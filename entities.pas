@@ -46,9 +46,6 @@ procedure moveNPC(id, newX, newY: smallint);
 
 implementation
 
-uses
-  main;
-
 procedure spawnNPCs;
 var
   i, p, r: smallint;

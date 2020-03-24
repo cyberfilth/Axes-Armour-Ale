@@ -29,7 +29,7 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <RevisionNr Value="8"/>
+      <RevisionNr Value="17"/>
       <Language Value="0809"/>
       <Attributes pvaDebug="True"/>
       <StringTable FileDescription="A simple Roguelike game"/>

@@ -1,4 +1,4 @@
-(* Weak enemy with simple AI *)
+(* Weak enemy with simple AI, no pathfinding *)
 
 unit cave_rat;
 
@@ -15,11 +15,13 @@ procedure createCaveRat(uniqueid, npcx, npcy: smallint);
 procedure takeTurn(id, spx, spy: smallint);
 (* Move in a random direction *)
 procedure wander(id, spx, spy: smallint);
+(* Chase the player *)
+procedure chasePlayer(id, spx, spy: smallint);
 
 implementation
 
 uses
-  entities;
+  entities, player;
 
 procedure createCaveRat(uniqueid, npcx, npcy: smallint);
 begin
@@ -32,13 +34,13 @@ begin
     race := 'cave rat';
     description := 'a large rat';
     glyph := 'r';
-    glyphColour:=clYellow;
+    glyphColour := clYellow;
     currentHP := 2;
     maxHP := 10;
     attack := 3;
     defense := 2;
     inView := False;
-    discovered:= False;
+    discovered := False;
     isDead := False;
     posX := npcx;
     posY := npcy;
@@ -47,7 +49,11 @@ end;
 
 procedure takeTurn(id, spx, spy: smallint);
 begin
-  wander(id, spx, spy);
+  // Check if the NPC is in the players FoV
+  if (map.canSee(spx, spy) = True) then
+    chasePlayer(id, spx, spy)
+  else
+    wander(id, spx, spy);
 end;
 
 procedure wander(id, spx, spy: smallint);
@@ -79,5 +85,36 @@ begin
   entities.moveNPC(id, testx, testy);
 end;
 
-end.
+procedure chasePlayer(id, spx, spy: smallint);
+begin
+  // Left, up
+  if (spx > player.ThePlayer.posX) and (spy > player.ThePlayer.posY) and
+    (map.canMove(spx - 1, spy - 1) = True) and
+    (map.isOccupied(spx - 1, spy - 1) = False) then
+    entities.moveNPC(id, spx - 1, spy - 1)
+  // Right, down
+  else if (spx < player.ThePlayer.posX) and (spy < player.ThePlayer.posY) and
+    (map.canMove(spx + 1, spy + 1) = True) and
+    (map.isOccupied(spx + 1, spy + 1) = False) then
+    entities.moveNPC(id, spx + 1, spy + 1)
+  // Left
+  else if (spx > player.ThePlayer.posX) and (map.canMove(spx - 1, spy) = True) and
+    (map.isOccupied(spx - 1, spy) = False) then
+    entities.moveNPC(id, spx - 1, spy)
+  // Right
+  else if (spx < player.ThePlayer.posX) and (map.canMove(spx + 1, spy) = True) and
+    (map.isOccupied(spx + 1, spy) = False) then
+    entities.moveNPC(id, spx + 1, spy)
+  // Up
+  else if (spy > player.ThePlayer.posY) and (map.canMove(spx, spy - 1) = True) and
+    (map.isOccupied(spx, spy - 1) = False) then
+    entities.moveNPC(id, spx, spy - 1)
+  // Down
+  else if (spy < player.ThePlayer.posY) and (map.canMove(spx, spy + 1) = True) and
+    (map.isOccupied(spx, spy + 1) = False) then
+    entities.moveNPC(id, spx, spy + 1)
+  else
+    wander(id, spx, spy);
+end;
 
+end.
