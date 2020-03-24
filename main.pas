@@ -61,7 +61,6 @@ begin
   {$ENDIF}
   StatusBar1.SimpleText := 'Version ' + globalutils.VERSION;
   ui.titleScreen;
-  // newGame;
 end;
 
 
@@ -77,6 +76,9 @@ begin
   map.blueDungeonWallDef.Free;
   map.blueDungeonWallHi.Free;
   player.ThePlayer.glyph.Free;
+  {$IFDEF Linux}
+  WriteLn('Axes, Armour & Ale - (c) Chris Hawkins');
+  {$ENDIF}
   Application.Terminate;
 end;
 
