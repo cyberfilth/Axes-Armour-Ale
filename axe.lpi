@@ -90,10 +90,9 @@
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
-            <SmartLinkUnit Value="True"/>
             <RelocatableUnit Value="True"/>
             <Optimizations>
-              <OptimizationLevel Value="3"/>
+              <OptimizationLevel Value="4"/>
             </Optimizations>
             <SmallerCode Value="True"/>
           </CodeGeneration>
@@ -101,7 +100,6 @@
             <Debugging>
               <GenerateDebugInfo Value="False"/>
             </Debugging>
-            <LinkSmart Value="True"/>
             <Options>
               <Win32>
                 <GraphicApplication Value="True"/>
