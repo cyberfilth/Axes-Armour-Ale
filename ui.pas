@@ -29,6 +29,10 @@ procedure titleScreen;
 procedure drawSidepanel;
 (* Update player health display *)
 procedure updateHealth;
+(* Update player attack value *)
+procedure updateAttack;
+(* Update player defence value *)
+procedure updateDefence;
 (* Write text to the message log *)
 procedure displayMessage(message: string);
 
@@ -58,16 +62,37 @@ begin
   main.tempScreen.Canvas.Rectangle(sbx, sby, sbx + sbw, sby + sbh);
   main.tempScreen.Canvas.Font.Size := 10;
   writeToBuffer(sbx + 50, sby + 5, UICOLOUR, 'Player');
+  updateHealth;
+  updateAttack;
+  updateDefence;
 end;
 
 procedure updateHealth;
 begin
   (* Paint over previous stats *)
-  main.tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
   main.tempScreen.Canvas.FillRect(sbx + 33, sby + 40, sbx + 135, sby + 60);
   (* Draw HP label *)
-  writeToBuffer(sbx + 8, sby + 40, UITEXTCOLOUR, 'HP:  ' +
+  writeToBuffer(sbx + 8, sby + 40, UITEXTCOLOUR, 'Health:  ' +
     IntToStr(ThePlayer.currentHP) + ' / ' + IntToStr(player.ThePlayer.maxHP));
+end;
+
+procedure updateAttack;
+begin
+  (* Paint over previous stats *)
+  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.FillRect(sbx + 50, sby + 60, sbx + 135, sby + 80);
+  main.tempScreen.Canvas.Pen.Color := UICOLOUR;
+  writeToBuffer(sbx + 8, sby + 60, UITEXTCOLOUR, 'Attack:  ' + IntToStr(ThePlayer.attack));
+end;
+
+procedure updateDefence;
+begin
+  (* Paint over previous stats *)
+  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.FillRect(sbx + 60, sby + 80, sbx + 135, sby + 100);
+  main.tempScreen.Canvas.Pen.Color := UICOLOUR;
+  writeToBuffer(sbx + 8, sby + 80, UITEXTCOLOUR, 'Defence:  ' + IntToStr(ThePlayer.defense));
 end;
 
 procedure displayMessage(message: string);

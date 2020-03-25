@@ -148,14 +148,12 @@ begin
   (* Clear the screen *)
   tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
   tempScreen.Canvas.FillRect(0, 0, tempScreen.Width, tempScreen.Height);
-  (* Draw sidepanel *)
-  ui.drawSidepanel;
   (* spawn player *)
   player.spawnPlayer(map.startX, map.startY);
   (* Spawn NPC's *)
   entities.spawnNPCs;
-  (* Draw stats in sidebar *)
-  ui.updateHealth;
+  (* Draw sidepanel *)
+  ui.drawSidepanel;
   ui.displayMessage('Welcome message to be added here...');
   Canvas.Draw(0, 0, tempScreen);
 end;

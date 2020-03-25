@@ -37,10 +37,10 @@ begin
     description := 'a large rat';
     glyph := 'r';
     glyphColour := clYellow;
-    currentHP := 2;
-    maxHP := 10;
-    attack := 3;
-    defense := 2;
+    maxHP := randomRange(2, 5);
+    currentHP := maxHP;
+    attack := randomRange(2, 3);
+    defense := randomRange(1, 3);
     inView := False;
     discovered := False;
     isDead := False;
