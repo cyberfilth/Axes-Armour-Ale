@@ -7,7 +7,7 @@ unit cave_rat;
 interface
 
 uses
-  Graphics, map;
+  Graphics, SysUtils, map;
 
 (* Create a cave rat *)
 procedure createCaveRat(uniqueid, npcx, npcy: smallint);
@@ -17,11 +17,13 @@ procedure takeTurn(id, spx, spy: smallint);
 procedure wander(id, spx, spy: smallint);
 (* Chase the player *)
 procedure chasePlayer(id, spx, spy: smallint);
+(* Combat *)
+procedure combat(id: smallint);
 
 implementation
 
 uses
-  entities, player;
+  entities, player, globalutils, ui;
 
 procedure createCaveRat(uniqueid, npcx, npcy: smallint);
 begin
@@ -86,35 +88,74 @@ begin
 end;
 
 procedure chasePlayer(id, spx, spy: smallint);
+var
+  newX, newY: smallint;
 begin
-  // Left, up
-  if (spx > player.ThePlayer.posX) and (spy > player.ThePlayer.posY) and
-    (map.canMove(spx - 1, spy - 1) = True) and
-    (map.isOccupied(spx - 1, spy - 1) = False) then
-    entities.moveNPC(id, spx - 1, spy - 1)
-  // Right, down
-  else if (spx < player.ThePlayer.posX) and (spy < player.ThePlayer.posY) and
-    (map.canMove(spx + 1, spy + 1) = True) and
-    (map.isOccupied(spx + 1, spy + 1) = False) then
-    entities.moveNPC(id, spx + 1, spy + 1)
-  // Left
-  else if (spx > player.ThePlayer.posX) and (map.canMove(spx - 1, spy) = True) and
-    (map.isOccupied(spx - 1, spy) = False) then
-    entities.moveNPC(id, spx - 1, spy)
-  // Right
-  else if (spx < player.ThePlayer.posX) and (map.canMove(spx + 1, spy) = True) and
-    (map.isOccupied(spx + 1, spy) = False) then
-    entities.moveNPC(id, spx + 1, spy)
-  // Up
-  else if (spy > player.ThePlayer.posY) and (map.canMove(spx, spy - 1) = True) and
-    (map.isOccupied(spx, spy - 1) = False) then
-    entities.moveNPC(id, spx, spy - 1)
-  // Down
-  else if (spy < player.ThePlayer.posY) and (map.canMove(spx, spy + 1) = True) and
-    (map.isOccupied(spx, spy + 1) = False) then
-    entities.moveNPC(id, spx, spy + 1)
+  (* Get new coordinates to chase the player *)
+  if (spx > player.ThePlayer.posX) and (spy > player.ThePlayer.posY) then
+  begin
+    newX := spx - 1;
+    newY := spy - 1;
+  end
+  else if (spx < player.ThePlayer.posX) and (spy < player.ThePlayer.posY) then
+  begin
+    newX := spx + 1;
+    newY := spy + 1;
+  end
+  else if (spx < player.ThePlayer.posX) then
+  begin
+    newX := spx + 1;
+    newY := spy;
+  end
+  else if (spx > player.ThePlayer.posX) then
+  begin
+    newX := spx - 1;
+    newY := spy;
+  end
+  else if (spy < player.ThePlayer.posY) then
+  begin
+    newX := spx;
+    newY := spy + 1;
+  end
+  else if (spy > player.ThePlayer.posY) then
+  begin
+    newX := spx;
+    newY := spy - 1;
+  end;
+  if (map.canMove(newX, newY) = True) then
+  begin
+    if (map.hasPlayer(newX, newY) = True) then
+    begin
+      entities.moveNPC(id, spx, spy);
+      combat(id);
+    end
+    else
+      entities.moveNPC(id, newX, newY);
+  end
   else
     wander(id, spx, spy);
+end;
+
+procedure combat(id: smallint);
+var
+  damageAmount: smallint;
+begin
+  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) -
+    player.ThePlayer.defense;
+  if (damageAmount > 0) then
+  begin
+    player.ThePlayer.currentHP := (player.ThePlayer.currentHP - damageAmount);
+    if (player.ThePlayer.currentHP < 1) then
+    begin
+      ui.displayMessage('You are dead!');
+      exit;
+    end
+    else
+      ui.displayMessage('The ' + entities.entityList[id].race +
+        ' attacks you for ' + IntToStr(damageAmount) + ' HP');
+  end
+  else
+    ui.displayMessage('The ' + entities.entityList[id].race + ' attacks but misses.');
 end;
 
 end.

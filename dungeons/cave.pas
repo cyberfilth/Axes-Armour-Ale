@@ -51,12 +51,15 @@ begin
   n := length(globalutils.currentDgncentreList) - 1;
   for i := n downto 2 do
     for j := 0 to i - 1 do
-      if globalutils.currentDgncentreList[j].x > globalutils.currentDgncentreList[j + 1].x then
+      if globalutils.currentDgncentreList[j].x >
+        globalutils.currentDgncentreList[j + 1].x then
       begin
         tempX := globalutils.currentDgncentreList[j].x;
         tempY := globalutils.currentDgncentreList[j].y;
-        globalutils.currentDgncentreList[j].x := globalutils.currentDgncentreList[j + 1].x;
-        globalutils.currentDgncentreList[j].y := globalutils.currentDgncentreList[j + 1].y;
+        globalutils.currentDgncentreList[j].x :=
+          globalutils.currentDgncentreList[j + 1].x;
+        globalutils.currentDgncentreList[j].y :=
+          globalutils.currentDgncentreList[j + 1].y;
         globalutils.currentDgncentreList[j + 1].x := tempX;
         globalutils.currentDgncentreList[j + 1].y := tempY;
       end;
@@ -212,6 +215,13 @@ procedure createRoom(gridNumber: smallint);
 var
   topLeftX, topLeftY, roomHeight, roomWidth, drawHeight, drawWidth: smallint;
 begin
+  // initialise variables
+  topLeftX := 0;
+  topLeftY := 0;
+  roomHeight := 0;
+  roomWidth := 0;
+  drawHeight := 0;
+  drawWidth := 0;
   // row 1
   if (gridNumber >= 1) and (gridNumber <= 13) then
   begin
@@ -257,7 +267,8 @@ begin
   globalutils.currentDgncentreList[listLength].x := topLeftX + (roomWidth div 2);
   globalutils.currentDgncentreList[listLength].y := topLeftY + (roomHeight div 2);
   (* Draw room within the grid square *)
-  drawCircle(globalutils.currentDgncentreList[listLength].x, globalutils.currentDgncentreList[listLength].y, roomHeight);
+  drawCircle(globalutils.currentDgncentreList[listLength].x,
+    globalutils.currentDgncentreList[listLength].y, roomHeight);
   for drawHeight := 0 to roomHeight do
   begin
     for drawWidth := 0 to roomWidth do
@@ -356,7 +367,8 @@ begin
   leftToRight();
   for i := 1 to (totalRooms - 1) do
   begin
-    createCorridor(globalutils.currentDgncentreList[i].x, globalutils.currentDgncentreList[i].y, globalutils.currentDgncentreList[i + 1].x,
+    createCorridor(globalutils.currentDgncentreList[i].x,
+      globalutils.currentDgncentreList[i].y, globalutils.currentDgncentreList[i + 1].x,
       globalutils.currentDgncentreList[i + 1].y);
   end;
   // connect random rooms so the map isn't totally linear
@@ -364,13 +376,15 @@ begin
   firstHalf := (totalRooms div 2);
   p := random(firstHalf - 1) + 1;
   t := random(firstHalf - 1) + 1;
-  createCorridor(globalutils.currentDgncentreList[p].x, globalutils.currentDgncentreList[p].y, globalutils.currentDgncentreList[t].x,
+  createCorridor(globalutils.currentDgncentreList[p].x,
+    globalutils.currentDgncentreList[p].y, globalutils.currentDgncentreList[t].x,
     globalutils.currentDgncentreList[t].y);
   // from the second half of the room list
   lastHalf := (totalRooms - firstHalf);
   p := random(lastHalf) + firstHalf;
   t := random(lastHalf) + firstHalf;
-  createCorridor(globalutils.currentDgncentreList[p].x, globalutils.currentDgncentreList[p].y, globalutils.currentDgncentreList[t].x,
+  createCorridor(globalutils.currentDgncentreList[p].x,
+    globalutils.currentDgncentreList[p].y, globalutils.currentDgncentreList[t].x,
     globalutils.currentDgncentreList[t].y);
 
   (* draw top and bottom border *)

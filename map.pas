@@ -56,6 +56,8 @@ procedure occupy(x, y: smallint);
 procedure unoccupy(x, y: smallint);
 (* Check if a map tile is occupied *)
 function isOccupied(checkX, checkY: smallint): boolean;
+(* Check if player is on a tile *)
+function hasPlayer(checkX, checkY: smallint): boolean;
 (* Translate map coordinates to screen coordinates *)
 function mapToScreen(pos: smallint): smallint;
 (* Translate screen coordinates to map coordinates *)
@@ -66,7 +68,7 @@ procedure drawTile(c, r: smallint; hiDef: byte);
 implementation
 
 uses
-  cave, grid_dungeon;
+  cave, grid_dungeon, player;
 
 procedure setupTiles;
 begin
@@ -145,6 +147,13 @@ function isOccupied(checkX, checkY: smallint): boolean;
 begin
   Result := False;
   if (maparea[checkY][checkX].Occupied = True) then
+    Result := True;
+end;
+
+function hasPlayer(checkX, checkY: smallint): boolean;
+begin
+  Result := False;
+  if (player.ThePlayer.posX = checkX) and (player.ThePlayer.posY = checkY) then
     Result := True;
 end;
 
