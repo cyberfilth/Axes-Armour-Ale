@@ -60,13 +60,19 @@ begin
   RandSeed := ((RandSeed shl 8) or GetProcessID);
   {$ENDIF}
   StatusBar1.SimpleText := 'Version ' + globalutils.VERSION;
-  ui.titleScreen;
+  (* Check for previous save file *)
+  if FileExists(globalutils.saveFile) then
+    ui.titleScreen(1)
+  else
+    ui.titleScreen(0);
 end;
 
 
 procedure TGameWindow.FormDestroy(Sender: TObject);
 begin
-  globalutils.saveGame;
+  (* Don't try to save game from title screen *)
+  if (gameState <> 0) then
+    globalutils.saveGame;
   tempScreen.Free;
   map.caveFloorHi.Free;
   map.caveFloorDef.Free;

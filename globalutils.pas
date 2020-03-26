@@ -56,6 +56,8 @@ procedure writeToBuffer(x, y: smallint; messageColour: TColor; message: string);
 procedure drawNPCtoBuffer(x, y: smallint; glyphTextColour: TColor; glyphCharacter: char);
 (* Save game state to XML file *)
 procedure saveGame;
+(* Load saved game *)
+procedure loadGame;
 
 implementation
 
@@ -181,6 +183,84 @@ begin
     WriteXMLFile(Doc, GetUserDir+saveFile);
   finally
     Doc.Free;  // free memory
+  end;
+end;
+
+procedure loadGame;
+var
+  RootNode, ParentNode, Tile, NextNode, Blocks, Visible, Occupied, Discovered, PlayerNode, NPCnode, GlyphNode: TDOMNode;
+  Doc: TXMLDocument;
+  r, c, i: integer;
+begin
+  try
+    (* Read in xml file from disk *)
+    ReadXMLFile(Doc, GetUserDir+saveFile);
+    (* Retrieve the nodes *)
+    RootNode := Doc.DocumentElement.FindNode('GameData');
+    ParentNode := RootNode.FirstChild.NextSibling;
+    (* NPC amount *)
+    entities.npcAmount := StrToInt(ParentNode.TextContent);
+    (* Map tile data *)
+    Tile := RootNode.NextSibling;
+    for r := 1 to MAXROWS do
+    begin
+      for c := 1 to MAXCOLUMNS do
+      begin
+        map.maparea[r][c].id := StrToInt(Tile.Attributes.Item[0].NodeValue);
+        Blocks := Tile.FirstChild;
+        map.maparea[r][c].Blocks := StrToBool(Blocks.TextContent);
+        Visible := Blocks.NextSibling;
+        map.maparea[r][c].Visible := StrToBool(Visible.TextContent);
+        Occupied := Visible.NextSibling;
+        map.maparea[r][c].Occupied := StrToBool(Occupied.TextContent);
+        Discovered := Occupied.NextSibling;
+        map.maparea[r][c].Discovered := StrToBool(Occupied.TextContent);
+        GlyphNode := Discovered.NextSibling;
+        (* Convert String to Char *)
+        map.maparea[r][c].Glyph := GlyphNode.TextContent[1];
+
+        NextNode := Tile.NextSibling;
+        Tile := NextNode;
+      end;
+    end;
+
+    (* Player info *)
+    PlayerNode := Doc.DocumentElement.FindNode('Player');
+    player.ThePlayer.currentHP   := StrToInt(PlayerNode.FindNode('currentHP').TextContent);
+    player.ThePlayer.posX        := StrToInt(PlayerNode.FindNode('posX').TextContent);
+    player.ThePlayer.posY        := StrToInt(PlayerNode.FindNode('posY').TextContent);
+    player.ThePlayer.maxHP       := StrToInt(PlayerNode.FindNode('maxHP').TextContent);
+    player.ThePlayer.attack      := StrToInt(PlayerNode.FindNode('attack').TextContent);
+    player.ThePlayer.defense     := StrToInt(PlayerNode.FindNode('defense').TextContent);
+    player.ThePlayer.visionRange := StrToInt(PlayerNode.FindNode('visionRange').TextContent);
+
+    (* NPC stats *)
+    SetLength(entities.entityList, 1);
+    NPCnode := Doc.DocumentElement.FindNode('NPC');
+    for i := 1 to entities.npcAmount do
+    begin
+      entities.listLength := length(entities.entityList);
+      SetLength(entities.entityList, entities.listLength + 1);
+      entities.entityList[i].npcID :=
+        StrToInt(NPCnode.Attributes.Item[0].NodeValue);
+      entities.entityList[i].race        := NPCnode.FindNode('race').TextContent;
+      entities.entityList[i].description := NPCnode.FindNode('description').TextContent;
+      entities.entityList[i].glyph       := Char(WideChar(NPCnode.FindNode('glyph').TextContent[1]));
+      entities.entityList[i].glyphColour := StrToInt(NPCnode.FindNode('glyphColour').TextContent);
+      entities.entityList[i].currentHP   := StrToInt(NPCnode.FindNode('currentHP').TextContent);
+      entities.entityList[i].attack      := StrToInt(NPCnode.FindNode('attack').TextContent);
+      entities.entityList[i].defense     := StrToInt(NPCnode.FindNode('defense').TextContent);
+      entities.entityList[i].inView      := StrToBool(NPCnode.FindNode('inView').TextContent);
+      entities.entityList[i].discovered  := StrToBool(NPCnode.FindNode('discovered').TextContent);
+      entities.entityList[i].isDead      := StrToBool(NPCnode.FindNode('isDead').TextContent);
+      entities.entityList[i].posX        := StrToInt(NPCnode.FindNode('posX').TextContent);
+      entities.entityList[i].posY        := StrToInt(NPCnode.FindNode('posY').TextContent);
+      ParentNode := NPCnode.NextSibling;
+      NPCnode := ParentNode;
+    end;
+  finally
+    (* free memory *)
+    Doc.Free;
   end;
 end;
 

@@ -24,7 +24,7 @@ var
   logo: TBitmap;
 
 (* Title screen *)
-procedure titleScreen;
+procedure titleScreen(yn: byte);
 (* Draws the panel on side of screen *)
 procedure drawSidepanel;
 (* Update player health display *)
@@ -41,7 +41,7 @@ implementation
 uses
   main, player;
 
-procedure titleScreen;
+procedure titleScreen(yn: byte);
 begin
   logo := TBitmap.Create;
   logo.LoadFromResourceName(HINSTANCE, 'TITLESCREEN');
@@ -50,9 +50,19 @@ begin
   main.tempScreen.Canvas.FillRect(0, 0, tempScreen.Width, tempScreen.Height);
   (* Draw logo *)
   drawToBuffer(145, 57, logo);
-  (* Write menu *)
-  writeToBuffer(200, 250, UITEXTCOLOUR, 'N - New Game');
-  writeToBuffer(200, 270, UITEXTCOLOUR, 'Q - Quit');
+  (* Check if a save file exists and display menu *)
+  if (yn = 0) then
+  begin
+    writeToBuffer(200, 250, UITEXTCOLOUR, 'N - New Game');
+    writeToBuffer(200, 270, UITEXTCOLOUR, 'Q - Quit');
+  end
+  else
+  begin
+    writeToBuffer(200, 250, UITEXTCOLOUR, 'L - Load Last Game');
+    writeToBuffer(200, 270, UITEXTCOLOUR, 'N - New Game');
+    writeToBuffer(200, 290, UITEXTCOLOUR, 'Q - Quit');
+  end;
+
   logo.Free;
 end;
 
@@ -83,7 +93,8 @@ begin
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
   main.tempScreen.Canvas.FillRect(sbx + 50, sby + 60, sbx + 135, sby + 80);
   main.tempScreen.Canvas.Pen.Color := UICOLOUR;
-  writeToBuffer(sbx + 8, sby + 60, UITEXTCOLOUR, 'Attack:  ' + IntToStr(ThePlayer.attack));
+  writeToBuffer(sbx + 8, sby + 60, UITEXTCOLOUR, 'Attack:  ' +
+    IntToStr(ThePlayer.attack));
 end;
 
 procedure updateDefence;
@@ -92,7 +103,8 @@ begin
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
   main.tempScreen.Canvas.FillRect(sbx + 60, sby + 80, sbx + 135, sby + 100);
   main.tempScreen.Canvas.Pen.Color := UICOLOUR;
-  writeToBuffer(sbx + 8, sby + 80, UITEXTCOLOUR, 'Defence:  ' + IntToStr(ThePlayer.defense));
+  writeToBuffer(sbx + 8, sby + 80, UITEXTCOLOUR, 'Defence:  ' +
+    IntToStr(ThePlayer.defense));
 end;
 
 procedure displayMessage(message: string);
