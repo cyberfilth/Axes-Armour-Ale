@@ -151,8 +151,12 @@ begin
       exit;
     end
     else
-      ui.displayMessage('The ' + entities.entityList[id].race +
-        ' attacks you for ' + IntToStr(damageAmount) + ' HP');
+    begin
+      if (damageAmount = 1) then
+        ui.displayMessage('The ' + entities.entityList[id].race + ' slightly wounds you')
+      else
+        ui.displayMessage('The ' + entities.entityList[id].race + ' bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+    end;
   end
   else
     ui.displayMessage('The ' + entities.entityList[id].race + ' attacks but misses.');

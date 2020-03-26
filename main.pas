@@ -99,25 +99,25 @@ begin
   if (gameState = 1) then
   begin // beginning of game input
     case Key of
-      VK_LEFT:
+      VK_LEFT, VK_NUMPAD4:
       begin
         player.movePlayer(2);
         gameLoop;
         Invalidate;
       end;
-      VK_RIGHT:
+      VK_RIGHT, VK_NUMPAD6:
       begin
         player.movePlayer(4);
         gameLoop;
         Invalidate;
       end;
-      VK_UP:
+      VK_UP, VK_NUMPAD8:
       begin
         player.movePlayer(1);
         gameLoop;
         Invalidate;
       end;
-      VK_DOWN:
+      VK_DOWN, VK_NUMPAD2:
       begin
         player.movePlayer(3);
         gameLoop;

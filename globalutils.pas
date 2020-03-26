@@ -16,7 +16,7 @@ type
 
 const
   (* Version info - a = Alpha, d = Debug, r = Release *)
-  VERSION = '17a';
+  VERSION = '18a';
   (* Columns of the game map *)
   MAXCOLUMNS = 67;
   (* Rows of the game map *)
@@ -77,10 +77,10 @@ procedure drawNPCtoBuffer(x, y: smallint; glyphTextColour: TColor; glyphCharacte
 begin
   main.tempScreen.Canvas.Brush.Style := bsClear;
   main.tempScreen.Canvas.Font.Color := glyphTextColour;
-  main.tempScreen.Canvas.TextOut(map.mapToScreen(x), map.mapToScreen(y) -
+  main.tempScreen.Canvas.TextOut(map.mapToScreen(x), (map.mapToScreen(y) + 1) -
     (tileSize div 2), glyphCharacter);
   (* Add a duplicate glyph, slightly offset, to make the glyph bold *)
-  main.tempScreen.Canvas.TextOut(map.mapToScreen(x)+1, map.mapToScreen(y) - (tileSize div 2), glyphCharacter);
+  main.tempScreen.Canvas.TextOut(map.mapToScreen(x)+1, (map.mapToScreen(y) + 1) - (tileSize div 2), glyphCharacter);
 end;
 
 end.
