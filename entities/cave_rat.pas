@@ -155,7 +155,8 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The ' + entities.entityList[id].race + ' slightly wounds you')
       else
-        ui.displayMessage('The ' + entities.entityList[id].race + ' bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The ' + entities.entityList[id].race +
+          ' bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
     end;
   end
   else

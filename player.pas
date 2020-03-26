@@ -54,8 +54,6 @@ begin
   end;
 end;
 
-{ TODO -cMovement : Once combat is implemented, revisit the checks for occupying a square so NPC's cannot move to it }
-
 (* Move the player within the confines of the game map *)
 procedure movePlayer(dir: word);
 var
@@ -74,7 +72,7 @@ begin
   end;
   (* check if tile is occupied *)
   if (map.isOccupied(ThePlayer.posX, ThePlayer.posY) = True) then
-  (* check if tile is occupied by hostile NPC *)
+    (* check if tile is occupied by hostile NPC *)
     if (combatCheck(ThePlayer.posX, ThePlayer.posY) = True) then
     begin
       ThePlayer.posX := originalX;
@@ -114,8 +112,11 @@ begin
       exit;
     end
     else
+    if (damageAmount = 1) then
+      ui.displayMessage('You slightly injure the ' + entities.entityList[npcID].race)
+    else
       ui.displayMessage('You hit the ' + entities.entityList[npcID].race +
-        ' for ' + IntToStr(damageAmount) + ' HP.');
+        ' for ' + IntToStr(damageAmount) + ' points of damage');
   end
   else
     ui.displayMessage('You miss');

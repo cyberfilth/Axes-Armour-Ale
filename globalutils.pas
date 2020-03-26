@@ -7,7 +7,7 @@ unit globalutils;
 interface
 
 uses
-  Graphics;
+  Graphics, SysUtils, DOM, XMLWrite, XMLRead;
 
 type
   coordinates = record
@@ -17,6 +17,13 @@ type
 const
   (* Version info - a = Alpha, d = Debug, r = Release *)
   VERSION = '18a';
+  (* Save game file *)
+  {$IFDEF Linux}
+  saveFile = '.axes.data';
+  {$ENDIF}
+  {$IFDEF Windows}
+  saveFile = 'axes.data';
+  {$ENDIF}
   (* Columns of the game map *)
   MAXCOLUMNS = 67;
   (* Rows of the game map *)
@@ -47,11 +54,13 @@ procedure drawToBuffer(x, y: smallint; image: TBitmap);
 procedure writeToBuffer(x, y: smallint; messageColour: TColor; message: string);
 (* Draw an NPC to temporary screen buffer *)
 procedure drawNPCtoBuffer(x, y: smallint; glyphTextColour: TColor; glyphCharacter: char);
+(* Save game state to XML file *)
+procedure saveGame;
 
 implementation
 
 uses
-  main, map;
+  main, map, entities, player;
 
 // Random(Range End - Range Start) + Range Start
 function randomRange(fromNumber, toNumber: smallint): smallint;
@@ -80,7 +89,99 @@ begin
   main.tempScreen.Canvas.TextOut(map.mapToScreen(x), (map.mapToScreen(y) + 1) -
     (tileSize div 2), glyphCharacter);
   (* Add a duplicate glyph, slightly offset, to make the glyph bold *)
-  main.tempScreen.Canvas.TextOut(map.mapToScreen(x)+1, (map.mapToScreen(y) + 1) - (tileSize div 2), glyphCharacter);
+  main.tempScreen.Canvas.TextOut(map.mapToScreen(x) + 1, (map.mapToScreen(y) + 1) -
+    (tileSize div 2), glyphCharacter);
+end;
+
+procedure saveGame;
+var
+  i, r, c: smallint;
+  Doc: TXMLDocument;
+  RootNode, dataNode: TDOMNode;
+
+  procedure AddElement(Node: TDOMNode; Name, Value: string);
+  var
+    NameNode, ValueNode: TDomNode;
+  begin
+    NameNode := Doc.CreateElement(Name);    // creates future Node/Name
+    ValueNode := Doc.CreateTextNode(Value);  // creates future Node/Name/Value
+    NameNode.Appendchild(ValueNode);         // place value in place
+    Node.Appendchild(NameNode);              // place Name in place
+  end;
+
+  function AddChild(Node: TDOMNode; ChildName: string): TDomNode;
+  var
+    ChildNode: TDomNode;
+  begin
+    ChildNode := Doc.CreateElement(ChildName);
+    Node.AppendChild(ChildNode);
+    Result := ChildNode;
+  end;
+
+begin
+  try
+    (* Create a document *)
+    Doc := TXMLDocument.Create;
+    (* Create a root node *)
+    RootNode := Doc.CreateElement('root');
+    Doc.Appendchild(RootNode);
+    RootNode := Doc.DocumentElement;
+
+    (* Game data *)
+    DataNode := AddChild(RootNode, 'GameData');
+    AddElement(datanode, 'RandSeed', IntToStr(RandSeed));
+    AddElement(datanode, 'npcAmount', IntToStr(entities.npcAmount));
+
+    (* map tiles *)
+    for r := 1 to MAXROWS do
+    begin
+      for c := 1 to MAXCOLUMNS do
+      begin
+        DataNode := AddChild(RootNode, 'map_tiles');
+        TDOMElement(dataNode).SetAttribute('id', IntToStr(maparea[r][c].id));
+        AddElement(datanode, 'Blocks', BoolToStr(map.maparea[r][c].Blocks));
+        AddElement(datanode, 'Visible', BoolToStr(map.maparea[r][c].Visible));
+        AddElement(datanode, 'Occupied', BoolToStr(map.maparea[r][c].Occupied));
+        AddElement(datanode, 'Discovered', BoolToStr(map.maparea[r][c].Discovered));
+        AddElement(datanode, 'Glyph', map.maparea[r][c].Glyph);
+      end;
+    end;
+
+    (* Player record *)
+    DataNode := AddChild(RootNode, 'Player');
+    AddElement(DataNode, 'currentHP', IntToStr(player.ThePlayer.currentHP));
+    AddElement(DataNode, 'maxHP', IntToStr(player.ThePlayer.maxHP));
+    AddElement(DataNode, 'attack', IntToStr(player.ThePlayer.attack));
+    AddElement(DataNode, 'defense', IntToStr(player.ThePlayer.defense));
+    AddElement(DataNode, 'posX', IntToStr(player.ThePlayer.posX));
+    AddElement(DataNode, 'posY', IntToStr(player.ThePlayer.posY));
+    AddElement(DataNode, 'visionRange', IntToStr(player.ThePlayer.visionRange));
+
+    (* NPC records *)
+    for i := 1 to entities.npcAmount do
+    begin
+      DataNode := AddChild(RootNode, 'NPC');
+      TDOMElement(dataNode).SetAttribute('npcID', IntToStr(i));
+      AddElement(DataNode, 'race', entities.entityList[i].race);
+      AddElement(DataNode, 'description', entities.entityList[i].description);
+      AddElement(DataNode, 'glyph', entities.entityList[i].glyph);
+      AddElement(DataNode, 'glyphColour', IntToStr(entities.entityList[i].glyphColour));
+      AddElement(DataNode, 'currentHP', IntToStr(entities.entityList[i].currentHP));
+      AddElement(DataNode, 'maxHP', IntToStr(entities.entityList[i].maxHP));
+      AddElement(DataNode, 'attack', IntToStr(entities.entityList[i].attack));
+      AddElement(DataNode, 'defense', IntToStr(entities.entityList[i].defense));
+      AddElement(DataNode, 'inView', BoolToStr(entities.entityList[i].inView));
+      AddElement(DataNode, 'discovered', BoolToStr(entities.entityList[i].discovered));
+      AddElement(DataNode, 'isDead', BoolToStr(entities.entityList[i].isDead));
+      AddElement(DataNode, 'posX', IntToStr(entities.entityList[i].posX));
+      AddElement(DataNode, 'posY', IntToStr(entities.entityList[i].posY));
+    end;
+
+    (* Save XML *)
+    WriteXMLFile(Doc, GetUserDir+saveFile);
+  finally
+    Doc.Free;  // free memory
+  end;
 end;
 
 end.

@@ -66,6 +66,7 @@ end;
 
 procedure TGameWindow.FormDestroy(Sender: TObject);
 begin
+  globalutils.saveGame;
   tempScreen.Free;
   map.caveFloorHi.Free;
   map.caveFloorDef.Free;
