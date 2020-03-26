@@ -82,7 +82,8 @@ begin
   (* Paint over previous stats *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
   main.tempScreen.Canvas.FillRect(sbx + 33, sby + 40, sbx + 135, sby + 60);
-  (* Draw HP label *)
+  (* Draw Health amount *)
+  main.tempScreen.Canvas.Font.Size := 10;
   writeToBuffer(sbx + 8, sby + 40, UITEXTCOLOUR, 'Health:  ' +
     IntToStr(ThePlayer.currentHP) + ' / ' + IntToStr(player.ThePlayer.maxHP));
 end;
@@ -93,6 +94,8 @@ begin
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
   main.tempScreen.Canvas.FillRect(sbx + 50, sby + 60, sbx + 135, sby + 80);
   main.tempScreen.Canvas.Pen.Color := UICOLOUR;
+  (* Draw Attack amount *)
+  main.tempScreen.Canvas.Font.Size := 10;
   writeToBuffer(sbx + 8, sby + 60, UITEXTCOLOUR, 'Attack:  ' +
     IntToStr(ThePlayer.attack));
 end;
@@ -103,6 +106,8 @@ begin
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
   main.tempScreen.Canvas.FillRect(sbx + 60, sby + 80, sbx + 135, sby + 100);
   main.tempScreen.Canvas.Pen.Color := UICOLOUR;
+  (* Draw Defence amount *)
+  main.tempScreen.Canvas.Font.Size := 10;
   writeToBuffer(sbx + 8, sby + 80, UITEXTCOLOUR, 'Defence:  ' +
     IntToStr(ThePlayer.defense));
 end;

@@ -61,7 +61,7 @@ begin
   {$ENDIF}
   StatusBar1.SimpleText := 'Version ' + globalutils.VERSION;
   (* Check for previous save file *)
-  if FileExists(globalutils.saveFile) then
+  if FileExists(GetUserDir + globalutils.saveFile) then
     ui.titleScreen(1)
   else
     ui.titleScreen(0);
