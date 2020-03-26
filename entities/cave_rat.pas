@@ -153,10 +153,11 @@ begin
     else
     begin
       if (damageAmount = 1) then
-        ui.displayMessage('The ' + entities.entityList[id].race + ' slightly wounds you')
+        ui.displayMessage('The cave rat slightly wounds you')
       else
-        ui.displayMessage('The ' + entities.entityList[id].race +
-          ' bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The cave rat bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+      (* Update health display to show damage *)
+      ui.updateHealth;
     end;
   end
   else
