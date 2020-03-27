@@ -91,6 +91,8 @@ procedure chasePlayer(id, spx, spy: smallint);
 var
   newX, newY: smallint;
 begin
+  newX := 0;
+  newY := 0;
   (* Get new coordinates to chase the player *)
   if (spx > player.ThePlayer.posX) and (spy > player.ThePlayer.posY) then
   begin
@@ -129,7 +131,7 @@ begin
       entities.moveNPC(id, spx, spy);
       combat(id);
     end
-    else
+    else if (map.isOccupied(newX, newY) = False) then
       entities.moveNPC(id, newX, newY);
   end
   else
@@ -155,7 +157,8 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The cave rat slightly wounds you')
       else
-        ui.displayMessage('The cave rat bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The cave rat bites you, inflicting ' +
+          IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;

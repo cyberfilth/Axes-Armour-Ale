@@ -71,18 +71,20 @@ end;
 procedure TGameWindow.FormDestroy(Sender: TObject);
 begin
   (* Don't try to save game from title screen *)
-  if (gameState <> 0) then
+  if (gameState = 1) then
+  begin
     globalutils.saveGame;
+    map.caveFloorHi.Free;
+    map.caveFloorDef.Free;
+    map.caveWallHi.Free;
+    map.caveWallDef.Free;
+    map.blueDungeonFloorDef.Free;
+    map.blueDungeonFloorHi.Free;
+    map.blueDungeonWallDef.Free;
+    map.blueDungeonWallHi.Free;
+    player.ThePlayer.glyph.Free;
+  end;
   tempScreen.Free;
-  map.caveFloorHi.Free;
-  map.caveFloorDef.Free;
-  map.caveWallHi.Free;
-  map.caveWallDef.Free;
-  map.blueDungeonFloorDef.Free;
-  map.blueDungeonFloorHi.Free;
-  map.blueDungeonWallDef.Free;
-  map.blueDungeonWallHi.Free;
-  player.ThePlayer.glyph.Free;
   {$IFDEF Linux}
   WriteLn('Axes, Armour & Ale - (c) Chris Hawkins');
   {$ENDIF}
