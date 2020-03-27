@@ -1,6 +1,6 @@
 ![Axes, Armour & Ale - logo](GITscreenshots/Logo.png)
 
-### A low fantasy roguelike game
+### A low-fantasy, roguelike game
 
 Alpha version, most features aren't implemented yet. This game builds on the terminal version at https://github.com/cyberfilth/FLUX/ and includes the following basic features;
 
