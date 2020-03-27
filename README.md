@@ -6,6 +6,6 @@ Alpha version, most features aren't implemented yet. This game builds on the ter
 
  - A randomly generated dungeon
  - Should run on GNU/Linux and Windows
- - Small, native binary
+ - Small, native binary with no external dependencies
  
 ![Dungeon screenshot](GITscreenshots/linux_screenshot1.png)
