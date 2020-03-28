@@ -133,6 +133,7 @@ begin
     DataNode := AddChild(RootNode, 'GameData');
     AddElement(datanode, 'RandSeed', IntToStr(RandSeed));
     AddElement(datanode, 'npcAmount', IntToStr(entities.npcAmount));
+    AddElement(datanode, 'currentMap', IntToStr(map.mapType));
 
     (* map tiles *)
     for r := 1 to MAXROWS do
@@ -200,6 +201,9 @@ begin
     ParentNode := RootNode.FirstChild.NextSibling;
     (* NPC amount *)
     entities.npcAmount := StrToInt(ParentNode.TextContent);
+    (* Current map type *)
+    //map.mapType:= StrToInt(ParentNode.FindNode('currentMap').TextContent);
+
     (* Map tile data *)
     Tile := RootNode.NextSibling;
     for r := 1 to MAXROWS do
@@ -214,7 +218,7 @@ begin
         Occupied := Visible.NextSibling;
         map.maparea[r][c].Occupied := StrToBool(Occupied.TextContent);
         Discovered := Occupied.NextSibling;
-        map.maparea[r][c].Discovered := StrToBool(Occupied.TextContent);
+        map.maparea[r][c].Discovered := StrToBool(Discovered.TextContent);
         GlyphNode := Discovered.NextSibling;
         (* Convert String to Char *)
         map.maparea[r][c].Glyph := GlyphNode.TextContent[1];

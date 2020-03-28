@@ -43,6 +43,8 @@ var
 procedure spawnNPCs;
 (* Move NPC's *)
 procedure moveNPC(id, newX, newY: smallint);
+(* Redraw all NPC's *)
+procedure redrawNPC;
 
 implementation
 
@@ -96,6 +98,19 @@ begin
   end
   else
     entityList[id].inView := False;
+end;
+
+procedure redrawNPC;
+var
+  i: smallint;
+begin
+  for i := 1 to npcAmount do
+  begin
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    begin
+      drawNPCtoBuffer(entityList[i].posX, entityList[i].posY, entityList[i].glyphColour, entityList[i].glyph);
+    end;
+  end;
 end;
 
 end.

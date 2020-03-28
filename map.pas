@@ -33,6 +33,8 @@ type
   end;
 
 var
+  (* Type of map: 0 = cave, 1 = blue grid-based dungeon *)
+  mapType: smallint;
   (* Game map array *)
   maparea: array[1..MAXROWS, 1..MAXCOLUMNS] of tile;
   r, c: smallint;
@@ -46,6 +48,8 @@ var
 procedure setupTiles;
 (* Loop through tiles and set their ID, visibility etc *)
 procedure setupMap;
+(* Load map from saved game *)
+procedure loadMap;
 (* Check if the direction to move to is valid *)
 function canMove(checkX, checkY: smallint): boolean;
 (* Check if an object is in players FoV *)
@@ -95,8 +99,8 @@ var
   // give each tile a unique ID number
   id_int: smallint;
 begin
-  //cave.generate;
-  grid_dungeon.generate;
+  cave.generate;
+  //grid_dungeon.generate;
   id_int := 0;
   for r := 1 to globalutils.MAXROWS do
   begin
@@ -115,6 +119,21 @@ begin
       if (globalutils.dungeonArray[r][c] = '.') or
         (globalutils.dungeonArray[r][c] = ':') then
         maparea[r][c].Blocks := False;
+    end;
+  end;
+end;
+
+(* Redraw all visible tiles *)
+procedure loadMap;
+begin
+  for r := 1 to MAXROWS do
+  begin
+    for c := 1 to MAXCOLUMNS do
+    begin
+      if (maparea[r][c].Discovered = True) and (maparea[r][c].Visible = False) then
+        drawTile(c, r, 0);
+      if (maparea[r][c].Visible = True) then
+        drawTile(c, r, 1);
     end;
   end;
 end;

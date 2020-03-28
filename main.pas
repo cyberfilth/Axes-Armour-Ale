@@ -24,6 +24,8 @@ type
     procedure FormPaint(Sender: TObject);
     (* New game setup *)
     procedure newGame;
+    (* Continue previous saved game *)
+    procedure continueGame;
   private
 
   public
@@ -40,7 +42,7 @@ var
 implementation
 
 uses
-  entities;
+  entities, fov;
 
 {$R *.lfm}
 
@@ -138,6 +140,7 @@ begin
   begin // beginning of Title menu
     case Key of
       VK_N: newGame;
+      VK_L: continueGame;
       VK_Q: Close();   //Application.Terminate;
     end;
   end;
@@ -163,6 +166,32 @@ begin
   entities.spawnNPCs;
   (* Draw sidepanel *)
   ui.drawSidepanel;
+  ui.displayMessage('Welcome message to be added here...');
+  Canvas.Draw(0, 0, tempScreen);
+end;
+
+procedure TGameWindow.continueGame;
+begin
+  gameState := 1;
+  globalutils.loadGame;
+  (* Clear the screen *)
+  tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
+  tempScreen.Canvas.FillRect(0, 0, tempScreen.Width, tempScreen.Height);
+  map.setupTiles;
+  map.loadMap;
+  (* Draw sidepanel *)
+  ui.drawSidepanel;
+  (* Setup player *)
+  with player.ThePlayer do
+  begin
+    glyph := TBitmap.Create;
+    glyph.LoadFromResourceName(HINSTANCE, 'PLAYER_GLYPH');
+  end;
+  fov.fieldOfView(player.ThePlayer.posX, player.ThePlayer.posY,
+    player.ThePlayer.visionRange, 1);
+  drawToBuffer(map.mapToScreen(ThePlayer.posX), map.mapToScreen(ThePlayer.posY), ThePlayer.glyph);
+  (* Add NPC's to the screen *)
+  entities.redrawNPC;
   ui.displayMessage('Welcome message to be added here...');
   Canvas.Draw(0, 0, tempScreen);
 end;

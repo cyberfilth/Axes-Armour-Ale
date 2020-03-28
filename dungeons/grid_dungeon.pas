@@ -254,6 +254,8 @@ begin
   end;
   (* Copy total rooms to main dungeon *)
   globalutils.currentDgnTotalRooms := totalRooms;
+  (* Set flag for type of dungeon *)
+  map.mapType := 1;
 end;
 
 end.
