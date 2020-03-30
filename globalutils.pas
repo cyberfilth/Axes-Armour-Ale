@@ -3,7 +3,8 @@
 unit globalutils;
 
 {$mode objfpc}{$H+}
-
+{$WARN 4105 off : Implicit string type conversion with potential data loss from "$1" to "$2"}
+{$WARN 4104 off : Implicit string type conversion from "$1" to "$2"}
 interface
 
 uses
@@ -16,7 +17,7 @@ type
 
 const
   (* Version info - a = Alpha, d = Debug, r = Release *)
-  VERSION = '18a';
+  VERSION = '19a';
   (* Save game file *)
   {$IFDEF Linux}
   saveFile = '.axes.data';
@@ -152,13 +153,14 @@ begin
 
     (* Player record *)
     DataNode := AddChild(RootNode, 'Player');
-    AddElement(DataNode, 'currentHP', IntToStr(player.ThePlayer.currentHP));
+    AddElement(DataNode, 'HP', IntToStr(player.ThePlayer.currentHP));
     AddElement(DataNode, 'maxHP', IntToStr(player.ThePlayer.maxHP));
-    AddElement(DataNode, 'attack', IntToStr(player.ThePlayer.attack));
-    AddElement(DataNode, 'defense', IntToStr(player.ThePlayer.defense));
-    AddElement(DataNode, 'posX', IntToStr(player.ThePlayer.posX));
-    AddElement(DataNode, 'posY', IntToStr(player.ThePlayer.posY));
-    AddElement(DataNode, 'visionRange', IntToStr(player.ThePlayer.visionRange));
+    AddElement(DataNode, 'att', IntToStr(player.ThePlayer.attack));
+    AddElement(DataNode, 'def', IntToStr(player.ThePlayer.defense));
+    AddElement(DataNode, 'xp', IntToStr(player.ThePlayer.experience));
+    AddElement(DataNode, 'X', IntToStr(player.ThePlayer.posX));
+    AddElement(DataNode, 'Y', IntToStr(player.ThePlayer.posY));
+    AddElement(DataNode, 'vis', IntToStr(player.ThePlayer.visionRange));
 
     (* NPC records *)
     for i := 1 to entities.npcAmount do
@@ -230,13 +232,14 @@ begin
 
     (* Player info *)
     PlayerNode := Doc.DocumentElement.FindNode('Player');
-    player.ThePlayer.currentHP   := StrToInt(PlayerNode.FindNode('currentHP').TextContent);
-    player.ThePlayer.posX        := StrToInt(PlayerNode.FindNode('posX').TextContent);
-    player.ThePlayer.posY        := StrToInt(PlayerNode.FindNode('posY').TextContent);
+    player.ThePlayer.currentHP   := StrToInt(PlayerNode.FindNode('HP').TextContent);
     player.ThePlayer.maxHP       := StrToInt(PlayerNode.FindNode('maxHP').TextContent);
-    player.ThePlayer.attack      := StrToInt(PlayerNode.FindNode('attack').TextContent);
-    player.ThePlayer.defense     := StrToInt(PlayerNode.FindNode('defense').TextContent);
-    player.ThePlayer.visionRange := StrToInt(PlayerNode.FindNode('visionRange').TextContent);
+    player.ThePlayer.attack      := StrToInt(PlayerNode.FindNode('att').TextContent);
+    player.ThePlayer.defense     := StrToInt(PlayerNode.FindNode('def').TextContent);
+    player.ThePlayer.experience  := StrToInt(PlayerNode.FindNode('xp').TextContent);
+    player.ThePlayer.posX        := StrToInt(PlayerNode.FindNode('X').TextContent);
+    player.ThePlayer.posY        := StrToInt(PlayerNode.FindNode('Y').TextContent);
+    player.ThePlayer.visionRange := StrToInt(PlayerNode.FindNode('vis').TextContent);
 
     (* NPC stats *)
     SetLength(entities.entityList, 1);

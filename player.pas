@@ -12,6 +12,7 @@ type
   (* Store information about the player *)
   Creature = record
     currentHP, maxHP, attack, defense, posX, posY, visionRange: smallint;
+    experience: integer;
     (* Player Glyph *)
     glyph: TBitmap;
   end;
@@ -43,6 +44,7 @@ begin
     maxHP := 20;
     attack := 5;
     defense := 2;
+    experience := 0;
     posX := startX;
     posY := startY;
     visionRange := 5;

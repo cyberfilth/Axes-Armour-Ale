@@ -190,7 +190,8 @@ begin
   end;
   fov.fieldOfView(player.ThePlayer.posX, player.ThePlayer.posY,
     player.ThePlayer.visionRange, 1);
-  drawToBuffer(map.mapToScreen(ThePlayer.posX), map.mapToScreen(ThePlayer.posY), ThePlayer.glyph);
+  drawToBuffer(map.mapToScreen(ThePlayer.posX), map.mapToScreen(ThePlayer.posY),
+    ThePlayer.glyph);
   (* Add NPC's to the screen *)
   entities.redrawNPC;
   ui.displayMessage('Welcome message to be added here...');
