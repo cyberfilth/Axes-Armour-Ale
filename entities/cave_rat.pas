@@ -17,6 +17,8 @@ procedure takeTurn(id, spx, spy: smallint);
 procedure wander(id, spx, spy: smallint);
 (* Chase the player *)
 procedure chasePlayer(id, spx, spy: smallint);
+(* Run from player *)
+procedure escapePlayer(id, spx, spy: smallint);
 (* Combat *)
 procedure combat(id: smallint);
 
@@ -51,9 +53,15 @@ end;
 
 procedure takeTurn(id, spx, spy: smallint);
 begin
-  // Check if the NPC is in the players FoV
+  (* Check if the NPC is in the players FoV *)
   if (map.canSee(spx, spy) = True) then
-    chasePlayer(id, spx, spy)
+  begin
+    (* If NPC is at half health, they run *)
+    if (entities.entityList[id].currentHP < entities.entityList[id].maxHP) then
+      escapePlayer(id, spx, spy)
+    else
+      chasePlayer(id, spx, spy);
+  end
   else
     wander(id, spx, spy);
 end;
@@ -73,7 +81,7 @@ begin
     if attempts > 10 then
     begin
       entities.moveNPC(id, spx, spy);
-      exit;
+      break;
     end;
     case direction of
       0: Dec(testy);
@@ -83,7 +91,7 @@ begin
       4: testx := spx;
       5: testy := spy;
     end
-  until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = False);
+  until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = True);
   entities.moveNPC(id, testx, testy);
 end;
 
@@ -123,6 +131,57 @@ begin
   begin
     newX := spx;
     newY := spy - 1;
+  end;
+  if (map.canMove(newX, newY) = True) then
+  begin
+    if (map.hasPlayer(newX, newY) = True) then
+    begin
+      entities.moveNPC(id, spx, spy);
+      combat(id);
+    end
+    else if (map.isOccupied(newX, newY) = False) then
+      entities.moveNPC(id, newX, newY);
+  end
+  else
+    wander(id, spx, spy);
+end;
+
+procedure escapePlayer(id, spx, spy: smallint);
+var
+  newX, newY: smallint;
+begin
+  newX := 0;
+  newY := 0;
+  (* Get new coordinates to run away from player *)
+  if (spx > player.ThePlayer.posX) and (spy > player.ThePlayer.posY) then
+  begin
+    newX := spx + 1;
+    newY := spy + 1;
+  end
+  else if (spx < player.ThePlayer.posX) and (spy < player.ThePlayer.posY) then
+  begin
+    newX := spx - 1;
+    newY := spy - 1;
+  end
+  else if (spx < player.ThePlayer.posX) then
+  begin
+    newX := spx - 1;
+    newY := spy;
+  end
+  else if (spx > player.ThePlayer.posX) then
+  begin
+    newX := spx + 1;
+    newY := spy;
+  end
+  else if (spy < player.ThePlayer.posY) then
+  begin
+    newX := spx;
+    newY := spy - 1;
+  end
+  else if (spy > player.ThePlayer.posY) then
+  begin
+    newX := spx;
+    newY := spy + 1;
   end;
   if (map.canMove(newX, newY) = True) then
   begin

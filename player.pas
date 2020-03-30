@@ -77,7 +77,6 @@ begin
     begin
       ThePlayer.posX := originalX;
       ThePlayer.posY := originalY;
-
     end;
   (* check if tile is walkable *)
   if (map.canMove(ThePlayer.posX, ThePlayer.posY) = True) then

@@ -54,6 +54,7 @@ begin
   tempScreen := TBitmap.Create;
   tempScreen.Height := 578;
   tempScreen.Width := 835;
+  Randomize;
   (* Set random seed *)
   {$IFDEF Linux}
   RandSeed := RandSeed shl 8;
