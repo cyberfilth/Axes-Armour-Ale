@@ -55,7 +55,7 @@ procedure takeTurn(id, spx, spy: smallint);
 begin
   (* Check if the NPC is in the players FoV *)
   if (map.canSee(spx, spy) = True) then
-  begin
+  begin { TODO : Check if player is adjacent to the entity, otherwise they will always be stuck in a retreat loop }
     (* If NPC is at half health, they run *)
     if (entities.entityList[id].currentHP < entities.entityList[id].maxHP) then
       escapePlayer(id, spx, spy)
@@ -207,7 +207,7 @@ begin
   begin
     player.ThePlayer.currentHP := (player.ThePlayer.currentHP - damageAmount);
     if (player.ThePlayer.currentHP < 1) then
-    begin
+    begin   { TODO : Create player.playerDeath function that handles this }
       ui.displayMessage('You are dead!');
       exit;
     end

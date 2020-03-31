@@ -27,6 +27,10 @@ var
 procedure titleScreen(yn: byte);
 (* Draws the panel on side of screen *)
 procedure drawSidepanel;
+(* Update player level *)
+procedure updateLevel;
+(* Update Experience points display *)
+procedure updateXP;
 (* Update player health display *)
 procedure updateHealth;
 (* Update player attack value *)
@@ -71,32 +75,72 @@ begin
   main.tempScreen.Canvas.Pen.Color := globalutils.UICOLOUR;
   main.tempScreen.Canvas.Rectangle(sbx, sby, sbx + sbw, sby + sbh);
   main.tempScreen.Canvas.Font.Size := 10;
-  writeToBuffer(sbx + 50, sby + 5, UICOLOUR, 'Player');
+  writeToBuffer(sbx + 8, sby + 5, UITEXTCOLOUR, 'Player');
+  updateLevel;
+  updateXP;
   updateHealth;
-  updateAttack;
-  updateDefence;
+  // updateAttack;
+  //  updateDefence;
 end;
 
-procedure updateHealth;
+procedure updateLevel;
+begin
+  (* Select players title *)
+  if (ThePlayer.experience <= 10) then
+    ThePlayer.title := 'the Worthless'
+  else if (ThePlayer.experience > 10) then
+    ThePlayer.title := 'the Brawler';
+  (* Paint over previous title *)
+  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.FillRect(sbx + 8, sby + 25, sbx + 135, sby + 45);
+  (* Write title to screen *)
+  main.tempScreen.Canvas.Font.Size := 10;
+  writeToBuffer(sbx + 8, sby + 25, UITEXTCOLOUR, ThePlayer.title);
+end;
+
+procedure updateXP;
 begin
   (* Paint over previous stats *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(sbx + 33, sby + 40, sbx + 135, sby + 60);
+  main.tempScreen.Canvas.FillRect(sbx + 80, sby + 55, sbx + 135, sby + 75);
+  main.tempScreen.Canvas.Pen.Color := UICOLOUR;
+  (* Write Experience points *)
+  main.tempScreen.Canvas.Font.Size := 10;
+  writeToBuffer(sbx + 8, sby + 55, UITEXTCOLOUR, 'Experience:  ' +
+    IntToStr(ThePlayer.experience));
+end;
+
+procedure updateHealth;
+var
+  healthPercentage: smallint;
+begin
+  (* Paint over previous stats *)
+  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.FillRect(sbx + 33, sby + 75, sbx + 135, sby + 95);
   (* Draw Health amount *)
   main.tempScreen.Canvas.Font.Size := 10;
-  writeToBuffer(sbx + 8, sby + 40, UITEXTCOLOUR, 'Health:  ' +
-    IntToStr(ThePlayer.currentHP) + ' / ' + IntToStr(player.ThePlayer.maxHP));
+  writeToBuffer(sbx + 8, sby + 75, UITEXTCOLOUR, 'Health:  ' +
+    IntToStr(ThePlayer.currentHP) + ' / ' + IntToStr(ThePlayer.maxHP));
+  (* Draw health bar *)
+  main.tempScreen.Canvas.Brush.Color := $2E2E00; // Background colour
+  main.tempScreen.Canvas.FillRect(sbx + 8, sby + 95, sbx + 108, sby + 100);
+  (* Calculate percentage of total health *)
+  healthPercentage:=(ThePlayer.currentHP *100 ) div ThePlayer.maxHP;
+  main.tempScreen.Canvas.Brush.Color := $0B9117; // Green colour
+  main.tempScreen.Canvas.FillRect(sbx + 8, sby + 95, sbx + (healthPercentage + 8), sby + 100);
+  // test how many times this is called
+  displayMessage(IntToStr(healthPercentage));
 end;
 
 procedure updateAttack;
 begin
   (* Paint over previous stats *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(sbx + 50, sby + 60, sbx + 135, sby + 80);
+  main.tempScreen.Canvas.FillRect(sbx + 50, sby + 65, sbx + 135, sby + 85);
   main.tempScreen.Canvas.Pen.Color := UICOLOUR;
   (* Draw Attack amount *)
   main.tempScreen.Canvas.Font.Size := 10;
-  writeToBuffer(sbx + 8, sby + 60, UITEXTCOLOUR, 'Attack:  ' +
+  writeToBuffer(sbx + 8, sby + 65, UITEXTCOLOUR, 'Attack:  ' +
     IntToStr(ThePlayer.attack));
 end;
 
@@ -104,11 +148,11 @@ procedure updateDefence;
 begin
   (* Paint over previous stats *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(sbx + 60, sby + 80, sbx + 135, sby + 100);
+  main.tempScreen.Canvas.FillRect(sbx + 60, sby + 85, sbx + 135, sby + 105);
   main.tempScreen.Canvas.Pen.Color := UICOLOUR;
   (* Draw Defence amount *)
   main.tempScreen.Canvas.Font.Size := 10;
-  writeToBuffer(sbx + 8, sby + 80, UITEXTCOLOUR, 'Defence:  ' +
+  writeToBuffer(sbx + 8, sby + 85, UITEXTCOLOUR, 'Defence:  ' +
     IntToStr(ThePlayer.defense));
 end;
 

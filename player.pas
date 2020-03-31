@@ -13,6 +13,7 @@ type
   Creature = record
     currentHP, maxHP, attack, defense, posX, posY, visionRange: smallint;
     experience: integer;
+    title: String;
     (* Player Glyph *)
     glyph: TBitmap;
   end;
@@ -48,6 +49,7 @@ begin
     posX := startX;
     posY := startY;
     visionRange := 5;
+    title := 'the nobody';
     glyph := TBitmap.Create;
     glyph.LoadFromResourceName(HINSTANCE, 'PLAYER_GLYPH');
     fov.fieldOfView(ThePlayer.posX, ThePlayer.posY, ThePlayer.visionRange, 1);
@@ -81,9 +83,7 @@ begin
       ThePlayer.posY := originalY;
     end;
   (* check if tile is walkable *)
-  if (map.canMove(ThePlayer.posX, ThePlayer.posY) = True) then
-    ui.updateHealth
-  else
+  if (map.canMove(ThePlayer.posX, ThePlayer.posY) = False) then
   begin
     ThePlayer.posX := originalX;
     ThePlayer.posY := originalY;
