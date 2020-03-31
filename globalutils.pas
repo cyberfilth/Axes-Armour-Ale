@@ -161,6 +161,7 @@ begin
     AddElement(DataNode, 'X', IntToStr(player.ThePlayer.posX));
     AddElement(DataNode, 'Y', IntToStr(player.ThePlayer.posY));
     AddElement(DataNode, 'vis', IntToStr(player.ThePlayer.visionRange));
+    AddElement(DataNode, 'title', player.ThePlayer.title);
 
     (* NPC records *)
     for i := 1 to entities.npcAmount do
@@ -175,6 +176,7 @@ begin
       AddElement(DataNode, 'maxHP', IntToStr(entities.entityList[i].maxHP));
       AddElement(DataNode, 'attack', IntToStr(entities.entityList[i].attack));
       AddElement(DataNode, 'defense', IntToStr(entities.entityList[i].defense));
+      AddElement(DataNode, 'xpReward', IntToStr(entities.entityList[i].xpReward));
       AddElement(DataNode, 'inView', BoolToStr(entities.entityList[i].inView));
       AddElement(DataNode, 'discovered', BoolToStr(entities.entityList[i].discovered));
       AddElement(DataNode, 'isDead', BoolToStr(entities.entityList[i].isDead));
@@ -240,6 +242,7 @@ begin
     player.ThePlayer.posX        := StrToInt(PlayerNode.FindNode('X').TextContent);
     player.ThePlayer.posY        := StrToInt(PlayerNode.FindNode('Y').TextContent);
     player.ThePlayer.visionRange := StrToInt(PlayerNode.FindNode('vis').TextContent);
+    player.ThePlayer.title       := PlayerNode.FindNode('title').TextContent;
 
     (* NPC stats *)
     SetLength(entities.entityList, 1);
@@ -257,6 +260,7 @@ begin
       entities.entityList[i].currentHP   := StrToInt(NPCnode.FindNode('currentHP').TextContent);
       entities.entityList[i].attack      := StrToInt(NPCnode.FindNode('attack').TextContent);
       entities.entityList[i].defense     := StrToInt(NPCnode.FindNode('defense').TextContent);
+      entities.entityList[i].xpReward    := StrToInt(NPCnode.FindNode('xpReward').TextContent);
       entities.entityList[i].inView      := StrToBool(NPCnode.FindNode('inView').TextContent);
       entities.entityList[i].discovered  := StrToBool(NPCnode.FindNode('discovered').TextContent);
       entities.entityList[i].isDead      := StrToBool(NPCnode.FindNode('isDead').TextContent);

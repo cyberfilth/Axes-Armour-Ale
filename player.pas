@@ -110,6 +110,8 @@ begin
       entities.entityList[npcID].isDead := True;
       entities.entityList[npcID].glyph := '%';
       map.unoccupy(entities.entityList[npcID].posX, entities.entityList[npcID].posY);
+      ThePlayer.experience:=ThePlayer.experience + entities.entityList[npcID].xpReward;
+      ui.updateXP;
       exit;
     end
     else

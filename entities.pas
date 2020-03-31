@@ -22,7 +22,7 @@ type
     (* Description of creature *)
     description: string;
     (* health and position on game map *)
-    currentHP, maxHP, attack, defense, posX, posY: smallint;
+    currentHP, maxHP, attack, defense, posX, posY, xpReward: smallint;
     (* Character used to represent NPC on game map *)
     glyph: char;
     (* Colour of NPC *)

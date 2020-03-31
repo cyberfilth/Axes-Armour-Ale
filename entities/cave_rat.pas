@@ -43,6 +43,7 @@ begin
     currentHP := maxHP;
     attack := randomRange(2, 3);
     defense := randomRange(1, 3);
+    xpReward := randomRange(3, 5) ;
     inView := False;
     discovered := False;
     isDead := False;

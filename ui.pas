@@ -79,8 +79,8 @@ begin
   updateLevel;
   updateXP;
   updateHealth;
-  // updateAttack;
-  //  updateDefence;
+  updateAttack;
+  updateDefence;
 end;
 
 procedure updateLevel;
@@ -128,19 +128,17 @@ begin
   healthPercentage:=(ThePlayer.currentHP *100 ) div ThePlayer.maxHP;
   main.tempScreen.Canvas.Brush.Color := $0B9117; // Green colour
   main.tempScreen.Canvas.FillRect(sbx + 8, sby + 95, sbx + (healthPercentage + 8), sby + 100);
-  // test how many times this is called
-  displayMessage(IntToStr(healthPercentage));
 end;
 
 procedure updateAttack;
 begin
   (* Paint over previous stats *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(sbx + 50, sby + 65, sbx + 135, sby + 85);
+  main.tempScreen.Canvas.FillRect(sbx + 50, sby + 105, sbx + 135, sby + 125);
   main.tempScreen.Canvas.Pen.Color := UICOLOUR;
   (* Draw Attack amount *)
   main.tempScreen.Canvas.Font.Size := 10;
-  writeToBuffer(sbx + 8, sby + 65, UITEXTCOLOUR, 'Attack:  ' +
+  writeToBuffer(sbx + 8, sby + 105, UITEXTCOLOUR, 'Attack:  ' +
     IntToStr(ThePlayer.attack));
 end;
 
@@ -148,11 +146,11 @@ procedure updateDefence;
 begin
   (* Paint over previous stats *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(sbx + 60, sby + 85, sbx + 135, sby + 105);
+  main.tempScreen.Canvas.FillRect(sbx + 60, sby + 125, sbx + 135, sby + 145);
   main.tempScreen.Canvas.Pen.Color := UICOLOUR;
   (* Draw Defence amount *)
   main.tempScreen.Canvas.Font.Size := 10;
-  writeToBuffer(sbx + 8, sby + 85, UITEXTCOLOUR, 'Defence:  ' +
+  writeToBuffer(sbx + 8, sby + 125, UITEXTCOLOUR, 'Defence:  ' +
     IntToStr(ThePlayer.defense));
 end;
 
