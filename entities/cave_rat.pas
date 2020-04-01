@@ -17,6 +17,8 @@ procedure takeTurn(id, spx, spy: smallint);
 procedure wander(id, spx, spy: smallint);
 (* Chase the player *)
 procedure chasePlayer(id, spx, spy: smallint);
+(* Check if player is next to NPC *)
+function isNextToPlayer(spx, spy: smallint): boolean;
 (* Run from player *)
 procedure escapePlayer(id, spx, spy: smallint);
 (* Combat *)
@@ -43,7 +45,7 @@ begin
     currentHP := maxHP;
     attack := randomRange(2, 3);
     defense := randomRange(1, 3);
-    xpReward := randomRange(3, 5) ;
+    xpReward := randomRange(3, 5);
     inView := False;
     discovered := False;
     isDead := False;
@@ -56,10 +58,15 @@ procedure takeTurn(id, spx, spy: smallint);
 begin
   (* Check if the NPC is in the players FoV *)
   if (map.canSee(spx, spy) = True) then
-  begin { TODO : Check if player is adjacent to the entity, otherwise they will always be stuck in a retreat loop }
+  begin
     (* If NPC is at half health, they run *)
     if (entities.entityList[id].currentHP < entities.entityList[id].maxHP) then
-      escapePlayer(id, spx, spy)
+    begin
+      if (isNextToPlayer(spx, spy) = True) then
+        escapePlayer(id, spx, spy)
+      else
+        wander(id, spx, spy);
+    end
     else
       chasePlayer(id, spx, spy);
   end
@@ -92,7 +99,8 @@ begin
       4: testx := spx;
       5: testy := spy;
     end
-  until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = True);
+  until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = False) and
+  (testx <> ThePlayer.posX) and (testy <> ThePlayer.posY);
   entities.moveNPC(id, testx, testy);
 end;
 
@@ -145,6 +153,27 @@ begin
   end
   else
     wander(id, spx, spy);
+end;
+
+function isNextToPlayer(spx, spy: smallint): boolean;
+begin
+  Result := False;
+  if (map.hasPlayer(spx, spy - 1) = True) then // NORTH
+    Result := True;
+  if (map.hasPlayer(spx + 1, spy - 1) = True) then // NORTH EAST
+    Result := True;
+  if (map.hasPlayer(spx + 1, spy) = True) then // EAST
+    Result := True;
+  if (map.hasPlayer(spx + 1, spy + 1) = True) then // SOUTH EAST
+    Result := True;
+  if (map.hasPlayer(spx, spy + 1) = True) then // SOUTH
+    Result := True;
+  if (map.hasPlayer(spx - 1, spy + 1) = True) then // SOUTH WEST
+    Result := True;
+  if (map.hasPlayer(spx - 1, spy) = True) then // WEST
+    Result := True;
+  if (map.hasPlayer(spx - 1, spy - 1) = True) then // NORTH WEST
+    Result := True;
 end;
 
 procedure escapePlayer(id, spx, spy: smallint);
