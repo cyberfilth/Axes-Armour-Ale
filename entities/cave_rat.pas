@@ -59,8 +59,8 @@ begin
   (* Check if the NPC is in the players FoV *)
   if (map.canSee(spx, spy) = True) then
   begin
-    (* If NPC is at half health, they run *)
-    if (entities.entityList[id].currentHP < entities.entityList[id].maxHP) then
+    (* If NPC has low health, they run *)
+    if (entities.entityList[id].currentHP < 2) then
     begin
       if (isNextToPlayer(spx, spy) = True) then
         escapePlayer(id, spx, spy)

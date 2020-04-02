@@ -94,7 +94,8 @@ begin
     end;
     (* redraw NPC *)
     entityList[id].inView := True;
-    drawNPCtoBuffer(entityList[id].posX, entityList[id].posY, entityList[id].glyphColour, entityList[id].glyph);
+    drawNPCtoBuffer(entityList[id].posX, entityList[id].posY,
+      entityList[id].glyphColour, entityList[id].glyph);
   end
   else
     entityList[id].inView := False;
@@ -108,7 +109,8 @@ begin
   begin
     if (entityList[i].inView = True) and (entityList[i].isDead = False) then
     begin
-      drawNPCtoBuffer(entityList[i].posX, entityList[i].posY, entityList[i].glyphColour, entityList[i].glyph);
+      drawNPCtoBuffer(entityList[i].posX, entityList[i].posY,
+        entityList[i].glyphColour, entityList[i].glyph);
     end;
   end;
 end;
