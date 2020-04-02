@@ -17,7 +17,7 @@ type
 
 const
   (* Version info - a = Alpha, d = Debug, r = Release *)
-  VERSION = '20a';
+  VERSION = '21a';
   (* Save game file *)
   {$IFDEF Linux}
   saveFile = '.axes.data';
@@ -162,6 +162,7 @@ begin
     AddElement(DataNode, 'Y', IntToStr(player.ThePlayer.posY));
     AddElement(DataNode, 'vis', IntToStr(player.ThePlayer.visionRange));
     AddElement(DataNode, 'title', player.ThePlayer.title);
+    AddElement(DataNode, 'name', player.ThePlayer.playerName);
 
     (* NPC records *)
     for i := 1 to entities.npcAmount do
@@ -243,6 +244,7 @@ begin
     player.ThePlayer.posY        := StrToInt(PlayerNode.FindNode('Y').TextContent);
     player.ThePlayer.visionRange := StrToInt(PlayerNode.FindNode('vis').TextContent);
     player.ThePlayer.title       := PlayerNode.FindNode('title').TextContent;
+    player.ThePlayer.playerName  := PlayerNode.FindNode('name').TextContent;
 
     (* NPC stats *)
     SetLength(entities.entityList, 1);

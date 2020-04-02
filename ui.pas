@@ -75,7 +75,7 @@ begin
   main.tempScreen.Canvas.Pen.Color := globalutils.UICOLOUR;
   main.tempScreen.Canvas.Rectangle(sbx, sby, sbx + sbw, sby + sbh);
   main.tempScreen.Canvas.Font.Size := 10;
-  writeToBuffer(sbx + 8, sby + 5, UITEXTCOLOUR, 'Player');
+  writeToBuffer(sbx + 8, sby + 5, UITEXTCOLOUR, ThePlayer.playerName);
   updateLevel;
   updateXP;
   updateHealth;

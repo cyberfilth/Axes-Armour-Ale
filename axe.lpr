@@ -14,7 +14,7 @@ uses {$IFDEF UNIX} {$IFDEF UseCThreads}
   fov,
   grid_dungeon,
   ui, entities,
-  cave_rat;
+  cave_rat, plot_gen;
 
 {$R *.res}
 

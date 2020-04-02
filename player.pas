@@ -13,7 +13,7 @@ type
   Creature = record
     currentHP, maxHP, attack, defense, posX, posY, visionRange: smallint;
     experience: integer;
-    title: String;
+    playerName, title: string;
     (* Player Glyph *)
     glyph: TBitmap;
   end;
@@ -34,7 +34,7 @@ function combatCheck(x, y: smallint): boolean;
 implementation
 
 uses
-  globalutils, map, fov, ui, entities;
+  globalutils, map, fov, ui, entities, plot_gen;
 
 procedure spawnPlayer(startX, startY: smallint);
 begin
@@ -49,9 +49,12 @@ begin
     posX := startX;
     posY := startY;
     visionRange := 5;
+    playerName := 'Default';
     title := 'the nobody';
     glyph := TBitmap.Create;
     glyph.LoadFromResourceName(HINSTANCE, 'PLAYER_GLYPH');
+    (* Generate a name for the player *)
+    plot_gen.generateName;
     fov.fieldOfView(ThePlayer.posX, ThePlayer.posY, ThePlayer.visionRange, 1);
     drawToBuffer(map.mapToScreen(ThePlayer.posX),
       map.mapToScreen(ThePlayer.posY), glyph);
@@ -110,7 +113,7 @@ begin
       entities.entityList[npcID].isDead := True;
       entities.entityList[npcID].glyph := '%';
       map.unoccupy(entities.entityList[npcID].posX, entities.entityList[npcID].posY);
-      ThePlayer.experience:=ThePlayer.experience + entities.entityList[npcID].xpReward;
+      ThePlayer.experience := ThePlayer.experience + entities.entityList[npcID].xpReward;
       ui.updateXP;
       exit;
     end
