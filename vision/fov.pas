@@ -127,6 +127,17 @@ begin
       drawLine(centreX, centreY, centreX - 3, centreY + 3, hiDef);
       drawLine(centreX, centreY, centreX - 3, centreY - 3, hiDef);
     end;
+    if (radius = 6) then
+    begin
+      drawLine(centreX, centreY, centreX + 4, centreY - 3, hiDef);
+      drawLine(centreX, centreY, centreX + 3, centreY - 4, hiDef);
+      drawLine(centreX, centreY, centreX - 4, centreY - 3, hiDef);
+      drawLine(centreX, centreY, centreX - 3, centreY - 4, hiDef);
+      drawLine(centreX, centreY, centreX + 4, centreY + 3, hiDef);
+      drawLine(centreX, centreY, centreX + 3, centreY + 4, hiDef);
+      drawLine(centreX, centreY, centreX - 4, centreY + 3, hiDef);
+      drawLine(centreX, centreY, centreX - 3, centreY + 4, hiDef);
+    end;
     if (d < 0) then
       d := d + (4 * x) + 6
     else

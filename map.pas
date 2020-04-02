@@ -99,8 +99,8 @@ var
   // give each tile a unique ID number
   id_int: smallint;
 begin
-  cave.generate;
-  //grid_dungeon.generate;
+  //cave.generate;
+  grid_dungeon.generate;
   id_int := 0;
   for r := 1 to globalutils.MAXROWS do
   begin

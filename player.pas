@@ -48,7 +48,7 @@ begin
     experience := 0;
     posX := startX;
     posY := startY;
-    visionRange := 5;
+    visionRange := 4;
     playerName := 'Default';
     title := 'the nobody';
     glyph := TBitmap.Create;
