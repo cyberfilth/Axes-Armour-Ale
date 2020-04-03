@@ -59,17 +59,21 @@ begin
   (* Check if the NPC is in the players FoV *)
   if (map.canSee(spx, spy) = True) then
   begin
-    (* If NPC has low health, they run *)
+    (* If NPC has low health... *)
     if (entities.entityList[id].currentHP < 2) then
     begin
+      (* and they're adjacent to the player, they run *)
       if (isNextToPlayer(spx, spy) = True) then
         escapePlayer(id, spx, spy)
       else
+        (* if not near the player, they wander *)
         wander(id, spx, spy);
     end
     else
+      (* if they are in players FoV and not low on health, they attack *)
       chasePlayer(id, spx, spy);
   end
+  (* Not in the players FoV *)
   else
     wander(id, spx, spy);
 end;
@@ -100,7 +104,7 @@ begin
       5: testy := spy;
     end
   until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = False) and
-  (testx <> ThePlayer.posX) and (testy <> ThePlayer.posY);
+    (testx <> ThePlayer.posX) and (testy <> ThePlayer.posY);
   entities.moveNPC(id, testx, testy);
 end;
 
@@ -141,18 +145,31 @@ begin
     newX := spx;
     newY := spy - 1;
   end;
+  (* New coordinates set. Check if they are walkable *)
   if (map.canMove(newX, newY) = True) then
   begin
+    (* Do they contain the player *)
     if (map.hasPlayer(newX, newY) = True) then
     begin
+      (* Remain on original tile and attack *)
       entities.moveNPC(id, spx, spy);
       combat(id);
     end
+    (* Else if tile does not contain player, check for another entity *)
+    else if (map.isOccupied(newX, newY) = True) then
+    begin
+      //ui.displayMessage('Rat ' + IntToStr(id) + ' bumps into Rat ' +
+      //  IntToStr(entities.getCreatureID(newX, newY)));
+      (* Remain on original tile *)
+      entities.moveNPC(id, spx, spy);
+    end
+    (* if map is unoccupied, move to that tile *)
     else if (map.isOccupied(newX, newY) = False) then
       entities.moveNPC(id, newX, newY);
   end
   else
     wander(id, spx, spy);
+  // entities.moveNPC(id, spx, spy);
 end;
 
 function isNextToPlayer(spx, spy: smallint): boolean;

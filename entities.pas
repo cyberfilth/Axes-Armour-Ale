@@ -45,6 +45,8 @@ procedure spawnNPCs;
 procedure moveNPC(id, newX, newY: smallint);
 (* Redraw all NPC's *)
 procedure redrawNPC;
+(* Get creature details at a specific location *)
+function getCreatureID(x, y: smallint): smallint;
 
 implementation
 
@@ -80,6 +82,11 @@ begin
   (* mark tile as unoccupied *)
   map.unoccupy(entityList[id].posX, entityList[id].posY);
   (* update new position *)
+   if (map.isOccupied(newX, newY) = True) and (getCreatureID(newX, newY) <> id) then
+    begin
+      newX := entityList[id].posX;
+      newY := entityList[id].posY;
+    end;
   entityList[id].posX := newX;
   entityList[id].posY := newY;
   (* mark tile as occupied *)
@@ -112,6 +119,17 @@ begin
       drawNPCtoBuffer(entityList[i].posX, entityList[i].posY,
         entityList[i].glyphColour, entityList[i].glyph);
     end;
+  end;
+end;
+
+function getCreatureID(x, y: smallint): smallint;
+var
+  i: smallint;
+begin
+  for i := 1 to npcAmount do
+  begin
+    if (entityList[i].posX = x) and (entityList[i].posY = y) then
+      Result := i;
   end;
 end;
 
