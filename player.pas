@@ -72,10 +72,30 @@ begin
   originalX := ThePlayer.posX;
   originalY := ThePlayer.posY;
   case dir of
-    1: Dec(ThePlayer.posY);
-    2: Dec(ThePlayer.posX);
-    3: Inc(ThePlayer.posY);
-    4: Inc(ThePlayer.posX);
+    1: Dec(ThePlayer.posY); // N
+    2: Dec(ThePlayer.posX); // W
+    3: Inc(ThePlayer.posY); // S
+    4: Inc(ThePlayer.posX); // E
+    5:                      // NE
+    begin
+      Inc(ThePlayer.posX);
+      Dec(ThePlayer.posY);
+    end;
+    6:                      // SE
+    begin
+      Inc(ThePlayer.posX);
+      Inc(ThePlayer.posY);
+    end;
+    7:                      // SW
+    begin
+      Dec(ThePlayer.posX);
+      Inc(ThePlayer.posY);
+    end;
+    8:                      // NW
+    begin
+      Dec(ThePlayer.posX);
+      Dec(ThePlayer.posY);
+    end;
   end;
   (* check if tile is occupied *)
   if (map.isOccupied(ThePlayer.posX, ThePlayer.posY) = True) then

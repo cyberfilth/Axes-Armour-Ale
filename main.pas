@@ -136,6 +136,30 @@ begin
         gameLoop;
         Invalidate;
       end;
+      VK_NUMPAD9:
+      begin
+        player.movePlayer(5);
+        gameLoop;
+        Invalidate;
+      end;
+      VK_NUMPAD3:
+      begin
+        player.movePlayer(6);
+        gameLoop;
+        Invalidate;
+      end;
+      VK_NUMPAD1:
+      begin
+        player.movePlayer(7);
+        gameLoop;
+        Invalidate;
+      end;
+      VK_NUMPAD7:
+      begin
+        player.movePlayer(8);
+        gameLoop;
+        Invalidate;
+      end;
     end;
   end // end of game input
   else if (gameState = 0) then
