@@ -27,7 +27,7 @@ procedure combat(id: smallint);
 implementation
 
 uses
-  entities, player, globalutils, ui;
+  entities, player, globalutils, ui, los;
 
 procedure createCaveRat(uniqueid, npcx, npcy: smallint);
 begin
@@ -46,6 +46,7 @@ begin
     attack := randomRange(2, 3);
     defense := randomRange(1, 3);
     xpReward := randomRange(3, 5);
+    visionRange := 4; { TODO : Add to Save/Load function }
     inView := False;
     discovered := False;
     isDead := False;
@@ -56,8 +57,9 @@ end;
 
 procedure takeTurn(id, spx, spy: smallint);
 begin
-  (* Check if the NPC is in the players FoV *)
-  if (map.canSee(spx, spy) = True) then
+  (* Can the NPC see the player *)
+  if (los.inView(spx, spy, ThePlayer.posX, ThePlayer.posY,
+    entities.entityList[id].visionRange) = True) then
   begin
     (* If NPC has low health... *)
     if (entities.entityList[id].currentHP < 2) then
@@ -70,7 +72,7 @@ begin
         wander(id, spx, spy);
     end
     else
-      (* if they are in players FoV and not low on health, they attack *)
+      (* if they cannot see player and not low on health, they attack *)
       chasePlayer(id, spx, spy);
   end
   (* Not in the players FoV *)
@@ -93,7 +95,7 @@ begin
     if attempts > 10 then
     begin
       entities.moveNPC(id, spx, spy);
-      break;
+      exit;
     end;
     case direction of
       0: Dec(testy);

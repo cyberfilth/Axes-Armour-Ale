@@ -104,6 +104,7 @@ begin
     begin
       cave_rat.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY);
     end;
+  entities.redrawNPC;
 end;
 
 procedure TGameWindow.FormKeyDown(Sender: TObject; var Key: word);

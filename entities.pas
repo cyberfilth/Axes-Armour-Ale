@@ -22,7 +22,7 @@ type
     (* Description of creature *)
     description: string;
     (* health and position on game map *)
-    currentHP, maxHP, attack, defense, posX, posY, xpReward: smallint;
+    currentHP, maxHP, attack, defense, posX, posY, xpReward, visionRange: smallint;
     (* Character used to represent NPC on game map *)
     glyph: char;
     (* Colour of NPC *)
@@ -41,7 +41,7 @@ var
 
 (* Generate list of creatures on the map *)
 procedure spawnNPCs;
-(* Move NPC's *)
+(* Update NPCs X, Y coordinates *)
 procedure moveNPC(id, newX, newY: smallint);
 (* Redraw all NPC's *)
 procedure redrawNPC;
@@ -82,11 +82,11 @@ begin
   (* mark tile as unoccupied *)
   map.unoccupy(entityList[id].posX, entityList[id].posY);
   (* update new position *)
-   if (map.isOccupied(newX, newY) = True) and (getCreatureID(newX, newY) <> id) then
-    begin
-      newX := entityList[id].posX;
-      newY := entityList[id].posY;
-    end;
+  if (map.isOccupied(newX, newY) = True) and (getCreatureID(newX, newY) <> id) then
+  begin
+    newX := entityList[id].posX;
+    newY := entityList[id].posY;
+  end;
   entityList[id].posX := newX;
   entityList[id].posY := newY;
   (* mark tile as occupied *)
@@ -94,15 +94,12 @@ begin
   (* Check if NPC in players FoV *)
   if (map.canSee(newX, newY) = True) then
   begin
+    entityList[id].inView := True;
     if (entityList[id].discovered = False) then
     begin
       ui.displayMessage('You see ' + entityList[id].description);
       entityList[id].discovered := True;
     end;
-    (* redraw NPC *)
-    entityList[id].inView := True;
-    drawNPCtoBuffer(entityList[id].posX, entityList[id].posY,
-      entityList[id].glyphColour, entityList[id].glyph);
   end
   else
     entityList[id].inView := False;

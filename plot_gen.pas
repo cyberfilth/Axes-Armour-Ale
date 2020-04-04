@@ -2,12 +2,12 @@
 
 unit plot_gen;
 
-{$mode objfpc}{$H+}
+{$mode objfpc}{$H+}{$R+}
 
 interface
 
 var
-  firstSyllable: array[1..74] of
+  firstSyllable: array[0..73] of
   string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
     'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con', 'Cor', 'Dag', 'Doo',
     'Elen', 'El', 'En', 'Eo', 'Faf', 'Fan', 'Fara', 'Fre', 'Fro',
@@ -17,7 +17,7 @@ var
     'Rud', 'Sam', 'She', 'Sheel', 'Shin', 'Shog', 'Son', 'Sur', 'Theo',
     'Tho', 'Tris', 'U', 'Uh', 'Ul', 'Vap', 'Vish', 'Vor', 'Ya', 'Yo', 'Yyr');
 
-  secondSyllable: array[1..63] of
+  secondSyllable: array[0..62] of
   string = ('ba', 'bis', 'bo', 'bus', 'da', 'dal', 'dagz', 'den',
     'di', 'dil', 'dinn', 'do', 'dor', 'dra', 'dur', 'gi', 'gauble',
     'gen', 'glum', 'go', 'gorn', 'goth', 'had', 'hard', 'is', 'karrl',
@@ -38,9 +38,9 @@ procedure generateName;
 var
   a, b: byte;
 begin
-  a := Random(73) + 1;
-  b := Random(62) + 1;
-  ThePlayer.playerName := firstSyllable[b] + secondSyllable[a];
+  a := Random(73);
+  b := Random(62);
+  ThePlayer.playerName := firstSyllable[a] + secondSyllable[b];
 end;
 
 end.
