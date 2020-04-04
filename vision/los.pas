@@ -73,7 +73,8 @@ begin
     if (map.maparea[y][x].Blocks = True) then
     begin
       Dec(totalSpaces);
-      break;
+      Result := False;
+      exit;
     end;
     if d < 0 then
     begin
