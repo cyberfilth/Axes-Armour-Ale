@@ -107,9 +107,9 @@ var
     NameNode, ValueNode: TDomNode;
   begin
     NameNode := Doc.CreateElement(Name);    // creates future Node/Name
-    ValueNode := Doc.CreateTextNode(Value);  // creates future Node/Name/Value
-    NameNode.Appendchild(ValueNode);         // place value in place
-    Node.Appendchild(NameNode);              // place Name in place
+    ValueNode := Doc.CreateTextNode(Value); // creates future Node/Name/Value
+    NameNode.Appendchild(ValueNode);        // place value in place
+    Node.Appendchild(NameNode);             // place Name in place
   end;
 
   function AddChild(Node: TDOMNode; ChildName: string): TDomNode;
@@ -178,6 +178,7 @@ begin
       AddElement(DataNode, 'attack', IntToStr(entities.entityList[i].attack));
       AddElement(DataNode, 'defense', IntToStr(entities.entityList[i].defense));
       AddElement(DataNode, 'xpReward', IntToStr(entities.entityList[i].xpReward));
+      AddElement(DataNode, 'visRange', IntToStr(entities.entityList[i].visionRange));
       AddElement(DataNode, 'inView', BoolToStr(entities.entityList[i].inView));
       AddElement(DataNode, 'discovered', BoolToStr(entities.entityList[i].discovered));
       AddElement(DataNode, 'isDead', BoolToStr(entities.entityList[i].isDead));
@@ -263,6 +264,7 @@ begin
       entities.entityList[i].attack      := StrToInt(NPCnode.FindNode('attack').TextContent);
       entities.entityList[i].defense     := StrToInt(NPCnode.FindNode('defense').TextContent);
       entities.entityList[i].xpReward    := StrToInt(NPCnode.FindNode('xpReward').TextContent);
+      entities.entityList[i].visionRange := StrToInt(NPCnode.FindNode('visRange').TextContent);
       entities.entityList[i].inView      := StrToBool(NPCnode.FindNode('inView').TextContent);
       entities.entityList[i].discovered  := StrToBool(NPCnode.FindNode('discovered').TextContent);
       entities.entityList[i].isDead      := StrToBool(NPCnode.FindNode('isDead').TextContent);

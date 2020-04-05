@@ -7,7 +7,7 @@ unit cave_rat;
 interface
 
 uses
-  Graphics, SysUtils, map;
+  SysUtils, map;
 
 (* Create a cave rat *)
 procedure createCaveRat(uniqueid, npcx, npcy: smallint);
@@ -46,7 +46,7 @@ begin
     attack := randomRange(2, 3);
     defense := randomRange(1, 3);
     xpReward := randomRange(3, 5);
-    visionRange := 4; { TODO : Add to Save/Load function }
+    visionRange := 4;
     inView := False;
     discovered := False;
     isDead := False;
