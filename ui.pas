@@ -125,9 +125,10 @@ begin
   main.tempScreen.Canvas.Brush.Color := $2E2E00; // Background colour
   main.tempScreen.Canvas.FillRect(sbx + 8, sby + 95, sbx + 108, sby + 100);
   (* Calculate percentage of total health *)
-  healthPercentage:=(ThePlayer.currentHP *100 ) div ThePlayer.maxHP;
+  healthPercentage := (ThePlayer.currentHP * 100) div ThePlayer.maxHP;
   main.tempScreen.Canvas.Brush.Color := $0B9117; // Green colour
-  main.tempScreen.Canvas.FillRect(sbx + 8, sby + 95, sbx + (healthPercentage + 8), sby + 100);
+  main.tempScreen.Canvas.FillRect(sbx + 8, sby + 95, sbx +
+    (healthPercentage + 8), sby + 100);
 end;
 
 procedure updateAttack;
@@ -156,26 +157,36 @@ end;
 
 procedure displayMessage(message: string);
 begin
-  (* Clear the message log *)
-  main.tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(5, 410, 833, 550);
-  (* Shift all messages down one line *)
-  messageArray[7] := messageArray[6];
-  messageArray[6] := messageArray[5];
-  messageArray[5] := messageArray[4];
-  messageArray[4] := messageArray[3];
-  messageArray[3] := messageArray[2];
-  messageArray[2] := messageArray[1];
-  messageArray[1] := message;
-  (* Display each line, gradually getting darker *)
-  main.tempScreen.Canvas.Font.Size := 9;
-  writeToBuffer(10, 410, UITEXTCOLOUR, messageArray[1]);
-  writeToBuffer(10, 430, MESSAGEFADE1, messageArray[2]);
-  writeToBuffer(10, 450, MESSAGEFADE2, messageArray[3]);
-  writeToBuffer(10, 470, MESSAGEFADE3, messageArray[4]);
-  writeToBuffer(10, 490, MESSAGEFADE4, messageArray[5]);
-  writeToBuffer(10, 510, MESSAGEFADE5, messageArray[6]);
-  writeToBuffer(10, 530, MESSAGEFADE6, messageArray[7]);
+  (* Catch duplicate messages *)
+  if (message = messageArray[1]) then
+  begin
+    messageArray[1] := messageArray[1] + ' x2';
+    main.tempScreen.Canvas.Font.Size := 9;
+    writeToBuffer(10, 410, UITEXTCOLOUR, messageArray[1]);
+  end
+  else
+  begin
+    (* Clear the message log *)
+    main.tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
+    main.tempScreen.Canvas.FillRect(5, 410, 833, 550);
+    (* Shift all messages down one line *)
+    messageArray[7] := messageArray[6];
+    messageArray[6] := messageArray[5];
+    messageArray[5] := messageArray[4];
+    messageArray[4] := messageArray[3];
+    messageArray[3] := messageArray[2];
+    messageArray[2] := messageArray[1];
+    messageArray[1] := message;
+    (* Display each line, gradually getting darker *)
+    main.tempScreen.Canvas.Font.Size := 9;
+    writeToBuffer(10, 410, UITEXTCOLOUR, messageArray[1]);
+    writeToBuffer(10, 430, MESSAGEFADE1, messageArray[2]);
+    writeToBuffer(10, 450, MESSAGEFADE2, messageArray[3]);
+    writeToBuffer(10, 470, MESSAGEFADE3, messageArray[4]);
+    writeToBuffer(10, 490, MESSAGEFADE4, messageArray[5]);
+    writeToBuffer(10, 510, MESSAGEFADE5, messageArray[6]);
+    writeToBuffer(10, 530, MESSAGEFADE6, messageArray[7]);
+  end;
 end;
 
 end.
