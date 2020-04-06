@@ -25,8 +25,6 @@ type
     currentHP, maxHP, attack, defense, posX, posY, xpReward, visionRange: smallint;
     (* Character used to represent NPC on game map *)
     glyph: char;
-    (* Colour of NPC *)
-    glyphColour: TColor;
     (* Is the NPC in the players FoV *)
     inView: boolean;
     (* First time the player discovers the NPC *)
@@ -38,9 +36,14 @@ type
 var
   entityList: array of Creature;
   npcAmount, listLength: smallint;
+  caveRatGlyph: TBitmap;
 
+(* Load entity textures *)
+procedure setupEntities;
 (* Generate list of creatures on the map *)
 procedure spawnNPCs;
+(* Draw entity on screen *)
+procedure drawEntity(c, r: smallint; glyph: char);
 (* Update NPCs X, Y coordinates *)
 procedure moveNPC(id, newX, newY: smallint);
 (* Redraw all NPC's *)
@@ -49,6 +52,12 @@ procedure redrawNPC;
 function getCreatureID(x, y: smallint): smallint;
 
 implementation
+
+procedure setupEntities;
+begin
+  caveRatGlyph := TBitmap.Create;
+  caveRatGlyph.LoadFromResourceName(HINSTANCE, 'R_ORANGE');
+end;
 
 procedure spawnNPCs;
 var
@@ -72,6 +81,13 @@ begin
         globalutils.currentDgncentreList[p + 2].y);
     Inc(p);
   end;
+end;
+
+procedure drawEntity(c, r: smallint; glyph: char);
+begin
+{ TODO : When more entities are created, swap this out for a CASE statement }
+  if (glyph = 'r') then
+    drawToBuffer(mapToScreen(c), mapToScreen(r), caveRatGlyph);
 end;
 
 procedure moveNPC(id, newX, newY: smallint);
@@ -122,8 +138,7 @@ begin
   begin
     if (entityList[i].inView = True) and (entityList[i].isDead = False) then
     begin
-      drawNPCtoBuffer(entityList[i].posX, entityList[i].posY,
-        entityList[i].glyphColour, entityList[i].glyph);
+      drawEntity(entityList[i].posX, entityList[i].posY, entityList[i].glyph);
     end;
   end;
 end;

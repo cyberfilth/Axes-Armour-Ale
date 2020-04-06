@@ -53,8 +53,6 @@ function randomRange(fromNumber, toNumber: smallint): smallint;
 procedure drawToBuffer(x, y: smallint; image: TBitmap);
 (* Write text to temporary screen buffer *)
 procedure writeToBuffer(x, y: smallint; messageColour: TColor; message: string);
-(* Draw an NPC to temporary screen buffer *)
-procedure drawNPCtoBuffer(x, y: smallint; glyphTextColour: TColor; glyphCharacter: char);
 (* Save game state to XML file *)
 procedure saveGame;
 (* Load saved game *)
@@ -83,17 +81,6 @@ procedure writeToBuffer(x, y: smallint; messageColour: TColor; message: string);
 begin
   main.tempScreen.Canvas.Font.Color := messageColour;
   main.tempScreen.Canvas.TextOut(x, y, message);
-end;
-
-procedure drawNPCtoBuffer(x, y: smallint; glyphTextColour: TColor; glyphCharacter: char);
-begin
-  main.tempScreen.Canvas.Brush.Style := bsClear;
-  main.tempScreen.Canvas.Font.Color := glyphTextColour;
-  main.tempScreen.Canvas.TextOut(map.mapToScreen(x), (map.mapToScreen(y) + 1) -
-    (tileSize div 2), glyphCharacter);
-  (* Add a duplicate glyph, slightly offset, to make the glyph bold *)
-  main.tempScreen.Canvas.TextOut(map.mapToScreen(x) + 1, (map.mapToScreen(y) + 1) -
-    (tileSize div 2), glyphCharacter);
 end;
 
 procedure saveGame;
@@ -172,7 +159,6 @@ begin
       AddElement(DataNode, 'race', entities.entityList[i].race);
       AddElement(DataNode, 'description', entities.entityList[i].description);
       AddElement(DataNode, 'glyph', entities.entityList[i].glyph);
-      AddElement(DataNode, 'glyphColour', IntToStr(entities.entityList[i].glyphColour));
       AddElement(DataNode, 'currentHP', IntToStr(entities.entityList[i].currentHP));
       AddElement(DataNode, 'maxHP', IntToStr(entities.entityList[i].maxHP));
       AddElement(DataNode, 'attack', IntToStr(entities.entityList[i].attack));
@@ -261,8 +247,6 @@ begin
       entities.entityList[i].description := NPCnode.FindNode('description').TextContent;
       entities.entityList[i].glyph :=
         char(widechar(NPCnode.FindNode('glyph').TextContent[1]));
-      entities.entityList[i].glyphColour :=
-        StrToInt(NPCnode.FindNode('glyphColour').TextContent);
       entities.entityList[i].currentHP :=
         StrToInt(NPCnode.FindNode('currentHP').TextContent);
       entities.entityList[i].attack :=

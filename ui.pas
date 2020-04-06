@@ -160,6 +160,7 @@ begin
   (* Catch duplicate messages *)
   if (message = messageArray[1]) then
   begin
+    main.tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
     messageArray[1] := messageArray[1] + ' x2';
     main.tempScreen.Canvas.Font.Size := 9;
     writeToBuffer(10, 410, UITEXTCOLOUR, messageArray[1]);

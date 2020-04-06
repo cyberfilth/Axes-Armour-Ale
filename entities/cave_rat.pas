@@ -40,7 +40,6 @@ begin
     race := 'cave rat';
     description := 'a large rat';
     glyph := 'r';
-    glyphColour := $20B2FB;
     maxHP := randomRange(2, 5);
     currentHP := maxHP;
     attack := randomRange(2, 3);

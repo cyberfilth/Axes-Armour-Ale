@@ -85,6 +85,8 @@ begin
     map.blueDungeonFloorHi.Free;
     map.blueDungeonWallDef.Free;
     map.blueDungeonWallHi.Free;
+    items.aleTankard.Free;
+    entities.caveRatGlyph.Free;
     player.ThePlayer.glyph.Free;
   end;
   tempScreen.Free;
@@ -201,6 +203,7 @@ begin
   gameState := 1;
   map.setupMap;
   map.setupTiles;
+  entities.setupEntities;
   items.setupItems;
   (* Clear the screen *)
   tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
