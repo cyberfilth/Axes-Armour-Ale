@@ -10,7 +10,7 @@ interface
 
 uses
   Classes, Forms, ComCtrls, Graphics, SysUtils, map, player,
-  globalutils, Controls, LCLType, ui, cave_rat;
+  globalutils, Controls, LCLType, ui, cave_rat, items;
 
 type
 
@@ -98,6 +98,21 @@ procedure gameLoop;
 var
   i: smallint;
 begin
+  (* Draw all visible items *)
+  for i := 1 to items.itemAmount do
+    if (map.canSee(items.itemList[i].posX, items.itemList[i].posY) = True) then
+    begin
+      items.itemList[i].inView := True;
+     items.redrawItems;
+      (* Display a message if this is the first time seeing this item *)
+      if (items.itemList[i].discovered = False) then
+      begin
+        ui.displayMessage('You see a ' + items.itemList[i].itemName);
+        items.itemList[i].discovered := True;
+      end;
+    end
+    else
+      items.itemList[i].inView := False;
   (* move NPC's *)
   for i := 1 to entities.npcAmount do
     if entities.entityList[i].isDead = False then
@@ -167,7 +182,7 @@ begin
     case Key of
       VK_N: newGame;
       VK_L: continueGame;
-      VK_Q: Close();   //Application.Terminate;
+      VK_Q: Close();
     end;
   end;
 end;
@@ -190,6 +205,8 @@ begin
   player.spawnPlayer(map.startX, map.startY);
   (* Spawn NPC's *)
   entities.spawnNPCs;
+  (* Drop items *)
+  items.spawnItem;
   (* Draw sidepanel *)
   ui.drawSidepanel;
   ui.displayMessage('Welcome message to be added here...');
