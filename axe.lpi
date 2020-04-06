@@ -186,7 +186,7 @@
         <IsPartOfProject Value="True"/>
       </Unit13>
       <Unit14>
-        <Filename Value="items\rock.pas"/>
+        <Filename Value="items\ale_tankard.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit14>
     </Units>

@@ -8,7 +8,7 @@ unit entities;
 interface
 
 uses
-  Graphics, map, globalutils, ui,
+  Graphics, map, globalutils, ui, items,
   (* Import the NPC's *)
   cave_rat;
 
@@ -75,10 +75,19 @@ begin
 end;
 
 procedure moveNPC(id, newX, newY: smallint);
+var
+  i: smallint;
 begin
   (* delete NPC at old position *)
-  if (entityList[id].inView = True) then
-    map.drawTile(entityList[id].posX, entityList[id].posY, 1);
+  (* First check if they are standing on an item *)
+  for i := 1 to items.itemAmount do
+    if (items.itemList[i].posX = entityList[id].posX) and
+      (items.itemList[i].posX = entityList[id].posX) then
+      items.redrawItems
+    (* if not, redraw the floor tile *)
+    else
+    if (entityList[id].inView = True) then
+      map.drawTile(entityList[id].posX, entityList[id].posY, 1);
   (* mark tile as unoccupied *)
   map.unoccupy(entityList[id].posX, entityList[id].posY);
   (* update new position *)

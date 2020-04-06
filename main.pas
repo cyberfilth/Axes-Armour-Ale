@@ -120,6 +120,9 @@ begin
       cave_rat.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY);
     end;
   entities.redrawNPC;
+  (* Redraw Player *)
+  drawToBuffer(map.mapToScreen(ThePlayer.posX), map.mapToScreen(ThePlayer.posY),
+    ThePlayer.glyph);
 end;
 
 procedure TGameWindow.FormKeyDown(Sender: TObject; var Key: word);
@@ -198,6 +201,7 @@ begin
   gameState := 1;
   map.setupMap;
   map.setupTiles;
+  items.setupItems;
   (* Clear the screen *)
   tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
   tempScreen.Canvas.FillRect(0, 0, tempScreen.Width, tempScreen.Height);

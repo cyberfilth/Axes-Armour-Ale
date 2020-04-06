@@ -113,8 +113,6 @@ begin
     ui.displayMessage('You bump into a wall');
   end;
   fov.fieldOfView(ThePlayer.posX, ThePlayer.posY, ThePlayer.visionRange, 1);
-  drawToBuffer(map.mapToScreen(ThePlayer.posX), map.mapToScreen(ThePlayer.posY),
-    ThePlayer.glyph);
 end;
 
 procedure combat(npcID: smallint);

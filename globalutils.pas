@@ -187,7 +187,7 @@ begin
     end;
 
     (* Save XML *)
-    WriteXMLFile(Doc, GetUserDir+saveFile);
+    WriteXMLFile(Doc, GetUserDir + saveFile);
   finally
     Doc.Free;  // free memory
   end;
@@ -195,13 +195,14 @@ end;
 
 procedure loadGame;
 var
-  RootNode, ParentNode, Tile, NextNode, Blocks, Visible, Occupied, Discovered, PlayerNode, NPCnode, GlyphNode: TDOMNode;
+  RootNode, ParentNode, Tile, NextNode, Blocks, Visible, Occupied,
+  Discovered, PlayerNode, NPCnode, GlyphNode: TDOMNode;
   Doc: TXMLDocument;
   r, c, i: integer;
 begin
   try
     (* Read in xml file from disk *)
-    ReadXMLFile(Doc, GetUserDir+saveFile);
+    ReadXMLFile(Doc, GetUserDir + saveFile);
     (* Retrieve the nodes *)
     RootNode := Doc.DocumentElement.FindNode('GameData');
     ParentNode := RootNode.FirstChild.NextSibling;
@@ -236,16 +237,16 @@ begin
 
     (* Player info *)
     PlayerNode := Doc.DocumentElement.FindNode('Player');
-    player.ThePlayer.currentHP   := StrToInt(PlayerNode.FindNode('HP').TextContent);
-    player.ThePlayer.maxHP       := StrToInt(PlayerNode.FindNode('maxHP').TextContent);
-    player.ThePlayer.attack      := StrToInt(PlayerNode.FindNode('att').TextContent);
-    player.ThePlayer.defense     := StrToInt(PlayerNode.FindNode('def').TextContent);
-    player.ThePlayer.experience  := StrToInt(PlayerNode.FindNode('xp').TextContent);
-    player.ThePlayer.posX        := StrToInt(PlayerNode.FindNode('X').TextContent);
-    player.ThePlayer.posY        := StrToInt(PlayerNode.FindNode('Y').TextContent);
+    player.ThePlayer.currentHP := StrToInt(PlayerNode.FindNode('HP').TextContent);
+    player.ThePlayer.maxHP := StrToInt(PlayerNode.FindNode('maxHP').TextContent);
+    player.ThePlayer.attack := StrToInt(PlayerNode.FindNode('att').TextContent);
+    player.ThePlayer.defense := StrToInt(PlayerNode.FindNode('def').TextContent);
+    player.ThePlayer.experience := StrToInt(PlayerNode.FindNode('xp').TextContent);
+    player.ThePlayer.posX := StrToInt(PlayerNode.FindNode('X').TextContent);
+    player.ThePlayer.posY := StrToInt(PlayerNode.FindNode('Y').TextContent);
     player.ThePlayer.visionRange := StrToInt(PlayerNode.FindNode('vis').TextContent);
-    player.ThePlayer.title       := PlayerNode.FindNode('title').TextContent;
-    player.ThePlayer.playerName  := PlayerNode.FindNode('name').TextContent;
+    player.ThePlayer.title := PlayerNode.FindNode('title').TextContent;
+    player.ThePlayer.playerName := PlayerNode.FindNode('name').TextContent;
 
     (* NPC stats *)
     SetLength(entities.entityList, 1);
@@ -256,20 +257,32 @@ begin
       SetLength(entities.entityList, entities.listLength + 1);
       entities.entityList[i].npcID :=
         StrToInt(NPCnode.Attributes.Item[0].NodeValue);
-      entities.entityList[i].race        := NPCnode.FindNode('race').TextContent;
+      entities.entityList[i].race := NPCnode.FindNode('race').TextContent;
       entities.entityList[i].description := NPCnode.FindNode('description').TextContent;
-      entities.entityList[i].glyph       := Char(WideChar(NPCnode.FindNode('glyph').TextContent[1]));
-      entities.entityList[i].glyphColour := StrToInt(NPCnode.FindNode('glyphColour').TextContent);
-      entities.entityList[i].currentHP   := StrToInt(NPCnode.FindNode('currentHP').TextContent);
-      entities.entityList[i].attack      := StrToInt(NPCnode.FindNode('attack').TextContent);
-      entities.entityList[i].defense     := StrToInt(NPCnode.FindNode('defense').TextContent);
-      entities.entityList[i].xpReward    := StrToInt(NPCnode.FindNode('xpReward').TextContent);
-      entities.entityList[i].visionRange := StrToInt(NPCnode.FindNode('visRange').TextContent);
-      entities.entityList[i].inView      := StrToBool(NPCnode.FindNode('inView').TextContent);
-      entities.entityList[i].discovered  := StrToBool(NPCnode.FindNode('discovered').TextContent);
-      entities.entityList[i].isDead      := StrToBool(NPCnode.FindNode('isDead').TextContent);
-      entities.entityList[i].posX        := StrToInt(NPCnode.FindNode('posX').TextContent);
-      entities.entityList[i].posY        := StrToInt(NPCnode.FindNode('posY').TextContent);
+      entities.entityList[i].glyph :=
+        char(widechar(NPCnode.FindNode('glyph').TextContent[1]));
+      entities.entityList[i].glyphColour :=
+        StrToInt(NPCnode.FindNode('glyphColour').TextContent);
+      entities.entityList[i].currentHP :=
+        StrToInt(NPCnode.FindNode('currentHP').TextContent);
+      entities.entityList[i].attack :=
+        StrToInt(NPCnode.FindNode('attack').TextContent);
+      entities.entityList[i].defense :=
+        StrToInt(NPCnode.FindNode('defense').TextContent);
+      entities.entityList[i].xpReward :=
+        StrToInt(NPCnode.FindNode('xpReward').TextContent);
+      entities.entityList[i].visionRange :=
+        StrToInt(NPCnode.FindNode('visRange').TextContent);
+      entities.entityList[i].inView :=
+        StrToBool(NPCnode.FindNode('inView').TextContent);
+      entities.entityList[i].discovered :=
+        StrToBool(NPCnode.FindNode('discovered').TextContent);
+      entities.entityList[i].isDead :=
+        StrToBool(NPCnode.FindNode('isDead').TextContent);
+      entities.entityList[i].posX :=
+        StrToInt(NPCnode.FindNode('posX').TextContent);
+      entities.entityList[i].posY :=
+        StrToInt(NPCnode.FindNode('posY').TextContent);
       ParentNode := NPCnode.NextSibling;
       NPCnode := ParentNode;
     end;
