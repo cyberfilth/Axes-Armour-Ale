@@ -25,8 +25,8 @@
         <Resource_7 FileName="images/dungeon/ascii/caveWallDef.bmp" Type="BITMAP" ResourceName="CAVEWALLDEF"/>
         <Resource_8 FileName="images/dungeon/ascii/caveWallHi.bmp" Type="BITMAP" ResourceName="CAVEWALLHI"/>
         <Resource_9 FileName="images\titleScreen.bmp" Type="BITMAP" ResourceName="TITLESCREEN"/>
-        <Resource_10 FileName="images\sprites\ale1.bmp" Type="BITMAP" ResourceName="ALE1"/>
-        <Resource_11 FileName="images\sprites\r_orange.bmp" Type="BITMAP" ResourceName="R_ORANGE"/>
+        <Resource_10 FileName="images\sprites\r_orange.bmp" Type="BITMAP" ResourceName="R_ORANGE"/>
+        <Resource_11 FileName="images\sprites\ale1.bmp" Type="BITMAP" ResourceName="ALE1"/>
       </Resources>
     </General>
     <VersionInfo>

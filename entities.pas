@@ -6,7 +6,7 @@ unit entities;
 {$ModeSwitch advancedrecords}
 
 interface
-
+{ TODO : Reload textures when loading saved game }
 uses
   Graphics, map, globalutils, ui, items,
   (* Import the NPC's *)
