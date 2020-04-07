@@ -6,7 +6,7 @@ unit player_inventory;
 interface
 
 uses
-  player, items, ui;
+  Graphics, player, items, ui, globalutils;
 
 type
   (* Items in inventory *)
@@ -22,8 +22,13 @@ var
 procedure initialiseInventory;
 (* Add to inventory *)
 procedure addToInventory(itemNumber: smallint);
+(* Display the inventory screen *)
+procedure showInventory;
 
 implementation
+
+uses
+  main;
 
 procedure initialiseInventory;
 begin
@@ -57,6 +62,17 @@ begin
       ui.displayMessage('Inventory is full');
   end;
 
+end;
+
+procedure showInventory;
+begin
+  (* Clear the screen *)
+  inventoryScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
+  inventoryScreen.Canvas.FillRect(0, 0, inventoryScreen.Width, inventoryScreen.Height);
+  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
+  inventoryScreen.Canvas.TextOut(50, 50, 'Inventory screen');
+  main.gameState := 2; // Accept keyboard commands for inventory screen
+  currentScreen := inventoryScreen; // Display inventory screen
 end;
 
 

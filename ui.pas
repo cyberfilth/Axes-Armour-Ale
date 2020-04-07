@@ -66,7 +66,6 @@ begin
     writeToBuffer(200, 270, UITEXTCOLOUR, 'N - New Game');
     writeToBuffer(200, 290, UITEXTCOLOUR, 'Q - Quit');
   end;
-
   logo.Free;
 end;
 

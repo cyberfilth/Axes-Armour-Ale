@@ -17,7 +17,7 @@ type
 
 const
   (* Version info - a = Alpha, d = Debug, r = Release *)
-  VERSION = '22a';
+  VERSION = '23a';
   (* Save game file *)
   {$IFDEF Linux}
   saveFile = '.axes.data';

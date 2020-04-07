@@ -174,7 +174,8 @@ var
 begin
   for i := 1 to itemAmount do
   begin
-    if (ThePlayer.posX = itemList[i].posX) and (ThePlayer.posY = itemList[i].posY) then
+    if (ThePlayer.posX = itemList[i].posX) and (ThePlayer.posY = itemList[i].posY) and
+      (itemList[i].onMap = True) then
       player_inventory.addToInventory(i)
     else
       ui.displayMessage('There is nothing on the ground here');

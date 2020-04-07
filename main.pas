@@ -10,7 +10,7 @@ interface
 
 uses
   Classes, Forms, ComCtrls, Graphics, SysUtils, map, player,
-  globalutils, Controls, LCLType, ui, cave_rat, items;
+  globalutils, Controls, LCLType, ui, cave_rat, items, player_inventory;
 
 type
 
@@ -34,9 +34,11 @@ type
 var
   GameWindow: TGameWindow;
   (* Display is drawn on tempScreen before being copied to canvas *)
-  tempScreen: TBitmap;
-  (* 0 = titlescreen, 1 = game running *)
+  tempScreen, inventoryScreen: TBitmap;
+  (* 0 = titlescreen, 1 = game running, 2 = inventory screen *)
   gameState: byte;
+  (* Screen to display *)
+  currentScreen: TBitmap;
 
 
 implementation
@@ -54,6 +56,10 @@ begin
   tempScreen := TBitmap.Create;
   tempScreen.Height := 578;
   tempScreen.Width := 835;
+  inventoryScreen := TBitmap.Create;
+  inventoryScreen.Height := 578;
+  inventoryScreen.Width := 835;
+  currentScreen := tempScreen;
   Randomize;
   (* Set random seed *)
   {$IFDEF Linux}
@@ -90,6 +96,8 @@ begin
     player.ThePlayer.glyph.Free;
   end;
   tempScreen.Free;
+  inventoryScreen.Free;
+  currentScreen.Free;
   {$IFDEF Linux}
   WriteLn('Axes, Armour & Ale - (c) Chris Hawkins');
   {$ENDIF}
@@ -105,7 +113,7 @@ begin
     if (map.canSee(items.itemList[i].posX, items.itemList[i].posY) = True) then
     begin
       items.itemList[i].inView := True;
-     items.redrawItems;
+      items.redrawItems;
       (* Display a message if this is the first time seeing this item *)
       if (items.itemList[i].discovered = False) then
       begin
@@ -186,6 +194,11 @@ begin
         gameLoop;
         Invalidate;
       end;
+      VK_I:
+      begin
+        player_inventory.showInventory;
+        Invalidate;
+      end;
     end;
   end // end of game input
   else if (gameState = 0) then
@@ -194,13 +207,24 @@ begin
       VK_N: newGame;
       VK_L: continueGame;
       VK_Q: Close();
-    end;
+    end; // end of title menu screen
+  end
+  else if (gameState = 2) then
+  begin // beginning of inventory menu
+    case Key of
+      VK_ESCAPE, VK_Q:
+      begin
+        gameState := 1;
+        currentScreen := tempScreen;
+        Invalidate;
+      end;
+    end;  // end of inventory menu
   end;
 end;
 
 procedure TGameWindow.FormPaint(Sender: TObject);
 begin
-  Canvas.Draw(0, 0, tempScreen);
+  Canvas.Draw(0, 0, currentScreen);
 end;
 
 
