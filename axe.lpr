@@ -9,7 +9,7 @@ uses {$IFDEF UNIX} {$IFDEF UseCThreads}
   { you can add units after this }
   main, map, cave, player, fov,
   grid_dungeon, ui, entities,
-  cave_rat, plot_gen, los, items, ale_tankard;
+  cave_rat, plot_gen, los, items, ale_tankard, player_inventory;
 
 {$R *.res}
 

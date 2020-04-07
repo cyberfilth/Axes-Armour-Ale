@@ -180,6 +180,12 @@ begin
         gameLoop;
         Invalidate;
       end;
+      VK_G:
+      begin
+        player.pickUp;
+        gameLoop;
+        Invalidate;
+      end;
     end;
   end // end of game input
   else if (gameState = 0) then

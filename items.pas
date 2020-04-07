@@ -83,7 +83,7 @@ var
 begin
   for i := 1 to itemAmount do
   begin
-    if (itemList[i].inView = True) then
+    if (itemList[i].inView = True) and (itemList[i].onMap = True) then
     begin
       drawItem(itemList[i].posX, itemList[i].posY, itemList[i].glyph);
     end;
