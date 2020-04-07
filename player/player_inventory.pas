@@ -95,12 +95,12 @@ begin
     if (inventory[i].Name = 'Empty') then
     begin
       inventoryScreen.Canvas.Font.Color := MESSAGEFADE1;
-      inventoryScreen.Canvas.TextOut(50, x, IntToStr(i) + ' <empty>');
+      inventoryScreen.Canvas.TextOut(50, x, '[' + IntToStr(i) + '] <empty slot>');
     end
     else
     begin
       inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-      inventoryScreen.Canvas.TextOut(50, x, IntToStr(i) + ' ' +
+      inventoryScreen.Canvas.TextOut(50, x, '[' + IntToStr(i) + '] ' +
         inventory[i].Name + ' - ' + itemList[(inventory[i].id)].itemDescription);
     end;
   end;
