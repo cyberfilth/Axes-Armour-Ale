@@ -97,7 +97,6 @@ begin
   end;
   tempScreen.Free;
   inventoryScreen.Free;
-  currentScreen.Free;
   {$IFDEF Linux}
   WriteLn('Axes, Armour & Ale - (c) Chris Hawkins');
   {$ENDIF}

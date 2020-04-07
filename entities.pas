@@ -147,6 +147,7 @@ function getCreatureID(x, y: smallint): smallint;
 var
   i: smallint;
 begin
+  Result := 0; // initialise variable
   for i := 1 to npcAmount do
   begin
     if (entityList[i].posX = x) and (entityList[i].posY = y) then

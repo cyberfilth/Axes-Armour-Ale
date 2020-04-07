@@ -6,7 +6,7 @@ unit player_inventory;
 interface
 
 uses
-  Graphics, SysUtils, player, items, ui, globalutils;
+  Graphics, SysUtils, items, ui, globalutils;
 
 type
   (* Items in inventory *)
@@ -100,7 +100,8 @@ begin
     else
     begin
       inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-      inventoryScreen.Canvas.TextOut(50, x, IntToStr(i) + ' ' + inventory[i].Name + ' - ' + itemList[inventory[i].id].itemDescription);
+      inventoryScreen.Canvas.TextOut(50, x, IntToStr(i) + ' ' +
+        inventory[i].Name + ' - ' + itemList[(inventory[i].id)].itemDescription);
     end;
   end;
 end;
