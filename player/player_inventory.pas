@@ -6,13 +6,15 @@ unit player_inventory;
 interface
 
 uses
-  Graphics, SysUtils, items, ui, globalutils;
+  Graphics, SysUtils, player, items, ui, globalutils;
 
 type
   (* Items in inventory *)
   Equipment = record
     id: smallint;
     Name: string;
+    (* Is the item being worn or wielded *)
+    equipped: boolean;
   end;
 
 var
@@ -46,24 +48,34 @@ procedure initialiseInventory;
 begin
   inventory[0].id := 0;
   inventory[0].Name := 'Empty';
+  inventory[0].equipped := False;
   inventory[1].id := 1;
   inventory[1].Name := 'Empty';
+  inventory[1].equipped := False;
   inventory[2].id := 2;
   inventory[2].Name := 'Empty';
+  inventory[2].equipped := False;
   inventory[3].id := 3;
   inventory[3].Name := 'Empty';
+  inventory[3].equipped := False;
   inventory[4].id := 4;
   inventory[4].Name := 'Empty';
+  inventory[4].equipped := False;
   inventory[5].id := 5;
   inventory[5].Name := 'Empty';
+  inventory[5].equipped := False;
   inventory[6].id := 6;
   inventory[6].Name := 'Empty';
+  inventory[6].equipped := False;
   inventory[7].id := 7;
   inventory[7].Name := 'Empty';
+  inventory[7].equipped := False;
   inventory[8].id := 8;
   inventory[8].Name := 'Empty';
+  inventory[8].equipped := False;
   inventory[9].id := 9;
   inventory[9].Name := 'Empty';
+  inventory[9].equipped := False;
 end;
 
 procedure addToInventory(itemNumber: smallint);
@@ -189,13 +201,41 @@ begin
 end;
 
 procedure drop(dropItem: byte);
+var
+  i, x: smallint;
 begin
   menuState := 1;
+  (* Clear the screen *)
+  inventoryScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
+  inventoryScreen.Canvas.FillRect(0, 0, inventoryScreen.Width, inventoryScreen.Height);
+  (* Draw title bar *)
+  inventoryScreen.Canvas.Brush.Color := globalutils.MESSAGEFADE6;
+  inventoryScreen.Canvas.Rectangle(50, 40, 785, 80);
+  (* Draw title *)
+  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
+  inventoryScreen.Canvas.Brush.Style := bsClear;
+  inventoryScreen.Canvas.Font.Size := 12;
+  inventoryScreen.Canvas.TextOut(100, 50, 'Select item to drop');
+  inventoryScreen.Canvas.Font.Size := 10;
+  (* List inventory *)
+  x := 90; // x is position of each new line
+  for i := 0 to 9 do
+  begin
+    x := x + 20;
+    if (inventory[i].Name = 'Empty') or (inventory[i].equipped = True) then
+      dimSlots(i, x)
+    else
+      highlightSlots(i, x);
+  end;
+  (* Bottom menu *)
   bottomMenu(1);
   if (dropItem <> 10) then
   begin
-     (* Place on map *)
+    (* Place on map *)
+    itemList[inventory[dropItem].id].posX := ThePlayer.posX;
+    itemList[inventory[dropItem].id].posY := ThePlayer.posY;
     itemList[inventory[dropItem].id].onMap := True;
+    ui.displayMessage('You drop the ' + inventory[dropItem].Name);
     (* Remove from inventory *)
     inventory[dropItem].Name := 'Empty';
     showInventory;

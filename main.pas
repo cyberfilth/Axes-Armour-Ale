@@ -187,13 +187,20 @@ begin
         gameLoop;
         Invalidate;
       end;
-      VK_G:
+      VK_G: // Get item
       begin
         player.pickUp;
         gameLoop;
         Invalidate;
       end;
-      VK_I:
+      VK_D: // Drop item
+      begin
+        currentScreen := inventoryScreen;
+        gameState := 2;
+        player_inventory.drop(10);
+        Invalidate;
+      end;
+      VK_I: // Show inventory
       begin
         player_inventory.showInventory;
         Invalidate;
