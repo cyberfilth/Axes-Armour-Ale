@@ -211,15 +211,14 @@ begin
   else if (gameState = 2) then
   begin // beginning of inventory menu
     case Key of
+      VK_ESCAPE:
+      begin
+        player_inventory.menu(0);
+        Invalidate;
+      end;
       VK_D:
       begin
         player_inventory.menu(1);
-        Invalidate;
-      end;
-      VK_ESCAPE, VK_Q:
-      begin
-        gameState := 1;
-        currentScreen := tempScreen;
         Invalidate;
       end;
     end;  // end of inventory menu

@@ -17,6 +17,8 @@ type
 
 var
   inventory: array[0..9] of Equipment;
+  (* 0 - main menu, 1 - drop menu *)
+  menuState: byte;
 
 (* Initialise empty player inventory *)
 procedure initialiseInventory;
@@ -89,6 +91,7 @@ var
   i, x: smallint;
 begin
   main.gameState := 2; // Accept keyboard commands for inventory screen
+  menuState := 0;
   currentScreen := inventoryScreen; // Display inventory screen
   (* Clear the screen *)
   inventoryScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
@@ -133,7 +136,8 @@ begin
     begin
       inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
       inventoryScreen.Canvas.Brush.Style := bsClear;
-      inventoryScreen.Canvas.TextOut(100, 350, '0..9 select inventory slot');
+      inventoryScreen.Canvas.TextOut(100, 350,
+        '0..9 select inventory slot  |  ESC key to go back');
     end;
   end;
 end;
@@ -154,13 +158,25 @@ end;
 procedure menu(selection: word);
 begin
   case selection of
+    0: // ESC key i pressed
+    begin
+      if (menuState = 0) then
+      begin
+        main.gameState := 1;
+        main.currentScreen := tempScreen;
+        exit;
+      end
+      else if (menuState = 1) then
+        showInventory;
+    end;
     1: drop;
   end;
 end;
 
 procedure drop;
 begin
-   bottomMenu(1);
+  menuState := 1;
+  bottomMenu(1);
 end;
 
 end.
