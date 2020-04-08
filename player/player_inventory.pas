@@ -24,6 +24,12 @@ procedure initialiseInventory;
 procedure addToInventory(itemNumber: smallint);
 (* Display the inventory screen *)
 procedure showInventory;
+(* Show menu at bottom of screen *)
+procedure bottomMenu;
+(* Highlight inventory slots *)
+procedure highlightSlots(i, x: smallint);
+(* Dim inventory slots *)
+procedure dimSlots(i, x: smallint);
 
 implementation
 
@@ -83,28 +89,46 @@ begin
   (* Clear the screen *)
   inventoryScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
   inventoryScreen.Canvas.FillRect(0, 0, inventoryScreen.Width, inventoryScreen.Height);
+  (* Draw title bar *)
+  inventoryScreen.Canvas.Brush.Color := globalutils.MESSAGEFADE6;
+  inventoryScreen.Canvas.Rectangle(50, 40, 785, 80);
+  (* Draw title *)
   inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
+  inventoryScreen.Canvas.Brush.Style:=bsClear;
   inventoryScreen.Canvas.Font.Size := 12;
-  inventoryScreen.Canvas.TextOut(100, 50, 'Inventory screen');
+  inventoryScreen.Canvas.TextOut(100, 50, 'Inventory slots');
   inventoryScreen.Canvas.Font.Size := 10;
   (* List inventory *)
-  x := 60; // x is position of each new line
+  x := 90; // x is position of each new line
   for i := 0 to 9 do
   begin
     x := x + 20;
     if (inventory[i].Name = 'Empty') then
-    begin
-      inventoryScreen.Canvas.Font.Color := MESSAGEFADE1;
-      inventoryScreen.Canvas.TextOut(50, x, '[' + IntToStr(i) + '] <empty slot>');
-    end
+      dimSlots(i, x)
     else
-    begin
-      inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-      inventoryScreen.Canvas.TextOut(50, x, '[' + IntToStr(i) + '] ' +
-        inventory[i].Name + ' - ' + itemList[(inventory[i].id)].itemDescription);
-    end;
+      highlightSlots(i, x);
   end;
+  bottomMenu;
 end;
 
+procedure bottomMenu;
+begin
+  (* Show menu options at bottom of screen *)
+  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
+  inventoryScreen.Canvas.TextOut(100, 350, 'D key to drop');
+end;
+
+procedure highlightSlots(i, x: smallint);
+begin
+  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
+  inventoryScreen.Canvas.TextOut(50, x, '[' + IntToStr(i) + '] ' +
+    inventory[i].Name + ' - ' + itemList[(inventory[i].id)].itemDescription);
+end;
+
+procedure dimSlots(i, x: smallint);
+begin
+  inventoryScreen.Canvas.Font.Color := MESSAGEFADE1;
+  inventoryScreen.Canvas.TextOut(50, x, '[' + IntToStr(i) + '] <empty slot>');
+end;
 
 end.
