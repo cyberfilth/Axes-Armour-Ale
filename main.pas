@@ -211,6 +211,11 @@ begin
   else if (gameState = 2) then
   begin // beginning of inventory menu
     case Key of
+      VK_D:
+      begin
+        player_inventory.menu(1);
+        Invalidate;
+      end;
       VK_ESCAPE, VK_Q:
       begin
         gameState := 1;

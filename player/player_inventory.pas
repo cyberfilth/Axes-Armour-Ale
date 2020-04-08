@@ -25,11 +25,15 @@ procedure addToInventory(itemNumber: smallint);
 (* Display the inventory screen *)
 procedure showInventory;
 (* Show menu at bottom of screen *)
-procedure bottomMenu;
+procedure bottomMenu(style: byte);
 (* Highlight inventory slots *)
 procedure highlightSlots(i, x: smallint);
 (* Dim inventory slots *)
 procedure dimSlots(i, x: smallint);
+(* Accept menu input *)
+procedure menu(selection: word);
+(* Drop menu *)
+procedure drop;
 
 implementation
 
@@ -94,7 +98,7 @@ begin
   inventoryScreen.Canvas.Rectangle(50, 40, 785, 80);
   (* Draw title *)
   inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-  inventoryScreen.Canvas.Brush.Style:=bsClear;
+  inventoryScreen.Canvas.Brush.Style := bsClear;
   inventoryScreen.Canvas.Font.Size := 12;
   inventoryScreen.Canvas.TextOut(100, 50, 'Inventory slots');
   inventoryScreen.Canvas.Font.Size := 10;
@@ -108,14 +112,30 @@ begin
     else
       highlightSlots(i, x);
   end;
-  bottomMenu;
+  bottomMenu(0);
 end;
 
-procedure bottomMenu;
+procedure bottomMenu(style: byte);
+(* 0 main menu, 1 drop *)
 begin
+  (* Draw menu bar *)
+  inventoryScreen.Canvas.Brush.Color := globalutils.MESSAGEFADE6;
+  inventoryScreen.Canvas.Rectangle(50, 345, 785, 375);
   (* Show menu options at bottom of screen *)
-  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-  inventoryScreen.Canvas.TextOut(100, 350, 'D key to drop');
+  case style of
+    0:
+    begin
+      inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
+      inventoryScreen.Canvas.Brush.Style := bsClear;
+      inventoryScreen.Canvas.TextOut(100, 350, 'D key to drop  |  ESC key to exit');
+    end;
+    1:
+    begin
+      inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
+      inventoryScreen.Canvas.Brush.Style := bsClear;
+      inventoryScreen.Canvas.TextOut(100, 350, '0..9 select inventory slot');
+    end;
+  end;
 end;
 
 procedure highlightSlots(i, x: smallint);
@@ -129,6 +149,18 @@ procedure dimSlots(i, x: smallint);
 begin
   inventoryScreen.Canvas.Font.Color := MESSAGEFADE1;
   inventoryScreen.Canvas.TextOut(50, x, '[' + IntToStr(i) + '] <empty slot>');
+end;
+
+procedure menu(selection: word);
+begin
+  case selection of
+    1: drop;
+  end;
+end;
+
+procedure drop;
+begin
+   bottomMenu(1);
 end;
 
 end.
