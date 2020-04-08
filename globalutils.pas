@@ -1,5 +1,7 @@
 (* Common functions / utilities *)
 
+{ TODO : Add Items and player inventory to Save / Load function }
+
 unit globalutils;
 
 {$mode objfpc}{$H+}
