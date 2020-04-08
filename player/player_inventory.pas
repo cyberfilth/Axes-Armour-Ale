@@ -35,7 +35,7 @@ procedure dimSlots(i, x: smallint);
 (* Accept menu input *)
 procedure menu(selection: word);
 (* Drop menu *)
-procedure drop;
+procedure drop(dropItem: byte);
 
 implementation
 
@@ -169,14 +169,37 @@ begin
       else if (menuState = 1) then
         showInventory;
     end;
-    1: drop;
+    1: drop(10); // Drop menu
+    2:  // Drop from 0 slot
+    begin
+      if (menuState = 1) then
+        drop(0);
+    end;
+    3: // Drop from 1 slot
+    begin
+      if (menuState = 1) then
+        drop(1);
+    end;
+    4: // Drop from 2 slot
+    begin
+      if (menuState = 1) then
+        drop(2);
+    end;
   end;
 end;
 
-procedure drop;
+procedure drop(dropItem: byte);
 begin
   menuState := 1;
   bottomMenu(1);
+  if (dropItem <> 10) then
+  begin
+     (* Place on map *)
+    itemList[inventory[dropItem].id].onMap := True;
+    (* Remove from inventory *)
+    inventory[dropItem].Name := 'Empty';
+    showInventory;
+  end;
 end;
 
 end.

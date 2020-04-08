@@ -71,10 +71,10 @@ begin
         wander(id, spx, spy);
     end
     else
-      (* if they cannot see player and not low on health, they attack *)
+      (* if they are next to player, and not low on health, they attack *)
       chasePlayer(id, spx, spy);
   end
-  (* Not in the players FoV *)
+  (* Cannot see the player *)
   else
     wander(id, spx, spy);
 end;

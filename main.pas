@@ -221,6 +221,21 @@ begin
         player_inventory.menu(1);
         Invalidate;
       end;
+      VK_0:
+      begin
+        player_inventory.menu(2);
+        Invalidate;
+      end;
+      VK_1:
+      begin
+        player_inventory.menu(3);
+        Invalidate;
+      end;
+      VK_2:
+      begin
+        player_inventory.menu(4);
+        Invalidate;
+      end;   { TODO : First 3 inventory added for testing, rest to be added later }
     end;  // end of inventory menu
   end;
 end;
