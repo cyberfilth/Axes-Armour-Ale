@@ -1,6 +1,8 @@
 (* Handles player inventory and associated functions *)
 unit player_inventory;
 
+{ TODO : Once Item data structure is finalised, fully move picked up items to the player_inventory and not reference it from the map items }
+
 {$mode objfpc}{$H+}
 
 interface
@@ -142,14 +144,15 @@ begin
     begin
       inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
       inventoryScreen.Canvas.Brush.Style := bsClear;
-      inventoryScreen.Canvas.TextOut(100, 350, 'D key to drop  |  ESC key to exit');
+      inventoryScreen.Canvas.TextOut(100, 350,
+        'D key for drop menu  |  ESC key to exit');
     end;
     1:
     begin
       inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
       inventoryScreen.Canvas.Brush.Style := bsClear;
       inventoryScreen.Canvas.TextOut(100, 350,
-        '0..9 select inventory slot  |  ESC key to go back');
+        '0..9 to select an inventory slot  |  ESC key to go back');
     end;
   end;
 end;
@@ -231,14 +234,17 @@ begin
   bottomMenu(1);
   if (dropItem <> 10) then
   begin
-    (* Place on map *)
-    itemList[inventory[dropItem].id].posX := ThePlayer.posX;
-    itemList[inventory[dropItem].id].posY := ThePlayer.posY;
-    itemList[inventory[dropItem].id].onMap := True;
-    ui.displayMessage('You drop the ' + inventory[dropItem].Name);
-    (* Remove from inventory *)
-    inventory[dropItem].Name := 'Empty';
-    showInventory;
+    if (inventory[dropItem].Name <> 'Empty') and (inventory[dropItem].equipped <> True) then
+    begin
+      (* Place on map *)
+      itemList[inventory[dropItem].id].posX := ThePlayer.posX;
+      itemList[inventory[dropItem].id].posY := ThePlayer.posY;
+      itemList[inventory[dropItem].id].onMap := True;
+      ui.displayMessage('You drop the ' + inventory[dropItem].Name);
+      (* Remove from inventory *)
+      inventory[dropItem].Name := 'Empty';
+      showInventory;
+    end;
   end;
 end;
 
