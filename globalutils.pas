@@ -43,6 +43,8 @@ const
   MESSAGEFADE6 = TColor($2E2E00);
 
 var
+  (* Turn counter *)
+  playerTurn: integer;
   dungeonArray: array[1..MAXROWS, 1..MAXCOLUMNS] of char;
   (* Number of rooms in the current dungeon *)
   currentDgnTotalRooms: smallint;
@@ -122,6 +124,7 @@ begin
     (* Game data *)
     DataNode := AddChild(RootNode, 'GameData');
     AddElement(datanode, 'RandSeed', IntToStr(RandSeed));
+    AddElement(datanode, 'turns', IntToStr(playerTurn));
     AddElement(datanode, 'npcAmount', IntToStr(entities.npcAmount));
     AddElement(datanode, 'currentMap', IntToStr(map.mapType));
 
@@ -194,8 +197,10 @@ begin
     (* Retrieve the nodes *)
     RootNode := Doc.DocumentElement.FindNode('GameData');
     ParentNode := RootNode.FirstChild.NextSibling;
+    (* Player turns *)
+    playerTurn := StrToInt(RootNode.FindNode('turns').TextContent);
     (* NPC amount *)
-    entities.npcAmount := StrToInt(ParentNode.TextContent);
+    entities.npcAmount := StrToInt(RootNode.FindNode('npcAmount').TextContent);
     (* Current map type *)
     //map.mapType:= StrToInt(ParentNode.FindNode('currentMap').TextContent);
 

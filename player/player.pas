@@ -111,12 +111,14 @@ begin
       ThePlayer.posX := originalX;
       ThePlayer.posY := originalY;
     end;
+  Inc(playerTurn);
   (* check if tile is walkable *)
   if (map.canMove(ThePlayer.posX, ThePlayer.posY) = False) then
   begin
     ThePlayer.posX := originalX;
     ThePlayer.posY := originalY;
     ui.displayMessage('You bump into a wall');
+    Dec(playerTurn);
   end;
   fov.fieldOfView(ThePlayer.posX, ThePlayer.posY, ThePlayer.visionRange, 1);
 end;
@@ -176,7 +178,10 @@ begin
   begin
     if (ThePlayer.posX = itemList[i].posX) and (ThePlayer.posY = itemList[i].posY) and
       (itemList[i].onMap = True) then
-      player_inventory.addToInventory(i)
+    begin
+      player_inventory.addToInventory(i);
+      Inc(playerTurn);
+    end
     else
       ui.displayMessage('There is nothing on the ground here');
   end;

@@ -256,6 +256,7 @@ end;
 procedure TGameWindow.newGame;
 begin
   gameState := 1;
+  playerTurn := 0;
   map.setupMap;
   map.setupTiles;
   entities.setupEntities;

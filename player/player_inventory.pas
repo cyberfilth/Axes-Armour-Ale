@@ -241,6 +241,7 @@ begin
       itemList[inventory[dropItem].id].posY := ThePlayer.posY;
       itemList[inventory[dropItem].id].onMap := True;
       ui.displayMessage('You drop the ' + inventory[dropItem].Name);
+      Inc(playerTurn);
       (* Remove from inventory *)
       inventory[dropItem].Name := 'Empty';
       showInventory;
