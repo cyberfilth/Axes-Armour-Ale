@@ -26,6 +26,10 @@ type
     procedure newGame;
     (* Continue previous saved game *)
     procedure continueGame;
+    (* Confirm quit game *)
+    procedure confirmQuit;
+    (* Free memory *)
+    procedure freeMemory;
   private
 
   public
@@ -35,11 +39,10 @@ var
   GameWindow: TGameWindow;
   (* Display is drawn on tempScreen before being copied to canvas *)
   tempScreen, inventoryScreen: TBitmap;
-  (* 0 = titlescreen, 1 = game running, 2 = inventory screen *)
+  (* 0 = titlescreen, 1 = game running, 2 = inventory screen, 3 = Quit menu *)
   gameState: byte;
   (* Screen to display *)
   currentScreen: TBitmap;
-
 
 implementation
 
@@ -83,17 +86,7 @@ begin
   if (gameState = 1) then
   begin
     globalutils.saveGame;
-    map.caveFloorHi.Free;
-    map.caveFloorDef.Free;
-    map.caveWallHi.Free;
-    map.caveWallDef.Free;
-    map.blueDungeonFloorDef.Free;
-    map.blueDungeonFloorHi.Free;
-    map.blueDungeonWallDef.Free;
-    map.blueDungeonWallHi.Free;
-    items.aleTankard.Free;
-    entities.caveRatGlyph.Free;
-    player.ThePlayer.glyph.Free;
+    freeMemory;
   end;
   tempScreen.Free;
   inventoryScreen.Free;
@@ -205,6 +198,11 @@ begin
         player_inventory.showInventory;
         Invalidate;
       end;
+      VK_ESCAPE: // Quit game
+      begin
+        gameState := 3;
+        confirmQuit;
+      end;
     end;
   end // end of game input
   else if (gameState = 0) then
@@ -244,6 +242,31 @@ begin
         Invalidate;
       end;   { TODO : First 3 inventory added for testing, rest to be added later }
     end;  // end of inventory menu
+  end
+  else if (gameState = 3) then // Quit menu
+  begin
+    case Key of
+      VK_Q:
+      begin
+        gameState := 1;
+        Close();
+      end;
+      VK_X:
+      begin
+        freeMemory;
+        globalutils.saveGame;
+        gameState := 0;
+        ui.clearLog;
+        ui.titleScreen(1);
+        Invalidate;
+      end;
+      VK_ESCAPE:
+      begin
+        gameState := 1;
+        ui.rewriteTopMessage;
+        Invalidate;
+      end;
+    end;
   end;
 end;
 
@@ -302,6 +325,27 @@ begin
   entities.redrawNPC;
   ui.displayMessage('Welcome message to be added here...');
   Canvas.Draw(0, 0, tempScreen);
+end;
+
+procedure TGameWindow.confirmQuit;
+begin
+  ui.exitPrompt;
+  Invalidate;
+end;
+
+procedure TGameWindow.freeMemory;
+begin
+  map.caveFloorHi.Free;
+  map.caveFloorDef.Free;
+  map.caveWallHi.Free;
+  map.caveWallDef.Free;
+  map.blueDungeonFloorDef.Free;
+  map.blueDungeonFloorHi.Free;
+  map.blueDungeonWallDef.Free;
+  map.blueDungeonWallHi.Free;
+  items.aleTankard.Free;
+  entities.caveRatGlyph.Free;
+  player.ThePlayer.glyph.Free;
 end;
 
 end.

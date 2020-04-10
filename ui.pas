@@ -39,6 +39,12 @@ procedure updateAttack;
 procedure updateDefence;
 (* Write text to the message log *)
 procedure displayMessage(message: string);
+(* Display Quit Game confirmation *)
+procedure exitPrompt;
+(* Rewrite message at top of log *)
+procedure rewriteTopMessage;
+(* Clear message log *)
+procedure clearLog;
 
 implementation
 
@@ -187,6 +193,34 @@ begin
     writeToBuffer(10, 510, MESSAGEFADE5, messageArray[6]);
     writeToBuffer(10, 530, MESSAGEFADE6, messageArray[7]);
   end;
+end;
+
+procedure exitPrompt;
+begin
+  main.tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.Font.Size := 9;
+  writeToBuffer(10, 410, clWhite,
+    'Exit game?      [Q] - Quit game    |    [X] - Exit to main menu    |    [ESC] - Return to game');
+end;
+
+procedure rewriteTopMessage;
+begin
+  // rewrite message at top of log *)
+  main.tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.FillRect(5, 410, 833, 429);
+  main.tempScreen.Canvas.Font.Size := 9;
+  writeToBuffer(10, 410, UITEXTCOLOUR, messageArray[1]);
+end;
+
+procedure clearLog;
+begin
+  messageArray[7] := ' ';
+  messageArray[6] := ' ';
+  messageArray[5] := ' ';
+  messageArray[4] := ' ';
+  messageArray[3] := ' ';
+  messageArray[2] := ' ';
+  messageArray[1] := ' ';
 end;
 
 end.
