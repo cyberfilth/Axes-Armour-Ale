@@ -11,12 +11,16 @@ uses
   ale_tankard;
 
 type
+  (* eunm for types of item *)
+  itemCategory = (consumable, weapon, armour, missile);
+
   (* Store information about items *)
   Item = record
     (* Unique ID *)
     itemID: smallint;
     (* Item name & description *)
     itemName, itemDescription: shortstring;
+    itemType: itemCategory;
     (* Position on game map *)
     posX, posY: smallint;
     (* Character used to represent item on game map *)
@@ -27,11 +31,8 @@ type
     onMap: boolean;
     (* Displays a message the first time item is seen *)
     discovered: boolean;
-  end;        { TODO : action:
-Consumable
-Weapon
-Armour
-Missile }
+  end;
+
 
 var
   itemList: array of Item;
