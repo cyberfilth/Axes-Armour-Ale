@@ -125,6 +125,8 @@ begin
   (* Redraw Player *)
   drawToBuffer(map.mapToScreen(ThePlayer.posX), map.mapToScreen(ThePlayer.posY),
     ThePlayer.glyph);
+  (* Process status effects *)
+  player.processStatus;
 end;
 
 procedure TGameWindow.FormKeyDown(Sender: TObject; var Key: word);

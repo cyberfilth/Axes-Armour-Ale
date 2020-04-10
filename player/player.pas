@@ -14,6 +14,10 @@ type
     currentHP, maxHP, attack, defense, posX, posY, visionRange: smallint;
     experience: integer;
     playerName, title: string;
+    (* status effects *)
+    stsDrunk, stsPoison: boolean;
+    (* status timers *)
+    tmrDrunk, tmrPoison: smallint;
     (* Player Glyph *)
     glyph: TBitmap;
   end;
@@ -27,6 +31,8 @@ var
 procedure spawnPlayer(startX, startY: smallint);
 (* Moves the player on the map *)
 procedure movePlayer(dir: word);
+(* Process status effects *)
+procedure processStatus;
 (* Attack NPC *)
 procedure combat(npcID: smallint);
 (* Check if tile is occupied by an NPC *)
@@ -56,6 +62,10 @@ begin
     title := 'the nobody';
     glyph := TBitmap.Create;
     glyph.LoadFromResourceName(HINSTANCE, 'PLAYER_GLYPH');
+    stsDrunk := False;
+    stsPoison := False;
+    tmrDrunk := 0;
+    tmrPoison := 0;
     (* Generate a name for the player *)
     plot_gen.generateName;
     (* set up inventory *)
@@ -121,6 +131,32 @@ begin
     Dec(playerTurn);
   end;
   fov.fieldOfView(ThePlayer.posX, ThePlayer.posY, ThePlayer.visionRange, 1);
+end;
+
+procedure processStatus;
+begin
+  (* Inebriation *)
+  if (ThePlayer.stsDrunk = True) then
+  begin
+    if (ThePlayer.tmrDrunk <= 0) then
+    begin
+      ThePlayer.tmrDrunk := 0;
+      ThePlayer.stsDrunk := False;
+    end
+    else
+      Dec(ThePlayer.tmrDrunk);
+  end;
+  (* Poison *)
+  if (ThePlayer.stsPoison = True) then
+  begin
+    if (ThePlayer.tmrPoison <= 0) then
+    begin
+      ThePlayer.tmrPoison := 0;
+      ThePlayer.stsPoison := False;
+    end
+    else
+      Dec(ThePlayer.tmrPoison);
+  end;
 end;
 
 procedure combat(npcID: smallint);

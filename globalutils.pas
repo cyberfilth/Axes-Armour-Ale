@@ -155,6 +155,11 @@ begin
     AddElement(DataNode, 'vis', IntToStr(player.ThePlayer.visionRange));
     AddElement(DataNode, 'title', player.ThePlayer.title);
     AddElement(DataNode, 'name', player.ThePlayer.playerName);
+    AddElement(DataNode, 'stsDrunk',BoolToStr(player.ThePlayer.stsDrunk));
+    AddElement(DataNode, 'stsPoison',BoolToStr(player.ThePlayer.stsPoison));
+    AddElement(DataNode, 'tmrDrunk',IntToStr(player.ThePlayer.tmrDrunk));
+    AddElement(DataNode, 'tmrPoison',IntToStr(player.ThePlayer.tmrPoison));
+
 
     (* NPC records *)
     for i := 1 to entities.npcAmount do
@@ -240,6 +245,10 @@ begin
     player.ThePlayer.visionRange := StrToInt(PlayerNode.FindNode('vis').TextContent);
     player.ThePlayer.title := PlayerNode.FindNode('title').TextContent;
     player.ThePlayer.playerName := PlayerNode.FindNode('name').TextContent;
+    player.ThePlayer.stsDrunk := StrToBool(PlayerNode.FindNode('stsDrunk').TextContent);
+    player.ThePlayer.stsPoison := StrToBool(PlayerNode.FindNode('stsPoison').TextContent);
+    player.ThePlayer.tmrDrunk := StrToInt(PlayerNode.FindNode('tmrDrunk').TextContent);
+    player.ThePlayer.tmrPoison := StrToInt(PlayerNode.FindNode('tmrPoison').TextContent);
 
     (* NPC stats *)
     SetLength(entities.entityList, 1);
