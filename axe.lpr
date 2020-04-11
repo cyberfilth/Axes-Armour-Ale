@@ -16,7 +16,9 @@ uses {$IFDEF UNIX} {$IFDEF UseCThreads}
 begin
   RequireDerivedFormResource := True;
   Application.Title:='Axes, Armour & Ale';
+  {$IF FPC_FULLVERSION >= 30004}
   Application.Scaled := True;
+  {$ENDIF}
   Application.Initialize;
   Application.CreateForm(TGameWindow, GameWindow);
   Application.Run;
