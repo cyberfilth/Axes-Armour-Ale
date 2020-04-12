@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         operating-system: [ubuntu-latest,windows-latest]
-        lazarus-versions: [dist, 2.0.6, 1.6.4, 1.6.2, 1.4.4, 1.2]
+        lazarus-versions: [dist, 2.0.6, 1.6.4, 1.6.2]
     steps:
     - uses: actions/checkout@v2
     - name: Install Lazarus
