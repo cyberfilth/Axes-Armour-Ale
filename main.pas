@@ -195,6 +195,13 @@ begin
         player_inventory.drop(10);
         Invalidate;
       end;
+      VK_Q: // Quaff item
+      begin
+        currentScreen := inventoryScreen;
+        gameState := 2;
+        player_inventory.quaff(10);
+        Invalidate;
+      end;
       VK_I: // Show inventory
       begin
         player_inventory.showInventory;
@@ -218,14 +225,20 @@ begin
   else if (gameState = 2) then
   begin // beginning of inventory menu
     case Key of
-      VK_ESCAPE:
+      VK_ESCAPE:  // Exit
       begin
         player_inventory.menu(0);
         Invalidate;
       end;
-      VK_D:
+      VK_D:  // Drop
       begin
         player_inventory.menu(1);
+        Invalidate;
+      end;
+      VK_Q:  // Quaff
+      begin
+        player_inventory.menu(5);
+        { TODO : Renumber the menu options once all slots are added }
         Invalidate;
       end;
       VK_0:

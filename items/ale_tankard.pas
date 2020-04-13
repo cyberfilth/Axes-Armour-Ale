@@ -7,11 +7,13 @@ interface
 
 (* Create a rock *)
 procedure createAleTankard(uniqueid, itmx, itmy: smallint);
+(* Drink Ale *)
+procedure useItem;
 
 implementation
 
 uses
-  Graphics, items;
+  items, player;
 
 procedure createAleTankard(uniqueid, itmx, itmy: smallint);
 begin
@@ -22,7 +24,8 @@ begin
     itemID := uniqueid;
     itemName := 'tankard of ale';
     itemDescription := 'restores 5 health points';
-    itemType := consumable;
+    itemType := drink;
+    useID := 1;
     glyph := '!';
     inView := False;
     posX := itmx;
@@ -30,6 +33,11 @@ begin
     onMap := True;
     discovered := False;
   end;
+end;
+
+procedure useItem;
+begin
+  player.increaseHealth(5);
 end;
 
 end.

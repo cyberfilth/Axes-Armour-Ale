@@ -2,6 +2,7 @@
 unit items;
 
 {$mode objfpc}{$H+}
+{$ModeSwitch advancedrecords}
 
 interface
 
@@ -12,7 +13,7 @@ uses
 
 type
   (* eunm for types of item *)
-  itemCategory = (consumable, weapon, armour, missile);
+  itemCategory = (drink, weapon, armour, missile);
 
   (* Store information about items *)
   Item = record
@@ -20,7 +21,10 @@ type
     itemID: smallint;
     (* Item name & description *)
     itemName, itemDescription: shortstring;
+    (* drink, weapon, armour, missile *)
     itemType: itemCategory;
+    (* Used for lookup table *)
+    useID: smallint;
     (* Position on game map *)
     posX, posY: smallint;
     (* Character used to represent item on game map *)
@@ -47,6 +51,8 @@ procedure spawnItem;
 procedure drawItem(c, r: smallint; glyph: char);
 (* Redraw all items *)
 procedure redrawItems;
+(* Execute useItem procedure *)
+procedure lookupUse(x: smallint);
 
 implementation
 
@@ -88,6 +94,14 @@ begin
     begin
       drawItem(itemList[i].posX, itemList[i].posY, itemList[i].glyph);
     end;
+  end;
+end;
+
+{ TODO : To be replaced by calling the useItem procedure of an advanced record. This lookup table is just for testing }
+procedure lookupUse(x: smallint);
+begin
+  case x of
+    1: ale_tankard.useItem;
   end;
 end;
 

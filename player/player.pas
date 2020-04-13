@@ -39,6 +39,8 @@ procedure combat(npcID: smallint);
 function combatCheck(x, y: smallint): boolean;
 (* Pick up an item from the floor *)
 procedure pickUp;
+(*Increase Health, no more than maxHP *)
+procedure increaseHealth(amount: smallint);
 
 implementation
 
@@ -221,6 +223,16 @@ begin
     else
       ui.displayMessage('There is nothing on the ground here');
   end;
+end;
+
+procedure increaseHealth(amount: smallint);
+begin
+  if ((ThePlayer.currentHP + amount) >= ThePlayer.maxHP) then
+    ThePlayer.currentHP := ThePlayer.maxHP
+  else
+    ThePlayer.currentHP := ThePlayer.currentHP + amount;
+  ui.updateHealth;
+  ui.displayMessage('You feel restored');
 end;
 
 end.
