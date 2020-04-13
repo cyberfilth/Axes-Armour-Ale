@@ -133,6 +133,7 @@ begin
     Dec(playerTurn);
   end;
   fov.fieldOfView(ThePlayer.posX, ThePlayer.posY, ThePlayer.visionRange, 1);
+  ui.writeBufferedMessages;
 end;
 
 procedure processStatus;
@@ -144,6 +145,7 @@ begin
     begin
       ThePlayer.tmrDrunk := 0;
       ThePlayer.stsDrunk := False;
+      ui.bufferMessage('The effects of the alcohol wear off');
     end
     else
       Dec(ThePlayer.tmrDrunk);
@@ -173,7 +175,7 @@ begin
       (entities.entityList[npcID].currentHP - damageAmount);
     if (entities.entityList[npcID].currentHP < 1) then
     begin
-      ui.displayMessage('You kill the ' + entities.entityList[npcID].race);
+      ui.bufferMessage('You kill the ' + entities.entityList[npcID].race);
       entities.entityList[npcID].isDead := True;
       entities.entityList[npcID].glyph := '%';
       map.unoccupy(entities.entityList[npcID].posX, entities.entityList[npcID].posY);
@@ -183,13 +185,13 @@ begin
     end
     else
     if (damageAmount = 1) then
-      ui.displayMessage('You slightly injure the ' + entities.entityList[npcID].race)
+      ui.bufferMessage('You slightly injure the ' + entities.entityList[npcID].race)
     else
-      ui.displayMessage('You hit the ' + entities.entityList[npcID].race +
+      ui.bufferMessage('You hit the ' + entities.entityList[npcID].race +
         ' for ' + IntToStr(damageAmount) + ' points of damage');
   end
   else
-    ui.displayMessage('You miss');
+    ui.bufferMessage('You miss');
 end;
 
 function combatCheck(x, y: smallint): boolean;
@@ -232,7 +234,7 @@ begin
   else
     ThePlayer.currentHP := ThePlayer.currentHP + amount;
   ui.updateHealth;
-  ui.displayMessage('You feel restored');
+  ui.bufferMessage('You feel restored');
 end;
 
 end.

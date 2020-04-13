@@ -317,8 +317,8 @@ begin
     if (inventory[quaffItem].Name <> 'Empty') and
       (inventory[quaffItem].itemType = drink) then
     begin
+      ui.bufferMessage('You quaff the ' + inventory[quaffItem].Name);
       items.lookupUse(inventory[quaffItem].useID);
-      ui.displayMessage('You quaff the ' + inventory[quaffItem].Name);
       Inc(playerTurn);
       (* Remove from inventory *)
       inventory[quaffItem].Name := 'Empty';

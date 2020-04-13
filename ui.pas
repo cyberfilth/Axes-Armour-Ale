@@ -21,6 +21,7 @@ const
 
 var
   messageArray: array[1..7] of string = (' ', ' ', ' ', ' ', ' ', ' ', ' ');
+  buffer: string;
   logo: TBitmap;
 
 (* Title screen *)
@@ -39,6 +40,10 @@ procedure updateAttack;
 procedure updateDefence;
 (* Write text to the message log *)
 procedure displayMessage(message: string);
+(* Store all messages from players turn *)
+procedure bufferMessage(message: string);
+(* Write buffered message to the message log *)
+procedure writeBufferedMessages;
 (* Display Quit Game confirmation *)
 procedure exitPrompt;
 (* Rewrite message at top of log *)
@@ -193,6 +198,18 @@ begin
     writeToBuffer(10, 510, MESSAGEFADE5, messageArray[6]);
     writeToBuffer(10, 530, MESSAGEFADE6, messageArray[7]);
   end;
+end;
+
+procedure bufferMessage(message: string);
+begin
+  buffer := buffer + message + '. ';
+end;
+
+procedure writeBufferedMessages;
+begin
+  if (buffer <> '') then
+    displayMessage(buffer);
+  buffer := '';
 end;
 
 procedure exitPrompt;
