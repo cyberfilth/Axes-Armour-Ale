@@ -169,7 +169,7 @@ var
 begin
   damageAmount := globalutils.randomRange(1, ThePlayer.attack) -
     entities.entityList[npcID].defense;
-  if (damageAmount > 0) then
+  if ((damageAmount - ThePlayer.tmrDrunk) > 0) then
   begin
     entities.entityList[npcID].currentHP :=
       (entities.entityList[npcID].currentHP - damageAmount);
@@ -191,7 +191,12 @@ begin
         ' for ' + IntToStr(damageAmount) + ' points of damage');
   end
   else
-    ui.bufferMessage('You miss');
+  begin
+    if (ThePlayer.stsDrunk = True) then
+      ui.bufferMessage('You drunkenly miss')
+    else
+      ui.bufferMessage('You miss');
+  end;
 end;
 
 function combatCheck(x, y: smallint): boolean;
