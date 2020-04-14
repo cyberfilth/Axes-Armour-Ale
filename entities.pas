@@ -3,7 +3,6 @@
 unit entities;
 
 {$mode objfpc}{$H+}
-{$ModeSwitch advancedrecords}
 
 interface
 { TODO : Reload textures when loading saved game }

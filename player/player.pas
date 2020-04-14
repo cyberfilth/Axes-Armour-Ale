@@ -234,12 +234,17 @@ end;
 
 procedure increaseHealth(amount: smallint);
 begin
-  if ((ThePlayer.currentHP + amount) >= ThePlayer.maxHP) then
-    ThePlayer.currentHP := ThePlayer.maxHP
+  if (ThePlayer.currentHP <> ThePlayer.maxHP) then
+  begin
+    if ((ThePlayer.currentHP + amount) >= ThePlayer.maxHP) then
+      ThePlayer.currentHP := ThePlayer.maxHP
+    else
+      ThePlayer.currentHP := ThePlayer.currentHP + amount;
+    ui.updateHealth;
+    ui.bufferMessage('You feel restored');
+  end
   else
-    ThePlayer.currentHP := ThePlayer.currentHP + amount;
-  ui.updateHealth;
-  ui.bufferMessage('You feel restored');
+    ui.bufferMessage('You are already at full health');
 end;
 
 end.

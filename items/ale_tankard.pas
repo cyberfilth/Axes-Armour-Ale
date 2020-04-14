@@ -42,7 +42,7 @@ begin
   begin
     ThePlayer.stsDrunk := True;
     ThePlayer.tmrDrunk := ThePlayer.tmrDrunk + 5;
-    ui.bufferMessage('the alcohol slows your reactions');
+    ui.bufferMessage('The alcohol slows your reactions');
     ui.writeBufferedMessages;
   end;
 end;

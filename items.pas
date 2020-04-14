@@ -2,7 +2,6 @@
 unit items;
 
 {$mode objfpc}{$H+}
-{$ModeSwitch advancedrecords}
 
 interface
 
