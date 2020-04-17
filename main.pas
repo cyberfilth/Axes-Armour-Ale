@@ -10,7 +10,7 @@ interface
 
 uses
   Classes, Forms, ComCtrls, Graphics, SysUtils, map, player,
-  globalutils, Controls, LCLType, ui, cave_rat, items, player_inventory;
+  globalutils, Controls, LCLType, ui, cave_rat, items, player_inventory, hyena;
 
 type
 
@@ -120,6 +120,7 @@ begin
     if entities.entityList[i].isDead = False then
     begin
       cave_rat.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY);
+      hyena.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY);
     end;
   entities.redrawNPC;
   (* Redraw Player *)
@@ -360,6 +361,7 @@ begin
   map.blueDungeonWallHi.Free;
   items.aleTankard.Free;
   entities.caveRatGlyph.Free;
+  entities.hyenaGlyph.Free;
   player.ThePlayer.glyph.Free;
 end;
 

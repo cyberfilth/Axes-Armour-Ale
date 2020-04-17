@@ -9,7 +9,7 @@ interface
 uses
   Graphics, map, globalutils, ui, items,
   (* Import the NPC's *)
-  cave_rat;
+  cave_rat, hyena;
 
 type
   (* Store information about NPC's *)
@@ -35,7 +35,7 @@ type
 var
   entityList: array of Creature;
   npcAmount, listLength: smallint;
-  caveRatGlyph: TBitmap;
+  caveRatGlyph, hyenaGlyph: TBitmap;
 
 (* Load entity textures *)
 procedure setupEntities;
@@ -56,6 +56,8 @@ procedure setupEntities;
 begin
   caveRatGlyph := TBitmap.Create;
   caveRatGlyph.LoadFromResourceName(HINSTANCE, 'R_ORANGE');
+  hyenaGlyph := TBitmap.Create;
+  hyenaGlyph.LoadFromResourceName(HINSTANCE, 'H_ORANGE');
 end;
 
 procedure spawnNPCs;
@@ -76,7 +78,7 @@ begin
       cave_rat.createCaveRat(i, globalutils.currentDgncentreList[p + 2].x,
         globalutils.currentDgncentreList[p + 2].y);
     if r = 0 then
-      cave_rat.createCaveRat(i, globalutils.currentDgncentreList[p + 2].x,
+      hyena.createHyena(i, globalutils.currentDgncentreList[p + 2].x,
         globalutils.currentDgncentreList[p + 2].y);
     Inc(p);
   end;
@@ -87,6 +89,8 @@ begin
 { TODO : When more entities are created, swap this out for a CASE statement }
   if (glyph = 'r') then
     drawToBuffer(mapToScreen(c), mapToScreen(r), caveRatGlyph);
+  if (glyph = 'h') then
+    drawToBuffer(mapToScreen(c), mapToScreen(r), hyenaGlyph);
 end;
 
 procedure moveNPC(id, newX, newY: smallint);
