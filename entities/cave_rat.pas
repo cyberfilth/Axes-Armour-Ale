@@ -271,7 +271,7 @@ begin
     end;
   end
   else
-    ui.bufferMessage('The ' + entities.entityList[id].race + ' attacks but misses');
+    ui.bufferMessage('The cave rat attacks but misses');
 end;
 
 end.

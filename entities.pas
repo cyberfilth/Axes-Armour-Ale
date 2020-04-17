@@ -3,8 +3,10 @@
 unit entities;
 
 {$mode objfpc}{$H+}
+{$ModeSwitch advancedrecords}
 
 interface
+
 { TODO : Reload textures when loading saved game }
 uses
   Graphics, map, globalutils, ui, items,
@@ -13,6 +15,9 @@ uses
 
 type
   (* Store information about NPC's *)
+
+  { Creature }
+
   Creature = record
     (* Unique ID *)
     npcID: smallint;
@@ -30,6 +35,8 @@ type
     discovered: boolean;
     (* Has the NPC been killed, to be removed at end of game loop *)
     isDead: boolean;
+    (* The procedure that allows each NPC to take a turn *)
+    procedure entityTakeTurn(i: smallint);
   end;
 
 var
@@ -49,6 +56,8 @@ procedure moveNPC(id, newX, newY: smallint);
 procedure redrawNPC;
 (* Get creature details at a specific location *)
 function getCreatureID(x, y: smallint): smallint;
+(* Call Creatures.takeTurn procedure *)
+procedure NPCgameLoop;
 
 implementation
 
@@ -62,31 +71,33 @@ end;
 
 procedure spawnNPCs;
 var
-  i, p, r: smallint;
+  i, p, NPCtype: smallint;
 begin
-  // get number of NPCs
+  (* Set the number of NPC's *)
   npcAmount := (globalutils.currentDgnTotalRooms - 2) div 2;
-  // initialise array, 1 based
+  (*  initialise array, 1 based *)
   SetLength(entityList, 1);
   p := 2; // used to space out NPC location
-  // place the NPCs
+  (* Create the NPCs *)
   for i := 1 to npcAmount do
   begin
     // randomly select a monster type
-    r := globalutils.randomRange(0, 1);
-    if r = 1 then
-      cave_rat.createCaveRat(i, globalutils.currentDgncentreList[p + 2].x,
-        globalutils.currentDgncentreList[p + 2].y);
-    if r = 0 then
-      hyena.createHyena(i, globalutils.currentDgncentreList[p + 2].x,
-        globalutils.currentDgncentreList[p + 2].y);
+    NPCtype := globalutils.randomRange(0, 1);
+    case NPCtype of
+      0: // Hyena
+        hyena.createHyena(i, globalutils.currentDgncentreList[p + 2].x,
+          globalutils.currentDgncentreList[p + 2].y);
+      1: // Cave rat
+        cave_rat.createCaveRat(i, globalutils.currentDgncentreList[p + 2].x,
+          globalutils.currentDgncentreList[p + 2].y);
+    end;
     Inc(p);
   end;
 end;
 
 procedure drawEntity(c, r: smallint; glyph: char);
 begin
-{ TODO : When more entities are created, swap this out for a CASE statement }
+  { TODO : When more entities are created, swap this out for a CASE statement }
   if (glyph = 'r') then
     drawToBuffer(mapToScreen(c), mapToScreen(r), caveRatGlyph);
   if (glyph = 'h') then
@@ -156,6 +167,25 @@ begin
     if (entityList[i].posX = x) and (entityList[i].posY = y) then
       Result := i;
   end;
+end;
+
+procedure NPCgameLoop;
+var
+  i: smallint;
+begin
+  for i := 1 to npcAmount do
+    if (entityList[i].isDead = False) then
+      entityList[i].entityTakeTurn(i);
+end;
+
+{ Creature }
+
+procedure Creature.entityTakeTurn(i: smallint);
+begin
+  if (entityList[i].race = 'cave rat') then
+    cave_rat.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY)
+  else if (entityList[i].race = 'hyena') then
+    hyena.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY);
 end;
 
 end.

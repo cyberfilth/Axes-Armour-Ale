@@ -10,7 +10,7 @@ interface
 
 uses
   Classes, Forms, ComCtrls, Graphics, SysUtils, map, player,
-  globalutils, Controls, LCLType, ui, cave_rat, items, player_inventory, hyena;
+  globalutils, Controls, LCLType, ui, items, player_inventory;
 
 type
 
@@ -116,12 +116,7 @@ begin
     else
       items.itemList[i].inView := False;
   (* move NPC's *)
-  for i := 1 to entities.npcAmount do
-    if entities.entityList[i].isDead = False then
-    begin
-      cave_rat.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY);
-      hyena.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY);
-    end;
+  entities.NPCgameLoop;
   entities.redrawNPC;
   (* Redraw Player *)
   drawToBuffer(map.mapToScreen(ThePlayer.posX), map.mapToScreen(ThePlayer.posY),
@@ -296,6 +291,7 @@ procedure TGameWindow.newGame;
 begin
   gameState := 1;
   playerTurn := 0;
+  map.mapType := 0;// set to cavern
   map.setupMap;
   map.setupTiles;
   entities.setupEntities;

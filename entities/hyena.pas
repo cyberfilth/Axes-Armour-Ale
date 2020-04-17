@@ -1,4 +1,5 @@
-(* Weak enemy with simple AI, no pathfinding *)
+(* Weak enemy with simple AI, no pathfinding
+    will attack and drain health *)
 
 unit hyena;
 
@@ -43,15 +44,16 @@ begin
         (* and they're adjacent to the player, they howl for strength *)
         if (isNextToPlayer(spx, spy) = True) then
         begin
-          ui.displayMessage('The hyena howls');
+          ui.bufferMessage('The hyena howls');
           hasHowled := True;
-          Inc(entities.entityList[id].attack);
+          entities.entityList[id].attack := entities.entityList[id].attack + 2;
+          entities.entityList[id].defense := entities.entityList[id].defense - 2;
+          combat(id);
         end
         else
           combat(id);
     end
     else
-      (* if they are next to player, and not low on health, they attack *)
       chasePlayer(id, spx, spy);
   end
   (* Cannot see the player *)
@@ -61,7 +63,7 @@ end;
 
 procedure createHyena(uniqueid, npcx, npcy: smallint);
 begin
-  // Add a cave rat to the list of creatures
+  // Add a Hyena to the list of creatures
   entities.listLength := length(entities.entityList);
   SetLength(entities.entityList, entities.listLength + 1);
   with entities.entityList[entities.listLength] do
@@ -215,16 +217,16 @@ begin
     else
     begin
       if (damageAmount = 1) then
-        ui.bufferMessage('The ' + entities.entityList[id].race + ' slightly wounds you')
+        ui.bufferMessage('The hyena slightly wounds you')
       else
-        ui.bufferMessage('The ' + entities.entityList[id].race +
-          ' bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+        ui.bufferMessage('The hyena bites you, inflicting ' +
+          IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
   end
   else
-    ui.bufferMessage('The ' + entities.entityList[id].race + ' attacks but misses');
+    ui.bufferMessage('The hyena attacks but misses');
 end;
 
 end.
