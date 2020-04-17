@@ -10,9 +10,6 @@ interface
 uses
   SysUtils, map;
 
-var
-  hasHowled: boolean = False;
-
 (* Create a hyena *)
 procedure createHyena(uniqueid, npcx, npcy: smallint);
 (* Take a turn *)
@@ -40,18 +37,20 @@ begin
     (* If NPC has low health... *)
     if (entities.entityList[id].currentHP < 2) then
     begin
-      if (hasHowled = False) then
-        (* and they're adjacent to the player, they howl for strength *)
-        if (isNextToPlayer(spx, spy) = True) then
-        begin
-          ui.bufferMessage('The hyena howls');
-          hasHowled := True;
-          entities.entityList[id].attack := entities.entityList[id].attack + 2;
-          entities.entityList[id].defense := entities.entityList[id].defense - 2;
-          combat(id);
-        end
-        else
-          combat(id);
+      if (entities.entityList[id].abilityTriggered = False) and (isNextToPlayer(spx, spy) = True) then
+      begin
+        ui.bufferMessage('The hyena howls');
+        entities.entityList[id].abilityTriggered := True;
+        entities.entityList[id].attack := entities.entityList[id].attack + 2;
+        entities.entityList[id].defense := entities.entityList[id].defense - 2;
+      end
+      else if (entities.entityList[id].abilityTriggered = True) and (isNextToPlayer(spx, spy) = True) then
+      begin
+        ui.bufferMessage('The hyena snarls');
+        combat(id);
+      end
+      else
+        chasePlayer(id, spx, spy);
     end
     else
       chasePlayer(id, spx, spy);
@@ -76,11 +75,12 @@ begin
     currentHP := maxHP;
     attack := randomRange(2, 3);
     defense := randomRange(2, 4);
-    xpReward := randomRange(3, 5);
+    xpReward := maxHP;
     visionRange := 5;
     inView := False;
     discovered := False;
     isDead := False;
+    abilityTriggered := False;
     posX := npcx;
     posY := npcy;
   end;
@@ -166,7 +166,7 @@ begin
     (* Else if tile does not contain player, check for another entity *)
     else if (map.isOccupied(newX, newY) = True) then
     begin
-      //ui.displayMessage('Rat ' + IntToStr(id) + ' bumps into Rat ' +
+      //ui.bufferMessage('cave rat bumps into Rat ' +
       //  IntToStr(entities.getCreatureID(newX, newY)));
       (* Remain on original tile *)
       entities.moveNPC(id, spx, spy);

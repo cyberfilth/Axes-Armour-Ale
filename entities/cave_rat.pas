@@ -44,11 +44,12 @@ begin
     currentHP := maxHP;
     attack := randomRange(2, 3);
     defense := randomRange(1, 3);
-    xpReward := randomRange(3, 5);
+    xpReward := maxHP;
     visionRange := 4;
     inView := False;
     discovered := False;
     isDead := False;
+    abilityTriggered := False;
     posX := npcx;
     posY := npcy;
   end;
@@ -159,9 +160,7 @@ begin
     (* Else if tile does not contain player, check for another entity *)
     else if (map.isOccupied(newX, newY) = True) then
     begin
-      //ui.displayMessage('Rat ' + IntToStr(id) + ' bumps into Rat ' +
-      //  IntToStr(entities.getCreatureID(newX, newY)));
-      (* Remain on original tile *)
+      ui.bufferMessage('The Cave rat bumps into ' + getCreatureName(newX, newY));
       entities.moveNPC(id, spx, spy);
     end
     (* if map is unoccupied, move to that tile *)

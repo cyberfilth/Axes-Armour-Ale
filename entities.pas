@@ -35,6 +35,8 @@ type
     discovered: boolean;
     (* Has the NPC been killed, to be removed at end of game loop *)
     isDead: boolean;
+    (* Whether a special ability has been activated *)
+    abilityTriggered: boolean;{ TODO : Add to save/load function }
     (* The procedure that allows each NPC to take a turn *)
     procedure entityTakeTurn(i: smallint);
   end;
@@ -54,8 +56,10 @@ procedure drawEntity(c, r: smallint; glyph: char);
 procedure moveNPC(id, newX, newY: smallint);
 (* Redraw all NPC's *)
 procedure redrawNPC;
-(* Get creature details at a specific location *)
+(* Get creature details at coordinates *)
 function getCreatureID(x, y: smallint): smallint;
+(* Get creature name at coordinates *)
+function getCreatureName(x, y: smallint): shortstring;
 (* Call Creatures.takeTurn procedure *)
 procedure NPCgameLoop;
 
@@ -166,6 +170,17 @@ begin
   begin
     if (entityList[i].posX = x) and (entityList[i].posY = y) then
       Result := i;
+  end;
+end;
+
+function getCreatureName(x, y: smallint): shortstring;
+var
+  i: smallint;
+begin
+  for i := 1 to npcAmount do
+  begin
+    if (entityList[i].posX = x) and (entityList[i].posY = y) then
+      Result := entityList[i].race;
   end;
 end;
 
