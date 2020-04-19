@@ -101,11 +101,10 @@ end;
 
 procedure drawEntity(c, r: smallint; glyph: char);
 begin
-  { TODO : When more entities are created, swap this out for a CASE statement }
-  if (glyph = 'r') then
-    drawToBuffer(mapToScreen(c), mapToScreen(r), caveRatGlyph);
-  if (glyph = 'h') then
-    drawToBuffer(mapToScreen(c), mapToScreen(r), hyenaGlyph);
+  case glyph of
+    'r': drawToBuffer(mapToScreen(c), mapToScreen(r), caveRatGlyph);
+    'h': drawToBuffer(mapToScreen(c), mapToScreen(r), hyenaGlyph);
+  end;
 end;
 
 procedure moveNPC(id, newX, newY: smallint);
