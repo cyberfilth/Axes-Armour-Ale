@@ -11,8 +11,7 @@ uses
   ale_tankard;
 
 type
-  (* eunm for types of item *)
-  itemCategory = (drink, weapon, armour, missile);
+  (* Item types = drink, weapon, armour, missile *)
 
   (* Store information about items *)
   Item = record
@@ -21,7 +20,7 @@ type
     (* Item name & description *)
     itemName, itemDescription: shortstring;
     (* drink, weapon, armour, missile *)
-    itemType: itemCategory;
+    itemType: shortstring;
     (* Used for lookup table *)
     useID: smallint;
     (* Position on game map *)

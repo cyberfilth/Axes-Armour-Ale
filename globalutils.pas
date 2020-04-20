@@ -65,7 +65,7 @@ procedure loadGame;
 implementation
 
 uses
-  main, map, entities, player;
+  main, map, entities, player, player_inventory;
 
 // Random(Range End - Range Start) + Range Start
 function randomRange(fromNumber, toNumber: smallint): smallint;
@@ -155,11 +155,23 @@ begin
     AddElement(DataNode, 'vis', IntToStr(player.ThePlayer.visionRange));
     AddElement(DataNode, 'title', player.ThePlayer.title);
     AddElement(DataNode, 'name', player.ThePlayer.playerName);
-    AddElement(DataNode, 'stsDrunk',BoolToStr(player.ThePlayer.stsDrunk));
-    AddElement(DataNode, 'stsPoison',BoolToStr(player.ThePlayer.stsPoison));
-    AddElement(DataNode, 'tmrDrunk',IntToStr(player.ThePlayer.tmrDrunk));
-    AddElement(DataNode, 'tmrPoison',IntToStr(player.ThePlayer.tmrPoison));
+    AddElement(DataNode, 'stsDrunk', BoolToStr(player.ThePlayer.stsDrunk));
+    AddElement(DataNode, 'stsPoison', BoolToStr(player.ThePlayer.stsPoison));
+    AddElement(DataNode, 'tmrDrunk', IntToStr(player.ThePlayer.tmrDrunk));
+    AddElement(DataNode, 'tmrPoison', IntToStr(player.ThePlayer.tmrPoison));
 
+    (* Player inventory *)
+    for i := 0 to 9 do
+    begin
+      DataNode := AddChild(RootNode, 'playerInventory');
+      TDOMElement(dataNode).SetAttribute('id', IntToStr(i));
+      AddElement(DataNode, 'Name', inventory[i].Name);
+      AddElement(DataNode, 'description', inventory[i].description);
+      AddElement(DataNode, 'itemType', inventory[i].itemType);
+      AddElement(DataNode, 'useID', IntToStr(inventory[i].useID));
+      AddElement(DataNode, 'glyph', inventory[i].glyph);
+      AddElement(DataNode, 'inInventory', BoolToStr(inventory[i].inInventory));
+    end;
 
     (* NPC records *)
     for i := 1 to entities.npcAmount do
@@ -178,7 +190,8 @@ begin
       AddElement(DataNode, 'inView', BoolToStr(entities.entityList[i].inView));
       AddElement(DataNode, 'discovered', BoolToStr(entities.entityList[i].discovered));
       AddElement(DataNode, 'isDead', BoolToStr(entities.entityList[i].isDead));
-      AddElement(DataNode, 'abilityTriggered', BoolToStr(entities.entityList[i].abilityTriggered));
+      AddElement(DataNode, 'abilityTriggered',
+        BoolToStr(entities.entityList[i].abilityTriggered));
       AddElement(DataNode, 'posX', IntToStr(entities.entityList[i].posX));
       AddElement(DataNode, 'posY', IntToStr(entities.entityList[i].posY));
     end;
@@ -193,7 +206,7 @@ end;
 procedure loadGame;
 var
   RootNode, ParentNode, Tile, NextNode, Blocks, Visible, Occupied,
-  Discovered, PlayerNode, NPCnode, GlyphNode: TDOMNode;
+  Discovered, PlayerNode, InventoryNode, NPCnode, GlyphNode: TDOMNode;
   Doc: TXMLDocument;
   r, c, i: integer;
 begin
@@ -247,9 +260,31 @@ begin
     player.ThePlayer.title := PlayerNode.FindNode('title').TextContent;
     player.ThePlayer.playerName := PlayerNode.FindNode('name').TextContent;
     player.ThePlayer.stsDrunk := StrToBool(PlayerNode.FindNode('stsDrunk').TextContent);
-    player.ThePlayer.stsPoison := StrToBool(PlayerNode.FindNode('stsPoison').TextContent);
+    player.ThePlayer.stsPoison :=
+      StrToBool(PlayerNode.FindNode('stsPoison').TextContent);
     player.ThePlayer.tmrDrunk := StrToInt(PlayerNode.FindNode('tmrDrunk').TextContent);
     player.ThePlayer.tmrPoison := StrToInt(PlayerNode.FindNode('tmrPoison').TextContent);
+
+    (* Player inventory *)
+    InventoryNode := Doc.DocumentElement.FindNode('playerInventory');
+    for i := 0 to 9 do
+    begin
+      player_inventory.inventory[i].id := i;
+      player_inventory.inventory[i].Name :=
+        InventoryNode.FindNode('Name').TextContent;
+      player_inventory.inventory[i].description :=
+        InventoryNode.FindNode('description').TextContent;
+      player_inventory.inventory[i].itemType :=
+        InventoryNode.FindNode('itemType').TextContent;
+      player_inventory.inventory[i].useID :=
+        StrToInt(InventoryNode.FindNode('useID').TextContent);
+      player_inventory.inventory[i].glyph :=
+        InventoryNode.FindNode('glyph').TextContent[1];
+      player_inventory.inventory[i].inInventory :=
+        StrToBool(InventoryNode.FindNode('inInventory').TextContent);
+      ParentNode := InventoryNode.NextSibling;
+      InventoryNode := ParentNode;
+    end;
 
     (* NPC stats *)
     SetLength(entities.entityList, 1);

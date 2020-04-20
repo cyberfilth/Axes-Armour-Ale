@@ -13,8 +13,7 @@ type
   (* Items in inventory *)
   Equipment = record
     id, useID: smallint;
-    Name, description: shortstring;
-    itemType: itemCategory;
+    Name, description, itemType: shortstring;
     glyph: char;
     (* Is the item still in the inventory *)
     inInventory: boolean;
@@ -52,37 +51,20 @@ uses
   main;
 
 procedure initialiseInventory;
+var
+  i: byte;
 begin
-  inventory[0].id := 0;
-  inventory[0].Name := 'Empty';
-  inventory[0].equipped := False;
-  inventory[1].id := 1;
-  inventory[1].Name := 'Empty';
-  inventory[1].equipped := False;
-  inventory[2].id := 2;
-  inventory[2].Name := 'Empty';
-  inventory[2].equipped := False;
-  inventory[3].id := 3;
-  inventory[3].Name := 'Empty';
-  inventory[3].equipped := False;
-  inventory[4].id := 4;
-  inventory[4].Name := 'Empty';
-  inventory[4].equipped := False;
-  inventory[5].id := 5;
-  inventory[5].Name := 'Empty';
-  inventory[5].equipped := False;
-  inventory[6].id := 6;
-  inventory[6].Name := 'Empty';
-  inventory[6].equipped := False;
-  inventory[7].id := 7;
-  inventory[7].Name := 'Empty';
-  inventory[7].equipped := False;
-  inventory[8].id := 8;
-  inventory[8].Name := 'Empty';
-  inventory[8].equipped := False;
-  inventory[9].id := 9;
-  inventory[9].Name := 'Empty';
-  inventory[9].equipped := False;
+  for i := 0 to 9 do
+  begin
+  inventory[i].id := i;
+  inventory[i].Name := 'Empty';
+  inventory[i].equipped := False;
+  inventory[i].description:='x';
+  inventory[i].itemType:='x';
+  inventory[i].glyph:='x';
+  inventory[i].inInventory:=False;
+  inventory[i].useID:=0;
+  end;
 end;
 
 procedure addToInventory(itemNumber: smallint);
@@ -305,7 +287,7 @@ begin
   for i := 0 to 9 do
   begin
     x := x + 20;
-    if (inventory[i].Name = 'Empty') or (inventory[i].itemType <> drink) then
+    if (inventory[i].Name = 'Empty') or (inventory[i].itemType <> 'drink') then
       dimSlots(i, x)
     else
       highlightSlots(i, x);
@@ -315,7 +297,7 @@ begin
   if (quaffItem <> 10) then
   begin
     if (inventory[quaffItem].Name <> 'Empty') and
-      (inventory[quaffItem].itemType = drink) then
+      (inventory[quaffItem].itemType = 'drink') then
     begin
       ui.writeBufferedMessages;
       ui.bufferMessage('You quaff the ' + inventory[quaffItem].Name);
