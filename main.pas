@@ -335,6 +335,9 @@ begin
   (* Add NPC's to the screen *)
   entities.setupEntities;
   entities.redrawNPC;
+  (* Add items to the screen *)
+  items.setupItems;
+  items.redrawItems;
   ui.displayMessage('Welcome message to be added here...');
   Canvas.Draw(0, 0, tempScreen);
 end;

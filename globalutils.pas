@@ -1,7 +1,5 @@
 (* Common functions / utilities *)
 
-{ TODO : Add Items to Save / Load function }
-
 unit globalutils;
 
 {$mode objfpc}{$H+}
@@ -126,6 +124,7 @@ begin
     AddElement(datanode, 'RandSeed', IntToStr(RandSeed));
     AddElement(datanode, 'turns', IntToStr(playerTurn));
     AddElement(datanode, 'npcAmount', IntToStr(entities.npcAmount));
+    AddElement(datanode, 'itemAmount', IntToStr(items.itemAmount));
     AddElement(datanode, 'currentMap', IntToStr(map.mapType));
 
     (* map tiles *)
@@ -144,10 +143,20 @@ begin
     end;
 
     (* Items on the map *)
-     for i := 1 to items.itemAmount do
+    for i := 1 to items.itemAmount do
     begin
-       DataNode := AddChild(RootNode, 'Items');
-
+      DataNode := AddChild(RootNode, 'Items');
+      TDOMElement(dataNode).SetAttribute('itemID', IntToStr(itemList[i].itemID));
+      AddElement(DataNode, 'Name', itemList[i].itemName);
+      AddElement(DataNode, 'description', itemList[i].itemDescription);
+      AddElement(DataNode, 'itemType', itemList[i].itemType);
+      AddElement(DataNode, 'useID', IntToStr(itemList[i].useID));
+      AddElement(DataNode, 'glyph', itemList[i].glyph);
+      AddElement(DataNode, 'inView', BoolToStr(itemList[i].inView));
+      AddElement(DataNode, 'posX', IntToStr(itemList[i].posX));
+      AddElement(DataNode, 'posY', IntToStr(itemList[i].posY));
+      AddElement(DataNode, 'onMap', BoolToStr(itemList[i].onMap));
+      AddElement(DataNode, 'discovered', BoolToStr(itemList[i].discovered));
     end;
 
     (* Player record *)
@@ -213,7 +222,7 @@ end;
 procedure loadGame;
 var
   RootNode, ParentNode, Tile, NextNode, Blocks, Visible, Occupied,
-  Discovered, PlayerNode, InventoryNode, NPCnode, GlyphNode: TDOMNode;
+  Discovered, PlayerNode, InventoryNode, ItemsNode, NPCnode, GlyphNode: TDOMNode;
   Doc: TXMLDocument;
   r, c, i: integer;
 begin
@@ -225,8 +234,10 @@ begin
     ParentNode := RootNode.FirstChild.NextSibling;
     (* Player turns *)
     playerTurn := StrToInt(RootNode.FindNode('turns').TextContent);
-    (* NPC amount *)
+    (* Number of NPC's *)
     entities.npcAmount := StrToInt(RootNode.FindNode('npcAmount').TextContent);
+    (* Number of items *)
+    items.itemAmount := StrToInt(RootNode.FindNode('itemAmount').TextContent);
     (* Current map type *)
     //map.mapType:= StrToInt(ParentNode.FindNode('currentMap').TextContent);
 
@@ -248,10 +259,34 @@ begin
         GlyphNode := Discovered.NextSibling;
         (* Convert String to Char *)
         map.maparea[r][c].Glyph := GlyphNode.TextContent[1];
-
         NextNode := Tile.NextSibling;
         Tile := NextNode;
       end;
+    end;
+
+    (* Items on the map *)
+    SetLength(items.itemList, 1);
+    ItemsNode := Doc.DocumentElement.FindNode('Items');
+    for i := 1 to items.itemAmount do
+    begin
+      items.listLength := length(items.itemList);
+      SetLength(items.itemList, items.listLength + 1);
+      items.itemList[i].itemID := StrToInt(ItemsNode.Attributes.Item[0].NodeValue);
+      items.itemList[i].itemName := ItemsNode.FindNode('Name').TextContent;
+      items.itemList[i].itemDescription :=
+        ItemsNode.FindNode('description').TextContent;
+      items.itemList[i].itemType := ItemsNode.FindNode('itemType').TextContent;
+      items.itemList[i].useID := StrToInt(ItemsNode.FindNode('useID').TextContent);
+      items.itemList[i].glyph :=
+        char(widechar(ItemsNode.FindNode('glyph').TextContent[1]));
+      items.itemList[i].inView := StrToBool(ItemsNode.FindNode('inView').TextContent);
+      items.itemList[i].posX := StrToInt(ItemsNode.FindNode('posX').TextContent);
+      items.itemList[i].posY := StrToInt(ItemsNode.FindNode('posY').TextContent);
+      items.itemList[i].onMap := StrToBool(ItemsNode.FindNode('onMap').TextContent);
+      items.itemList[i].discovered :=
+        StrToBool(ItemsNode.FindNode('discovered').TextContent);
+      ParentNode := ItemsNode.NextSibling;
+      ItemsNode := ParentNode;
     end;
 
     (* Player info *)

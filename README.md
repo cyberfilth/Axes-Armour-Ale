@@ -1,6 +1,6 @@
 ![Axes, Armour & Ale - logo](GITscreenshots/Logo.png)
 
-![build-test](https://github.com/cyberfilth/Axes-Armour-Ale/workflows/build-test/badge.svg)
+![build-test](https://github.com/cyberfilth/Axes-Armour-Ale/workflows/build-test/badge.svg)     ![Free Pascal](GITscreenshots/fpc.svg)
 
 ### A low-fantasy, roguelike game
 
@@ -17,4 +17,3 @@ Alpha version, most features aren't implemented yet. This game builds on the ter
 ![Cave screenshot](GITscreenshots/windows_screenshot1.png)
 
 
-![Code size](https://img.shields.io/github/languages/code-size/cyberfilth/Axes-Armour-Ale)      https://img.shields.io/badge/Free%20Pascal-v3.0.4-blue        ![stars](https://img.shields.io/github/stars/cyberfilth/Axes-Armour-Ale?style=social)
