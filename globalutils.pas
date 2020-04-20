@@ -178,6 +178,7 @@ begin
       AddElement(DataNode, 'inView', BoolToStr(entities.entityList[i].inView));
       AddElement(DataNode, 'discovered', BoolToStr(entities.entityList[i].discovered));
       AddElement(DataNode, 'isDead', BoolToStr(entities.entityList[i].isDead));
+      AddElement(DataNode, 'abilityTriggered', BoolToStr(entities.entityList[i].abilityTriggered));
       AddElement(DataNode, 'posX', IntToStr(entities.entityList[i].posX));
       AddElement(DataNode, 'posY', IntToStr(entities.entityList[i].posY));
     end;
@@ -279,6 +280,8 @@ begin
         StrToBool(NPCnode.FindNode('discovered').TextContent);
       entities.entityList[i].isDead :=
         StrToBool(NPCnode.FindNode('isDead').TextContent);
+      entities.entityList[i].abilityTriggered :=
+        StrToBool(NPCnode.FindNode('abilityTriggered').TextContent);
       entities.entityList[i].posX :=
         StrToInt(NPCnode.FindNode('posX').TextContent);
       entities.entityList[i].posY :=

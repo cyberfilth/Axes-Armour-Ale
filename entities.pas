@@ -36,7 +36,7 @@ type
     (* Has the NPC been killed, to be removed at end of game loop *)
     isDead: boolean;
     (* Whether a special ability has been activated *)
-    abilityTriggered: boolean;{ TODO : Add to save/load function }
+    abilityTriggered: boolean;
     (* The procedure that allows each NPC to take a turn *)
     procedure entityTakeTurn(i: smallint);
   end;

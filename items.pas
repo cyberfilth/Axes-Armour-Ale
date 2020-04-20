@@ -96,7 +96,6 @@ begin
   end;
 end;
 
-{ TODO : To be replaced by calling the useItem procedure of an advanced record. This lookup table is just for testing }
 procedure lookupUse(x: smallint);
 begin
   case x of
