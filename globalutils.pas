@@ -1,6 +1,6 @@
 (* Common functions / utilities *)
 
-{ TODO : Add Items and player inventory to Save / Load function }
+{ TODO : Add Items to Save / Load function }
 
 unit globalutils;
 
@@ -65,7 +65,7 @@ procedure loadGame;
 implementation
 
 uses
-  main, map, entities, player, player_inventory;
+  main, map, entities, player, player_inventory, items;
 
 // Random(Range End - Range Start) + Range Start
 function randomRange(fromNumber, toNumber: smallint): smallint;
@@ -141,6 +141,13 @@ begin
         AddElement(datanode, 'Discovered', BoolToStr(map.maparea[r][c].Discovered));
         AddElement(datanode, 'Glyph', map.maparea[r][c].Glyph);
       end;
+    end;
+
+    (* Items on the map *)
+     for i := 1 to items.itemAmount do
+    begin
+       DataNode := AddChild(RootNode, 'Items');
+
     end;
 
     (* Player record *)
