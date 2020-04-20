@@ -1,6 +1,6 @@
 ![Axes, Armour & Ale - logo](GITscreenshots/Logo.png)
 
-![build-test](https://github.com/cyberfilth/Axes-Armour-Ale/workflows/build-test/badge.svg)
+![build-test](https://github.com/cyberfilth/Axes-Armour-Ale/workflows/build-test/badge.svg)     ![Code size](https://img.shields.io/github/languages/code-size/cyberfilth/Axes-Armour-Ale)      
 
 ### A low-fantasy, roguelike game
 
