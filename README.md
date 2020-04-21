@@ -1,6 +1,6 @@
 ![Axes, Armour & Ale - logo](GITscreenshots/Logo.png)
 
-![build-test](https://github.com/cyberfilth/Axes-Armour-Ale/workflows/build-test/badge.svg)     ![Free Pascal](GITscreenshots/fpc.svg)
+![build-test](https://github.com/cyberfilth/Axes-Armour-Ale/workflows/build-test/badge.svg)     ![Free Pascal](GITscreenshots/fpc.svg)      ![Lazarus](GITscreenshots/lazarus.svg)
 
 ### A low-fantasy, roguelike game
 
