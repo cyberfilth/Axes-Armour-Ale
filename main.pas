@@ -130,55 +130,55 @@ begin
   if (gameState = 1) then
   begin // beginning of game input
     case Key of
-      VK_LEFT, VK_NUMPAD4:
+      VK_LEFT, VK_NUMPAD4, VK_H:
       begin
         player.movePlayer(2);
         gameLoop;
         Invalidate;
       end;
-      VK_RIGHT, VK_NUMPAD6:
+      VK_RIGHT, VK_NUMPAD6, VK_L:
       begin
         player.movePlayer(4);
         gameLoop;
         Invalidate;
       end;
-      VK_UP, VK_NUMPAD8:
+      VK_UP, VK_NUMPAD8, VK_K:
       begin
         player.movePlayer(1);
         gameLoop;
         Invalidate;
       end;
-      VK_DOWN, VK_NUMPAD2:
+      VK_DOWN, VK_NUMPAD2, VK_J:
       begin
         player.movePlayer(3);
         gameLoop;
         Invalidate;
       end;
-      VK_NUMPAD9:
+      VK_NUMPAD9, VK_U:
       begin
         player.movePlayer(5);
         gameLoop;
         Invalidate;
       end;
-      VK_NUMPAD3:
+      VK_NUMPAD3, VK_N:
       begin
         player.movePlayer(6);
         gameLoop;
         Invalidate;
       end;
-      VK_NUMPAD1:
+      VK_NUMPAD1, VK_B:
       begin
         player.movePlayer(7);
         gameLoop;
         Invalidate;
       end;
-      VK_NUMPAD7:
+      VK_NUMPAD7, VK_Y:
       begin
         player.movePlayer(8);
         gameLoop;
         Invalidate;
       end;
-      VK_G: // Get item
+      VK_G, VK_OEM_COMMA: // Get item
       begin
         player.pickUp;
         gameLoop;
