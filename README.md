@@ -17,7 +17,7 @@ Alpha version, most features aren't implemented yet. This game builds on the ter
 ![Cave screenshot](GITscreenshots/windows_screenshot1.png)
 
 
-# Controls
+### Controls
 Your character is controlled using either the numberpad or Vi keys.
 <pre>
   y  k  u      7  8  9
@@ -34,3 +34,11 @@ Drop an item with 'd'
 Quaff / drink with 'q'
 To exit a menu / quit the game press ESCAPE
 
+
+### documentation
+All code has been heavily commented so that you can generate documentation using PasDoc.
+Navigate to the source directory and create a folder called docs (or whatever you want to call it), then run the following commands.
+```
+mkdir docs/
+pasdoc *.pas --output docs/
+```
