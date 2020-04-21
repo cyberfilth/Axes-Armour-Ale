@@ -15,7 +15,7 @@
       </XPManifest>
       <Icon Value="0"/>
       <Resources Count="13">
-        <Resource_0 FileName="images\sprites\player_glyph.bmp" Type="BITMAP" ResourceName="PLAYER_GLYPH"/>
+        <Resource_0 FileName="images/sprites/player_glyph.bmp" Type="BITMAP" ResourceName="PLAYER_GLYPH"/>
         <Resource_1 FileName="images/dungeon/ascii/blueDungeonFloorDef.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORDEF"/>
         <Resource_2 FileName="images/dungeon/ascii/blueDungeonFloorHi.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORHI"/>
         <Resource_3 FileName="images/dungeon/ascii/blueDungeonWallDef.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONWALLDEF"/>
@@ -24,10 +24,10 @@
         <Resource_6 FileName="images/dungeon/ascii/caveFloorHi.bmp" Type="BITMAP" ResourceName="CAVEFLOORHI"/>
         <Resource_7 FileName="images/dungeon/ascii/caveWallDef.bmp" Type="BITMAP" ResourceName="CAVEWALLDEF"/>
         <Resource_8 FileName="images/dungeon/ascii/caveWallHi.bmp" Type="BITMAP" ResourceName="CAVEWALLHI"/>
-        <Resource_9 FileName="images\titleScreen.bmp" Type="BITMAP" ResourceName="TITLESCREEN"/>
-        <Resource_10 FileName="images\sprites\r_orange.bmp" Type="BITMAP" ResourceName="R_ORANGE"/>
-        <Resource_11 FileName="images\sprites\ale1.bmp" Type="BITMAP" ResourceName="ALE1"/>
-        <Resource_12 FileName="images/sprites/h_orange.bmp" Type="BITMAP" ResourceName="H_ORANGE"/>
+        <Resource_9 FileName="images/titleScreen.bmp" Type="BITMAP" ResourceName="TITLESCREEN"/>
+        <Resource_10 FileName="images/sprites/r_orange.bmp" Type="BITMAP" ResourceName="R_ORANGE"/>
+        <Resource_11 FileName="images/sprites/ale1.bmp" Type="BITMAP" ResourceName="ALE1"/>
+        <Resource_12 FileName="images/sprites/h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
       </Resources>
     </General>
     <VersionInfo>

@@ -69,7 +69,7 @@ begin
   caveRatGlyph := TBitmap.Create;
   caveRatGlyph.LoadFromResourceName(HINSTANCE, 'R_ORANGE');
   hyenaGlyph := TBitmap.Create;
-  hyenaGlyph.LoadFromResourceName(HINSTANCE, 'H_ORANGE');
+  hyenaGlyph.LoadFromResourceName(HINSTANCE, 'H_RED');
 end;
 
 procedure spawnNPCs;
@@ -197,7 +197,7 @@ procedure Creature.entityTakeTurn(i: smallint);
 begin
   if (entityList[i].race = 'cave rat') then
     cave_rat.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY)
-  else if (entityList[i].race = 'hyena') then
+  else if (entityList[i].race = 'blood hyena') then
     hyena.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY);
 end;
 

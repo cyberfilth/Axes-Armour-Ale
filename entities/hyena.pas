@@ -68,8 +68,8 @@ begin
   with entities.entityList[entities.listLength] do
   begin
     npcID := uniqueid;
-    race := 'hyena';
-    description := 'a hyena';
+    race := 'blood hyena';
+    description := 'a drooling, blood hyena';
     glyph := 'h';
     maxHP := randomRange(3, 5);
     currentHP := maxHP;
