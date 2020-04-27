@@ -203,6 +203,9 @@ begin
       AddElement(DataNode, 'defense', IntToStr(entities.entityList[i].defense));
       AddElement(DataNode, 'xpReward', IntToStr(entities.entityList[i].xpReward));
       AddElement(DataNode, 'visRange', IntToStr(entities.entityList[i].visionRange));
+      AddElement(DataNode, 'NPCsize', IntToStr(entities.entityList[i].NPCsize));
+      AddElement(DataNode, 'trackingTurns', IntToStr(entities.entityList[i].trackingTurns));
+      AddElement(DataNode, 'moveCount', IntToStr(entities.entityList[i].moveCount));
       AddElement(DataNode, 'inView', BoolToStr(entities.entityList[i].inView));
       AddElement(DataNode, 'discovered', BoolToStr(entities.entityList[i].discovered));
       AddElement(DataNode, 'isDead', BoolToStr(entities.entityList[i].isDead));
@@ -351,6 +354,12 @@ begin
         StrToInt(NPCnode.FindNode('xpReward').TextContent);
       entities.entityList[i].visionRange :=
         StrToInt(NPCnode.FindNode('visRange').TextContent);
+      entities.entityList[i].NPCsize :=
+        StrToInt(NPCnode.FindNode('NPCsize').TextContent);
+      entities.entityList[i].trackingTurns :=
+        StrToInt(NPCnode.FindNode('trackingTurns').TextContent);
+      entities.entityList[i].moveCount :=
+        StrToInt(NPCnode.FindNode('moveCount').TextContent);
       entities.entityList[i].inView :=
         StrToBool(NPCnode.FindNode('inView').TextContent);
       entities.entityList[i].discovered :=

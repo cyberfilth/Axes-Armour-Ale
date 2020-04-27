@@ -12,6 +12,8 @@ uses
 
 (* Create a hyena *)
 procedure createHyena(uniqueid, npcx, npcy: smallint);
+(* check to see if entity can move to a square *)
+function checkSpaceFree(x, y: smallint): boolean;
 (* Take a turn *)
 procedure takeTurn(id, spx, spy: smallint);
 (* Move in a random direction *)
@@ -28,23 +30,40 @@ implementation
 uses
   entities, player, globalutils, ui, los;
 
+function checkSpaceFree(x, y: smallint): boolean;
+begin
+  (* Set boolean to false *)
+  Result := False;
+  (* Check that not blocked by map tiles *)
+  if (map.canMove(x, y) = True) and
+    (* Check not occupied by player *)
+    (x <> ThePlayer.posX) and (y <> ThePlayer.posY) and
+    (* Check that not occupied by another entity *)
+    (map.isOccupied(x, y) = False) then
+    Result := True;
+end;
+
 procedure takeTurn(id, spx, spy: smallint);
 begin
   (* Can the NPC see the player *)
   if (los.inView(spx, spy, ThePlayer.posX, ThePlayer.posY,
     entities.entityList[id].visionRange) = True) then
   begin
+    (* Reset move counter *)
+    entities.entityList[id].moveCount := entities.entityList[id].trackingTurns;
     (* If NPC has low health... *)
     if (entities.entityList[id].currentHP < 2) then
     begin
-      if (entities.entityList[id].abilityTriggered = False) and (isNextToPlayer(spx, spy) = True) then
+      if (entities.entityList[id].abilityTriggered = False) and
+        (isNextToPlayer(spx, spy) = True) then
       begin
         ui.bufferMessage('The hyena howls');
         entities.entityList[id].abilityTriggered := True;
         entities.entityList[id].attack := entities.entityList[id].attack + 2;
         entities.entityList[id].defense := entities.entityList[id].defense - 2;
       end
-      else if (entities.entityList[id].abilityTriggered = True) and (isNextToPlayer(spx, spy) = True) then
+      else if (entities.entityList[id].abilityTriggered = True) and
+        (isNextToPlayer(spx, spy) = True) then
       begin
         ui.bufferMessage('The hyena snarls');
         combat(id);
@@ -56,6 +75,11 @@ begin
       chasePlayer(id, spx, spy);
   end
   (* Cannot see the player *)
+  else if (entities.entityList[id].moveCount > 0) then
+  begin    (* The NPC is still in pursuit *)
+    Dec(entities.entityList[id].moveCount);
+    chasePlayer(id, spx, spy);
+  end
   else
     wander(id, spx, spy);
 end;
@@ -77,6 +101,9 @@ begin
     defense := randomRange(2, 4);
     xpReward := maxHP;
     visionRange := 5;
+    NPCsize := 2;
+    trackingTurns := 3;
+    moveCount := 0;
     inView := False;
     discovered := False;
     isDead := False;
@@ -165,7 +192,7 @@ begin
     end
     (* Else if tile does not contain player, check for another entity *)
     else if (map.isOccupied(newX, newY) = True) then
-    begin
+    begin  { TODO : Check NPCsize of entity }
       //ui.bufferMessage('cave rat bumps into Rat ' +
       //  IntToStr(entities.getCreatureID(newX, newY)));
       (* Remain on original tile *)
@@ -175,6 +202,15 @@ begin
     else if (map.isOccupied(newX, newY) = False) then
       entities.moveNPC(id, newX, newY);
   end
+  // wall hugging code
+  else if (spx < player.ThePlayer.posX) and (checkSpaceFree(spx + 1, spy) = True) then
+    entities.moveNPC(id, spx + 1, spy)
+  else if (spx > player.ThePlayer.posX) and (checkSpaceFree(spx - 1, spy) = True) then
+    entities.moveNPC(id, spx - 1, spy)
+  else if (spy < player.ThePlayer.posY) and (checkSpaceFree(spx, spy + 1) = True) then
+    entities.moveNPC(id, spx, spy + 1)
+  else if (spy > player.ThePlayer.posY) and (checkSpaceFree(spx, spy - 1) = True) then
+    entities.moveNPC(id, spx, spy - 1)
   else
     wander(id, spx, spy);
 end;

@@ -28,6 +28,12 @@ type
     currentHP, maxHP, attack, defense, posX, posY, xpReward, visionRange: smallint;
     (* Character used to represent NPC on game map *)
     glyph: char;
+    (* Size of NPC *)
+    NPCsize: smallint;
+    (* Number of turns the entity will track the player when they're out of sight *)
+    trackingTurns: smallint;
+    (* Count of turns the entity will keep tracking the player when they're out of sight *)
+    moveCount: smallint;
     (* Is the NPC in the players FoV *)
     inView: boolean;
     (* First time the player discovers the NPC *)

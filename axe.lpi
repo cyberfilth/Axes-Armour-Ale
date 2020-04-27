@@ -27,7 +27,7 @@
         <Resource_9 FileName="images/titleScreen.bmp" Type="BITMAP" ResourceName="TITLESCREEN"/>
         <Resource_10 FileName="images/sprites/r_orange.bmp" Type="BITMAP" ResourceName="R_ORANGE"/>
         <Resource_11 FileName="images/sprites/ale1.bmp" Type="BITMAP" ResourceName="ALE1"/>
-        <Resource_12 FileName="images/sprites/h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
+        <Resource_12 FileName="images\sprites\h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
       </Resources>
     </General>
     <VersionInfo>

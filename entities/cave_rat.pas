@@ -46,6 +46,9 @@ begin
     defense := randomRange(1, 3);
     xpReward := maxHP;
     visionRange := 4;
+    NPCsize := 1;
+    trackingTurns := 0;
+    moveCount := 0;
     inView := False;
     discovered := False;
     isDead := False;
