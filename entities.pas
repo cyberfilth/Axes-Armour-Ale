@@ -80,13 +80,13 @@ end;
 
 procedure spawnNPCs;
 var
-  i, p, NPCtype: smallint;
+  i, iplus, NPCtype: smallint;
 begin
+  iplus := 2; // Start placing entities from 2nd room so not on the player
   (* Set the number of NPC's *)
-  npcAmount := (globalutils.currentDgnTotalRooms - 2) div 2;
+  npcAmount := (globalutils.currentDgnTotalRooms - 1);
   (*  initialise array, 1 based *)
   SetLength(entityList, 1);
-  p := 2; // used to space out NPC location
   (* Create the NPCs *)
   for i := 1 to npcAmount do
   begin
@@ -94,13 +94,13 @@ begin
     NPCtype := globalutils.randomRange(0, 1);
     case NPCtype of
       0: // Hyena
-        hyena.createHyena(i, globalutils.currentDgncentreList[p + 2].x,
-          globalutils.currentDgncentreList[p + 2].y);
+        hyena.createHyena(i, globalutils.currentDgncentreList[iplus].x,
+          globalutils.currentDgncentreList[iplus].y);
       1: // Cave rat
-        cave_rat.createCaveRat(i, globalutils.currentDgncentreList[p + 2].x,
-          globalutils.currentDgncentreList[p + 2].y);
+        cave_rat.createCaveRat(i, globalutils.currentDgncentreList[iplus].x,
+          globalutils.currentDgncentreList[iplus].y);
     end;
-    Inc(p);
+    Inc(iplus);
   end;
 end;
 
