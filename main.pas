@@ -119,8 +119,8 @@ begin
   entities.NPCgameLoop;
   entities.redrawNPC;
   (* Redraw Player *)
-  drawToBuffer(map.mapToScreen(ThePlayer.posX), map.mapToScreen(ThePlayer.posY),
-    ThePlayer.glyph);
+  drawToBuffer(map.mapToScreen(entities.entityList[0].posX), map.mapToScreen(entities.entityList[0].posY),
+    entities.playerGlyph);
   (* Process status effects *)
   player.processStatus;
 end;

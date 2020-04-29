@@ -193,8 +193,11 @@ begin
     (* Else if tile does not contain player, check for another entity *)
     else if (map.isOccupied(newX, newY) = True) then
     begin  { TODO : Check NPCsize of entity }
-      //ui.bufferMessage('cave rat bumps into Rat ' +
-      //  IntToStr(entities.getCreatureID(newX, newY)));
+      if (entities.entityList[entities.getCreatureID(newX, newY)].NPCsize <
+        entities.entityList[id].NPCsize) then
+        ui.bufferMessage('Hyena attacks ' + entities.getCreatureName(newX, newY))
+      else
+        ui.bufferMessage('Hyena bumps into a ' + entities.getCreatureName(newX, newY));
       (* Remain on original tile *)
       entities.moveNPC(id, spx, spy);
     end

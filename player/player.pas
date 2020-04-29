@@ -29,6 +29,8 @@ var
 
 (* Places the player on the map *)
 procedure spawnPlayer(startX, startY: smallint);
+(* Create player character *)
+procedure createPlayer;
 (* Moves the player on the map *)
 procedure movePlayer(dir: word);
 (* Process status effects *)
@@ -79,6 +81,35 @@ begin
   end;
 end;
 
+procedure createPlayer;
+begin
+   // Add Player to the list of creatures
+  entities.listLength := length(entities.entityList);
+  SetLength(entities.entityList, entities.listLength + 1);
+  with entities.entityList[0] do
+  begin
+    npcID := 0;
+    race := 'Player';
+    description := 'your character';
+    glyph := '@';
+    maxHP := 20;
+    currentHP := 20;
+    attack := 5;
+    defense := 2;
+    xpReward := 0;
+    visionRange := 4;
+    NPCsize := 3;
+    trackingTurns := 3;
+    moveCount := 0;
+    inView := True;
+    discovered := True;
+    isDead := False;
+    abilityTriggered := False;
+    posX := map.startX;
+    posY := map.startY
+  end;
+end;
+
 (* Move the player within the confines of the game map *)
 procedure movePlayer(dir: word);
 var
@@ -86,117 +117,117 @@ var
   originalX, originalY: smallint;
 begin
   (* Repaint visited tiles *)
-  fov.fieldOfView(ThePlayer.posX, ThePlayer.posY, ThePlayer.visionRange, 0);
-  originalX := ThePlayer.posX;
-  originalY := ThePlayer.posY;
+  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY, entities.entityList[0].visionRange, 0);
+  originalX := entities.entityList[0].posX;
+  originalY := entities.entityList[0].posY;
   case dir of
-    1: Dec(ThePlayer.posY); // N
-    2: Dec(ThePlayer.posX); // W
-    3: Inc(ThePlayer.posY); // S
-    4: Inc(ThePlayer.posX); // E
+    1: Dec(entities.entityList[0].posY); // N
+    2: Dec(entities.entityList[0].posX); // W
+    3: Inc(entities.entityList[0].posY); // S
+    4: Inc(entities.entityList[0].posX); // E
     5:                      // NE
     begin
-      Inc(ThePlayer.posX);
-      Dec(ThePlayer.posY);
+      Inc(entities.entityList[0].posX);
+      Dec(entities.entityList[0].posY);
     end;
     6:                      // SE
     begin
-      Inc(ThePlayer.posX);
-      Inc(ThePlayer.posY);
+      Inc(entities.entityList[0].posX);
+      Inc(entities.entityList[0].posY);
     end;
     7:                      // SW
     begin
-      Dec(ThePlayer.posX);
-      Inc(ThePlayer.posY);
+      Dec(entities.entityList[0].posX);
+      Inc(entities.entityList[0].posY);
     end;
     8:                      // NW
     begin
-      Dec(ThePlayer.posX);
-      Dec(ThePlayer.posY);
+      Dec(entities.entityList[0].posX);
+      Dec(entities.entityList[0].posY);
     end;
   end;
   (* check if tile is occupied *)
-  if (map.isOccupied(ThePlayer.posX, ThePlayer.posY) = True) then
+  if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
     (* check if tile is occupied by hostile NPC *)
-    if (combatCheck(ThePlayer.posX, ThePlayer.posY) = True) then
+    if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
     begin
-      ThePlayer.posX := originalX;
-      ThePlayer.posY := originalY;
+      entities.entityList[0].posX := originalX;
+      entities.entityList[0].posY := originalY;
     end;
   Inc(playerTurn);
   (* check if tile is walkable *)
-  if (map.canMove(ThePlayer.posX, ThePlayer.posY) = False) then
+  if (map.canMove(entities.entityList[0].posX, entities.entityList[0].posY) = False) then
   begin
-    ThePlayer.posX := originalX;
-    ThePlayer.posY := originalY;
+    entities.entityList[0].posX := originalX;
+    entities.entityList[0].posY := originalY;
     ui.displayMessage('You bump into a wall');
     Dec(playerTurn);
   end;
-  fov.fieldOfView(ThePlayer.posX, ThePlayer.posY, ThePlayer.visionRange, 1);
+  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY, entities.entityList[0].visionRange, 1);
   ui.writeBufferedMessages;
 end;
 
 procedure processStatus;
 begin
   (* Inebriation *)
-  if (ThePlayer.stsDrunk = True) then
-  begin
-    if (ThePlayer.tmrDrunk <= 0) then
-    begin
-      ThePlayer.tmrDrunk := 0;
-      ThePlayer.stsDrunk := False;
-      ui.bufferMessage('The effects of the alcohol wear off');
-    end
-    else
-      Dec(ThePlayer.tmrDrunk);
-  end;
-  (* Poison *)
-  if (ThePlayer.stsPoison = True) then
-  begin
-    if (ThePlayer.tmrPoison <= 0) then
-    begin
-      ThePlayer.tmrPoison := 0;
-      ThePlayer.stsPoison := False;
-    end
-    else
-      Dec(ThePlayer.tmrPoison);
-  end;
+  //if (ThePlayer.stsDrunk = True) then
+  //begin
+  //  if (ThePlayer.tmrDrunk <= 0) then
+  //  begin
+  //    ThePlayer.tmrDrunk := 0;
+  //    ThePlayer.stsDrunk := False;
+  //    ui.bufferMessage('The effects of the alcohol wear off');
+  //  end
+  //  else
+  //    Dec(ThePlayer.tmrDrunk);
+  //end;
+  //(* Poison *)
+  //if (ThePlayer.stsPoison = True) then
+  //begin
+  //  if (ThePlayer.tmrPoison <= 0) then
+  //  begin
+  //    ThePlayer.tmrPoison := 0;
+  //    ThePlayer.stsPoison := False;
+  //  end
+  //  else
+  //    Dec(ThePlayer.tmrPoison);
+  //end;
 end;
 
 procedure combat(npcID: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, ThePlayer.attack) -
-    entities.entityList[npcID].defense;
-  if ((damageAmount - ThePlayer.tmrDrunk) > 0) then
-  begin
-    entities.entityList[npcID].currentHP :=
-      (entities.entityList[npcID].currentHP - damageAmount);
-    if (entities.entityList[npcID].currentHP < 1) then
-    begin
-      ui.bufferMessage('You kill the ' + entities.entityList[npcID].race);
-      entities.entityList[npcID].isDead := True;
-      entities.entityList[npcID].glyph := '%';
-      map.unoccupy(entities.entityList[npcID].posX, entities.entityList[npcID].posY);
-      ThePlayer.experience := ThePlayer.experience + entities.entityList[npcID].xpReward;
-      ui.updateXP;
-      exit;
-    end
-    else
-    if (damageAmount = 1) then
-      ui.bufferMessage('You slightly injure the ' + entities.entityList[npcID].race)
-    else
-      ui.bufferMessage('You hit the ' + entities.entityList[npcID].race +
-        ' for ' + IntToStr(damageAmount) + ' points of damage');
-  end
-  else
-  begin
-    if (ThePlayer.stsDrunk = True) then
-      ui.bufferMessage('You drunkenly miss')
-    else
-      ui.bufferMessage('You miss');
-  end;
+  //damageAmount := globalutils.randomRange(1, entities.entityList[0].attack) -
+  //  entities.entityList[npcID].defense;
+  //if ((damageAmount - ThePlayer.tmrDrunk) > 0) then
+  //begin
+  //  entities.entityList[npcID].currentHP :=
+  //    (entities.entityList[npcID].currentHP - damageAmount);
+  //  if (entities.entityList[npcID].currentHP < 1) then
+  //  begin
+  //    ui.bufferMessage('You kill the ' + entities.entityList[npcID].race);
+  //    entities.entityList[npcID].isDead := True;
+  //    entities.entityList[npcID].glyph := '%';
+  //    map.unoccupy(entities.entityList[npcID].posX, entities.entityList[npcID].posY);
+  //    ThePlayer.experience := ThePlayer.experience + entities.entityList[npcID].xpReward;
+  //    ui.updateXP;
+  //    exit;
+  //  end
+  //  else
+  //  if (damageAmount = 1) then
+  //    ui.bufferMessage('You slightly injure the ' + entities.entityList[npcID].race)
+  //  else
+  //    ui.bufferMessage('You hit the ' + entities.entityList[npcID].race +
+  //      ' for ' + IntToStr(damageAmount) + ' points of damage');
+  //end
+  //else
+  //begin
+  //  if (ThePlayer.stsDrunk = True) then
+  //    ui.bufferMessage('You drunkenly miss')
+    //else
+    //  ui.bufferMessage('You miss');
+  //end;
 end;
 
 function combatCheck(x, y: smallint): boolean;

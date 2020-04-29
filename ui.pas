@@ -54,7 +54,7 @@ procedure clearLog;
 implementation
 
 uses
-  main, player;
+  main, player, entities;
 
 procedure titleScreen(yn: byte);
 begin
@@ -85,7 +85,7 @@ begin
   main.tempScreen.Canvas.Pen.Color := globalutils.UICOLOUR;
   main.tempScreen.Canvas.Rectangle(sbx, sby, sbx + sbw, sby + sbh);
   main.tempScreen.Canvas.Font.Size := 10;
-  writeToBuffer(sbx + 8, sby + 5, UITEXTCOLOUR, ThePlayer.playerName);
+  writeToBuffer(sbx + 8, sby + 5, UITEXTCOLOUR, entities.entityList[0].race);
   updateLevel;
   updateXP;
   updateHealth;
@@ -96,28 +96,28 @@ end;
 procedure updateLevel;
 begin
   (* Select players title *)
-  if (ThePlayer.experience <= 10) then
-    ThePlayer.title := 'the Worthless'
-  else if (ThePlayer.experience > 10) then
-    ThePlayer.title := 'the Brawler';
+  if (entities.entityList[0].xpReward <= 10) then
+    entities.entityList[0].description := 'the Worthless'
+  else if (entities.entityList[0].xpReward > 10) then
+    entities.entityList[0].description := 'the Brawler';
   (* Paint over previous title *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
   main.tempScreen.Canvas.FillRect(sbx + 8, sby + 25, sbx + 135, sby + 45);
   (* Write title to screen *)
   main.tempScreen.Canvas.Font.Size := 10;
-  writeToBuffer(sbx + 8, sby + 25, UITEXTCOLOUR, ThePlayer.title);
+  writeToBuffer(sbx + 8, sby + 25, UITEXTCOLOUR, entities.entityList[0].description);
 end;
 
 procedure updateXP;
 begin
   (* Paint over previous stats *)
-  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(sbx + 80, sby + 55, sbx + 135, sby + 75);
-  main.tempScreen.Canvas.Pen.Color := UICOLOUR;
-  (* Write Experience points *)
-  main.tempScreen.Canvas.Font.Size := 10;
-  writeToBuffer(sbx + 8, sby + 55, UITEXTCOLOUR, 'Experience:  ' +
-    IntToStr(ThePlayer.experience));
+  //main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
+  //main.tempScreen.Canvas.FillRect(sbx + 80, sby + 55, sbx + 135, sby + 75);
+  //main.tempScreen.Canvas.Pen.Color := UICOLOUR;
+  //(* Write Experience points *)
+  //main.tempScreen.Canvas.Font.Size := 10;
+  //writeToBuffer(sbx + 8, sby + 55, UITEXTCOLOUR, 'Experience:  ' +
+  //  IntToStr(ThePlayer.experience));
 end;
 
 procedure updateHealth;
@@ -130,12 +130,12 @@ begin
   (* Draw Health amount *)
   main.tempScreen.Canvas.Font.Size := 10;
   writeToBuffer(sbx + 8, sby + 75, UITEXTCOLOUR, 'Health:  ' +
-    IntToStr(ThePlayer.currentHP) + ' / ' + IntToStr(ThePlayer.maxHP));
+    IntToStr(entities.entityList[0].currentHP) + ' / ' + IntToStr(entities.entityList[0].maxHP));
   (* Draw health bar *)
   main.tempScreen.Canvas.Brush.Color := $2E2E00; // Background colour
   main.tempScreen.Canvas.FillRect(sbx + 8, sby + 95, sbx + 108, sby + 100);
   (* Calculate percentage of total health *)
-  healthPercentage := (ThePlayer.currentHP * 100) div ThePlayer.maxHP;
+  healthPercentage := (entities.entityList[0].currentHP * 100) div entities.entityList[0].maxHP;
   main.tempScreen.Canvas.Brush.Color := $0B9117; // Green colour
   main.tempScreen.Canvas.FillRect(sbx + 8, sby + 95, sbx +
     (healthPercentage + 8), sby + 100);
@@ -150,7 +150,7 @@ begin
   (* Draw Attack amount *)
   main.tempScreen.Canvas.Font.Size := 10;
   writeToBuffer(sbx + 8, sby + 105, UITEXTCOLOUR, 'Attack:  ' +
-    IntToStr(ThePlayer.attack));
+    IntToStr(entities.entityList[0].attack));
 end;
 
 procedure updateDefence;
@@ -162,7 +162,7 @@ begin
   (* Draw Defence amount *)
   main.tempScreen.Canvas.Font.Size := 10;
   writeToBuffer(sbx + 8, sby + 125, UITEXTCOLOUR, 'Defence:  ' +
-    IntToStr(ThePlayer.defense));
+    IntToStr(entities.entityList[0].defense));
 end;
 
 procedure displayMessage(message: string);

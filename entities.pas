@@ -49,7 +49,7 @@ type
 var
   entityList: array of Creature;
   npcAmount, listLength: smallint;
-  caveRatGlyph, hyenaGlyph: TBitmap;
+  caveRatGlyph, hyenaGlyph, playerGlyph: TBitmap;
 
 (* Load entity textures *)
 procedure setupEntities;
@@ -70,8 +70,13 @@ procedure NPCgameLoop;
 
 implementation
 
+uses
+  player;
+
 procedure setupEntities;
 begin
+  playerGlyph := TBitmap.Create;
+  playerGlyph.LoadFromResourceName(HINSTANCE, 'PLAYER_GLYPH');
   caveRatGlyph := TBitmap.Create;
   caveRatGlyph.LoadFromResourceName(HINSTANCE, 'R_ORANGE');
   hyenaGlyph := TBitmap.Create;
@@ -85,8 +90,10 @@ begin
   iplus := 2; // Start placing entities from 2nd room so not on the player
   (* Set the number of NPC's *)
   npcAmount := (globalutils.currentDgnTotalRooms - 1);
-  (*  initialise array, 1 based *)
-  SetLength(entityList, 1);
+  (*  initialise array *)
+  SetLength(entityList, 0);
+  (*Add player to Entity list *)
+  player.createPlayer;
   (* Create the NPCs *)
   for i := 1 to npcAmount do
   begin
