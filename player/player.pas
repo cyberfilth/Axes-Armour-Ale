@@ -173,36 +173,36 @@ procedure combat(npcID: smallint);
 var
   damageAmount: smallint;
 begin
-  //damageAmount := globalutils.randomRange(1, entities.entityList[0].attack) -
-  //  entities.entityList[npcID].defense;
-  //if ((damageAmount - ThePlayer.tmrDrunk) > 0) then
-  //begin
-  //  entities.entityList[npcID].currentHP :=
-  //    (entities.entityList[npcID].currentHP - damageAmount);
-  //  if (entities.entityList[npcID].currentHP < 1) then
-  //  begin
-  //    ui.bufferMessage('You kill the ' + entities.entityList[npcID].race);
-  //    entities.entityList[npcID].isDead := True;
-  //    entities.entityList[npcID].glyph := '%';
-  //    map.unoccupy(entities.entityList[npcID].posX, entities.entityList[npcID].posY);
-  //    ThePlayer.experience := ThePlayer.experience + entities.entityList[npcID].xpReward;
-  //    ui.updateXP;
-  //    exit;
-  //  end
-  //  else
-  //  if (damageAmount = 1) then
-  //    ui.bufferMessage('You slightly injure the ' + entities.entityList[npcID].race)
-  //  else
-  //    ui.bufferMessage('You hit the ' + entities.entityList[npcID].race +
-  //      ' for ' + IntToStr(damageAmount) + ' points of damage');
-  //end
-  //else
-  //begin
-  //  if (ThePlayer.stsDrunk = True) then
-  //    ui.bufferMessage('You drunkenly miss')
-  //else
-  //  ui.bufferMessage('You miss');
-  //end;
+  damageAmount := globalutils.randomRange(1, entities.entityList[0].attack) -
+    entities.entityList[npcID].defense;
+  if ((damageAmount - entities.entityList[0].tmrDrunk) > 0) then
+  begin
+    entities.entityList[npcID].currentHP :=
+      (entities.entityList[npcID].currentHP - damageAmount);
+    if (entities.entityList[npcID].currentHP < 1) then
+    begin
+      ui.bufferMessage('You kill the ' + entities.entityList[npcID].race);
+      entities.entityList[npcID].isDead := True;
+      entities.entityList[npcID].glyph := '%';
+      map.unoccupy(entities.entityList[npcID].posX, entities.entityList[npcID].posY);
+      entities.entityList[0].xpReward := entities.entityList[0].xpReward + entities.entityList[npcID].xpReward;
+      ui.updateXP;
+      exit;
+    end
+    else
+    if (damageAmount = 1) then
+      ui.bufferMessage('You slightly injure the ' + entities.entityList[npcID].race)
+    else
+      ui.bufferMessage('You hit the ' + entities.entityList[npcID].race +
+        ' for ' + IntToStr(damageAmount) + ' points of damage');
+  end
+  else
+  begin
+    if (entities.entityList[0].stsDrunk = True) then
+      ui.bufferMessage('You drunkenly miss')
+  else
+    ui.bufferMessage('You miss');
+  end;
 end;
 
 function combatCheck(x, y: smallint): boolean;

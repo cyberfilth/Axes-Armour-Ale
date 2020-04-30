@@ -111,13 +111,13 @@ end;
 procedure updateXP;
 begin
   (* Paint over previous stats *)
-  //main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  //main.tempScreen.Canvas.FillRect(sbx + 80, sby + 55, sbx + 135, sby + 75);
-  //main.tempScreen.Canvas.Pen.Color := UICOLOUR;
-  //(* Write Experience points *)
-  //main.tempScreen.Canvas.Font.Size := 10;
-  //writeToBuffer(sbx + 8, sby + 55, UITEXTCOLOUR, 'Experience:  ' +
-  //  IntToStr(ThePlayer.experience));
+  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.FillRect(sbx + 80, sby + 55, sbx + 135, sby + 75);
+  main.tempScreen.Canvas.Pen.Color := UICOLOUR;
+  (* Write Experience points *)
+  main.tempScreen.Canvas.Font.Size := 10;
+  writeToBuffer(sbx + 8, sby + 55, UITEXTCOLOUR, 'Experience:  ' +
+    IntToStr(entities.entityList[0].xpReward));
 end;
 
 procedure updateHealth;
