@@ -159,23 +159,6 @@ begin
       AddElement(DataNode, 'discovered', BoolToStr(itemList[i].discovered));
     end;
 
-    (* Player record *)
-    DataNode := AddChild(RootNode, 'Player');
-    AddElement(DataNode, 'HP', IntToStr(entities.entityList[0].currentHP));
-    AddElement(DataNode, 'maxHP', IntToStr(entities.entityList[0].maxHP));
-    AddElement(DataNode, 'att', IntToStr(entities.entityList[0].attack));
-    AddElement(DataNode, 'def', IntToStr(entities.entityList[0].defense));
-    AddElement(DataNode, 'xp', IntToStr(entities.entityList[0].xpReward));
-    AddElement(DataNode, 'X', IntToStr(entities.entityList[0].posX));
-    AddElement(DataNode, 'Y', IntToStr(entities.entityList[0].posY));
-    AddElement(DataNode, 'vis', IntToStr(entities.entityList[0].visionRange));
-    AddElement(DataNode, 'title', entities.entityList[0].description);
-    AddElement(DataNode, 'name', entities.entityList[0].race);
-    AddElement(DataNode, 'stsDrunk', BoolToStr(entities.entityList[0].stsDrunk));
-    AddElement(DataNode, 'stsPoison', BoolToStr(entities.entityList[0].stsPoison));
-    AddElement(DataNode, 'tmrDrunk', IntToStr(entities.entityList[0].tmrDrunk));
-    AddElement(DataNode, 'tmrPoison', IntToStr(entities.entityList[0].tmrPoison));
-
     (* Player inventory *)
     for i := 0 to 9 do
     begin
@@ -189,8 +172,8 @@ begin
       AddElement(DataNode, 'inInventory', BoolToStr(inventory[i].inInventory));
     end;
 
-    (* NPC records *)
-    for i := 1 to entities.npcAmount do
+    (* Entity records *)
+    for i := 0 to entities.npcAmount do
     begin
       DataNode := AddChild(RootNode, 'NPC');
       TDOMElement(dataNode).SetAttribute('npcID', IntToStr(i));
@@ -292,24 +275,6 @@ begin
       ItemsNode := ParentNode;
     end;
 
-    (* Player info *)
-    PlayerNode := Doc.DocumentElement.FindNode('Player');
-    entities.entityList[0].currentHP := StrToInt(PlayerNode.FindNode('HP').TextContent);
-    entities.entityList[0].maxHP := StrToInt(PlayerNode.FindNode('maxHP').TextContent);
-    entities.entityList[0].attack := StrToInt(PlayerNode.FindNode('att').TextContent);
-    entities.entityList[0].defense := StrToInt(PlayerNode.FindNode('def').TextContent);
-    entities.entityList[0].xpReward := StrToInt(PlayerNode.FindNode('xp').TextContent);
-    entities.entityList[0].posX := StrToInt(PlayerNode.FindNode('X').TextContent);
-    entities.entityList[0].posY := StrToInt(PlayerNode.FindNode('Y').TextContent);
-    entities.entityList[0].visionRange := StrToInt(PlayerNode.FindNode('vis').TextContent);
-    entities.entityList[0].description := PlayerNode.FindNode('title').TextContent;
-    entities.entityList[0].race := PlayerNode.FindNode('name').TextContent;
-    entities.entityList[0].stsDrunk := StrToBool(PlayerNode.FindNode('stsDrunk').TextContent);
-    entities.entityList[0].stsPoison :=
-      StrToBool(PlayerNode.FindNode('stsPoison').TextContent);
-    entities.entityList[0].tmrDrunk := StrToInt(PlayerNode.FindNode('tmrDrunk').TextContent);
-    entities.entityList[0].tmrPoison := StrToInt(PlayerNode.FindNode('tmrPoison').TextContent);
-
     (* Player inventory *)
     InventoryNode := Doc.DocumentElement.FindNode('playerInventory');
     for i := 0 to 9 do
@@ -332,9 +297,9 @@ begin
     end;
 
     (* NPC stats *)
-    SetLength(entities.entityList, 1);
+    SetLength(entities.entityList, 0);
     NPCnode := Doc.DocumentElement.FindNode('NPC');
-    for i := 1 to entities.npcAmount do
+    for i := 0 to entities.npcAmount do
     begin
       entities.listLength := length(entities.entityList);
       SetLength(entities.entityList, entities.listLength + 1);
@@ -346,6 +311,8 @@ begin
         char(widechar(NPCnode.FindNode('glyph').TextContent[1]));
       entities.entityList[i].currentHP :=
         StrToInt(NPCnode.FindNode('currentHP').TextContent);
+      entities.entityList[i].maxHP :=
+        StrToInt(NPCnode.FindNode('maxHP').TextContent);
       entities.entityList[i].attack :=
         StrToInt(NPCnode.FindNode('attack').TextContent);
       entities.entityList[i].defense :=

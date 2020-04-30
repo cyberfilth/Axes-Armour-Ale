@@ -54,7 +54,7 @@ procedure clearLog;
 implementation
 
 uses
-  main, player, entities;
+  main, entities;
 
 procedure titleScreen(yn: byte);
 begin

@@ -320,25 +320,19 @@ begin
   tempScreen.Canvas.FillRect(0, 0, tempScreen.Width, tempScreen.Height);
   map.setupTiles;
   map.loadMap;
-  (* Draw sidepanel *)
-  ui.drawSidepanel;
-  (* Setup player *)
-  //with player.ThePlayer do
-  //begin
-  //  glyph := TBitmap.Create;
-  //  glyph.LoadFromResourceName(HINSTANCE, 'PLAYER_GLYPH');
-  //end;
-  //fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
-  //  entities.entityList[0].visionRange, 1);
-  //drawToBuffer(map.mapToScreen(entities.entityList[0].posX), map.mapToScreen(entities.entityList[0].posY),
-  //  entities.entityList[0].glyph);
-  (* Add NPC's to the screen *)
+  (* Add entities to the screen *)
   entities.setupEntities;
   entities.redrawNPC;
   (* Add items to the screen *)
   items.setupItems;
   items.redrawItems;
+  (* Draw sidepanel *)
+  ui.drawSidepanel;
+  (* Setup player vision *)
+  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
+    entities.entityList[0].visionRange, 1);
   ui.displayMessage('Welcome message to be added here...');
+  gameLoop;
   Canvas.Draw(0, 0, tempScreen);
 end;
 

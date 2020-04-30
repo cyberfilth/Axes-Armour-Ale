@@ -45,7 +45,7 @@ type
     (* status effects *)
     stsDrunk, stsPoison: boolean;
     (* status timers *)
-    tmrDrunk, tmrPoison: smallint;{ TODO : Add to save/load function }
+    tmrDrunk, tmrPoison: smallint;
     (* The procedure that allows each NPC to take a turn *)
     procedure entityTakeTurn(i: smallint);
   end;

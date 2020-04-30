@@ -143,7 +143,7 @@ end;
 function canMove(checkX, checkY: smallint): boolean;
 begin
   Result := False;
-  if (maparea[checkY][checkX].Blocks) = False then
+  if (maparea[checkY][checkX].Blocks) = False then { TODO : This line causes intermittant error 201 - check it out }
     Result := True;
 end;
 
