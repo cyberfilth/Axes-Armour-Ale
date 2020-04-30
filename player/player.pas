@@ -6,7 +6,7 @@ unit player;
 interface
 
 uses
-  Graphics, SysUtils;
+  Graphics, SysUtils, plot_gen;
 
 type
   (* Store information about the player *)
@@ -22,13 +22,6 @@ type
     glyph: TBitmap;
   end;
 
-
-var
-  (* Player character *)
-  ThePlayer: Creature;
-
-(* Places the player on the map *)
-procedure spawnPlayer(startX, startY: smallint);
 (* Create player character *)
 procedure createPlayer;
 (* Moves the player on the map *)
@@ -47,49 +40,18 @@ procedure increaseHealth(amount: smallint);
 implementation
 
 uses
-  globalutils, map, fov, ui, entities, plot_gen, player_inventory, items;
-
-procedure spawnPlayer(startX, startY: smallint);
-begin
-  (* Setup player stats *)
-  with ThePlayer do
-  begin
-    currentHP := 20;
-    maxHP := 20;
-    attack := 5;
-    defense := 2;
-    experience := 0;
-    posX := startX;
-    posY := startY;
-    visionRange := 4;
-    playerName := 'Default';
-    title := 'the nobody';
-    glyph := TBitmap.Create;
-    glyph.LoadFromResourceName(HINSTANCE, 'PLAYER_GLYPH');
-    stsDrunk := False;
-    stsPoison := False;
-    tmrDrunk := 0;
-    tmrPoison := 0;
-    (* Generate a name for the player *)
-    plot_gen.generateName;
-    (* set up inventory *)
-    player_inventory.initialiseInventory;
-    (* Draw player and FOV *)
-    fov.fieldOfView(ThePlayer.posX, ThePlayer.posY, ThePlayer.visionRange, 1);
-    drawToBuffer(map.mapToScreen(ThePlayer.posX),
-      map.mapToScreen(ThePlayer.posY), glyph);
-  end;
-end;
+  globalutils, map, fov, ui, entities, player_inventory, items;
 
 procedure createPlayer;
 begin
-   // Add Player to the list of creatures
+  plot_gen.generateName;
+  // Add Player to the list of creatures
   entities.listLength := length(entities.entityList);
   SetLength(entities.entityList, entities.listLength + 1);
   with entities.entityList[0] do
   begin
     npcID := 0;
-    race := 'Player';
+    race := plot_gen.playerName;
     description := 'your character';
     glyph := '@';
     maxHP := 20;
@@ -105,9 +67,18 @@ begin
     discovered := True;
     isDead := False;
     abilityTriggered := False;
+    stsDrunk := False;
+    stsPoison := False;
+    tmrDrunk := 0;
+    tmrPoison := 0;
     posX := map.startX;
-    posY := map.startY
+    posY := map.startY;
   end;
+  (* set up inventory *)
+  player_inventory.initialiseInventory;
+  (* Draw player and FOV *)
+  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
+    entities.entityList[0].visionRange, 1);
 end;
 
 (* Move the player within the confines of the game map *)
@@ -117,7 +88,8 @@ var
   originalX, originalY: smallint;
 begin
   (* Repaint visited tiles *)
-  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY, entities.entityList[0].visionRange, 0);
+  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
+    entities.entityList[0].visionRange, 0);
   originalX := entities.entityList[0].posX;
   originalY := entities.entityList[0].posY;
   case dir of
@@ -147,9 +119,11 @@ begin
     end;
   end;
   (* check if tile is occupied *)
-  if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
+  if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) =
+    True) then
     (* check if tile is occupied by hostile NPC *)
-    if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
+    if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) =
+      True) then
     begin
       entities.entityList[0].posX := originalX;
       entities.entityList[0].posY := originalY;
@@ -163,35 +137,36 @@ begin
     ui.displayMessage('You bump into a wall');
     Dec(playerTurn);
   end;
-  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY, entities.entityList[0].visionRange, 1);
+  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
+    entities.entityList[0].visionRange, 1);
   ui.writeBufferedMessages;
 end;
 
 procedure processStatus;
 begin
   (* Inebriation *)
-  //if (ThePlayer.stsDrunk = True) then
-  //begin
-  //  if (ThePlayer.tmrDrunk <= 0) then
-  //  begin
-  //    ThePlayer.tmrDrunk := 0;
-  //    ThePlayer.stsDrunk := False;
-  //    ui.bufferMessage('The effects of the alcohol wear off');
-  //  end
-  //  else
-  //    Dec(ThePlayer.tmrDrunk);
-  //end;
-  //(* Poison *)
-  //if (ThePlayer.stsPoison = True) then
-  //begin
-  //  if (ThePlayer.tmrPoison <= 0) then
-  //  begin
-  //    ThePlayer.tmrPoison := 0;
-  //    ThePlayer.stsPoison := False;
-  //  end
-  //  else
-  //    Dec(ThePlayer.tmrPoison);
-  //end;
+  if (entities.entityList[0].stsDrunk = True) then
+  begin
+    if (entities.entityList[0].tmrDrunk <= 0) then
+    begin
+      entities.entityList[0].tmrDrunk := 0;
+      entities.entityList[0].stsDrunk := False;
+      ui.bufferMessage('The effects of the alcohol wear off');
+    end
+    else
+      Dec(entities.entityList[0].tmrDrunk);
+  end;
+  (* Poison *)
+  if (entities.entityList[0].stsPoison = True) then
+  begin
+    if (entities.entityList[0].tmrPoison <= 0) then
+    begin
+      entities.entityList[0].tmrPoison := 0;
+      entities.entityList[0].stsPoison := False;
+    end
+    else
+      Dec(entities.entityList[0].tmrPoison);
+  end;
 end;
 
 procedure combat(npcID: smallint);
@@ -225,8 +200,8 @@ begin
   //begin
   //  if (ThePlayer.stsDrunk = True) then
   //    ui.bufferMessage('You drunkenly miss')
-    //else
-    //  ui.bufferMessage('You miss');
+  //else
+  //  ui.bufferMessage('You miss');
   //end;
 end;
 
@@ -252,7 +227,8 @@ var
 begin
   for i := 1 to itemAmount do
   begin
-    if (ThePlayer.posX = itemList[i].posX) and (ThePlayer.posY = itemList[i].posY) and
+    if (entities.entityList[0].posX = itemList[i].posX) and
+      (entities.entityList[0].posY = itemList[i].posY) and
       (itemList[i].onMap = True) then
     begin
       player_inventory.addToInventory(i);
@@ -265,12 +241,12 @@ end;
 
 procedure increaseHealth(amount: smallint);
 begin
-  if (ThePlayer.currentHP <> ThePlayer.maxHP) then
+  if (entities.entityList[0].currentHP <> entities.entityList[0].maxHP) then
   begin
-    if ((ThePlayer.currentHP + amount) >= ThePlayer.maxHP) then
-      ThePlayer.currentHP := ThePlayer.maxHP
+    if ((entities.entityList[0].currentHP + amount) >= entities.entityList[0].maxHP) then
+      entities.entityList[0].currentHP := entities.entityList[0].maxHP
     else
-      ThePlayer.currentHP := ThePlayer.currentHP + amount;
+      entities.entityList[0].currentHP := entities.entityList[0].currentHP + amount;
     ui.updateHealth;
     ui.bufferMessage('You feel restored');
   end

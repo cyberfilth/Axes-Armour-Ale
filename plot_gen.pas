@@ -7,6 +7,9 @@ unit plot_gen;
 interface
 
 var
+
+  playerName: string;
+
   firstSyllable: array[0..73] of
   string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
     'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con', 'Cor', 'Dag', 'Doo',
@@ -40,7 +43,7 @@ var
 begin
   a := Random(73);
   b := Random(62);
-  ThePlayer.playerName := firstSyllable[a] + secondSyllable[b];
+  playerName := firstSyllable[a] + secondSyllable[b];
 end;
 
 end.

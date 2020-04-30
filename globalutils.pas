@@ -161,20 +161,20 @@ begin
 
     (* Player record *)
     DataNode := AddChild(RootNode, 'Player');
-    AddElement(DataNode, 'HP', IntToStr(player.ThePlayer.currentHP));
-    AddElement(DataNode, 'maxHP', IntToStr(player.ThePlayer.maxHP));
-    AddElement(DataNode, 'att', IntToStr(player.ThePlayer.attack));
-    AddElement(DataNode, 'def', IntToStr(player.ThePlayer.defense));
-    AddElement(DataNode, 'xp', IntToStr(player.ThePlayer.experience));
-    AddElement(DataNode, 'X', IntToStr(player.ThePlayer.posX));
-    AddElement(DataNode, 'Y', IntToStr(player.ThePlayer.posY));
-    AddElement(DataNode, 'vis', IntToStr(player.ThePlayer.visionRange));
-    AddElement(DataNode, 'title', player.ThePlayer.title);
-    AddElement(DataNode, 'name', player.ThePlayer.playerName);
-    AddElement(DataNode, 'stsDrunk', BoolToStr(player.ThePlayer.stsDrunk));
-    AddElement(DataNode, 'stsPoison', BoolToStr(player.ThePlayer.stsPoison));
-    AddElement(DataNode, 'tmrDrunk', IntToStr(player.ThePlayer.tmrDrunk));
-    AddElement(DataNode, 'tmrPoison', IntToStr(player.ThePlayer.tmrPoison));
+    AddElement(DataNode, 'HP', IntToStr(entities.entityList[0].currentHP));
+    AddElement(DataNode, 'maxHP', IntToStr(entities.entityList[0].maxHP));
+    AddElement(DataNode, 'att', IntToStr(entities.entityList[0].attack));
+    AddElement(DataNode, 'def', IntToStr(entities.entityList[0].defense));
+    AddElement(DataNode, 'xp', IntToStr(entities.entityList[0].xpReward));
+    AddElement(DataNode, 'X', IntToStr(entities.entityList[0].posX));
+    AddElement(DataNode, 'Y', IntToStr(entities.entityList[0].posY));
+    AddElement(DataNode, 'vis', IntToStr(entities.entityList[0].visionRange));
+    AddElement(DataNode, 'title', entities.entityList[0].description);
+    AddElement(DataNode, 'name', entities.entityList[0].race);
+    AddElement(DataNode, 'stsDrunk', BoolToStr(entities.entityList[0].stsDrunk));
+    AddElement(DataNode, 'stsPoison', BoolToStr(entities.entityList[0].stsPoison));
+    AddElement(DataNode, 'tmrDrunk', IntToStr(entities.entityList[0].tmrDrunk));
+    AddElement(DataNode, 'tmrPoison', IntToStr(entities.entityList[0].tmrPoison));
 
     (* Player inventory *)
     for i := 0 to 9 do
@@ -294,21 +294,21 @@ begin
 
     (* Player info *)
     PlayerNode := Doc.DocumentElement.FindNode('Player');
-    player.ThePlayer.currentHP := StrToInt(PlayerNode.FindNode('HP').TextContent);
-    player.ThePlayer.maxHP := StrToInt(PlayerNode.FindNode('maxHP').TextContent);
-    player.ThePlayer.attack := StrToInt(PlayerNode.FindNode('att').TextContent);
-    player.ThePlayer.defense := StrToInt(PlayerNode.FindNode('def').TextContent);
-    player.ThePlayer.experience := StrToInt(PlayerNode.FindNode('xp').TextContent);
-    player.ThePlayer.posX := StrToInt(PlayerNode.FindNode('X').TextContent);
-    player.ThePlayer.posY := StrToInt(PlayerNode.FindNode('Y').TextContent);
-    player.ThePlayer.visionRange := StrToInt(PlayerNode.FindNode('vis').TextContent);
-    player.ThePlayer.title := PlayerNode.FindNode('title').TextContent;
-    player.ThePlayer.playerName := PlayerNode.FindNode('name').TextContent;
-    player.ThePlayer.stsDrunk := StrToBool(PlayerNode.FindNode('stsDrunk').TextContent);
-    player.ThePlayer.stsPoison :=
+    entities.entityList[0].currentHP := StrToInt(PlayerNode.FindNode('HP').TextContent);
+    entities.entityList[0].maxHP := StrToInt(PlayerNode.FindNode('maxHP').TextContent);
+    entities.entityList[0].attack := StrToInt(PlayerNode.FindNode('att').TextContent);
+    entities.entityList[0].defense := StrToInt(PlayerNode.FindNode('def').TextContent);
+    entities.entityList[0].xpReward := StrToInt(PlayerNode.FindNode('xp').TextContent);
+    entities.entityList[0].posX := StrToInt(PlayerNode.FindNode('X').TextContent);
+    entities.entityList[0].posY := StrToInt(PlayerNode.FindNode('Y').TextContent);
+    entities.entityList[0].visionRange := StrToInt(PlayerNode.FindNode('vis').TextContent);
+    entities.entityList[0].description := PlayerNode.FindNode('title').TextContent;
+    entities.entityList[0].race := PlayerNode.FindNode('name').TextContent;
+    entities.entityList[0].stsDrunk := StrToBool(PlayerNode.FindNode('stsDrunk').TextContent);
+    entities.entityList[0].stsPoison :=
       StrToBool(PlayerNode.FindNode('stsPoison').TextContent);
-    player.ThePlayer.tmrDrunk := StrToInt(PlayerNode.FindNode('tmrDrunk').TextContent);
-    player.ThePlayer.tmrPoison := StrToInt(PlayerNode.FindNode('tmrPoison').TextContent);
+    entities.entityList[0].tmrDrunk := StrToInt(PlayerNode.FindNode('tmrDrunk').TextContent);
+    entities.entityList[0].tmrPoison := StrToInt(PlayerNode.FindNode('tmrPoison').TextContent);
 
     (* Player inventory *)
     InventoryNode := Doc.DocumentElement.FindNode('playerInventory');

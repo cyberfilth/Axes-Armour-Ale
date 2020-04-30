@@ -42,6 +42,10 @@ type
     isDead: boolean;
     (* Whether a special ability has been activated *)
     abilityTriggered: boolean;
+    (* status effects *)
+    stsDrunk, stsPoison: boolean;
+    (* status timers *)
+    tmrDrunk, tmrPoison: smallint;{ TODO : Add to save/load function }
     (* The procedure that allows each NPC to take a turn *)
     procedure entityTakeTurn(i: smallint);
   end;

@@ -7,7 +7,7 @@ unit player_inventory;
 interface
 
 uses
-  Graphics, SysUtils, player, items, ui, globalutils;
+  Graphics, SysUtils, player, entities, items, ui, globalutils;
 
 type
   (* Items in inventory *)
@@ -251,8 +251,8 @@ begin
         itemType := inventory[dropItem].itemType;
         glyph := inventory[dropItem].glyph;
         inView := True;
-        posX := ThePlayer.posX;
-        posY := ThePlayer.posY;
+        posX := entities.entityList[0].posX;
+        posY := entities.entityList[0].posY;
         onMap := True;
         discovered := True;
       end;

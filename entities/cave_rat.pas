@@ -53,6 +53,10 @@ begin
     discovered := False;
     isDead := False;
     abilityTriggered := False;
+    stsDrunk := False;
+    stsPoison := False;
+    tmrDrunk := 0;
+    tmrPoison := 0;
     posX := npcx;
     posY := npcy;
   end;
@@ -61,7 +65,7 @@ end;
 procedure takeTurn(id, spx, spy: smallint);
 begin
   (* Can the NPC see the player *)
-  if (los.inView(spx, spy, ThePlayer.posX, ThePlayer.posY,
+  if (los.inView(spx, spy, entities.entityList[0].posX, entities.entityList[0].posY,
     entities.entityList[id].visionRange) = True) then
   begin
     (* If NPC has low health... *)
@@ -109,7 +113,7 @@ begin
       5: testy := spy;
     end
   until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = False) and
-    (testx <> ThePlayer.posX) and (testy <> ThePlayer.posY);
+    (testx <> entities.entityList[0].posX) and (testy <> entities.entityList[0].posY);
   entities.moveNPC(id, testx, testy);
 end;
 
@@ -120,32 +124,32 @@ begin
   newX := 0;
   newY := 0;
   (* Get new coordinates to chase the player *)
-  if (spx > player.ThePlayer.posX) and (spy > player.ThePlayer.posY) then
+  if (spx > entities.entityList[0].posX) and (spy > entities.entityList[0].posY) then
   begin
     newX := spx - 1;
     newY := spy - 1;
   end
-  else if (spx < player.ThePlayer.posX) and (spy < player.ThePlayer.posY) then
+  else if (spx < entities.entityList[0].posX) and (spy < entities.entityList[0].posY) then
   begin
     newX := spx + 1;
     newY := spy + 1;
   end
-  else if (spx < player.ThePlayer.posX) then
+  else if (spx < entities.entityList[0].posX) then
   begin
     newX := spx + 1;
     newY := spy;
   end
-  else if (spx > player.ThePlayer.posX) then
+  else if (spx > entities.entityList[0].posX) then
   begin
     newX := spx - 1;
     newY := spy;
   end
-  else if (spy < player.ThePlayer.posY) then
+  else if (spy < entities.entityList[0].posY) then
   begin
     newX := spx;
     newY := spy + 1;
   end
-  else if (spy > player.ThePlayer.posY) then
+  else if (spy > entities.entityList[0].posY) then
   begin
     newX := spx;
     newY := spy - 1;
@@ -203,32 +207,32 @@ begin
   newX := 0;
   newY := 0;
   (* Get new coordinates to run away from player *)
-  if (spx > player.ThePlayer.posX) and (spy > player.ThePlayer.posY) then
+  if (spx > entities.entityList[0].posX) and (spy > entities.entityList[0].posY) then
   begin
     newX := spx + 1;
     newY := spy + 1;
   end
-  else if (spx < player.ThePlayer.posX) and (spy < player.ThePlayer.posY) then
+  else if (spx < entities.entityList[0].posX) and (spy < entities.entityList[0].posY) then
   begin
     newX := spx - 1;
     newY := spy - 1;
   end
-  else if (spx < player.ThePlayer.posX) then
+  else if (spx < entities.entityList[0].posX) then
   begin
     newX := spx - 1;
     newY := spy;
   end
-  else if (spx > player.ThePlayer.posX) then
+  else if (spx > entities.entityList[0].posX) then
   begin
     newX := spx + 1;
     newY := spy;
   end
-  else if (spy < player.ThePlayer.posY) then
+  else if (spy < entities.entityList[0].posY) then
   begin
     newX := spx;
     newY := spy - 1;
   end
-  else if (spy > player.ThePlayer.posY) then
+  else if (spy > entities.entityList[0].posY) then
   begin
     newX := spx;
     newY := spy + 1;
@@ -252,11 +256,11 @@ var
   damageAmount: smallint;
 begin
   damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) -
-    player.ThePlayer.defense;
+    entities.entityList[0].defense;
   if (damageAmount > 0) then
   begin
-    player.ThePlayer.currentHP := (player.ThePlayer.currentHP - damageAmount);
-    if (player.ThePlayer.currentHP < 1) then
+    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
+    if (entities.entityList[0].currentHP < 1) then
     begin   { TODO : Create player.playerDeath function that handles this }
       ui.displayMessage('You are dead!');
       exit;

@@ -37,7 +37,7 @@ begin
   (* Check that not blocked by map tiles *)
   if (map.canMove(x, y) = True) and
     (* Check not occupied by player *)
-    (x <> ThePlayer.posX) and (y <> ThePlayer.posY) and
+    (x <> entities.entityList[0].posX) and (y <> entities.entityList[0].posY) and
     (* Check that not occupied by another entity *)
     (map.isOccupied(x, y) = False) then
     Result := True;
@@ -46,7 +46,7 @@ end;
 procedure takeTurn(id, spx, spy: smallint);
 begin
   (* Can the NPC see the player *)
-  if (los.inView(spx, spy, ThePlayer.posX, ThePlayer.posY,
+  if (los.inView(spx, spy, entities.entityList[0].posX, entities.entityList[0].posY,
     entities.entityList[id].visionRange) = True) then
   begin
     (* Reset move counter *)
@@ -108,6 +108,10 @@ begin
     discovered := False;
     isDead := False;
     abilityTriggered := False;
+    stsDrunk := False;
+    stsPoison := False;
+    tmrDrunk := 0;
+    tmrPoison := 0;
     posX := npcx;
     posY := npcy;
   end;
@@ -139,7 +143,7 @@ begin
       5: testy := spy;
     end
   until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = False) and
-    (testx <> ThePlayer.posX) and (testy <> ThePlayer.posY);
+    (testx <> entities.entityList[0].posX) and (testy <> entities.entityList[0].posY);
   entities.moveNPC(id, testx, testy);
 end;
 
@@ -150,32 +154,32 @@ begin
   newX := 0;
   newY := 0;
   (* Get new coordinates to chase the player *)
-  if (spx > player.ThePlayer.posX) and (spy > player.ThePlayer.posY) then
+  if (spx > entities.entityList[0].posX) and (spy > entities.entityList[0].posY) then
   begin
     newX := spx - 1;
     newY := spy - 1;
   end
-  else if (spx < player.ThePlayer.posX) and (spy < player.ThePlayer.posY) then
+  else if (spx < entities.entityList[0].posX) and (spy < entities.entityList[0].posY) then
   begin
     newX := spx + 1;
     newY := spy + 1;
   end
-  else if (spx < player.ThePlayer.posX) then
+  else if (spx < entities.entityList[0].posX) then
   begin
     newX := spx + 1;
     newY := spy;
   end
-  else if (spx > player.ThePlayer.posX) then
+  else if (spx > entities.entityList[0].posX) then
   begin
     newX := spx - 1;
     newY := spy;
   end
-  else if (spy < player.ThePlayer.posY) then
+  else if (spy < entities.entityList[0].posY) then
   begin
     newX := spx;
     newY := spy + 1;
   end
-  else if (spy > player.ThePlayer.posY) then
+  else if (spy > entities.entityList[0].posY) then
   begin
     newX := spx;
     newY := spy - 1;
@@ -206,13 +210,13 @@ begin
       entities.moveNPC(id, newX, newY);
   end
   // wall hugging code
-  else if (spx < player.ThePlayer.posX) and (checkSpaceFree(spx + 1, spy) = True) then
+  else if (spx < entities.entityList[0].posX) and (checkSpaceFree(spx + 1, spy) = True) then
     entities.moveNPC(id, spx + 1, spy)
-  else if (spx > player.ThePlayer.posX) and (checkSpaceFree(spx - 1, spy) = True) then
+  else if (spx > entities.entityList[0].posX) and (checkSpaceFree(spx - 1, spy) = True) then
     entities.moveNPC(id, spx - 1, spy)
-  else if (spy < player.ThePlayer.posY) and (checkSpaceFree(spx, spy + 1) = True) then
+  else if (spy < entities.entityList[0].posY) and (checkSpaceFree(spx, spy + 1) = True) then
     entities.moveNPC(id, spx, spy + 1)
-  else if (spy > player.ThePlayer.posY) and (checkSpaceFree(spx, spy - 1) = True) then
+  else if (spy > entities.entityList[0].posY) and (checkSpaceFree(spx, spy - 1) = True) then
     entities.moveNPC(id, spx, spy - 1)
   else
     wander(id, spx, spy);
@@ -244,11 +248,11 @@ var
   damageAmount: smallint;
 begin
   damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) -
-    player.ThePlayer.defense;
+    entities.entityList[0].defense;
   if (damageAmount > 0) then
   begin
-    player.ThePlayer.currentHP := (player.ThePlayer.currentHP - damageAmount);
-    if (player.ThePlayer.currentHP < 1) then
+    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
+    if (entities.entityList[0].currentHP < 1) then
     begin   { TODO : Create player.playerDeath function that handles this }
       ui.displayMessage('You are dead!');
       exit;

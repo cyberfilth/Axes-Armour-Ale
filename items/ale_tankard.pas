@@ -13,7 +13,7 @@ procedure useItem;
 implementation
 
 uses
-  items, player, ui;
+  items, entities, ui, player;
 
 procedure createAleTankard(uniqueid, itmx, itmy: smallint);
 begin
@@ -38,10 +38,10 @@ end;
 procedure useItem;
 begin
   player.increaseHealth(5);
-  if (ThePlayer.stsDrunk = False) then
+  if (entities.entityList[0].stsDrunk = False) then
   begin
-    ThePlayer.stsDrunk := True;
-    ThePlayer.tmrDrunk := ThePlayer.tmrDrunk + 5;
+    entities.entityList[0].stsDrunk := True;
+    entities.entityList[0].tmrDrunk := entities.entityList[0].tmrDrunk + 5;
     ui.bufferMessage('The alcohol slows your reactions');
     ui.writeBufferedMessages;
   end;

@@ -72,7 +72,7 @@ procedure drawTile(c, r: smallint; hiDef: byte);
 implementation
 
 uses
-  cave, grid_dungeon, player;
+  cave, grid_dungeon, player, entities;
 
 procedure setupTiles;
 begin
@@ -174,7 +174,7 @@ end;
 function hasPlayer(checkX, checkY: smallint): boolean;
 begin
   Result := False;
-  if (player.ThePlayer.posX = checkX) and (player.ThePlayer.posY = checkY) then
+  if (entities.entityList[0].posX = checkX) and (entities.entityList[0].posY = checkY) then
     Result := True;
 end;
 

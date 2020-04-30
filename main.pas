@@ -119,7 +119,8 @@ begin
   entities.NPCgameLoop;
   entities.redrawNPC;
   (* Redraw Player *)
-  drawToBuffer(map.mapToScreen(entities.entityList[0].posX), map.mapToScreen(entities.entityList[0].posY),
+  drawToBuffer(map.mapToScreen(entities.entityList[0].posX),
+    map.mapToScreen(entities.entityList[0].posY),
     entities.playerGlyph);
   (* Process status effects *)
   player.processStatus;
@@ -299,15 +300,14 @@ begin
   (* Clear the screen *)
   tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
   tempScreen.Canvas.FillRect(0, 0, tempScreen.Width, tempScreen.Height);
-  (* spawn player *)
-  player.spawnPlayer(map.startX, map.startY);
-  (* Spawn NPC's *)
+  (* Spawn game entities *)
   entities.spawnNPCs;
   (* Drop items *)
   items.spawnItem;
   (* Draw sidepanel *)
   ui.drawSidepanel;
   ui.displayMessage('Welcome message to be added here...');
+  gameLoop;
   Canvas.Draw(0, 0, tempScreen);
 end;
 
@@ -323,15 +323,15 @@ begin
   (* Draw sidepanel *)
   ui.drawSidepanel;
   (* Setup player *)
-  with player.ThePlayer do
-  begin
-    glyph := TBitmap.Create;
-    glyph.LoadFromResourceName(HINSTANCE, 'PLAYER_GLYPH');
-  end;
-  fov.fieldOfView(player.ThePlayer.posX, player.ThePlayer.posY,
-    player.ThePlayer.visionRange, 1);
-  drawToBuffer(map.mapToScreen(ThePlayer.posX), map.mapToScreen(ThePlayer.posY),
-    ThePlayer.glyph);
+  //with player.ThePlayer do
+  //begin
+  //  glyph := TBitmap.Create;
+  //  glyph.LoadFromResourceName(HINSTANCE, 'PLAYER_GLYPH');
+  //end;
+  //fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
+  //  entities.entityList[0].visionRange, 1);
+  //drawToBuffer(map.mapToScreen(entities.entityList[0].posX), map.mapToScreen(entities.entityList[0].posY),
+  //  entities.entityList[0].glyph);
   (* Add NPC's to the screen *)
   entities.setupEntities;
   entities.redrawNPC;
@@ -361,7 +361,7 @@ begin
   items.aleTankard.Free;
   entities.caveRatGlyph.Free;
   entities.hyenaGlyph.Free;
-  player.ThePlayer.glyph.Free;
+  entities.playerGlyph.Free;
 end;
 
 end.
