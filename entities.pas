@@ -59,6 +59,8 @@ var
 procedure setupEntities;
 (* Generate list of creatures on the map *)
 procedure spawnNPCs;
+(* Handle death of NPC's *)
+procedure killEntity(id: smallint);
 (* Draw entity on screen *)
 procedure drawEntity(c, r: smallint; glyph: char);
 (* Update NPCs X, Y coordinates *)
@@ -113,6 +115,13 @@ begin
     end;
     Inc(iplus);
   end;
+end;
+
+procedure killEntity(id: smallint);
+begin
+  entities.entityList[id].isDead := True;
+  entities.entityList[id].glyph := '%';
+  map.unoccupy(entities.entityList[id].posX, entities.entityList[id].posY);
 end;
 
 procedure drawEntity(c, r: smallint; glyph: char);

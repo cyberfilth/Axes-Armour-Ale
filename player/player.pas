@@ -182,9 +182,7 @@ begin
     if (entities.entityList[npcID].currentHP < 1) then
     begin
       ui.bufferMessage('You kill the ' + entities.entityList[npcID].race);
-      entities.entityList[npcID].isDead := True;
-      entities.entityList[npcID].glyph := '%';
-      map.unoccupy(entities.entityList[npcID].posX, entities.entityList[npcID].posY);
+      entities.killEntity(npcID);
       entities.entityList[0].xpReward := entities.entityList[0].xpReward + entities.entityList[npcID].xpReward;
       ui.updateXP;
       exit;

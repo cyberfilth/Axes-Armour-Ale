@@ -23,12 +23,12 @@ procedure chasePlayer(id, spx, spy: smallint);
 (* Check if player is next to NPC *)
 function isNextToPlayer(spx, spy: smallint): boolean;
 (* Combat *)
-procedure combat(id: smallint);
+procedure combat(idOwner, idTarget: smallint);
 
 implementation
 
 uses
-  entities, player, globalutils, ui, los;
+  entities, globalutils, ui, los;
 
 function checkSpaceFree(x, y: smallint): boolean;
 begin
@@ -66,7 +66,7 @@ begin
         (isNextToPlayer(spx, spy) = True) then
       begin
         ui.bufferMessage('The hyena snarls');
-        combat(id);
+        combat(id, 0);
       end
       else
         chasePlayer(id, spx, spy);
@@ -159,7 +159,8 @@ begin
     newX := spx - 1;
     newY := spy - 1;
   end
-  else if (spx < entities.entityList[0].posX) and (spy < entities.entityList[0].posY) then
+  else if (spx < entities.entityList[0].posX) and
+    (spy < entities.entityList[0].posY) then
   begin
     newX := spx + 1;
     newY := spy + 1;
@@ -192,14 +193,15 @@ begin
     begin
       (* Remain on original tile and attack *)
       entities.moveNPC(id, spx, spy);
-      combat(id);
+      combat(id, 0);  { TODO : add NPC id, [0] for player }
     end
     (* Else if tile does not contain player, check for another entity *)
     else if (map.isOccupied(newX, newY) = True) then
     begin  { TODO : Check NPCsize of entity }
       if (entities.entityList[entities.getCreatureID(newX, newY)].NPCsize <
         entities.entityList[id].NPCsize) then
-        ui.bufferMessage('Hyena attacks ' + entities.getCreatureName(newX, newY))
+        combat(id, entities.getCreatureID(newX, newY))
+      //ui.bufferMessage('Hyena attacks ' + entities.getCreatureName(newX, newY))
       else
         ui.bufferMessage('Hyena bumps into a ' + entities.getCreatureName(newX, newY));
       (* Remain on original tile *)
@@ -210,13 +212,17 @@ begin
       entities.moveNPC(id, newX, newY);
   end
   // wall hugging code
-  else if (spx < entities.entityList[0].posX) and (checkSpaceFree(spx + 1, spy) = True) then
+  else if (spx < entities.entityList[0].posX) and
+    (checkSpaceFree(spx + 1, spy) = True) then
     entities.moveNPC(id, spx + 1, spy)
-  else if (spx > entities.entityList[0].posX) and (checkSpaceFree(spx - 1, spy) = True) then
+  else if (spx > entities.entityList[0].posX) and
+    (checkSpaceFree(spx - 1, spy) = True) then
     entities.moveNPC(id, spx - 1, spy)
-  else if (spy < entities.entityList[0].posY) and (checkSpaceFree(spx, spy + 1) = True) then
+  else if (spy < entities.entityList[0].posY) and
+    (checkSpaceFree(spx, spy + 1) = True) then
     entities.moveNPC(id, spx, spy + 1)
-  else if (spy > entities.entityList[0].posY) and (checkSpaceFree(spx, spy - 1) = True) then
+  else if (spy > entities.entityList[0].posY) and
+    (checkSpaceFree(spx, spy - 1) = True) then
     entities.moveNPC(id, spx, spy - 1)
   else
     wander(id, spx, spy);
@@ -243,29 +249,54 @@ begin
     Result := True;
 end;
 
-procedure combat(id: smallint);
+procedure combat(idOwner, idTarget: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) -
-    entities.entityList[0].defense;
+  damageAmount := globalutils.randomRange(1, entities.entityList[idOwner].attack) -
+    entities.entityList[idTarget].defense;
   if (damageAmount > 0) then
   begin
-    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
-    if (entities.entityList[0].currentHP < 1) then
-    begin   { TODO : Create player.playerDeath function that handles this }
+    entities.entityList[idTarget].currentHP :=
+      (entities.entityList[idTarget].currentHP - damageAmount);
+    if (entities.entityList[idTarget].currentHP < 1) then
+    begin
+      if (idTarget = 0) then{ TODO : Create player.playerDeath function that handles this }
+      begin
       ui.displayMessage('You are dead!');
       exit;
+      end
+      else
+      begin
+        ui.displayMessage('The hyena kills the ' + entities.entityList[idTarget].race);
+        entities.killEntity(idTarget);
+        (* The Hyena levels up *)
+        Inc(entities.entityList[idOwner].xpReward, 2);
+        Inc(entities.entityList[idOwner].attack, 2);
+        ui.bufferMessage('The hyena appears to grow stronger');
+        exit;
+      end;
     end
     else
-    begin
+    begin // if attack causes slight damage
       if (damageAmount = 1) then
-        ui.bufferMessage('The hyena slightly wounds you')
-      else
-        ui.bufferMessage('The hyena bites you, inflicting ' +
-          IntToStr(damageAmount) + ' damage');
+      begin
+        if (idTarget = 0) then // if target is the player
+          ui.bufferMessage('The hyena slightly wounds you')
+        else
+          ui.bufferMessage('The hyena slightly wounds the ' + entities.entityList[idTarget].race);
+      end
+      else  // if attack causes more damage
+      begin
+      if (idTarget = 0) then // if target is the player
+      begin
+        ui.bufferMessage('The hyena bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
+      end
+      else
+        ui.bufferMessage('The hyena bites the ' + entities.entityList[idTarget].race);
+      end;
     end;
   end
   else

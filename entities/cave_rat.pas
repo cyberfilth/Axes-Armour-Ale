@@ -27,7 +27,7 @@ procedure combat(id: smallint);
 implementation
 
 uses
-  entities, player, globalutils, ui, los;
+  entities, globalutils, ui, los;
 
 procedure createCaveRat(uniqueid, npcx, npcy: smallint);
 begin
@@ -167,7 +167,7 @@ begin
     (* Else if tile does not contain player, check for another entity *)
     else if (map.isOccupied(newX, newY) = True) then
     begin
-      ui.bufferMessage('The Cave rat bumps into ' + getCreatureName(newX, newY));
+      ui.bufferMessage('The cave rat bumps into ' + getCreatureName(newX, newY));
       entities.moveNPC(id, spx, spy);
     end
     (* if map is unoccupied, move to that tile *)
@@ -176,7 +176,6 @@ begin
   end
   else
     wander(id, spx, spy);
-  // entities.moveNPC(id, spx, spy);
 end;
 
 function isNextToPlayer(spx, spy: smallint): boolean;

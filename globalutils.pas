@@ -63,7 +63,7 @@ procedure loadGame;
 implementation
 
 uses
-  main, map, entities, player, player_inventory, items;
+  main, map, entities, player_inventory, items;
 
 // Random(Range End - Range Start) + Range Start
 function randomRange(fromNumber, toNumber: smallint): smallint;
@@ -208,7 +208,7 @@ end;
 procedure loadGame;
 var
   RootNode, ParentNode, Tile, NextNode, Blocks, Visible, Occupied,
-  Discovered, PlayerNode, InventoryNode, ItemsNode, NPCnode, GlyphNode: TDOMNode;
+  Discovered, InventoryNode, ItemsNode, NPCnode, GlyphNode: TDOMNode;
   Doc: TXMLDocument;
   r, c, i: integer;
 begin

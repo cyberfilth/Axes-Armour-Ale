@@ -72,7 +72,7 @@ procedure drawTile(c, r: smallint; hiDef: byte);
 implementation
 
 uses
-  cave, grid_dungeon, player, entities;
+  cave, grid_dungeon, entities;
 
 procedure setupTiles;
 begin
@@ -143,7 +143,7 @@ end;
 function canMove(checkX, checkY: smallint): boolean;
 begin
   Result := False;
-  if (maparea[checkY][checkX].Blocks) = False then { TODO : This line causes intermittant error 201 - check it out }
+  if (maparea[checkY][checkX].Blocks) = False then { TODO : This line causes intermittant raised exception class 201 - check it out }
     Result := True;
 end;
 

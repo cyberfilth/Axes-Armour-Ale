@@ -7,7 +7,7 @@ unit player_inventory;
 interface
 
 uses
-  Graphics, SysUtils, player, entities, items, ui, globalutils;
+  Graphics, SysUtils, entities, items, ui, globalutils;
 
 type
   (* Items in inventory *)
