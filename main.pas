@@ -118,6 +118,8 @@ begin
   (* move NPC's *)
   entities.NPCgameLoop;
   entities.redrawNPC;
+  (* Update health display to show damage *)
+  ui.updateHealth;
   (* Redraw Player *)
   drawToBuffer(map.mapToScreen(entities.entityList[0].posX),
     map.mapToScreen(entities.entityList[0].posY),
@@ -353,6 +355,7 @@ begin
   map.blueDungeonWallDef.Free;
   map.blueDungeonWallHi.Free;
   items.aleTankard.Free;
+  items.crudeDagger.Free;
   entities.caveRatGlyph.Free;
   entities.hyenaGlyph.Free;
   entities.playerGlyph.Free;

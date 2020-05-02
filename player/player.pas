@@ -58,6 +58,8 @@ begin
     currentHP := 20;
     attack := 5;
     defense := 2;
+    weaponDice := 0;
+    weaponAdds := 0;
     xpReward := 0;
     visionRange := 4;
     NPCsize := 3;

@@ -99,6 +99,8 @@ begin
     currentHP := maxHP;
     attack := randomRange(2, 3);
     defense := randomRange(2, 4);
+    weaponDice := 0;
+    weaponAdds := 0;
     xpReward := maxHP;
     visionRange := 5;
     NPCsize := 2;
@@ -257,8 +259,7 @@ begin
     entities.entityList[idTarget].defense;
   if (damageAmount > 0) then
   begin
-    entities.entityList[idTarget].currentHP :=
-      (entities.entityList[idTarget].currentHP - damageAmount);
+    entities.entityList[idTarget].currentHP := (entities.entityList[idTarget].currentHP - damageAmount);
     if (entities.entityList[idTarget].currentHP < 1) then
     begin
       if (idTarget = 0) then{ TODO : Create player.playerDeath function that handles this }
@@ -282,17 +283,21 @@ begin
       if (damageAmount = 1) then
       begin
         if (idTarget = 0) then // if target is the player
-          ui.bufferMessage('The hyena slightly wounds you')
+        begin
+          ui.writeBufferedMessages;
+          ui.displayMessage('The hyena slightly wounds you')
+        end
         else
-          ui.bufferMessage('The hyena slightly wounds the ' + entities.entityList[idTarget].race);
+        begin
+          ui.writeBufferedMessages;
+          ui.displayMessage('The hyena slightly wounds the ' + entities.entityList[idTarget].race);
+        end;
       end
       else  // if attack causes more damage
       begin
       if (idTarget = 0) then // if target is the player
       begin
         ui.bufferMessage('The hyena bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
-      (* Update health display to show damage *)
-      ui.updateHealth;
       end
       else
         ui.bufferMessage('The hyena bites the ' + entities.entityList[idTarget].race);

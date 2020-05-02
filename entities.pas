@@ -26,6 +26,8 @@ type
     description: string;
     (* health and position on game map *)
     currentHP, maxHP, attack, defense, posX, posY, xpReward, visionRange: smallint;
+    (* Weapon stats *)
+    weaponDice, weaponAdds: smallint;{ TODO : Add to save/load function }
     (* Character used to represent NPC on game map *)
     glyph: char;
     (* Size of NPC *)

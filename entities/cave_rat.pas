@@ -44,6 +44,8 @@ begin
     currentHP := maxHP;
     attack := randomRange(2, 3);
     defense := randomRange(1, 3);
+    weaponDice := 0;
+    weaponAdds := 0;
     xpReward := maxHP;
     visionRange := 4;
     NPCsize := 1;
