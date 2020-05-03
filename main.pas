@@ -201,6 +201,13 @@ begin
         player_inventory.quaff(10);
         Invalidate;
       end;
+      VK_W: // Wear / Wield item
+      begin
+        currentScreen := inventoryScreen;
+        gameState := 2;
+        player_inventory.wield(10);
+        Invalidate;
+      end;
       VK_I: // Show inventory
       begin
         player_inventory.showInventory;
@@ -236,8 +243,12 @@ begin
       end;
       VK_Q:  // Quaff
       begin
-        player_inventory.menu(5);
-        { TODO : Renumber the menu options once all slots are added }
+        player_inventory.menu(12);
+        Invalidate;
+      end;
+       VK_W:  // Wear / Wield
+      begin
+        player_inventory.menu(13);
         Invalidate;
       end;
       VK_0:

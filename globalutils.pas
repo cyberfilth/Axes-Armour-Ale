@@ -51,6 +51,8 @@ var
 
 (* Select random number from a range *)
 function randomRange(fromNumber, toNumber: smallint): smallint;
+(* Simulate dice rolls *)
+function rollDice(numberOfDice: byte): smallint;
 (* Draw image to temporary screen buffer *)
 procedure drawToBuffer(x, y: smallint; image: TBitmap);
 (* Write text to temporary screen buffer *)
@@ -72,6 +74,18 @@ var
 begin
   p := toNumber - fromNumber;
   Result := random(p + 1) + fromNumber;
+end;
+
+function rollDice(numberOfDice: byte): smallint;
+var
+  i: byte;
+  x: smallint;
+begin
+  for i := 1 to numberOfDice do
+  begin
+    x := Random(6) + 1;
+  end;
+  Result := x;
 end;
 
 procedure drawToBuffer(x, y: smallint; image: TBitmap);
