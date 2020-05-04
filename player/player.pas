@@ -67,6 +67,8 @@ begin
     moveCount := 0;
     inView := True;
     discovered := True;
+    weaponEquipped := False;
+    armourEquipped := False;
     isDead := False;
     abilityTriggered := False;
     stsDrunk := False;
@@ -171,12 +173,37 @@ begin
   end;
 end;
 
+(*
+  Combat is decided by rolling a random number between 1 and the entity's ATTACK value.
+  Then modifiers are added, for example, a 1D6+4 axe will roll a 6 sided die and
+  add the result plus 4 to the total damage amount. This is then removed from the
+  opponents DEFENSE rating. If the opponents defense doesn't soak up the whole damage
+  amount, the remainder is taken from their Health. This is partly inspired by the
+  Tunnels & Trolls rules, my favourite tabletop RPG.
+*)
+
 procedure combat(npcID: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entities.entityList[0].attack) -
+  (* Check for weapon adds *)
+  if (entities.entityList[0].weaponEquipped = True) then
+  begin
+    damageAmount :=
+    (globalutils.randomRange(1, entityList[0].attack) + // Base attack
+    globalutils.rollDice(entityList[0].weaponDice) +    // Weapon dice
+    entityList[0].weaponAdds) -                         // Weapon adds
     entities.entityList[npcID].defense;
+  end
+
+  (* No weapon adds *)
+  else
+  begin
+    damageAmount := globalutils.randomRange(1, entities.entityList[0].attack) -
+      entities.entityList[npcID].defense;
+    ui.displayMessage('No weapon equipped');
+  end;
+
   if ((damageAmount - entities.entityList[0].tmrDrunk) > 0) then
   begin
     entities.entityList[npcID].currentHP :=
@@ -185,7 +212,8 @@ begin
     begin
       ui.bufferMessage('You kill the ' + entities.entityList[npcID].race);
       entities.killEntity(npcID);
-      entities.entityList[0].xpReward := entities.entityList[0].xpReward + entities.entityList[npcID].xpReward;
+      entities.entityList[0].xpReward :=
+        entities.entityList[0].xpReward + entities.entityList[npcID].xpReward;
       ui.updateXP;
       exit;
     end
@@ -200,12 +228,13 @@ begin
   begin
     if (entities.entityList[0].stsDrunk = True) then
       ui.bufferMessage('You drunkenly miss')
-  else
-    ui.bufferMessage('You miss');
+    else
+      ui.bufferMessage('You miss');
   end;
 end;
 
 function combatCheck(x, y: smallint): boolean;
+  { TODO : Replace this with a check to see if the tile is occupied }
 var
   i: smallint;
 begin

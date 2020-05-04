@@ -108,6 +108,8 @@ begin
     moveCount := 0;
     inView := False;
     discovered := False;
+    weaponEquipped := False;
+    armourEquipped := False;
     isDead := False;
     abilityTriggered := False;
     stsDrunk := False;

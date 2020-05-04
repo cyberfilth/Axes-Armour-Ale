@@ -13,7 +13,7 @@ procedure useItem;
 implementation
 
 uses
-    items, entities;
+  items, entities, ui;
 
 procedure createDagger(uniqueid, itmx, itmy: smallint);
 begin
@@ -38,7 +38,11 @@ end;
 procedure useItem;
 begin
   { TODO : Add Throw Range and Throw Damage }
-   // 1 D6
+  entityList[0].weaponEquipped := True;
+ Inc(entityList[0].weaponDice);
+ // Inc(entityList[0].weaponAdds, 600);
+  ui.bufferMessage('The dagger adds 1D6 to your attack');
+  ui.writeBufferedMessages;
   // 0 ADDS
 end;
 

@@ -103,6 +103,7 @@ procedure lookupUse(x: smallint);
 begin
   case x of
     1: ale_tankard.useItem;
+    2: dagger.useItem;
   end;
 end;
 

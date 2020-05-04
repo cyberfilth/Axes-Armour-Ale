@@ -40,6 +40,10 @@ type
     inView: boolean;
     (* First time the player discovers the NPC *)
     discovered: boolean;
+    (* Is a weapon equipped *)
+    weaponEquipped: boolean;
+    (* Is Armour equipped *)
+    armourEquipped: boolean;
     (* Has the NPC been killed, to be removed at end of game loop *)
     isDead: boolean;
     (* Whether a special ability has been activated *)

@@ -65,7 +65,7 @@ procedure loadGame;
 implementation
 
 uses
-  main, map, entities, player_inventory, items;
+  main, map, entities, player_inventory, items, ui;
 
 // Random(Range End - Range Start) + Range Start
 function randomRange(fromNumber, toNumber: smallint): smallint;
@@ -81,7 +81,7 @@ var
   i: byte;
   x: smallint;
 begin
-  for i := 1 to numberOfDice do
+  for i := 0 to numberOfDice do
   begin
     x := Random(6) + 1;
   end;

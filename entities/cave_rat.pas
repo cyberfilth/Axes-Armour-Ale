@@ -43,7 +43,7 @@ begin
     maxHP := randomRange(2, 5);
     currentHP := maxHP;
     attack := randomRange(2, 3);
-    defense := randomRange(1, 3);
+    defense := randomRange(2, 3);
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;
@@ -53,6 +53,8 @@ begin
     moveCount := 0;
     inView := False;
     discovered := False;
+    weaponEquipped := False;
+    armourEquipped := False;
     isDead := False;
     abilityTriggered := False;
     stsDrunk := False;
