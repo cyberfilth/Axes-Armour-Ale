@@ -186,23 +186,11 @@ procedure combat(npcID: smallint);
 var
   damageAmount: smallint;
 begin
-  (* Check for weapon adds *)
-  if (entities.entityList[0].weaponEquipped = True) then
-  begin
-    damageAmount :=
+  damageAmount :=
     (globalutils.randomRange(1, entityList[0].attack) + // Base attack
     globalutils.rollDice(entityList[0].weaponDice) +    // Weapon dice
     entityList[0].weaponAdds) -                         // Weapon adds
     entities.entityList[npcID].defense;
-  end
-
-  (* No weapon adds *)
-  else
-  begin
-    damageAmount := globalutils.randomRange(1, entities.entityList[0].attack) -
-      entities.entityList[npcID].defense;
-    ui.displayMessage('No weapon equipped');
-  end;
 
   if ((damageAmount - entities.entityList[0].tmrDrunk) > 0) then
   begin

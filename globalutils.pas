@@ -81,11 +81,16 @@ var
   i: byte;
   x: smallint;
 begin
-  for i := 0 to numberOfDice do
+  if (numberOfDice = 0) then
+    Result := 0
+  else
   begin
-    x := Random(6) + 1;
+    for i := 0 to numberOfDice do
+    begin
+      x := Random(6) + 1;
+    end;
+    Result := x;
   end;
-  Result := x;
 end;
 
 procedure drawToBuffer(x, y: smallint; image: TBitmap);
@@ -203,12 +208,15 @@ begin
       AddElement(DataNode, 'xpReward', IntToStr(entities.entityList[i].xpReward));
       AddElement(DataNode, 'visRange', IntToStr(entities.entityList[i].visionRange));
       AddElement(DataNode, 'NPCsize', IntToStr(entities.entityList[i].NPCsize));
-      AddElement(DataNode, 'trackingTurns', IntToStr(entities.entityList[i].trackingTurns));
+      AddElement(DataNode, 'trackingTurns',
+        IntToStr(entities.entityList[i].trackingTurns));
       AddElement(DataNode, 'moveCount', IntToStr(entities.entityList[i].moveCount));
       AddElement(DataNode, 'inView', BoolToStr(entities.entityList[i].inView));
       AddElement(DataNode, 'discovered', BoolToStr(entities.entityList[i].discovered));
-      AddElement(DataNode, 'weaponEquipped', BoolToStr(entities.entityList[i].weaponEquipped));
-      AddElement(DataNode, 'armourEquipped', BoolToStr(entities.entityList[i].armourEquipped));
+      AddElement(DataNode, 'weaponEquipped',
+        BoolToStr(entities.entityList[i].weaponEquipped));
+      AddElement(DataNode, 'armourEquipped',
+        BoolToStr(entities.entityList[i].armourEquipped));
       AddElement(DataNode, 'isDead', BoolToStr(entities.entityList[i].isDead));
       AddElement(DataNode, 'abilityTriggered',
         BoolToStr(entities.entityList[i].abilityTriggered));
