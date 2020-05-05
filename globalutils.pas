@@ -67,7 +67,7 @@ implementation
 uses
   main, map, entities, player_inventory, items, ui;
 
-// Random(Range End - Range Start) + Range Start
+(* Random(Range End - Range Start) + Range Start *)
 function randomRange(fromNumber, toNumber: smallint): smallint;
 var
   p: smallint;
@@ -198,6 +198,8 @@ begin
       AddElement(DataNode, 'maxHP', IntToStr(entities.entityList[i].maxHP));
       AddElement(DataNode, 'attack', IntToStr(entities.entityList[i].attack));
       AddElement(DataNode, 'defense', IntToStr(entities.entityList[i].defense));
+      AddElement(DataNode, 'weaponDice', IntToStr(entities.entityList[i].weaponDice));
+      AddElement(DataNode, 'weaponAdds', IntToStr(entities.entityList[i].weaponAdds));
       AddElement(DataNode, 'xpReward', IntToStr(entities.entityList[i].xpReward));
       AddElement(DataNode, 'visRange', IntToStr(entities.entityList[i].visionRange));
       AddElement(DataNode, 'NPCsize', IntToStr(entities.entityList[i].NPCsize));
@@ -205,6 +207,8 @@ begin
       AddElement(DataNode, 'moveCount', IntToStr(entities.entityList[i].moveCount));
       AddElement(DataNode, 'inView', BoolToStr(entities.entityList[i].inView));
       AddElement(DataNode, 'discovered', BoolToStr(entities.entityList[i].discovered));
+      AddElement(DataNode, 'weaponEquipped', BoolToStr(entities.entityList[i].weaponEquipped));
+      AddElement(DataNode, 'armourEquipped', BoolToStr(entities.entityList[i].armourEquipped));
       AddElement(DataNode, 'isDead', BoolToStr(entities.entityList[i].isDead));
       AddElement(DataNode, 'abilityTriggered',
         BoolToStr(entities.entityList[i].abilityTriggered));
@@ -331,6 +335,10 @@ begin
         StrToInt(NPCnode.FindNode('attack').TextContent);
       entities.entityList[i].defense :=
         StrToInt(NPCnode.FindNode('defense').TextContent);
+      entities.entityList[i].weaponDice :=
+        StrToInt(NPCnode.FindNode('weaponDice').TextContent);
+      entities.entityList[i].weaponAdds :=
+        StrToInt(NPCnode.FindNode('weaponAdds').TextContent);
       entities.entityList[i].xpReward :=
         StrToInt(NPCnode.FindNode('xpReward').TextContent);
       entities.entityList[i].visionRange :=
@@ -345,6 +353,10 @@ begin
         StrToBool(NPCnode.FindNode('inView').TextContent);
       entities.entityList[i].discovered :=
         StrToBool(NPCnode.FindNode('discovered').TextContent);
+      entities.entityList[i].weaponEquipped :=
+        StrToBool(NPCnode.FindNode('weaponEquipped').TextContent);
+      entities.entityList[i].armourEquipped :=
+        StrToBool(NPCnode.FindNode('armourEquipped').TextContent);
       entities.entityList[i].isDead :=
         StrToBool(NPCnode.FindNode('isDead').TextContent);
       entities.entityList[i].abilityTriggered :=
