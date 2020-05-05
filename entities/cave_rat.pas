@@ -79,8 +79,13 @@ begin
       if (isNextToPlayer(spx, spy) = True) then
         escapePlayer(id, spx, spy)
       else
-        (* if not near the player, they wander *)
-        wander(id, spx, spy);
+        (* if not near the player, heal *)
+      begin
+        if (entityList[id].currentHP < entityList[id].maxHP) then
+          Inc(entityList[id].currentHP)
+        else
+          wander(id, spx, spy);
+      end;
     end
     else
       (* if they are next to player, and not low on health, they attack *)
@@ -133,7 +138,8 @@ begin
     newX := spx - 1;
     newY := spy - 1;
   end
-  else if (spx < entities.entityList[0].posX) and (spy < entities.entityList[0].posY) then
+  else if (spx < entities.entityList[0].posX) and
+    (spy < entities.entityList[0].posY) then
   begin
     newX := spx + 1;
     newY := spy + 1;
@@ -215,7 +221,8 @@ begin
     newX := spx + 1;
     newY := spy + 1;
   end
-  else if (spx < entities.entityList[0].posX) and (spy < entities.entityList[0].posY) then
+  else if (spx < entities.entityList[0].posX) and
+    (spy < entities.entityList[0].posY) then
   begin
     newX := spx - 1;
     newY := spy - 1;
@@ -262,7 +269,8 @@ begin
     entities.entityList[0].defense;
   if (damageAmount > 0) then
   begin
-    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
+    entities.entityList[0].currentHP :=
+      (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin   { TODO : Create player.playerDeath function that handles this }
       ui.displayMessage('You are dead!');
