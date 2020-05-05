@@ -17,7 +17,12 @@ const
   (* side bar Width *)
   sbw = 140;
   (* side bar Height *)
-  sbh = 380;
+  sbh = 150;
+  (* equipment bar Y position *)
+  eqy = 170;
+  (* equipment bar Height *)
+  eqh = 120;
+
 
 var
   messageArray: array[1..7] of string = (' ', ' ', ' ', ' ', ' ', ' ', ' ');
@@ -38,6 +43,8 @@ procedure updateHealth;
 procedure updateAttack;
 (* Update player defence value *)
 procedure updateDefence;
+(* Display equipped weapon *)
+procedure updateWeapon(weaponName: shortstring);
 (* Write text to the message log *)
 procedure displayMessage(message: string);
 (* Store all messages from players turn *)
@@ -54,7 +61,7 @@ procedure clearLog;
 implementation
 
 uses
-  main, entities;
+  main, entities, items;
 
 procedure titleScreen(yn: byte);
 begin
@@ -83,14 +90,21 @@ end;
 procedure drawSidepanel;
 begin
   main.tempScreen.Canvas.Pen.Color := globalutils.UICOLOUR;
+  (* Stats window *)
   main.tempScreen.Canvas.Rectangle(sbx, sby, sbx + sbw, sby + sbh);
+  (* Equipment window *)
+  main.tempScreen.Canvas.Rectangle(sbx, eqy, sbx + sbw, eqy + eqh);
   main.tempScreen.Canvas.Font.Size := 10;
+  (* Write stats *)
   writeToBuffer(sbx + 8, sby + 5, UITEXTCOLOUR, entities.entityList[0].race);
   updateLevel;
   updateXP;
   updateHealth;
   updateAttack;
   updateDefence;
+  (* Write Equipment window *)
+  writeToBuffer(sbx + 8, eqy + 5, MESSAGEFADE1, 'Equipment');
+  updateWeapon('none');
 end;
 
 procedure updateLevel;
@@ -130,12 +144,14 @@ begin
   (* Draw Health amount *)
   main.tempScreen.Canvas.Font.Size := 10;
   writeToBuffer(sbx + 8, sby + 75, UITEXTCOLOUR, 'Health:  ' +
-    IntToStr(entities.entityList[0].currentHP) + ' / ' + IntToStr(entities.entityList[0].maxHP));
+    IntToStr(entities.entityList[0].currentHP) + ' / ' +
+    IntToStr(entities.entityList[0].maxHP));
   (* Draw health bar *)
   main.tempScreen.Canvas.Brush.Color := $2E2E00; // Background colour
   main.tempScreen.Canvas.FillRect(sbx + 8, sby + 95, sbx + 108, sby + 100);
   (* Calculate percentage of total health *)
-  healthPercentage := (entities.entityList[0].currentHP * 100) div entities.entityList[0].maxHP;
+  healthPercentage := (entities.entityList[0].currentHP * 100) div
+    entities.entityList[0].maxHP;
   main.tempScreen.Canvas.Brush.Color := $0B9117; // Green colour
   main.tempScreen.Canvas.FillRect(sbx + 8, sby + 95, sbx +
     (healthPercentage + 8), sby + 100);
@@ -163,6 +179,22 @@ begin
   main.tempScreen.Canvas.Font.Size := 10;
   writeToBuffer(sbx + 8, sby + 125, UITEXTCOLOUR, 'Defence:  ' +
     IntToStr(entities.entityList[0].defense));
+end;
+
+procedure updateWeapon(weaponName: shortstring);
+begin
+  main.tempScreen.Canvas.Font.Size := 10;
+  (* Paint over previous text *)
+  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.FillRect(sbx + 8, eqy + 25, sbx + 135, eqy + 40);
+  if (weaponName = 'none') then
+  begin
+    writeToBuffer(sbx + 8, eqy + 25, MESSAGEFADE2, 'No weapon equipped');
+  end
+  else
+  begin
+    writeToBuffer(sbx + 8, eqy + 25, UITEXTCOLOUR, weaponName);
+  end;
 end;
 
 procedure displayMessage(message: string);

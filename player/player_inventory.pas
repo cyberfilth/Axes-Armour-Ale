@@ -420,7 +420,7 @@ begin
     begin
       (* Check whether the item is already equipped or not *)
       if (inventory[wieldItem].equipped = False) then
-      begin
+      begin { TODO : Add check to ensure equipped weapon is unequipped before wielding a new one }
         ui.writeBufferedMessages;
         if (inventory[wieldItem].itemType = 'weapon') then
           ui.bufferMessage('You equip the ' + inventory[wieldItem].Name)
@@ -428,6 +428,7 @@ begin
           ui.bufferMessage('You put on the ' + inventory[wieldItem].Name);
         items.lookupUse(inventory[wieldItem].useID, False);
         inventory[wieldItem].equipped := True;
+        ui.updateWeapon(inventory[wieldItem].Name);
         (* Add equipped suffix *)
         inventory[wieldItem].description :=
           inventory[wieldItem].description + ' [equipped]';
@@ -443,6 +444,7 @@ begin
           ui.bufferMessage('You take off the ' + inventory[wieldItem].Name);
         items.lookupUse(inventory[wieldItem].useID, True);
         inventory[wieldItem].equipped := False;
+         ui.updateWeapon('none');
         (* Remove equipped suffix *)
         SetLength(inventory[wieldItem].description, Length(inventory[wieldItem].description) - 11);
         Inc(playerTurn);
