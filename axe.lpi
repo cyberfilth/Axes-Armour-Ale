@@ -14,7 +14,7 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="14">
+      <Resources Count="15">
         <Resource_0 FileName="images/sprites/player_glyph.bmp" Type="BITMAP" ResourceName="PLAYER_GLYPH"/>
         <Resource_1 FileName="images/dungeon/ascii/blueDungeonFloorDef.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORDEF"/>
         <Resource_2 FileName="images/dungeon/ascii/blueDungeonFloorHi.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORHI"/>
@@ -27,8 +27,9 @@
         <Resource_9 FileName="images/titleScreen.bmp" Type="BITMAP" ResourceName="TITLESCREEN"/>
         <Resource_10 FileName="images/sprites/r_orange.bmp" Type="BITMAP" ResourceName="R_ORANGE"/>
         <Resource_11 FileName="images/sprites/ale1.bmp" Type="BITMAP" ResourceName="ALE1"/>
-        <Resource_12 FileName="images\sprites\h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
-        <Resource_13 FileName="images\sprites\dagger1.bmp" Type="BITMAP" ResourceName="DAGGER1"/>
+        <Resource_12 FileName="images/sprites/h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
+        <Resource_13 FileName="images/sprites/dagger1.bmp" Type="BITMAP" ResourceName="DAGGER1"/>
+        <Resource_14 FileName="images/sprites/leather_amour1.bmp" Type="BITMAP" ResourceName="LEATHER_AMOUR1"/>
       </Resources>
     </General>
     <VersionInfo>
