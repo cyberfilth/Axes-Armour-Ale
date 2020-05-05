@@ -50,7 +50,7 @@ procedure drawItem(c, r: smallint; glyph: char);
 (* Redraw all items *)
 procedure redrawItems;
 (* Execute useItem procedure *)
-procedure lookupUse(x: smallint);
+procedure lookupUse(x: smallint; equipped: boolean);
 
 implementation
 
@@ -99,11 +99,11 @@ begin
   end;
 end;
 
-procedure lookupUse(x: smallint);
+procedure lookupUse(x: smallint; equipped: boolean);
 begin
   case x of
     1: ale_tankard.useItem;
-    2: dagger.useItem;
+    2: dagger.useItem(equipped);
   end;
 end;
 

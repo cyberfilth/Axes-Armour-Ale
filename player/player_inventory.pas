@@ -198,7 +198,7 @@ begin
         drop(1)
       else if (menuState = 2) then
         quaff(1)
-        else if (menuState = 3) then
+      else if (menuState = 3) then
         wield(0);
     end;
     4: // 2 slot
@@ -207,7 +207,7 @@ begin
         drop(2)
       else if (menuState = 2) then
         quaff(2)
-        else if (menuState = 3) then
+      else if (menuState = 3) then
         wield(0);
     end;
     5: // 3 slot
@@ -216,7 +216,7 @@ begin
         drop(3)
       else if (menuState = 2) then
         quaff(3)
-        else if (menuState = 3) then
+      else if (menuState = 3) then
         wield(0);
     end;
     6: // 4 slot
@@ -225,7 +225,7 @@ begin
         drop(4)
       else if (menuState = 2) then
         quaff(4)
-        else if (menuState = 3) then
+      else if (menuState = 3) then
         wield(0);
     end;
     7: // 5 slot
@@ -234,7 +234,7 @@ begin
         drop(5)
       else if (menuState = 2) then
         quaff(5)
-        else if (menuState = 3) then
+      else if (menuState = 3) then
         wield(0);
     end;
     8: // 6 slot
@@ -243,7 +243,7 @@ begin
         drop(6)
       else if (menuState = 2) then
         quaff(6)
-        else if (menuState = 3) then
+      else if (menuState = 3) then
         wield(0);
     end;
     9: // 7 slot
@@ -252,7 +252,7 @@ begin
         drop(7)
       else if (menuState = 2) then
         quaff(7)
-        else if (menuState = 3) then
+      else if (menuState = 3) then
         wield(0);
     end;
     10: // 8 slot
@@ -261,7 +261,7 @@ begin
         drop(8)
       else if (menuState = 2) then
         quaff(8)
-        else if (menuState = 3) then
+      else if (menuState = 3) then
         wield(0);
     end;
     11: // 9 slot
@@ -270,7 +270,7 @@ begin
         drop(9)
       else if (menuState = 2) then
         quaff(9)
-        else if (menuState = 3) then
+      else if (menuState = 3) then
         wield(0);
     end;
     12: quaff(10);  // Quaff menu
@@ -374,7 +374,7 @@ begin
     begin
       ui.writeBufferedMessages;
       ui.bufferMessage('You quaff the ' + inventory[quaffItem].Name);
-      items.lookupUse(inventory[quaffItem].useID);
+      items.lookupUse(inventory[quaffItem].useID, False);
       Inc(playerTurn);
       (* Remove from inventory *)
       inventory[quaffItem].Name := 'Empty';
@@ -406,7 +406,7 @@ begin
   begin
     x := x + 20;
     if (inventory[i].Name = 'Empty') then
-   //   dimSlots(i, x)
+    //   dimSlots(i, x)
     else
       highlightSlots(i, x);
   end;
@@ -426,10 +426,11 @@ begin
           ui.bufferMessage('You equip the ' + inventory[wieldItem].Name)
         else
           ui.bufferMessage('You put on the ' + inventory[wieldItem].Name);
-        items.lookupUse(inventory[wieldItem].useID);
+        items.lookupUse(inventory[wieldItem].useID, False);
         inventory[wieldItem].equipped := True;
         (* Add equipped suffix *)
-        inventory[wieldItem].description := inventory[wieldItem].description + ' [equipped]';
+        inventory[wieldItem].description :=
+          inventory[wieldItem].description + ' [equipped]';
         Inc(playerTurn);
         showInventory;
       end
@@ -440,11 +441,10 @@ begin
           ui.bufferMessage('You unequip the ' + inventory[wieldItem].Name)
         else
           ui.bufferMessage('You take off the ' + inventory[wieldItem].Name);
-        items.lookupUse(inventory[wieldItem].useID);
+        items.lookupUse(inventory[wieldItem].useID, True);
         inventory[wieldItem].equipped := False;
         (* Remove equipped suffix *)
-        { TODO : Remove suffix }
-        // inventory[wieldItem].Name := inventory[wieldItem].Name + ' - equipped';
+        SetLength(inventory[wieldItem].description, Length(inventory[wieldItem].description) - 11);
         Inc(playerTurn);
         showInventory;
       end;
