@@ -118,6 +118,8 @@ begin
   (* move NPC's *)
   entities.NPCgameLoop;
   entities.redrawNPC;
+  (* Update health display to show damage *)
+  ui.updateHealth;
   (* Redraw Player *)
   drawToBuffer(map.mapToScreen(entities.entityList[0].posX),
     map.mapToScreen(entities.entityList[0].posY),
@@ -199,6 +201,13 @@ begin
         player_inventory.quaff(10);
         Invalidate;
       end;
+      VK_W: // Wear / Wield item
+      begin
+        currentScreen := inventoryScreen;
+        gameState := 2;
+        player_inventory.wield(10);
+        Invalidate;
+      end;
       VK_I: // Show inventory
       begin
         player_inventory.showInventory;
@@ -234,8 +243,12 @@ begin
       end;
       VK_Q:  // Quaff
       begin
-        player_inventory.menu(5);
-        { TODO : Renumber the menu options once all slots are added }
+        player_inventory.menu(12);
+        Invalidate;
+      end;
+       VK_W:  // Wear / Wield
+      begin
+        player_inventory.menu(13);
         Invalidate;
       end;
       VK_0:
@@ -353,6 +366,7 @@ begin
   map.blueDungeonWallDef.Free;
   map.blueDungeonWallHi.Free;
   items.aleTankard.Free;
+  items.crudeDagger.Free;
   entities.caveRatGlyph.Free;
   entities.hyenaGlyph.Free;
   entities.playerGlyph.Free;

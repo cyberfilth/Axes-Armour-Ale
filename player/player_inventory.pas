@@ -2,7 +2,6 @@
 unit player_inventory;
 
 {$mode objfpc}{$H+}
-{$ModeSwitch advancedrecords}
 
 interface
 
@@ -23,7 +22,7 @@ type
 
 var
   inventory: array[0..9] of Equipment;
-  (* 0 - main menu, 1 - drop menu, 2 - quaff menu *)
+  (* 0 - main menu, 1 - drop menu, 2 - quaff menu, 3 - wear/wield menu *)
   menuState: byte;
 
 (* Initialise empty player inventory *)
@@ -44,6 +43,8 @@ procedure menu(selection: word);
 procedure drop(dropItem: byte);
 (* Quaff menu *)
 procedure quaff(quaffItem: byte);
+(* Wear / Wield menu *)
+procedure wield(wieldItem: byte);
 
 implementation
 
@@ -56,14 +57,14 @@ var
 begin
   for i := 0 to 9 do
   begin
-  inventory[i].id := i;
-  inventory[i].Name := 'Empty';
-  inventory[i].equipped := False;
-  inventory[i].description:='x';
-  inventory[i].itemType:='x';
-  inventory[i].glyph:='x';
-  inventory[i].inInventory:=False;
-  inventory[i].useID:=0;
+    inventory[i].id := i;
+    inventory[i].Name := 'Empty';
+    inventory[i].equipped := False;
+    inventory[i].description := 'x';
+    inventory[i].itemType := 'x';
+    inventory[i].glyph := 'x';
+    inventory[i].inInventory := False;
+    inventory[i].useID := 0;
   end;
 end;
 
@@ -138,7 +139,7 @@ begin
       inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
       inventoryScreen.Canvas.Brush.Style := bsClear;
       inventoryScreen.Canvas.TextOut(100, 350,
-        'D key for drop menu  |  Q key for quaff/drink menu  |  ESC key to exit');
+        'D key for drop menu  |  Q key for quaff/drink menu  |  W key to equip armour/weapons  |  ESC key to exit');
     end;
     1:  // Select Inventory slot
     begin
@@ -177,6 +178,8 @@ begin
       else if (menuState = 1) then // In the Drop screen
         showInventory
       else if (menuState = 2) then // In the Quaff screen
+        showInventory
+      else if (menuState = 3) then // In the Wear / Wield screen
         showInventory;
     end;
     1: drop(10); // Drop menu
@@ -185,23 +188,93 @@ begin
       if (menuState = 1) then
         drop(0)
       else if (menuState = 2) then
-        quaff(0);
+        quaff(0)
+      else if (menuState = 3) then
+        wield(0);
     end;
     3: // 1 slot
     begin
       if (menuState = 1) then
         drop(1)
       else if (menuState = 2) then
-        quaff(1);
+        quaff(1)
+      else if (menuState = 3) then
+        wield(0);
     end;
     4: // 2 slot
     begin
       if (menuState = 1) then
         drop(2)
       else if (menuState = 2) then
-        quaff(2);
+        quaff(2)
+      else if (menuState = 3) then
+        wield(0);
     end;
-    5: quaff(10);  // Quaff menu
+    5: // 3 slot
+    begin
+      if (menuState = 1) then
+        drop(3)
+      else if (menuState = 2) then
+        quaff(3)
+      else if (menuState = 3) then
+        wield(0);
+    end;
+    6: // 4 slot
+    begin
+      if (menuState = 1) then
+        drop(4)
+      else if (menuState = 2) then
+        quaff(4)
+      else if (menuState = 3) then
+        wield(0);
+    end;
+    7: // 5 slot
+    begin
+      if (menuState = 1) then
+        drop(5)
+      else if (menuState = 2) then
+        quaff(5)
+      else if (menuState = 3) then
+        wield(0);
+    end;
+    8: // 6 slot
+    begin
+      if (menuState = 1) then
+        drop(6)
+      else if (menuState = 2) then
+        quaff(6)
+      else if (menuState = 3) then
+        wield(0);
+    end;
+    9: // 7 slot
+    begin
+      if (menuState = 1) then
+        drop(7)
+      else if (menuState = 2) then
+        quaff(7)
+      else if (menuState = 3) then
+        wield(0);
+    end;
+    10: // 8 slot
+    begin
+      if (menuState = 1) then
+        drop(8)
+      else if (menuState = 2) then
+        quaff(8)
+      else if (menuState = 3) then
+        wield(0);
+    end;
+    11: // 9 slot
+    begin
+      if (menuState = 1) then
+        drop(9)
+      else if (menuState = 2) then
+        quaff(9)
+      else if (menuState = 3) then
+        wield(0);
+    end;
+    12: quaff(10);  // Quaff menu
+    13: wield(10);  // Wear / Wield menu
   end;
 end;
 
@@ -287,8 +360,8 @@ begin
   for i := 0 to 9 do
   begin
     x := x + 20;
-    if (inventory[i].Name = 'Empty') or (inventory[i].itemType <> 'drink') then
-      dimSlots(i, x)
+    if (inventory[i].Name = 'Empty') then
+    //  dimSlots(i, x)
     else
       highlightSlots(i, x);
   end;
@@ -301,11 +374,82 @@ begin
     begin
       ui.writeBufferedMessages;
       ui.bufferMessage('You quaff the ' + inventory[quaffItem].Name);
-      items.lookupUse(inventory[quaffItem].useID);
+      items.lookupUse(inventory[quaffItem].useID, False);
       Inc(playerTurn);
       (* Remove from inventory *)
       inventory[quaffItem].Name := 'Empty';
       showInventory;
+    end;
+  end;
+end;
+
+procedure wield(wieldItem: byte);
+var
+  i, x: smallint;
+begin
+  menuState := 3;
+  (* Clear the screen *)
+  inventoryScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
+  inventoryScreen.Canvas.FillRect(0, 0, inventoryScreen.Width, inventoryScreen.Height);
+  (* Draw title bar *)
+  inventoryScreen.Canvas.Brush.Color := globalutils.MESSAGEFADE6;
+  inventoryScreen.Canvas.Rectangle(50, 40, 785, 80);
+  (* Draw title *)
+  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
+  inventoryScreen.Canvas.Brush.Style := bsClear;
+  inventoryScreen.Canvas.Font.Size := 12;
+  inventoryScreen.Canvas.TextOut(100, 50, 'Select item to wear / wield');
+  inventoryScreen.Canvas.Font.Size := 10;
+  (* List inventory *)
+  x := 90; // x is position of each new line
+  for i := 0 to 9 do
+  begin
+    x := x + 20;
+    if (inventory[i].Name = 'Empty') then
+    //   dimSlots(i, x)
+    else
+      highlightSlots(i, x);
+  end;
+  (* Bottom menu *)
+  bottomMenu(1);
+  if (wieldItem <> 10) then
+  begin
+    if (inventory[wieldItem].Name <> 'Empty') and
+      (inventory[wieldItem].itemType = 'weapon') or
+      (inventory[wieldItem].itemType = 'armour') then
+    begin
+      (* Check whether the item is already equipped or not *)
+      if (inventory[wieldItem].equipped = False) then
+      begin { TODO : Add check to ensure equipped weapon is unequipped before wielding a new one }
+        ui.writeBufferedMessages;
+        if (inventory[wieldItem].itemType = 'weapon') then
+          ui.bufferMessage('You equip the ' + inventory[wieldItem].Name)
+        else
+          ui.bufferMessage('You put on the ' + inventory[wieldItem].Name);
+        items.lookupUse(inventory[wieldItem].useID, False);
+        inventory[wieldItem].equipped := True;
+        ui.updateWeapon(inventory[wieldItem].Name);
+        (* Add equipped suffix *)
+        inventory[wieldItem].description :=
+          inventory[wieldItem].description + ' [equipped]';
+        Inc(playerTurn);
+        showInventory;
+      end
+      else
+      begin
+        ui.writeBufferedMessages;
+        if (inventory[wieldItem].itemType = 'weapon') then
+          ui.bufferMessage('You unequip the ' + inventory[wieldItem].Name)
+        else
+          ui.bufferMessage('You take off the ' + inventory[wieldItem].Name);
+        items.lookupUse(inventory[wieldItem].useID, True);
+        inventory[wieldItem].equipped := False;
+         ui.updateWeapon('none');
+        (* Remove equipped suffix *)
+        SetLength(inventory[wieldItem].description, Length(inventory[wieldItem].description) - 11);
+        Inc(playerTurn);
+        showInventory;
+      end;
     end;
   end;
 end;

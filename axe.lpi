@@ -14,7 +14,7 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="13">
+      <Resources Count="14">
         <Resource_0 FileName="images/sprites/player_glyph.bmp" Type="BITMAP" ResourceName="PLAYER_GLYPH"/>
         <Resource_1 FileName="images/dungeon/ascii/blueDungeonFloorDef.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORDEF"/>
         <Resource_2 FileName="images/dungeon/ascii/blueDungeonFloorHi.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORHI"/>
@@ -28,6 +28,7 @@
         <Resource_10 FileName="images/sprites/r_orange.bmp" Type="BITMAP" ResourceName="R_ORANGE"/>
         <Resource_11 FileName="images/sprites/ale1.bmp" Type="BITMAP" ResourceName="ALE1"/>
         <Resource_12 FileName="images\sprites\h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
+        <Resource_13 FileName="images\sprites\dagger1.bmp" Type="BITMAP" ResourceName="DAGGER1"/>
       </Resources>
     </General>
     <VersionInfo>
@@ -48,7 +49,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="dungeons;vision;entities;items;player"/>
+            <OtherUnitFiles Value="dungeons;vision;entities;items;player;items\weapons"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -89,7 +90,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="dungeons;vision;entities;items;player"/>
+            <OtherUnitFiles Value="dungeons;vision;entities;items;player;items\weapons"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -127,7 +128,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="17">
+    <Units Count="18">
       <Unit0>
         <Filename Value="axe.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -199,6 +200,10 @@
         <Filename Value="entities\hyena.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit16>
+      <Unit17>
+        <Filename Value="items\weapons\dagger.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit17>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -209,7 +214,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="dungeons;vision;entities;items;player"/>
+      <OtherUnitFiles Value="dungeons;vision;entities;items;player;items\weapons"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>

@@ -3,6 +3,7 @@
 unit map;
 
 {$mode objfpc}{$H+}
+{$RANGECHECKS OFF}
 
 interface
 

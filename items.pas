@@ -8,7 +8,7 @@ interface
 uses
   Graphics, globalutils, map,
   (* Import the items *)
-  ale_tankard;
+  ale_tankard, dagger;
 
 type
   (* Item types = drink, weapon, armour, missile *)
@@ -39,7 +39,7 @@ type
 var
   itemList: array of Item;
   itemAmount, listLength: smallint;
-  aleTankard: TBitmap;
+  aleTankard, crudeDagger: TBitmap;
 
 (* Load item textures *)
 procedure setupItems;
@@ -50,7 +50,7 @@ procedure drawItem(c, r: smallint; glyph: char);
 (* Redraw all items *)
 procedure redrawItems;
 (* Execute useItem procedure *)
-procedure lookupUse(x: smallint);
+procedure lookupUse(x: smallint; equipped: boolean);
 
 implementation
 
@@ -58,6 +58,8 @@ procedure setupItems;
 begin
   aleTankard := TBitmap.Create;
   aleTankard.LoadFromResourceName(HINSTANCE, 'ALE1');
+  crudeDagger := TBitmap.Create;
+  crudeDagger.LoadFromResourceName(HINSTANCE, 'DAGGER1');
 end;
 
 procedure spawnItem;
@@ -71,7 +73,7 @@ begin
   // place the item
   for i := 1 to itemAmount do
   begin
-    createAleTankard(i, globalutils.currentDgncentreList[p + 2].x,
+    createDagger(i, globalutils.currentDgncentreList[p + 2].x,
       globalutils.currentDgncentreList[p + 2].y);
   end;
 end;
@@ -79,7 +81,9 @@ end;
 procedure drawItem(c, r: smallint; glyph: char);
 begin { TODO : When more items are created, swap this out for a CASE statement }
   if (glyph = '!') then
-    drawToBuffer(mapToScreen(c), mapToScreen(r), aleTankard);
+    drawToBuffer(mapToScreen(c), mapToScreen(r), aleTankard)
+  else if (glyph = '2') then
+    drawToBuffer(mapToScreen(c), mapToScreen(r), crudeDagger);
 end;
 
 procedure redrawItems;
@@ -95,10 +99,11 @@ begin
   end;
 end;
 
-procedure lookupUse(x: smallint);
+procedure lookupUse(x: smallint; equipped: boolean);
 begin
   case x of
     1: ale_tankard.useItem;
+    2: dagger.useItem(equipped);
   end;
 end;
 

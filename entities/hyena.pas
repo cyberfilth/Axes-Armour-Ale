@@ -99,6 +99,8 @@ begin
     currentHP := maxHP;
     attack := randomRange(2, 3);
     defense := randomRange(2, 4);
+    weaponDice := 0;
+    weaponAdds := 0;
     xpReward := maxHP;
     visionRange := 5;
     NPCsize := 2;
@@ -106,6 +108,8 @@ begin
     moveCount := 0;
     inView := False;
     discovered := False;
+    weaponEquipped := False;
+    armourEquipped := False;
     isDead := False;
     abilityTriggered := False;
     stsDrunk := False;
@@ -193,15 +197,17 @@ begin
     begin
       (* Remain on original tile and attack *)
       entities.moveNPC(id, spx, spy);
-      combat(id, 0);  { TODO : add NPC id, [0] for player }
+      combat(id, 0);
     end
     (* Else if tile does not contain player, check for another entity *)
     else if (map.isOccupied(newX, newY) = True) then
-    begin  { TODO : Check NPCsize of entity }
+    begin
       if (entities.entityList[entities.getCreatureID(newX, newY)].NPCsize <
         entities.entityList[id].NPCsize) then
-        combat(id, entities.getCreatureID(newX, newY))
-      //ui.bufferMessage('Hyena attacks ' + entities.getCreatureName(newX, newY))
+      begin
+        combat(id, entities.getCreatureID(newX, newY));
+        ui.bufferMessage('Hyena attacks ' + entities.getCreatureName(newX, newY));
+      end
       else
         ui.bufferMessage('Hyena bumps into a ' + entities.getCreatureName(newX, newY));
       (* Remain on original tile *)
@@ -261,10 +267,11 @@ begin
       (entities.entityList[idTarget].currentHP - damageAmount);
     if (entities.entityList[idTarget].currentHP < 1) then
     begin
-      if (idTarget = 0) then{ TODO : Create player.playerDeath function that handles this }
+      if (idTarget = 0) then
+        { TODO : Create player.playerDeath function that handles this }
       begin
-      ui.displayMessage('You are dead!');
-      exit;
+        ui.displayMessage('You are dead!');
+        exit;
       end
       else
       begin
@@ -282,20 +289,26 @@ begin
       if (damageAmount = 1) then
       begin
         if (idTarget = 0) then // if target is the player
-          ui.bufferMessage('The hyena slightly wounds you')
+        begin
+          ui.writeBufferedMessages;
+          ui.displayMessage('The hyena slightly wounds you');
+        end
         else
-          ui.bufferMessage('The hyena slightly wounds the ' + entities.entityList[idTarget].race);
+        begin
+          ui.writeBufferedMessages;
+          ui.displayMessage('The hyena slightly wounds the ' +
+            entities.entityList[idTarget].race);
+        end;
       end
       else  // if attack causes more damage
       begin
-      if (idTarget = 0) then // if target is the player
-      begin
-        ui.bufferMessage('The hyena bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
-      (* Update health display to show damage *)
-      ui.updateHealth;
-      end
-      else
-        ui.bufferMessage('The hyena bites the ' + entities.entityList[idTarget].race);
+        if (idTarget = 0) then // if target is the player
+        begin
+          ui.bufferMessage('The hyena bites you, inflicting ' +
+            IntToStr(damageAmount) + ' damage');
+        end
+        else
+          ui.bufferMessage('The hyena bites the ' + entities.entityList[idTarget].race);
       end;
     end;
   end
