@@ -367,6 +367,7 @@ begin
   map.blueDungeonWallHi.Free;
   items.aleTankard.Free;
   items.crudeDagger.Free;
+  items.leatherArmour1.Free;
   entities.caveRatGlyph.Free;
   entities.hyenaGlyph.Free;
   entities.playerGlyph.Free;
