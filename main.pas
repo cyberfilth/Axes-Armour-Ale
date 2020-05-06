@@ -341,6 +341,8 @@ begin
   items.redrawItems;
   (* Draw sidepanel *)
   ui.drawSidepanel;
+  (* Check for equipped items *)
+  player_inventory.loadEquippedItems;
   (* Setup player vision *)
   fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
     entities.entityList[0].visionRange, 1);
