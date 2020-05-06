@@ -101,7 +101,7 @@ var
   id_int: smallint;
 begin
   case mapType of
-    0:cave.generate;
+    0: cave.generate;
     1: grid_dungeon.generate;
   end;
   id_int := 0;
@@ -144,7 +144,12 @@ end;
 function canMove(checkX, checkY: smallint): boolean;
 begin
   Result := False;
-  if (maparea[checkY][checkX].Blocks) = False then { TODO : This line causes intermittant raised exception class 201 - check it out }
+  if (checkX < 1) and (checkX > MAXCOLUMNS) then
+    Result := False
+  else if (checkY < 1) and (checkY > MAXROWS) then
+    Result := False
+  else if (maparea[checkY][checkX].Blocks) = False then
+    { TODO : This line causes intermittant raised exception class 201 - check it out }
     Result := True;
 end;
 
@@ -175,7 +180,8 @@ end;
 function hasPlayer(checkX, checkY: smallint): boolean;
 begin
   Result := False;
-  if (entities.entityList[0].posX = checkX) and (entities.entityList[0].posY = checkY) then
+  if (entities.entityList[0].posX = checkX) and
+    (entities.entityList[0].posY = checkY) then
     Result := True;
 end;
 

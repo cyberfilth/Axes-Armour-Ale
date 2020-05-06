@@ -196,7 +196,7 @@ var
   i: smallint;
 begin
   Result := 0; // initialise variable
-  for i := 1 to npcAmount do
+  for i := 0 to npcAmount do
   begin
     if (entityList[i].posX = x) and (entityList[i].posY = y) then
       Result := i;
@@ -207,7 +207,7 @@ function getCreatureName(x, y: smallint): shortstring;
 var
   i: smallint;
 begin
-  for i := 1 to npcAmount do
+  for i := 0 to npcAmount do
   begin
     if (entityList[i].posX = x) and (entityList[i].posY = y) then
       Result := entityList[i].race;

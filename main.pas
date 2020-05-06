@@ -21,6 +21,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: word);
+    procedure FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
     procedure FormPaint(Sender: TObject);
     (* New game setup *)
     procedure newGame;
@@ -246,7 +247,7 @@ begin
         player_inventory.menu(12);
         Invalidate;
       end;
-       VK_W:  // Wear / Wield
+      VK_W:  // Wear / Wield
       begin
         player_inventory.menu(13);
         Invalidate;
@@ -293,6 +294,24 @@ begin
       end;
     end;
   end;
+end;
+
+(* Capture mouse pointer for the Look command *)
+procedure TGameWindow.FormMouseMove(Sender: TObject; Shift: TShiftState; X, Y: integer);
+begin
+  if (X >= 1) and (X <= 686) and (Y >= 1) and (Y <= 400) then
+  begin
+    (* Check for entity *)
+    if (map.isOccupied(map.screenToMap(x), map.screenToMap(y)) = True) then
+    (* Add check if they are visible *)
+
+    begin
+      ui.displayLook(getCreatureName(screenToMap(x), screenToMap(y)));
+      Invalidate;
+    end;
+  end;
+  (* Check for item *)
+
 end;
 
 procedure TGameWindow.FormPaint(Sender: TObject);
