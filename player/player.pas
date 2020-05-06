@@ -91,6 +91,8 @@ var
   (* store original values in case player cannot move *)
   originalX, originalY: smallint;
 begin
+  (* Unoccupy tile *)
+  map.unoccupy(entityList[0].posX, entityList[0].posY);
   (* Repaint visited tiles *)
   fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
     entities.entityList[0].visionRange, 0);
@@ -141,6 +143,8 @@ begin
     ui.displayMessage('You bump into a wall');
     Dec(playerTurn);
   end;
+  (* Occupy tile *)
+  map.occupy(entityList[0].posX, entityList[0].posY);
   fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
     entities.entityList[0].visionRange, 1);
   ui.writeBufferedMessages;

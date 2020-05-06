@@ -43,6 +43,7 @@ begin
     entityList[0].armourEquipped := True;
     Inc(entityList[0].defense, 2);
     ui.bufferMessage('The armour adds 2 points to your defense');
+    ui.updateArmour('Leather armour');
     ui.updateDefence;
     ui.writeBufferedMessages;
   end
@@ -52,6 +53,7 @@ begin
     entityList[0].armourEquipped := False;
     Dec(entityList[0].defense, 2);
     ui.updateDefence;
+    ui.updateArmour('none');
     ui.writeBufferedMessages;
   end;
 end;

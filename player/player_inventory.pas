@@ -428,7 +428,6 @@ begin
           ui.bufferMessage('You put on the ' + inventory[wieldItem].Name);
         items.lookupUse(inventory[wieldItem].useID, False);
         inventory[wieldItem].equipped := True;
-        ui.updateWeapon(inventory[wieldItem].Name);
         (* Add equipped suffix *)
         inventory[wieldItem].description :=
           inventory[wieldItem].description + ' [equipped]';
@@ -444,7 +443,6 @@ begin
           ui.bufferMessage('You take off the ' + inventory[wieldItem].Name);
         items.lookupUse(inventory[wieldItem].useID, True);
         inventory[wieldItem].equipped := False;
-         ui.updateWeapon('none');
         (* Remove equipped suffix *)
         SetLength(inventory[wieldItem].description, Length(inventory[wieldItem].description) - 11);
         Inc(playerTurn);
