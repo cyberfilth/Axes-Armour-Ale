@@ -45,6 +45,8 @@ procedure updateAttack;
 procedure updateDefence;
 (* Display equipped weapon *)
 procedure updateWeapon(weaponName: shortstring);
+(* Display equipped armour *)
+procedure updateArmour(armourName: shortstring);
 (* Write text to the message log *)
 procedure displayMessage(message: string);
 (* Store all messages from players turn *)
@@ -105,6 +107,7 @@ begin
   (* Write Equipment window *)
   writeToBuffer(sbx + 8, eqy + 5, MESSAGEFADE1, 'Equipment');
   updateWeapon('none');
+  updateArmour('none');
 end;
 
 procedure updateLevel;
@@ -197,6 +200,22 @@ begin
   end;
 end;
 
+procedure updateArmour(armourName: shortstring);
+begin
+  main.tempScreen.Canvas.Font.Size := 10;
+  (* Paint over previous text *)
+  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.FillRect(sbx + 8, eqy + 45, sbx + 135, eqy + 60);
+  if (armourName = 'none') then
+  begin
+    writeToBuffer(sbx + 8, eqy + 45, MESSAGEFADE2, 'No armour equipped');
+  end
+  else
+  begin
+    writeToBuffer(sbx + 8, eqy + 45, UITEXTCOLOUR, armourName);
+  end;
+end;
+
 procedure displayMessage(message: string);
 begin
   (* Catch duplicate messages *)
@@ -231,7 +250,7 @@ begin
     writeToBuffer(10, 530, MESSAGEFADE6, messageArray[7]);
   end;
 end;
-
+{ TODO : If buffered message is longer than a certain length, flush the buffer with writeBuffer procedure }
 procedure bufferMessage(message: string);
 begin
   buffer := buffer + message + '. ';

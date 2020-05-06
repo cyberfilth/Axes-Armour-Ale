@@ -8,7 +8,7 @@ interface
 uses
   Graphics, globalutils, map,
   (* Import the items *)
-  ale_tankard, dagger;
+  ale_tankard, dagger, leather_armour1;
 
 type
   (* Item types = drink, weapon, armour, missile *)
@@ -39,7 +39,7 @@ type
 var
   itemList: array of Item;
   itemAmount, listLength: smallint;
-  aleTankard, crudeDagger: TBitmap;
+  aleTankard, crudeDagger, leatherArmour1: TBitmap;
 
 (* Load item textures *)
 procedure setupItems;
@@ -60,6 +60,8 @@ begin
   aleTankard.LoadFromResourceName(HINSTANCE, 'ALE1');
   crudeDagger := TBitmap.Create;
   crudeDagger.LoadFromResourceName(HINSTANCE, 'DAGGER1');
+  leatherArmour1 := TBitmap.Create;
+  leatherArmour1.LoadFromResourceName(HINSTANCE, 'LEATHER_AMOUR1');
 end;
 
 procedure spawnItem;
@@ -73,7 +75,7 @@ begin
   // place the item
   for i := 1 to itemAmount do
   begin
-    createDagger(i, globalutils.currentDgncentreList[p + 2].x,
+    createArmour(i, globalutils.currentDgncentreList[p + 2].x,
       globalutils.currentDgncentreList[p + 2].y);
   end;
 end;
@@ -83,7 +85,9 @@ begin { TODO : When more items are created, swap this out for a CASE statement }
   if (glyph = '!') then
     drawToBuffer(mapToScreen(c), mapToScreen(r), aleTankard)
   else if (glyph = '2') then
-    drawToBuffer(mapToScreen(c), mapToScreen(r), crudeDagger);
+    drawToBuffer(mapToScreen(c), mapToScreen(r), crudeDagger)
+  else if (glyph = '3') then
+    drawToBuffer(mapToScreen(c), mapToScreen(r), leatherArmour1);
 end;
 
 procedure redrawItems;
@@ -104,6 +108,7 @@ begin
   case x of
     1: ale_tankard.useItem;
     2: dagger.useItem(equipped);
+    3: leather_armour1.useItem(equipped);
   end;
 end;
 

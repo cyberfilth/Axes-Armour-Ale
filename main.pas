@@ -341,6 +341,8 @@ begin
   items.redrawItems;
   (* Draw sidepanel *)
   ui.drawSidepanel;
+  (* Check for equipped items *)
+  player_inventory.loadEquippedItems;
   (* Setup player vision *)
   fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
     entities.entityList[0].visionRange, 1);
@@ -367,6 +369,7 @@ begin
   map.blueDungeonWallHi.Free;
   items.aleTankard.Free;
   items.crudeDagger.Free;
+  items.leatherArmour1.Free;
   entities.caveRatGlyph.Free;
   entities.hyenaGlyph.Free;
   entities.playerGlyph.Free;

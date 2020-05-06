@@ -3,6 +3,7 @@
 unit los;
 
 {$mode objfpc}{$H+}
+{$RANGECHECKS OFF}
 
 interface
 

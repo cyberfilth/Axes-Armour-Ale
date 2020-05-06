@@ -146,8 +146,7 @@ begin
       4: testx := spx;
       5: testy := spy;
     end
-  until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = False) and
-    (testx <> entities.entityList[0].posX) and (testy <> entities.entityList[0].posY);
+  until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = False);
   entities.moveNPC(id, testx, testy);
 end;
 

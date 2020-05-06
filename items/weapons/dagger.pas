@@ -45,6 +45,7 @@ begin
     Inc(entityList[0].weaponDice);
     // Inc(entityList[0].weaponAdds, 6);
     ui.bufferMessage('The dagger adds 1D6 to your attack');
+    ui.updateWeapon('Crude dagger');
     ui.writeBufferedMessages;
   end
   else
@@ -52,6 +53,7 @@ begin
   begin
     entityList[0].weaponEquipped := False;
     Dec(entityList[0].weaponDice);
+    ui.updateWeapon('none');
     ui.writeBufferedMessages;
   end;
 end;

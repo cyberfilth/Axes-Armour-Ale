@@ -27,6 +27,8 @@ var
 
 (* Initialise empty player inventory *)
 procedure initialiseInventory;
+(* Setup equipped items when loading a saved game *)
+procedure loadEquippedItems;
 (* Add to inventory *)
 procedure addToInventory(itemNumber: smallint);
 (* Display the inventory screen *)
@@ -66,6 +68,25 @@ begin
     inventory[i].inInventory := False;
     inventory[i].useID := 0;
   end;
+end;
+
+procedure loadEquippedItems;
+var
+  i: smallint;
+begin
+  for i := 0 to 9 do
+  begin
+    if (inventory[i].equipped = True) then
+    begin
+      (* Check for weapons *)
+      if (inventory[i].itemType = 'weapon') then
+        ui.updateWeapon(inventory[i].Name)
+      (* Check for armour *)
+      else if (inventory[i].itemType = 'armour') then
+        ui.updateArmour(inventory[i].Name);
+    end;
+  end;
+
 end;
 
 procedure addToInventory(itemNumber: smallint);
@@ -428,7 +449,6 @@ begin
           ui.bufferMessage('You put on the ' + inventory[wieldItem].Name);
         items.lookupUse(inventory[wieldItem].useID, False);
         inventory[wieldItem].equipped := True;
-        ui.updateWeapon(inventory[wieldItem].Name);
         (* Add equipped suffix *)
         inventory[wieldItem].description :=
           inventory[wieldItem].description + ' [equipped]';
@@ -444,9 +464,9 @@ begin
           ui.bufferMessage('You take off the ' + inventory[wieldItem].Name);
         items.lookupUse(inventory[wieldItem].useID, True);
         inventory[wieldItem].equipped := False;
-         ui.updateWeapon('none');
         (* Remove equipped suffix *)
-        SetLength(inventory[wieldItem].description, Length(inventory[wieldItem].description) - 11);
+        SetLength(inventory[wieldItem].description,
+          Length(inventory[wieldItem].description) - 11);
         Inc(playerTurn);
         showInventory;
       end;

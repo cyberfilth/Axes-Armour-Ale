@@ -184,6 +184,7 @@ begin
       DataNode := AddChild(RootNode, 'playerInventory');
       TDOMElement(dataNode).SetAttribute('id', IntToStr(i));
       AddElement(DataNode, 'Name', inventory[i].Name);
+      AddElement(DataNode, 'equipped', BoolToStr(inventory[i].equipped));
       AddElement(DataNode, 'description', inventory[i].description);
       AddElement(DataNode, 'itemType', inventory[i].itemType);
       AddElement(DataNode, 'useID', IntToStr(inventory[i].useID));
@@ -308,6 +309,8 @@ begin
       player_inventory.inventory[i].id := i;
       player_inventory.inventory[i].Name :=
         InventoryNode.FindNode('Name').TextContent;
+      player_inventory.inventory[i].equipped :=
+        StrToBool(InventoryNode.FindNode('equipped').TextContent);
       player_inventory.inventory[i].description :=
         InventoryNode.FindNode('description').TextContent;
       player_inventory.inventory[i].itemType :=

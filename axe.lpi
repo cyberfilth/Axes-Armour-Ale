@@ -14,7 +14,7 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="14">
+      <Resources Count="15">
         <Resource_0 FileName="images/sprites/player_glyph.bmp" Type="BITMAP" ResourceName="PLAYER_GLYPH"/>
         <Resource_1 FileName="images/dungeon/ascii/blueDungeonFloorDef.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORDEF"/>
         <Resource_2 FileName="images/dungeon/ascii/blueDungeonFloorHi.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORHI"/>
@@ -27,8 +27,9 @@
         <Resource_9 FileName="images/titleScreen.bmp" Type="BITMAP" ResourceName="TITLESCREEN"/>
         <Resource_10 FileName="images/sprites/r_orange.bmp" Type="BITMAP" ResourceName="R_ORANGE"/>
         <Resource_11 FileName="images/sprites/ale1.bmp" Type="BITMAP" ResourceName="ALE1"/>
-        <Resource_12 FileName="images\sprites\h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
-        <Resource_13 FileName="images\sprites\dagger1.bmp" Type="BITMAP" ResourceName="DAGGER1"/>
+        <Resource_12 FileName="images/sprites/h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
+        <Resource_13 FileName="images/sprites/dagger1.bmp" Type="BITMAP" ResourceName="DAGGER1"/>
+        <Resource_14 FileName="images/sprites/leather_amour1.bmp" Type="BITMAP" ResourceName="LEATHER_AMOUR1"/>
       </Resources>
     </General>
     <VersionInfo>
@@ -49,7 +50,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="dungeons;vision;entities;items;player;items\weapons"/>
+            <OtherUnitFiles Value="dungeons;vision;entities;items;player;items\weapons;items\armour"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -71,6 +72,7 @@
               <DebugInfoType Value="dsDwarf2Set"/>
               <UseHeaptrc Value="True"/>
               <TrashVariables Value="True"/>
+              <UseValgrind Value="True"/>
               <UseExternalDbgSyms Value="True"/>
             </Debugging>
             <Options>
@@ -90,7 +92,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="dungeons;vision;entities;items;player;items\weapons"/>
+            <OtherUnitFiles Value="dungeons;vision;entities;items;player;items\weapons;items\armour"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -128,7 +130,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="18">
+    <Units Count="19">
       <Unit0>
         <Filename Value="axe.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -204,6 +206,10 @@
         <Filename Value="items\weapons\dagger.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit17>
+      <Unit18>
+        <Filename Value="items\armour\leather_armour1.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit18>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -214,7 +220,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="dungeons;vision;entities;items;player;items\weapons"/>
+      <OtherUnitFiles Value="dungeons;vision;entities;items;player;items\weapons;items\armour"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Linking>
