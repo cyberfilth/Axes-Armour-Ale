@@ -303,6 +303,7 @@ begin
   begin
     (* Check for entity *)
     if (map.isOccupied(map.screenToMap(x), map.screenToMap(y)) = True) then
+    begin
       (* Add check if they are visible *)
       if (isCreatureVisible(screenToMap(x), screenToMap(y)) = True) then
       begin
@@ -312,6 +313,13 @@ begin
           getCreatureMaxHP(screenToMap(x), screenToMap(y)));
         Invalidate;
       end;
+    end
+    else if (map.isOccupied(map.screenToMap(x), map.screenToMap(y)) = False) then
+    begin
+      (* Clear UI display *)
+      ui.displayLook('none', 0, 0);
+      Invalidate;
+    end;
   end;
   (* Check for item *)
 

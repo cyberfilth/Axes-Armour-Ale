@@ -233,11 +233,14 @@ begin
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
   main.tempScreen.Canvas.FillRect(sbx + 3, infoy + 20, sbx + 135, infoy + 98);
   main.tempScreen.Canvas.Font.Size := 10;
-  (* Display entity name *)
-  writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, entityName);
-  (* Display health *)
-  writeToBuffer(sbx + 5, infoy + 50, UITEXTCOLOUR, 'Health: ' +
-    IntToStr(currentHP) + ' / ' + IntToStr(maxHP));
+  if (entityName <> 'none') then
+  begin
+    (* Display entity name *)
+    writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, entityName);
+    (* Display health *)
+    writeToBuffer(sbx + 5, infoy + 50, UITEXTCOLOUR, 'Health: ' +
+      IntToStr(currentHP) + ' / ' + IntToStr(maxHP));
+  end;
 end;
 
 procedure displayMessage(message: string);
