@@ -148,8 +148,7 @@ begin
     Result := False
   else if (checkY < 1) and (checkY > MAXROWS) then
     Result := False
-  else if (maparea[checkY][checkX].Blocks) = False then
-    { TODO : This line causes intermittant raised exception class 201 - check it out }
+  else if (maparea[checkY][checkX].Blocks = False) then
     Result := True;
 end;
 

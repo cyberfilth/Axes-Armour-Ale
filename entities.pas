@@ -73,10 +73,16 @@ procedure drawEntity(c, r: smallint; glyph: char);
 procedure moveNPC(id, newX, newY: smallint);
 (* Redraw all NPC's *)
 procedure redrawNPC;
-(* Get creature details at coordinates *)
+(* Get creature currentHP at coordinates *)
+function getCreatureHP(x, y: smallint): smallint;
+(* Get creature maxHP at coordinates *)
+function getCreatureMaxHP(x, y: smallint): smallint;
+(* Get creature ID at coordinates *)
 function getCreatureID(x, y: smallint): smallint;
 (* Get creature name at coordinates *)
 function getCreatureName(x, y: smallint): shortstring;
+(* Check if creature is visible at coordinates *)
+function isCreatureVisible(x, y: smallint): boolean;
 (* Call Creatures.takeTurn procedure *)
 procedure NPCgameLoop;
 
@@ -191,6 +197,28 @@ begin
   end;
 end;
 
+function getCreatureHP(x, y: smallint): smallint;
+var
+  i: smallint;
+begin
+  for i := 0 to npcAmount do
+  begin
+    if (entityList[i].posX = x) and (entityList[i].posY = y) then
+      Result := entityList[i].currentHP;
+  end;
+end;
+
+function getCreatureMaxHP(x, y: smallint): smallint;
+var
+  i: smallint;
+begin
+  for i := 0 to npcAmount do
+  begin
+    if (entityList[i].posX = x) and (entityList[i].posY = y) then
+      Result := entityList[i].maxHP;
+  end;
+end;
+
 function getCreatureID(x, y: smallint): smallint;
 var
   i: smallint;
@@ -212,6 +240,17 @@ begin
     if (entityList[i].posX = x) and (entityList[i].posY = y) then
       Result := entityList[i].race;
   end;
+end;
+
+function isCreatureVisible(x, y: smallint): boolean;
+var
+  i: smallint;
+begin
+  Result := False;
+  for i := 0 to npcAmount do
+    if (entityList[i].posX = x) and (entityList[i].posY = y) then
+      if (entityList[i].inView = True) then
+        Result := True;
 end;
 
 procedure NPCgameLoop;

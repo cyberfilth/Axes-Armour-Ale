@@ -303,12 +303,15 @@ begin
   begin
     (* Check for entity *)
     if (map.isOccupied(map.screenToMap(x), map.screenToMap(y)) = True) then
-    (* Add check if they are visible *)
-
-    begin
-      ui.displayLook(getCreatureName(screenToMap(x), screenToMap(y)));
-      Invalidate;
-    end;
+      (* Add check if they are visible *)
+      if (isCreatureVisible(screenToMap(x), screenToMap(y)) = True) then
+      begin
+        (* Send entity name, current HP and max HP to UI display *)
+        ui.displayLook(getCreatureName(screenToMap(x), screenToMap(y)),
+          getCreatureHP(screenToMap(x), screenToMap(y)),
+          getCreatureMaxHP(screenToMap(x), screenToMap(y)));
+        Invalidate;
+      end;
   end;
   (* Check for item *)
 

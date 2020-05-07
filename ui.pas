@@ -53,7 +53,7 @@ procedure updateWeapon(weaponName: shortstring);
 (* Display equipped armour *)
 procedure updateArmour(armourName: shortstring);
 (* Info window results from LOOK command *)
-procedure displayLook(entityName: shortstring);
+procedure displayLook(entityName: shortstring; currentHP, maxHP: smallint);
 (* Write text to the message log *)
 procedure displayMessage(message: string);
 (* Store all messages from players turn *)
@@ -70,7 +70,7 @@ procedure clearLog;
 implementation
 
 uses
-  main, entities, items, map;
+  main, entities, items;
 
 procedure titleScreen(yn: byte);
 begin
@@ -227,16 +227,17 @@ begin
   end;
 end;
 
-procedure displayLook(entityName: shortstring);
+procedure displayLook(entityName: shortstring; currentHP, maxHP: smallint);
 begin
-    (* Paint over previous text *)
-    main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-    main.tempScreen.Canvas.FillRect(sbx + 3, infoy + 20, sbx + 135, infoy + 98);
-    main.tempScreen.Canvas.Font.Size := 10;
-    (* Display entity name *)
-    writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, entityName);
-    //writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, 'Tile information');
-    //writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, map.maparea[map.screenToMap(y)][map.screenToMap(x)].Glyph);
+  (* Paint over previous text *)
+  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.FillRect(sbx + 3, infoy + 20, sbx + 135, infoy + 98);
+  main.tempScreen.Canvas.Font.Size := 10;
+  (* Display entity name *)
+  writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, entityName);
+  (* Display health *)
+  writeToBuffer(sbx + 5, infoy + 50, UITEXTCOLOUR, 'Health: ' +
+    IntToStr(currentHP) + ' / ' + IntToStr(maxHP));
 end;
 
 procedure displayMessage(message: string);
