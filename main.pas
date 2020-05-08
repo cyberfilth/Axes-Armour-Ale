@@ -22,7 +22,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure FormKeyDown(Sender: TObject; var Key: word);
     procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
+      Shift: TShiftState; X, Y: integer);
     procedure FormPaint(Sender: TObject);
     (* New game setup *)
     procedure newGame;
@@ -122,7 +122,7 @@ begin
   (* Update health display to show damage *)
   ui.updateHealth;
   (* Clear Look / Info box *)
-  ui.displayLook('none', 0, 0);
+  ui.displayLook(1, 'none', '', 0, 0);
   (* Redraw Player *)
   drawToBuffer(map.mapToScreen(entities.entityList[0].posX),
     map.mapToScreen(entities.entityList[0].posY),
@@ -300,32 +300,37 @@ end;
 
 (* Capture mouse position for the Look command *)
 procedure TGameWindow.FormMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+  Shift: TShiftState; X, Y: integer);
 begin
-   if (X >= 1) and (X <= 686) and (Y >= 1) and (Y <= 400) then
-   begin
-     (* Check for entity *)
-     if (map.isOccupied(map.screenToMap(x), map.screenToMap(y)) = True) then
-     begin
-       (* Add check if they are visible *)
-       if (isCreatureVisible(screenToMap(x), screenToMap(y)) = True) then
-       begin
-         (* Send entity name, current HP and max HP to UI display *)
-         ui.displayLook(getCreatureName(screenToMap(x), screenToMap(y)),
-           getCreatureHP(screenToMap(x), screenToMap(y)),
-           getCreatureMaxHP(screenToMap(x), screenToMap(y)));
-         Invalidate;
-       end;
-     end
-     else if (map.isOccupied(map.screenToMap(x), map.screenToMap(y)) = False) then
-     begin
-       (* Clear UI display *)
-       ui.displayLook('none', 0, 0);
-       Invalidate;
-     end;
-   end;
-   (* Check for item *)
-
+  if (X >= 1) and (X <= 686) and (Y >= 1) and (Y <= 400) then
+  begin
+    (* Check for entity *)
+    if (map.isOccupied(map.screenToMap(x), map.screenToMap(y)) = True) then
+    begin
+      (* Add check if they are visible *)
+      if (isCreatureVisible(screenToMap(x), screenToMap(y)) = True) then
+      begin
+        (* Send entity name, current HP and max HP to UI display *)
+        ui.displayLook(1, getCreatureName(screenToMap(x), screenToMap(y)), '',
+          getCreatureHP(screenToMap(x), screenToMap(y)),
+          getCreatureMaxHP(screenToMap(x), screenToMap(y)));
+        Invalidate;
+      end;
+    end
+    (* Check for item *)
+    else if (items.containsItem(map.screenToMap(x), map.screenToMap(y)) = True) then
+    begin
+      ui.displayLook(2, getItemName(map.screenToMap(x), map.screenToMap(y)),
+        getItemDescription(map.screenToMap(x), map.screenToMap(y)), 0, 0);
+      Invalidate;
+    end
+    else
+    begin
+      (* Clear UI display *)
+      ui.displayLook(1, 'none', '', 0, 0);
+      Invalidate;
+    end;
+  end;
 end;
 
 procedure TGameWindow.FormPaint(Sender: TObject);

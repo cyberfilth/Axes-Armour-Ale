@@ -47,6 +47,12 @@ procedure setupItems;
 procedure spawnItem;
 (* Draw item on screen *)
 procedure drawItem(c, r: smallint; glyph: char);
+(* Is there an item at coordinates *)
+function containsItem(x, y: smallint): boolean;
+(* Get name of item at coordinates *)
+function getItemName(x, y: smallint): shortstring;
+(* Get description of item at coordinates *)
+function getItemDescription(x, y: smallint): shortstring;
 (* Redraw all items *)
 procedure redrawItems;
 (* Execute useItem procedure *)
@@ -88,6 +94,40 @@ begin { TODO : When more items are created, swap this out for a CASE statement }
     drawToBuffer(mapToScreen(c), mapToScreen(r), crudeDagger)
   else if (glyph = '3') then
     drawToBuffer(mapToScreen(c), mapToScreen(r), leatherArmour1);
+end;
+
+function containsItem(x, y: smallint): boolean;
+var
+  i: smallint;
+begin
+  Result := False;
+  for i := 1 to itemAmount do
+  begin
+    if (itemList[i].posX = x) and (itemList[i].posY = y) then
+      Result := True;
+  end;
+end;
+
+function getItemName(x, y: smallint): shortstring;
+var
+  i: smallint;
+begin
+  for i := 1 to itemAmount do
+  begin
+    if (itemList[i].posX = x) and (itemList[i].posY = y) then
+      Result := itemList[i].itemName;
+  end;
+end;
+
+function getItemDescription(x, y: smallint): shortstring;
+var
+  i: smallint;
+begin
+  for i := 1 to itemAmount do
+  begin
+    if (itemList[i].posX = x) and (itemList[i].posY = y) then
+      Result := itemList[i].itemDescription;
+  end;
 end;
 
 procedure redrawItems;

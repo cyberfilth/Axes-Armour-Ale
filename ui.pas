@@ -53,7 +53,7 @@ procedure updateWeapon(weaponName: shortstring);
 (* Display equipped armour *)
 procedure updateArmour(armourName: shortstring);
 (* Info window results from LOOK command *)
-procedure displayLook(entityName: shortstring; currentHP, maxHP: smallint);
+procedure displayLook(displayType: byte; entityName, itemDescription: shortstring; currentHP, maxHP: smallint);
 (* Write text to the message log *)
 procedure displayMessage(message: string);
 (* Store all messages from players turn *)
@@ -227,12 +227,15 @@ begin
   end;
 end;
 
-procedure displayLook(entityName: shortstring; currentHP, maxHP: smallint);
+(* displayType: 1 = Entity, 2 = Item *)
+procedure displayLook(displayType: byte; entityName, itemDescription: shortstring; currentHP, maxHP: smallint);
 begin
   (* Paint over previous text *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
   main.tempScreen.Canvas.FillRect(sbx + 3, infoy + 20, sbx + 135, infoy + 98);
   main.tempScreen.Canvas.Font.Size := 10;
+  if (displayType = 1) then
+  begin
   if (entityName <> 'none') then
   begin
     (* Display entity name *)
@@ -241,6 +244,17 @@ begin
     writeToBuffer(sbx + 5, infoy + 50, UITEXTCOLOUR, 'Health: ' +
       IntToStr(currentHP) + ' / ' + IntToStr(maxHP));
   end;
+  end
+  else if (displayType = 2) then
+  begin
+  begin
+    (* Display item name *)
+    writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, entityName);
+    (* Display item description *)
+    writeToBuffer(sbx + 5, infoy + 50, MESSAGEFADE1, itemDescription);
+  end;
+  end;
+
 end;
 
 procedure displayMessage(message: string);
