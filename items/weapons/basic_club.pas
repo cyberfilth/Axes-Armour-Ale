@@ -1,12 +1,12 @@
-(* A crude dagger *)
-unit dagger;
+(* A wooden club *)
+unit basic_club;
 
 {$mode objfpc}{$H+}
 
 interface
 
-(* Create a dagger *)
-procedure createDagger(uniqueid, itmx, itmy: smallint);
+(* Create a club *)
+procedure createClub(uniqueid, itmx, itmy: smallint);
 (* Equip weapon *)
 procedure useItem(equipped: boolean);
 
@@ -15,15 +15,15 @@ implementation
 uses
   items, entities, ui;
 
-procedure createDagger(uniqueid, itmx, itmy: smallint);
+procedure createClub(uniqueid, itmx, itmy: smallint);
 begin
   items.listLength := length(items.itemList);
   SetLength(items.itemList, items.listLength + 1);
   with items.itemList[items.listLength] do
   begin
     itemID := uniqueid;
-    itemName := 'Crude dagger';
-    itemDescription := 'adds 1D6+2 to attack';
+    itemName := 'Wooden club';
+    itemDescription := 'adds 1D6 to attack';
     itemType := 'weapon';
     useID := 2;
     glyph := '2';
@@ -43,9 +43,9 @@ begin
   begin
     entityList[0].weaponEquipped := True;
     Inc(entityList[0].weaponDice);
-    Inc(entityList[0].weaponAdds, 2);
-    ui.bufferMessage('The dagger adds 1D6+2 to your attack');
-    ui.updateWeapon('Crude dagger');
+    //Inc(entityList[0].weaponAdds, 2);
+    ui.bufferMessage('The club adds 1D6 to your attack');
+    ui.updateWeapon('Wooden club');
     ui.writeBufferedMessages;
   end
   else
@@ -53,11 +53,10 @@ begin
   begin
     entityList[0].weaponEquipped := False;
     Dec(entityList[0].weaponDice);
-    Dec(entityList[0].weaponAdds, 2);
+    //Dec(entityList[0].weaponAdds, 2);
     ui.updateWeapon('none');
     ui.writeBufferedMessages;
   end;
 end;
 
 end.
-

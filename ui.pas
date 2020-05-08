@@ -3,6 +3,7 @@
 unit ui;
 
 {$mode objfpc}{$H+}
+{$RANGECHECKS OFF}
 
 interface
 
@@ -22,6 +23,10 @@ const
   eqy = 170;
   (* equipment bar Height *)
   eqh = 120;
+  (* Look box Y position *)
+  infoy = 300;
+  (* Look box Height *)
+  infoh = 100;
 
 
 var
@@ -47,6 +52,8 @@ procedure updateDefence;
 procedure updateWeapon(weaponName: shortstring);
 (* Display equipped armour *)
 procedure updateArmour(armourName: shortstring);
+(* Info window results from LOOK command *)
+procedure displayLook(displayType: byte; entityName, itemDescription: shortstring; currentHP, maxHP: smallint);
 (* Write text to the message log *)
 procedure displayMessage(message: string);
 (* Store all messages from players turn *)
@@ -96,6 +103,8 @@ begin
   main.tempScreen.Canvas.Rectangle(sbx, sby, sbx + sbw, sby + sbh);
   (* Equipment window *)
   main.tempScreen.Canvas.Rectangle(sbx, eqy, sbx + sbw, eqy + eqh);
+  (* Info window *)
+  main.tempScreen.Canvas.Rectangle(sbx, infoy, sbx + sbw, infoy + infoh);
   main.tempScreen.Canvas.Font.Size := 10;
   (* Write stats *)
   writeToBuffer(sbx + 8, sby + 5, UITEXTCOLOUR, entities.entityList[0].race);
@@ -108,6 +117,8 @@ begin
   writeToBuffer(sbx + 8, eqy + 5, MESSAGEFADE1, 'Equipment');
   updateWeapon('none');
   updateArmour('none');
+  (* Write Info window *)
+  writeToBuffer(sbx + 8, infoy + 5, MESSAGEFADE1, 'Info');
 end;
 
 procedure updateLevel;
@@ -216,12 +227,42 @@ begin
   end;
 end;
 
+(* displayType: 1 = Entity, 2 = Item *)
+procedure displayLook(displayType: byte; entityName, itemDescription: shortstring; currentHP, maxHP: smallint);
+begin
+  (* Paint over previous text *)
+  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.FillRect(sbx + 3, infoy + 20, sbx + 135, infoy + 98);
+  main.tempScreen.Canvas.Font.Size := 10;
+  if (displayType = 1) then
+  begin
+  if (entityName <> 'none') then
+  begin
+    (* Display entity name *)
+    writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, entityName);
+    (* Display health *)
+    writeToBuffer(sbx + 5, infoy + 50, UITEXTCOLOUR, 'Health: ' +
+      IntToStr(currentHP) + ' / ' + IntToStr(maxHP));
+  end;
+  end
+  else if (displayType = 2) then
+  begin
+  begin
+    (* Display item name *)
+    writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, entityName);
+    (* Display item description *)
+    writeToBuffer(sbx + 5, infoy + 50, MESSAGEFADE1, itemDescription);
+  end;
+  end;
+
+end;
+
 procedure displayMessage(message: string);
 begin
   (* Catch duplicate messages *)
   if (message = messageArray[1]) then
   begin
-    main.tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
+    main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
     messageArray[1] := messageArray[1] + ' x2';
     main.tempScreen.Canvas.Font.Size := 9;
     writeToBuffer(10, 410, UITEXTCOLOUR, messageArray[1]);
@@ -250,6 +291,7 @@ begin
     writeToBuffer(10, 530, MESSAGEFADE6, messageArray[7]);
   end;
 end;
+
 { TODO : If buffered message is longer than a certain length, flush the buffer with writeBuffer procedure }
 procedure bufferMessage(message: string);
 begin

@@ -19,6 +19,7 @@ object GameWindow: TGameWindow
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnKeyDown = FormKeyDown
+  OnMouseDown = FormMouseDown
   OnPaint = FormPaint
   Position = poScreenCenter
   LCLVersion = '2.0.0.4'
