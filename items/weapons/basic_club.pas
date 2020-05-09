@@ -25,8 +25,8 @@ begin
     itemName := 'Wooden club';
     itemDescription := 'adds 1D6 to attack';
     itemType := 'weapon';
-    useID := 2;
-    glyph := '2';
+    useID := 4;
+    glyph := '4';
     inView := False;
     posX := itmx;
     posY := itmy;
@@ -43,7 +43,6 @@ begin
   begin
     entityList[0].weaponEquipped := True;
     Inc(entityList[0].weaponDice);
-    //Inc(entityList[0].weaponAdds, 2);
     ui.bufferMessage('The club adds 1D6 to your attack');
     ui.updateWeapon('Wooden club');
     ui.writeBufferedMessages;
@@ -53,7 +52,6 @@ begin
   begin
     entityList[0].weaponEquipped := False;
     Dec(entityList[0].weaponDice);
-    //Dec(entityList[0].weaponAdds, 2);
     ui.updateWeapon('none');
     ui.writeBufferedMessages;
   end;

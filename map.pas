@@ -144,12 +144,11 @@ end;
 function canMove(checkX, checkY: smallint): boolean;
 begin
   Result := False;
-  if (checkX < 1) and (checkX > MAXCOLUMNS) then
-    Result := False
-  else if (checkY < 1) and (checkY > MAXROWS) then
-    Result := False
-  else if (maparea[checkY][checkX].Blocks = False) then
-    Result := True;
+  if (checkX >= 1) and (checkX <= MAXCOLUMNS) and (checkY >= 1) and (checkY <= MAXROWS) then
+  begin
+    if (maparea[checkY][checkX].Blocks = False) then
+      Result := True;
+  end;
 end;
 
 function canSee(checkX, checkY: smallint): boolean;

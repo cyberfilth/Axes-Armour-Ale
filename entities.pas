@@ -110,7 +110,7 @@ begin
   npcAmount := (globalutils.currentDgnTotalRooms - 1);
   (*  initialise array *)
   SetLength(entityList, 0);
-  (*Add player to Entity list *)
+  (* Add player to Entity list *)
   player.createPlayer;
   (* Create the NPCs *)
   for i := 1 to npcAmount do

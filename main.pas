@@ -5,6 +5,9 @@
 unit main;
 
 {$mode objfpc}{$H+}
+{$IfOpt D+}
+{$Define DEBUG}
+{$EndIf}
 
 interface
 
@@ -341,6 +344,12 @@ end;
 
 procedure TGameWindow.newGame;
 begin
+  {$IfDef DEBUG}
+  {$IfDef Linux}
+  writeln('Debugging info...');
+  writeln('Random seed = ' + IntToStr(RandSeed));
+  {$EndIf}
+  {$EndIf}
   gameState := 1;
   playerTurn := 0;
   map.mapType := 0;// set to cavern
@@ -357,6 +366,8 @@ begin
   items.spawnItem;
   (* Draw sidepanel *)
   ui.drawSidepanel;
+  (* Setup players starting equipment *)
+  player.createEquipment;
   ui.displayMessage('Welcome message to be added here...');
   gameLoop;
   Canvas.Draw(0, 0, tempScreen);
@@ -397,6 +408,7 @@ end;
 
 procedure TGameWindow.freeMemory;
 begin
+  (* Map tiles *)
   map.caveFloorHi.Free;
   map.caveFloorDef.Free;
   map.caveWallHi.Free;
@@ -405,9 +417,12 @@ begin
   map.blueDungeonFloorHi.Free;
   map.blueDungeonWallDef.Free;
   map.blueDungeonWallHi.Free;
+  (* Item sprites *)
   items.aleTankard.Free;
   items.crudeDagger.Free;
   items.leatherArmour1.Free;
+  items.woodenClub.Free;
+  (* Entity sprites *)
   entities.caveRatGlyph.Free;
   entities.hyenaGlyph.Free;
   entities.playerGlyph.Free;

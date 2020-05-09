@@ -14,7 +14,7 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="15">
+      <Resources Count="16">
         <Resource_0 FileName="images/sprites/player_glyph.bmp" Type="BITMAP" ResourceName="PLAYER_GLYPH"/>
         <Resource_1 FileName="images/dungeon/ascii/blueDungeonFloorDef.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORDEF"/>
         <Resource_2 FileName="images/dungeon/ascii/blueDungeonFloorHi.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORHI"/>
@@ -30,6 +30,7 @@
         <Resource_12 FileName="images/sprites/h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
         <Resource_13 FileName="images/sprites/dagger1.bmp" Type="BITMAP" ResourceName="DAGGER1"/>
         <Resource_14 FileName="images/sprites/leather_amour1.bmp" Type="BITMAP" ResourceName="LEATHER_AMOUR1"/>
+        <Resource_15 FileName="images/sprites/basic_club.bmp" Type="BITMAP" ResourceName="BASIC_CLUB"/>
       </Resources>
     </General>
     <VersionInfo>
@@ -66,13 +67,14 @@
               <StackChecks Value="True"/>
             </Checks>
             <VerifyObjMethodCallValidity Value="True"/>
+            <Optimizations>
+              <OptimizationLevel Value="0"/>
+            </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <DebugInfoType Value="dsDwarf2Set"/>
+              <DebugInfoType Value="dsDwarf2"/>
               <UseHeaptrc Value="True"/>
-              <TrashVariables Value="True"/>
-              <UseValgrind Value="True"/>
               <UseExternalDbgSyms Value="True"/>
             </Debugging>
             <Options>

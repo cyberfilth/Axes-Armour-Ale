@@ -220,7 +220,7 @@ begin
       else if (menuState = 2) then
         quaff(1)
       else if (menuState = 3) then
-        wield(0);
+        wield(1);
     end;
     4: // 2 slot
     begin
@@ -229,7 +229,7 @@ begin
       else if (menuState = 2) then
         quaff(2)
       else if (menuState = 3) then
-        wield(0);
+        wield(2);
     end;
     5: // 3 slot
     begin
@@ -238,7 +238,7 @@ begin
       else if (menuState = 2) then
         quaff(3)
       else if (menuState = 3) then
-        wield(0);
+        wield(3);
     end;
     6: // 4 slot
     begin
@@ -247,7 +247,7 @@ begin
       else if (menuState = 2) then
         quaff(4)
       else if (menuState = 3) then
-        wield(0);
+        wield(4);
     end;
     7: // 5 slot
     begin
@@ -256,7 +256,7 @@ begin
       else if (menuState = 2) then
         quaff(5)
       else if (menuState = 3) then
-        wield(0);
+        wield(5);
     end;
     8: // 6 slot
     begin
@@ -265,7 +265,7 @@ begin
       else if (menuState = 2) then
         quaff(6)
       else if (menuState = 3) then
-        wield(0);
+        wield(6);
     end;
     9: // 7 slot
     begin
@@ -274,7 +274,7 @@ begin
       else if (menuState = 2) then
         quaff(7)
       else if (menuState = 3) then
-        wield(0);
+        wield(7);
     end;
     10: // 8 slot
     begin
@@ -283,7 +283,7 @@ begin
       else if (menuState = 2) then
         quaff(8)
       else if (menuState = 3) then
-        wield(0);
+        wield(8);
     end;
     11: // 9 slot
     begin
@@ -292,7 +292,7 @@ begin
       else if (menuState = 2) then
         quaff(9)
       else if (menuState = 3) then
-        wield(0);
+        wield(9);
     end;
     12: quaff(10);  // Quaff menu
     13: wield(10);  // Wear / Wield menu

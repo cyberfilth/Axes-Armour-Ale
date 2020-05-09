@@ -24,6 +24,8 @@ type
 
 (* Create player character *)
 procedure createPlayer;
+(* Players starting inventory *)
+procedure createEquipment;
 (* Moves the player on the map *)
 procedure movePlayer(dir: word);
 (* Process status effects *)
@@ -83,6 +85,26 @@ begin
   (* Draw player and FOV *)
   fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
     entities.entityList[0].visionRange, 1);
+end;
+
+procedure createEquipment;
+begin
+  { TODO : Once character creation is implemented, replace this with a function that generates starting equipment based on the type of player chosen. }
+  (* Add a club to the players inventory *)
+  with player_inventory.inventory[0] do
+  begin
+    id := 0;
+    Name := 'Wooden club';
+    equipped := True;
+    description := 'adds 1D6 to attack [equipped]';
+    itemType := 'weapon';
+    glyph := '4';
+    inInventory := True;
+    useID := 4;
+  end;
+  ui.updateWeapon('Wooden club');
+  entityList[0].weaponEquipped := True;
+  Inc(entityList[0].weaponDice);
 end;
 
 (* Move the player within the confines of the game map *)
