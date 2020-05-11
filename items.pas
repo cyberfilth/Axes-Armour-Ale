@@ -83,7 +83,7 @@ begin
   // place the item
   for i := 1 to itemAmount do
   begin
-    createArmour(i, globalutils.currentDgncentreList[p + 2].x,
+    createDagger(i, globalutils.currentDgncentreList[p + 2].x,
       globalutils.currentDgncentreList[p + 2].y);
   end;
 end;

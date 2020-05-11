@@ -35,6 +35,8 @@ procedure addToInventory(itemNumber: smallint);
 procedure showInventory;
 (* Show menu at bottom of screen *)
 procedure bottomMenu(style: byte);
+(* Show hint at bottom of screen *)
+procedure showHint(message: shortstring);
 (* Highlight inventory slots *)
 procedure highlightSlots(i, x: smallint);
 (* Dim inventory slots *)
@@ -148,7 +150,7 @@ begin
 end;
 
 procedure bottomMenu(style: byte);
-(* 0 main menu, 1 drop *)
+(* 0 - main menu, 1 - inventory slots, exit *)
 begin
   (* Draw menu bar *)
   inventoryScreen.Canvas.Brush.Color := globalutils.MESSAGEFADE6;
@@ -170,6 +172,13 @@ begin
         '0..9 to select an inventory slot  |  ESC key to go back');
     end;
   end;
+end;
+
+procedure showHint(message: shortstring);
+begin
+  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
+  inventoryScreen.Canvas.Brush.Style := bsClear;
+  inventoryScreen.Canvas.TextOut(100, 480, message);
 end;
 
 procedure highlightSlots(i, x: smallint);
@@ -439,9 +448,25 @@ begin
       (inventory[wieldItem].itemType = 'weapon') or
       (inventory[wieldItem].itemType = 'armour') then
     begin
+      (* If the item is an unequipped weapon, and the player already has a weapon equipped
+         prompt the player to unequip their weapon first *)
+      if (inventory[wieldItem].equipped = False) and
+        (inventory[wieldItem].itemType = 'weapon') and
+        (entityList[0].weaponEquipped = True) then
+      begin
+        showHint('You must first unequip the weapon you already hold');
+      end
+      (* If the item is unworn armour, and the player is already wearing armour
+         prompt the player to unequip their armour first *)
+      else if (inventory[wieldItem].equipped = False) and
+        (inventory[wieldItem].itemType = 'armour') and
+        (entityList[0].armourEquipped = True) then
+      begin
+        showHint('You must first remove the armour you already wear');
+      end
       (* Check whether the item is already equipped or not *)
-      if (inventory[wieldItem].equipped = False) then
-      begin { TODO : Add check to ensure equipped weapon is unequipped before wielding a new one }
+      else if (inventory[wieldItem].equipped = False) then
+      begin
         ui.writeBufferedMessages;
         if (inventory[wieldItem].itemType = 'weapon') then
           ui.bufferMessage('You equip the ' + inventory[wieldItem].Name)

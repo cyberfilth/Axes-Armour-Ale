@@ -22,15 +22,15 @@
         <Resource_4 FileName="images/dungeon/ascii/blueDungeonWallHi.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONWALLHI"/>
         <Resource_5 FileName="images/dungeon/ascii/caveFloorDef.bmp" Type="BITMAP" ResourceName="CAVEFLOORDEF"/>
         <Resource_6 FileName="images/dungeon/ascii/caveFloorHi.bmp" Type="BITMAP" ResourceName="CAVEFLOORHI"/>
-        <Resource_7 FileName="images/dungeon/ascii/caveWallDef.bmp" Type="BITMAP" ResourceName="CAVEWALLDEF"/>
-        <Resource_8 FileName="images/dungeon/ascii/caveWallHi.bmp" Type="BITMAP" ResourceName="CAVEWALLHI"/>
-        <Resource_9 FileName="images/titleScreen.bmp" Type="BITMAP" ResourceName="TITLESCREEN"/>
-        <Resource_10 FileName="images/sprites/r_orange.bmp" Type="BITMAP" ResourceName="R_ORANGE"/>
-        <Resource_11 FileName="images/sprites/ale1.bmp" Type="BITMAP" ResourceName="ALE1"/>
-        <Resource_12 FileName="images/sprites/h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
-        <Resource_13 FileName="images/sprites/dagger1.bmp" Type="BITMAP" ResourceName="DAGGER1"/>
-        <Resource_14 FileName="images/sprites/leather_amour1.bmp" Type="BITMAP" ResourceName="LEATHER_AMOUR1"/>
-        <Resource_15 FileName="images/sprites/basic_club.bmp" Type="BITMAP" ResourceName="BASIC_CLUB"/>
+        <Resource_7 FileName="images/titleScreen.bmp" Type="BITMAP" ResourceName="TITLESCREEN"/>
+        <Resource_8 FileName="images/sprites/r_orange.bmp" Type="BITMAP" ResourceName="R_ORANGE"/>
+        <Resource_9 FileName="images/sprites/ale1.bmp" Type="BITMAP" ResourceName="ALE1"/>
+        <Resource_10 FileName="images/sprites/h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
+        <Resource_11 FileName="images/sprites/dagger1.bmp" Type="BITMAP" ResourceName="DAGGER1"/>
+        <Resource_12 FileName="images/sprites/leather_amour1.bmp" Type="BITMAP" ResourceName="LEATHER_AMOUR1"/>
+        <Resource_13 FileName="images/sprites/basic_club.bmp" Type="BITMAP" ResourceName="BASIC_CLUB"/>
+        <Resource_14 FileName="images/dungeon/ascii/caveWallDef.bmp" Type="BITMAP" ResourceName="CAVEWALLDEF"/>
+        <Resource_15 FileName="images/dungeon/ascii/caveWallHi.bmp" Type="BITMAP" ResourceName="CAVEWALLHI"/>
       </Resources>
     </General>
     <VersionInfo>
