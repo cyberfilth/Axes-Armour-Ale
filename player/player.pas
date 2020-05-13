@@ -38,11 +38,13 @@ function combatCheck(x, y: smallint): boolean;
 procedure pickUp;
 (*Increase Health, no more than maxHP *)
 procedure increaseHealth(amount: smallint);
+(* Display game over screen *)
+procedure gameOver;
 
 implementation
 
 uses
-  globalutils, map, fov, ui, entities, player_inventory, items;
+  globalutils, map, fov, ui, entities, player_inventory, items, main;
 
 procedure createPlayer;
 begin
@@ -57,9 +59,9 @@ begin
     description := 'your character';
     glyph := '@';
     maxHP := 20;
-    currentHP := 20;
+    currentHP := 2; // 20
     attack := 5;
-    defense := 2;
+    defense := 1; // 2
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := 0;
@@ -295,6 +297,28 @@ begin
   end
   else
     ui.bufferMessage('You are already at full health');
+end;
+
+procedure gameOver;
+begin
+  main.gameState := 4;
+  currentScreen := RIPscreen;
+  (* Clear the screen *)
+  RIPscreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
+  RIPscreen.Canvas.FillRect(0, 0, RIPscreen.Width, RIPscreen.Height);
+  (* Draw title *)
+  RIPscreen.Canvas.Font.Color := UITEXTCOLOUR;
+  RIPscreen.Canvas.Brush.Style := bsClear;
+  RIPscreen.Canvas.Font.Size := 12;
+  RIPscreen.Canvas.TextOut(100, 50, 'You have died...');
+  RIPscreen.Canvas.Font.Size := 10;
+  (* Display message *)
+  RIPscreen.Canvas.TextOut(30, 100, 'Killed by a ' + killer + ' after ' +
+    IntToStr(playerTurn) + ' turns, whilst testing a roguelike ;-)');
+  (* Menu options *)
+   RIPscreen.Canvas.Font.Size := 9;
+  RIPscreen.Canvas.TextOut(10, 410,
+  'Exit game?      [Q] - Quit game    |    [X] - Exit to main menu');
 end;
 
 end.

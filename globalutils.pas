@@ -48,6 +48,8 @@ var
   currentDgnTotalRooms: smallint;
   (* list of coordinates of centre of each room *)
   currentDgncentreList: array of coordinates;
+  (* Name of entity or item that killed the player *)
+  killer: shortstring;
 
 (* Select random number from a range *)
 function randomRange(fromNumber, toNumber: smallint): smallint;
