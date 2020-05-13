@@ -63,6 +63,8 @@ procedure writeToBuffer(x, y: smallint; messageColour: TColor; message: string);
 procedure saveGame;
 (* Load saved game *)
 procedure loadGame;
+(* Delete saved game *)
+procedure deleteGame;
 
 implementation
 
@@ -385,6 +387,15 @@ begin
     (* free memory *)
     Doc.Free;
   end;
+end;
+
+procedure deleteGame;
+var
+  saveGame: string;
+begin
+  saveGame := GetUserDir + saveFile;
+  if FileExists(saveGame) then
+    DeleteFile(saveGame);
 end;
 
 end.

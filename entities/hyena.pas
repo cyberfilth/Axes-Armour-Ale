@@ -28,7 +28,7 @@ procedure combat(idOwner, idTarget: smallint);
 implementation
 
 uses
-  entities, globalutils, ui, los, player;
+  entities, globalutils, ui, los;
 
 function checkSpaceFree(x, y: smallint): boolean;
 begin

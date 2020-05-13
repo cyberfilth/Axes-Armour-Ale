@@ -293,7 +293,8 @@ begin
     case Key of
       VK_Q:
       begin
-        gameState := 1;
+        globalutils.saveGame;
+        gameState := 0;
         freeMemory;
         Close();
       end;
@@ -319,10 +320,9 @@ begin
     case Key of
       VK_Q:
       begin
-        gameState := 1;
+        gameState := 0;
         freeMemory;
-        Application.Terminate;
-        //Close();
+        Close();
       end;
       VK_X:
       begin

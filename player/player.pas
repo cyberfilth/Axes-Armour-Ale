@@ -301,6 +301,7 @@ end;
 
 procedure gameOver;
 begin
+  globalutils.deleteGame;
   main.gameState := 4;
   currentScreen := RIPscreen;
   (* Clear the screen *)
@@ -316,9 +317,9 @@ begin
   RIPscreen.Canvas.TextOut(30, 100, 'Killed by a ' + killer + ' after ' +
     IntToStr(playerTurn) + ' turns, whilst testing a roguelike ;-)');
   (* Menu options *)
-   RIPscreen.Canvas.Font.Size := 9;
+  RIPscreen.Canvas.Font.Size := 9;
   RIPscreen.Canvas.TextOut(10, 410,
-  'Exit game?      [Q] - Quit game    |    [X] - Exit to main menu');
+    'Exit game?      [Q] - Quit game    |    [X] - Exit to main menu');
 end;
 
 end.
