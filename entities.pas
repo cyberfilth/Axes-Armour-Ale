@@ -157,7 +157,7 @@ begin
     (* if not, redraw the floor tile *)
     else
     if (entityList[id].inView = True) then
-      map.drawTile(entityList[id].posX, entityList[id].posY, 1);
+      map.drawTile(entityList[id].posX, entityList[id].posY, 0);
   (* mark tile as unoccupied *)
   map.unoccupy(entityList[id].posX, entityList[id].posY);
   (* update new position *)

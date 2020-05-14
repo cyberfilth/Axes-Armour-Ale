@@ -113,6 +113,10 @@ begin
     player.gameOver;
     Exit;
   end;
+  (* move NPC's *)
+  entities.NPCgameLoop;
+  (* Redraw Field of View after entities move *)
+  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
   (* Draw all visible items *)
   for i := 1 to items.itemAmount do
     if (map.canSee(items.itemList[i].posX, items.itemList[i].posY) = True) then
@@ -128,8 +132,7 @@ begin
     end
     else
       items.itemList[i].inView := False;
-  (* move NPC's *)
-  entities.NPCgameLoop;
+  (* Redraw NPC's *)
   entities.redrawNPC;
   (* Update health display to show damage *)
   ui.updateHealth;
