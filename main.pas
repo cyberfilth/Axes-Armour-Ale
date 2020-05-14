@@ -43,8 +43,8 @@ type
 var
   GameWindow: TGameWindow;
   (* Display is drawn on tempScreen before being copied to canvas *)
-  tempScreen, inventoryScreen: TBitmap;
-  (* 0 = titlescreen, 1 = game running, 2 = inventory screen, 3 = Quit menu *)
+  tempScreen, inventoryScreen, RIPscreen: TBitmap;
+  (* 0 = titlescreen, 1 = game running, 2 = inventory screen, 3 = Quit menu, 4 = Game Over *)
   gameState: byte;
   (* Screen to display *)
   currentScreen: TBitmap;
@@ -67,6 +67,9 @@ begin
   inventoryScreen := TBitmap.Create;
   inventoryScreen.Height := 578;
   inventoryScreen.Width := 835;
+  RIPscreen := TBitmap.Create;
+  RIPscreen.Height := 578;
+  RIPscreen.Width := 835;
   currentScreen := tempScreen;
   Randomize;
   (* Set random seed *)
@@ -94,6 +97,7 @@ begin
   end;
   tempScreen.Free;
   inventoryScreen.Free;
+  RIPscreen.Free;
   {$IFDEF Linux}
   WriteLn('Axes, Armour & Ale - (c) Chris Hawkins');
   {$ENDIF}
@@ -104,6 +108,11 @@ procedure gameLoop;
 var
   i: smallint;
 begin
+  if (entityList[0].currentHP <= 0) then
+  begin
+    player.gameOver;
+    Exit;
+  end;
   (* Draw all visible items *)
   for i := 1 to items.itemAmount do
     if (map.canSee(items.itemList[i].posX, items.itemList[i].posY) = True) then
@@ -124,6 +133,11 @@ begin
   entities.redrawNPC;
   (* Update health display to show damage *)
   ui.updateHealth;
+  if (entityList[0].currentHP <= 0) then
+  begin
+    player.gameOver;
+    Exit;
+  end;
   (* Clear Look / Info box *)
   ui.displayLook(1, 'none', '', 0, 0);
   (* Redraw Player *)
@@ -279,7 +293,9 @@ begin
     case Key of
       VK_Q:
       begin
-        gameState := 1;
+        globalutils.saveGame;
+        gameState := 0;
+        freeMemory;
         Close();
       end;
       VK_X:
@@ -295,6 +311,26 @@ begin
       begin
         gameState := 1;
         ui.rewriteTopMessage;
+        Invalidate;
+      end;
+    end;
+  end
+  else if (gameState = 4) then // Game Over menu
+  begin
+    case Key of
+      VK_Q:
+      begin
+        gameState := 0;
+        freeMemory;
+        Close();
+      end;
+      VK_X:
+      begin
+        freeMemory;
+        gameState := 0;
+        ui.clearLog;
+        ui.titleScreen(0);
+        currentScreen := tempScreen;
         Invalidate;
       end;
     end;
@@ -351,6 +387,7 @@ begin
   {$EndIf}
   {$EndIf}
   gameState := 1;
+  killer := 'empty';
   playerTurn := 0;
   map.mapType := 0;// set to cavern
   map.setupMap;
@@ -377,6 +414,7 @@ procedure TGameWindow.continueGame;
 begin
   gameState := 1;
   globalutils.loadGame;
+  killer := 'empty';
   (* Clear the screen *)
   tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
   tempScreen.Canvas.FillRect(0, 0, tempScreen.Width, tempScreen.Height);

@@ -271,8 +271,9 @@ begin
     entities.entityList[0].currentHP :=
       (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
-    begin   { TODO : Create player.playerDeath function that handles this }
-      ui.displayMessage('You are dead!');
+    begin
+      if (killer = 'empty') then
+        killer := entityList[id].race;
       exit;
     end
     else

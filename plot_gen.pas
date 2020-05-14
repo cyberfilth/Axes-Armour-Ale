@@ -34,9 +34,6 @@ procedure generateName;
 
 implementation
 
-uses
-  player;
-
 procedure generateName;
 var
   a, b: byte;

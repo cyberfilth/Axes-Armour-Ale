@@ -48,6 +48,8 @@ var
   currentDgnTotalRooms: smallint;
   (* list of coordinates of centre of each room *)
   currentDgncentreList: array of coordinates;
+  (* Name of entity or item that killed the player *)
+  killer: shortstring;
 
 (* Select random number from a range *)
 function randomRange(fromNumber, toNumber: smallint): smallint;
@@ -61,6 +63,8 @@ procedure writeToBuffer(x, y: smallint; messageColour: TColor; message: string);
 procedure saveGame;
 (* Load saved game *)
 procedure loadGame;
+(* Delete saved game *)
+procedure deleteGame;
 
 implementation
 
@@ -383,6 +387,15 @@ begin
     (* free memory *)
     Doc.Free;
   end;
+end;
+
+procedure deleteGame;
+var
+  saveGame: string;
+begin
+  saveGame := GetUserDir + saveFile;
+  if FileExists(saveGame) then
+    DeleteFile(saveGame);
 end;
 
 end.

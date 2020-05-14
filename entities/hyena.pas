@@ -267,9 +267,9 @@ begin
     if (entities.entityList[idTarget].currentHP < 1) then
     begin
       if (idTarget = 0) then
-        { TODO : Create player.playerDeath function that handles this }
       begin
-        ui.displayMessage('You are dead!');
+        if (killer = 'empty') then
+          killer := entityList[idOwner].race;
         exit;
       end
       else
