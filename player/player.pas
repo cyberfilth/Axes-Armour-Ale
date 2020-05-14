@@ -59,9 +59,9 @@ begin
     description := 'your character';
     glyph := '@';
     maxHP := 20;
-    currentHP := 2; // 20
+    currentHP := 20;
     attack := 5;
-    defense := 1; // 2
+    defense := 2;
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := 0;

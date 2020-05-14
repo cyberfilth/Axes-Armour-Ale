@@ -330,6 +330,7 @@ begin
         gameState := 0;
         ui.clearLog;
         ui.titleScreen(0);
+        currentScreen := tempScreen;
         Invalidate;
       end;
     end;
