@@ -288,7 +288,42 @@ begin
       begin
         player_inventory.menu(4);
         Invalidate;
-      end;   { TODO : First 3 inventory added for testing, rest to be added later }
+      end;
+      VK_3:
+      begin
+        player_inventory.menu(5);
+        Invalidate;
+      end;
+      VK_4:
+      begin
+        player_inventory.menu(6);
+        Invalidate;
+      end;
+      VK_5:
+      begin
+        player_inventory.menu(7);
+        Invalidate;
+      end;
+      VK_6:
+      begin
+        player_inventory.menu(8);
+        Invalidate;
+      end;
+      VK_7:
+      begin
+        player_inventory.menu(9);
+        Invalidate;
+      end;
+      VK_8:
+      begin
+        player_inventory.menu(10);
+        Invalidate;
+      end;
+      VK_9:
+      begin
+        player_inventory.menu(11);
+        Invalidate;
+      end;
     end;  // end of inventory menu
   end
   else if (gameState = 3) then // Quit menu
