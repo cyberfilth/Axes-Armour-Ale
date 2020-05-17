@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: hyena</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+Axes, Armour & Ale - a roguelike written in Free Pascal
+<h1 class="unit">Unit hyena</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Uses</div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Weak enemy with simple AI, no pathfinding will attack and drain health</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Overview</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="hyena.html#createHyena">createHyena</a></b>(uniqueid, npcx, npcy: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="hyena.html#checkSpaceFree">checkSpaceFree</a></b>(x, y: smallint): boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="hyena.html#takeTurn">takeTurn</a></b>(id, spx, spy: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="hyena.html#wander">wander</a></b>(id, spx, spy: smallint);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="hyena.html#chasePlayer">chasePlayer</a></b>(id, spx, spy: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="hyena.html#isNextToPlayer">isNextToPlayer</a></b>(spx, spy: smallint): boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="hyena.html#combat">combat</a></b>(idOwner, idTarget: smallint);</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="createHyena"></span><code>procedure <b>createHyena</b>(uniqueid, npcx, npcy: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Create a <a class="normal" href="hyena.html">hyena</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="checkSpaceFree"></span><code>function <b>checkSpaceFree</b>(x, y: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+check to see if entity can move to a square</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="takeTurn"></span><code>procedure <b>takeTurn</b>(id, spx, spy: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Take a turn</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="wander"></span><code>procedure <b>wander</b>(id, spx, spy: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Move in a random direction</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="chasePlayer"></span><code>procedure <b>chasePlayer</b>(id, spx, spy: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Chase the <a class="normal" href="player.html">player</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="isNextToPlayer"></span><code>function <b>isNextToPlayer</b>(spx, spy: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if <a class="normal" href="player.html">player</a> is next to NPC</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="combat"></span><code>procedure <b>combat</b>(idOwner, idTarget: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<code>Combat</code></p>
+</td></tr>
+</table>
+Axes, Armour & Ale - (c) 2020 Chris Hawkins
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

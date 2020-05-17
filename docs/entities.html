@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: entities</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+Axes, Armour & Ale - a roguelike written in Free Pascal
+<h1 class="unit">Unit entities</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Uses</div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+NPC stats and setup</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Overview</h2>
+<span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">Record&nbsp;<a class="bold" href="entities.Creature.html"><code>Creature</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="entities.html#setupEntities">setupEntities</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="entities.html#spawnNPCs">spawnNPCs</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="entities.html#killEntity">killEntity</a></b>(id: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="entities.html#drawEntity">drawEntity</a></b>(c, r: smallint; glyph: char);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="entities.html#moveNPC">moveNPC</a></b>(id, newX, newY: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="entities.html#redrawNPC">redrawNPC</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="entities.html#getCreatureHP">getCreatureHP</a></b>(x, y: smallint): smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="entities.html#getCreatureMaxHP">getCreatureMaxHP</a></b>(x, y: smallint): smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="entities.html#getCreatureID">getCreatureID</a></b>(x, y: smallint): smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="entities.html#getCreatureName">getCreatureName</a></b>(x, y: smallint): shortstring;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="entities.html#isCreatureVisible">isCreatureVisible</a></b>(x, y: smallint): boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="entities.html#NPCgameLoop">NPCgameLoop</a></b>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.html#entityList">entityList</a></b>: array of <a  href="entities.Creature.html">Creature</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.html#npcAmount">npcAmount</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.html#listLength">listLength</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.html#caveRatGlyph">caveRatGlyph</a></b>: TBitmap;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.html#hyenaGlyph">hyenaGlyph</a></b>: TBitmap;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.html#playerGlyph">playerGlyph</a></b>: TBitmap;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="setupEntities"></span><code>procedure <b>setupEntities</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Load entity textures</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="spawnNPCs"></span><code>procedure <b>spawnNPCs</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal" href="cave.html#generate">Generate</a> list of creatures on the <a class="normal" href="map.html">map</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="killEntity"></span><code>procedure <b>killEntity</b>(id: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Handle death of NPC's</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drawEntity"></span><code>procedure <b>drawEntity</b>(c, r: smallint; glyph: char);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Draw entity on screen</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="moveNPC"></span><code>procedure <b>moveNPC</b>(id, newX, newY: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Update NPCs X, Y <a class="normal" href="globalutils.coordinates.html">coordinates</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="redrawNPC"></span><code>procedure <b>redrawNPC</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Redraw all NPC's</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getCreatureHP"></span><code>function <b>getCreatureHP</b>(x, y: smallint): smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get <a class="normal" href="entities.Creature.html">creature</a> currentHP at <a class="normal" href="globalutils.coordinates.html">coordinates</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getCreatureMaxHP"></span><code>function <b>getCreatureMaxHP</b>(x, y: smallint): smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get <a class="normal" href="entities.Creature.html">creature</a> maxHP at <a class="normal" href="globalutils.coordinates.html">coordinates</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getCreatureID"></span><code>function <b>getCreatureID</b>(x, y: smallint): smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get <a class="normal" href="entities.Creature.html">creature</a> ID at <a class="normal" href="globalutils.coordinates.html">coordinates</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getCreatureName"></span><code>function <b>getCreatureName</b>(x, y: smallint): shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get <a class="normal" href="entities.Creature.html">creature</a> name at <a class="normal" href="globalutils.coordinates.html">coordinates</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="isCreatureVisible"></span><code>function <b>isCreatureVisible</b>(x, y: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if <a class="normal" href="entities.Creature.html">creature</a> is visible at <a class="normal" href="globalutils.coordinates.html">coordinates</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="NPCgameLoop"></span><code>procedure <b>NPCgameLoop</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Call Creatures.takeTurn procedure</p>
+</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="entityList"></span><code><b>entityList</b>: array of <a  href="entities.Creature.html">Creature</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="npcAmount"></span><code><b>npcAmount</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="listLength"></span><code><b>listLength</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="caveRatGlyph"></span><code><b>caveRatGlyph</b>: TBitmap;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="hyenaGlyph"></span><code><b>hyenaGlyph</b>: TBitmap;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="playerGlyph"></span><code><b>playerGlyph</b>: TBitmap;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+Axes, Armour & Ale - (c) 2020 Chris Hawkins
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: player_inventory</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+Axes, Armour & Ale - a roguelike written in Free Pascal
+<h1 class="unit">Unit player_inventory</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Uses</div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Handles <a class="normal" href="player.html">player</a> <a class="normal" href="player_inventory.html#inventory">inventory</a> and associated functions</p>
+<span id="PasDoc-Uses"></span><h2 class="overview">Overview</h2>
+<span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">Record&nbsp;<a class="bold" href="player_inventory.Equipment.html"><code>Equipment</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#initialiseInventory">initialiseInventory</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#loadEquippedItems">loadEquippedItems</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#addToInventory">addToInventory</a></b>(itemNumber: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#showInventory">showInventory</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#bottomMenu">bottomMenu</a></b>(style: byte);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#showHint">showHint</a></b>(message: shortstring);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#highlightSlots">highlightSlots</a></b>(i, x: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#dimSlots">dimSlots</a></b>(i, x: smallint);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#menu">menu</a></b>(selection: word);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#drop">drop</a></b>(dropItem: byte);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#quaff">quaff</a></b>(quaffItem: byte);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#wield">wield</a></b>(wieldItem: byte);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="player_inventory.html#inventory">inventory</a></b>: array[0..9] of <a  href="player_inventory.Equipment.html">Equipment</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="player_inventory.html#menuState">menuState</a></b>: byte;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="initialiseInventory"></span><code>procedure <b>initialiseInventory</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Initialise empty <a class="normal" href="player.html">player</a> <a class="normal" href="player_inventory.html#inventory">inventory</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="loadEquippedItems"></span><code>procedure <b>loadEquippedItems</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Setup equipped <a class="normal" href="items.html">items</a> when loading a saved game</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="addToInventory"></span><code>procedure <b>addToInventory</b>(itemNumber: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Add to <a class="normal" href="player_inventory.html#inventory">inventory</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="showInventory"></span><code>procedure <b>showInventory</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display the <a class="normal" href="player_inventory.html#inventory">inventory</a> screen</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="bottomMenu"></span><code>procedure <b>bottomMenu</b>(style: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Show <a class="normal" href="player_inventory.html#menu">menu</a> at bottom of screen</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="showHint"></span><code>procedure <b>showHint</b>(message: shortstring);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Show hint at bottom of screen</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="highlightSlots"></span><code>procedure <b>highlightSlots</b>(i, x: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Highlight <a class="normal" href="player_inventory.html#inventory">inventory</a> slots</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dimSlots"></span><code>procedure <b>dimSlots</b>(i, x: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Dim <a class="normal" href="player_inventory.html#inventory">inventory</a> slots</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="menu"></span><code>procedure <b>menu</b>(selection: word);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Accept <code>menu</code> input</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drop"></span><code>procedure <b>drop</b>(dropItem: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<code>Drop</code> <a class="normal" href="player_inventory.html#menu">menu</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="quaff"></span><code>procedure <b>quaff</b>(quaffItem: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<code>Quaff</code> <a class="normal" href="player_inventory.html#menu">menu</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="wield"></span><code>procedure <b>wield</b>(wieldItem: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Wear / <code>Wield</code> <a class="normal" href="player_inventory.html#menu">menu</a></p>
+</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="inventory"></span><code><b>inventory</b>: array[0..9] of <a  href="player_inventory.Equipment.html">Equipment</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="menuState"></span><code><b>menuState</b>: byte;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+0 - <a class="normal" href="main.html">main</a> <a class="normal" href="player_inventory.html#menu">menu</a>, 1 - <a class="normal" href="player_inventory.html#drop">drop</a> <a class="normal" href="player_inventory.html#menu">menu</a>, 2 - <a class="normal" href="player_inventory.html#quaff">quaff</a> <a class="normal" href="player_inventory.html#menu">menu</a>, 3 - wear/<a class="normal" href="player_inventory.html#wield">wield</a> <a class="normal" href="player_inventory.html#menu">menu</a></p>
+</td></tr>
+</table>
+Axes, Armour & Ale - (c) 2020 Chris Hawkins
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

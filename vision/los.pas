@@ -13,7 +13,7 @@ uses
 var
   totalSpaces: smallint;
 
-(* Checks in the distance to the target is within vision range *)
+(* Checks that the distance to the target is within vision range *)
 function inView(x1, y1, x2, y2, visRange: smallint): boolean;
 
 implementation
