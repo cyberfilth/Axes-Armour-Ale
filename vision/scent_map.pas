@@ -1,5 +1,5 @@
 (* Scent trails left by the player, generated over a radius of 6 squares *)
-
+{ TODO : Keep within bounds of the map }
 unit scent_map;
 
 {$mode objfpc}{$H+}
