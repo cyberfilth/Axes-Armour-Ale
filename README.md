@@ -37,8 +37,5 @@ To exit a menu / quit the game press ESCAPE
 
 ### documentation
 All code has been heavily commented so that you can generate documentation using PasDoc.
-Navigate to the source directory and create a folder called docs (or whatever you want to call it), then run the following commands.
-```
-mkdir docs/
-pasdoc *.pas --output docs/
-```
+
+Online documentation can be found at https://cyberfilth.github.io/Axes-Armour-Ale/
