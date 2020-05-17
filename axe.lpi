@@ -73,7 +73,6 @@
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <DebugInfoType Value="dsDwarf2"/>
               <UseHeaptrc Value="True"/>
               <UseExternalDbgSyms Value="True"/>
             </Debugging>
@@ -83,6 +82,12 @@
               </Win32>
             </Options>
           </Linking>
+          <Other>
+            <Verbosity>
+              <ShoLineNum Value="True"/>
+              <ShowDebugInfo Value="True"/>
+            </Verbosity>
+          </Other>
         </CompilerOptions>
       </Item2>
       <Item3 Name="Release">

@@ -172,6 +172,8 @@ begin
   map.occupy(entityList[0].posX, entityList[0].posY);
   fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
     entities.entityList[0].visionRange, 1);
+  (* Update the scent map *)
+  scent_map.updateScent(entityList[0].posX, entityList[0].posY);
   ui.writeBufferedMessages;
 end;
 
