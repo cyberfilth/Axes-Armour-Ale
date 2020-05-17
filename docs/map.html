@@ -9,13 +9,14 @@
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
-Axes, Armour & Ale - a roguelike written in Free Pascal<h1 class="unit">Unit map</h1>
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+Axes, Armour & Ale - a roguelike written in Free Pascal
+<h1 class="unit">Unit map</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Uses</div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
-Organises the game world in an array and calculates the players FoV</p>
+Organises the game world in an array and calculates the players <a class="normal" href="fov.html">FoV</a></p>
 <span id="PasDoc-Uses"></span><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
@@ -135,7 +136,7 @@ Organises the game world in an array and calculates the players FoV</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Load tile textures</p>
+Load <a class="normal" href="map.tile.html">tile</a> textures</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -153,7 +154,7 @@ Loop through tiles and set their ID, visibility etc</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Load map from saved game</p>
+Load <a class="normal" href="map.html">map</a> from saved game</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -171,7 +172,7 @@ Check if the direction to move to is valid</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Check if an object is in players FoV</p>
+Check if an object is in players <a class="normal" href="fov.html">FoV</a></p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -180,7 +181,7 @@ Check if an object is in players FoV</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Occupy tile</p>
+<code>Occupy</code> <a class="normal" href="map.tile.html">tile</a></p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -189,7 +190,7 @@ Occupy tile</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Unoccupy tile</p>
+<code>Unoccupy</code> <a class="normal" href="map.tile.html">tile</a></p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -198,7 +199,7 @@ Unoccupy tile</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Check if a map tile is occupied</p>
+Check if a <a class="normal" href="map.html">map</a> <a class="normal" href="map.tile.html">tile</a> is occupied</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -207,7 +208,7 @@ Check if a map tile is occupied</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Check if player is on a tile</p>
+Check if <a class="normal" href="player.html">player</a> is on a <a class="normal" href="map.tile.html">tile</a></p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -216,7 +217,7 @@ Check if player is on a tile</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Translate map coordinates to screen coordinates</p>
+Translate <a class="normal" href="map.html">map</a> <a class="normal" href="globalutils.coordinates.html">coordinates</a> to screen <a class="normal" href="globalutils.coordinates.html">coordinates</a></p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -225,7 +226,7 @@ Translate map coordinates to screen coordinates</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Translate screen coordinates to map coordinates</p>
+Translate screen <a class="normal" href="globalutils.coordinates.html">coordinates</a> to <a class="normal" href="map.html">map</a> <a class="normal" href="globalutils.coordinates.html">coordinates</a></p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -234,7 +235,7 @@ Translate screen coordinates to map coordinates</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Place a tile on the map</p>
+Place a <a class="normal" href="map.tile.html">tile</a> on the <a class="normal" href="map.html">map</a></p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -243,7 +244,7 @@ Place a tile on the map</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Get the scent value at coordinates</p>
+Get the scent value at <a class="normal" href="globalutils.coordinates.html">coordinates</a></p>
 </td></tr>
 </table>
 <h3 class="detail">Constants</h3>
@@ -272,7 +273,7 @@ File path to image folder</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Type of map: 0 = cave, 1 = blue grid-based dungeon</p>
+Type of <a class="normal" href="map.html">map</a>: 0 = <a class="normal" href="cave.html">cave</a>, 1 = blue grid-based dungeon</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -290,7 +291,7 @@ Current smell value for scent tracking</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Game map array</p>
+Game <a class="normal" href="map.html">map</a> array</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -313,7 +314,7 @@ Game map array</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Player starting position</p>
+<a class="normal" href="player.html">Player</a> starting position</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -322,7 +323,7 @@ Player starting position</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Player starting position</p>
+<a class="normal" href="player.html">Player</a> starting position</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -397,6 +398,7 @@ Graphical tiles</p>
 Graphical tiles</p>
 </td></tr>
 </table>
-Axes, Armour & Ale - (c) 2020 Chris Hawkins<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+Axes, Armour & Ale - (c) 2020 Chris Hawkins
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
 </span>
 </td></tr></table></body></html>

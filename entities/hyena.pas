@@ -98,7 +98,7 @@ begin
     maxHP := randomRange(3, 5);
     currentHP := maxHP;
     attack := randomRange(2, 3);
-    defense := randomRange(2, 4);
+    defense := randomRange(3, 5);
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;

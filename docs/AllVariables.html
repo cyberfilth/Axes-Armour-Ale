@@ -9,8 +9,9 @@
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
-Axes, Armour & Ale - a roguelike written in Free Pascal<h1 class="allitems">All Variables</h1>
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+Axes, Armour & Ale - a roguelike written in Free Pascal
+<h1 class="allitems">All Variables</h1>
 <table class="itemstable wide_list">
 <tr class="listheader">
 <th class="itemname">Name</th>
@@ -100,7 +101,7 @@ Axes, Armour & Ale - a roguelike written in Free Pascal<h1 class="allitems">All 
 <tr class="list">
 <td class="itemname"><a class="bold" href="globalutils.html#currentDgncentreList">currentDgncentreList</a></td>
 <td class="itemunit"><a class="bold" href="globalutils.html">globalutils</a></td>
-<td class="itemdesc"><p>list of coordinates of centre of each room</p></td>
+<td class="itemdesc"><p>list of <a class="normal" href="globalutils.coordinates.html">coordinates</a> of centre of each room</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="globalutils.html#currentDgnTotalRooms">currentDgnTotalRooms</a></td>
@@ -160,7 +161,7 @@ Axes, Armour & Ale - a roguelike written in Free Pascal<h1 class="allitems">All 
 <tr class="list">
 <td class="itemname"><a class="bold" href="main.html#gameState">gameState</a></td>
 <td class="itemunit"><a class="bold" href="main.html">main</a></td>
-<td class="itemdesc"><p>0 = titlescreen, 1 = game running, 2 = inventory screen, 3 = Quit menu, 4 = Game Over</p></td>
+<td class="itemdesc"><p>0 = <a class="normal" href="ui.html#titleScreen">titlescreen</a>, 1 = game running, 2 = <a class="normal" href="player_inventory.html#inventory">inventory</a> screen, 3 = Quit <a class="normal" href="player_inventory.html#menu">menu</a>, 4 = Game Over</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="main.html#GameWindow">GameWindow</a></td>
@@ -190,7 +191,7 @@ Axes, Armour & Ale - a roguelike written in Free Pascal<h1 class="allitems">All 
 <tr class="list">
 <td class="itemname"><a class="bold" href="main.html#inventoryScreen">inventoryScreen</a></td>
 <td class="itemunit"><a class="bold" href="main.html">main</a></td>
-<td class="itemdesc"><p>Display is drawn on tempScreen before being copied to canvas</p></td>
+<td class="itemdesc"><p>Display is drawn on <a class="normal" href="main.html#tempScreen">tempScreen</a> before being copied to canvas</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="items.html#itemAmount">itemAmount</a></td>
@@ -210,7 +211,7 @@ Axes, Armour & Ale - a roguelike written in Free Pascal<h1 class="allitems">All 
 <tr class="list">
 <td class="itemname"><a class="bold" href="globalutils.html#killer">killer</a></td>
 <td class="itemunit"><a class="bold" href="globalutils.html">globalutils</a></td>
-<td class="itemdesc"><p>Name of entity or item that killed the player</p></td>
+<td class="itemdesc"><p>Name of entity or <a class="normal" href="items.Item.html">item</a> that killed the <a class="normal" href="player.html">player</a></p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="cave.html#lastHalf">lastHalf</a></td>
@@ -255,17 +256,17 @@ Axes, Armour & Ale - a roguelike written in Free Pascal<h1 class="allitems">All 
 <tr class="list2">
 <td class="itemname"><a class="bold" href="map.html#maparea">maparea</a></td>
 <td class="itemunit"><a class="bold" href="map.html">map</a></td>
-<td class="itemdesc"><p>Game map array</p></td>
+<td class="itemdesc"><p>Game <a class="normal" href="map.html">map</a> array</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="map.html#mapType">mapType</a></td>
 <td class="itemunit"><a class="bold" href="map.html">map</a></td>
-<td class="itemdesc"><p>Type of map: 0 = cave, 1 = blue grid-based dungeon</p></td>
+<td class="itemdesc"><p>Type of <a class="normal" href="map.html">map</a>: 0 = <a class="normal" href="cave.html">cave</a>, 1 = blue grid-based dungeon</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="player_inventory.html#menuState">menuState</a></td>
 <td class="itemunit"><a class="bold" href="player_inventory.html">player_inventory</a></td>
-<td class="itemdesc"><p>0 - main menu, 1 - drop menu, 2 - quaff menu, 3 - wear/wield menu</p></td>
+<td class="itemdesc"><p>0 - <a class="normal" href="main.html">main</a> <a class="normal" href="player_inventory.html#menu">menu</a>, 1 - <a class="normal" href="player_inventory.html#drop">drop</a> <a class="normal" href="player_inventory.html#menu">menu</a>, 2 - <a class="normal" href="player_inventory.html#quaff">quaff</a> <a class="normal" href="player_inventory.html#menu">menu</a>, 3 - wear/<a class="normal" href="player_inventory.html#wield">wield</a> <a class="normal" href="player_inventory.html#menu">menu</a></p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="ui.html#messageArray">messageArray</a></td>
@@ -330,7 +331,7 @@ Axes, Armour & Ale - a roguelike written in Free Pascal<h1 class="allitems">All 
 <tr class="list">
 <td class="itemname"><a class="bold" href="main.html#RIPscreen">RIPscreen</a></td>
 <td class="itemunit"><a class="bold" href="main.html">main</a></td>
-<td class="itemdesc"><p>Display is drawn on tempScreen before being copied to canvas</p></td>
+<td class="itemdesc"><p>Display is drawn on <a class="normal" href="main.html#tempScreen">tempScreen</a> before being copied to canvas</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="grid_dungeon.html#roomCounter">roomCounter</a></td>
@@ -360,32 +361,32 @@ Axes, Armour & Ale - a roguelike written in Free Pascal<h1 class="allitems">All 
 <tr class="list">
 <td class="itemname"><a class="bold" href="cave.html#startX">startX</a></td>
 <td class="itemunit"><a class="bold" href="cave.html">cave</a></td>
-<td class="itemdesc"><p>Player starting position</p></td>
+<td class="itemdesc"><p><a class="normal" href="player.html">Player</a> starting position</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="map.html#startX">startX</a></td>
 <td class="itemunit"><a class="bold" href="map.html">map</a></td>
-<td class="itemdesc"><p>Player starting position</p></td>
+<td class="itemdesc"><p><a class="normal" href="player.html">Player</a> starting position</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="grid_dungeon.html#startX">startX</a></td>
 <td class="itemunit"><a class="bold" href="grid_dungeon.html">grid_dungeon</a></td>
-<td class="itemdesc"><p>Player starting position</p></td>
+<td class="itemdesc"><p><a class="normal" href="player.html">Player</a> starting position</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="cave.html#startY">startY</a></td>
 <td class="itemunit"><a class="bold" href="cave.html">cave</a></td>
-<td class="itemdesc"><p>Player starting position</p></td>
+<td class="itemdesc"><p><a class="normal" href="player.html">Player</a> starting position</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="grid_dungeon.html#startY">startY</a></td>
 <td class="itemunit"><a class="bold" href="grid_dungeon.html">grid_dungeon</a></td>
-<td class="itemdesc"><p>Player starting position</p></td>
+<td class="itemdesc"><p><a class="normal" href="player.html">Player</a> starting position</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="map.html#startY">startY</a></td>
 <td class="itemunit"><a class="bold" href="map.html">map</a></td>
-<td class="itemdesc"><p>Player starting position</p></td>
+<td class="itemdesc"><p><a class="normal" href="player.html">Player</a> starting position</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="cave.html#t">t</a></td>
@@ -405,7 +406,7 @@ Axes, Armour & Ale - a roguelike written in Free Pascal<h1 class="allitems">All 
 <tr class="list2">
 <td class="itemname"><a class="bold" href="main.html#tempScreen">tempScreen</a></td>
 <td class="itemunit"><a class="bold" href="main.html">main</a></td>
-<td class="itemdesc"><p>Display is drawn on tempScreen before being copied to canvas</p></td>
+<td class="itemdesc"><p>Display is drawn on <code>tempScreen</code> before being copied to canvas</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="cave.html#tileCounter">tileCounter</a></td>
@@ -433,6 +434,7 @@ Axes, Armour & Ale - a roguelike written in Free Pascal<h1 class="allitems">All 
 <td class="itemdesc"><p>&nbsp;</p></td>
 </tr>
 </table>
-Axes, Armour & Ale - (c) 2020 Chris Hawkins<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+Axes, Armour & Ale - (c) 2020 Chris Hawkins
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
 </span>
 </td></tr></table></body></html>

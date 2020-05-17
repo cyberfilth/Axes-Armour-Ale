@@ -32,7 +32,7 @@ type
     (* Character used to represent the tile *)
     Glyph: char;
     (* Scent trail left by the player *)
-    Scent: smallint; { TODO : Add to save/load function }
+    Scent: smallint;
   end;
 
 var

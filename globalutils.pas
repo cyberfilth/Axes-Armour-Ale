@@ -162,6 +162,7 @@ begin
         AddElement(datanode, 'Occupied', BoolToStr(map.maparea[r][c].Occupied));
         AddElement(datanode, 'Discovered', BoolToStr(map.maparea[r][c].Discovered));
         AddElement(datanode, 'Glyph', map.maparea[r][c].Glyph);
+        AddElement(datanode, 'Scent', IntToStr(map.maparea[r][c].Scent));
       end;
     end;
 
@@ -239,7 +240,7 @@ end;
 procedure loadGame;
 var
   RootNode, ParentNode, Tile, NextNode, Blocks, Visible, Occupied,
-  Discovered, InventoryNode, ItemsNode, NPCnode, GlyphNode: TDOMNode;
+  Discovered, InventoryNode, ItemsNode, NPCnode, GlyphNode, ScentNode: TDOMNode;
   Doc: TXMLDocument;
   r, c, i: integer;
 begin
@@ -276,6 +277,8 @@ begin
         GlyphNode := Discovered.NextSibling;
         (* Convert String to Char *)
         map.maparea[r][c].Glyph := GlyphNode.TextContent[1];
+        ScentNode := GlyphNode.NextSibling;
+        map.maparea[r][c].Scent := StrToInt(ScentNode.TextContent);
         NextNode := Tile.NextSibling;
         Tile := NextNode;
       end;

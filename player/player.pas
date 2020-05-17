@@ -6,7 +6,7 @@ unit player;
 interface
 
 uses
-  Graphics, SysUtils, plot_gen;
+  Graphics, SysUtils, plot_gen, scent_map;
 
 type
   (* Store information about the player *)
@@ -84,9 +84,10 @@ begin
   end;
   (* set up inventory *)
   player_inventory.initialiseInventory;
+  (* Generate smell map *)
+  scent_map.initialiseScent(entityList[0].posX, entityList[0].posY);
   (* Draw player and FOV *)
-  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
-    entities.entityList[0].visionRange, 1);
+  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
 end;
 
 procedure createEquipment;
