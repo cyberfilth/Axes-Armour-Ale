@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: entities: Record Creature</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
+Axes, Armour & Ale - a roguelike written in Free Pascal<span id="Creature"></span><h1 class="cio">Record Creature</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Hierarchy</div><div class="one_section"><a class="section" href="#PasDoc-Fields">Fields</a></div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="entities.html">entities</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type Creature = record</code></p>
+<h2 class="description">Description</h2>
+<p>
+Creature</p>
+<h2 class="overview">Overview</h2>
+<span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#npcID">npcID</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#race">race</a></b>: shortstring;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#description">description</a></b>: string;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#currentHP">currentHP</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#maxHP">maxHP</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#attack">attack</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#defense">defense</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#posX">posX</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#posY">posY</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#xpReward">xpReward</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#visionRange">visionRange</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#weaponDice">weaponDice</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#weaponAdds">weaponAdds</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#glyph">glyph</a></b>: char;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#NPCsize">NPCsize</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#trackingTurns">trackingTurns</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#moveCount">moveCount</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#inView">inView</a></b>: boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#discovered">discovered</a></b>: boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#weaponEquipped">weaponEquipped</a></b>: boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#armourEquipped">armourEquipped</a></b>: boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#isDead">isDead</a></b>: boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#abilityTriggered">abilityTriggered</a></b>: boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#stsDrunk">stsDrunk</a></b>: boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#stsPoison">stsPoison</a></b>: boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#tmrDrunk">tmrDrunk</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#tmrPoison">tmrPoison</a></b>: smallint;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Methods"></span><h3 class="summary">Methods</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="entities.Creature.html#entityTakeTurn">entityTakeTurn</a></b>(i: smallint);</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="npcID"></span><code><b>npcID</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Unique ID</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="race"></span><code><b>race</b>: shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Creature type</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="description"></span><code><b>description</b>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Description of creature</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="currentHP"></span><code><b>currentHP</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+health and position on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="maxHP"></span><code><b>maxHP</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+health and position on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="attack"></span><code><b>attack</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+health and position on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="defense"></span><code><b>defense</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+health and position on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="posX"></span><code><b>posX</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+health and position on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="posY"></span><code><b>posY</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+health and position on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="xpReward"></span><code><b>xpReward</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+health and position on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="visionRange"></span><code><b>visionRange</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+health and position on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="weaponDice"></span><code><b>weaponDice</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Weapon stats</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="weaponAdds"></span><code><b>weaponAdds</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Weapon stats</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="glyph"></span><code><b>glyph</b>: char;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Character used to represent NPC on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="NPCsize"></span><code><b>NPCsize</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Size of NPC</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="trackingTurns"></span><code><b>trackingTurns</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Number of turns the entity will track the player when they're out of sight</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="moveCount"></span><code><b>moveCount</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Count of turns the entity will keep tracking the player when they're out of sight</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="inView"></span><code><b>inView</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Is the NPC in the players FoV</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="discovered"></span><code><b>discovered</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+First time the player discovers the NPC</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="weaponEquipped"></span><code><b>weaponEquipped</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Is a weapon equipped</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="armourEquipped"></span><code><b>armourEquipped</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Is Armour equipped</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="isDead"></span><code><b>isDead</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Has the NPC been killed, to be removed at end of game loop</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="abilityTriggered"></span><code><b>abilityTriggered</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Whether a special ability has been activated</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stsDrunk"></span><code><b>stsDrunk</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+status effects</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stsPoison"></span><code><b>stsPoison</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+status effects</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="tmrDrunk"></span><code><b>tmrDrunk</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+status timers</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="tmrPoison"></span><code><b>tmrPoison</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+status timers</p>
+</td></tr>
+</table>
+<h3 class="detail">Methods</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="entityTakeTurn"></span><code>procedure <b>entityTakeTurn</b>(i: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+The procedure that allows each NPC to take a turn</p>
+</td></tr>
+</table>
+Axes, Armour & Ale - (c) 2020 Chris Hawkins<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

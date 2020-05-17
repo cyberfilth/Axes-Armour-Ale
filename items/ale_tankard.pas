@@ -5,7 +5,7 @@ unit ale_tankard;
 
 interface
 
-(* Create a rock *)
+(* Create a tankard of ale *)
 procedure createAleTankard(uniqueid, itmx, itmy: smallint);
 (* Drink Ale *)
 procedure useItem;

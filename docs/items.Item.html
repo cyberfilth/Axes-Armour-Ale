@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: items: Record Item</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
+Axes, Armour & Ale - a roguelike written in Free Pascal<span id="Item"></span><h1 class="cio">Record Item</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Hierarchy</div><div class="one_section"><a class="section" href="#PasDoc-Fields">Fields</a></div><div class="one_section">Methods</div><div class="one_section">Properties</div></div>
+<span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
+<p class="unitlink">
+<a  href="items.html">items</a></p>
+<h2 class="declaration">Declaration</h2>
+<p class="declaration">
+<code>type Item = record</code></p>
+<h2 class="description">Description</h2>
+<p>
+Store information about items</p>
+<h2 class="overview">Overview</h2>
+<span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="items.Item.html#itemID">itemID</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="items.Item.html#itemName">itemName</a></b>: shortstring;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="items.Item.html#itemDescription">itemDescription</a></b>: shortstring;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="items.Item.html#itemType">itemType</a></b>: shortstring;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="items.Item.html#useID">useID</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="items.Item.html#posX">posX</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="items.Item.html#posY">posY</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="items.Item.html#glyph">glyph</a></b>: char;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="items.Item.html#inView">inView</a></b>: boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="items.Item.html#onMap">onMap</a></b>: boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="items.Item.html#discovered">discovered</a></b>: boolean;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="itemID"></span><code><b>itemID</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Unique ID</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="itemName"></span><code><b>itemName</b>: shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Item name &amp; description</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="itemDescription"></span><code><b>itemDescription</b>: shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Item name &amp; description</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="itemType"></span><code><b>itemType</b>: shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+drink, weapon, armour, missile</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="useID"></span><code><b>useID</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Used for lookup table</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="posX"></span><code><b>posX</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Position on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="posY"></span><code><b>posY</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Position on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="glyph"></span><code><b>glyph</b>: char;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Character used to represent item on game map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="inView"></span><code><b>inView</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Is the item in the players FoV</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="onMap"></span><code><b>onMap</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Is the item on the map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="discovered"></span><code><b>discovered</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Displays a message the first time item is seen</p>
+</td></tr>
+</table>
+Axes, Armour & Ale - (c) 2020 Chris Hawkins<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

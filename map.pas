@@ -38,7 +38,7 @@ type
 var
   (* Type of map: 0 = cave, 1 = blue grid-based dungeon *)
   mapType: smallint;
-  (* Current smell value *)
+  (* Current smell value for scent tracking *)
   currentSmellValue: smallint;
   (* Game map array *)
   maparea: array[1..MAXROWS, 1..MAXCOLUMNS] of tile;
