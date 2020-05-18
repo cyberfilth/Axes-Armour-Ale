@@ -55,6 +55,8 @@ procedure setupTiles;
 procedure setupMap;
 (* Load map from saved game *)
 procedure loadMap;
+(* Check if the coordinates are within the bounds of the gamemap *)
+function withinBounds(x, y: smallint): boolean;
 (* Check if the direction to move to is valid *)
 function canMove(checkX, checkY: smallint): boolean;
 (* Check if an object is in players FoV *)
@@ -148,10 +150,19 @@ begin
   end;
 end;
 
+function withinBounds(x, y: smallint): boolean;
+begin
+  Result := False;
+  if (x >= 1) and (x <= globalutils.MAXCOLUMNS) and (y >= 1) and
+    (y <= globalutils.MAXROWS) then
+    Result := True;
+end;
+
 function canMove(checkX, checkY: smallint): boolean;
 begin
   Result := False;
-  if (checkX >= 1) and (checkX <= MAXCOLUMNS) and (checkY >= 1) and (checkY <= MAXROWS) then
+  if (checkX >= 1) and (checkX <= MAXCOLUMNS) and (checkY >= 1) and
+    (checkY <= MAXROWS) then
   begin
     if (maparea[checkY][checkX].Blocks = False) then
       Result := True;

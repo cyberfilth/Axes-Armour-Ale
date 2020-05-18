@@ -5,19 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="tipuesearch/tipuesearch.css">
+
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p><form class="search-form" action="_tipue_results.html"><div class="search-input"><input type="text" name="q" id="tipue_search_input"></div><div class="search-button"><input type="button" id="tipue_search_button" onclick="this.form.submit();"></div></form>
+<div style="clear: both"></div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        /* 10 items to display seems standard */
+        'show': 10,
+        /* For PasDoc docs, showing urls is not very useful,
+           since the page title already shows the unit and identifier. */
+        'showURL': false
+    });
+});
+</script>
+</td><td class="content">
 Axes, Armour & Ale - a roguelike written in Free Pascal
 <h1 class="unit">Unit player</h1>
 <div class="sections">
-<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Uses</div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
 <code>Player</code> setup and stats</p>
-<span id="PasDoc-Uses"></span><h2 class="overview">Overview</h2>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>Graphics</li><li>SysUtils</li><li><a  href="plot_gen.html">plot_gen</a></li><li><a  href="scent_map.html">scent_map</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -32,71 +49,35 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player.html#createPlayer">createPlayer</a></b>;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player.html#createEquipment">createEquipment</a></b>;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player.html#movePlayer">movePlayer</a></b>(dir: word);</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player.html#processStatus">processStatus</a></b>;</code></td>
-</tr>
-<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="player.html#combat">combat</a></b>(npcID: smallint);</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>function <b><a  href="player.html#combatCheck">combatCheck</a></b>(x, y: smallint): boolean;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player.html#pickUp">pickUp</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="player.html#createEquipment">createEquipment</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player.html#createPlayer">createPlayer</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="player.html#gameOver">gameOver</a></b>;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="player.html#increaseHealth">increaseHealth</a></b>(amount: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player.html#gameOver">gameOver</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="player.html#movePlayer">movePlayer</a></b>(dir: word);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player.html#pickUp">pickUp</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="player.html#processStatus">processStatus</a></b>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="createPlayer"></span><code>procedure <b>createPlayer</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Create <a class="normal" href="player.html">player</a> character</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="createEquipment"></span><code>procedure <b>createEquipment</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Players starting <a class="normal" href="player_inventory.html#inventory">inventory</a></p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="movePlayer"></span><code>procedure <b>movePlayer</b>(dir: word);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Moves the <a class="normal" href="player.html">player</a> on the <a class="normal" href="map.html">map</a></p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="processStatus"></span><code>procedure <b>processStatus</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Process status effects</p>
-</td></tr>
-</table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="combat"></span><code>procedure <b>combat</b>(npcID: smallint);</code></td>
@@ -117,11 +98,29 @@ Check if <a class="normal" href="map.tile.html">tile</a> is occupied by an NPC</
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="pickUp"></span><code>procedure <b>pickUp</b>;</code></td>
+<td class="itemcode"><span id="createEquipment"></span><code>procedure <b>createEquipment</b>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Pick up an <a class="normal" href="items.Item.html">item</a> from the floor</p>
+Players starting <a class="normal" href="player_inventory.html#inventory">inventory</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="createPlayer"></span><code>procedure <b>createPlayer</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Create <a class="normal" href="player.html">player</a> character</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="gameOver"></span><code>procedure <b>gameOver</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display game over screen</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -135,11 +134,29 @@ Increase Health, no more than maxHP</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="gameOver"></span><code>procedure <b>gameOver</b>;</code></td>
+<td class="itemcode"><span id="movePlayer"></span><code>procedure <b>movePlayer</b>(dir: word);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Display game over screen</p>
+Moves the <a class="normal" href="player.html">player</a> on the <a class="normal" href="map.html">map</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="pickUp"></span><code>procedure <b>pickUp</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Pick up an <a class="normal" href="items.Item.html">item</a> from the floor</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="processStatus"></span><code>procedure <b>processStatus</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Process status effects</p>
 </td></tr>
 </table>
 Axes, Armour & Ale - (c) 2020 Chris Hawkins

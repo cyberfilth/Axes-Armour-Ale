@@ -12,7 +12,7 @@ unit main;
 interface
 
 uses
-  Classes, Forms, ComCtrls, Graphics, SysUtils, map, player,
+  Classes, Forms, ComCtrls, Graphics, SysUtils, map, player, scent_map,
   globalutils, Controls, LCLType, ui, items, player_inventory;
 
 type
@@ -113,6 +113,9 @@ begin
     player.gameOver;
     Exit;
   end;
+  (* Fade out the players scent every two turns *)
+  if (globalutils.playerTurn mod 2 = 0) then
+    scent_map.fadeScent;
   (* move NPC's *)
   entities.NPCgameLoop;
   (* Redraw Field of View after entities move *)
@@ -131,7 +134,10 @@ begin
       end;
     end
     else
+    begin
       items.itemList[i].inView := False;
+      map.drawTile(itemList[i].posX, itemList[i].posY, 0);
+    end;
   (* Redraw NPC's *)
   entities.redrawNPC;
   (* Update health display to show damage *)
