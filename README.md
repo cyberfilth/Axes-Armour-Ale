@@ -4,12 +4,13 @@
 
 ### A low-fantasy, roguelike game
 
-Alpha version, most features aren't implemented yet. This game builds on the terminal version at https://github.com/cyberfilth/FLUX/ and includes the following basic features;
-
- - A randomly generated dungeon
- - Save / Load last game
- - Should run on GNU/Linux and Windows
- - Small, native binary with no external dependencies
+Alpha version, most features aren't implemented yet and what there is may change frequently. Currently there are the following features:
+ - A randomly generated dungeon and a cave created using cellular automata
+ - Each game is automatically saved when exiting and can be reloaded when continuing
+ - Saved games are deleted when the player dies
+ - Game runs natively on both GNU/Linux and Windows
+ - Small, self-contained binary with no external dependencies.
+ - Can be run without needing to be installed
 
 ![Dungeon screenshot](GITscreenshots/linux_screenshot1.png)
 
@@ -26,16 +27,17 @@ Your character is controlled using either the numberpad or Vi keys.
    / | \        / | \
   b  j  n      1  2  3
   vi-keys      numpad
-</pre>
+
 You can also move in cardinal directions using the arrow keys.
 Pick up an item from the ground with either 'g' or ','
 View inventory with 'i'
 Drop an item with 'd'
 Quaff / drink with 'q'
+Wear armour or Wield a weapon with 'w'
 To exit a menu / quit the game press ESCAPE
 
+Use the mouse to click on enemies or items and the stats will display in the info box
+</pre>
 
 ### documentation
-All code has been heavily commented so that you can generate documentation using PasDoc.
-
-Online documentation can be found at https://cyberfilth.github.io/Axes-Armour-Ale/
+Technical documentation can be found at https://cyberfilth.github.io/Axes-Armour-Ale/
