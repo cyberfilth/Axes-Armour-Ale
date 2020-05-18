@@ -3,7 +3,6 @@
 unit scent_map;
 
 {$mode objfpc}{$H+}
-{$RANGECHECKS OFF}
 
 interface
 
@@ -35,46 +34,66 @@ begin
     while (x <= y) do
     begin
       (* Set starting scent values *)
-      if (maparea[centreY + Y][centreX + X].Blocks = False) then
+      if (withinBounds(centreX + X, centreY + Y)) and
+        (maparea[centreY + Y][centreX + X].Blocks = False) then
         maparea[centreY + Y][centreX + X].Scent := scentNumber;
-      if (maparea[centreY - Y][centreX + X].Blocks = False) then
+      if (withinBounds(centreX + X, centreY - Y)) and
+        (maparea[centreY - Y][centreX + X].Blocks = False) then
         maparea[centreY - Y][centreX + X].Scent := scentNumber;
-      if (maparea[centreY + Y][centreX - X].Blocks = False) then
+      if (withinBounds(centreX - X, centreY + Y)) and
+        (maparea[centreY + Y][centreX - X].Blocks = False) then
         maparea[centreY + Y][centreX - X].Scent := scentNumber;
-      if (maparea[centreY - Y][centreX - X].Blocks = False) then
+      if (withinBounds(centreX - X, centreY - Y)) and
+        (maparea[centreY - Y][centreX - X].Blocks = False) then
         maparea[centreY - Y][centreX - X].Scent := scentNumber;
-      if (maparea[centreY + X][centreX + Y].Blocks = False) then
+      if (withinBounds(centreX + Y, centreY + X)) and
+        (maparea[centreY + X][centreX + Y].Blocks = False) then
         maparea[centreY + X][centreX + Y].Scent := scentNumber;
-      if (maparea[centreY - X][centreX + Y].Blocks = False) then
+      if (withinBounds(centreX + Y, centreY - X)) and
+        (maparea[centreY - X][centreX + Y].Blocks = False) then
         maparea[centreY - X][centreX + Y].Scent := scentNumber;
-      if (maparea[centreY + X][centreX - Y].Blocks = False) then
+      if (withinBounds(centreX - Y, centreY + X)) and
+        (maparea[centreY + X][centreX - Y].Blocks = False) then
         maparea[centreY + X][centreX - Y].Scent := scentNumber;
-      if (maparea[centreY - X][centreX - Y].Blocks = False) then
+      if (withinBounds(centreX - Y, centreY - X)) and
+        (maparea[centreY - X][centreX - Y].Blocks = False) then
         maparea[centreY - X][centreX - Y].Scent := scentNumber;
       (* Cover the gaps left by the algorithm above *)
-      if (maparea[centreY + 1][centreX + 1].Blocks = False) then
+      if (withinBounds(centreX + 1, centreY + 1)) and
+        (maparea[centreY + 1][centreX + 1].Blocks = False) then
         maparea[centreY + 1][centreX + 1].Scent := 6;
-      if (maparea[centreY - 1][centreX + 1].Blocks = False) then
+      if (withinBounds(centreX + 1, centreY - 1)) and
+        (maparea[centreY - 1][centreX + 1].Blocks = False) then
         maparea[centreY - 1][centreX + 1].Scent := 6;
-      if (maparea[centreY + 1][centreX - 1].Blocks = False) then
+      if (withinBounds(centreX - 1, centreY + 1)) and
+        (maparea[centreY + 1][centreX - 1].Blocks = False) then
         maparea[centreY + 1][centreX - 1].Scent := 6;
-      if (maparea[centreY - 1][centreX - 1].Blocks = False) then
+      if (withinBounds(centreX - 1, centreY - 1)) and
+        (maparea[centreY - 1][centreX - 1].Blocks = False) then
         maparea[centreY - 1][centreX - 1].Scent := 6;
-      if (maparea[centreY - 2][centreX + 4].Blocks = False) then
+      if (withinBounds(centreX + 4, centreY - 2)) and
+        (maparea[centreY - 2][centreX + 4].Blocks = False) then
         maparea[centreY - 2][centreX + 4].Scent := 3;
-      if (maparea[centreY - 2][centreX - 4].Blocks = False) then
+      if (withinBounds(centreX - 4, centreY - 2)) and
+        (maparea[centreY - 2][centreX - 4].Blocks = False) then
         maparea[centreY - 2][centreX - 4].Scent := 3;
-      if (maparea[centreY + 2][centreX + 4].Blocks = False) then
+      if (withinBounds(centreX + 4, centreY + 2)) and
+        (maparea[centreY + 2][centreX + 4].Blocks = False) then
         maparea[centreY + 2][centreX + 4].Scent := 3;
-      if (maparea[centreY + 2][centreX - 4].Blocks = False) then
+      if (withinBounds(centreX - 4, centreY + 2)) and
+        (maparea[centreY + 2][centreX - 4].Blocks = False) then
         maparea[centreY + 2][centreX - 4].Scent := 3;
-      if (maparea[centreY + 4][centreX + 2].Blocks = False) then
+      if (withinBounds(centreX + 2, centreY + 4)) and
+        (maparea[centreY + 4][centreX + 2].Blocks = False) then
         maparea[centreY + 4][centreX + 2].Scent := 2;
-      if (maparea[centreY + 4][centreX - 2].Blocks = False) then
+      if (withinBounds(centreX - 2, centreY + 4)) and
+        (maparea[centreY + 4][centreX - 2].Blocks = False) then
         maparea[centreY + 4][centreX - 2].Scent := 2;
-      if (maparea[centreY - 4][centreX + 2].Blocks = False) then
+      if (withinBounds(centreX + 2, centreY - 4)) and
+        (maparea[centreY - 4][centreX + 2].Blocks = False) then
         maparea[centreY - 4][centreX + 2].Scent := 2;
-      if (maparea[centreY - 4][centreX - 2].Blocks = False) then
+      if (withinBounds(centreX - 2, centreY - 4)) and
+        (maparea[centreY - 4][centreX - 2].Blocks = False) then
         maparea[centreY - 4][centreX - 2].Scent := 2;
 
       if (d < 0) then
@@ -106,46 +125,66 @@ begin
     while (x <= y) do
     begin
       (* Increase scent values *)
-      if (maparea[centreY + Y][centreX + X].Blocks = False) then
+      if (withinBounds(centreX + X, centreY + Y)) and
+        (maparea[centreY + Y][centreX + X].Blocks = False) then
         Inc(maparea[centreY + Y][centreX + X].Scent);
-      if (maparea[centreY - Y][centreX + X].Blocks = False) then
+      if (withinBounds(centreX + X, centreY - Y)) and
+        (maparea[centreY - Y][centreX + X].Blocks = False) then
         Inc(maparea[centreY - Y][centreX + X].Scent);
-      if (maparea[centreY + Y][centreX - X].Blocks = False) then
+      if (withinBounds(centreX - X, centreY + Y)) and
+        (maparea[centreY + Y][centreX - X].Blocks = False) then
         Inc(maparea[centreY + Y][centreX - X].Scent);
-      if (maparea[centreY - Y][centreX - X].Blocks = False) then
+      if (withinBounds(centreX - X, centreY - Y)) and
+        (maparea[centreY - Y][centreX - X].Blocks = False) then
         Inc(maparea[centreY - Y][centreX - X].Scent);
-      if (maparea[centreY + X][centreX + Y].Blocks = False) then
+      if (withinBounds(centreX + Y, centreY + X)) and
+        (maparea[centreY + X][centreX + Y].Blocks = False) then
         Inc(maparea[centreY + X][centreX + Y].Scent);
-      if (maparea[centreY - X][centreX + Y].Blocks = False) then
+      if (withinBounds(centreX + Y, centreY - X)) and
+        (maparea[centreY - X][centreX + Y].Blocks = False) then
         Inc(maparea[centreY - X][centreX + Y].Scent);
-      if (maparea[centreY + X][centreX - Y].Blocks = False) then
+      if (withinBounds(centreX - Y, centreY + X)) and
+        (maparea[centreY + X][centreX - Y].Blocks = False) then
         Inc(maparea[centreY + X][centreX - Y].Scent);
-      if (maparea[centreY - X][centreX - Y].Blocks = False) then
+      if (withinBounds(centreX - Y, centreY - X)) and
+        (maparea[centreY - X][centreX - Y].Blocks = False) then
         Inc(maparea[centreY - X][centreX - Y].Scent);
       (* Cover the gaps left by the algorithm above *)
-      if (maparea[centreY + 1][centreX + 1].Blocks = False) then
+      if (withinBounds(centreX + 1, centreY + 1)) and
+        (maparea[centreY + 1][centreX + 1].Blocks = False) then
         Inc(maparea[centreY + 1][centreX + 1].Scent);
-      if (maparea[centreY - 1][centreX + 1].Blocks = False) then
+      if (withinBounds(centreX + 1, centreY - 1)) and
+        (maparea[centreY - 1][centreX + 1].Blocks = False) then
         Inc(maparea[centreY - 1][centreX + 1].Scent);
-      if (maparea[centreY + 1][centreX - 1].Blocks = False) then
+      if (withinBounds(centreX - 1, centreY + 1)) and
+        (maparea[centreY + 1][centreX - 1].Blocks = False) then
         Inc(maparea[centreY + 1][centreX - 1].Scent);
-      if (maparea[centreY - 1][centreX - 1].Blocks = False) then
+      if (withinBounds(centreX - 1, centreY - 1)) and
+        (maparea[centreY - 1][centreX - 1].Blocks = False) then
         Inc(maparea[centreY - 1][centreX - 1].Scent);
-      if (maparea[centreY - 2][centreX + 4].Blocks = False) then
+      if (withinBounds(centreX + 4, centreY - 2)) and
+        (maparea[centreY - 2][centreX + 4].Blocks = False) then
         Inc(maparea[centreY - 2][centreX + 4].Scent);
-      if (maparea[centreY - 2][centreX - 4].Blocks = False) then
+      if (withinBounds(centreX - 4, centreY - 2)) and
+        (maparea[centreY - 2][centreX - 4].Blocks = False) then
         Inc(maparea[centreY - 2][centreX - 4].Scent);
-      if (maparea[centreY + 2][centreX + 4].Blocks = False) then
+      if (withinBounds(centreX + 4, centreY + 2)) and
+        (maparea[centreY + 2][centreX + 4].Blocks = False) then
         Inc(maparea[centreY + 2][centreX + 4].Scent);
-      if (maparea[centreY + 2][centreX - 4].Blocks = False) then
+      if (withinBounds(centreX - 4, centreY + 2)) and
+        (maparea[centreY + 2][centreX - 4].Blocks = False) then
         Inc(maparea[centreY + 2][centreX - 4].Scent);
-      if (maparea[centreY + 4][centreX + 2].Blocks = False) then
+      if (withinBounds(centreX + 2, centreY + 4)) and
+        (maparea[centreY + 4][centreX + 2].Blocks = False) then
         Inc(maparea[centreY + 4][centreX + 2].Scent);
-      if (maparea[centreY + 4][centreX - 2].Blocks = False) then
+      if (withinBounds(centreX - 2, centreY + 4)) and
+        (maparea[centreY + 4][centreX - 2].Blocks = False) then
         Inc(maparea[centreY + 4][centreX - 2].Scent);
-      if (maparea[centreY - 4][centreX + 2].Blocks = False) then
+      if (withinBounds(centreX + 2, centreY - 4)) and
+        (maparea[centreY - 4][centreX + 2].Blocks = False) then
         Inc(maparea[centreY - 4][centreX + 2].Scent);
-      if (maparea[centreY - 4][centreX - 2].Blocks = False) then
+      if (withinBounds(centreX - 2, centreY - 4)) and
+        (maparea[centreY - 4][centreX - 2].Blocks = False) then
         Inc(maparea[centreY - 4][centreX - 2].Scent);
 
       if (d < 0) then
@@ -177,4 +216,3 @@ begin
 end;
 
 end.
-

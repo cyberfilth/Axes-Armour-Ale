@@ -5,59 +5,52 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="tipuesearch/tipuesearch.css">
+
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><p><a href="GVClasses.png" class="navigation">Classes hierarchy graph</a></p><form class="search-form" action="_tipue_results.html"><div class="search-input"><input type="text" name="q" id="tipue_search_input"></div><div class="search-button"><input type="button" id="tipue_search_button" onclick="this.form.submit();"></div></form>
+<div style="clear: both"></div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#tipue_search_input').tipuesearch({
+        /* 10 items to display seems standard */
+        'show': 10,
+        /* For PasDoc docs, showing urls is not very useful,
+           since the page title already shows the unit and identifier. */
+        'showURL': false
+    });
+});
+</script>
+</td><td class="content">
 Axes, Armour & Ale - a roguelike written in Free Pascal
 <h1 class="unit">Unit ui</h1>
 <div class="sections">
-<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Uses</div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
 User Interface - Unit responsible for displaying messages and stats</p>
-<span id="PasDoc-Uses"></span><h2 class="overview">Overview</h2>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>SysUtils</li><li>Graphics</li><li><a  href="globalutils.html">globalutils</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#titleScreen">titleScreen</a></b>(yn: byte);</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#drawSidepanel">drawSidepanel</a></b>;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#updateLevel">updateLevel</a></b>;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#updateXP">updateXP</a></b>;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#updateHealth">updateHealth</a></b>;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#updateAttack">updateAttack</a></b>;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#updateDefence">updateDefence</a></b>;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#updateWeapon">updateWeapon</a></b>(weaponName: shortstring);</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#updateArmour">updateArmour</a></b>(armourName: shortstring);</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#displayLook">displayLook</a></b>(displayType: byte; entityName, itemDescription: shortstring; currentHP, maxHP: smallint);</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#displayMessage">displayMessage</a></b>(message: string);</code></td>
-</tr>
-<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="ui.html#bufferMessage">bufferMessage</a></b>(message: string);</code></td>
 </tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="ui.html#clearLog">clearLog</a></b>;</code></td>
+</tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#writeBufferedMessages">writeBufferedMessages</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="ui.html#displayLook">displayLook</a></b>(displayType: byte; entityName, itemDescription: shortstring; currentHP, maxHP: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="ui.html#displayMessage">displayMessage</a></b>(message: string);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="ui.html#drawSidepanel">drawSidepanel</a></b>;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="ui.html#exitPrompt">exitPrompt</a></b>;</code></td>
@@ -66,7 +59,31 @@ User Interface - Unit responsible for displaying messages and stats</p>
 <td class="itemcode"><code>procedure <b><a  href="ui.html#rewriteTopMessage">rewriteTopMessage</a></b>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="ui.html#clearLog">clearLog</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="ui.html#titleScreen">titleScreen</a></b>(yn: byte);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="ui.html#updateArmour">updateArmour</a></b>(armourName: shortstring);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="ui.html#updateAttack">updateAttack</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="ui.html#updateDefence">updateDefence</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="ui.html#updateHealth">updateHealth</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="ui.html#updateLevel">updateLevel</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="ui.html#updateWeapon">updateWeapon</a></b>(weaponName: shortstring);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="ui.html#updateXP">updateXP</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="ui.html#writeBufferedMessages">writeBufferedMessages</a></b>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
@@ -99,96 +116,33 @@ User Interface - Unit responsible for displaying messages and stats</p>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="ui.html#messageArray">messageArray</a></b>: array[1..7] of string = (' ', ' ', ' ', ' ', ' ', ' ', ' ');</code></td>
-</tr>
-<tr class="list2">
 <td class="itemcode"><code><b><a  href="ui.html#buffer">buffer</a></b>: string;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="ui.html#logo">logo</a></b>: TBitmap;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="ui.html#messageArray">messageArray</a></b>: array[1..7] of string = (' ', ' ', ' ', ' ', ' ', ' ', ' ');</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="titleScreen"></span><code>procedure <b>titleScreen</b>(yn: byte);</code></td>
+<td class="itemcode"><span id="bufferMessage"></span><code>procedure <b>bufferMessage</b>(message: string);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Title screen</p>
+Store all messages from players turn</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="drawSidepanel"></span><code>procedure <b>drawSidepanel</b>;</code></td>
+<td class="itemcode"><span id="clearLog"></span><code>procedure <b>clearLog</b>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Draws the panel on side of screen</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="updateLevel"></span><code>procedure <b>updateLevel</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Update <a class="normal" href="player.html">player</a> level</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="updateXP"></span><code>procedure <b>updateXP</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Update Experience points display</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="updateHealth"></span><code>procedure <b>updateHealth</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Update <a class="normal" href="player.html">player</a> health display</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="updateAttack"></span><code>procedure <b>updateAttack</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Update <a class="normal" href="player.html">player</a> attack value</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="updateDefence"></span><code>procedure <b>updateDefence</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Update <a class="normal" href="player.html">player</a> defence value</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="updateWeapon"></span><code>procedure <b>updateWeapon</b>(weaponName: shortstring);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Display equipped weapon</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="updateArmour"></span><code>procedure <b>updateArmour</b>(armourName: shortstring);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Display equipped armour</p>
+Clear message log</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -211,20 +165,11 @@ Write text to the message log</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="bufferMessage"></span><code>procedure <b>bufferMessage</b>(message: string);</code></td>
+<td class="itemcode"><span id="drawSidepanel"></span><code>procedure <b>drawSidepanel</b>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Store all messages from players turn</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="writeBufferedMessages"></span><code>procedure <b>writeBufferedMessages</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Write buffered message to the message log</p>
+Draws the panel on side of screen</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -247,11 +192,83 @@ Rewrite message at top of log</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="clearLog"></span><code>procedure <b>clearLog</b>;</code></td>
+<td class="itemcode"><span id="titleScreen"></span><code>procedure <b>titleScreen</b>(yn: byte);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Clear message log</p>
+Title screen</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="updateArmour"></span><code>procedure <b>updateArmour</b>(armourName: shortstring);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display equipped armour</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="updateAttack"></span><code>procedure <b>updateAttack</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Update <a class="normal" href="player.html">player</a> attack value</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="updateDefence"></span><code>procedure <b>updateDefence</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Update <a class="normal" href="player.html">player</a> defence value</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="updateHealth"></span><code>procedure <b>updateHealth</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Update <a class="normal" href="player.html">player</a> health display</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="updateLevel"></span><code>procedure <b>updateLevel</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Update <a class="normal" href="player.html">player</a> level</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="updateWeapon"></span><code>procedure <b>updateWeapon</b>(weaponName: shortstring);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display equipped weapon</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="updateXP"></span><code>procedure <b>updateXP</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Update Experience points display</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="writeBufferedMessages"></span><code>procedure <b>writeBufferedMessages</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Write buffered message to the message log</p>
 </td></tr>
 </table>
 <h3 class="detail">Constants</h3>
@@ -330,13 +347,6 @@ Look box Height</p>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="messageArray"></span><code><b>messageArray</b>: array[1..7] of string = (' ', ' ', ' ', ' ', ' ', ' ', ' ');</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
 <td class="itemcode"><span id="buffer"></span><code><b>buffer</b>: string;</code></td>
 </tr>
 <tr><td colspan="1">
@@ -345,6 +355,13 @@ Look box Height</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="logo"></span><code><b>logo</b>: TBitmap;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="messageArray"></span><code><b>messageArray</b>: array[1..7] of string = (' ', ' ', ' ', ' ', ' ', ' ', ' ');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
