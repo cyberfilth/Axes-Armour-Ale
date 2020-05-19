@@ -29,15 +29,16 @@ Your character is controlled using either the numberpad or Vi keys.
   vi-keys      numpad
 
 You can also move in cardinal directions using the arrow keys.
-Pick up an item from the ground with either 'g' or ','
-View inventory with 'i'
-Drop an item with 'd'
-Quaff / drink with 'q'
-Wear armour or Wield a weapon with 'w'
-To exit a menu / quit the game press ESCAPE
+</pre>
+ - Pick up an item from the ground with either 'g' or ','
+ - View inventory with 'i'
+ - Drop an item with 'd'
+ - Quaff / drink with 'q'
+ - Wear armour or Wield a weapon with 'w'
+ - To exit a menu / quit the game press ESCAPE
 
 Use the mouse to click on enemies or items and the stats will display in the info box
-</pre>
+
 
 ### documentation
 Technical documentation can be found at https://cyberfilth.github.io/Axes-Armour-Ale/
