@@ -29,7 +29,7 @@ const
   MAXCOLUMNS = 67;
   (* Rows of the game map *)
   MAXROWS = 38;
-  (* Colours *)
+  (* Colours *)   { TODO : Move these to the UI unit }
   BACKGROUNDCOLOUR = TColor($131A00);
   UICOLOUR = TColor($808000);
   UITEXTCOLOUR = TColor($F5F58C);
@@ -162,7 +162,6 @@ begin
         AddElement(datanode, 'Occupied', BoolToStr(map.maparea[r][c].Occupied));
         AddElement(datanode, 'Discovered', BoolToStr(map.maparea[r][c].Discovered));
         AddElement(datanode, 'Glyph', map.maparea[r][c].Glyph);
-        AddElement(datanode, 'Scent', IntToStr(map.maparea[r][c].Scent));
       end;
     end;
 
@@ -217,6 +216,8 @@ begin
       AddElement(DataNode, 'trackingTurns',
         IntToStr(entities.entityList[i].trackingTurns));
       AddElement(DataNode, 'moveCount', IntToStr(entities.entityList[i].moveCount));
+      AddElement(DataNode, 'targetX', IntToStr(entities.entityList[i].targetX));
+      AddElement(DataNode, 'targetY', IntToStr(entities.entityList[i].targetY));
       AddElement(DataNode, 'inView', BoolToStr(entities.entityList[i].inView));
       AddElement(DataNode, 'discovered', BoolToStr(entities.entityList[i].discovered));
       AddElement(DataNode, 'weaponEquipped',
@@ -240,7 +241,7 @@ end;
 procedure loadGame;
 var
   RootNode, ParentNode, Tile, NextNode, Blocks, Visible, Occupied,
-  Discovered, InventoryNode, ItemsNode, NPCnode, GlyphNode, ScentNode: TDOMNode;
+  Discovered, InventoryNode, ItemsNode, NPCnode, GlyphNode: TDOMNode;
   Doc: TXMLDocument;
   r, c, i: integer;
 begin
@@ -277,8 +278,6 @@ begin
         GlyphNode := Discovered.NextSibling;
         (* Convert String to Char *)
         map.maparea[r][c].Glyph := GlyphNode.TextContent[1];
-        ScentNode := GlyphNode.NextSibling;
-        map.maparea[r][c].Scent := StrToInt(ScentNode.TextContent);
         NextNode := Tile.NextSibling;
         Tile := NextNode;
       end;
@@ -367,6 +366,10 @@ begin
         StrToInt(NPCnode.FindNode('trackingTurns').TextContent);
       entities.entityList[i].moveCount :=
         StrToInt(NPCnode.FindNode('moveCount').TextContent);
+      entities.entityList[i].targetX :=
+        StrToInt(NPCnode.FindNode('targetX').TextContent);
+      entities.entityList[i].targetY :=
+        StrToInt(NPCnode.FindNode('targetY').TextContent);
       entities.entityList[i].inView :=
         StrToBool(NPCnode.FindNode('inView').TextContent);
       entities.entityList[i].discovered :=

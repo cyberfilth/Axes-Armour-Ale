@@ -10,7 +10,7 @@ interface
 uses
   Graphics, map, globalutils, ui, items,
   (* Import the NPC's *)
-  cave_rat, hyena;
+  cave_rat, hyena, cave_bear;
 
 type
   (* Store information about NPC's *)
@@ -25,7 +25,8 @@ type
     (* Description of creature *)
     description: string;
     (* health and position on game map *)
-    currentHP, maxHP, attack, defense, posX, posY, xpReward, visionRange: smallint;
+    currentHP, maxHP, attack, defense, posX, posY, targetX, targetY,
+    xpReward, visionRange: smallint;
     (* Weapon stats *)
     weaponDice, weaponAdds: smallint;
     (* Character used to represent NPC on game map *)
@@ -59,7 +60,7 @@ type
 var
   entityList: array of Creature;
   npcAmount, listLength: smallint;
-  caveRatGlyph, hyenaGlyph, playerGlyph: TBitmap;
+  playerGlyph, caveRatGlyph, hyenaGlyph, caveBearGlyph: TBitmap;
 
 (* Load entity textures *)
 procedure setupEntities;
@@ -99,6 +100,8 @@ begin
   caveRatGlyph.LoadFromResourceName(HINSTANCE, 'R_ORANGE');
   hyenaGlyph := TBitmap.Create;
   hyenaGlyph.LoadFromResourceName(HINSTANCE, 'H_RED');
+  caveBearGlyph := TBitmap.Create;
+  caveBearGlyph.LoadFromResourceName(HINSTANCE, 'B_LBLUE');
 end;
 
 procedure spawnNPCs;
@@ -119,11 +122,14 @@ begin
     NPCtype := globalutils.randomRange(0, 1);
     case NPCtype of
       0: // Hyena
-        hyena.createHyena(i, globalutils.currentDgncentreList[iplus].x,
+        //hyena.createHyena(i, globalutils.currentDgncentreList[iplus].x,
+        //  globalutils.currentDgncentreList[iplus].y);
+        cave_bear.createCaveBear(i, globalutils.currentDgncentreList[iplus].x,
           globalutils.currentDgncentreList[iplus].y);
       1: // Cave rat
         cave_rat.createCaveRat(i, globalutils.currentDgncentreList[iplus].x,
           globalutils.currentDgncentreList[iplus].y);
+
     end;
     Inc(iplus);
   end;
@@ -141,6 +147,7 @@ begin
   case glyph of
     'r': drawToBuffer(mapToScreen(c), mapToScreen(r), caveRatGlyph);
     'h': drawToBuffer(mapToScreen(c), mapToScreen(r), hyenaGlyph);
+    'b': drawToBuffer(mapToScreen(c), mapToScreen(r), caveBearGlyph);
   end;
 end;
 
@@ -269,7 +276,9 @@ begin
   if (entityList[i].race = 'cave rat') then
     cave_rat.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY)
   else if (entityList[i].race = 'blood hyena') then
-    hyena.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY);
+    hyena.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY)
+  else if (entityList[i].race = 'cave bear') then
+    cave_bear.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY);
 end;
 
 end.

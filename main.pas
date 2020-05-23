@@ -12,7 +12,7 @@ unit main;
 interface
 
 uses
-  Classes, Forms, ComCtrls, Graphics, SysUtils, map, player, scent_map,
+  Classes, Forms, ComCtrls, Graphics, SysUtils, map, player,
   globalutils, Controls, LCLType, ui, items, player_inventory;
 
 type
@@ -113,9 +113,6 @@ begin
     player.gameOver;
     Exit;
   end;
-  (* Fade out the players scent every two turns *)
-  if (globalutils.playerTurn mod 2 = 0) then
-    scent_map.fadeScent;
   (* move NPC's *)
   entities.NPCgameLoop;
   (* Redraw Field of View after entities move *)
@@ -505,9 +502,10 @@ begin
   items.leatherArmour1.Free;
   items.woodenClub.Free;
   (* Entity sprites *)
+  entities.playerGlyph.Free;
   entities.caveRatGlyph.Free;
   entities.hyenaGlyph.Free;
-  entities.playerGlyph.Free;
+  entities.caveBearGlyph.Free;
 end;
 
 end.

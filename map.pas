@@ -31,15 +31,11 @@ type
     Discovered: boolean;
     (* Character used to represent the tile *)
     Glyph: char;
-    (* Scent trail left by the player *)
-    Scent: smallint;
   end;
 
 var
   (* Type of map: 0 = cave, 1 = blue grid-based dungeon *)
   mapType: smallint;
-  (* Current smell value for scent tracking *)
-  currentSmellValue: smallint;
   (* Game map array *)
   maparea: array[1..MAXROWS, 1..MAXCOLUMNS] of tile;
   r, c: smallint;
@@ -75,8 +71,6 @@ function mapToScreen(pos: smallint): smallint;
 function screenToMap(pos: smallint): smallint;
 (* Place a tile on the map *)
 procedure drawTile(c, r: smallint; hiDef: byte);
-(* Get the scent value at coordinates *)
-function getScentValue(x, y: smallint): smallint;
 
 implementation
 
@@ -126,10 +120,8 @@ begin
         Discovered := False;
         Occupied := False;
         Glyph := globalutils.dungeonArray[r][c];
-        Scent := 0;
       end;
-      if (globalutils.dungeonArray[r][c] = '.') or
-        (globalutils.dungeonArray[r][c] = ':') then
+      if (globalutils.dungeonArray[r][c] = '.') or (globalutils.dungeonArray[r][c] = ':') then
         maparea[r][c].Blocks := False;
     end;
   end;
@@ -244,11 +236,5 @@ begin
     end;
   end;
 end;
-
-function getScentValue(x, y: smallint): smallint;
-begin
-
-end;
-
 
 end.

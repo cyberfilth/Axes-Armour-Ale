@@ -6,7 +6,7 @@ unit player;
 interface
 
 uses
-  Graphics, SysUtils, plot_gen, scent_map;
+  Graphics, SysUtils, plot_gen;
 
 type
   (* Store information about the player *)
@@ -69,6 +69,8 @@ begin
     NPCsize := 3;
     trackingTurns := 3;
     moveCount := 0;
+    targetX := 0;
+    targetY := 0;
     inView := True;
     discovered := True;
     weaponEquipped := False;
@@ -84,8 +86,6 @@ begin
   end;
   (* set up inventory *)
   player_inventory.initialiseInventory;
-  (* Generate smell map *)
-  scent_map.initialiseScent(entityList[0].posX, entityList[0].posY);
   (* Draw player and FOV *)
   fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
 end;
@@ -172,8 +172,6 @@ begin
   map.occupy(entityList[0].posX, entityList[0].posY);
   fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
     entities.entityList[0].visionRange, 1);
-  (* Update the scent map *)
-  scent_map.updateScent(entityList[0].posX, entityList[0].posY);
   ui.writeBufferedMessages;
 end;
 

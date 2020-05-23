@@ -14,7 +14,7 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="16">
+      <Resources Count="17">
         <Resource_0 FileName="images/sprites/player_glyph.bmp" Type="BITMAP" ResourceName="PLAYER_GLYPH"/>
         <Resource_1 FileName="images/dungeon/ascii/blueDungeonFloorDef.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORDEF"/>
         <Resource_2 FileName="images/dungeon/ascii/blueDungeonFloorHi.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORHI"/>
@@ -31,6 +31,7 @@
         <Resource_13 FileName="images/sprites/basic_club.bmp" Type="BITMAP" ResourceName="BASIC_CLUB"/>
         <Resource_14 FileName="images/dungeon/ascii/caveWallDef.bmp" Type="BITMAP" ResourceName="CAVEWALLDEF"/>
         <Resource_15 FileName="images/dungeon/ascii/caveWallHi.bmp" Type="BITMAP" ResourceName="CAVEWALLHI"/>
+        <Resource_16 FileName="images\sprites\b_lblue.bmp" Type="BITMAP" ResourceName="B_LBLUE"/>
       </Resources>
     </General>
     <VersionInfo>
@@ -181,7 +182,7 @@
         <IsPartOfProject Value="True"/>
       </Unit9>
       <Unit10>
-        <Filename Value="entities\cave_rat.pas"/>
+        <Filename Value="entities\cave_bear.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit10>
       <Unit11>

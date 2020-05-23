@@ -106,6 +106,8 @@ begin
     NPCsize := 2;
     trackingTurns := 3;
     moveCount := 0;
+    targetX := 0;
+    targetY := 0;
     inView := False;
     discovered := False;
     weaponEquipped := False;
