@@ -22,7 +22,7 @@ begin
   with items.itemList[items.listLength] do
   begin
     itemID := uniqueid;
-    itemName := 'Crude dagger';
+    itemName := 'crude dagger';
     itemDescription := 'adds 1D6+2 to attack';
     itemType := 'weapon';
     useID := 2;

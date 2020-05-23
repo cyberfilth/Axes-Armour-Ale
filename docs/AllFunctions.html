@@ -29,48 +29,48 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemdesc"><p>Show <a class="normal" href="player_inventory.html#menu">menu</a> at bottom of screen</p></td>
 </tr>
 <tr class="list">
+<td class="itemname"><a class="bold" href="barrel.html#breakBarrel">breakBarrel</a></td>
+<td class="itemunit"><a class="bold" href="barrel.html">barrel</a></td>
+<td class="itemdesc"><p><a class="normal" href="barrel.html">Barrel</a> breaks open</p></td>
+</tr>
+<tr class="list2">
 <td class="itemname"><a class="bold" href="ui.html#bufferMessage">bufferMessage</a></td>
 <td class="itemunit"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>Store all messages from players turn</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="map.html#canMove">canMove</a></td>
 <td class="itemunit"><a class="bold" href="map.html">map</a></td>
 <td class="itemdesc"><p>Check if the direction to move to is valid</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="map.html#canSee">canSee</a></td>
 <td class="itemunit"><a class="bold" href="map.html">map</a></td>
 <td class="itemdesc"><p>Check if an object is in players <a class="normal" href="fov.html">FoV</a></p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="grid_dungeon.html#carveHorizontally">carveHorizontally</a></td>
 <td class="itemunit"><a class="bold" href="grid_dungeon.html">grid_dungeon</a></td>
 <td class="itemdesc"><p>Carve a horizontal tunnel</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="cave.html#carveHorizontally">carveHorizontally</a></td>
 <td class="itemunit"><a class="bold" href="cave.html">cave</a></td>
 <td class="itemdesc"><p>Carve a horizontal tunnel</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="grid_dungeon.html#carveVertically">carveVertically</a></td>
 <td class="itemunit"><a class="bold" href="grid_dungeon.html">grid_dungeon</a></td>
 <td class="itemdesc"><p>Carve a vertical tunnel</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="cave.html#carveVertically">carveVertically</a></td>
 <td class="itemunit"><a class="bold" href="cave.html">cave</a></td>
 <td class="itemdesc"><p>Carve a vertical tunnel</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="hyena.html#chasePlayer">chasePlayer</a></td>
 <td class="itemunit"><a class="bold" href="hyena.html">hyena</a></td>
-<td class="itemdesc"><p>Chase the <a class="normal" href="player.html">player</a></p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="cave_rat.html#chasePlayer">chasePlayer</a></td>
-<td class="itemunit"><a class="bold" href="cave_rat.html">cave_rat</a></td>
 <td class="itemdesc"><p>Chase the <a class="normal" href="player.html">player</a></p></td>
 </tr>
 <tr class="list2">
@@ -79,33 +79,33 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemdesc"><p>Chase the <a class="normal" href="player.html">player</a></p></td>
 </tr>
 <tr class="list">
+<td class="itemname"><a class="bold" href="cave_rat.html#chasePlayer">chasePlayer</a></td>
+<td class="itemunit"><a class="bold" href="cave_rat.html">cave_rat</a></td>
+<td class="itemdesc"><p>Chase the <a class="normal" href="player.html">player</a></p></td>
+</tr>
+<tr class="list2">
 <td class="itemname"><a class="bold" href="cave_bear.html#chaseTarget">chaseTarget</a></td>
 <td class="itemunit"><a class="bold" href="cave_bear.html">cave_bear</a></td>
 <td class="itemdesc"><p>Go to last known location of <a class="normal" href="player.html">player</a></p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="hyena.html#checkSpaceFree">checkSpaceFree</a></td>
 <td class="itemunit"><a class="bold" href="hyena.html">hyena</a></td>
 <td class="itemdesc"><p>check to see if entity can move to a square</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="ui.html#clearLog">clearLog</a></td>
 <td class="itemunit"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>Clear message log</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="player.html#combat">combat</a></td>
 <td class="itemunit"><a class="bold" href="player.html">player</a></td>
 <td class="itemdesc"><p>Attack NPC</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="cave_rat.html#combat">combat</a></td>
 <td class="itemunit"><a class="bold" href="cave_rat.html">cave_rat</a></td>
-<td class="itemdesc"><p><code>Combat</code></p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="cave_bear.html#combat">combat</a></td>
-<td class="itemunit"><a class="bold" href="cave_bear.html">cave_bear</a></td>
 <td class="itemdesc"><p><code>Combat</code></p></td>
 </tr>
 <tr class="list">
@@ -114,24 +114,34 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemdesc"><p><code>Combat</code></p></td>
 </tr>
 <tr class="list2">
+<td class="itemname"><a class="bold" href="cave_bear.html#combat">combat</a></td>
+<td class="itemunit"><a class="bold" href="cave_bear.html">cave_bear</a></td>
+<td class="itemdesc"><p><code>Combat</code></p></td>
+</tr>
+<tr class="list">
 <td class="itemname"><a class="bold" href="player.html#combatCheck">combatCheck</a></td>
 <td class="itemunit"><a class="bold" href="player.html">player</a></td>
 <td class="itemdesc"><p>Check if <a class="normal" href="map.tile.html">tile</a> is occupied by an NPC</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="items.html#containsItem">containsItem</a></td>
 <td class="itemunit"><a class="bold" href="items.html">items</a></td>
 <td class="itemdesc"><p>Is there an <a class="normal" href="items.Item.html">item</a> at <a class="normal" href="globalutils.coordinates.html">coordinates</a></p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="ale_tankard.html#createAleTankard">createAleTankard</a></td>
 <td class="itemunit"><a class="bold" href="ale_tankard.html">ale_tankard</a></td>
 <td class="itemdesc"><p>Create a tankard of ale</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="leather_armour1.html#createArmour">createArmour</a></td>
 <td class="itemunit"><a class="bold" href="leather_armour1.html">leather_armour1</a></td>
 <td class="itemdesc"><p>Create armour</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="barrel.html#createBarrel">createBarrel</a></td>
+<td class="itemunit"><a class="bold" href="barrel.html">barrel</a></td>
+<td class="itemdesc"><p>Create a <a class="normal" href="barrel.html">barrel</a></p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="cave_bear.html#createCaveBear">createCaveBear</a></td>
@@ -264,13 +274,13 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemdesc"><p>Display game over screen</p></td>
 </tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="grid_dungeon.html#generate">generate</a></td>
-<td class="itemunit"><a class="bold" href="grid_dungeon.html">grid_dungeon</a></td>
+<td class="itemname"><a class="bold" href="cave.html#generate">generate</a></td>
+<td class="itemunit"><a class="bold" href="cave.html">cave</a></td>
 <td class="itemdesc"><p><code>Generate</code> a dungeon</p></td>
 </tr>
 <tr class="list">
-<td class="itemname"><a class="bold" href="cave.html#generate">generate</a></td>
-<td class="itemunit"><a class="bold" href="cave.html">cave</a></td>
+<td class="itemname"><a class="bold" href="grid_dungeon.html#generate">generate</a></td>
+<td class="itemunit"><a class="bold" href="grid_dungeon.html">grid_dungeon</a></td>
 <td class="itemdesc"><p><code>Generate</code> a dungeon</p></td>
 </tr>
 <tr class="list2">
@@ -339,18 +349,18 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemdesc"><p>Check if <a class="normal" href="entities.Creature.html">creature</a> is visible at <a class="normal" href="globalutils.coordinates.html">coordinates</a></p></td>
 </tr>
 <tr class="list">
-<td class="itemname"><a class="bold" href="cave_rat.html#isNextToPlayer">isNextToPlayer</a></td>
-<td class="itemunit"><a class="bold" href="cave_rat.html">cave_rat</a></td>
-<td class="itemdesc"><p>Check if <a class="normal" href="player.html">player</a> is next to NPC</p></td>
-</tr>
-<tr class="list2">
 <td class="itemname"><a class="bold" href="cave_bear.html#isNextToPlayer">isNextToPlayer</a></td>
 <td class="itemunit"><a class="bold" href="cave_bear.html">cave_bear</a></td>
 <td class="itemdesc"><p>Check if <a class="normal" href="player.html">player</a> is next to NPC</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="hyena.html#isNextToPlayer">isNextToPlayer</a></td>
 <td class="itemunit"><a class="bold" href="hyena.html">hyena</a></td>
+<td class="itemdesc"><p>Check if <a class="normal" href="player.html">player</a> is next to NPC</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="cave_rat.html#isNextToPlayer">isNextToPlayer</a></td>
+<td class="itemunit"><a class="bold" href="cave_rat.html">cave_rat</a></td>
 <td class="itemdesc"><p>Check if <a class="normal" href="player.html">player</a> is next to NPC</p></td>
 </tr>
 <tr class="list2">
@@ -514,13 +524,13 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemdesc"><p><a class="normal" href="cave.html#generate">Generate</a> list of creatures on the <a class="normal" href="map.html">map</a></p></td>
 </tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="cave_bear.html#takeTurn">takeTurn</a></td>
-<td class="itemunit"><a class="bold" href="cave_bear.html">cave_bear</a></td>
+<td class="itemname"><a class="bold" href="cave_rat.html#takeTurn">takeTurn</a></td>
+<td class="itemunit"><a class="bold" href="cave_rat.html">cave_rat</a></td>
 <td class="itemdesc"><p>Take a turn</p></td>
 </tr>
 <tr class="list">
-<td class="itemname"><a class="bold" href="cave_rat.html#takeTurn">takeTurn</a></td>
-<td class="itemunit"><a class="bold" href="cave_rat.html">cave_rat</a></td>
+<td class="itemname"><a class="bold" href="barrel.html#takeTurn">takeTurn</a></td>
+<td class="itemunit"><a class="bold" href="barrel.html">barrel</a></td>
 <td class="itemdesc"><p>Take a turn</p></td>
 </tr>
 <tr class="list2">
@@ -529,64 +539,54 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemdesc"><p>Take a turn</p></td>
 </tr>
 <tr class="list">
+<td class="itemname"><a class="bold" href="cave_bear.html#takeTurn">takeTurn</a></td>
+<td class="itemunit"><a class="bold" href="cave_bear.html">cave_bear</a></td>
+<td class="itemdesc"><p>Take a turn</p></td>
+</tr>
+<tr class="list2">
 <td class="itemname"><a class="bold" href="ui.html#titleScreen">titleScreen</a></td>
 <td class="itemunit"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>Title screen</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="map.html#unoccupy">unoccupy</a></td>
 <td class="itemunit"><a class="bold" href="map.html">map</a></td>
 <td class="itemdesc"><p><code>Unoccupy</code> <a class="normal" href="map.tile.html">tile</a></p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="ui.html#updateArmour">updateArmour</a></td>
 <td class="itemunit"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>Display equipped armour</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="ui.html#updateAttack">updateAttack</a></td>
 <td class="itemunit"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>Update <a class="normal" href="player.html">player</a> attack value</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="ui.html#updateDefence">updateDefence</a></td>
 <td class="itemunit"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>Update <a class="normal" href="player.html">player</a> defence value</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="ui.html#updateHealth">updateHealth</a></td>
 <td class="itemunit"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>Update <a class="normal" href="player.html">player</a> health display</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="ui.html#updateLevel">updateLevel</a></td>
 <td class="itemunit"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>Update <a class="normal" href="player.html">player</a> level</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="ui.html#updateWeapon">updateWeapon</a></td>
 <td class="itemunit"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>Display equipped weapon</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="ui.html#updateXP">updateXP</a></td>
 <td class="itemunit"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>Update Experience points display</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="ale_tankard.html#useItem">useItem</a></td>
-<td class="itemunit"><a class="bold" href="ale_tankard.html">ale_tankard</a></td>
-<td class="itemdesc"><p>Drink Ale</p></td>
-</tr>
-<tr class="list">
-<td class="itemname"><a class="bold" href="basic_club.html#useItem">useItem</a></td>
-<td class="itemunit"><a class="bold" href="basic_club.html">basic_club</a></td>
-<td class="itemdesc"><p>Equip weapon</p></td>
-</tr>
-<tr class="list2">
-<td class="itemname"><a class="bold" href="dagger.html#useItem">useItem</a></td>
-<td class="itemunit"><a class="bold" href="dagger.html">dagger</a></td>
-<td class="itemdesc"><p>Equip weapon</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="leather_armour1.html#useItem">useItem</a></td>
@@ -594,13 +594,23 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemdesc"><p>Wear armour</p></td>
 </tr>
 <tr class="list2">
-<td class="itemname"><a class="bold" href="cave_rat.html#wander">wander</a></td>
-<td class="itemunit"><a class="bold" href="cave_rat.html">cave_rat</a></td>
-<td class="itemdesc"><p>Move in a random direction</p></td>
+<td class="itemname"><a class="bold" href="ale_tankard.html#useItem">useItem</a></td>
+<td class="itemunit"><a class="bold" href="ale_tankard.html">ale_tankard</a></td>
+<td class="itemdesc"><p>Drink Ale</p></td>
 </tr>
 <tr class="list">
-<td class="itemname"><a class="bold" href="hyena.html#wander">wander</a></td>
-<td class="itemunit"><a class="bold" href="hyena.html">hyena</a></td>
+<td class="itemname"><a class="bold" href="dagger.html#useItem">useItem</a></td>
+<td class="itemunit"><a class="bold" href="dagger.html">dagger</a></td>
+<td class="itemdesc"><p>Equip weapon</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="basic_club.html#useItem">useItem</a></td>
+<td class="itemunit"><a class="bold" href="basic_club.html">basic_club</a></td>
+<td class="itemdesc"><p>Equip weapon</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="cave_rat.html#wander">wander</a></td>
+<td class="itemunit"><a class="bold" href="cave_rat.html">cave_rat</a></td>
 <td class="itemdesc"><p>Move in a random direction</p></td>
 </tr>
 <tr class="list2">
@@ -609,21 +619,26 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemdesc"><p>Move in a random direction</p></td>
 </tr>
 <tr class="list">
+<td class="itemname"><a class="bold" href="hyena.html#wander">wander</a></td>
+<td class="itemunit"><a class="bold" href="hyena.html">hyena</a></td>
+<td class="itemdesc"><p>Move in a random direction</p></td>
+</tr>
+<tr class="list2">
 <td class="itemname"><a class="bold" href="player_inventory.html#wield">wield</a></td>
 <td class="itemunit"><a class="bold" href="player_inventory.html">player_inventory</a></td>
 <td class="itemdesc"><p>Wear / <code>Wield</code> <a class="normal" href="player_inventory.html#menu">menu</a></p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="map.html#withinBounds">withinBounds</a></td>
 <td class="itemunit"><a class="bold" href="map.html">map</a></td>
 <td class="itemdesc"><p>Check if the <a class="normal" href="globalutils.coordinates.html">coordinates</a> are within the bounds of the gamemap</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="ui.html#writeBufferedMessages">writeBufferedMessages</a></td>
 <td class="itemunit"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>Write buffered message to the message log</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="globalutils.html#writeToBuffer">writeToBuffer</a></td>
 <td class="itemunit"><a class="bold" href="globalutils.html">globalutils</a></td>
 <td class="itemdesc"><p>Write text to temporary screen <a class="normal" href="ui.html#buffer">buffer</a></p></td>

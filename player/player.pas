@@ -227,7 +227,10 @@ begin
       (entities.entityList[npcID].currentHP - damageAmount);
     if (entities.entityList[npcID].currentHP < 1) then
     begin
-      ui.bufferMessage('You kill the ' + entities.entityList[npcID].race);
+      if (entities.entityList[npcID].race = 'barrel') then
+        ui.bufferMessage('You break open the barrel')
+      else
+        ui.bufferMessage('You kill the ' + entities.entityList[npcID].race);
       entities.killEntity(npcID);
       entities.entityList[0].xpReward :=
         entities.entityList[0].xpReward + entities.entityList[npcID].xpReward;
@@ -277,8 +280,10 @@ begin
       (entities.entityList[0].posY = itemList[i].posY) and
       (itemList[i].onMap = True) then
     begin
-      player_inventory.addToInventory(i);
-      Inc(playerTurn);
+      if (player_inventory.addToInventory(i) = True) then
+        Inc(playerTurn)
+      else
+        ui.displayMessage('Your inventory is full');
     end
     else
       ui.displayMessage('There is nothing on the ground here');

@@ -506,6 +506,7 @@ begin
   entities.caveRatGlyph.Free;
   entities.hyenaGlyph.Free;
   entities.caveBearGlyph.Free;
+  entities.barrelGlyph.Free;
 end;
 
 end.

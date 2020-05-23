@@ -30,7 +30,7 @@ procedure initialiseInventory;
 (* Setup equipped items when loading a saved game *)
 procedure loadEquippedItems;
 (* Add to inventory *)
-procedure addToInventory(itemNumber: smallint);
+function addToInventory(itemNumber: smallint): boolean;
 (* Display the inventory screen *)
 procedure showInventory;
 (* Show menu at bottom of screen *)
@@ -91,10 +91,12 @@ begin
 
 end;
 
-procedure addToInventory(itemNumber: smallint);
+(* Returns TRUE if successfully added, FALSE if the inventory is full *)
+function addToInventory(itemNumber: smallint): boolean;
 var
   i: smallint;
 begin
+  Result := False;
   for i := 0 to 9 do
   begin
     if (inventory[i].Name = 'Empty') then
@@ -109,12 +111,10 @@ begin
       inventory[i].glyph := itemList[itemNumber].glyph;
       inventory[i].inInventory := True;
       ui.displayMessage('You pick up the ' + inventory[i].Name);
+      Result := True;
       exit;
     end
-    else
-      ui.displayMessage('Inventory is full');
   end;
-
 end;
 
 procedure showInventory;

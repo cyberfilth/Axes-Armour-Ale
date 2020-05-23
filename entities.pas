@@ -9,6 +9,8 @@ interface
 
 uses
   Graphics, map, globalutils, ui, items,
+  (* Import item-style entities *)
+  barrel,
   (* Import the NPC's *)
   cave_rat, hyena, cave_bear;
 
@@ -60,7 +62,7 @@ type
 var
   entityList: array of Creature;
   npcAmount, listLength: smallint;
-  playerGlyph, caveRatGlyph, hyenaGlyph, caveBearGlyph: TBitmap;
+  playerGlyph, caveRatGlyph, hyenaGlyph, caveBearGlyph, barrelGlyph: TBitmap;
 
 (* Load entity textures *)
 procedure setupEntities;
@@ -96,6 +98,8 @@ procedure setupEntities;
 begin
   playerGlyph := TBitmap.Create;
   playerGlyph.LoadFromResourceName(HINSTANCE, 'PLAYER_GLYPH');
+  barrelGlyph := TBitmap.Create;
+  barrelGlyph.LoadFromResourceName(HINSTANCE, 'BARREL');
   caveRatGlyph := TBitmap.Create;
   caveRatGlyph.LoadFromResourceName(HINSTANCE, 'R_ORANGE');
   hyenaGlyph := TBitmap.Create;
@@ -124,7 +128,9 @@ begin
       0: // Hyena
         //hyena.createHyena(i, globalutils.currentDgncentreList[iplus].x,
         //  globalutils.currentDgncentreList[iplus].y);
-        cave_bear.createCaveBear(i, globalutils.currentDgncentreList[iplus].x,
+        //cave_bear.createCaveBear(i, globalutils.currentDgncentreList[iplus].x,
+        //  globalutils.currentDgncentreList[iplus].y);
+        barrel.createBarrel(i, globalutils.currentDgncentreList[iplus].x,
           globalutils.currentDgncentreList[iplus].y);
       1: // Cave rat
         cave_rat.createCaveRat(i, globalutils.currentDgncentreList[iplus].x,
@@ -137,14 +143,17 @@ end;
 
 procedure killEntity(id: smallint);
 begin
-  entities.entityList[id].isDead := True;
-  entities.entityList[id].glyph := '%';
-  map.unoccupy(entities.entityList[id].posX, entities.entityList[id].posY);
+  entityList[id].isDead := True;
+  entityList[id].glyph := '%';
+  map.unoccupy(entityList[id].posX, entityList[id].posY);
+  if (entityList[id].race = 'barrel') then
+    barrel.breakBarrel(entityList[id].posX, entityList[id].posY);
 end;
 
 procedure drawEntity(c, r: smallint; glyph: char);
 begin
   case glyph of
+    '8': drawToBuffer(mapToScreen(c), mapToScreen(r), barrelGlyph);
     'r': drawToBuffer(mapToScreen(c), mapToScreen(r), caveRatGlyph);
     'h': drawToBuffer(mapToScreen(c), mapToScreen(r), hyenaGlyph);
     'b': drawToBuffer(mapToScreen(c), mapToScreen(r), caveBearGlyph);
@@ -273,12 +282,14 @@ end;
 
 procedure Creature.entityTakeTurn(i: smallint);
 begin
-  if (entityList[i].race = 'cave rat') then
-    cave_rat.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY)
+  if (entityList[i].race = 'barrel') then
+    barrel.takeTurn(i, entityList[i].posX, entityList[i].posY)
+  else if (entityList[i].race = 'cave rat') then
+    cave_rat.takeTurn(i, entityList[i].posX, entityList[i].posY)
   else if (entityList[i].race = 'blood hyena') then
-    hyena.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY)
+    hyena.takeTurn(i, entityList[i].posX, entityList[i].posY)
   else if (entityList[i].race = 'cave bear') then
-    cave_bear.takeTurn(i, entities.entityList[i].posX, entities.entityList[i].posY);
+    cave_bear.takeTurn(i, entityList[i].posX, entityList[i].posY);
 end;
 
 end.

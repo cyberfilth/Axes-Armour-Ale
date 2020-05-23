@@ -200,7 +200,7 @@ begin
   main.tempScreen.Canvas.Font.Size := 10;
   (* Paint over previous text *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(sbx + 8, eqy + 25, sbx + 135, eqy + 40);
+  main.tempScreen.Canvas.FillRect(sbx + 8, eqy + 25, sbx + 135, eqy + 42);
   if (weaponName = 'none') then
   begin
     writeToBuffer(sbx + 8, eqy + 25, MESSAGEFADE2, 'No weapon equipped');
