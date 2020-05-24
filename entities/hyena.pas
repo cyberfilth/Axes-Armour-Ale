@@ -109,6 +109,7 @@ begin
     targetX := 0;
     targetY := 0;
     inView := False;
+    blocks := False;
     discovered := False;
     weaponEquipped := False;
     armourEquipped := False;

@@ -72,13 +72,21 @@ begin
   RIPscreen.Width := 835;
   currentScreen := tempScreen;
   Randomize;
-  (* Set random seed *)
-  {$IFDEF Linux}
-  RandSeed := RandSeed shl 8;
-  {$ENDIF}
-  {$IFDEF Windows}
-  RandSeed := ((RandSeed shl 8) or GetProcessID);
-  {$ENDIF}
+  if (ParamCount = 2) then
+  begin
+    if (ParamStr(1) = '--seed') then
+      RandSeed := StrToInt(ParamStr(2))
+    else
+    begin
+      (* Set random seed *)
+      {$IFDEF Linux}
+      RandSeed := RandSeed shl 8;
+      {$ENDIF}
+      {$IFDEF Windows}
+      RandSeed := ((RandSeed shl 8) or GetProcessID);
+      {$ENDIF}
+    end;
+  end;
   StatusBar1.SimpleText := 'Version ' + globalutils.VERSION;
   (* Check for previous save file *)
   if FileExists(GetUserDir + globalutils.saveFile) then

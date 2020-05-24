@@ -43,6 +43,8 @@ type
     inView: boolean;
     (* First time the player discovers the NPC *)
     discovered: boolean;
+    (* Some entities block movement, i.e. barrels *)
+    blocks: boolean;
     (* Is a weapon equipped *)
     weaponEquipped: boolean;
     (* Is Armour equipped *)
