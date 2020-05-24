@@ -390,7 +390,7 @@ begin
   for i := 0 to 9 do
   begin
     x := x + 20;
-    if (inventory[i].Name = 'Empty') then
+    if (inventory[i].Name = 'Empty') or (inventory[i].itemType <> 'drink') then
     //  dimSlots(i, x)
     else
       highlightSlots(i, x);
@@ -435,7 +435,7 @@ begin
   for i := 0 to 9 do
   begin
     x := x + 20;
-    if (inventory[i].Name = 'Empty') then
+    if (inventory[i].Name = 'Empty') or (inventory[i].itemType = 'drink')then
     //   dimSlots(i, x)
     else
       highlightSlots(i, x);
@@ -444,9 +444,7 @@ begin
   bottomMenu(1);
   if (wieldItem <> 10) then
   begin
-    if (inventory[wieldItem].Name <> 'Empty') and
-      (inventory[wieldItem].itemType = 'weapon') or
-      (inventory[wieldItem].itemType = 'armour') then
+    if (inventory[wieldItem].Name <> 'Empty') then
     begin
       (* If the item is an unequipped weapon, and the player already has a weapon equipped
          prompt the player to unequip their weapon first *)
