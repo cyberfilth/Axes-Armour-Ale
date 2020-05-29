@@ -147,6 +147,7 @@ procedure killEntity(id: smallint);
 begin
   entityList[id].isDead := True;
   entityList[id].glyph := '%';
+  entityList[id].blocks := False; // For destroyed barrels
   map.unoccupy(entityList[id].posX, entityList[id].posY);
   if (entityList[id].race = 'barrel') then
     barrel.breakBarrel(entityList[id].posX, entityList[id].posY);

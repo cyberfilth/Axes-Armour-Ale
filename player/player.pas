@@ -285,7 +285,9 @@ begin
       else
         ui.displayMessage('Your inventory is full');
     end
-    else
+    else if (entities.entityList[0].posX = itemList[i].posX) and
+      (entities.entityList[0].posY = itemList[i].posY) and
+      (itemList[i].onMap = False) then
       ui.displayMessage('There is nothing on the ground here');
   end;
 end;

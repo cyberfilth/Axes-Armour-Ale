@@ -73,19 +73,11 @@ begin
 end;
 
 procedure spawnItem;
-var
-  i, p: smallint;
 begin
   itemAmount := 1;
   // initialise array, 1 based
   SetLength(itemList, 1);
-  p := 2; // used to space out item location
-  // place the item
-  for i := 1 to itemAmount do
-  begin
-    createDagger(i, globalutils.currentDgncentreList[p + 2].x,
-      globalutils.currentDgncentreList[p + 2].y);
-  end;
+  createDagger(1, globalutils.currentDgncentreList[2].x, globalutils.currentDgncentreList[2].y);
 end;
 
 procedure drawItem(c, r: smallint; glyph: char);

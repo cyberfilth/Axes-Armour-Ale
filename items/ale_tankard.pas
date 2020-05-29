@@ -38,13 +38,10 @@ end;
 procedure useItem;
 begin
   player.increaseHealth(5);
-  if (entities.entityList[0].stsDrunk = False) then
-  begin
-    entities.entityList[0].stsDrunk := True;
-    entities.entityList[0].tmrDrunk := entities.entityList[0].tmrDrunk + 5;
-    ui.bufferMessage('The alcohol slows your reactions');
-    ui.writeBufferedMessages;
-  end;
+  entities.entityList[0].stsDrunk := True;
+  Inc(entities.entityList[0].tmrDrunk, 5);
+  ui.bufferMessage('The alcohol slows your reactions');
+  ui.writeBufferedMessages;
 end;
 
 end.

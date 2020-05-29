@@ -65,7 +65,6 @@ end;
 procedure takeTurn(id, spx, spy: smallint);
 begin
   entities.moveNPC(id, spx, spy);
-  Exit;
 end;
 
 procedure breakBarrel(x, y: smallint);
@@ -73,7 +72,9 @@ var
   percentage: smallint;
 begin
   percentage := randomRange(1, 100);
-  Inc(itemAmount);
+  (* Create a new entry in item list and add item details *)
+  Inc(items.itemAmount);
+  SetLength(items.itemList, items.itemAmount);
   if (percentage < 80) then
     (* Drop an item - Ale Tankard *)
     createAleTankard(itemAmount, x, y)
