@@ -85,6 +85,7 @@ var
   i: byte;
   x: smallint;
 begin
+  x := 0; // initialise variable
   if (numberOfDice = 0) then
     Result := 0
   else

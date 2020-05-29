@@ -26,13 +26,13 @@
         <Resource_8 FileName="images/sprites/r_orange.bmp" Type="BITMAP" ResourceName="R_ORANGE"/>
         <Resource_9 FileName="images/sprites/ale1.bmp" Type="BITMAP" ResourceName="ALE1"/>
         <Resource_10 FileName="images/sprites/h_red.bmp" Type="BITMAP" ResourceName="H_RED"/>
-        <Resource_11 FileName="images/sprites/dagger1.bmp" Type="BITMAP" ResourceName="DAGGER1"/>
-        <Resource_12 FileName="images/sprites/leather_amour1.bmp" Type="BITMAP" ResourceName="LEATHER_AMOUR1"/>
-        <Resource_13 FileName="images/sprites/basic_club.bmp" Type="BITMAP" ResourceName="BASIC_CLUB"/>
-        <Resource_14 FileName="images/dungeon/ascii/caveWallDef.bmp" Type="BITMAP" ResourceName="CAVEWALLDEF"/>
-        <Resource_15 FileName="images/dungeon/ascii/caveWallHi.bmp" Type="BITMAP" ResourceName="CAVEWALLHI"/>
-        <Resource_16 FileName="images\sprites\b_lblue.bmp" Type="BITMAP" ResourceName="B_LBLUE"/>
-        <Resource_17 FileName="images\sprites\barrel.bmp" Type="BITMAP" ResourceName="BARREL"/>
+        <Resource_11 FileName="images/sprites/basic_club.bmp" Type="BITMAP" ResourceName="BASIC_CLUB"/>
+        <Resource_12 FileName="images/dungeon/ascii/caveWallDef.bmp" Type="BITMAP" ResourceName="CAVEWALLDEF"/>
+        <Resource_13 FileName="images/dungeon/ascii/caveWallHi.bmp" Type="BITMAP" ResourceName="CAVEWALLHI"/>
+        <Resource_14 FileName="images\sprites\b_lblue.bmp" Type="BITMAP" ResourceName="B_LBLUE"/>
+        <Resource_15 FileName="images\sprites\barrel.bmp" Type="BITMAP" ResourceName="BARREL"/>
+        <Resource_16 FileName="images\sprites\leather_amour1.bmp" Type="BITMAP" ResourceName="LEATHER_AMOUR1"/>
+        <Resource_17 FileName="images\sprites\dagger.bmp" Type="BITMAP" ResourceName="DAGGER"/>
       </Resources>
     </General>
     <VersionInfo>
@@ -104,6 +104,7 @@
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
+            <SmartLinkUnit Value="True"/>
             <RelocatableUnit Value="True"/>
             <Optimizations>
               <OptimizationLevel Value="4"/>
@@ -114,6 +115,7 @@
             <Debugging>
               <GenerateDebugInfo Value="False"/>
             </Debugging>
+            <LinkSmart Value="True"/>
             <Options>
               <Win32>
                 <GraphicApplication Value="True"/>

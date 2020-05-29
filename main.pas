@@ -449,7 +449,7 @@ begin
   (* Spawn game entities *)
   entities.spawnNPCs;
   (* Drop items *)
-  items.spawnItem;
+  items.initialiseItems;
   (* Draw sidepanel *)
   ui.drawSidepanel;
   (* Setup players starting equipment *)

@@ -44,7 +44,7 @@ var
 (* Load item textures *)
 procedure setupItems;
 (* Generate list of items on the map *)
-procedure spawnItem;
+procedure initialiseItems;
 (* Draw item on screen *)
 procedure drawItem(c, r: smallint; glyph: char);
 (* Is there an item at coordinates *)
@@ -65,19 +65,18 @@ begin
   aleTankard := TBitmap.Create;
   aleTankard.LoadFromResourceName(HINSTANCE, 'ALE1');
   crudeDagger := TBitmap.Create;
-  crudeDagger.LoadFromResourceName(HINSTANCE, 'DAGGER1');
+  crudeDagger.LoadFromResourceName(HINSTANCE, 'DAGGER');
   leatherArmour1 := TBitmap.Create;
   leatherArmour1.LoadFromResourceName(HINSTANCE, 'LEATHER_AMOUR1');
   woodenClub := TBitmap.Create;
   woodenClub.LoadFromResourceName(HINSTANCE, 'BASIC_CLUB');  ;
 end;
 
-procedure spawnItem;
+procedure initialiseItems;
 begin
-  itemAmount := 1;
-  // initialise array, 1 based
-  SetLength(itemList, 1);
-  createDagger(1, globalutils.currentDgncentreList[2].x, globalutils.currentDgncentreList[2].y);
+  itemAmount := 0;
+  // initialise array
+  SetLength(itemList, 0);
 end;
 
 procedure drawItem(c, r: smallint; glyph: char);

@@ -8,7 +8,7 @@ unit barrel;
 interface
 
 uses
-  SysUtils, ui, items, ale_tankard, leather_armour1;
+  SysUtils, items, ale_tankard, leather_armour1;
 
 (* Create a barrel *)
 procedure createBarrel(uniqueid, npcx, npcy: smallint);
