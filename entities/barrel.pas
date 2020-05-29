@@ -8,7 +8,7 @@ unit barrel;
 interface
 
 uses
-  SysUtils, items, ale_tankard, leather_armour1;
+  SysUtils, items, ale_tankard, leather_armour1, cloth_armour1;
 
 (* Create a barrel *)
 procedure createBarrel(uniqueid, npcx, npcy: smallint);
@@ -78,9 +78,12 @@ begin
   if (percentage < 80) then
     (* Drop an item - Ale Tankard *)
     createAleTankard(itemAmount, x, y)
-  else if (percentage >= 80) then
+  else if (percentage >= 80) and (percentage <= 90) then
+    (* Drop an item -  Cloth armour*)
+    createClothArmour(itemAmount, x, y)
+  else
     (* Drop an item -  Leather armour*)
-    createArmour(itemAmount, x, y);
+    createLeatherArmour(itemAmount, x, y);
 end;
 
 end.

@@ -18,7 +18,7 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <p>
 <code>Items</code> and objects in the game world</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>Graphics</li><li><a  href="globalutils.html">globalutils</a></li><li><a  href="map.html">map</a></li><li><a  href="ale_tankard.html">ale_tankard</a></li><li><a  href="dagger.html">dagger</a></li><li><a  href="leather_armour1.html">leather_armour1</a></li><li><a  href="basic_club.html">basic_club</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>Graphics</li><li><a  href="globalutils.html">globalutils</a></li><li><a  href="map.html">map</a></li><li><a  href="ale_tankard.html">ale_tankard</a></li><li><a  href="dagger.html">dagger</a></li><li><a  href="leather_armour1.html">leather_armour1</a></li><li><a  href="cloth_armour1.html">cloth_armour1</a></li><li><a  href="basic_club.html">basic_club</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -45,16 +45,16 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemcode"><code>function <b><a  href="items.html#getItemName">getItemName</a></b>(x, y: smallint): shortstring;</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="items.html#initialiseItems">initialiseItems</a></b>;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="items.html#lookupUse">lookupUse</a></b>(x: smallint; equipped: boolean);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="items.html#redrawItems">redrawItems</a></b>;</code></td>
 </tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="items.html#setupItems">setupItems</a></b>;</code></td>
-</tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="items.html#spawnItem">spawnItem</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="items.html#setupItems">setupItems</a></b>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
@@ -63,21 +63,24 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemcode"><code><b><a  href="items.html#aleTankard">aleTankard</a></b>: TBitmap;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code><b><a  href="items.html#clothArmour">clothArmour</a></b>: TBitmap;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code><b><a  href="items.html#crudeDagger">crudeDagger</a></b>: TBitmap;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="items.html#itemAmount">itemAmount</a></b>: smallint;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="items.html#itemList">itemList</a></b>: array of <a  href="items.Item.html">Item</a>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="items.html#leatherArmour1">leatherArmour1</a></b>: TBitmap;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="items.html#listLength">listLength</a></b>: smallint;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="items.html#woodenClub">woodenClub</a></b>: TBitmap;</code></td>
 </tr>
 </table>
@@ -121,6 +124,15 @@ Get name of <a class="normal" href="items.Item.html">item</a> at <a class="norma
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="initialiseItems"></span><code>procedure <b>initialiseItems</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+<a class="normal" href="cave.html#generate">Generate</a> list of <a class="normal" href="items.html">items</a> on the <a class="normal" href="map.html">map</a></p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="lookupUse"></span><code>procedure <b>lookupUse</b>(x: smallint; equipped: boolean);</code></td>
 </tr>
 <tr><td colspan="1">
@@ -146,19 +158,17 @@ Redraw all <a class="normal" href="items.html">items</a></p>
 Load <a class="normal" href="items.Item.html">item</a> textures</p>
 </td></tr>
 </table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="spawnItem"></span><code>procedure <b>spawnItem</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-<a class="normal" href="cave.html#generate">Generate</a> list of <a class="normal" href="items.html">items</a> on the <a class="normal" href="map.html">map</a></p>
-</td></tr>
-</table>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="aleTankard"></span><code><b>aleTankard</b>: TBitmap;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="clothArmour"></span><code><b>clothArmour</b>: TBitmap;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>

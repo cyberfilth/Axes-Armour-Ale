@@ -216,7 +216,7 @@ begin
   main.tempScreen.Canvas.Font.Size := 10;
   (* Paint over previous text *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(sbx + 8, eqy + 45, sbx + 135, eqy + 60);
+  main.tempScreen.Canvas.FillRect(sbx + 8, eqy + 45, sbx + 135, eqy + 62);
   if (armourName = 'none') then
   begin
     writeToBuffer(sbx + 8, eqy + 45, MESSAGEFADE2, 'No armour equipped');

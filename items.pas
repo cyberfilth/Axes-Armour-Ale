@@ -8,7 +8,7 @@ interface
 uses
   Graphics, globalutils, map,
   (* Import the items *)
-  ale_tankard, dagger, leather_armour1, basic_club;
+  ale_tankard, dagger, leather_armour1, cloth_armour1, basic_club;
 
 type
   (* Item types = drink, weapon, armour, missile *)
@@ -39,7 +39,7 @@ type
 var
   itemList: array of Item;
   itemAmount, listLength: smallint;
-  aleTankard, crudeDagger, leatherArmour1, woodenClub: TBitmap;
+  aleTankard, crudeDagger, leatherArmour1, clothArmour, woodenClub: TBitmap;
 
 (* Load item textures *)
 procedure setupItems;
@@ -67,9 +67,11 @@ begin
   crudeDagger := TBitmap.Create;
   crudeDagger.LoadFromResourceName(HINSTANCE, 'DAGGER');
   leatherArmour1 := TBitmap.Create;
-  leatherArmour1.LoadFromResourceName(HINSTANCE, 'LEATHER_AMOUR1');
+  leatherArmour1.LoadFromResourceName(HINSTANCE, 'LEATHER_ARMOUR1');
   woodenClub := TBitmap.Create;
-  woodenClub.LoadFromResourceName(HINSTANCE, 'BASIC_CLUB');  ;
+  woodenClub.LoadFromResourceName(HINSTANCE, 'BASIC_CLUB');
+  clothArmour := TBitmap.Create;
+  clothArmour.LoadFromResourceName(HINSTANCE, 'CLOTH_ARMOUR1');
 end;
 
 procedure initialiseItems;
@@ -88,7 +90,9 @@ begin { TODO : When more items are created, swap this out for a CASE statement }
   else if (glyph = '3') then
     drawToBuffer(mapToScreen(c), mapToScreen(r), leatherArmour1)
   else if (glyph = '4') then
-    drawToBuffer(mapToScreen(c), mapToScreen(r), woodenClub);
+    drawToBuffer(mapToScreen(c), mapToScreen(r), woodenClub)
+  else if (glyph = '5') then
+    drawToBuffer(mapToScreen(c), mapToScreen(r), clothArmour);
 end;
 
 function containsItem(x, y: smallint): boolean;
@@ -145,6 +149,7 @@ begin
     2: dagger.useItem(equipped);
     3: leather_armour1.useItem(equipped);
     4: basic_club.useItem(equipped);
+    5: cloth_armour1.useItem(equipped);
   end;
 end;
 

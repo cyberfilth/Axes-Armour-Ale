@@ -508,6 +508,7 @@ begin
   items.aleTankard.Free;
   items.crudeDagger.Free;
   items.leatherArmour1.Free;
+  items.clothArmour.Free;
   items.woodenClub.Free;
   (* Entity sprites *)
   entities.playerGlyph.Free;
