@@ -18,7 +18,7 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <p>
 NPC stats and setup</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>Graphics</li><li><a  href="map.html">map</a></li><li><a  href="globalutils.html">globalutils</a></li><li><a  href="ui.html">ui</a></li><li><a  href="items.html">items</a></li><li><a  href="barrel.html">barrel</a></li><li><a  href="cave_rat.html">cave_rat</a></li><li><a  href="hyena.html">hyena</a></li><li><a  href="cave_bear.html">cave_bear</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>Graphics</li><li><a  href="map.html">map</a></li><li><a  href="globalutils.html">globalutils</a></li><li><a  href="ui.html">ui</a></li><li><a  href="items.html">items</a></li><li><a  href="barrel.html">barrel</a></li><li><a  href="cave_rat.html">cave_rat</a></li><li><a  href="hyena.html">hyena</a></li><li><a  href="cave_bear.html">cave_bear</a></li><li><a  href="green_fungus.html">green_fungus</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -84,15 +84,18 @@ NPC stats and setup</p>
 <td class="itemcode"><code><b><a  href="entities.html#entityList">entityList</a></b>: array of <a  href="entities.Creature.html">Creature</a>;</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code><b><a  href="entities.html#greenFungusGlyph">greenFungusGlyph</a></b>: TBitmap;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="entities.html#hyenaGlyph">hyenaGlyph</a></b>: TBitmap;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="entities.html#listLength">listLength</a></b>: smallint;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="entities.html#npcAmount">npcAmount</a></b>: smallint;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="entities.html#playerGlyph">playerGlyph</a></b>: TBitmap;</code></td>
 </tr>
 </table>
@@ -231,6 +234,13 @@ Load entity textures</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="entityList"></span><code><b>entityList</b>: array of <a  href="entities.Creature.html">Creature</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="greenFungusGlyph"></span><code><b>greenFungusGlyph</b>: TBitmap;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
