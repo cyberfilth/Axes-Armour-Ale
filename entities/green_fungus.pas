@@ -34,10 +34,10 @@ begin
     race := 'green fungus';
     description := 'a green fungus';
     glyph := 'f';
-    maxHP := randomRange(2, 5);
+    maxHP := randomRange(2, 6);
     currentHP := maxHP;
-    attack := randomRange(2, 6);
-    defense := randomRange(2, 7);
+    attack := randomRange(4, 6);
+    defense := randomRange(2, 3);
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;

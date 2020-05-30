@@ -42,7 +42,7 @@ begin
     glyph := 'b';
     maxHP := randomRange(7, 10);
     currentHP := maxHP;
-    attack := randomRange(4, 6);
+    attack := randomRange(4, 7);
     defense := randomRange(4, 6);
     weaponDice := 0;
     weaponAdds := 0;

@@ -40,10 +40,10 @@ begin
     race := 'cave rat';
     description := 'a large rat';
     glyph := 'r';
-    maxHP := randomRange(2, 5);
+    maxHP := randomRange(4, 6);
     currentHP := maxHP;
-    attack := randomRange(2, 3);
-    defense := randomRange(2, 3);
+    attack := randomRange(3, 5);
+    defense := randomRange(3, 6);
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;

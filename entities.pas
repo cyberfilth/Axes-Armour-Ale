@@ -4,6 +4,7 @@ unit entities;
 
 {$mode objfpc}{$H+}
 {$ModeSwitch advancedrecords}
+{$RANGECHECKS OFF}
 
 interface
 
@@ -118,7 +119,7 @@ procedure spawnNPCs;
 var
   i, r, c, percentage: smallint;
 begin
-  npcAmount := globalutils.currentDgnTotalRooms;
+  npcAmount := (globalutils.currentDgnTotalRooms + 2);
   (*  initialise array *)
   SetLength(entityList, 0);
   (* Add player to Entity list *)
@@ -146,6 +147,8 @@ begin
 end;
 
 procedure killEntity(id: smallint);
+var
+  i, r, c: smallint;
 begin
   entityList[id].isDead := True;
   entityList[id].glyph := '%';
@@ -153,6 +156,24 @@ begin
   map.unoccupy(entityList[id].posX, entityList[id].posY);
   if (entityList[id].race = 'barrel') then
     barrel.breakBarrel(entityList[id].posX, entityList[id].posY);
+  //if (entityList[id].race = 'green fungus') then
+  //begin
+  //  for i := 1 to 3 do
+  //  begin
+  //    (* Choose random location on the map *)
+  //    repeat
+  //      r := globalutils.randomRange(entityList[id].posY + 4, entityList[id].posY - 4);
+  //      c := globalutils.randomRange(entityList[id].posX + 4, entityList[id].posX - 4);
+  //      (* choose a location that is not a wall or occupied *)
+  //    until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
+  //    if (withinBounds(c, r) = True) then
+  //    begin
+  //      Inc(npcAmount);
+  //      green_fungus.createGreenFungus(npcAmount, c, r);
+  //    end;
+  //  end;
+  //end;
+  //redrawNPC;
 end;
 
 procedure drawEntity(c, r: smallint; glyph: char);
