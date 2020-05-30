@@ -14,7 +14,7 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="19">
+      <Resources Count="20">
         <Resource_0 FileName="images/sprites/player_glyph.bmp" Type="BITMAP" ResourceName="PLAYER_GLYPH"/>
         <Resource_1 FileName="images/dungeon/ascii/blueDungeonFloorDef.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORDEF"/>
         <Resource_2 FileName="images/dungeon/ascii/blueDungeonFloorHi.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORHI"/>
@@ -34,6 +34,7 @@
         <Resource_16 FileName="images\sprites\dagger.bmp" Type="BITMAP" ResourceName="DAGGER"/>
         <Resource_17 FileName="images\sprites\cloth_armour1.bmp" Type="BITMAP" ResourceName="CLOTH_ARMOUR1"/>
         <Resource_18 FileName="images\sprites\leather_armour1.bmp" Type="BITMAP" ResourceName="LEATHER_ARMOUR1"/>
+        <Resource_19 FileName="images\sprites\f_green1.bmp" Type="BITMAP" ResourceName="F_GREEN1"/>
       </Resources>
     </General>
     <VersionInfo>
@@ -141,7 +142,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="23">
+    <Units Count="24">
       <Unit0>
         <Filename Value="axe.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -237,6 +238,10 @@
         <Filename Value="items\armour\cloth_armour1.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit22>
+      <Unit23>
+        <Filename Value="entities\green_fungus.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit23>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

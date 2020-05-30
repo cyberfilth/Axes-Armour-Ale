@@ -67,6 +67,8 @@ begin
     posX := npcx;
     posY := npcy;
   end;
+   (* Occupy tile *)
+  map.occupy(npcx, npcy);
 end;
 
 procedure takeTurn(id, spx, spy: smallint);

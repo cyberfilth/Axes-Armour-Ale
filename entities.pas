@@ -12,7 +12,7 @@ uses
   (* Import item-style entities *)
   barrel,
   (* Import the NPC's *)
-  cave_rat, hyena, cave_bear;
+  cave_rat, hyena, cave_bear, green_fungus;
 
 type
   (* Store information about NPC's *)
@@ -64,7 +64,8 @@ type
 var
   entityList: array of Creature;
   npcAmount, listLength: smallint;
-  playerGlyph, caveRatGlyph, hyenaGlyph, caveBearGlyph, barrelGlyph: TBitmap;
+  playerGlyph, caveRatGlyph, hyenaGlyph, caveBearGlyph, barrelGlyph,
+  greenFungusGlyph: TBitmap;
 
 (* Load entity textures *)
 procedure setupEntities;
@@ -108,15 +109,16 @@ begin
   hyenaGlyph.LoadFromResourceName(HINSTANCE, 'H_RED');
   caveBearGlyph := TBitmap.Create;
   caveBearGlyph.LoadFromResourceName(HINSTANCE, 'B_LBLUE');
+  greenFungusGlyph := TBitmap.Create;
+  greenFungusGlyph.LoadFromResourceName(HINSTANCE, 'F_GREEN1');
+  ;
 end;
 
 procedure spawnNPCs;
 var
-  i, iplus, NPCtype: smallint;
+  i, r, c, percentage: smallint;
 begin
-  iplus := 2; // Start placing entities from 2nd room so not on the player
-  (* Set the number of NPC's *)
-  npcAmount := (globalutils.currentDgnTotalRooms - 1);
+  npcAmount := globalutils.currentDgnTotalRooms;
   (*  initialise array *)
   SetLength(entityList, 0);
   (* Add player to Entity list *)
@@ -124,22 +126,22 @@ begin
   (* Create the NPCs *)
   for i := 1 to npcAmount do
   begin
-    // randomly select a monster type
-    NPCtype := globalutils.randomRange(0, 1);
-    case NPCtype of
-      0: // Hyena
-        //hyena.createHyena(i, globalutils.currentDgncentreList[iplus].x,
-        //  globalutils.currentDgncentreList[iplus].y);
-        //cave_bear.createCaveBear(i, globalutils.currentDgncentreList[iplus].x,
-        //  globalutils.currentDgncentreList[iplus].y);
-        barrel.createBarrel(i, globalutils.currentDgncentreList[iplus].x,
-          globalutils.currentDgncentreList[iplus].y);
-      1: // Cave rat
-        cave_rat.createCaveRat(i, globalutils.currentDgncentreList[iplus].x,
-          globalutils.currentDgncentreList[iplus].y);
-
-    end;
-    Inc(iplus);
+    (* Choose random location on the map *)
+    repeat
+      r := globalutils.randomRange(1, MAXROWS);
+      c := globalutils.randomRange(1, MAXCOLUMNS);
+      (* choose a location that is not a wall or occupied *)
+    until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
+    (* Roll for chance of each enemy type appearing *)
+    percentage := randomRange(1, 100);
+    if (percentage < 20) then
+      barrel.createBarrel(i, c, r)
+    else if (percentage >= 20) and (percentage <= 75) then // Cave rat
+      cave_rat.createCaveRat(i, c, r)
+    else if (percentage > 75) and (percentage <= 90) then // Blood hyena
+      hyena.createHyena(i, c, r)
+    else // Green fungus
+      green_fungus.createGreenFungus(i, c, r);
   end;
 end;
 
@@ -160,6 +162,7 @@ begin
     'r': drawToBuffer(mapToScreen(c), mapToScreen(r), caveRatGlyph);
     'h': drawToBuffer(mapToScreen(c), mapToScreen(r), hyenaGlyph);
     'b': drawToBuffer(mapToScreen(c), mapToScreen(r), caveBearGlyph);
+    'f': drawToBuffer(mapToScreen(c), mapToScreen(r), greenFungusGlyph);
   end;
 end;
 
@@ -292,7 +295,9 @@ begin
   else if (entityList[i].race = 'blood hyena') then
     hyena.takeTurn(i, entityList[i].posX, entityList[i].posY)
   else if (entityList[i].race = 'cave bear') then
-    cave_bear.takeTurn(i, entityList[i].posX, entityList[i].posY);
+    cave_bear.takeTurn(i, entityList[i].posX, entityList[i].posY)
+  else if (entityList[i].race = 'green fungus') then
+    green_fungus.takeTurn(i, entityList[i].posX, entityList[i].posY);
 end;
 
 end.

@@ -84,6 +84,8 @@ begin
     posX := map.startX;
     posY := map.startY;
   end;
+  (* Occupy tile *)
+  map.occupy(entityList[0].posX, entityList[0].posY);
   (* set up inventory *)
   player_inventory.initialiseInventory;
   (* Draw player and FOV *)

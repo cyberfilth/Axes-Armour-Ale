@@ -122,6 +122,8 @@ begin
     posX := npcx;
     posY := npcy;
   end;
+   (* Occupy tile *)
+  map.occupy(npcx, npcy);
 end;
 
 procedure wander(id, spx, spy: smallint);

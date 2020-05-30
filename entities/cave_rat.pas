@@ -67,6 +67,8 @@ begin
     posX := npcx;
     posY := npcy;
   end;
+  (* Occupy tile *)
+  map.occupy(npcx, npcy);
 end;
 
 procedure takeTurn(id, spx, spy: smallint);
@@ -190,14 +192,14 @@ begin
   dx := round(dx / distance);
   dy := round(dy / distance);
   if (dx > 0) then
-      dx := -1;
-    if (dx < 0) then
-      dx := 1;
-    dy := round(dy / distance);
-    if (dy > 0) then
-      dy := -1;
-    if (dy < 0) then
-      dy := 1;
+    dx := -1;
+  if (dx < 0) then
+    dx := 1;
+  dy := round(dy / distance);
+  if (dy > 0) then
+    dy := -1;
+  if (dy < 0) then
+    dy := 1;
   newX := spx + dx;
   newY := spy + dy;
   if (map.canMove(newX, newY) = True) then

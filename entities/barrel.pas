@@ -8,7 +8,7 @@ unit barrel;
 interface
 
 uses
-  SysUtils, items, ale_tankard, leather_armour1, cloth_armour1;
+  SysUtils, map, items, ale_tankard, leather_armour1, cloth_armour1;
 
 (* Create a barrel *)
 procedure createBarrel(uniqueid, npcx, npcy: smallint);
@@ -60,6 +60,8 @@ begin
     posX := npcx;
     posY := npcy;
   end;
+   (* Occupy tile *)
+  map.occupy(npcx, npcy);
 end;
 
 procedure takeTurn(id, spx, spy: smallint);
