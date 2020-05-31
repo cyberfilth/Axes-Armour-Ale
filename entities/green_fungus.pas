@@ -7,7 +7,7 @@ unit green_fungus;
 interface
 
 uses
-  SysUtils, Math, globalutils, map, ui;
+  SysUtils, globalutils, map, los, ui;
 
 (* Create fungus *)
 procedure createGreenFungus(uniqueid, npcx, npcy: smallint);
@@ -15,8 +15,8 @@ procedure createGreenFungus(uniqueid, npcx, npcy: smallint);
 procedure takeTurn(id, spx, spy: smallint);
 (* Check if player is next to NPC *)
 function isNextToPlayer(spx, spy: smallint): boolean;
-(* Fungus attacks player *)
-procedure combat(id: smallint);
+(* Fungus attacks *)
+procedure combat(idOwner, idTarget: smallint);
 
 implementation
 
@@ -67,58 +67,105 @@ end;
 
 procedure takeTurn(id, spx, spy: smallint);
 begin
-  if (isNextToPlayer(spx, spy) = True) then
-    combat(id);
-  entities.moveNPC(id, spx, spy);
+  (* Can the NPC see the player *)
+  if (los.inView(spx, spy, entities.entityList[0].posX, entities.entityList[0].posY,
+    entities.entityList[id].visionRange) = True) then
+  begin
+    if (isNextToPlayer(spx, spy) = True) then
+      combat(id, 0);
+    entities.moveNPC(id, spx, spy);
+
+  end;
+
 end;
 
 function isNextToPlayer(spx, spy: smallint): boolean;
-var
-  dx, dy: smallint;
-  distance: double;
 begin
   Result := False;
-  dx := entityList[0].posX - spx;
-  dy := entityList[0].posY - spy;
-  distance := sqrt(dx ** 2 + dy ** 2);
-  if (round(distance) = 0) then
+  if (map.hasPlayer(spx, spy - 1) = True) then // NORTH
+    Result := True;
+  if (map.hasPlayer(spx + 1, spy - 1) = True) then // NORTH EAST
+    Result := True;
+  if (map.hasPlayer(spx + 1, spy) = True) then // EAST
+    Result := True;
+  if (map.hasPlayer(spx + 1, spy + 1) = True) then // SOUTH EAST
+    Result := True;
+  if (map.hasPlayer(spx, spy + 1) = True) then // SOUTH
+    Result := True;
+  if (map.hasPlayer(spx - 1, spy + 1) = True) then // SOUTH WEST
+    Result := True;
+  if (map.hasPlayer(spx - 1, spy) = True) then // WEST
+    Result := True;
+  if (map.hasPlayer(spx - 1, spy - 1) = True) then // NORTH WEST
     Result := True;
 end;
 
-procedure combat(id: smallint);
+procedure combat(idOwner, idTarget: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(2, entities.entityList[id].attack) -
-    entities.entityList[0].defense;
+  damageAmount := globalutils.randomRange(2, entities.entityList[idOwner].attack) -
+    entities.entityList[idTarget].defense;
   if (damageAmount > 0) then
   begin
-    entities.entityList[0].currentHP :=
-      (entities.entityList[0].currentHP - damageAmount);
-    if (entities.entityList[0].currentHP < 1) then
+    entities.entityList[idTarget].currentHP :=
+      (entities.entityList[idTarget].currentHP - damageAmount);
+    if (entities.entityList[idTarget].currentHP < 1) then
     begin
-      if (killer = 'empty') then
-        killer := entityList[id].race;
-      exit;
-    end
-    else
-    begin
-      if (damageAmount = 1) then
-        ui.bufferMessage('The fungus slightly wounds you')
+      if (idTarget = 0) then
+      begin
+        if (killer = 'empty') then
+          killer := entityList[idOwner].race;
+        exit;
+      end
       else
       begin
-        ui.bufferMessage('The fungus lashes you with its stinger, inflicting ' +
-          IntToStr(damageAmount) + ' damage');
-        (* Fungus does poison damage *)
-        entities.entityList[0].stsPoison := True;
+        ui.displayMessage('The fungus kills the ' + entities.entityList[idTarget].race);
+        entities.killEntity(idTarget);
+        (* The fungus levels up *)
+        Inc(entities.entityList[idOwner].xpReward, 2);
+        Inc(entities.entityList[idOwner].attack, 2);
+        ui.bufferMessage('The fungus appears to grow larger');
+        exit;
       end;
-      (* Update health display to show damage *)
-      ui.updateHealth;
+    end
+    else
+    begin // if attack causes slight damage
+      if (damageAmount = 1) then
+      begin
+        if (idTarget = 0) then // if target is the player
+        begin
+          ui.writeBufferedMessages;
+          ui.displayMessage('The fungus slightly wounds you');
+        end
+        else
+        begin
+          ui.writeBufferedMessages;
+          ui.displayMessage('The fungus attacks the ' +
+            entities.entityList[idTarget].race);
+        end;
+      end
+      else  // if attack causes more damage
+      begin
+        if (idTarget = 0) then // if target is the player
+        begin
+          ui.bufferMessage('The fungus lashes you with its stinger, inflicting ' +
+            IntToStr(damageAmount) + ' damage');
+          (* Fungus does poison damage *)
+          entityList[0].stsPoison := True;
+          entityList[0].tmrPoison := damageAmount + 2;
+          if (killer = 'empty') then
+            killer := 'poisoned fungus spore';
+        end
+        else
+          ui.bufferMessage('The fungus stings the ' +
+            entities.entityList[idTarget].race);
+      end;
     end;
   end
   else
     ui.bufferMessage('The fungus lashes out at you but misses');
 end;
 
-end.
 
+end.

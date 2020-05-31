@@ -16,23 +16,25 @@ const
   (* side bar Y position *)
   sby = 10;
   (* side bar Width *)
-  sbw = 140;
+  sbw = 145;
   (* side bar Height *)
-  sbh = 150;
+  sbh = 210;  // + 60
   (* equipment bar Y position *)
-  eqy = 170;
+  eqy = 242;
   (* equipment bar Height *)
-  eqh = 120;
+  eqh = 70;
   (* Look box Y position *)
-  infoy = 300;
+  infoy = 324;
   (* Look box Height *)
-  infoh = 100;
+  infoh = 55;
 
 
 var
   messageArray: array[1..7] of string = (' ', ' ', ' ', ' ', ' ', ' ', ' ');
   buffer: string;
   logo: TBitmap;
+  (* Status effects *)
+  poisonStatusSet: boolean;
 
 (* Title screen *)
 procedure titleScreen(yn: byte);
@@ -52,8 +54,11 @@ procedure updateDefence;
 procedure updateWeapon(weaponName: shortstring);
 (* Display equipped armour *)
 procedure updateArmour(armourName: shortstring);
+(* Display status effects *)
+procedure displayStatusEffect(onoff: byte; effectType: shortstring);
 (* Info window results from LOOK command *)
-procedure displayLook(displayType: byte; entityName, itemDescription: shortstring; currentHP, maxHP: smallint);
+procedure displayLook(displayType: byte; entityName, itemDescription: shortstring;
+  currentHP, maxHP: smallint);
 (* Write text to the message log *)
 procedure displayMessage(message: string);
 (* Store all messages from players turn *)
@@ -114,11 +119,13 @@ begin
   updateAttack;
   updateDefence;
   (* Write Equipment window *)
-  writeToBuffer(sbx + 8, eqy + 5, MESSAGEFADE1, 'Equipment');
+  writeToBuffer(sbx + 8, eqy - 8, MESSAGEFADE1, 'Equipment');  // originally eqy + 5
   updateWeapon('none');
   updateArmour('none');
   (* Write Info window *)
-  writeToBuffer(sbx + 8, infoy + 5, MESSAGEFADE1, 'Info');
+  writeToBuffer(sbx + 8, infoy - 8, MESSAGEFADE1, 'Info');
+  (* Set status effect flags *)
+  poisonStatusSet := False;
 end;
 
 procedure updateLevel;
@@ -200,14 +207,14 @@ begin
   main.tempScreen.Canvas.Font.Size := 10;
   (* Paint over previous text *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(sbx + 8, eqy + 25, sbx + 135, eqy + 42);
+  main.tempScreen.Canvas.FillRect(sbx + 8, eqy + 13, sbx + 135, eqy + 30);
   if (weaponName = 'none') then
   begin
-    writeToBuffer(sbx + 8, eqy + 25, MESSAGEFADE2, 'No weapon equipped');
+    writeToBuffer(sbx + 8, eqy + 13, MESSAGEFADE2, 'No weapon equipped');
   end
   else
   begin
-    writeToBuffer(sbx + 8, eqy + 25, UITEXTCOLOUR, weaponName);
+    writeToBuffer(sbx + 8, eqy + 13, UITEXTCOLOUR, weaponName);
   end;
 end;
 
@@ -216,43 +223,58 @@ begin
   main.tempScreen.Canvas.Font.Size := 10;
   (* Paint over previous text *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(sbx + 8, eqy + 45, sbx + 135, eqy + 62);
+  main.tempScreen.Canvas.FillRect(sbx + 8, eqy + 13, sbx + 135, eqy + 49);
   if (armourName = 'none') then
   begin
-    writeToBuffer(sbx + 8, eqy + 45, MESSAGEFADE2, 'No armour equipped');
+    writeToBuffer(sbx + 8, eqy + 33, MESSAGEFADE2, 'No armour equipped');
   end
   else
   begin
-    writeToBuffer(sbx + 8, eqy + 45, UITEXTCOLOUR, armourName);
+    writeToBuffer(sbx + 8, eqy + 33, UITEXTCOLOUR, armourName);
+  end;
+end;
+
+procedure displayStatusEffect(onoff: byte; effectType: shortstring);
+begin
+  (* Paint over previous stats *)
+  main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
+  main.tempScreen.Canvas.FillRect(sbx + 3, sby + 150, sbx + 140, sby + 170);
+  main.tempScreen.Canvas.Pen.Color := UICOLOUR;
+  (* POISON *)
+  if (effectType = 'poison') then
+  begin
+    if (onoff = 1) then
+      writeToBuffer(sbx + 8, sby + 151, STSPOISON, 'Poisoned');
   end;
 end;
 
 (* displayType: 1 = Entity, 2 = Item *)
-procedure displayLook(displayType: byte; entityName, itemDescription: shortstring; currentHP, maxHP: smallint);
+procedure displayLook(displayType: byte; entityName, itemDescription: shortstring;
+  currentHP, maxHP: smallint);
 begin
   (* Paint over previous text *)
   main.tempScreen.Canvas.Brush.Color := BACKGROUNDCOLOUR;
-  main.tempScreen.Canvas.FillRect(sbx + 3, infoy + 20, sbx + 135, infoy + 98);
+  main.tempScreen.Canvas.FillRect(sbx + 3, infoy + 10, sbx + 135, infoy + 50);
   main.tempScreen.Canvas.Font.Size := 10;
   if (displayType = 1) then
   begin
-  if (entityName <> 'none') then
-  begin
-    (* Display entity name *)
-    writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, entityName);
-    (* Display health *)
-    writeToBuffer(sbx + 5, infoy + 50, UITEXTCOLOUR, 'Health: ' +
-      IntToStr(currentHP) + ' / ' + IntToStr(maxHP));
-  end;
+    if (entityName <> 'none') then
+    begin
+      (* Display entity name *)
+      writeToBuffer(sbx + 5, infoy + 10, UITEXTCOLOUR, entityName);
+      (* Display health *)
+      writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, 'Health: ' +
+        IntToStr(currentHP) + ' / ' + IntToStr(maxHP));
+    end;
   end
   else if (displayType = 2) then
   begin
-  begin
-    (* Display item name *)
-    writeToBuffer(sbx + 5, infoy + 30, UITEXTCOLOUR, entityName);
-    (* Display item description *)
-    writeToBuffer(sbx + 5, infoy + 50, MESSAGEFADE1, itemDescription);
-  end;
+    begin
+      (* Display item name *)
+      writeToBuffer(sbx + 5, infoy + 10, UITEXTCOLOUR, entityName);
+      (* Display item description *)
+      writeToBuffer(sbx + 5, infoy + 30, MESSAGEFADE1, itemDescription);
+    end;
   end;
 
 end;

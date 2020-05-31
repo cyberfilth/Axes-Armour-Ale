@@ -39,6 +39,7 @@ const
   MESSAGEFADE4 = TColor($686800);
   MESSAGEFADE5 = TColor($4F4F00);
   MESSAGEFADE6 = TColor($2E2E00);
+  STSPOISON = TColor($DCDFFC);
 
 var
   (* Turn counter *)
