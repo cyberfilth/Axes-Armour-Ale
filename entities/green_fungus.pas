@@ -73,10 +73,8 @@ begin
   begin
     if (isNextToPlayer(spx, spy) = True) then
       combat(id, 0);
-    entities.moveNPC(id, spx, spy);
-
   end;
-
+  entities.moveNPC(id, spx, spy);
 end;
 
 function isNextToPlayer(spx, spy: smallint): boolean;
