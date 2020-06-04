@@ -134,7 +134,7 @@ end;
 procedure chaseTarget(id, spx, spy: smallint);
 var
   newX, newY, dx, dy: smallint;
-  distance: double;
+  distance: Single;
 begin
   (* Get new coordinates to chase the player *)
   dx := entityList[id].targetX - spx;

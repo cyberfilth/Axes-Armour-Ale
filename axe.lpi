@@ -14,7 +14,7 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="20">
+      <Resources Count="24">
         <Resource_0 FileName="images/sprites/player_glyph.bmp" Type="BITMAP" ResourceName="PLAYER_GLYPH"/>
         <Resource_1 FileName="images/dungeon/ascii/blueDungeonFloorDef.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORDEF"/>
         <Resource_2 FileName="images/dungeon/ascii/blueDungeonFloorHi.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORHI"/>
@@ -35,6 +35,10 @@
         <Resource_17 FileName="images\sprites\cloth_armour1.bmp" Type="BITMAP" ResourceName="CLOTH_ARMOUR1"/>
         <Resource_18 FileName="images\sprites\leather_armour1.bmp" Type="BITMAP" ResourceName="LEATHER_ARMOUR1"/>
         <Resource_19 FileName="images\sprites\f_green1.bmp" Type="BITMAP" ResourceName="F_GREEN1"/>
+        <Resource_20 FileName="images/dungeon/ascii/caveWall2Def.bmp" Type="BITMAP" ResourceName="CAVEWALL2DEF"/>
+        <Resource_21 FileName="images/dungeon/ascii/caveWall2Hi.bmp" Type="BITMAP" ResourceName="CAVEWALL2HI"/>
+        <Resource_22 FileName="images/dungeon/ascii/caveWall3Def.bmp" Type="BITMAP" ResourceName="CAVEWALL3DEF"/>
+        <Resource_23 FileName="images/dungeon/ascii/caveWall3Hi.bmp" Type="BITMAP" ResourceName="CAVEWALL3HI"/>
       </Resources>
     </General>
     <VersionInfo>
@@ -142,7 +146,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="24">
+    <Units Count="25">
       <Unit0>
         <Filename Value="axe.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -242,6 +246,10 @@
         <Filename Value="entities\green_fungus.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit23>
+      <Unit24>
+        <Filename Value="dungeons\cavern.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit24>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

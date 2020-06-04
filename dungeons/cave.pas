@@ -1,4 +1,4 @@
-(* Generate a cave with a grid-based dungeon superimposed over the top *)
+(* Generate a cave with tunnels *)
 
 unit cave;
 
@@ -23,7 +23,7 @@ var
   startX, startY: smallint;
   (* start creating corridors once this rises above 1 *)
   roomCounter: smallint;
-  (* TESTING - Write dungeon to text file *)
+  (* TESTING - Write cave to text file *)
   filename: ShortString;
   myfile: Text;
 
@@ -37,7 +37,7 @@ procedure carveHorizontally(x1, x2, y: smallint);
 procedure carveVertically(y1, y2, x: smallint);
 (* Create a room *)
 procedure createRoom(gridNumber: smallint);
-(* Generate a dungeon *)
+(* Generate a cave *)
 procedure generate;
 (* sort room list in order from left to right *)
 procedure leftToRight;
