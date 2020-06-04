@@ -183,7 +183,7 @@ end;
 procedure escapePlayer(id, spx, spy: smallint);
 var
   newX, newY, dx, dy: smallint;
-  distance: double;
+  distance: Single;
 begin
   (* Get new coordinates to escape the player *)
   dx := entityList[0].posX - spx;
