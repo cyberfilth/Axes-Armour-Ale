@@ -214,8 +214,10 @@ begin
       globalutils.dungeonArray[r][c] := terrainArray[r][c];
     end;
   end;
-  (* Set flag for type of dungeon *)
-  map.mapType := 0;
+  (* Set 'room number' to set NPC amount *)
+  globalutils.currentDgnTotalRooms := 12;
+  (* Set flag for type of map *)
+  map.mapType := 2;
 end;
 
 end.

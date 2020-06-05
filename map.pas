@@ -34,7 +34,7 @@ type
   end;
 
 var
-  (* Type of map: 0 = cave, 1 = blue grid-based dungeon *)
+  (* Type of map: 0 = cave tunnels, 1 = blue grid-based dungeon, 2 = cavern *)
   mapType: smallint;
   (* Game map array *)
   maparea: array[1..MAXROWS, 1..MAXCOLUMNS] of tile;
@@ -43,7 +43,8 @@ var
   startX, startY: smallint;
   (* Graphical tiles *)
   caveWallHi, caveWallDef, caveFloorHi, caveFloorDef, blueDungeonWallHi,
-  blueDungeonWallDef, blueDungeonFloorHi, blueDungeonFloorDef: TBitmap;
+  blueDungeonWallDef, blueDungeonFloorHi, blueDungeonFloorDef,
+  caveWall2Def, caveWall2Hi, caveWall3Def, caveWall3Hi: TBitmap;
 
 (* Load tile textures *)
 procedure setupTiles;
@@ -75,7 +76,7 @@ procedure drawTile(c, r: smallint; hiDef: byte);
 implementation
 
 uses
-  cave, grid_dungeon, entities;
+  cave, grid_dungeon, cavern, entities;
 
 procedure setupTiles;
 begin
@@ -95,6 +96,14 @@ begin
   blueDungeonFloorHi.LoadFromResourceName(HINSTANCE, 'BLUEDUNGEONFLOORHI');
   blueDungeonFloorDef := TBitmap.Create;
   blueDungeonFloorDef.LoadFromResourceName(HINSTANCE, 'BLUEDUNGEONFLOORDEF');
+  caveWall2Def := TBitmap.Create;
+  caveWall2Def.LoadFromResourceName(HINSTANCE, 'CAVEWALL2DEF');
+  caveWall2Hi := TBitmap.Create;
+  caveWall2Hi.LoadFromResourceName(HINSTANCE, 'CAVEWALL2HI');
+  caveWall3Def := TBitmap.Create;
+  caveWall3Def.LoadFromResourceName(HINSTANCE, 'CAVEWALL3DEF');
+  caveWall3Hi := TBitmap.Create;
+  caveWall3Hi.LoadFromResourceName(HINSTANCE, 'CAVEWALL3HI');
 end;
 
 procedure setupMap;
@@ -105,6 +114,7 @@ begin
   case mapType of
     0: cave.generate;
     1: grid_dungeon.generate;
+    2: cavern.generate;
   end;
   id_int := 0;
   for r := 1 to globalutils.MAXROWS do
@@ -121,7 +131,8 @@ begin
         Occupied := False;
         Glyph := globalutils.dungeonArray[r][c];
       end;
-      if (globalutils.dungeonArray[r][c] = '.') or (globalutils.dungeonArray[r][c] = ':') then
+      if (globalutils.dungeonArray[r][c] = '.') or
+        (globalutils.dungeonArray[r][c] = ':') then
         maparea[r][c].Blocks := False;
     end;
   end;
@@ -205,34 +216,68 @@ end;
 
 procedure drawTile(c, r: smallint; hiDef: byte);
 begin
-  case maparea[r][c].glyph of
-    '.': // Blue Dungeon Floor
-    begin
-      if (hiDef = 1) then
-        drawToBuffer(mapToScreen(c), mapToScreen(r), blueDungeonFloorHi)
-      else
-        drawToBuffer(mapToScreen(c), mapToScreen(r), blueDungeonFloorDef);
+  if (mapType = 0) then
+  begin
+    case maparea[r][c].glyph of
+      ':': // Cave Floor
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveFloorHi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveFloorDef);
+      end;
+      '*': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWallHi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWallDef);
+      end;
     end;
-    ':': // Cave Floor
-    begin
-      if (hiDef = 1) then
-        drawToBuffer(mapToScreen(c), mapToScreen(r), caveFloorHi)
-      else
-        drawToBuffer(mapToScreen(c), mapToScreen(r), caveFloorDef);
+  end
+  else if (mapType = 1) then
+  begin
+    case maparea[r][c].glyph of
+      '.': // Blue Dungeon Floor
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), blueDungeonFloorHi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), blueDungeonFloorDef);
+      end;
+      '#': // Blue Dungeon wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), blueDungeonWallHi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), blueDungeonWallDef);
+      end;
     end;
-    '#': // Blue Dungeon wall
-    begin
-      if (hiDef = 1) then
-        drawToBuffer(mapToScreen(c), mapToScreen(r), blueDungeonWallHi)
-      else
-        drawToBuffer(mapToScreen(c), mapToScreen(r), blueDungeonWallDef);
-    end;
-    '*': // Cave wall
-    begin
-      if (hiDef = 1) then
-        drawToBuffer(mapToScreen(c), mapToScreen(r), caveWallHi)
-      else
-        drawToBuffer(mapToScreen(c), mapToScreen(r), caveWallDef);
+  end
+  else if (mapType = 2) then
+  begin
+    case maparea[r][c].glyph of
+      '.': // Cave Floor
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveFloorHi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveFloorDef);
+      end;
+      '#': // Cavern wall 1
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall2Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall2Def);
+      end;
+      '*': // Cavern wall 2
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall3Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall3Def);
+      end;
     end;
   end;
 end;

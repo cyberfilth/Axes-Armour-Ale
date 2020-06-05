@@ -438,7 +438,7 @@ begin
   gameState := 1;
   killer := 'empty';
   playerTurn := 0;
-  map.mapType := 0;// set to cavern
+  map.mapType := 0;
   map.setupMap;
   map.setupTiles;
   entities.setupEntities;
@@ -504,6 +504,10 @@ begin
   map.blueDungeonFloorHi.Free;
   map.blueDungeonWallDef.Free;
   map.blueDungeonWallHi.Free;
+  map.caveWall2Def.Free;
+  map.caveWall2Hi.Free;
+  map.caveWall3Def.Free;
+  map.caveWall3Hi.Free;
   (* Item sprites *)
   items.aleTankard.Free;
   items.crudeDagger.Free;
