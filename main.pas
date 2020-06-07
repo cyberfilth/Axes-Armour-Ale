@@ -510,6 +510,7 @@ begin
   map.caveWall3Hi.Free;
   (* Item sprites *)
   items.aleTankard.Free;
+  items.wineFlask.Free;
   items.crudeDagger.Free;
   items.leatherArmour1.Free;
   items.clothArmour.Free;

@@ -14,7 +14,7 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="24">
+      <Resources Count="25">
         <Resource_0 FileName="images/sprites/player_glyph.bmp" Type="BITMAP" ResourceName="PLAYER_GLYPH"/>
         <Resource_1 FileName="images/dungeon/ascii/blueDungeonFloorDef.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORDEF"/>
         <Resource_2 FileName="images/dungeon/ascii/blueDungeonFloorHi.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORHI"/>
@@ -39,6 +39,7 @@
         <Resource_21 FileName="images/dungeon/ascii/caveWall2Hi.bmp" Type="BITMAP" ResourceName="CAVEWALL2HI"/>
         <Resource_22 FileName="images/dungeon/ascii/caveWall3Def.bmp" Type="BITMAP" ResourceName="CAVEWALL3DEF"/>
         <Resource_23 FileName="images/dungeon/ascii/caveWall3Hi.bmp" Type="BITMAP" ResourceName="CAVEWALL3HI"/>
+        <Resource_24 FileName="images/sprites/ale2.bmp" Type="BITMAP" ResourceName="ALE2"/>
       </Resources>
     </General>
     <VersionInfo>
@@ -146,7 +147,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="25">
+    <Units Count="26">
       <Unit0>
         <Filename Value="axe.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -250,6 +251,10 @@
         <Filename Value="dungeons\cavern.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit24>
+      <Unit25>
+        <Filename Value="items\wine_flask.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit25>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

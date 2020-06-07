@@ -226,12 +226,19 @@ begin
         else
           drawToBuffer(mapToScreen(c), mapToScreen(r), caveFloorDef);
       end;
-      '*': // Cave wall
+      '#': // Cavern wall 1
       begin
         if (hiDef = 1) then
-          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWallHi)
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall2Hi)
         else
-          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWallDef);
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall2Def);
+      end;
+      '*': // Cavern wall 2
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall3Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall3Def);
       end;
     end;
   end

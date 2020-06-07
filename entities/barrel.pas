@@ -8,7 +8,7 @@ unit barrel;
 interface
 
 uses
-  SysUtils, map, items, ale_tankard, leather_armour1, cloth_armour1;
+  SysUtils, map, items, ale_tankard, leather_armour1, cloth_armour1, wine_flask;
 
 (* Create a barrel *)
 procedure createBarrel(uniqueid, npcx, npcy: smallint);
@@ -77,7 +77,10 @@ begin
   (* Create a new entry in item list and add item details *)
   Inc(items.itemAmount);
   SetLength(items.itemList, items.itemAmount);
-  if (percentage < 80) then
+  if (percentage <= 40) then
+    (* Drop a Flask of Wine *)
+    createWineFlask(itemAmount, x, y)
+  else if (percentage > 40) and (percentage < 80) then
     (* Drop an item - Ale Tankard *)
     createAleTankard(itemAmount, x, y)
   else if (percentage >= 80) and (percentage <= 90) then

@@ -8,7 +8,7 @@ interface
 uses
   Graphics, globalutils, map,
   (* Import the items *)
-  ale_tankard, dagger, leather_armour1, cloth_armour1, basic_club;
+  ale_tankard, dagger, leather_armour1, cloth_armour1, basic_club, wine_flask;
 
 type
   (* Item types = drink, weapon, armour, missile *)
@@ -39,7 +39,7 @@ type
 var
   itemList: array of Item;
   itemAmount, listLength: smallint;
-  aleTankard, crudeDagger, leatherArmour1, clothArmour, woodenClub: TBitmap;
+  aleTankard, crudeDagger, leatherArmour1, clothArmour, woodenClub, wineFlask: TBitmap;
 
 (* Load item textures *)
 procedure setupItems;
@@ -64,6 +64,8 @@ procedure setupItems;
 begin
   aleTankard := TBitmap.Create;
   aleTankard.LoadFromResourceName(HINSTANCE, 'ALE1');
+  wineFlask := TBitmap.Create;
+  wineFlask.LoadFromResourceName(HINSTANCE, 'ALE2');
   crudeDagger := TBitmap.Create;
   crudeDagger.LoadFromResourceName(HINSTANCE, 'DAGGER');
   leatherArmour1 := TBitmap.Create;
@@ -92,7 +94,9 @@ begin { TODO : When more items are created, swap this out for a CASE statement }
   else if (glyph = '4') then
     drawToBuffer(mapToScreen(c), mapToScreen(r), woodenClub)
   else if (glyph = '5') then
-    drawToBuffer(mapToScreen(c), mapToScreen(r), clothArmour);
+    drawToBuffer(mapToScreen(c), mapToScreen(r), clothArmour)
+  else if (glyph = '6') then
+    drawToBuffer(mapToScreen(c), mapToScreen(r), wineFlask);
 end;
 
 function containsItem(x, y: smallint): boolean;
@@ -150,6 +154,7 @@ begin
     3: leather_armour1.useItem(equipped);
     4: basic_club.useItem(equipped);
     5: cloth_armour1.useItem(equipped);
+    6: wine_flask.useItem;
   end;
 end;
 

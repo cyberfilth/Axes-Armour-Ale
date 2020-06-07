@@ -424,13 +424,18 @@ begin
   begin
     for c := 1 to globalutils.MAXCOLUMNS do
     begin
+      if (caveArray[r][c] = '*') then
+      begin
+        if (random(2) = 1) then
+          globalutils.dungeonArray[r][c] := '*'
+        else
+          globalutils.dungeonArray[r][c] := '#';
+      end;
       globalutils.dungeonArray[r][c] := caveArray[r][c];
     end;
   end;
   (* Copy total rooms to main dungeon *)
   globalutils.currentDgnTotalRooms := totalRooms;
-  (* Set flag for type of dungeon *)
-  map.mapType := 0;
 end;
 
 end.
