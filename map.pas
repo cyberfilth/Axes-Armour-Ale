@@ -44,7 +44,7 @@ var
   (* Graphical tiles *)
   caveWallHi, caveWallDef, caveFloorHi, caveFloorDef, blueDungeonWallHi,
   blueDungeonWallDef, blueDungeonFloorHi, blueDungeonFloorDef,
-  caveWall2Def, caveWall2Hi, caveWall3Def, caveWall3Hi: TBitmap;
+  caveWall2Def, caveWall2Hi, caveWall3Def, caveWall3Hi, upStairs, downStairs: TBitmap;
 
 (* Load tile textures *)
 procedure setupTiles;
@@ -104,6 +104,10 @@ begin
   caveWall3Def.LoadFromResourceName(HINSTANCE, 'CAVEWALL3DEF');
   caveWall3Hi := TBitmap.Create;
   caveWall3Hi.LoadFromResourceName(HINSTANCE, 'CAVEWALL3HI');
+  upStairs := TBitmap.Create;
+  upStairs.LoadFromResourceName(HINSTANCE, 'USTAIRS');
+  downStairs := TBitmap.Create;
+  downStairs.LoadFromResourceName(HINSTANCE, 'DSTAIRS');
 end;
 
 procedure setupMap;

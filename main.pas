@@ -116,6 +116,7 @@ procedure gameLoop;
 var
   i: smallint;
 begin
+  (* Check for player death at start of game loop *)
   if (entityList[0].currentHP <= 0) then
   begin
     player.gameOver;
@@ -148,10 +149,6 @@ begin
   (* Update health display to show damage *)
   ui.updateHealth;
   if (entityList[0].currentHP <= 0) then
-  begin
-    player.gameOver;
-    Exit;
-  end;
   (* Clear Look / Info box *)
   ui.displayLook(1, 'none', '', 0, 0);
   (* Redraw Player *)
@@ -160,6 +157,12 @@ begin
     entities.playerGlyph);
   (* Process status effects *)
   player.processStatus;
+   (* Check for player death at end of game loop *)
+  if (entityList[0].currentHP <= 0) then
+  begin
+    player.gameOver;
+    Exit;
+  end;
 end;
 
 procedure TGameWindow.FormKeyDown(Sender: TObject; var Key: word);
@@ -508,6 +511,8 @@ begin
   map.caveWall2Hi.Free;
   map.caveWall3Def.Free;
   map.caveWall3Hi.Free;
+  map.downStairs.Free;
+  map.upStairs.Free;
   (* Item sprites *)
   items.aleTankard.Free;
   items.wineFlask.Free;
