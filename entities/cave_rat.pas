@@ -138,11 +138,19 @@ begin
   (* Get new coordinates to chase the player *)
   dx := entityList[0].posX - spx;
   dy := entityList[0].posY - spy;
-  distance := sqrt(dx ** 2 + dy ** 2);
-  dx := round(dx / distance);
-  dy := round(dy / distance);
-  newX := spx + dx;
-  newY := spy + dy;
+  if (dx = 0) and (dy = 0) then
+  begin
+    newX := spx;
+    newy := spy;
+  end
+  else
+  begin
+    distance := sqrt(dx ** 2 + dy ** 2);
+    dx := round(dx / distance);
+    dy := round(dy / distance);
+    newX := spx + dx;
+    newY := spy + dy;
+  end;
   (* New coordinates set. Check if they are walkable *)
   if (map.canMove(newX, newY) = True) then
   begin
@@ -183,7 +191,7 @@ end;
 procedure escapePlayer(id, spx, spy: smallint);
 var
   newX, newY, dx, dy: smallint;
-  distance: Single;
+  distance: single;
 begin
   (* Get new coordinates to escape the player *)
   dx := entityList[0].posX - spx;

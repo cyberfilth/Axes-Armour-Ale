@@ -13,8 +13,6 @@ uses
 const
   (* Width of tiles is used as a multiplier in placing tiles *)
   tileSize = 10;
-  (* File path to image folder *)
-  imagesFolder = 'images/dungeon/ascii/';
 
 type
   (* Tiles that make up the game world *)
@@ -34,7 +32,7 @@ type
   end;
 
 var
-  (* Type of map: 0 = cave tunnels, 1 = blue grid-based dungeon, 2 = cavern *)
+  (* Type of map: 0 = cave tunnels, 1 = blue grid-based dungeon, 2 = cavern, 3 = Bitmask dungeon *)
   mapType: smallint;
   (* Game map array *)
   maparea: array[1..MAXROWS, 1..MAXCOLUMNS] of tile;
@@ -44,7 +42,14 @@ var
   (* Graphical tiles *)
   caveWallHi, caveWallDef, caveFloorHi, caveFloorDef, blueDungeonWallHi,
   blueDungeonWallDef, blueDungeonFloorHi, blueDungeonFloorDef,
-  caveWall2Def, caveWall2Hi, caveWall3Def, caveWall3Hi, upStairs, downStairs: TBitmap;
+  caveWall2Def, caveWall2Hi, caveWall3Def, caveWall3Hi, upStairs,
+  downStairs, bmDungeon0Hi, bmDungeon0Def, bmDungeon1Hi, bmDungeon1Def,
+  bmDungeon2Hi, bmDungeon2Def, bmDungeon3Hi, bmDungeon3Def, bmDungeon4Hi,
+  bmDungeon4Def, bmDungeon5Hi, bmDungeon5Def, bmDungeon6Hi, bmDungeon6Def,
+  bmDungeon7Hi, bmDungeon7Def, bmDungeon8Hi, bmDungeon8Def, bmDungeon9Hi,
+  bmDungeon9Def, bmDungeon10Hi, bmDungeon10Def, bmDungeon11Hi,
+  bmDungeon11Def, bmDungeon12Hi, bmDungeon12Def, bmDungeon13Hi,
+  bmDungeon13Def, bmDungeon14Hi, bmDungeon14Def, blankTile: TBitmap;
 
 (* Load tile textures *)
 procedure setupTiles;
@@ -76,10 +81,11 @@ procedure drawTile(c, r: smallint; hiDef: byte);
 implementation
 
 uses
-  cave, grid_dungeon, cavern, entities;
+  cave, grid_dungeon, cavern, bitmask_dungeon, entities;
 
 procedure setupTiles;
 begin
+  // Cave tiles
   caveWallHi := TBitmap.Create;
   caveWallHi.LoadFromResourceName(HINSTANCE, 'CAVEWALLHI');
   caveWallDef := TBitmap.Create;
@@ -88,6 +94,7 @@ begin
   caveFloorHi.LoadFromResourceName(HINSTANCE, 'CAVEFLOORHI');
   caveFloorDef := TBitmap.Create;
   caveFloorDef.LoadFromResourceName(HINSTANCE, 'CAVEFLOORDEF');
+  // Blue dungeon tiles
   blueDungeonWallHi := TBitmap.Create;
   blueDungeonWallHi.LoadFromResourceName(HINSTANCE, 'BLUEDUNGEONWALLHI');
   blueDungeonWallDef := TBitmap.Create;
@@ -96,6 +103,7 @@ begin
   blueDungeonFloorHi.LoadFromResourceName(HINSTANCE, 'BLUEDUNGEONFLOORHI');
   blueDungeonFloorDef := TBitmap.Create;
   blueDungeonFloorDef.LoadFromResourceName(HINSTANCE, 'BLUEDUNGEONFLOORDEF');
+  // Cavern tiles
   caveWall2Def := TBitmap.Create;
   caveWall2Def.LoadFromResourceName(HINSTANCE, 'CAVEWALL2DEF');
   caveWall2Hi := TBitmap.Create;
@@ -104,10 +112,74 @@ begin
   caveWall3Def.LoadFromResourceName(HINSTANCE, 'CAVEWALL3DEF');
   caveWall3Hi := TBitmap.Create;
   caveWall3Hi.LoadFromResourceName(HINSTANCE, 'CAVEWALL3HI');
+  // Stairs
   upStairs := TBitmap.Create;
   upStairs.LoadFromResourceName(HINSTANCE, 'USTAIRS');
   downStairs := TBitmap.Create;
   downStairs.LoadFromResourceName(HINSTANCE, 'DSTAIRS');
+  // Bitmask dungeon tiles
+  bmDungeon0Def := TBitmap.Create;
+  bmDungeon0Def.LoadFromResourceName(HINSTANCE, '0DEF');
+  bmDungeon0Hi := TBitmap.Create;
+  bmDungeon0Hi.LoadFromResourceName(HINSTANCE, '0HI');
+  bmDungeon1Def := TBitmap.Create;
+  bmDungeon1Def.LoadFromResourceName(HINSTANCE, '1DEF');
+  bmDungeon1Hi := TBitmap.Create;
+  bmDungeon1Hi.LoadFromResourceName(HINSTANCE, '1HI');
+  bmDungeon2Def := TBitmap.Create;
+  bmDungeon2Def.LoadFromResourceName(HINSTANCE, '2DEF');
+  bmDungeon2Hi := TBitmap.Create;
+  bmDungeon2Hi.LoadFromResourceName(HINSTANCE, '2HI');
+  bmDungeon3Def := TBitmap.Create;
+  bmDungeon3Def.LoadFromResourceName(HINSTANCE, '3DEF');
+  bmDungeon3Hi := TBitmap.Create;
+  bmDungeon3Hi.LoadFromResourceName(HINSTANCE, '3HI');
+  bmDungeon4Def := TBitmap.Create;
+  bmDungeon4Def.LoadFromResourceName(HINSTANCE, '4DEF');
+  bmDungeon4Hi := TBitmap.Create;
+  bmDungeon4Hi.LoadFromResourceName(HINSTANCE, '4HI');
+  bmDungeon5Def := TBitmap.Create;
+  bmDungeon5Def.LoadFromResourceName(HINSTANCE, '5DEF');
+  bmDungeon5Hi := TBitmap.Create;
+  bmDungeon5Hi.LoadFromResourceName(HINSTANCE, '5HI');
+  bmDungeon6Def := TBitmap.Create;
+  bmDungeon6Def.LoadFromResourceName(HINSTANCE, '6DEF');
+  bmDungeon6Hi := TBitmap.Create;
+  bmDungeon6Hi.LoadFromResourceName(HINSTANCE, '6HI');
+  bmDungeon7Def := TBitmap.Create;
+  bmDungeon7Def.LoadFromResourceName(HINSTANCE, '7DEF');
+  bmDungeon7Hi := TBitmap.Create;
+  bmDungeon7Hi.LoadFromResourceName(HINSTANCE, '7HI');
+  bmDungeon8Def := TBitmap.Create;
+  bmDungeon8Def.LoadFromResourceName(HINSTANCE, '8DEF');
+  bmDungeon8Hi := TBitmap.Create;
+  bmDungeon8Hi.LoadFromResourceName(HINSTANCE, '8HI');
+  bmDungeon9Def := TBitmap.Create;
+  bmDungeon9Def.LoadFromResourceName(HINSTANCE, '9DEF');
+  bmDungeon9Hi := TBitmap.Create;
+  bmDungeon9Hi.LoadFromResourceName(HINSTANCE, '9HI');
+  bmDungeon10Def := TBitmap.Create;
+  bmDungeon10Def.LoadFromResourceName(HINSTANCE, '10DEF');
+  bmDungeon10Hi := TBitmap.Create;
+  bmDungeon10Hi.LoadFromResourceName(HINSTANCE, '10HI');
+  bmDungeon11Def := TBitmap.Create;
+  bmDungeon11Def.LoadFromResourceName(HINSTANCE, '11DEF');
+  bmDungeon11Hi := TBitmap.Create;
+  bmDungeon11Hi.LoadFromResourceName(HINSTANCE, '11HI');
+  bmDungeon12Def := TBitmap.Create;
+  bmDungeon12Def.LoadFromResourceName(HINSTANCE, '12DEF');
+  bmDungeon12Hi := TBitmap.Create;
+  bmDungeon12Hi.LoadFromResourceName(HINSTANCE, '12HI');
+  bmDungeon13Def := TBitmap.Create;
+  bmDungeon13Def.LoadFromResourceName(HINSTANCE, '13DEF');
+  bmDungeon13Hi := TBitmap.Create;
+  bmDungeon13Hi.LoadFromResourceName(HINSTANCE, '13HI');
+  bmDungeon14Def := TBitmap.Create;
+  bmDungeon14Def.LoadFromResourceName(HINSTANCE, '14DEF');
+  bmDungeon14Hi := TBitmap.Create;
+  bmDungeon14Hi.LoadFromResourceName(HINSTANCE, '14HI');
+  blankTile := TBitmap.Create;
+  blankTile.LoadFromResourceName(HINSTANCE, '15');
 end;
 
 procedure setupMap;
@@ -119,6 +191,7 @@ begin
     0: cave.generate;
     1: grid_dungeon.generate;
     2: cavern.generate;
+    3: bitmask_dungeon.generate;
   end;
   id_int := 0;
   for r := 1 to globalutils.MAXROWS do
@@ -288,6 +361,130 @@ begin
           drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall3Hi)
         else
           drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall3Def);
+      end;
+    end;
+  end
+  else if (mapType = 3) then
+  begin
+    case maparea[r][c].glyph of
+      'A': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon0Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon0Def);
+      end;
+      'B': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon1Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon1Def);
+      end;
+      'C': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon2Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon2Def);
+      end;
+      'D': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon3Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon3Def);
+      end;
+      'E': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon4Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon4Def);
+      end;
+      'F': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon5Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon5Def);
+      end;
+      'G': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon6Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon6Def);
+      end;
+      'H': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon7Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon7Def);
+      end;
+      'I': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon8Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon8Def);
+      end;
+      'J': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon9Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon9Def);
+      end;
+      'K': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon10Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon10Def);
+      end;
+      'L': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon11Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon11Def);
+      end;
+      'M': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon12Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon12Def);
+      end;
+      'N': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon13Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon13Def);
+      end;
+      'O': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon14Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeon14Def);
+      end;
+      'P': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), blankTile)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), blankTile);
+      end;
+      '.': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), blueDungeonFloorHi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), blueDungeonFloorDef);
       end;
     end;
   end;

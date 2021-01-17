@@ -149,15 +149,15 @@ begin
   (* Update health display to show damage *)
   ui.updateHealth;
   if (entityList[0].currentHP <= 0) then
-  (* Clear Look / Info box *)
-  ui.displayLook(1, 'none', '', 0, 0);
+    (* Clear Look / Info box *)
+    ui.displayLook(1, 'none', '', 0, 0);
   (* Redraw Player *)
   drawToBuffer(map.mapToScreen(entities.entityList[0].posX),
     map.mapToScreen(entities.entityList[0].posY),
     entities.playerGlyph);
   (* Process status effects *)
   player.processStatus;
-   (* Check for player death at end of game loop *)
+  (* Check for player death at end of game loop *)
   if (entityList[0].currentHP <= 0) then
   begin
     player.gameOver;
@@ -441,7 +441,7 @@ begin
   gameState := 1;
   killer := 'empty';
   playerTurn := 0;
-  map.mapType := 0;
+  map.mapType := 3;
   map.setupMap;
   map.setupTiles;
   entities.setupEntities;
@@ -513,6 +513,37 @@ begin
   map.caveWall3Hi.Free;
   map.downStairs.Free;
   map.upStairs.Free;
+  map.bmDungeon0Def.Free;
+  map.bmDungeon0Hi.Free;
+  map.bmDungeon1Def.Free;
+  map.bmDungeon1Hi.Free;
+  map.bmDungeon2Def.Free;
+  map.bmDungeon2Hi.Free;
+  map.bmDungeon3Def.Free;
+  map.bmDungeon3Hi.Free;
+  map.bmDungeon4Def.Free;
+  map.bmDungeon4Hi.Free;
+  map.bmDungeon5Def.Free;
+  map.bmDungeon5Hi.Free;
+  map.bmDungeon6Def.Free;
+  map.bmDungeon6Hi.Free;
+  map.bmDungeon7Def.Free;
+  map.bmDungeon7Hi.Free;
+  map.bmDungeon8Def.Free;
+  map.bmDungeon8Hi.Free;
+  map.bmDungeon9Def.Free;
+  map.bmDungeon9Hi.Free;
+  map.bmDungeon10Def.Free;
+  map.bmDungeon10Hi.Free;
+  map.bmDungeon11Def.Free;
+  map.bmDungeon11Hi.Free;
+  map.bmDungeon12Def.Free;
+  map.bmDungeon12Hi.Free;
+  map.bmDungeon13Def.Free;
+  map.bmDungeon13Hi.Free;
+  map.bmDungeon14Def.Free;
+  map.bmDungeon14Hi.Free;
+  map.blankTile.Free;
   (* Item sprites *)
   items.aleTankard.Free;
   items.wineFlask.Free;
