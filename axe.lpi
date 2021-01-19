@@ -41,38 +41,38 @@
         <Resource_23 FileName="images/dungeon/ascii/caveWall3Hi.bmp" Type="BITMAP" ResourceName="CAVEWALL3HI"/>
         <Resource_24 FileName="images/sprites/ale2.bmp" Type="BITMAP" ResourceName="ALE2"/>
         <Resource_25 FileName="images/dungeon/ascii/ustairs.bmp" Type="BITMAP" ResourceName="USTAIRS"/>
-        <Resource_26 FileName="images/dungeon/ascii/dstairs.bmp" Type="BITMAP" ResourceName="DSTAIRS"/>
-        <Resource_27 FileName="images\dungeon\ascii\0def.bmp" Type="BITMAP" ResourceName="0DEF"/>
-        <Resource_28 FileName="images\dungeon\ascii\0hi.bmp" Type="BITMAP" ResourceName="0HI"/>
-        <Resource_29 FileName="images\dungeon\ascii\1def.bmp" Type="BITMAP" ResourceName="1DEF"/>
-        <Resource_30 FileName="images\dungeon\ascii\1hi.bmp" Type="BITMAP" ResourceName="1HI"/>
-        <Resource_31 FileName="images\dungeon\ascii\2def.bmp" Type="BITMAP" ResourceName="2DEF"/>
-        <Resource_32 FileName="images\dungeon\ascii\2hi.bmp" Type="BITMAP" ResourceName="2HI"/>
-        <Resource_33 FileName="images\dungeon\ascii\3def.bmp" Type="BITMAP" ResourceName="3DEF"/>
-        <Resource_34 FileName="images\dungeon\ascii\3hi.bmp" Type="BITMAP" ResourceName="3HI"/>
-        <Resource_35 FileName="images\dungeon\ascii\4def.bmp" Type="BITMAP" ResourceName="4DEF"/>
-        <Resource_36 FileName="images\dungeon\ascii\4hi.bmp" Type="BITMAP" ResourceName="4HI"/>
-        <Resource_37 FileName="images\dungeon\ascii\5def.bmp" Type="BITMAP" ResourceName="5DEF"/>
-        <Resource_38 FileName="images\dungeon\ascii\5hi.bmp" Type="BITMAP" ResourceName="5HI"/>
-        <Resource_39 FileName="images\dungeon\ascii\6def.bmp" Type="BITMAP" ResourceName="6DEF"/>
-        <Resource_40 FileName="images\dungeon\ascii\6hi.bmp" Type="BITMAP" ResourceName="6HI"/>
-        <Resource_41 FileName="images\dungeon\ascii\7def.bmp" Type="BITMAP" ResourceName="7DEF"/>
-        <Resource_42 FileName="images\dungeon\ascii\7hi.bmp" Type="BITMAP" ResourceName="7HI"/>
-        <Resource_43 FileName="images\dungeon\ascii\8def.bmp" Type="BITMAP" ResourceName="8DEF"/>
-        <Resource_44 FileName="images\dungeon\ascii\8hi.bmp" Type="BITMAP" ResourceName="8HI"/>
-        <Resource_45 FileName="images\dungeon\ascii\9def.bmp" Type="BITMAP" ResourceName="9DEF"/>
-        <Resource_46 FileName="images\dungeon\ascii\9hi.bmp" Type="BITMAP" ResourceName="9HI"/>
-        <Resource_47 FileName="images\dungeon\ascii\10def.bmp" Type="BITMAP" ResourceName="10DEF"/>
-        <Resource_48 FileName="images\dungeon\ascii\10hi.bmp" Type="BITMAP" ResourceName="10HI"/>
-        <Resource_49 FileName="images\dungeon\ascii\11def.bmp" Type="BITMAP" ResourceName="11DEF"/>
-        <Resource_50 FileName="images\dungeon\ascii\11hi.bmp" Type="BITMAP" ResourceName="11HI"/>
-        <Resource_51 FileName="images\dungeon\ascii\12def.bmp" Type="BITMAP" ResourceName="12DEF"/>
-        <Resource_52 FileName="images\dungeon\ascii\12hi.bmp" Type="BITMAP" ResourceName="12HI"/>
-        <Resource_53 FileName="images\dungeon\ascii\13def.bmp" Type="BITMAP" ResourceName="13DEF"/>
-        <Resource_54 FileName="images\dungeon\ascii\13hi.bmp" Type="BITMAP" ResourceName="13HI"/>
-        <Resource_55 FileName="images\dungeon\ascii\14def.bmp" Type="BITMAP" ResourceName="14DEF"/>
-        <Resource_56 FileName="images\dungeon\ascii\14hi.bmp" Type="BITMAP" ResourceName="14HI"/>
-        <Resource_57 FileName="images\dungeon\ascii\15.bmp" Type="BITMAP" ResourceName="15"/>
+        <Resource_26 FileName="images\dungeon\ascii\dstairs.bmp" Type="BITMAP" ResourceName="DSTAIRS"/>
+        <Resource_27 FileName="images\dungeon\ascii\3def.bmp" Type="BITMAP" ResourceName="3DEF"/>
+        <Resource_28 FileName="images\dungeon\ascii\3hi.bmp" Type="BITMAP" ResourceName="3HI"/>
+        <Resource_29 FileName="images\dungeon\ascii\5def.bmp" Type="BITMAP" ResourceName="5DEF"/>
+        <Resource_30 FileName="images\dungeon\ascii\5hi.bmp" Type="BITMAP" ResourceName="5HI"/>
+        <Resource_31 FileName="images\dungeon\ascii\6def.bmp" Type="BITMAP" ResourceName="6DEF"/>
+        <Resource_32 FileName="images\dungeon\ascii\6hi.bmp" Type="BITMAP" ResourceName="6HI"/>
+        <Resource_33 FileName="images\dungeon\ascii\7def.bmp" Type="BITMAP" ResourceName="7DEF"/>
+        <Resource_34 FileName="images\dungeon\ascii\7hi.bmp" Type="BITMAP" ResourceName="7HI"/>
+        <Resource_35 FileName="images\dungeon\ascii\9def.bmp" Type="BITMAP" ResourceName="9DEF"/>
+        <Resource_36 FileName="images\dungeon\ascii\9hi.bmp" Type="BITMAP" ResourceName="9HI"/>
+        <Resource_37 FileName="images\dungeon\ascii\10def.bmp" Type="BITMAP" ResourceName="10DEF"/>
+        <Resource_38 FileName="images\dungeon\ascii\10hi.bmp" Type="BITMAP" ResourceName="10HI"/>
+        <Resource_39 FileName="images\dungeon\ascii\11def.bmp" Type="BITMAP" ResourceName="11DEF"/>
+        <Resource_40 FileName="images\dungeon\ascii\11hi.bmp" Type="BITMAP" ResourceName="11HI"/>
+        <Resource_41 FileName="images\dungeon\ascii\12def.bmp" Type="BITMAP" ResourceName="12DEF"/>
+        <Resource_42 FileName="images\dungeon\ascii\12hi.bmp" Type="BITMAP" ResourceName="12HI"/>
+        <Resource_43 FileName="images\dungeon\ascii\13def.bmp" Type="BITMAP" ResourceName="13DEF"/>
+        <Resource_44 FileName="images\dungeon\ascii\13hi.bmp" Type="BITMAP" ResourceName="13HI"/>
+        <Resource_45 FileName="images\dungeon\ascii\14def.bmp" Type="BITMAP" ResourceName="14DEF"/>
+        <Resource_46 FileName="images\dungeon\ascii\14hi.bmp" Type="BITMAP" ResourceName="14HI"/>
+        <Resource_47 FileName="images\dungeon\ascii\15.bmp" Type="BITMAP" ResourceName="15"/>
+        <Resource_48 FileName="images\dungeon\ascii\42def.bmp" Type="BITMAP" ResourceName="42DEF"/>
+        <Resource_49 FileName="images\dungeon\ascii\42hi.bmp" Type="BITMAP" ResourceName="42HI"/>
+        <Resource_50 FileName="images\dungeon\ascii\43def.bmp" Type="BITMAP" ResourceName="43DEF"/>
+        <Resource_51 FileName="images\dungeon\ascii\43hi.bmp" Type="BITMAP" ResourceName="43HI"/>
+        <Resource_52 FileName="images\dungeon\ascii\44def.bmp" Type="BITMAP" ResourceName="44DEF"/>
+        <Resource_53 FileName="images\dungeon\ascii\44hi.bmp" Type="BITMAP" ResourceName="44HI"/>
+        <Resource_54 FileName="images\dungeon\ascii\45def.bmp" Type="BITMAP" ResourceName="45DEF"/>
+        <Resource_55 FileName="images\dungeon\ascii\45hi.bmp" Type="BITMAP" ResourceName="45HI"/>
+        <Resource_56 FileName="images\dungeon\ascii\greyFloorDef.bmp" Type="BITMAP" ResourceName="GREYFLOORDEF"/>
+        <Resource_57 FileName="images\dungeon\ascii\greyFloorHi.bmp" Type="BITMAP" ResourceName="GREYFLOORHI"/>
       </Resources>
     </General>
     <VersionInfo>

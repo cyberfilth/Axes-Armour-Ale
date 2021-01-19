@@ -25,7 +25,7 @@ procedure prettify;
 var
   tileCounter: smallint;
 begin
-  (* Don't scan the outer border as there will be NULL tiles on their edges *)
+  (* First pass for adding walls *)
   for r := 1 to globalutils.MAXROWS do
   begin
     for c := 1 to globalutils.MAXCOLUMNS do
@@ -64,6 +64,47 @@ begin
       else
         processed_dungeon[r][c] := '.';
   end;
+
+  (* Second pass for corners *)
+  for r := 1 to globalutils.MAXROWS do
+  begin
+    for c := 1 to globalutils.MAXCOLUMNS do
+      if (processed_dungeon[r][c] = 'P') then
+      begin
+        // Bottom left corner
+        if (processed_dungeon[r - 1][c] = 'L') and
+          (processed_dungeon[r][c + 1] = 'O') then
+          processed_dungeon[r][c] := 'a';
+        if (processed_dungeon[r - 1][c] = 'L') and
+          (processed_dungeon[r][c + 1] = 'K') then
+          processed_dungeon[r][c] := 'a';
+        // Bottom right corner
+        if (processed_dungeon[r - 1][c] = 'N') and
+          (processed_dungeon[r][c - 1] = 'O') then
+          processed_dungeon[r][c] := 'b';
+        // Top left corner
+        if (processed_dungeon[r + 1][c] = 'L') and
+          (processed_dungeon[r][c + 1] = 'H') then
+          processed_dungeon[r][c] := 'c';
+        if (processed_dungeon[r + 1][c] = 'L') and
+          (processed_dungeon[r][c + 1] = 'D') then
+          processed_dungeon[r][c] := 'c';
+        if (processed_dungeon[r + 1][c] = 'D') and
+          (processed_dungeon[r][c + 1] = 'H') then
+          processed_dungeon[r][c] := 'c';
+        if (processed_dungeon[r + 1][c] = 'D') and
+          (processed_dungeon[r][c + 1] = 'D') then
+          processed_dungeon[r][c] := 'c';
+        // Top right corner
+        if (processed_dungeon[r + 1][c] = 'N') and
+          (processed_dungeon[r][c - 1] = 'H') then
+          processed_dungeon[r][c] := 'd';
+        if (processed_dungeon[r + 1][c] = 'F') and
+          (processed_dungeon[r][c - 1] = 'H') then
+          processed_dungeon[r][c] := 'd';
+      end;
+  end;
+
   // Update the original dungeon
   for r := 1 to globalutils.MAXROWS do
   begin

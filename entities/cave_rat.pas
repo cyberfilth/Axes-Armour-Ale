@@ -196,20 +196,28 @@ begin
   (* Get new coordinates to escape the player *)
   dx := entityList[0].posX - spx;
   dy := entityList[0].posY - spy;
-  distance := sqrt(dx ** 2 + dy ** 2);
-  dx := round(dx / distance);
-  dy := round(dy / distance);
-  if (dx > 0) then
-    dx := -1;
-  if (dx < 0) then
-    dx := 1;
-  dy := round(dy / distance);
-  if (dy > 0) then
-    dy := -1;
-  if (dy < 0) then
-    dy := 1;
-  newX := spx + dx;
-  newY := spy + dy;
+  if (dx = 0) and (dy = 0) then
+  begin
+    newX := spx;
+    newy := spy;
+  end
+  else
+  begin
+    distance := sqrt(dx ** 2 + dy ** 2);
+    dx := round(dx / distance);
+    dy := round(dy / distance);
+    if (dx > 0) then
+      dx := -1;
+    if (dx < 0) then
+      dx := 1;
+    dy := round(dy / distance);
+    if (dy > 0) then
+      dy := -1;
+    if (dy < 0) then
+      dy := 1;
+    newX := spx + dx;
+    newY := spy + dy;
+  end;
   if (map.canMove(newX, newY) = True) then
   begin
     if (map.hasPlayer(newX, newY) = True) then
