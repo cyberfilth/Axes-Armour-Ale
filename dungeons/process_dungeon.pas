@@ -62,7 +62,7 @@ begin
         end;
       end
       else
-        processed_dungeon[r][c] := '.';
+        processed_dungeon[r][c] := '|';
   end;
 
   (* Second pass for corners *)

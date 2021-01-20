@@ -211,7 +211,7 @@ begin
         Glyph := globalutils.dungeonArray[r][c];
       end;
       if (globalutils.dungeonArray[r][c] = '.') or
-        (globalutils.dungeonArray[r][c] = ':') then
+        (globalutils.dungeonArray[r][c] = ':') or (globalutils.dungeonArray[r][c] = '|')then
         maparea[r][c].Blocks := False;
     end;
   end;
@@ -480,6 +480,13 @@ begin
           drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeonTRHi)
         else
           drawToBuffer(mapToScreen(c), mapToScreen(r), bmDungeonTRDef);
+      end;
+      '|': // Bitmask dungeon
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), greyFloorHi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), greyFloorDef);
       end;
 
     end;
