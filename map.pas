@@ -178,8 +178,8 @@ begin
   bmDungeonTRHi.LoadFromResourceName(HINSTANCE, '45HI');
   greyFloorDef := TBitmap.Create;
   greyFloorDef.LoadFromResourceName(HINSTANCE, 'GREYFLOORDEF');
-  greyFloorDef := TBitmap.Create;
-  greyFloorDef.LoadFromResourceName(HINSTANCE, 'GREYFLOORHI');
+  greyFloorHi := TBitmap.Create;
+  greyFloorHi.LoadFromResourceName(HINSTANCE, 'GREYFLOORHI');
   blankTile := TBitmap.Create;
   blankTile.LoadFromResourceName(HINSTANCE, '15');
 end;

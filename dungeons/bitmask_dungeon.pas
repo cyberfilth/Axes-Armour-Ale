@@ -226,36 +226,36 @@ begin
 
   /////////////////////////////
   // Write map to text file for testing
-  filename := 'output_bitmask_dungeon.txt';
-  AssignFile(myfile, filename);
-  rewrite(myfile);
-  for r := 1 to MAXROWS do
-  begin
-    for c := 1 to MAXCOLUMNS do
-    begin
-      Write(myfile, dungeonArray[r][c]);
-    end;
-    Write(myfile, sLineBreak);
-  end;
-  closeFile(myfile);
+  //filename := 'output_bitmask_dungeon.txt';
+  //AssignFile(myfile, filename);
+  //rewrite(myfile);
+  //for r := 1 to MAXROWS do
+  //begin
+  //  for c := 1 to MAXCOLUMNS do
+  //  begin
+  //    Write(myfile, dungeonArray[r][c]);
+  //  end;
+  //  Write(myfile, sLineBreak);
+  //end;
+  //closeFile(myfile);
   //////////////////////////////
 
   process_dungeon.prettify;
 
     /////////////////////////////
   // Write map to text file for testing
-  filename := 'output_processed_dungeon.txt';
-  AssignFile(myfile, filename);
-  rewrite(myfile);
-  for r := 1 to MAXROWS do
-  begin
-    for c := 1 to MAXCOLUMNS do
-    begin
-      Write(myfile, globalutils.dungeonArray[r][c]);
-    end;
-    Write(myfile, sLineBreak);
-  end;
-  closeFile(myfile);
+  //filename := 'output_processed_dungeon.txt';
+  //AssignFile(myfile, filename);
+  //rewrite(myfile);
+  //for r := 1 to MAXROWS do
+  //begin
+  //  for c := 1 to MAXCOLUMNS do
+  //  begin
+  //    Write(myfile, globalutils.dungeonArray[r][c]);
+  //  end;
+  //  Write(myfile, sLineBreak);
+  //end;
+  //closeFile(myfile);
   //////////////////////////////
 
   (* Copy total rooms to main dungeon *)

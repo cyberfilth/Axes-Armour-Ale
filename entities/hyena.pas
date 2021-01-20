@@ -122,7 +122,7 @@ begin
     posX := npcx;
     posY := npcy;
   end;
-   (* Occupy tile *)
+  (* Occupy tile *)
   map.occupy(npcx, npcy);
 end;
 

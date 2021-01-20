@@ -29,7 +29,7 @@ const
   MAXCOLUMNS = 67;
   (* Rows of the game map *)
   MAXROWS = 38;
-  (* Colours *)   { TODO : Move these to the UI unit }
+  (* Colours *){ TODO : Move these to the UI unit }
   BACKGROUNDCOLOUR = TColor($131A00);
   UICOLOUR = TColor($808000);
   UITEXTCOLOUR = TColor($F5F58C);
