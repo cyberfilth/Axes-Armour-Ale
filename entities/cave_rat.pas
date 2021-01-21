@@ -42,8 +42,8 @@ begin
     glyph := 'r';
     maxHP := randomRange(4, 6);
     currentHP := maxHP;
-    attack := randomRange(3, 5);
-    defense := randomRange(3, 6);
+    attack := randomRange(entityList[0].attack - 2, entityList[0].attack + 3);
+    defense := randomRange(entityList[0].defense - 2, entityList[0].defense + 2);
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;
@@ -106,6 +106,9 @@ var
   direction, attempts, testx, testy: smallint;
 begin
   attempts := 0;
+  testx := 0;
+  testy := 0;
+  direction := 0;
   repeat
     // Reset values after each failed loop so they don't keep dec/incrementing
     testx := spx;
@@ -135,6 +138,8 @@ var
   newX, newY, dx, dy: smallint;
   distance: double;
 begin
+  newX := 0;
+  newY := 0;
   (* Get new coordinates to chase the player *)
   dx := entityList[0].posX - spx;
   dy := entityList[0].posY - spy;
@@ -193,6 +198,8 @@ var
   newX, newY, dx, dy: smallint;
   distance: single;
 begin
+  newX := 0;
+  newY := 0;
   (* Get new coordinates to escape the player *)
   dx := entityList[0].posX - spx;
   dy := entityList[0].posY - spy;

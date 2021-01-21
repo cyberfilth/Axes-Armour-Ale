@@ -95,10 +95,10 @@ begin
     race := 'blood hyena';
     description := 'a drooling, blood hyena';
     glyph := 'h';
-    maxHP := randomRange(5, 7);
+    maxHP := randomRange(entityList[0].maxHP - 15, entityList[0].maxHP - 13);
     currentHP := maxHP;
-    attack := randomRange(4, 7);
-    defense := randomRange(3, 6);
+    attack := randomRange(entityList[0].attack - 1, entityList[0].attack + 2);
+    defense := randomRange(entityList[0].defense, entityList[0].attack - 3);
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;
