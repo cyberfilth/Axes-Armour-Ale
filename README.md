@@ -12,10 +12,11 @@ Alpha version, most features aren't implemented yet and what there is may change
  - Small, self-contained binary with no external dependencies.
  - Can be run without needing to be installed
 
-![Dungeon screenshot](GITscreenshots/linux_screenshot1.png)
-
-
 ![Cave screenshot](GITscreenshots/windows_screenshot1.png)
+
+![Dungeon screenshot](GITscreenshots/windows_screenshot2.png)
+
+![Dungeon screenshot](GITscreenshots/linux_screenshot1.png)
 
 
 ### Controls
