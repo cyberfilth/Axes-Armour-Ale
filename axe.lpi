@@ -14,7 +14,7 @@
         <DpiAware Value="True"/>
       </XPManifest>
       <Icon Value="0"/>
-      <Resources Count="58">
+      <Resources Count="150">
         <Resource_0 FileName="images/sprites/player_glyph.bmp" Type="BITMAP" ResourceName="PLAYER_GLYPH"/>
         <Resource_1 FileName="images/dungeon/ascii/blueDungeonFloorDef.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORDEF"/>
         <Resource_2 FileName="images/dungeon/ascii/blueDungeonFloorHi.bmp" Type="BITMAP" ResourceName="BLUEDUNGEONFLOORHI"/>
@@ -73,6 +73,98 @@
         <Resource_55 FileName="images\dungeon\ascii\45hi.bmp" Type="BITMAP" ResourceName="45HI"/>
         <Resource_56 FileName="images\dungeon\ascii\greyFloorDef.bmp" Type="BITMAP" ResourceName="GREYFLOORDEF"/>
         <Resource_57 FileName="images\dungeon\ascii\greyFloorHi.bmp" Type="BITMAP" ResourceName="GREYFLOORHI"/>
+        <Resource_58 FileName="images\dungeon\ascii\cave-1-def.bmp" Type="BITMAP" ResourceName="CAVE-1-DEF"/>
+        <Resource_59 FileName="images\dungeon\ascii\cave-1-hi.bmp" Type="BITMAP" ResourceName="CAVE-1-HI"/>
+        <Resource_60 FileName="images\dungeon\ascii\cave-4-def.bmp" Type="BITMAP" ResourceName="CAVE-4-DEF"/>
+        <Resource_61 FileName="images\dungeon\ascii\cave-4-hi.bmp" Type="BITMAP" ResourceName="CAVE-4-HI"/>
+        <Resource_62 FileName="images\dungeon\ascii\cave-5-def.bmp" Type="BITMAP" ResourceName="CAVE-5-DEF"/>
+        <Resource_63 FileName="images\dungeon\ascii\cave-5-hi.bmp" Type="BITMAP" ResourceName="CAVE-5-HI"/>
+        <Resource_64 FileName="images\dungeon\ascii\cave-7-def.bmp" Type="BITMAP" ResourceName="CAVE-7-DEF"/>
+        <Resource_65 FileName="images\dungeon\ascii\cave-7-hi.bmp" Type="BITMAP" ResourceName="CAVE-7-HI"/>
+        <Resource_66 FileName="images\dungeon\ascii\cave-16-def.bmp" Type="BITMAP" ResourceName="CAVE-16-DEF"/>
+        <Resource_67 FileName="images\dungeon\ascii\cave-16-hi.bmp" Type="BITMAP" ResourceName="CAVE-16-HI"/>
+        <Resource_68 FileName="images\dungeon\ascii\cave-17-def.bmp" Type="BITMAP" ResourceName="CAVE-17-DEF"/>
+        <Resource_69 FileName="images\dungeon\ascii\cave-17-hi.bmp" Type="BITMAP" ResourceName="CAVE-17-HI"/>
+        <Resource_70 FileName="images\dungeon\ascii\cave-20-def.bmp" Type="BITMAP" ResourceName="CAVE-20-DEF"/>
+        <Resource_71 FileName="images\dungeon\ascii\cave-20-hi.bmp" Type="BITMAP" ResourceName="CAVE-20-HI"/>
+        <Resource_72 FileName="images\dungeon\ascii\cave-21-def.bmp" Type="BITMAP" ResourceName="CAVE-21-DEF"/>
+        <Resource_73 FileName="images\dungeon\ascii\cave-21-hi.bmp" Type="BITMAP" ResourceName="CAVE-21-HI"/>
+        <Resource_74 FileName="images\dungeon\ascii\cave-23-def.bmp" Type="BITMAP" ResourceName="CAVE-23-DEF"/>
+        <Resource_75 FileName="images\dungeon\ascii\cave-23-hi.bmp" Type="BITMAP" ResourceName="CAVE-23-HI"/>
+        <Resource_76 FileName="images\dungeon\ascii\cave-28-def.bmp" Type="BITMAP" ResourceName="CAVE-28-DEF"/>
+        <Resource_77 FileName="images\dungeon\ascii\cave-28-hi.bmp" Type="BITMAP" ResourceName="CAVE-28-HI"/>
+        <Resource_78 FileName="images\dungeon\ascii\cave-29-def.bmp" Type="BITMAP" ResourceName="CAVE-29-DEF"/>
+        <Resource_79 FileName="images\dungeon\ascii\cave-29-hi.bmp" Type="BITMAP" ResourceName="CAVE-29-HI"/>
+        <Resource_80 FileName="images\dungeon\ascii\cave-31-def.bmp" Type="BITMAP" ResourceName="CAVE-31-DEF"/>
+        <Resource_81 FileName="images\dungeon\ascii\cave-31-hi.bmp" Type="BITMAP" ResourceName="CAVE-31-HI"/>
+        <Resource_82 FileName="images\dungeon\ascii\cave-64-def.bmp" Type="BITMAP" ResourceName="CAVE-64-DEF"/>
+        <Resource_83 FileName="images\dungeon\ascii\cave-64-hi.bmp" Type="BITMAP" ResourceName="CAVE-64-HI"/>
+        <Resource_84 FileName="images\dungeon\ascii\cave-65-def.bmp" Type="BITMAP" ResourceName="CAVE-65-DEF"/>
+        <Resource_85 FileName="images\dungeon\ascii\cave-65-hi.bmp" Type="BITMAP" ResourceName="CAVE-65-HI"/>
+        <Resource_86 FileName="images\dungeon\ascii\cave-68-def.bmp" Type="BITMAP" ResourceName="CAVE-68-DEF"/>
+        <Resource_87 FileName="images\dungeon\ascii\cave-68-hi.bmp" Type="BITMAP" ResourceName="CAVE-68-HI"/>
+        <Resource_88 FileName="images\dungeon\ascii\cave-69-def.bmp" Type="BITMAP" ResourceName="CAVE-69-DEF"/>
+        <Resource_89 FileName="images\dungeon\ascii\cave-69-hi.bmp" Type="BITMAP" ResourceName="CAVE-69-HI"/>
+        <Resource_90 FileName="images\dungeon\ascii\cave-71-def.bmp" Type="BITMAP" ResourceName="CAVE-71-DEF"/>
+        <Resource_91 FileName="images\dungeon\ascii\cave-71-hi.bmp" Type="BITMAP" ResourceName="CAVE-71-HI"/>
+        <Resource_92 FileName="images\dungeon\ascii\cave-80-def.bmp" Type="BITMAP" ResourceName="CAVE-80-DEF"/>
+        <Resource_93 FileName="images\dungeon\ascii\cave-80-hi.bmp" Type="BITMAP" ResourceName="CAVE-80-HI"/>
+        <Resource_94 FileName="images\dungeon\ascii\cave-81-def.bmp" Type="BITMAP" ResourceName="CAVE-81-DEF"/>
+        <Resource_95 FileName="images\dungeon\ascii\cave-81-hi.bmp" Type="BITMAP" ResourceName="CAVE-81-HI"/>
+        <Resource_96 FileName="images\dungeon\ascii\cave-84-def.bmp" Type="BITMAP" ResourceName="CAVE-84-DEF"/>
+        <Resource_97 FileName="images\dungeon\ascii\cave-84-hi.bmp" Type="BITMAP" ResourceName="CAVE-84-HI"/>
+        <Resource_98 FileName="images\dungeon\ascii\cave-85-def.bmp" Type="BITMAP" ResourceName="CAVE-85-DEF"/>
+        <Resource_99 FileName="images\dungeon\ascii\cave-85-hi.bmp" Type="BITMAP" ResourceName="CAVE-85-HI"/>
+        <Resource_100 FileName="images\dungeon\ascii\cave-87-def.bmp" Type="BITMAP" ResourceName="CAVE-87-DEF"/>
+        <Resource_101 FileName="images\dungeon\ascii\cave-87-hi.bmp" Type="BITMAP" ResourceName="CAVE-87-HI"/>
+        <Resource_102 FileName="images\dungeon\ascii\cave-92-def.bmp" Type="BITMAP" ResourceName="CAVE-92-DEF"/>
+        <Resource_103 FileName="images\dungeon\ascii\cave-92-hi.bmp" Type="BITMAP" ResourceName="CAVE-92-HI"/>
+        <Resource_104 FileName="images\dungeon\ascii\cave-93-def.bmp" Type="BITMAP" ResourceName="CAVE-93-DEF"/>
+        <Resource_105 FileName="images\dungeon\ascii\cave-93-hi.bmp" Type="BITMAP" ResourceName="CAVE-93-HI"/>
+        <Resource_106 FileName="images\dungeon\ascii\cave-95-def.bmp" Type="BITMAP" ResourceName="CAVE-95-DEF"/>
+        <Resource_107 FileName="images\dungeon\ascii\cave-95-hi.bmp" Type="BITMAP" ResourceName="CAVE-95-HI"/>
+        <Resource_108 FileName="images\dungeon\ascii\cave-112-def.bmp" Type="BITMAP" ResourceName="CAVE-112-DEF"/>
+        <Resource_109 FileName="images\dungeon\ascii\cave-112-hi.bmp" Type="BITMAP" ResourceName="CAVE-112-HI"/>
+        <Resource_110 FileName="images\dungeon\ascii\cave-113-def.bmp" Type="BITMAP" ResourceName="CAVE-113-DEF"/>
+        <Resource_111 FileName="images\dungeon\ascii\cave-113-hi.bmp" Type="BITMAP" ResourceName="CAVE-113-HI"/>
+        <Resource_112 FileName="images\dungeon\ascii\cave-116-def.bmp" Type="BITMAP" ResourceName="CAVE-116-DEF"/>
+        <Resource_113 FileName="images\dungeon\ascii\cave-116-hi.bmp" Type="BITMAP" ResourceName="CAVE-116-HI"/>
+        <Resource_114 FileName="images\dungeon\ascii\cave-117-def.bmp" Type="BITMAP" ResourceName="CAVE-117-DEF"/>
+        <Resource_115 FileName="images\dungeon\ascii\cave-117-hi.bmp" Type="BITMAP" ResourceName="CAVE-117-HI"/>
+        <Resource_116 FileName="images\dungeon\ascii\cave-119-def.bmp" Type="BITMAP" ResourceName="CAVE-119-DEF"/>
+        <Resource_117 FileName="images\dungeon\ascii\cave-119-hi.bmp" Type="BITMAP" ResourceName="CAVE-119-HI"/>
+        <Resource_118 FileName="images\dungeon\ascii\cave-124-def.bmp" Type="BITMAP" ResourceName="CAVE-124-DEF"/>
+        <Resource_119 FileName="images\dungeon\ascii\cave-124-hi.bmp" Type="BITMAP" ResourceName="CAVE-124-HI"/>
+        <Resource_120 FileName="images\dungeon\ascii\cave-125-def.bmp" Type="BITMAP" ResourceName="CAVE-125-DEF"/>
+        <Resource_121 FileName="images\dungeon\ascii\cave-125-hi.bmp" Type="BITMAP" ResourceName="CAVE-125-HI"/>
+        <Resource_122 FileName="images\dungeon\ascii\cave-127-def.bmp" Type="BITMAP" ResourceName="CAVE-127-DEF"/>
+        <Resource_123 FileName="images\dungeon\ascii\cave-127-hi.bmp" Type="BITMAP" ResourceName="CAVE-127-HI"/>
+        <Resource_124 FileName="images\dungeon\ascii\cave-193-def.bmp" Type="BITMAP" ResourceName="CAVE-193-DEF"/>
+        <Resource_125 FileName="images\dungeon\ascii\cave-193-hi.bmp" Type="BITMAP" ResourceName="CAVE-193-HI"/>
+        <Resource_126 FileName="images\dungeon\ascii\cave-197-def.bmp" Type="BITMAP" ResourceName="CAVE-197-DEF"/>
+        <Resource_127 FileName="images\dungeon\ascii\cave-197-hi.bmp" Type="BITMAP" ResourceName="CAVE-197-HI"/>
+        <Resource_128 FileName="images\dungeon\ascii\cave-199-def.bmp" Type="BITMAP" ResourceName="CAVE-199-DEF"/>
+        <Resource_129 FileName="images\dungeon\ascii\cave-199-hi.bmp" Type="BITMAP" ResourceName="CAVE-199-HI"/>
+        <Resource_130 FileName="images\dungeon\ascii\cave-209-def.bmp" Type="BITMAP" ResourceName="CAVE-209-DEF"/>
+        <Resource_131 FileName="images\dungeon\ascii\cave-209-hi.bmp" Type="BITMAP" ResourceName="CAVE-209-HI"/>
+        <Resource_132 FileName="images\dungeon\ascii\cave-213-def.bmp" Type="BITMAP" ResourceName="CAVE-213-DEF"/>
+        <Resource_133 FileName="images\dungeon\ascii\cave-213-hi.bmp" Type="BITMAP" ResourceName="CAVE-213-HI"/>
+        <Resource_134 FileName="images\dungeon\ascii\cave-215-def.bmp" Type="BITMAP" ResourceName="CAVE-215-DEF"/>
+        <Resource_135 FileName="images\dungeon\ascii\cave-215-hi.bmp" Type="BITMAP" ResourceName="CAVE-215-HI"/>
+        <Resource_136 FileName="images\dungeon\ascii\cave-221-def.bmp" Type="BITMAP" ResourceName="CAVE-221-DEF"/>
+        <Resource_137 FileName="images\dungeon\ascii\cave-221-hi.bmp" Type="BITMAP" ResourceName="CAVE-221-HI"/>
+        <Resource_138 FileName="images\dungeon\ascii\cave-223-def.bmp" Type="BITMAP" ResourceName="CAVE-223-DEF"/>
+        <Resource_139 FileName="images\dungeon\ascii\cave-223-hi.bmp" Type="BITMAP" ResourceName="CAVE-223-HI"/>
+        <Resource_140 FileName="images\dungeon\ascii\cave-241-def.bmp" Type="BITMAP" ResourceName="CAVE-241-DEF"/>
+        <Resource_141 FileName="images\dungeon\ascii\cave-241-hi.bmp" Type="BITMAP" ResourceName="CAVE-241-HI"/>
+        <Resource_142 FileName="images\dungeon\ascii\cave-245-def.bmp" Type="BITMAP" ResourceName="CAVE-245-DEF"/>
+        <Resource_143 FileName="images\dungeon\ascii\cave-245-hi.bmp" Type="BITMAP" ResourceName="CAVE-245-HI"/>
+        <Resource_144 FileName="images\dungeon\ascii\cave-247-def.bmp" Type="BITMAP" ResourceName="CAVE-247-DEF"/>
+        <Resource_145 FileName="images\dungeon\ascii\cave-247-hi.bmp" Type="BITMAP" ResourceName="CAVE-247-HI"/>
+        <Resource_146 FileName="images\dungeon\ascii\cave-253-def.bmp" Type="BITMAP" ResourceName="CAVE-253-DEF"/>
+        <Resource_147 FileName="images\dungeon\ascii\cave-253-hi.bmp" Type="BITMAP" ResourceName="CAVE-253-HI"/>
+        <Resource_148 FileName="images\dungeon\ascii\cave-255-def.bmp" Type="BITMAP" ResourceName="CAVE-255-DEF"/>
+        <Resource_149 FileName="images\dungeon\ascii\cave-255-hi.bmp" Type="BITMAP" ResourceName="CAVE-255-HI"/>
       </Resources>
     </General>
     <VersionInfo>
@@ -180,7 +272,7 @@
         <PackageName Value="LCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="28">
+    <Units Count="29">
       <Unit0>
         <Filename Value="axe.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -296,6 +388,10 @@
         <Filename Value="dungeons\process_dungeon.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit27>
+      <Unit28>
+        <Filename Value="dungeons\process_cave.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit28>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

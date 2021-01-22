@@ -11,7 +11,7 @@ uses
   globalutils, Graphics, LResources;
 
 const
-  (* Width of tiles is used as a multiplier in placing tiles *)
+  (* Width/Height of tiles is used as a multiplier in placing tiles *)
   tileSize = 10;
 
 type
@@ -40,6 +40,7 @@ var
   (* Player starting position *)
   startX, startY: smallint;
   (* Graphical tiles *)
+  { TODO : Move the code responsible for loading tiles into each specific unit. Cave tiles are loaded from the cave generator etc... }
   caveWallHi, caveWallDef, caveFloorHi, caveFloorDef, blueDungeonWallHi,
   blueDungeonWallDef, blueDungeonFloorHi, blueDungeonFloorDef,
   caveWall2Def, caveWall2Hi, caveWall3Def, caveWall3Hi, upStairs,
@@ -50,7 +51,22 @@ var
   bmDungeon13Def, bmDungeon14Hi, bmDungeon14Def, bmDungeonBLHi,
   bmDungeonBLDef, bmDungeonBRHi, bmDungeonBRDef, bmDungeonTLHi,
   bmDungeonTLDef, bmDungeonTRHi, bmDungeonTRDef, greyFloorHi, greyFloorDef,
-  blankTile: TBitmap;
+  blankTile, cave1Def, cave1Hi, cave4Def, cave4Hi, cave5Def, cave5Hi,
+  cave7Def, cave7Hi, cave16Def, cave16Hi, cave17Def, cave17Hi, cave20Def,
+  cave20Hi, cave21Def, cave21Hi, cave23Def, cave23Hi, cave28Def,
+  cave28Hi, cave29Def, cave29Hi, cave31Def, cave31Hi, cave64Def,
+  cave64Hi, cave65Def, cave65Hi, cave68Def, cave68Hi, cave69Def,
+  cave69Hi, cave71Def, cave71Hi, cave80Def, cave80Hi, cave81Def,
+  cave81Hi, cave84Def, cave84Hi, cave85Def, cave85Hi, cave87Def,
+  cave87Hi, cave92Def, cave92Hi, cave93Def, cave93Hi, cave95Def,
+  cave95Hi, cave112Def, cave112Hi, cave113Def, cave113Hi, cave116Def,
+  cave116Hi, cave117Def, cave117Hi, cave119Def, cave119Hi, cave124Def,
+  cave124Hi, cave125Def, cave125Hi, cave127Def, cave127Hi, cave193Def,
+  cave193Hi, cave197Def, cave197Hi, cave199Def, cave199Hi, cave209Def,
+  cave209Hi, cave213Def, cave213Hi, cave215Def, cave215Hi, cave221Def,
+  cave221Hi, cave223Def, cave223Hi, cave241Def, cave241Hi, cave245Def,
+  cave245Hi, cave247Def, cave247Hi, cave253Def, cave253Hi, cave255Def,
+  cave255Hi: TBitmap;
 
 
 (* Load tile textures *)
@@ -88,10 +104,190 @@ uses
 procedure setupTiles;
 begin
   // Cave tiles
-  caveWallHi := TBitmap.Create;
-  caveWallHi.LoadFromResourceName(HINSTANCE, 'CAVEWALLHI');
-  caveWallDef := TBitmap.Create;
-  caveWallDef.LoadFromResourceName(HINSTANCE, 'CAVEWALLDEF');
+  cave1Hi := TBitmap.Create;
+  cave1Hi.LoadFromResourceName(HINSTANCE, 'CAVE-1-Hi');
+  cave1Def := TBitmap.Create;
+  cave1Def.LoadFromResourceName(HINSTANCE, 'CAVE-1-DEF');
+  cave4Hi := TBitmap.Create;
+  cave4Hi.LoadFromResourceName(HINSTANCE, 'CAVE-4-Hi');
+  cave4Def := TBitmap.Create;
+  cave4Def.LoadFromResourceName(HINSTANCE, 'CAVE-4-DEF');
+  cave5Hi := TBitmap.Create;
+  cave5Hi.LoadFromResourceName(HINSTANCE, 'CAVE-5-Hi');
+  cave5Def := TBitmap.Create;
+  cave5Def.LoadFromResourceName(HINSTANCE, 'CAVE-5-DEF');
+  cave7Hi := TBitmap.Create;
+  cave7Hi.LoadFromResourceName(HINSTANCE, 'CAVE-7-Hi');
+  cave7Def := TBitmap.Create;
+  cave7Def.LoadFromResourceName(HINSTANCE, 'CAVE-7-DEF');
+  cave16Hi := TBitmap.Create;
+  cave16Hi.LoadFromResourceName(HINSTANCE, 'CAVE-16-Hi');
+  cave16Def := TBitmap.Create;
+  cave16Def.LoadFromResourceName(HINSTANCE, 'CAVE-16-DEF');
+  cave17Hi := TBitmap.Create;
+  cave17Hi.LoadFromResourceName(HINSTANCE, 'CAVE-17-Hi');
+  cave17Def := TBitmap.Create;
+  cave17Def.LoadFromResourceName(HINSTANCE, 'CAVE-17-DEF');
+  cave20Hi := TBitmap.Create;
+  cave20Hi.LoadFromResourceName(HINSTANCE, 'CAVE-20-Hi');
+  cave20Def := TBitmap.Create;
+  cave20Def.LoadFromResourceName(HINSTANCE, 'CAVE-20-DEF');
+  cave21Hi := TBitmap.Create;
+  cave21Hi.LoadFromResourceName(HINSTANCE, 'CAVE-21-Hi');
+  cave21Def := TBitmap.Create;
+  cave21Def.LoadFromResourceName(HINSTANCE, 'CAVE-21-DEF');
+  cave23Hi := TBitmap.Create;
+  cave23Hi.LoadFromResourceName(HINSTANCE, 'CAVE-23-Hi');
+  cave23Def := TBitmap.Create;
+  cave23Def.LoadFromResourceName(HINSTANCE, 'CAVE-23-DEF');
+  cave28Hi := TBitmap.Create;
+  cave28Hi.LoadFromResourceName(HINSTANCE, 'CAVE-28-Hi');
+  cave28Def := TBitmap.Create;
+  cave28Def.LoadFromResourceName(HINSTANCE, 'CAVE-28-DEF');
+  cave29Hi := TBitmap.Create;
+  cave29Hi.LoadFromResourceName(HINSTANCE, 'CAVE-29-Hi');
+  cave29Def := TBitmap.Create;
+  cave29Def.LoadFromResourceName(HINSTANCE, 'CAVE-29-DEF');
+  cave31Hi := TBitmap.Create;
+  cave31Hi.LoadFromResourceName(HINSTANCE, 'CAVE-31-Hi');
+  cave31Def := TBitmap.Create;
+  cave31Def.LoadFromResourceName(HINSTANCE, 'CAVE-31-DEF');
+  cave64Hi := TBitmap.Create;
+  cave64Hi.LoadFromResourceName(HINSTANCE, 'CAVE-64-Hi');
+  cave64Def := TBitmap.Create;
+  cave64Def.LoadFromResourceName(HINSTANCE, 'CAVE-64-DEF');
+  cave65Hi := TBitmap.Create;
+  cave65Hi.LoadFromResourceName(HINSTANCE, 'CAVE-65-Hi');
+  cave65Def := TBitmap.Create;
+  cave65Def.LoadFromResourceName(HINSTANCE, 'CAVE-65-DEF');
+  cave68Hi := TBitmap.Create;
+  cave68Hi.LoadFromResourceName(HINSTANCE, 'CAVE-68-Hi');
+  cave68Def := TBitmap.Create;
+  cave68Def.LoadFromResourceName(HINSTANCE, 'CAVE-68-DEF');
+  cave69Hi := TBitmap.Create;
+  cave69Hi.LoadFromResourceName(HINSTANCE, 'CAVE-69-Hi');
+  cave69Def := TBitmap.Create;
+  cave69Def.LoadFromResourceName(HINSTANCE, 'CAVE-69-DEF');
+  cave71Hi := TBitmap.Create;
+  cave71Hi.LoadFromResourceName(HINSTANCE, 'CAVE-71-Hi');
+  cave71Def := TBitmap.Create;
+  cave71Def.LoadFromResourceName(HINSTANCE, 'CAVE-71-DEF');
+  cave80Hi := TBitmap.Create;
+  cave80Hi.LoadFromResourceName(HINSTANCE, 'CAVE-80-Hi');
+  cave80Def := TBitmap.Create;
+  cave80Def.LoadFromResourceName(HINSTANCE, 'CAVE-80-DEF');
+  cave81Hi := TBitmap.Create;
+  cave81Hi.LoadFromResourceName(HINSTANCE, 'CAVE-81-Hi');
+  cave81Def := TBitmap.Create;
+  cave81Def.LoadFromResourceName(HINSTANCE, 'CAVE-81-DEF');
+  cave84Hi := TBitmap.Create;
+  cave84Hi.LoadFromResourceName(HINSTANCE, 'CAVE-84-Hi');
+  cave84Def := TBitmap.Create;
+  cave84Def.LoadFromResourceName(HINSTANCE, 'CAVE-84-DEF');
+  cave85Hi := TBitmap.Create;
+  cave85Hi.LoadFromResourceName(HINSTANCE, 'CAVE-85-Hi');
+  cave85Def := TBitmap.Create;
+  cave85Def.LoadFromResourceName(HINSTANCE, 'CAVE-85-DEF');
+  cave87Hi := TBitmap.Create;
+  cave87Hi.LoadFromResourceName(HINSTANCE, 'CAVE-87-Hi');
+  cave87Def := TBitmap.Create;
+  cave87Def.LoadFromResourceName(HINSTANCE, 'CAVE-87-DEF');
+  cave92Hi := TBitmap.Create;
+  cave92Hi.LoadFromResourceName(HINSTANCE, 'CAVE-92-Hi');
+  cave92Def := TBitmap.Create;
+  cave92Def.LoadFromResourceName(HINSTANCE, 'CAVE-92-DEF');
+  cave93Hi := TBitmap.Create;
+  cave93Hi.LoadFromResourceName(HINSTANCE, 'CAVE-93-Hi');
+  cave93Def := TBitmap.Create;
+  cave93Def.LoadFromResourceName(HINSTANCE, 'CAVE-93-DEF');
+  cave95Hi := TBitmap.Create;
+  cave95Hi.LoadFromResourceName(HINSTANCE, 'CAVE-95-Hi');
+  cave95Def := TBitmap.Create;
+  cave95Def.LoadFromResourceName(HINSTANCE, 'CAVE-95-DEF');
+  cave112Hi := TBitmap.Create;
+  cave112Hi.LoadFromResourceName(HINSTANCE, 'CAVE-112-Hi');
+  cave112Def := TBitmap.Create;
+  cave112Def.LoadFromResourceName(HINSTANCE, 'CAVE-112-DEF');
+  cave113Hi := TBitmap.Create;
+  cave113Hi.LoadFromResourceName(HINSTANCE, 'CAVE-113-Hi');
+  cave113Def := TBitmap.Create;
+  cave113Def.LoadFromResourceName(HINSTANCE, 'CAVE-113-DEF');
+  cave116Hi := TBitmap.Create;
+  cave116Hi.LoadFromResourceName(HINSTANCE, 'CAVE-116-Hi');
+  cave116Def := TBitmap.Create;
+  cave116Def.LoadFromResourceName(HINSTANCE, 'CAVE-116-DEF');
+  cave117Hi := TBitmap.Create;
+  cave117Hi.LoadFromResourceName(HINSTANCE, 'CAVE-117-Hi');
+  cave117Def := TBitmap.Create;
+  cave117Def.LoadFromResourceName(HINSTANCE, 'CAVE-117-DEF');
+  cave119Hi := TBitmap.Create;
+  cave119Hi.LoadFromResourceName(HINSTANCE, 'CAVE-119-Hi');
+  cave119Def := TBitmap.Create;
+  cave119Def.LoadFromResourceName(HINSTANCE, 'CAVE-119-DEF');
+  cave124Hi := TBitmap.Create;
+  cave124Hi.LoadFromResourceName(HINSTANCE, 'CAVE-124-Hi');
+  cave124Def := TBitmap.Create;
+  cave124Def.LoadFromResourceName(HINSTANCE, 'CAVE-124-DEF');
+  cave125Hi := TBitmap.Create;
+  cave125Hi.LoadFromResourceName(HINSTANCE, 'CAVE-125-Hi');
+  cave125Def := TBitmap.Create;
+  cave125Def.LoadFromResourceName(HINSTANCE, 'CAVE-125-DEF');
+  cave127Hi := TBitmap.Create;
+  cave127Hi.LoadFromResourceName(HINSTANCE, 'CAVE-127-Hi');
+  cave127Def := TBitmap.Create;
+  cave127Def.LoadFromResourceName(HINSTANCE, 'CAVE-127-DEF');
+  cave193Hi := TBitmap.Create;
+  cave193Hi.LoadFromResourceName(HINSTANCE, 'CAVE-193-Hi');
+  cave193Def := TBitmap.Create;
+  cave193Def.LoadFromResourceName(HINSTANCE, 'CAVE-193-DEF');
+  cave197Hi := TBitmap.Create;
+  cave197Hi.LoadFromResourceName(HINSTANCE, 'CAVE-197-Hi');
+  cave197Def := TBitmap.Create;
+  cave197Def.LoadFromResourceName(HINSTANCE, 'CAVE-197-DEF');
+  cave199Hi := TBitmap.Create;
+  cave199Hi.LoadFromResourceName(HINSTANCE, 'CAVE-199-Hi');
+  cave199Def := TBitmap.Create;
+  cave199Def.LoadFromResourceName(HINSTANCE, 'CAVE-199-DEF');
+  cave209Hi := TBitmap.Create;
+  cave209Hi.LoadFromResourceName(HINSTANCE, 'CAVE-209-Hi');
+  cave209Def := TBitmap.Create;
+  cave209Def.LoadFromResourceName(HINSTANCE, 'CAVE-209-DEF');
+  cave213Hi := TBitmap.Create;
+  cave2131Hi.LoadFromResourceName(HINSTANCE, 'CAVE-213-Hi');
+  cave213Def := TBitmap.Create;
+  cave213Def.LoadFromResourceName(HINSTANCE, 'CAVE-213-DEF');
+  cave215Hi := TBitmap.Create;
+  cave215Hi.LoadFromResourceName(HINSTANCE, 'CAVE-215-Hi');
+  cave215Def := TBitmap.Create;
+  cave215Def.LoadFromResourceName(HINSTANCE, 'CAVE-215-DEF');
+  cave221Hi := TBitmap.Create;
+  cave221Hi.LoadFromResourceName(HINSTANCE, 'CAVE-221-Hi');
+  cave221Def := TBitmap.Create;
+  cave221Def.LoadFromResourceName(HINSTANCE, 'CAVE-221-DEF');
+  cave223Hi := TBitmap.Create;
+  cave223Hi.LoadFromResourceName(HINSTANCE, 'CAVE-223-Hi');
+  cave223Def := TBitmap.Create;
+  cave223Def.LoadFromResourceName(HINSTANCE, 'CAVE-223-DEF');
+  cave241Hi := TBitmap.Create;
+  cave241Hi.LoadFromResourceName(HINSTANCE, 'CAVE-241-Hi');
+  cave241Def := TBitmap.Create;
+  cave241Def.LoadFromResourceName(HINSTANCE, 'CAVE-241-DEF');
+  cave245Hi := TBitmap.Create;
+  cave245Hi.LoadFromResourceName(HINSTANCE, 'CAVE-245-Hi');
+  cave245Def := TBitmap.Create;
+  cave245Def.LoadFromResourceName(HINSTANCE, 'CAVE-245-DEF');
+  cave247Hi := TBitmap.Create;
+  cave247Hi.LoadFromResourceName(HINSTANCE, 'CAVE-247-Hi');
+  cave247Def := TBitmap.Create;
+  cave247Def.LoadFromResourceName(HINSTANCE, 'CAVE-247-DEF');
+  cave253Hi := TBitmap.Create;
+  cave253Hi.LoadFromResourceName(HINSTANCE, 'CAVE-253-Hi');
+  cave253Def := TBitmap.Create;
+  cave253Def.LoadFromResourceName(HINSTANCE, 'CAVE-253-DEF');
+  cave255Hi := TBitmap.Create;
+  cave255Hi.LoadFromResourceName(HINSTANCE, 'CAVE-255-Hi');
+  cave255Def := TBitmap.Create;
+  cave255Def.LoadFromResourceName(HINSTANCE, 'CAVE-255-DEF');
   caveFloorHi := TBitmap.Create;
   caveFloorHi.LoadFromResourceName(HINSTANCE, 'CAVEFLOORHI');
   caveFloorDef := TBitmap.Create;
@@ -211,7 +407,8 @@ begin
         Glyph := globalutils.dungeonArray[r][c];
       end;
       if (globalutils.dungeonArray[r][c] = '.') or
-        (globalutils.dungeonArray[r][c] = ':') or (globalutils.dungeonArray[r][c] = '|')then
+        (globalutils.dungeonArray[r][c] = ':') or
+        (globalutils.dungeonArray[r][c] = '|') then
         maparea[r][c].Blocks := False;
     end;
   end;

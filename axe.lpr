@@ -10,7 +10,7 @@ uses {$IFDEF UNIX} {$IFDEF UseCThreads}
   main, map, cave, player, fov, grid_dungeon, ui, entities, cave_rat, plot_gen,
   los, items, ale_tankard, player_inventory, hyena, dagger, leather_armour1,
   basic_club, cave_bear, barrel, cloth_armour1, green_fungus, cavern,
-  wine_flask, bitmask_dungeon, process_dungeon;
+  wine_flask, bitmask_dungeon, process_dungeon, process_cave;
 
 {$R *.res}
 
