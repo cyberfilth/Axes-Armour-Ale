@@ -253,7 +253,7 @@ begin
   cave209Def := TBitmap.Create;
   cave209Def.LoadFromResourceName(HINSTANCE, 'CAVE-209-DEF');
   cave213Hi := TBitmap.Create;
-  cave2131Hi.LoadFromResourceName(HINSTANCE, 'CAVE-213-Hi');
+  cave213Hi.LoadFromResourceName(HINSTANCE, 'CAVE-213-Hi');
   cave213Def := TBitmap.Create;
   cave213Def.LoadFromResourceName(HINSTANCE, 'CAVE-213-DEF');
   cave215Hi := TBitmap.Create;
