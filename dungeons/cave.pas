@@ -405,36 +405,36 @@ begin
 
   /////////////////////////////
   // Write map to text file for testing
-  filename := 'output_cave.txt';
-  AssignFile(myfile, filename);
-  rewrite(myfile);
-  for r := 1 to MAXROWS do
-  begin
-    for c := 1 to MAXCOLUMNS do
-    begin
-      Write(myfile, caveArray[r][c]);
-    end;
-    Write(myfile, sLineBreak);
-  end;
-  closeFile(myfile);
+  //filename := 'output_cave.txt';
+  //AssignFile(myfile, filename);
+  //rewrite(myfile);
+  //for r := 1 to MAXROWS do
+  //begin
+  //  for c := 1 to MAXCOLUMNS do
+  //  begin
+  //    Write(myfile, caveArray[r][c]);
+  //  end;
+  //  Write(myfile, sLineBreak);
+  //end;
+  //closeFile(myfile);
   //////////////////////////////
 
   process_cave.prettify;
 
   /////////////////////////////
   // Write map to text file for testing
-  filename := 'output_processed_cave.txt';
-  AssignFile(myfile, filename);
-  rewrite(myfile);
-  for r := 1 to MAXROWS do
-  begin
-    for c := 1 to MAXCOLUMNS do
-    begin
-      Write(myfile, globalutils.dungeonArray[r][c]);
-    end;
-    Write(myfile, sLineBreak);
-  end;
-  closeFile(myfile);
+  //filename := 'output_processed_cave.txt';
+  //AssignFile(myfile, filename);
+  //rewrite(myfile);
+  //for r := 1 to MAXROWS do
+  //begin
+  //  for c := 1 to MAXCOLUMNS do
+  //  begin
+  //    Write(myfile, globalutils.dungeonArray[r][c]);
+  //  end;
+  //  Write(myfile, sLineBreak);
+  //end;
+  //closeFile(myfile);
   //////////////////////////////
 
 
