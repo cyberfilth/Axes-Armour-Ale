@@ -253,7 +253,7 @@ begin
   cave209Def := TBitmap.Create;
   cave209Def.LoadFromResourceName(HINSTANCE, 'CAVE-209-DEF');
   cave213Hi := TBitmap.Create;
-  cave2131Hi.LoadFromResourceName(HINSTANCE, 'CAVE-213-Hi');
+  cave213Hi.LoadFromResourceName(HINSTANCE, 'CAVE-213-Hi');
   cave213Def := TBitmap.Create;
   cave213Def.LoadFromResourceName(HINSTANCE, 'CAVE-213-DEF');
   cave215Hi := TBitmap.Create;
@@ -502,20 +502,340 @@ begin
         else
           drawToBuffer(mapToScreen(c), mapToScreen(r), caveFloorDef);
       end;
-      '#': // Cavern wall 1
+      'A': // blank tile
       begin
         if (hiDef = 1) then
-          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall2Hi)
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave255Hi)
         else
-          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall2Def);
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave255Def);
       end;
-      '*': // Cavern wall 2
+      'B': // Cave wall
       begin
         if (hiDef = 1) then
-          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall3Hi)
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave1Hi)
         else
-          drawToBuffer(mapToScreen(c), mapToScreen(r), caveWall3Def);
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave1Def);
       end;
+      'C': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave4Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave4Def);
+      end;
+      'D': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave5Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave5Def);
+      end;
+      'E': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave7Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave7Def);
+      end;
+      'F': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave16Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave16Def);
+      end;
+      'G': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave17Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave17Def);
+      end;
+      'H': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave20Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave20Def);
+      end;
+      'I': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave21Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave21Def);
+      end;
+      'J': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave23Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave23Def);
+      end;
+      'K': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave28Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave28Def);
+      end;
+      'L': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave29Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave29Def);
+      end;
+      'M': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave31Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave31Def);
+      end;
+      'N': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave64Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave64Def);
+      end;
+      'O': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave65Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave65Def);
+      end;
+      'P': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave68Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave68Def);
+      end;
+      'Q': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave69Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave69Def);
+      end;
+      'R': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave71Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave71Def);
+      end;
+      'S': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave80Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave80Def);
+      end;
+      'T': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave81Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave81Def);
+      end;
+      'U': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave84Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave84Def);
+      end;
+      'V': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave85Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave85Def);
+      end;
+      'W': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave87Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave87Def);
+      end;
+      'X': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave92Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave92Def);
+      end;
+      'Y': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave93Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave93Def);
+      end;
+      'Z': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave95Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave95Def);
+      end;
+      'a': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave112Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave112Def);
+      end;
+      'b': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave113Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave113Def);
+      end;
+      'c': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave116Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave116Def);
+      end;
+      'd': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave117Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave117Def);
+      end;
+      'e': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave119Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave119Def);
+      end;
+      'f': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave124Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave124Def);
+      end;
+      'g': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave125Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave125Def);
+      end;
+      'h': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave127Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave127Def);
+      end;
+      'i': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave193Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave193Def);
+      end;
+      'j': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave197Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave197Def);
+      end;
+      'k': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave199Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave199Def);
+      end;
+      'l': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave209Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave209Def);
+      end;
+      'm': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave213Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave213Def);
+      end;
+      'n': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave215Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave215Def);
+      end;
+      'o': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave221Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave221Def);
+      end;
+      'p': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave223Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave223Def);
+      end;
+      'q': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave241Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave241Def);
+      end;
+      'r': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave245Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave245Def);
+      end;
+      's': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave247Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave247Def);
+      end;
+      't': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave253Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave253Def);
+      end;
+      'u': // Cave wall
+      begin
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave255Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave255Def);
+      end
+      else
+        if (hiDef = 1) then
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave255Hi)
+        else
+          drawToBuffer(mapToScreen(c), mapToScreen(r), cave255Def);
     end;
   end
   else if (mapType = 1) then

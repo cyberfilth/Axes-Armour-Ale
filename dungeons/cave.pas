@@ -8,7 +8,7 @@ unit cave;
 interface
 
 uses
-  globalutils, map;
+  globalutils, map, process_cave;
 
 type
   coordinates = record
@@ -405,37 +405,43 @@ begin
 
   /////////////////////////////
   // Write map to text file for testing
-  //filename:='output_cave.txt';
-  //AssignFile(myfile, filename);
-  // rewrite(myfile);
-  // for r := 1 to MAXROWS do
-  //begin
-  //  for c := 1 to MAXCOLUMNS do
-  //  begin
-  // write(myfile,caveArray[r][c]);
-  // end;
-  //  write(myfile, sLineBreak);
-  //  end;
-  // closeFile(myfile);
+  filename := 'output_cave.txt';
+  AssignFile(myfile, filename);
+  rewrite(myfile);
+  for r := 1 to MAXROWS do
+  begin
+    for c := 1 to MAXCOLUMNS do
+    begin
+      Write(myfile, caveArray[r][c]);
+    end;
+    Write(myfile, sLineBreak);
+  end;
+  closeFile(myfile);
   //////////////////////////////
 
-  // Copy array to main dungeon
-  for r := 1 to globalutils.MAXROWS do
+  process_cave.prettify;
+
+  /////////////////////////////
+  // Write map to text file for testing
+  filename := 'output_processed_cave.txt';
+  AssignFile(myfile, filename);
+  rewrite(myfile);
+  for r := 1 to MAXROWS do
   begin
-    for c := 1 to globalutils.MAXCOLUMNS do
+    for c := 1 to MAXCOLUMNS do
     begin
-      if (caveArray[r][c] = '*') then
-      begin
-        if (random(2) = 1) then
-          globalutils.dungeonArray[r][c] := '*'
-        else
-          globalutils.dungeonArray[r][c] := '#';
-      end;
-      globalutils.dungeonArray[r][c] := caveArray[r][c];
+      Write(myfile, globalutils.dungeonArray[r][c]);
     end;
+    Write(myfile, sLineBreak);
   end;
+  closeFile(myfile);
+  //////////////////////////////
+
+
   (* Copy total rooms to main dungeon *)
   globalutils.currentDgnTotalRooms := totalRooms;
+  (* Set flag for type of dungeon *)
+  map.mapType := 0;
 end;
 
 end.

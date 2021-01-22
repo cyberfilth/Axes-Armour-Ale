@@ -8,7 +8,7 @@ unit globalutils;
 interface
 
 uses
-  Graphics, SysUtils, DOM, XMLWrite, XMLRead, Math;
+  Graphics, SysUtils, DOM, XMLWrite, XMLRead;
 
 type
   coordinates = record

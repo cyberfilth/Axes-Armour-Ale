@@ -4,13 +4,9 @@ program axe;
 
 uses {$IFDEF UNIX} {$IFDEF UseCThreads}
   cthreads, {$ENDIF} {$ENDIF}
-  Interfaces, // this includes the LCL widgetset
-  Forms,
+  Forms, Interfaces,
   { you can add units after this }
-  main, map, cave, player, fov, grid_dungeon, ui, entities, cave_rat, plot_gen,
-  los, items, ale_tankard, player_inventory, hyena, dagger, leather_armour1,
-  basic_club, cave_bear, barrel, cloth_armour1, green_fungus, cavern,
-  wine_flask, bitmask_dungeon, process_dungeon, process_cave;
+  main;
 
 {$R *.res}
 

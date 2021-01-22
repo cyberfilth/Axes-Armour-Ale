@@ -441,7 +441,7 @@ begin
   gameState := 1;
   killer := 'empty';
   playerTurn := 0;
-  map.mapType := 3;
+  map.mapType := 0;
   map.setupMap;
   map.setupTiles;
   entities.setupEntities;
