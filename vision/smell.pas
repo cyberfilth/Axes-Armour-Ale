@@ -21,12 +21,18 @@ var
 procedure floodFill(r, c: smallint);
 (* Generate smell map *)
 procedure sniff;
+(* Check tile to the North *)
+procedure sniffNorth(y, x: smallint);
+(* Check tile to the East *)
+procedure sniffEast(y, x: smallint);
+(* Check tile to the South *)
+procedure sniffSouth(y, x: smallint);
+(* Check tile to the West *)
+procedure sniffWest(y, x: smallint);
 
 implementation
 
 procedure floodFill(r, c: smallint);
-var
-  r, c: smallint;
 begin
   if (counter < 500) then
   begin
@@ -67,6 +73,38 @@ begin
   // generate smell map
   counter := 0;
   floodFill(entityList[0].posY, entityList[0].posX);
+end;
+
+procedure sniffNorth(y, x: smallint);
+begin
+  if (smellmap[y - 1][x] > smellmap[y][x]) then
+    Result := True
+  else
+    Result := False;
+end;
+
+procedure sniffEast(y, x: smallint);
+begin
+  if (smellmap[y][x + 1] > smellmap[y][x]) then
+    Result := True
+  else
+    Result := False;
+end;
+
+procedure sniffSouth(y, x: smallint);
+begin
+  if (smellmap[y + 1][x] > smellmap[y][x]) then
+    Result := True
+  else
+    Result := False;
+end;
+
+procedure sniffWest(y, x: smallint);
+begin
+  if (smellmap[y][x - 1] > smellmap[y][x]) then
+    Result := True
+  else
+    Result := False;
 end;
 
 end.
