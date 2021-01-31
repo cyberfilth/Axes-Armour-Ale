@@ -35,6 +35,8 @@ procedure drawCircle(centreX, centreY, radius: smallint);
 procedure carveHorizontally(x1, x2, y: smallint);
 (* Carve a vertical tunnel *)
 procedure carveVertically(y1, y2, x: smallint);
+(* Carve corridor between rooms *)
+procedure createCorridor(fromX, fromY, toX, toY: smallint);
 (* Create a room *)
 procedure createRoom(gridNumber: smallint);
 (* Generate a cave *)

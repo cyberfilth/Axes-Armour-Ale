@@ -10,7 +10,7 @@ unit smell;
 interface
 
 uses
-  globalutils, entities;
+  globalutils;
 
 var
   dungeonCopy: array[1..MAXROWS, 1..MAXCOLUMNS] of char;
@@ -31,6 +31,9 @@ procedure sniffSouth(y, x: smallint);
 procedure sniffWest(y, x: smallint);
 
 implementation
+
+uses
+  entities;
 
 procedure floodFill(r, c: smallint);
 begin

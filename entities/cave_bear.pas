@@ -7,7 +7,7 @@ unit cave_bear;
 interface
 
 uses
-  SysUtils, Math, map;
+  SysUtils, Math, map, smell;
 
 (* Create a cave rat *)
 procedure createCaveBear(uniqueid, npcx, npcy: smallint);
@@ -15,8 +15,8 @@ procedure createCaveBear(uniqueid, npcx, npcy: smallint);
 procedure takeTurn(id, spx, spy: smallint);
 (* Move in a random direction *)
 procedure wander(id, spx, spy: smallint);
-(* Go to last known location of player *)
-procedure chaseTarget(id, spx, spy: smallint);
+(* Use smell map to find the player *)
+procedure sniffOutPlayer(id, spx, spy: smallint);
 (* Chase the player *)
 procedure chasePlayer(id, spx, spy: smallint);
 (* Check if player is next to NPC *)
@@ -67,7 +67,7 @@ begin
     posX := npcx;
     posY := npcy;
   end;
-   (* Occupy tile *)
+  (* Occupy tile *)
   map.occupy(npcx, npcy);
 end;
 
@@ -131,19 +131,50 @@ begin
   entities.moveNPC(id, testx, testy);
 end;
 
-procedure chaseTarget(id, spx, spy: smallint);
+procedure sniffOutPlayer(id, spx, spy: smallint);
 var
-  newX, newY, dx, dy: smallint;
-  distance: Single;
+  newX, newY: smallint;
 begin
   (* Get new coordinates to chase the player *)
-  dx := entityList[id].targetX - spx;
-  dy := entityList[id].targetY - spy;
-  distance := sqrt(dx ** 2 + dy ** 2);
-  dx := round(dx / distance);
-  dy := round(dy / distance);
-  newX := spx + dx;
-  newY := spy + dy;
+  smell.sniff;
+  newX := 0;
+  newY := 0;
+  (* Check N S E W smell map *)
+  if (sniffNorth(entityList[id].y, entityList[id].x) = True) and
+    (canMove(entityList[id].x, entityList[id].y - 1)) then
+  begin
+    newX := entityList[id].x;
+    newY := entityList[id].y - 1;
+  end
+  else if (sniffSouth(entityList[id].y, entityList[id].x) = True) and
+    (canMove(entityList[id].x, entityList[id].y + 1)) then
+  begin
+    newX := entityList[id].x;
+    newY := entityList[id].y + 1;
+  end
+  else if (sniffEast(entityList[id].y, entityList[id].x) = True) and
+    (canMove(entityList[id].x + 1, entityList[id].y)) then
+  begin
+    newX := entityList[id].x + 1;
+    newY := entityList[id].y;
+  end
+  else if (sniffWest(entityList[id].y, entityList[id].x) = True) and
+    (canMove(entityList[id].x - 1, entityList[id].y)) then
+  begin
+    newX := entityList[id].x - 1;
+    newY := entityList[id].y;
+  end
+  else
+  begin
+
+    newX := entityList[id].x;
+    newY := entityList[id].y;
+  end;
+
+
+
+
+
   (* New coordinates set. Check if they are walkable *)
   if (map.canMove(newX, newY) = True) then
   begin
@@ -170,17 +201,42 @@ end;
 
 procedure chasePlayer(id, spx, spy: smallint);
 var
-  newX, newY, dx, dy: smallint;
-  distance: double;
+  newX, newY: smallint;
 begin
+  newX := 0;
+  newY := 0;
   (* Get new coordinates to chase the player *)
-  dx := entityList[0].posX - spx;
-  dy := entityList[0].posY - spy;
-  distance := sqrt(dx ** 2 + dy ** 2);
-  dx := round(dx / distance);
-  dy := round(dy / distance);
-  newX := spx + dx;
-  newY := spy + dy;
+  if (spx > entities.entityList[0].posX) and (spy > entities.entityList[0].posY) then
+  begin
+    newX := spx - 1;
+    newY := spy - 1;
+  end
+  else if (spx < entities.entityList[0].posX) and
+    (spy < entities.entityList[0].posY) then
+  begin
+    newX := spx + 1;
+    newY := spy + 1;
+  end
+  else if (spx < entities.entityList[0].posX) then
+  begin
+    newX := spx + 1;
+    newY := spy;
+  end
+  else if (spx > entities.entityList[0].posX) then
+  begin
+    newX := spx - 1;
+    newY := spy;
+  end
+  else if (spy < entities.entityList[0].posY) then
+  begin
+    newX := spx;
+    newY := spy + 1;
+  end
+  else if (spy > entities.entityList[0].posY) then
+  begin
+    newX := spx;
+    newY := spy - 1;
+  end;
   (* New coordinates set. Check if they are walkable *)
   if (map.canMove(newX, newY) = True) then
   begin

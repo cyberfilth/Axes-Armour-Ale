@@ -183,7 +183,7 @@ end;
 function isNextToPlayer(spx, spy: smallint): boolean;
 var
   dx, dy: smallint;
-  distance: double;
+  distance: double; // try single
 begin
   Result := False;
   dx := entityList[0].posX - spx;
