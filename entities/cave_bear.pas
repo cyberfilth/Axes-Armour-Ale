@@ -96,8 +96,8 @@ begin
       chasePlayer(id, spx, spy);
   end
   else if (entityList[id].targetX <> 0) and (entityList[id].targetY <> 0) then
-    (* Go to the targets last position *)
-    chaseTarget(id, spx, spy)
+    (* If the player cannot be seen, sniff them out *)
+    sniffOutPlayer(id, spx, spy)
   else
     wander(id, spx, spy);
 end;
@@ -137,64 +137,44 @@ var
 begin
   (* Get new coordinates to chase the player *)
   smell.sniff;
-  newX := 0;
-  newY := 0;
+  newX := spx;
+  newY := spy;
   (* Check N S E W smell map *)
-  if (sniffNorth(entityList[id].y, entityList[id].x) = True) and
-    (canMove(entityList[id].x, entityList[id].y - 1)) then
+  if (sniffNorth(entityList[id].posY, entityList[id].posX) = True) and
+    (canMove(entityList[id].posX, entityList[id].posY - 1)) then
   begin
-    newX := entityList[id].x;
-    newY := entityList[id].y - 1;
+    newX := entityList[id].posX;
+    newY := entityList[id].posY - 1;
   end
-  else if (sniffSouth(entityList[id].y, entityList[id].x) = True) and
-    (canMove(entityList[id].x, entityList[id].y + 1)) then
+  else if (sniffSouth(entityList[id].posY, entityList[id].posX) = True) and
+    (canMove(entityList[id].posX, entityList[id].posY + 1)) then
   begin
-    newX := entityList[id].x;
-    newY := entityList[id].y + 1;
+    newX := entityList[id].posX;
+    newY := entityList[id].posY + 1;
   end
-  else if (sniffEast(entityList[id].y, entityList[id].x) = True) and
-    (canMove(entityList[id].x + 1, entityList[id].y)) then
+  else if (sniffEast(entityList[id].posY, entityList[id].posX) = True) and
+    (canMove(entityList[id].posX + 1, entityList[id].posY)) then
   begin
-    newX := entityList[id].x + 1;
-    newY := entityList[id].y;
+    newX := entityList[id].posX + 1;
+    newY := entityList[id].posY;
   end
-  else if (sniffWest(entityList[id].y, entityList[id].x) = True) and
-    (canMove(entityList[id].x - 1, entityList[id].y)) then
+  else if (sniffWest(entityList[id].posY, entityList[id].posX) = True) and
+    (canMove(entityList[id].posX - 1, entityList[id].posY)) then
   begin
-    newX := entityList[id].x - 1;
-    newY := entityList[id].y;
-  end
-  else
-  begin
-
-    newX := entityList[id].x;
-    newY := entityList[id].y;
+    newX := entityList[id].posX - 1;
+    newY := entityList[id].posY;
   end;
 
-
-
-
-
-  (* New coordinates set. Check if they are walkable *)
-  if (map.canMove(newX, newY) = True) then
+  (* Check if the tile contains another entity *)
+  if (map.isOccupied(newX, newY) = True) then
   begin
-    (* Do they contain the player *)
-    if (map.hasPlayer(newX, newY) = True) then
-    begin
-      (* Remain on original tile and attack *)
-      entities.moveNPC(id, spx, spy);
-      combat(id);
-    end
-    (* Else if tile does not contain player, check for another entity *)
-    else if (map.isOccupied(newX, newY) = True) then
-    begin
+    if (map.canSee(newX, newY) = True) then
       ui.bufferMessage('The cave bear bumps into ' + getCreatureName(newX, newY));
-      entities.moveNPC(id, spx, spy);
-    end
-    (* if map is unoccupied, move to that tile *)
-    else if (map.isOccupied(newX, newY) = False) then
-      entities.moveNPC(id, newX, newY);
+    entities.moveNPC(id, spx, spy);
   end
+  (* if map is unoccupied, move to that tile *)
+  else if (map.isOccupied(newX, newY) = False) then
+    entities.moveNPC(id, newX, newY)
   else
     wander(id, spx, spy);
 end;

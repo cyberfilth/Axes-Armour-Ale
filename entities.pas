@@ -112,7 +112,6 @@ begin
   caveBearGlyph.LoadFromResourceName(HINSTANCE, 'B_LBLUE');
   greenFungusGlyph := TBitmap.Create;
   greenFungusGlyph.LoadFromResourceName(HINSTANCE, 'F_GREEN1');
-  ;
 end;
 
 procedure spawnNPCs;
@@ -137,8 +136,10 @@ begin
     percentage := randomRange(1, 100);
     if (percentage < 20) then
       barrel.createBarrel(i, c, r)
-    else if (percentage >= 20) and (percentage <= 75) then // Cave rat
+    else if (percentage >= 20) and (percentage <= 50) then // Cave rat
       cave_rat.createCaveRat(i, c, r)
+    else if (percentage > 50) and (percentage <= 75) then // Cave bear
+      cave_bear.createCaveBear(i, c, r)
     else if (percentage > 75) and (percentage <= 90) then // Blood hyena
       hyena.createHyena(i, c, r)
     else // Green fungus

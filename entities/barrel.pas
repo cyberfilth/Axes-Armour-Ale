@@ -78,7 +78,7 @@ begin
   Inc(items.itemAmount);
   SetLength(items.itemList, items.itemAmount);
   if (percentage <= 40) then
-    (* Drop a Flask of Wine *)
+    (* Drop an item - Flask of Wine *)
     createWineFlask(itemAmount, x, y)
   else if (percentage > 40) and (percentage < 80) then
     (* Drop an item - Ale Tankard *)

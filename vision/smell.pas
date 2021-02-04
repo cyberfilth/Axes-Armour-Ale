@@ -16,19 +16,22 @@ var
   dungeonCopy: array[1..MAXROWS, 1..MAXCOLUMNS] of char;
   smellmap: array[1..MAXROWS, 1..MAXCOLUMNS] of smallint;
   counter: smallint;
+  (* TESTING - Write dungeon to text file *)
+  filename: ShortString;
+  myfile: Text;
 
 (* Flood fill map with integers *)
 procedure floodFill(r, c: smallint);
 (* Generate smell map *)
 procedure sniff;
 (* Check tile to the North *)
-procedure sniffNorth(y, x: smallint);
+function sniffNorth(y, x: smallint): boolean;
 (* Check tile to the East *)
-procedure sniffEast(y, x: smallint);
+function sniffEast(y, x: smallint): boolean;
 (* Check tile to the South *)
-procedure sniffSouth(y, x: smallint);
+function sniffSouth(y, x: smallint): boolean;
 (* Check tile to the West *)
-procedure sniffWest(y, x: smallint);
+function sniffWest(y, x: smallint): boolean;
 
 implementation
 
@@ -41,7 +44,7 @@ begin
   begin
     if (r >= 1) and (r <= MAXROWS) and (c >= 1) and (c <= MAXCOLUMNS) then
     begin
-      if (dungeonCopy[r][c] = '.') then
+      if (dungeonCopy[r][c] = ':') then
       begin
         smellmap[r][c] := counter;
         dungeonCopy[r][c] := '*';
@@ -49,13 +52,13 @@ begin
       end
       else
         exit;
-      if (dungeonCopy[r + 1][c] = '.') then
+      if (dungeonCopy[r + 1][c] = ':') then
         floodFill(r + 1, c);
-      if (dungeonCopy[r - 1][c] = '.') then
+      if (dungeonCopy[r - 1][c] = ':') then
         floodFill(r - 1, c);
-      if (dungeonCopy[r][c + 1] = '.') then
+      if (dungeonCopy[r][c + 1] = ':') then
         floodFill(r, c + 1);
-      if (dungeonCopy[r][c - 1] = '.') then
+      if (dungeonCopy[r][c - 1] = ':') then
         floodFill(r, c - 1);
     end;
   end;
@@ -74,11 +77,40 @@ begin
     end;
   end;
   // generate smell map
-  counter := 0;
+  counter := 1;
   floodFill(entityList[0].posY, entityList[0].posX);
+  /////////////////////////////
+  //Write map to text file for testing
+  //filename := 'smellmap.txt';
+  //AssignFile(myfile, filename);
+  //rewrite(myfile);
+  //for r := 1 to MAXROWS do
+  //begin
+  //  for c := 1 to MAXCOLUMNS do
+  //  begin
+  //    Write(myfile, smellmap[r][c]);
+  //  end;
+  //  Write(myfile, sLineBreak);
+  //end;
+  //closeFile(myfile);
+
+  //filename := 'DungeonCopy.txt';
+  //AssignFile(myfile, filename);
+  //rewrite(myfile);
+  //for r := 1 to MAXROWS do
+  //begin
+  //  for c := 1 to MAXCOLUMNS do
+  //  begin
+  //    Write(myfile, dungeonCopy[r][c]);
+  //  end;
+  //  Write(myfile, sLineBreak);
+  //end;
+  //closeFile(myfile);
+  //////////////////////////////
+
 end;
 
-procedure sniffNorth(y, x: smallint);
+function sniffNorth(y, x: smallint): boolean;
 begin
   if (smellmap[y - 1][x] > smellmap[y][x]) then
     Result := True
@@ -86,7 +118,7 @@ begin
     Result := False;
 end;
 
-procedure sniffEast(y, x: smallint);
+function sniffEast(y, x: smallint): boolean;
 begin
   if (smellmap[y][x + 1] > smellmap[y][x]) then
     Result := True
@@ -94,7 +126,7 @@ begin
     Result := False;
 end;
 
-procedure sniffSouth(y, x: smallint);
+function sniffSouth(y, x: smallint): boolean;
 begin
   if (smellmap[y + 1][x] > smellmap[y][x]) then
     Result := True
@@ -102,7 +134,7 @@ begin
     Result := False;
 end;
 
-procedure sniffWest(y, x: smallint);
+function sniffWest(y, x: smallint): boolean;
 begin
   if (smellmap[y][x - 1] > smellmap[y][x]) then
     Result := True
@@ -111,4 +143,3 @@ begin
 end;
 
 end.
-
