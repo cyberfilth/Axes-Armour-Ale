@@ -73,16 +73,11 @@ end;
 
 procedure takeTurn(id, spx, spy: smallint);
 begin
-  (* Reset target coordinates if already at this location *)
-  if (spx = entityList[id].targetX) and (spy = entityList[id].targetY) then
-  begin
-    entityList[id].targetX := 0;
-    entityList[id].targetY := 0;
-  end;
-  (* Can the NPC see the player *)
+  (* If can see the player *)
   if (los.inView(spx, spy, entityList[0].posX, entityList[0].posY,
     entityList[id].visionRange) = True) then
   begin
+    entityList[id].abilityTriggered := True; // Have caught sight of player
     entityList[id].targetX := entityList[0].posX;
     entityList[id].targetY := entityList[0].posY;
     (* if they are next to player, they attack *)
@@ -95,7 +90,8 @@ begin
       (* If too far away they chase the player *)
       chasePlayer(id, spx, spy);
   end
-  else if (entityList[id].targetX <> 0) and (entityList[id].targetY <> 0) then
+  (* If the player cannot be seen *)
+  else if (entityList[id].abilityTriggered = True) then
     (* If the player cannot be seen, sniff them out *)
     sniffOutPlayer(id, spx, spy)
   else
@@ -135,6 +131,7 @@ procedure sniffOutPlayer(id, spx, spy: smallint);
 var
   newX, newY: smallint;
 begin
+  ui.bufferMessage('Bear: '+IntToStr(id)+' sniffs you out');
   (* Get new coordinates to chase the player *)
   smell.sniff;
   newX := spx;
@@ -145,24 +142,28 @@ begin
   begin
     newX := entityList[id].posX;
     newY := entityList[id].posY - 1;
+    ui.bufferMessage(IntToStr(id)+' North');
   end
   else if (sniffSouth(entityList[id].posY, entityList[id].posX) = True) and
     (canMove(entityList[id].posX, entityList[id].posY + 1)) then
   begin
     newX := entityList[id].posX;
     newY := entityList[id].posY + 1;
+    ui.bufferMessage(IntToStr(id)+' South');
   end
   else if (sniffEast(entityList[id].posY, entityList[id].posX) = True) and
     (canMove(entityList[id].posX + 1, entityList[id].posY)) then
   begin
     newX := entityList[id].posX + 1;
     newY := entityList[id].posY;
+    ui.bufferMessage(IntToStr(id)+' East');
   end
   else if (sniffWest(entityList[id].posY, entityList[id].posX) = True) and
     (canMove(entityList[id].posX - 1, entityList[id].posY)) then
   begin
     newX := entityList[id].posX - 1;
     newY := entityList[id].posY;
+    ui.bufferMessage(IntToStr(id)+' West');
   end;
 
   (* Check if the tile contains another entity *)

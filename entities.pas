@@ -118,7 +118,8 @@ procedure spawnNPCs;
 var
   i, r, c, percentage: smallint;
 begin
-  npcAmount := (globalutils.currentDgnTotalRooms + 2);
+ // npcAmount := (globalutils.currentDgnTotalRooms + 2);
+  npcAmount:=2;
   (*  initialise array *)
   SetLength(entityList, 0);
   (* Add player to Entity list *)
@@ -134,16 +135,16 @@ begin
     until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
     (* Roll for chance of each enemy type appearing *)
     percentage := randomRange(1, 100);
-    if (percentage < 20) then
-      barrel.createBarrel(i, c, r)
-    else if (percentage >= 20) and (percentage <= 50) then // Cave rat
-      cave_rat.createCaveRat(i, c, r)
-    else if (percentage > 50) and (percentage <= 75) then // Cave bear
+    //if (percentage < 20) then
+    //  barrel.createBarrel(i, c, r)
+    //else if (percentage >= 20) and (percentage <= 50) then // Cave rat
+    //  cave_rat.createCaveRat(i, c, r)
+    //else if (percentage > 50) and (percentage <= 75) then // Cave bear
       cave_bear.createCaveBear(i, c, r)
-    else if (percentage > 75) and (percentage <= 90) then // Blood hyena
-      hyena.createHyena(i, c, r)
-    else // Green fungus
-      green_fungus.createGreenFungus(i, c, r);
+    //else if (percentage > 75) and (percentage <= 90) then // Blood hyena
+    //  hyena.createHyena(i, c, r)
+    //else // Green fungus
+    //  green_fungus.createGreenFungus(i, c, r);
   end;
 end;
 

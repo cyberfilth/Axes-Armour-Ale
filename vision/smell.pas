@@ -38,13 +38,14 @@ implementation
 uses
   entities;
 
+(* Fill immediate area *)
 procedure floodFill(r, c: smallint);
 begin
   if (counter < 500) then
   begin
     if (r >= 1) and (r <= MAXROWS) and (c >= 1) and (c <= MAXCOLUMNS) then
     begin
-      if (dungeonCopy[r][c] = ':') then
+      if (dungeonCopy[r][c] = ':') and (smellmap[r][c] > counter) then
       begin
         smellmap[r][c] := counter;
         dungeonCopy[r][c] := '*';
@@ -52,14 +53,10 @@ begin
       end
       else
         exit;
-      if (dungeonCopy[r + 1][c] = ':') then
-        floodFill(r + 1, c);
-      if (dungeonCopy[r - 1][c] = ':') then
-        floodFill(r - 1, c);
-      if (dungeonCopy[r][c + 1] = ':') then
-        floodFill(r, c + 1);
-      if (dungeonCopy[r][c - 1] = ':') then
-        floodFill(r, c - 1);
+      floodFill(r + 1, c);
+      floodFill(r - 1, c);
+      floodFill(r, c + 1);
+      floodFill(r, c - 1);
     end;
   end;
 end;
@@ -76,67 +73,66 @@ begin
       dungeonCopy[r][c] := dungeonArray[r][c];
     end;
   end;
+  // initialise smell map
+  for r := 1 to MAXROWS do
+  begin
+    for c := 1 to MAXCOLUMNS do
+    begin
+      smellmap[r][c] := 550;
+    end;
+  end;
   // generate smell map
   counter := 1;
   floodFill(entityList[0].posY, entityList[0].posX);
   /////////////////////////////
   //Write map to text file for testing
-  //filename := 'smellmap.txt';
-  //AssignFile(myfile, filename);
-  //rewrite(myfile);
-  //for r := 1 to MAXROWS do
-  //begin
-  //  for c := 1 to MAXCOLUMNS do
-  //  begin
-  //    Write(myfile, smellmap[r][c]);
-  //  end;
-  //  Write(myfile, sLineBreak);
-  //end;
-  //closeFile(myfile);
-
-  //filename := 'DungeonCopy.txt';
-  //AssignFile(myfile, filename);
-  //rewrite(myfile);
-  //for r := 1 to MAXROWS do
-  //begin
-  //  for c := 1 to MAXCOLUMNS do
-  //  begin
-  //    Write(myfile, dungeonCopy[r][c]);
-  //  end;
-  //  Write(myfile, sLineBreak);
-  //end;
-  //closeFile(myfile);
+  filename := 'smellmap.txt';
+  AssignFile(myfile, filename);
+  rewrite(myfile);
+  for r := 1 to MAXROWS do
+  begin
+    for c := 1 to MAXCOLUMNS do
+    begin
+      Write(myfile, smellmap[r][c], ' ');
+    end;
+    Write(myfile, sLineBreak);
+  end;
+  closeFile(myfile);
   //////////////////////////////
 
 end;
 
+(* If the tile to the North has a lower value than current tile return true *)
 function sniffNorth(y, x: smallint): boolean;
 begin
-  if (smellmap[y - 1][x] > smellmap[y][x]) then
+  if (smellmap[y - 1][x] < smellmap[y][x]) then
     Result := True
   else
     Result := False;
 end;
 
+(* If the tile to the East has a lower value than current tile return true *)
 function sniffEast(y, x: smallint): boolean;
 begin
-  if (smellmap[y][x + 1] > smellmap[y][x]) then
+  if (smellmap[y][x + 1] < smellmap[y][x]) then
     Result := True
   else
     Result := False;
 end;
 
+(* If the tile to the South has a lower value than current tile return true *)
 function sniffSouth(y, x: smallint): boolean;
 begin
-  if (smellmap[y + 1][x] > smellmap[y][x]) then
+  if (smellmap[y + 1][x] < smellmap[y][x]) then
     Result := True
   else
     Result := False;
 end;
 
+(* If the tile to the West has a lower value than current tilem return true *)
 function sniffWest(y, x: smallint): boolean;
 begin
-  if (smellmap[y][x - 1] > smellmap[y][x]) then
+  if (smellmap[y][x - 1] < smellmap[y][x]) then
     Result := True
   else
     Result := False;
