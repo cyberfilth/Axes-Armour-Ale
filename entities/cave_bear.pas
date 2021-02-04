@@ -73,6 +73,12 @@ end;
 
 procedure takeTurn(id, spx, spy: smallint);
 begin 
+(* Reset target coordinates if already at this location *)
+  if (spx = entityList[id].targetX) and (spy = entityList[id].targetY) then
+  begin
+    entityList[id].targetX := 0;
+    entityList[id].targetY := 0;
+  end;
   (* Can the NPC see the player *)
   if (los.inView(spx, spy, entityList[0].posX, entityList[0].posY,
     entityList[id].visionRange) = True) then
