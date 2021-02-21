@@ -7,7 +7,7 @@ unit cave_bear;
 interface
 
 uses
-  SysUtils, Math, map, smell;
+  SysUtils, Math, map;
 
 (* Create a cave rat *)
 procedure createCaveBear(uniqueid, npcx, npcy: smallint);
@@ -15,8 +15,6 @@ procedure createCaveBear(uniqueid, npcx, npcy: smallint);
 procedure takeTurn(id, spx, spy: smallint);
 (* Move in a random direction *)
 procedure wander(id, spx, spy: smallint);
-(* Use smell map to find the player *)
-procedure sniffOutPlayer(id, spx, spy: smallint);
 (* Chase the player *)
 procedure chasePlayer(id, spx, spy: smallint);
 (* Check if player is next to NPC *)
@@ -93,7 +91,7 @@ begin
   (* If the player cannot be seen *)
   else if (entityList[id].abilityTriggered = True) then
     (* If the player cannot be seen, sniff them out *)
-    sniffOutPlayer(id, spx, spy)
+    chasePlayer(id, spx, spy)
   else
     wander(id, spx, spy);
 end;
@@ -125,59 +123,6 @@ begin
     end
   until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = False);
   entities.moveNPC(id, testx, testy);
-end;
-
-procedure sniffOutPlayer(id, spx, spy: smallint);
-var
-  newX, newY: smallint;
-begin
-  ui.bufferMessage('Bear: '+IntToStr(id)+' sniffs you out');
-  (* Get new coordinates to chase the player *)
-  smell.sniff;
-  newX := spx;
-  newY := spy;
-  (* Check N S E W smell map *)
-  if (sniffNorth(entityList[id].posY, entityList[id].posX) = True) and
-    (canMove(entityList[id].posX, entityList[id].posY - 1)) then
-  begin
-    newX := entityList[id].posX;
-    newY := entityList[id].posY - 1;
-    ui.bufferMessage(IntToStr(id)+' North');
-  end
-  else if (sniffSouth(entityList[id].posY, entityList[id].posX) = True) and
-    (canMove(entityList[id].posX, entityList[id].posY + 1)) then
-  begin
-    newX := entityList[id].posX;
-    newY := entityList[id].posY + 1;
-    ui.bufferMessage(IntToStr(id)+' South');
-  end
-  else if (sniffEast(entityList[id].posY, entityList[id].posX) = True) and
-    (canMove(entityList[id].posX + 1, entityList[id].posY)) then
-  begin
-    newX := entityList[id].posX + 1;
-    newY := entityList[id].posY;
-    ui.bufferMessage(IntToStr(id)+' East');
-  end
-  else if (sniffWest(entityList[id].posY, entityList[id].posX) = True) and
-    (canMove(entityList[id].posX - 1, entityList[id].posY)) then
-  begin
-    newX := entityList[id].posX - 1;
-    newY := entityList[id].posY;
-    ui.bufferMessage(IntToStr(id)+' West');
-  end;
-
-  (* Check if the tile contains another entity *)
-  if (map.isOccupied(newX, newY) = True) then
-  begin
-    if (map.canSee(newX, newY) = True) then
-      ui.bufferMessage('The cave bear bumps into ' + getCreatureName(newX, newY));
-    entities.moveNPC(id, spx, spy);
-  end
-  (* if map is unoccupied, move to that tile *)
-  else if (map.isOccupied(newX, newY) = False) then
-    entities.moveNPC(id, newX, newY)
-  else
-    wander(id, spx, spy);
 end;
 
 procedure chasePlayer(id, spx, spy: smallint);
