@@ -154,6 +154,7 @@ begin
       end;
     end;
   end;
+
   (* Copy temporary map back to main dungeon map array *)
   for r := 1 to MAXROWS do
   begin

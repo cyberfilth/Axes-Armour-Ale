@@ -281,7 +281,10 @@ begin
 end;
 
 procedure generate;
+var
+  pillars: byte;
 begin
+  pillars := 0;
   roomCounter := 0;
   // initialise the array
   SetLength(globalutils.currentDgncentreList, 1);
@@ -401,7 +404,25 @@ begin
     caveArray[i][1] := '*';
     caveArray[i][globalutils.MAXCOLUMNS] := '*';
   end;
-  // set player start coordinates
+
+  (* Add random pillars *)
+  for pillars := 1 to randomRange(5, 10) do
+  begin
+    //  (* Choose random location on the map *)
+    repeat
+      r := globalutils.randomRange(1, MAXROWS);
+      c := globalutils.randomRange(1, MAXCOLUMNS);
+      (* choose a location that is a floor tile surrounded by floor tiles *)
+    until (caveArray[r][c] = ':') and (caveArray[r + 1][c] = ':') and
+      (caveArray[r - 1][c] = ':') and (caveArray[r][c + 1] = ':') and
+      (caveArray[r][c - 1] = ':');
+    (* Place a pillar *)
+    caveArray[r][c] := '*';
+  end;
+
+  (* set player start coordinates, and make sure it isn't a pillar *)
+  caveArray[globalutils.currentDgncentreList[1].y]
+    [globalutils.currentDgncentreList[1].x] := ':';
   map.startX := globalutils.currentDgncentreList[1].x;
   map.startY := globalutils.currentDgncentreList[1].y;
 
