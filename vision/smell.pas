@@ -1,7 +1,9 @@
 (* Smell map, a copy of the map is floodfilled with integers.
    Each integer increments the further away it is from the player.
    Creatures can then track the player by finding a tile with a lower number
-   than the one that they're standing on *)
+   than the one that they're standing on.
+
+   The below routine is based on code from Stephen Peter (aka speter) *)
 
 unit smell;
 
@@ -12,16 +14,25 @@ interface
 uses
   globalutils;
 
+const
+  (* used on the smell map to denote a wall *)
+  BLOCKVALUE = 500;
+
+type
+  TDist = array [1..MAXROWS, 1..MAXCOLUMNS] of smallint;
+  Tbkinds = (bWall, bClear);
+
 var
-  dungeonCopy: array[1..MAXROWS, 1..MAXCOLUMNS] of char;
   smellmap: array[1..MAXROWS, 1..MAXCOLUMNS] of smallint;
-  counter: smallint;
-  (* TESTING - Write dungeon to text file *)
+  distances: TDist;
+  (* TESTING - Write smell map to text file *)
   filename: ShortString;
   myfile: Text;
 
-(* Flood fill map with integers *)
-procedure floodFill(r, c: smallint);
+(* Check if tile is a wall or not *)
+function blockORnot(x, y: smallint): Tbkinds;
+(* Calculate distance from player *)
+procedure calcDistances(x, y: smallint);
 (* Generate smell map *)
 procedure sniff;
 (* Check tile to the North *)
@@ -38,66 +49,78 @@ implementation
 uses
   entities;
 
-(* Fill immediate area *)
-procedure floodFill(r, c: smallint);
+function blockORnot(x, y: smallint): Tbkinds;
 begin
-  if (counter < 500) then
-  begin
-    if (r >= 1) and (r <= MAXROWS) and (c >= 1) and (c <= MAXCOLUMNS) then
-    begin
-      if (dungeonCopy[r][c] = ':') and (smellmap[r][c] > counter) then
-      begin
-        smellmap[r][c] := counter;
-        dungeonCopy[r][c] := '*';
-        counter := counter + 1;
-      end
-      else
-        exit;
-      floodFill(r + 1, c);
-      floodFill(r - 1, c);
-      floodFill(r, c + 1);
-      floodFill(r, c - 1);
-    end;
-  end;
+  if (dungeon[y][x] = '#') then
+    Result := bWall
+  else if (dungeon[y][x] = '.') then
+    Result := bClear
+  else
+    Result := bWall;
 end;
 
-procedure sniff;
-var
-  r, c: smallint;
+procedure calcDistances(x, y: smallint);
+(* Check within boundaries of map *)
+  function rangeok(x, y: smallint): boolean;
+  begin
+    Result := (x in [2..MAXCOLUMNS - 1]) and (y in [2..MAXROWS - 1]);
+  end;
+
+  (* Set distance around current tile *)
+  procedure setaround(x, y: smallint; d: smallint);
+  const
+    r: array[1..4] of tpoint =              // the four directions of movement
+      ((x: 0; y: -1), (x: 1; y: 0), (x: 0; y: 1), (x: -1; y: 0));
+  var
+    a: smallint;
+    dx, dy: smallint;
+  begin
+    for a := 1 to 4 do
+    begin
+      dx := x + r[a].x;
+      dy := y + r[a].y;
+      if rangeok(dx, dy) and (blockORnot(dx, dy) = bClear) and
+        (d < distances[dy, dx]) then
+      begin
+        distances[dy, dx] := d;
+        setaround(dx, dy, d + 1);
+      end;
+    end;
+  end;
+
 begin
-  // create a copy of the dungeon
+  distances[x, y] := 0;
+  setaround(x, y, 1);
+end;
+
+
+procedure sniff;
+begin
+  (* Initialise distance map *)
   for r := 1 to MAXROWS do
   begin
     for c := 1 to MAXCOLUMNS do
     begin
-      dungeonCopy[r][c] := dungeonArray[r][c];
+      distances[r, c] := BLOCKVALUE;
     end;
   end;
-  // initialise smell map
-  for r := 1 to MAXROWS do
-  begin
-    for c := 1 to MAXCOLUMNS do
-    begin
-      smellmap[r][c] := 550;
-    end;
-  end;
-  // generate smell map
-  counter := 1;
-  floodFill(entityList[0].posY, entityList[0].posX);
+  (* flood map from players current position *)
+  calcDistances(entityList[0].posX, entityList[0].posY);
+
   /////////////////////////////
   //Write map to text file for testing
-  filename := 'smellmap.txt';
-  AssignFile(myfile, filename);
-  rewrite(myfile);
-  for r := 1 to MAXROWS do
-  begin
-    for c := 1 to MAXCOLUMNS do
-    begin
-      Write(myfile, smellmap[r][c], ' ');
-    end;
-    Write(myfile, sLineBreak);
-  end;
-  closeFile(myfile);
+  //filename := 'smellmap.txt';
+  //AssignFile(myfile, filename);
+  //rewrite(myfile);
+  //for r := 1 to MAXROWS do
+  //begin
+  //  for c := 1 to MAXCOLUMNS do
+  //  begin
+  //    Write(myfile, smellmap[r][c], ' ');
+  //  end;
+  //  Write(myfile, sLineBreak);
+  //end;
+  //closeFile(myfile);
   //////////////////////////////
 
 end;
