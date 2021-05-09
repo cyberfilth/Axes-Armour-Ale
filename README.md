@@ -12,6 +12,8 @@ Alpha version, most features aren't implemented yet and what there is may change
  - Small, self-contained binary with no external dependencies.
  - Can be run without needing to be installed
 
+A terminal version is in development at [ASCII Axe](https://github.com/cyberfilth/ASCII-axe).
+
 ![Cave screenshot](GITscreenshots/windows_screenshot1.png)
 
 ![Dungeon screenshot](GITscreenshots/windows_screenshot2.png)
