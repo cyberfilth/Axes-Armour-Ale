@@ -1,4 +1,6 @@
-![Axes, Armour & Ale - logo](GITscreenshots/Logo.png)
+<p align="center">
+  <img width="400" height="113" src="GITscreenshots/Logo.png">
+</p>
 
 ![build-test](https://github.com/cyberfilth/Axes-Armour-Ale/workflows/build-test/badge.svg)     ![Free Pascal](GITscreenshots/fpc.svg)      ![Lazarus](GITscreenshots/lazarus.svg)
 
