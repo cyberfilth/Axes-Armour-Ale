@@ -6,6 +6,8 @@
 
 ### A low-fantasy, roguelike game
 
+##  This version has been superceded by the ASCII version at [ASCII Axe](https://github.com/cyberfilth/ASCII-axe).
+
 Alpha version, most features aren't implemented yet and what there is may change frequently. Currently there are the following features:
  - A randomly generated dungeon and a cave created using cellular automata
  - Each game is automatically saved when exiting and can be reloaded when continuing
@@ -13,8 +15,7 @@ Alpha version, most features aren't implemented yet and what there is may change
  - Game runs natively on both GNU/Linux and Windows
  - Small, self-contained binary with no external dependencies.
  - Can be run without needing to be installed
-
-A terminal version is in development at [ASCII Axe](https://github.com/cyberfilth/ASCII-axe).
+ 
 
 ![Cave screenshot](GITscreenshots/windows_screenshot1.png)
 
