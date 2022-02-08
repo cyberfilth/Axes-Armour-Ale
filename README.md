@@ -1,4 +1,4 @@
-# Axes, Armour & Ale
+<h1 align="center">Axes, Armour & Ale</h1>
 <p align="center">
   <img width="300" height="230" src="GITscreenshots/Logo.png">
 </p>
