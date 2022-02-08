@@ -1,141 +1,236 @@
-(* Axes, Armour & Ale - Roguelike for Linux and Windows.
+(* Axes, Armour & Ale - A low-fantasy roguelike.
    @author (Chris Hawkins)
 *)
 
 unit main;
 
 {$mode objfpc}{$H+}
-{$IfOpt D+}
-{$Define DEBUG}
-{$EndIf}
+{$IFOPT D+} {$DEFINE DEBUG} {$ENDIF}
 
 interface
 
 uses
-  Classes, Forms, ComCtrls, Graphics, SysUtils, map, player,
-  globalutils, Controls, LCLType, ui, items, player_inventory;
+  SysUtils, Video, keyboard, KeyboardInput, ui, camera, map, scrGame, globalUtils,
+  universe, fov, scrRIP, plot_gen, file_handling, smell, scrTitle, scrWinAlpha,
+  dlgInfo
+  {$IFDEF DEBUG}, logging{$ENDIF};
 
+(* Finite State Machine game states *)
 type
-
-  { TGameWindow }
-
-  TGameWindow = class(TForm)
-    StatusBar1: TStatusBar;
-    procedure FormCreate(Sender: TObject);
-    procedure FormDestroy(Sender: TObject);
-    procedure FormKeyDown(Sender: TObject; var Key: word);
-    procedure FormMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: integer);
-    procedure FormPaint(Sender: TObject);
-    (* New game setup *)
-    procedure newGame;
-    (* Continue previous saved game *)
-    procedure continueGame;
-    (* Confirm quit game *)
-    procedure confirmQuit;
-    (* Free memory *)
-    procedure freeMemory;
-  private
-
-  public
-  end;
+  gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
+    stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave,
+    stCharSelect, stCharIntro, stDialogBox, stWinAlpha);
 
 var
-  GameWindow: TGameWindow;
-  (* Display is drawn on tempScreen before being copied to canvas *)
-  tempScreen, inventoryScreen, RIPscreen: TBitmap;
-  (* 0 = titlescreen, 1 = game running, 2 = inventory screen, 3 = Quit menu, 4 = Game Over *)
-  gameState: byte;
-  (* Screen to display *)
-  currentScreen: TBitmap;
+  (* State machine for game menus / controls *)
+  gameState: gameStatus;
+  (* Used for title menu, TRUE if there is a save file *)
+  saveExists: boolean;
+
+procedure setSeed;
+procedure initialise;
+procedure exitApplication;
+procedure exitToTitleMenu;
+procedure newGame;
+procedure continue;
+procedure loop;
+procedure gameLoop;
+procedure returnToGameScreen;
+procedure gameOver;
+procedure WinningScreen;
 
 implementation
 
 uses
-  entities, fov;
+  entities, items, player, player_inventory, player_stats;
 
-{$R *.lfm}
-
-{ TGameWindow }
-
-procedure TGameWindow.FormCreate(Sender: TObject);
+procedure setSeed;
 begin
-  gameState := 0;
-  tempScreen := TBitmap.Create;
-  tempScreen.Height := 578;
-  tempScreen.Width := 835;
-  inventoryScreen := TBitmap.Create;
-  inventoryScreen.Height := 578;
-  inventoryScreen.Width := 835;
-  RIPscreen := TBitmap.Create;
-  RIPscreen.Height := 578;
-  RIPscreen.Width := 835;
-  currentScreen := tempScreen;
+  {$IFDEF Linux}
+  RandSeed := RandSeed shl 8;
+  {$ENDIF}
+  {$IFDEF Windows}
+  RandSeed := ((RandSeed shl 8) or GetProcessID);
+  {$ENDIF}
+  {$IFDEF Darwin}
+  RandSeed := RandSeed shl 8;
+  {$ENDIF}
+end;
+
+procedure initialise;
+begin
+  (* Set save directory *)
+  {$IFDEF Linux}
+  globalutils.saveDirectory := getUserDir + '.axesData';
+  {$ENDIF}
+  {$IFDEF Darwin}
+  globalutils.saveDirectory := getUserDir + '.axesData';
+  {$ENDIF}
+  {$IFDEF Windows}
+  globalutils.saveDirectory := getUserDir + 'axesData';
+  {$ENDIF}
+  gameState := stTitle;
   Randomize;
+  { Check if seed set as command line parameter }
   if (ParamCount = 2) then
   begin
     if (ParamStr(1) = '--seed') then
-      RandSeed := StrToInt(ParamStr(2))
+      RandSeed := StrToDWord(ParamStr(2))
     else
     begin
-      (* Set random seed *)
-      {$IFDEF Linux}
-      RandSeed := RandSeed shl 8;
-      {$ENDIF}
-      {$IFDEF Windows}
-      RandSeed := ((RandSeed shl 8) or GetProcessID);
-      {$ENDIF}
+      { Set random seed if not specified }
+      setSeed;
+    end;
+  end
+  else
+    setSeed;
+  {$IFDEF DEBUG}
+  logging.beginLogging;
+  {$ENDIF}
+
+  (* Check for previous save file *)
+  if (FileExists(globalUtils.saveDirectory + DirectorySeparator +
+    globalutils.saveFile)) then
+  begin
+    saveExists := True;
+    { Initialise video unit and show title screen }
+    ui.setupScreen(1);
+  end
+  else
+  begin
+    try
+      { create directory }
+      CreateDir(globalUtils.saveDirectory);
+    finally
+      { Initialise video unit and show title screen }
+      ui.setupScreen(0);
     end;
   end;
-  StatusBar1.SimpleText := 'Version ' + globalutils.VERSION;
+  { Initialise keyboard unit }
+  keyboardinput.setupKeyboard;
+
+  (* Set a Dwarven clan name *)
+  plot_gen.generateClanName;
+end;
+
+procedure exitApplication;
+begin
+  (* Don't attempt to save game from Title screen *)
+  if (gameState <> stTitle) then
+  begin
+    if (gameState <> stGameOver) then
+    begin
+      file_handling.saveGame;
+      (* Clear arrays *)
+      entityList := nil;
+      itemList := nil;
+    end;
+  end;
+  gameState := stGameOver;
+  { Shutdown keyboard unit }
+  keyboardinput.shutdownKeyboard;
+  { Shutdown video unit }
+  ui.shutdownScreen;
+  (* Clear screen and display author message *)
+  ui.exitMessage;
+  halt;
+end;
+
+procedure exitToTitleMenu;
+begin
+  (* Don't attempt to save game from Title screen *)
+  if (gameState <> stTitle) then
+  begin
+    if (gameState <> stGameOver) then
+    begin
+      file_handling.saveGame;
+      (* Clear arrays *)
+      entityList := nil;
+      itemList := nil;
+    end;
+  end;
+  gameState := stTitle;
+  ClearScreen;
+  (* Clear the message array *)
+  ui.messageArray[1] := ' ';
+  ui.messageArray[2] := ' ';
+  ui.messageArray[3] := ' ';
+  ui.messageArray[4] := ' ';
+  ui.messageArray[5] := ' ';
+  ui.messageArray[6] := ' ';
+  ui.messageArray[7] := ' ';
+  (* prepare changes to the screen *)
+  LockScreenUpdate;
   (* Check for previous save file *)
-  if FileExists(GetUserDir + globalutils.saveFile) then
-    ui.titleScreen(1)
+  if (FileExists(globalUtils.saveDirectory + DirectorySeparator +
+    globalutils.saveFile)) then
+  begin
+    saveExists := True;
+    scrtitle.displayTitleScreen(1);
+  end
   else
-    ui.titleScreen(0);
-end;
-
-procedure TGameWindow.FormDestroy(Sender: TObject);
-begin
-  (* Don't try to save game from title screen *)
-  if (gameState = 1) then
   begin
-    globalutils.saveGame;
-    freeMemory;
+    try
+      { create directory }
+      CreateDir(globalUtils.saveDirectory);
+    finally
+      { Initialise video unit and show title screen }
+      scrtitle.displayTitleScreen(0);
+    end;
   end;
-  tempScreen.Free;
-  inventoryScreen.Free;
-  RIPscreen.Free;
-  {$IFDEF Linux}
-  WriteLn('Axes, Armour & Ale - (c) Chris Hawkins');
-  {$ENDIF}
-  Application.Terminate;
+  (* Write those changes to the screen *)
+  UnlockScreenUpdate;
+  (* only redraws the parts that have been updated *)
+  UpdateScreen(False);
 end;
 
-procedure gameLoop;
+procedure newGame;
 var
-  i: smallint;
+  i: byte;
 begin
-  (* Check for player death at start of game loop *)
-  if (entityList[0].currentHP <= 0) then
-  begin
-    player.gameOver;
-    Exit;
-  end;
-  (* move NPC's *)
+  (* Game state = game running *)
+  gameState := stGame;
+  dlgInfo.dialogType := dlgNone;
+  killer := 'empty';
+  (* Initialise the game world and create 1st cave *)
+  universe.dlistLength := 0;
+  (* first map type is always a cave *)
+  map.mapType := universe.tCave;
+  (* Create the dungeon *)
+  universe.createNewDungeon(map.mapType);
+  (* Set smell counter to zero *)
+  smell.smellCounter := 0;
+  (* Create the Player *)
+  entities.spawnPlayer;
+  (* Set player stats *)
+  player_stats.playerLevel := 1;
+  player_stats.enchantedWeaponEquipped := False;
+  player_stats.enchWeapType := 0;
+  (* Spawn game entities *)
+  universe.spawnDenizens;
+  (* Initialise items list *)
+  items.initialiseItems;
+  (* Start dropping items on map *)
+  universe.litterItems;
+
+  { prepare changes to the screen }
+  LockScreenUpdate;
+  (* Clear the screen *)
+  ui.screenBlank;
+  (* Draw the game screen *)
+  scrGame.displayGameScreen;
+  (* Place the NPC's *)
   entities.NPCgameLoop;
-  (* Redraw Field of View after entities move *)
-  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
-  (* Draw all visible items *)
+  (* Redraw all items *)
   for i := 1 to items.itemAmount do
     if (map.canSee(items.itemList[i].posX, items.itemList[i].posY) = True) then
     begin
       items.itemList[i].inView := True;
-      items.redrawItems;
+      items.drawItemsOnMap(i);
       (* Display a message if this is the first time seeing this item *)
       if (items.itemList[i].discovered = False) then
       begin
-        ui.displayMessage('You see a ' + items.itemList[i].itemName);
+        ui.displayMessage('You see ' + items.itemList[i].itemArticle + ' ' + items.itemList[i].itemName);
         items.itemList[i].discovered := True;
       end;
     end
@@ -144,512 +239,237 @@ begin
       items.itemList[i].inView := False;
       map.drawTile(itemList[i].posX, itemList[i].posY, 0);
     end;
-  (* Redraw NPC's *)
-  entities.redrawNPC;
-  (* Update health display to show damage *)
-  ui.updateHealth;
+
+  (* draw map through the camera *)
+  camera.drawMap;
+
+  (* Draw player and FOV *)
+  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+
+  (* Generate the welcome message *)
+  ui.welcome;
+
+  { Write those changes to the screen }
+  UnlockScreenUpdate;
+  { only redraws the parts that have been updated }
+  UpdateScreen(False);
+end;
+
+procedure continue;
+var
+  i: byte;
+begin
+  (* Initialise items list *)
+  items.initialiseItems;
+  file_handling.loadGame;
+  file_handling.loadDungeonLevel(universe.currentDepth);
+  map.loadDisplayedMap;
+  (* Game state = game running *)
+  gameState := stGame;
+  killer := 'empty';
+  (* set up inventory *)
+  ui.equippedWeapon := 'No weapon equipped';
+  ui.equippedArmour := 'No armour worn';
+  (* Load player inventory *)
+  player_inventory.loadEquippedItems;
+
+  (* Draw player and FOV *)
+  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+
+  (* Redraw all items *)
+  items.redrawItems;
+
+  (* Redraw all NPC'S *)
+  for i := 1 to entities.npcAmount do
+    entities.redrawMapDisplay(i);
+
+  { prepare changes to the screen }
+  LockScreenUpdate;
+  (* Clear the screen *)
+  ui.screenBlank;
+  (* Draw the game screen *)
+  scrGame.displayGameScreen;
+  (* draw map through the camera *)
+  camera.drawMap;
+  (* Generate the welcome message *)
+  plot_gen.getTrollDate;
+  ui.displayMessage('Good Luck...');
+  ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
+  ui.displayMessage('It is ' + plot_gen.trollDate);
+  { Write those changes to the screen }
+  UnlockScreenUpdate;
+  { only redraws the parts that have been updated }
+  UpdateScreen(False);
+end;
+
+(* Take input from player for the KeyboardInput unit, based on current game state *)
+procedure loop;
+var
+  Keypress: TKeyEvent;
+begin
+  while True do
+  begin
+    Keypress := GetKeyEvent;
+    Keypress := TranslateKeyEvent(Keypress);
+    case gameState of
+      { ----------------------------------   Title menu }
+      stTitle: titleInput(Keypress);
+      { ----------------------------------   Character select screen }
+      stCharSelect: charSelInput(Keypress);
+      { ----------------------------------   Intro screen }
+      stIntro: introInput(Keypress);
+      { ----------------------------------   Character Intro screen }
+      stCharIntro: charIntroInput(Keypress);
+      { -----------------------------------  Game Over screen }
+      stGameOver: RIPInput(Keypress);
+      { ----------------------------------   Prompt to quit game }
+      stQuitMenu: quitInput(Keypress);
+      { ---------------------------------    In the Inventory menu }
+      stInventory: inventoryInput(Keypress);
+      { ---------------------------------    In the Drop item menu }
+      stDropMenu: dropInput(Keypress);
+      { ---------------------------------    In the Quaff menu }
+      stQuaffMenu: quaffInput(Keypress);
+      { ---------------------------------    In the Wear / Wield menu }
+      stWearWield: wearWieldInput(Keypress);
+      { ---------------------------------    In the Level Up menu }
+      stDialogLevel: LevelUpInput(Keypress);
+      { ---------------------------------    In the Dialog pop-up }
+      stDialogBox: dialogBoxInput(Keypress);
+      { ---------------------------------    Gameplay controls }
+      stGame: gameInput(Keypress);
+      { ---------------------------------    Confirm overwrite game }
+      stLoseSave: LoseSaveInput(Keypress);
+      { ---------------------------------    Winning Alpha version of game }
+      stWinAlpha: WinAlphaInput(Keypress);
+    end;
+  end;
+end;
+
+procedure gameLoop;
+var
+  i: byte;
+begin
+  (* Check for player death at start of game loop *)
   if (entityList[0].currentHP <= 0) then
-    (* Clear Look / Info box *)
-    ui.displayLook(1, 'none', '', 0, 0);
-  (* Redraw Player *)
-  drawToBuffer(map.mapToScreen(entities.entityList[0].posX),
-    map.mapToScreen(entities.entityList[0].posY),
-    entities.playerGlyph);
+  begin
+    gameState := stGameOver;
+    gameOver;
+  end;
+
+  (* ALPHA VERSION ONLY - Check if player has won *)
+  if (gameState = stWinAlpha) then
+    Exit;
+
+  (* move NPC's *)
+  entities.NPCgameLoop;
   (* Process status effects *)
   player.processStatus;
+  (* Draw player and FOV *)
+  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+  (* Redraw all items *)
+  items.redrawItems;
+  (* Redraw all NPC'S *)
+  for i := 1 to entities.npcAmount do
+    entities.redrawMapDisplay(i);
+  { prepare changes to the screen }
+  LockScreenUpdate;
+
+  (* BEGIN DRAWING TO THE BUFFER *)
+
+  entities.occupyUpdate;
+  (* Update health display to show damage *)
+  ui.updateHealth;
+  (* Update magick display *)
+  if (player_stats.playerRace <> 'Dwarf') then
+    ui.updateMagick;
+  (* Reduce smell counter *)
+  if (smell.smellCounter > 0) then
+    Dec(smell.smellCounter);
+  (* draw map through the camera *)
+  camera.drawMap;
+
+  (* FINISH DRAWING TO THE BUFFER *)
+
+  { Write those changes to the screen }
+  UnlockScreenUpdate;
+  { only redraws the parts that have been updated }
+  UpdateScreen(False);
   (* Check for player death at end of game loop *)
   if (entityList[0].currentHP <= 0) then
   begin
-    player.gameOver;
-    Exit;
+    gameState := stGameOver;
+    gameOver;
   end;
+  (* Check if the player has levelled up *)
+  player_stats.checkLevel;
+  (* Process any dialog pop-ups *)
+  dlgInfo.checkNotifications;
 end;
 
-procedure TGameWindow.FormKeyDown(Sender: TObject; var Key: word);
+procedure returnToGameScreen;
+var
+  i: byte;
 begin
-  if (gameState = 1) then
-  begin // beginning of game input
-    case Key of
-      VK_LEFT, VK_NUMPAD4, VK_H:
-      begin
-        player.movePlayer(2);
-        gameLoop;
-        Invalidate;
-      end;
-      VK_RIGHT, VK_NUMPAD6, VK_L:
-      begin
-        player.movePlayer(4);
-        gameLoop;
-        Invalidate;
-      end;
-      VK_UP, VK_NUMPAD8, VK_K:
-      begin
-        player.movePlayer(1);
-        gameLoop;
-        Invalidate;
-      end;
-      VK_DOWN, VK_NUMPAD2, VK_J:
-      begin
-        player.movePlayer(3);
-        gameLoop;
-        Invalidate;
-      end;
-      VK_NUMPAD9, VK_U:
-      begin
-        player.movePlayer(5);
-        gameLoop;
-        Invalidate;
-      end;
-      VK_NUMPAD3, VK_N:
-      begin
-        player.movePlayer(6);
-        gameLoop;
-        Invalidate;
-      end;
-      VK_NUMPAD1, VK_B:
-      begin
-        player.movePlayer(7);
-        gameLoop;
-        Invalidate;
-      end;
-      VK_NUMPAD7, VK_Y:
-      begin
-        player.movePlayer(8);
-        gameLoop;
-        Invalidate;
-      end;
-      VK_G, VK_OEM_COMMA: // Get item
-      begin
-        player.pickUp;
-        gameLoop;
-        Invalidate;
-      end;
-      VK_D: // Drop item
-      begin
-        currentScreen := inventoryScreen;
-        gameState := 2;
-        player_inventory.drop(10);
-        Invalidate;
-      end;
-      VK_Q: // Quaff item
-      begin
-        currentScreen := inventoryScreen;
-        gameState := 2;
-        player_inventory.quaff(10);
-        Invalidate;
-      end;
-      VK_W: // Wear / Wield item
-      begin
-        currentScreen := inventoryScreen;
-        gameState := 2;
-        player_inventory.wield(10);
-        Invalidate;
-      end;
-      VK_I: // Show inventory
-      begin
-        player_inventory.showInventory;
-        Invalidate;
-      end;
-      VK_ESCAPE: // Quit game
-      begin
-        gameState := 3;
-        confirmQuit;
-      end;
-    end;
-  end // end of game input
-  else if (gameState = 0) then
-  begin // beginning of Title menu
-    case Key of
-      VK_N: newGame;
-      VK_L: continueGame;
-      VK_Q: Close();
-    end; // end of title menu screen
-  end
-  else if (gameState = 2) then
-  begin // beginning of inventory menu
-    case Key of
-      VK_ESCAPE:  // Exit
-      begin
-        player_inventory.menu(0);
-        Invalidate;
-      end;
-      VK_D:  // Drop
-      begin
-        player_inventory.menu(1);
-        Invalidate;
-      end;
-      VK_Q:  // Quaff
-      begin
-        player_inventory.menu(12);
-        Invalidate;
-      end;
-      VK_W:  // Wear / Wield
-      begin
-        player_inventory.menu(13);
-        Invalidate;
-      end;
-      VK_0:
-      begin
-        player_inventory.menu(2);
-        Invalidate;
-      end;
-      VK_1:
-      begin
-        player_inventory.menu(3);
-        Invalidate;
-      end;
-      VK_2:
-      begin
-        player_inventory.menu(4);
-        Invalidate;
-      end;
-      VK_3:
-      begin
-        player_inventory.menu(5);
-        Invalidate;
-      end;
-      VK_4:
-      begin
-        player_inventory.menu(6);
-        Invalidate;
-      end;
-      VK_5:
-      begin
-        player_inventory.menu(7);
-        Invalidate;
-      end;
-      VK_6:
-      begin
-        player_inventory.menu(8);
-        Invalidate;
-      end;
-      VK_7:
-      begin
-        player_inventory.menu(9);
-        Invalidate;
-      end;
-      VK_8:
-      begin
-        player_inventory.menu(10);
-        Invalidate;
-      end;
-      VK_9:
-      begin
-        player_inventory.menu(11);
-        Invalidate;
-      end;
-    end;  // end of inventory menu
-  end
-  else if (gameState = 3) then // Quit menu
-  begin
-    case Key of
-      VK_Q:
-      begin
-        globalutils.saveGame;
-        gameState := 0;
-        freeMemory;
-        Close();
-      end;
-      VK_X:
-      begin
-        freeMemory;
-        globalutils.saveGame;
-        gameState := 0;
-        ui.clearLog;
-        ui.titleScreen(1);
-        Invalidate;
-      end;
-      VK_ESCAPE:
-      begin
-        gameState := 1;
-        ui.rewriteTopMessage;
-        Invalidate;
-      end;
-    end;
-  end
-  else if (gameState = 4) then // Game Over menu
-  begin
-    case Key of
-      VK_Q:
-      begin
-        gameState := 0;
-        freeMemory;
-        Close();
-      end;
-      VK_X:
-      begin
-        freeMemory;
-        gameState := 0;
-        ui.clearLog;
-        ui.titleScreen(0);
-        currentScreen := tempScreen;
-        Invalidate;
-      end;
-    end;
-  end;
-end;
+  { prepare changes to the screen }
+  LockScreenUpdate;
+  (* BEGIN DRAWING TO THE BUFFER *)
 
-(* Capture mouse position for the Look command *)
-procedure TGameWindow.FormMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: integer);
-begin
-  if (X >= 1) and (X <= 686) and (Y >= 1) and (Y <= 400) then
-  begin
-    (* Check for entity *)
-    if (map.isOccupied(map.screenToMap(x), map.screenToMap(y)) = True) then
+  (* Clear the screen *)
+  ui.screenBlank;
+  (* Draw the game screen *)
+  scrGame.displayGameScreen;
+  (* Draw player and FOV *)
+  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+  (* Redraw all NPC'S *)
+  for i := 1 to entities.npcAmount do
+    entities.redrawMapDisplay(i);
+  (* Redraw all items *)
+  for i := 1 to items.itemAmount do
+    if (map.canSee(items.itemList[i].posX, items.itemList[i].posY) = True) then
     begin
-      (* Add check if they are visible *)
-      if (isCreatureVisible(screenToMap(x), screenToMap(y)) = True) then
+      items.itemList[i].inView := True;
+      items.drawItemsOnMap(i);
+      (* Display a message if this is the first time seeing this item *)
+      if (items.itemList[i].discovered = False) then
       begin
-        (* Send entity name, current HP and max HP to UI display *)
-        ui.displayLook(1, getCreatureName(screenToMap(x), screenToMap(y)), '',
-          getCreatureHP(screenToMap(x), screenToMap(y)),
-          getCreatureMaxHP(screenToMap(x), screenToMap(y)));
-        Invalidate;
+        ui.displayMessage('You see ' + items.itemList[i].itemArticle + ' ' + items.itemList[i].itemName);
+        items.itemList[i].discovered := True;
       end;
-    end
-    (* Check for item *)
-    else if (items.containsItem(map.screenToMap(x), map.screenToMap(y)) = True) then
-    begin
-      ui.displayLook(2, getItemName(map.screenToMap(x), map.screenToMap(y)),
-        getItemDescription(map.screenToMap(x), map.screenToMap(y)), 0, 0);
-      Invalidate;
     end
     else
     begin
-      (* Clear UI display *)
-      ui.displayLook(1, 'none', '', 0, 0);
-      Invalidate;
+      items.itemList[i].inView := False;
+      map.drawTile(itemList[i].posX, itemList[i].posY, 0);
     end;
-  end;
+  (* draw map through the camera *)
+  camera.drawMap;
+  entities.occupyUpdate;
+  (* Update health display to show damage *)
+  ui.updateHealth;
+  (* draw map through the camera *)
+  camera.drawMap;
+  (* Redraw message log *)
+  ui.restoreMessages;
+  ui.writeBufferedMessages;
+
+  (* FINISH DRAWING TO THE BUFFER *)
+
+  { Write those changes to the screen }
+  UnlockScreenUpdate;
+  { only redraws the parts that have been updated }
+  UpdateScreen(False);
 end;
 
-procedure TGameWindow.FormPaint(Sender: TObject);
+procedure gameOver;
 begin
-  Canvas.Draw(0, 0, currentScreen);
+  scrRIP.displayRIPscreen;
 end;
 
-
-procedure TGameWindow.newGame;
+procedure WinningScreen;
 begin
-  {$IfDef DEBUG}
-  {$IfDef Linux}
-  writeln('Debugging info...');
-  writeln('Random seed = ' + IntToStr(RandSeed));
-  {$EndIf}
-  {$EndIf}
-  gameState := 1;
-  killer := 'empty';
-  playerTurn := 0;
-  map.mapType := 0;
-  map.setupMap;
-  map.setupTiles;
-  entities.setupEntities;
-  items.setupItems;
-  (* Clear the screen *)
-  tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
-  tempScreen.Canvas.FillRect(0, 0, tempScreen.Width, tempScreen.Height);
-  (* Spawn game entities *)
-  entities.spawnNPCs;
-  (* Drop items *)
-  items.initialiseItems;
-  (* Draw sidepanel *)
-  ui.drawSidepanel;
-  (* Setup players starting equipment *)
-  player.createEquipment;
-  ui.displayMessage('Welcome message to be added here...');
-  gameLoop;
-  Canvas.Draw(0, 0, tempScreen);
-end;
-
-procedure TGameWindow.continueGame;
-begin
-  gameState := 1;
-  globalutils.loadGame;
-  killer := 'empty';
-  (* Clear the screen *)
-  tempScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
-  tempScreen.Canvas.FillRect(0, 0, tempScreen.Width, tempScreen.Height);
-  map.setupTiles;
-  map.loadMap;
-  (* Add entities to the screen *)
-  entities.setupEntities;
-  entities.redrawNPC;
-  (* Add items to the screen *)
-  items.setupItems;
-  items.redrawItems;
-  (* Draw sidepanel *)
-  ui.drawSidepanel;
-  (* Check for equipped items *)
-  player_inventory.loadEquippedItems;
-  (* Setup player vision *)
-  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
-    entities.entityList[0].visionRange, 1);
-  ui.displayMessage('Welcome message to be added here...');
-  gameLoop;
-  Canvas.Draw(0, 0, tempScreen);
-end;
-
-procedure TGameWindow.confirmQuit;
-begin
-  ui.exitPrompt;
-  Invalidate;
-end;
-
-procedure TGameWindow.freeMemory;
-begin
-  (* Map tiles *)
-  map.caveFloorHi.Free;
-  map.caveFloorDef.Free;
-  map.caveWallHi.Free;
-  map.caveWallDef.Free;
-  map.blueDungeonFloorDef.Free;
-  map.blueDungeonFloorHi.Free;
-  map.blueDungeonWallDef.Free;
-  map.blueDungeonWallHi.Free;
-  map.caveWall2Def.Free;
-  map.caveWall2Hi.Free;
-  map.caveWall3Def.Free;
-  map.caveWall3Hi.Free;
-  map.downStairs.Free;
-  map.upStairs.Free;
-  map.bmDungeon3Def.Free;
-  map.bmDungeon3Hi.Free;
-  map.bmDungeon5Def.Free;
-  map.bmDungeon5Hi.Free;
-  map.bmDungeon6Def.Free;
-  map.bmDungeon6Hi.Free;
-  map.bmDungeon7Def.Free;
-  map.bmDungeon7Hi.Free;
-  map.bmDungeon9Def.Free;
-  map.bmDungeon9Hi.Free;
-  map.bmDungeon10Def.Free;
-  map.bmDungeon10Hi.Free;
-  map.bmDungeon11Def.Free;
-  map.bmDungeon11Hi.Free;
-  map.bmDungeon12Def.Free;
-  map.bmDungeon12Hi.Free;
-  map.bmDungeon13Def.Free;
-  map.bmDungeon13Hi.Free;
-  map.bmDungeon14Def.Free;
-  map.bmDungeon14Hi.Free;
-  map.greyFloorHi.Free;
-  map.greyFloorDef.Free;
-  map.bmDungeonBLHi.Free;
-  map.bmDungeonBLDef.Free;
-  map.bmDungeonBRHi.Free;
-  map.bmDungeonBRDef.Free;
-  map.bmDungeonTLDef.Free;
-  map.bmDungeonTLHi.Free;
-  map.bmDungeonTRDef.Free;
-  map.bmDungeonTRHi.Free;
-  map.blankTile.Free;
-  cave1Def.Free;
-  cave1Hi.Free;
-  cave4Def.Free;
-  cave4Hi.Free;
-  cave5Def.Free;
-  cave5Hi.Free;
-  cave7Def.Free;
-  cave7Hi.Free;
-  cave16Def.Free;
-  cave16Hi.Free;
-  cave17Def.Free;
-  cave17Hi.Free;
-  cave20Def.Free;
-  cave20Hi.Free;
-  cave21Def.Free;
-  cave21Hi.Free;
-  cave23Def.Free;
-  cave23Hi.Free;
-  cave28Def.Free;
-  cave28Hi.Free;
-  cave29Def.Free;
-  cave29Hi.Free;
-  cave31Def.Free;
-  cave31Hi.Free;
-  cave64Def.Free;
-  cave64Hi.Free;
-  cave65Def.Free;
-  cave65Hi.Free;
-  cave68Def.Free;
-  cave68Hi.Free;
-  cave69Def.Free;
-  cave69Hi.Free;
-  cave71Def.Free;
-  cave71Hi.Free;
-  cave80Def.Free;
-  cave80Hi.Free;
-  cave81Def.Free;
-  cave81Hi.Free;
-  cave84Def.Free;
-  cave84Hi.Free;
-  cave85Def.Free;
-  cave85Hi.Free;
-  cave87Def.Free;
-  cave87Hi.Free;
-  cave92Def.Free;
-  cave92Hi.Free;
-  cave93Def.Free;
-  cave93Hi.Free;
-  cave95Def.Free;
-  cave95Hi.Free;
-  cave112Def.Free;
-  cave112Hi.Free;
-  cave113Def.Free;
-  cave113Hi.Free;
-  cave116Def.Free;
-  cave116Hi.Free;
-  cave117Def.Free;
-  cave117Hi.Free;
-  cave119Def.Free;
-  cave119Hi.Free;
-  cave124Def.Free;
-  cave124Hi.Free;
-  cave125Def.Free;
-  cave125Hi.Free;
-  cave127Def.Free;
-  cave127Hi.Free;
-  cave193Def.Free;
-  cave193Hi.Free;
-  cave197Def.Free;
-  cave197Hi.Free;
-  cave199Def.Free;
-  cave199Hi.Free;
-  cave209Def.Free;
-  cave209Hi.Free;
-  cave213Def.Free;
-  cave213Hi.Free;
-  cave215Def.Free;
-  cave215Hi.Free;
-  cave221Def.Free;
-  cave221Hi.Free;
-  cave223Def.Free;
-  cave223Hi.Free;
-  cave241Def.Free;
-  cave241Hi.Free;
-  cave245Def.Free;
-  cave245Hi.Free;
-  cave247Def.Free;
-  cave247Hi.Free;
-  cave253Def.Free;
-  cave253Hi.Free;
-  cave255Def.Free;
-  cave255Hi.Free;
-  (* Item sprites *)
-  items.aleTankard.Free;
-  items.wineFlask.Free;
-  items.crudeDagger.Free;
-  items.leatherArmour1.Free;
-  items.clothArmour.Free;
-  items.woodenClub.Free;
-  (* Entity sprites *)
-  entities.playerGlyph.Free;
-  entities.caveRatGlyph.Free;
-  entities.hyenaGlyph.Free;
-  entities.caveBearGlyph.Free;
-  entities.barrelGlyph.Free;
-  entities.greenFungusGlyph.Free;
+  gameState := stWinAlpha;
+  scrWinAlpha.displayWinscreen;
 end;
 
 end.

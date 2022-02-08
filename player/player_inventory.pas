@@ -1,4 +1,5 @@
 (* Handles player inventory and associated functions *)
+
 unit player_inventory;
 
 {$mode objfpc}{$H+}
@@ -6,14 +7,15 @@ unit player_inventory;
 interface
 
 uses
-  Graphics, SysUtils, entities, items, ui, globalutils;
+  SysUtils, StrUtils, video, entities, items, item_lookup, player_stats, staff_minor_scorch;
 
 type
   (* Items in inventory *)
   Equipment = record
-    id, useID: smallint;
-    Name, description, itemType: shortstring;
-    glyph: char;
+    id, useID, sortIndex: smallint;
+    Name, description, article, glyph, glyphColour: shortstring;
+    itemType: tItem;
+    itemMaterial: tMaterial;
     (* Is the item still in the inventory *)
     inInventory: boolean;
     (* Is the item being worn or wielded *)
@@ -22,8 +24,6 @@ type
 
 var
   inventory: array[0..9] of Equipment;
-  (* 0 - main menu, 1 - drop menu, 2 - quaff menu, 3 - wear/wield menu *)
-  menuState: byte;
 
 (* Initialise empty player inventory *)
 procedure initialiseInventory;
@@ -31,42 +31,51 @@ procedure initialiseInventory;
 procedure loadEquippedItems;
 (* Add to inventory *)
 function addToInventory(itemNumber: smallint): boolean;
+(* Remove from inventory *)
+function removeFromInventory(itemNumber: smallint): boolean;
+(* Sort inventory *)
+procedure sortInventory(iLo, iHi: integer);
 (* Display the inventory screen *)
 procedure showInventory;
-(* Show menu at bottom of screen *)
-procedure bottomMenu(style: byte);
-(* Show hint at bottom of screen *)
-procedure showHint(message: shortstring);
-(* Highlight inventory slots *)
-procedure highlightSlots(i, x: smallint);
-(* Dim inventory slots *)
-procedure dimSlots(i, x: smallint);
-(* Accept menu input *)
-procedure menu(selection: word);
+(* Display more information about an item *)
+procedure examineInventory(selection: smallint);
 (* Drop menu *)
-procedure drop(dropItem: byte);
+procedure drop;
+(* Drop selected item *)
+procedure dropSelection(selection: smallint);
 (* Quaff menu *)
-procedure quaff(quaffItem: byte);
+procedure quaff;
+(* Quaff selected item *)
+procedure quaffSelection(selection: smallint);
 (* Wear / Wield menu *)
-procedure wield(wieldItem: byte);
+procedure wield(message: char);
+(* Wear / Wield selected item *)
+procedure wearWieldSelection(selection: smallint);
+(* Zap equipped item *)
+procedure Zzap(item: smallint);
 
 implementation
 
 uses
-  main;
+  scrInventory, ui;
 
 procedure initialiseInventory;
+
 var
   i: byte;
 begin
   for i := 0 to 9 do
   begin
     inventory[i].id := i;
+    inventory[i].sortIndex := 10;
     inventory[i].Name := 'Empty';
     inventory[i].equipped := False;
     inventory[i].description := 'x';
-    inventory[i].itemType := 'x';
+    inventory[i].article := 'x';
+    inventory[i].itemType := itmEmptySlot;
+    inventory[i].itemMaterial := matEmpty;
     inventory[i].glyph := 'x';
+    inventory[i].glyphColour := 'x';
     inventory[i].inInventory := False;
     inventory[i].useID := 0;
   end;
@@ -81,14 +90,20 @@ begin
     if (inventory[i].equipped = True) then
     begin
       (* Check for weapons *)
-      if (inventory[i].itemType = 'weapon') then
-        ui.updateWeapon(inventory[i].Name)
+      if (inventory[i].itemType = itmWeapon) or
+        (inventory[i].itemType = itmEnchantedWeapon) then
+      begin
+        ui.equippedWeapon := inventory[i].Name;
+        ui.updateWeapon;
+      end
       (* Check for armour *)
-      else if (inventory[i].itemType = 'armour') then
-        ui.updateArmour(inventory[i].Name);
+      else if (inventory[i].itemType = itmArmour) then
+      begin
+        ui.equippedArmour := inventory[i].Name;
+        ui.updateArmour;
+      end;
     end;
   end;
-
 end;
 
 (* Returns TRUE if successfully added, FALSE if the inventory is full *)
@@ -96,404 +111,386 @@ function addToInventory(itemNumber: smallint): boolean;
 var
   i: smallint;
 begin
-  Result := False;
-  for i := 0 to 9 do
+  (* If this is not a quest item *)
+  if (itemList[itemNumber].itemType <> itmQuest) then
   begin
-    if (inventory[i].Name = 'Empty') then
+    Result := False;
+    for i := 0 to 9 do
     begin
-      itemList[itemNumber].onMap := False;
-      (* Populate inventory with item description *)
-      inventory[i].id := i;
-      inventory[i].Name := itemList[itemNumber].itemname;
-      inventory[i].description := itemList[itemNumber].itemDescription;
-      inventory[i].itemType := itemList[itemNumber].itemType;
-      inventory[i].useID := itemList[itemNumber].useID;
-      inventory[i].glyph := itemList[itemNumber].glyph;
-      inventory[i].inInventory := True;
-      ui.displayMessage('You pick up the ' + inventory[i].Name);
-      Result := True;
-      exit;
-    end
+      if (inventory[i].Name = 'Empty') then
+      begin
+        itemList[itemNumber].onMap := False;
+        (* Populate inventory with item description *)
+        inventory[i].id := i;
+        (* Set sortIndex for sorting inventory *)
+        if (itemList[itemNumber].itemType = itmWeapon) then
+          inventory[i].sortIndex := 1
+        else if (itemList[itemNumber].itemType = itmArmour) then
+          inventory[i].sortIndex := 2
+        else if (itemList[itemNumber].itemType = itmDrink) then
+          inventory[i].sortIndex := 3;
+        inventory[i].Name := itemList[itemNumber].itemname;
+        inventory[i].description := itemList[itemNumber].itemDescription;
+        inventory[i].article := itemList[itemNumber].itemArticle;
+        inventory[i].itemType := itemList[itemNumber].itemType;
+        inventory[i].itemMaterial := itemList[itemNumber].itemMaterial;
+        inventory[i].useID := itemList[itemNumber].useID;
+        inventory[i].glyph := itemList[itemNumber].glyph;
+        inventory[i].glyphColour := itemList[itemNumber].glyphColour;
+        inventory[i].inInventory := True;
+        ui.displayMessage('You pick up the ' + inventory[i].Name);
+      (* Set an empty flag for the item on the map, this
+         gets deleted when saving the map *)
+        with itemList[itemNumber] do
+        begin
+          itemID := itemNumber;
+          itemName := 'empty';
+          itemDescription := '';
+          itemArticle := '';
+          itemType := itmEmptySlot;
+          itemMaterial := matEmpty;
+          useID := 1;
+          glyph := 'x';
+          glyphColour := 'lightCyan';
+          inView := False;
+          posX := 1;
+          posY := 1;
+          onMap := False;
+          discovered := False;
+        end;
+        (* Sort items in inventory *)
+        sortInventory(0, high(inventory));
+        Result := True;
+        exit;
+      end;
+    end;
+  end
+  else
+  begin
+    item_lookup.lookupUse(itemList[itemNumber].useID, False);
+       (* Set an empty flag for the item on the map, this
+         gets deleted when saving the map *)
+    with itemList[itemNumber] do
+    begin
+      itemID := itemNumber;
+      itemName := 'empty';
+      itemDescription := '';
+      itemArticle := '';
+      itemType := itmEmptySlot;
+      itemMaterial := matEmpty;
+      useID := 1;
+      glyph := 'x';
+      glyphColour := 'lightCyan';
+      inView := False;
+      posX := 1;
+      posY := 1;
+      onMap := False;
+      discovered := False;
+    end;
+    Result := True;
+    exit;
   end;
+end;
+
+function removeFromInventory(itemNumber: smallint): boolean;
+var
+  newItem: item;
+  ss: shortstring;
+begin
+  Result := False;
+  (* Check if there is already an item on the floor here *)
+  if (items.containsItem(entityList[0].posX, entityList[0].posY) = False) then
+    { Create an item }
+  begin
+    newItem.itemID := items.itemAmount;
+    newItem.itemName := inventory[itemNumber].Name;
+    newItem.itemDescription := inventory[itemNumber].description;
+    newItem.itemArticle := inventory[itemNumber].article;
+    newItem.itemType := inventory[itemNumber].itemType;
+    newItem.itemMaterial := inventory[itemNumber].itemMaterial;
+    newItem.useID := inventory[itemNumber].useID;
+    newItem.glyph := inventory[itemNumber].glyph;
+    newItem.glyphColour := inventory[itemNumber].glyphColour;
+    newItem.inView := True;
+    newItem.posX := entities.entityList[0].posX;
+    newItem.posY := entities.entityList[0].posY;
+    newItem.onMap := True;
+    newItem.discovered := True;
+
+    { Place item on the game map }
+    Inc(items.itemAmount);
+    Insert(newitem, itemList, itemAmount);
+    WriteStr(ss, 'You drop the ', newItem.itemName);
+    ui.bufferMessage(ss);
+
+    (* Remove from inventory *)
+    inventory[itemNumber].sortIndex := 10;
+    inventory[itemNumber].Name := 'Empty';
+    inventory[itemNumber].equipped := False;
+    inventory[itemNumber].description := 'x';
+    inventory[itemNumber].article := 'x';
+    inventory[itemNumber].itemType := itmEmptySlot;
+    inventory[itemNumber].itemMaterial := matEmpty;
+    inventory[itemNumber].glyph := 'x';
+    inventory[itemNumber].glyphColour := 'x';
+    inventory[itemNumber].inInventory := False;
+    inventory[itemNumber].useID := 0;
+    Result := True;
+    (* Sort items in inventory *)
+    sortInventory(0, high(inventory));
+    (* Redraw the Drop menu *)
+    drop;
+  end
+  else
+  begin
+    { prepare changes to the screen }
+    LockScreenUpdate;
+    (* Clear the message line *)
+    TextOut(6, 20, 'black', '                                                  ');
+    { Display message }
+    TextOut(6, 20, 'cyan', 'There is no room to drop this item here');
+    { Write those changes to the screen }
+    UnlockScreenUpdate;
+    { only redraws the parts that have been updated }
+    UpdateScreen(False);
+  end;
+end;
+
+procedure sortInventory(iLo, iHi: integer);
+var
+  t: Equipment;
+  lo, hi, mid: integer;
+begin
+  lo := iLo;
+  hi := iHi;
+  mid := inventory[(lo + hi) shr 1].sortIndex;
+  repeat
+    while inventory[lo].sortIndex < mid do
+      Inc(lo);
+    while inventory[hi].sortIndex > mid do
+      Dec(hi);
+    if lo <= hi then
+    begin
+      t := inventory[lo];
+      inventory[lo] := inventory[hi];
+      inventory[hi] := t;
+      Inc(lo);
+      Dec(hi);
+    end;
+  until lo > hi;
+  if hi > iLo then
+    sortInventory(iLo, hi);
+  if lo < iHi then
+    sortInventory(lo, iHi);
 end;
 
 procedure showInventory;
-var
-  i, x: smallint;
 begin
-  main.gameState := 2; // Accept keyboard commands for inventory screen
-  menuState := 0;
-  currentScreen := inventoryScreen; // Display inventory screen
+  { prepare changes to the screen }
+  LockScreenUpdate;
   (* Clear the screen *)
-  inventoryScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
-  inventoryScreen.Canvas.FillRect(0, 0, inventoryScreen.Width, inventoryScreen.Height);
-  (* Draw title bar *)
-  inventoryScreen.Canvas.Brush.Color := globalutils.MESSAGEFADE6;
-  inventoryScreen.Canvas.Rectangle(50, 40, 785, 80);
-  (* Draw title *)
-  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-  inventoryScreen.Canvas.Brush.Style := bsClear;
-  inventoryScreen.Canvas.Font.Size := 12;
-  inventoryScreen.Canvas.TextOut(100, 50, 'Inventory slots');
-  inventoryScreen.Canvas.Font.Size := 10;
-  (* List inventory *)
-  x := 90; // x is position of each new line
-  for i := 0 to 9 do
+  ui.screenBlank;
+  (* Draw the game screen *)
+  scrInventory.displayInventoryScreen;
+  { Write those changes to the screen }
+  UnlockScreenUpdate;
+  { only redraws the parts that have been updated }
+  UpdateScreen(False);
+end;
+
+procedure examineInventory(selection: smallint);
+var
+  material: shortstring;
+begin
+  (* Check that the slot is not empty *)
+  if (inventory[selection].inInventory = True) then
   begin
-    x := x + 20;
-    if (inventory[i].Name = 'Empty') then
-      dimSlots(i, x)
-    else
-      highlightSlots(i, x);
-  end;
-  bottomMenu(0);
-end;
-
-procedure bottomMenu(style: byte);
-(* 0 - main menu, 1 - inventory slots, exit *)
-begin
-  (* Draw menu bar *)
-  inventoryScreen.Canvas.Brush.Color := globalutils.MESSAGEFADE6;
-  inventoryScreen.Canvas.Rectangle(50, 345, 785, 375);
-  (* Show menu options at bottom of screen *)
-  case style of
-    0:  // Main menu
+    (* Get the item material *)
+    material := '';
+    if (inventory[selection].itemType <> itmDrink) then
     begin
-      inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-      inventoryScreen.Canvas.Brush.Style := bsClear;
-      inventoryScreen.Canvas.TextOut(100, 350,
-        'D key for drop menu  |  Q key for quaff/drink menu  |  W key to equip armour/weapons  |  ESC key to exit');
+      if (inventory[selection].itemMaterial = matIron) then
+        material := ' [iron]';
+      if (inventory[selection].itemMaterial = matSteel) then
+        material := ' [steel]';
+      if (inventory[selection].itemMaterial = matWood) then
+        material := ' [wooden]';
+      if (inventory[selection].itemMaterial = matLeather) then
+        material := ' [leather]';
     end;
-    1:  // Select Inventory slot
-    begin
-      inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-      inventoryScreen.Canvas.Brush.Style := bsClear;
-      inventoryScreen.Canvas.TextOut(100, 350,
-        '0..9 to select an inventory slot  |  ESC key to go back');
-    end;
+    { prepare changes to the screen }
+    LockScreenUpdate;
+    (* Clear the name & description lines *)
+    TextOut(6, 20, 'black',
+      '                                                                 ');
+    TextOut(6, 21, 'black',
+      '                                                                 ');
+    { glyph }
+    TextOut(6, 20, inventory[selection].glyphColour, inventory[selection].glyph);
+    { name }
+    TextOut(8, 20, 'lightCyan', AnsiProperCase(inventory[selection].Name,
+      StdWordDelims) + material);
+    { description }
+    TextOut(7, 21, 'cyan', chr(16) + ' ' + inventory[selection].description);
+    { Write those changes to the screen }
+    UnlockScreenUpdate;
+    { only redraws the parts that have been updated }
+    UpdateScreen(False);
   end;
 end;
 
-procedure showHint(message: shortstring);
+procedure drop;
 begin
-  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-  inventoryScreen.Canvas.Brush.Style := bsClear;
-  inventoryScreen.Canvas.TextOut(100, 480, message);
+  (* Sort items in inventory *)
+  sortInventory(0, high(inventory));
+  { prepare changes to the screen }
+  LockScreenUpdate;
+  (* Clear the screen *)
+  ui.screenBlank;
+  (* Draw the game screen *)
+  scrInventory.displayDropMenu;
+  { Write those changes to the screen }
+  UnlockScreenUpdate;
+  { only redraws the parts that have been updated }
+  UpdateScreen(False);
 end;
 
-procedure highlightSlots(i, x: smallint);
+procedure dropSelection(selection: smallint);
 begin
-  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-  inventoryScreen.Canvas.TextOut(50, x, '[' + IntToStr(i) + '] ' +
-    inventory[i].Name + ' - ' + inventory[i].description);
+  (* Check that the slot is not empty *)
+  if (inventory[selection].inInventory = True) then
+    removeFromInventory(selection);
 end;
 
-procedure dimSlots(i, x: smallint);
+procedure quaff;
 begin
-  inventoryScreen.Canvas.Font.Color := MESSAGEFADE1;
-  inventoryScreen.Canvas.TextOut(50, x, '[' + IntToStr(i) + '] <empty slot>');
+  { prepare changes to the screen }
+  LockScreenUpdate;
+  (* Clear the screen *)
+  ui.screenBlank;
+  (* Draw the game screen *)
+  scrInventory.displayQuaffMenu;
+  { Write those changes to the screen }
+  UnlockScreenUpdate;
+  { only redraws the parts that have been updated }
+  UpdateScreen(False);
 end;
 
-procedure menu(selection: word);
+procedure quaffSelection(selection: smallint);
 begin
-  case selection of
-    0: // ESC key i pressed
+  (* Check that the slot is not empty *)
+  if (inventory[selection].inInventory = True) and
+    (inventory[selection].itemType = itmDrink) then
+  begin
+    item_lookup.lookupUse(inventory[selection].useID, False);
+    (* Increase turn counter for this action *)
+    Inc(entityList[0].moveCount);
+    (* Remove from inventory *)
+    inventory[selection].Name := 'Empty';
+    inventory[selection].equipped := False;
+    inventory[selection].description := 'x';
+    inventory[selection].article := 'x';
+    inventory[selection].itemType := itmEmptySlot;
+    inventory[selection].itemMaterial := matEmpty;
+    inventory[selection].glyph := 'x';
+    inventory[selection].glyphColour := 'x';
+    inventory[selection].inInventory := False;
+    inventory[selection].useID := 0;
+    (* Sort items in inventory *)
+    sortInventory(0, high(inventory));
+    (* Redraw the Quaff menu *)
+    quaff;
+  end;
+end;
+
+procedure wield(message: char);
+begin
+  { prepare changes to the screen }
+  LockScreenUpdate;
+  (* Clear the screen *)
+  ui.screenBlank;
+  (* Draw the game screen *)
+  scrInventory.displayWieldMenu;
+  (* Check if there is a message to show *)
+  if (message = 'w') then
+    TextOut(6, 20, 'cyan', 'You must first unequip the weapon you already hold')
+  else if (message = 'a') then
+    TextOut(6, 20, 'cyan', 'You must first remove the armour you already wear')
+  else if (message = 'i') then
+    TextOut(6, 20, 'cyan', 'You are unable to use iron items');
+  { Write those changes to the screen }
+  UnlockScreenUpdate;
+  { only redraws the parts that have been updated }
+  UpdateScreen(False);
+end;
+
+procedure wearWieldSelection(selection: smallint);
+var
+  { Flag to display message if unable to equip item }
+  msg: char;
+begin
+  (* Set default flag *)
+  msg := 'n';
+
+  (* Check that the slot is not empty *)
+  if (inventory[selection].inInventory = True) then
+  begin
+    (* Check that the selected item is armour or a weapon *)
+    if (inventory[selection].itemType = itmWeapon) or
+      (inventory[selection].itemType = itmArmour) then
     begin
-      if (menuState = 0) then
+
+      (* Check if an elf is trying to use an iron item *)
+      if (inventory[selection].itemMaterial = matIron) and
+        (player_stats.playerRace = 'Elf') then
       begin
-        main.gameState := 1;
-        main.currentScreen := tempScreen;
+        wield('i');
         exit;
-      end
-      else if (menuState = 1) then // In the Drop screen
-        showInventory
-      else if (menuState = 2) then // In the Quaff screen
-        showInventory
-      else if (menuState = 3) then // In the Wear / Wield screen
-        showInventory;
-    end;
-    1: drop(10); // Drop menu
-    2:  // 0 slot
-    begin
-      if (menuState = 1) then
-        drop(0)
-      else if (menuState = 2) then
-        quaff(0)
-      else if (menuState = 3) then
-        wield(0);
-    end;
-    3: // 1 slot
-    begin
-      if (menuState = 1) then
-        drop(1)
-      else if (menuState = 2) then
-        quaff(1)
-      else if (menuState = 3) then
-        wield(1);
-    end;
-    4: // 2 slot
-    begin
-      if (menuState = 1) then
-        drop(2)
-      else if (menuState = 2) then
-        quaff(2)
-      else if (menuState = 3) then
-        wield(2);
-    end;
-    5: // 3 slot
-    begin
-      if (menuState = 1) then
-        drop(3)
-      else if (menuState = 2) then
-        quaff(3)
-      else if (menuState = 3) then
-        wield(3);
-    end;
-    6: // 4 slot
-    begin
-      if (menuState = 1) then
-        drop(4)
-      else if (menuState = 2) then
-        quaff(4)
-      else if (menuState = 3) then
-        wield(4);
-    end;
-    7: // 5 slot
-    begin
-      if (menuState = 1) then
-        drop(5)
-      else if (menuState = 2) then
-        quaff(5)
-      else if (menuState = 3) then
-        wield(5);
-    end;
-    8: // 6 slot
-    begin
-      if (menuState = 1) then
-        drop(6)
-      else if (menuState = 2) then
-        quaff(6)
-      else if (menuState = 3) then
-        wield(6);
-    end;
-    9: // 7 slot
-    begin
-      if (menuState = 1) then
-        drop(7)
-      else if (menuState = 2) then
-        quaff(7)
-      else if (menuState = 3) then
-        wield(7);
-    end;
-    10: // 8 slot
-    begin
-      if (menuState = 1) then
-        drop(8)
-      else if (menuState = 2) then
-        quaff(8)
-      else if (menuState = 3) then
-        wield(8);
-    end;
-    11: // 9 slot
-    begin
-      if (menuState = 1) then
-        drop(9)
-      else if (menuState = 2) then
-        quaff(9)
-      else if (menuState = 3) then
-        wield(9);
-    end;
-    12: quaff(10);  // Quaff menu
-    13: wield(10);  // Wear / Wield menu
-  end;
-end;
-
-procedure drop(dropItem: byte);
-var
-  i, x: smallint;
-begin
-  menuState := 1;
-  (* Clear the screen *)
-  inventoryScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
-  inventoryScreen.Canvas.FillRect(0, 0, inventoryScreen.Width, inventoryScreen.Height);
-  (* Draw title bar *)
-  inventoryScreen.Canvas.Brush.Color := globalutils.MESSAGEFADE6;
-  inventoryScreen.Canvas.Rectangle(50, 40, 785, 80);
-  (* Draw title *)
-  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-  inventoryScreen.Canvas.Brush.Style := bsClear;
-  inventoryScreen.Canvas.Font.Size := 12;
-  inventoryScreen.Canvas.TextOut(100, 50, 'Select item to drop');
-  inventoryScreen.Canvas.Font.Size := 10;
-  (* List inventory *)
-  x := 90; // x is position of each new line
-  for i := 0 to 9 do
-  begin
-    x := x + 20;
-    if (inventory[i].Name = 'Empty') or (inventory[i].equipped = True) then
-      dimSlots(i, x)
-    else
-      highlightSlots(i, x);
-  end;
-  (* Bottom menu *)
-  bottomMenu(1);
-  if (dropItem <> 10) then
-  begin
-    if (inventory[dropItem].Name <> 'Empty') and
-      (inventory[dropItem].equipped <> True) then
-    begin   { TODO : First search for a space in the itemList that has the onMap flag set to false and use that slot }
-      (* Create a new entry in item list and copy item description *)
-      Inc(items.itemAmount);
-      items.listLength := length(items.itemList);
-      SetLength(items.itemList, items.listLength + 1);
-      with items.itemList[items.listLength] do
-      begin
-        itemID := items.listLength;
-        itemName := inventory[dropItem].Name;
-        itemDescription := inventory[dropItem].description;
-        itemType := inventory[dropItem].itemType;
-        glyph := inventory[dropItem].glyph;
-        inView := True;
-        posX := entities.entityList[0].posX;
-        posY := entities.entityList[0].posY;
-        onMap := True;
-        discovered := True;
       end;
-      ui.displayMessage('You drop the ' + inventory[dropItem].Name);
-      Inc(playerTurn);
-      (* Remove from inventory *)
-      inventory[dropItem].Name := 'Empty';
-      showInventory;
-    end;
-  end;
-end;
 
-procedure quaff(quaffItem: byte);
-var
-  i, x: smallint;
-begin
-  menuState := 2;
-  (* Clear the screen *)
-  inventoryScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
-  inventoryScreen.Canvas.FillRect(0, 0, inventoryScreen.Width, inventoryScreen.Height);
-  (* Draw title bar *)
-  inventoryScreen.Canvas.Brush.Color := globalutils.MESSAGEFADE6;
-  inventoryScreen.Canvas.Rectangle(50, 40, 785, 80);
-  (* Draw title *)
-  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-  inventoryScreen.Canvas.Brush.Style := bsClear;
-  inventoryScreen.Canvas.Font.Size := 12;
-  inventoryScreen.Canvas.TextOut(100, 50, 'Select item to drink');
-  inventoryScreen.Canvas.Font.Size := 10;
-  (* List inventory *)
-  x := 90; // x is position of each new line
-  for i := 0 to 9 do
-  begin
-    x := x + 20;
-    if (inventory[i].Name = 'Empty') or (inventory[i].itemType <> 'drink') then
-    //  dimSlots(i, x)
-    else
-      highlightSlots(i, x);
-  end;
-  (* Bottom menu *)
-  bottomMenu(1);
-  if (quaffItem <> 10) then
-  begin
-    if (inventory[quaffItem].Name <> 'Empty') and
-      (inventory[quaffItem].itemType = 'drink') then
-    begin
-      ui.writeBufferedMessages;
-      ui.bufferMessage('You quaff the ' + inventory[quaffItem].Name);
-      items.lookupUse(inventory[quaffItem].useID, False);
-      Inc(playerTurn);
-      (* Remove from inventory *)
-      inventory[quaffItem].Name := 'Empty';
-      showInventory;
-    end;
-  end;
-end;
-
-procedure wield(wieldItem: byte);
-var
-  i, x: smallint;
-begin
-  menuState := 3;
-  (* Clear the screen *)
-  inventoryScreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
-  inventoryScreen.Canvas.FillRect(0, 0, inventoryScreen.Width, inventoryScreen.Height);
-  (* Draw title bar *)
-  inventoryScreen.Canvas.Brush.Color := globalutils.MESSAGEFADE6;
-  inventoryScreen.Canvas.Rectangle(50, 40, 785, 80);
-  (* Draw title *)
-  inventoryScreen.Canvas.Font.Color := UITEXTCOLOUR;
-  inventoryScreen.Canvas.Brush.Style := bsClear;
-  inventoryScreen.Canvas.Font.Size := 12;
-  inventoryScreen.Canvas.TextOut(100, 50, 'Select item to wear / wield');
-  inventoryScreen.Canvas.Font.Size := 10;
-  (* List inventory *)
-  x := 90; // x is position of each new line
-  for i := 0 to 9 do
-  begin
-    x := x + 20;
-    if (inventory[i].Name = 'Empty') or (inventory[i].itemType = 'drink')then
-    //   dimSlots(i, x)
-    else
-      highlightSlots(i, x);
-  end;
-  (* Bottom menu *)
-  bottomMenu(1);
-  if (wieldItem <> 10) then
-  begin
-    if (inventory[wieldItem].Name <> 'Empty') then
-    begin
-      (* If the item is an unequipped weapon, and the player already has a weapon equipped
-         prompt the player to unequip their weapon first *)
-      if (inventory[wieldItem].equipped = False) and
-        (inventory[wieldItem].itemType = 'weapon') and
+    (* If the item is an unequipped weapon, and the player already has a weapon
+    equipped prompt the player to unequip their weapon first *)
+      if (inventory[selection].equipped = False) and
+        (inventory[selection].itemType = itmWeapon) and
         (entityList[0].weaponEquipped = True) then
-      begin
-        showHint('You must first unequip the weapon you already hold');
-      end
-      (* If the item is unworn armour, and the player is already wearing armour
+        msg := 'w'
+
+(* If the item is unworn armour, and the player is already wearing armour
          prompt the player to unequip their armour first *)
-      else if (inventory[wieldItem].equipped = False) and
-        (inventory[wieldItem].itemType = 'armour') and
+      else if (inventory[selection].equipped = False) and
+        (inventory[selection].itemType = itmArmour) and
         (entityList[0].armourEquipped = True) then
-      begin
-        showHint('You must first remove the armour you already wear');
-      end
+        msg := 'a'
+
       (* Check whether the item is already equipped or not *)
-      else if (inventory[wieldItem].equipped = False) then
+      else if (inventory[selection].equipped = False) then
       begin
-        ui.writeBufferedMessages;
-        if (inventory[wieldItem].itemType = 'weapon') then
-          ui.bufferMessage('You equip the ' + inventory[wieldItem].Name)
-        else
-          ui.bufferMessage('You put on the ' + inventory[wieldItem].Name);
-        items.lookupUse(inventory[wieldItem].useID, False);
-        inventory[wieldItem].equipped := True;
-        (* Add equipped suffix *)
-        inventory[wieldItem].description :=
-          inventory[wieldItem].description + ' [equipped]';
-        Inc(playerTurn);
-        showInventory;
+        (* Equip *)
+        inventory[selection].equipped := True;
+        item_lookup.lookupUse(inventory[selection].useID, False);
       end
       else
       begin
-        ui.writeBufferedMessages;
-        if (inventory[wieldItem].itemType = 'weapon') then
-          ui.bufferMessage('You unequip the ' + inventory[wieldItem].Name)
-        else
-          ui.bufferMessage('You take off the ' + inventory[wieldItem].Name);
-        items.lookupUse(inventory[wieldItem].useID, True);
-        inventory[wieldItem].equipped := False;
-        (* Remove equipped suffix *)
-        SetLength(inventory[wieldItem].description,
-          Length(inventory[wieldItem].description) - 11);
-        Inc(playerTurn);
-        showInventory;
+        (* Unequip *)
+        inventory[selection].equipped := False;
+        item_lookup.lookupUse(inventory[selection].useID, True);
       end;
+      { Increment turn counter }
+      Inc(entityList[0].moveCount);
+      wield(msg);
     end;
+  end;
+end;
+
+procedure Zzap(item: smallint);
+begin
+  case item of
+    8: { Staff of Minor Scorch }
+    begin
+      staff_minor_scorch.Zap;
+    end;
+    else { No enchanted weapon equipped }
+      ui.displayMessage('You have no magical weapon equipped');
   end;
 end;
 

@@ -1,7 +1,8 @@
 (* Low quality leather armour *)
+
 unit leather_armour1;
 
-{$mode objfpc}{$H+}
+{$mode fpc}{$H+}
 
 interface
 
@@ -23,10 +24,13 @@ begin
   begin
     itemID := uniqueid;
     itemName := 'Leather armour';
-    itemDescription := 'adds 2 to defense';
-    itemType := 'armour';
+    itemDescription := 'adds 2 to defence';
+    itemArticle := 'some';
+    itemType := itmArmour;
+    itemMaterial := matLeather;
     useID := 3;
-    glyph := '3';
+    glyph := '(';
+    glyphColour := 'lightMagenta';
     inView := False;
     posX := itmx;
     posY := itmy;
@@ -37,23 +41,22 @@ end;
 
 procedure useItem(equipped: boolean);
 begin
-   if (equipped = False) then
+     if (equipped = False) then
     (* To wear the armour *)
   begin
     entityList[0].armourEquipped := True;
-    Inc(entityList[0].defense, 2);
-    ui.bufferMessage('The armour adds 2 points to your defense');
-    ui.updateArmour('Leather armour');
-    ui.updateDefence;
+    Inc(entityList[0].defence, 2);
+    ui.displayMessage('You don the leather armour. The armour adds 2 points to your defence');
+    ui.equippedArmour:='Leather armour';
     ui.writeBufferedMessages;
   end
   else
     (* To remove the armour *)
   begin
     entityList[0].armourEquipped := False;
-    Dec(entityList[0].defense, 2);
-    ui.updateDefence;
-    ui.updateArmour('none');
+    Dec(entityList[0].defence, 2);
+    ui.displayMessage('You remove the leather armour.');
+    ui.equippedArmour:='No armour worn';
     ui.writeBufferedMessages;
   end;
 end;

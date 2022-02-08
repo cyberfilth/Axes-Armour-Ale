@@ -3,14 +3,12 @@
 <head>
 <title>Axes, Armour &amp; Ale: entities: Record Creature</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
-Axes, Armour & Ale - a roguelike written in Free Pascal
+<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
 <span id="Creature"></span><h1 class="cio">Record Creature</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Hierarchy</div><div class="one_section"><a class="section" href="#PasDoc-Fields">Fields</a></div><div class="one_section"><a class="section" href="#PasDoc-Methods">Methods</a></div><div class="one_section">Properties</div></div>
@@ -22,7 +20,7 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <code>type Creature = record</code></p>
 <h2 class="description">Description</h2>
 <p>
-<code>Creature</code></p>
+Creature</p>
 <h2 class="overview">Overview</h2>
 <span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
 <table class="summary wide_list">
@@ -31,6 +29,12 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 </tr>
 <tr class="list2">
 <td class="itemcode"><code><b><a  href="entities.Creature.html#race">race</a></b>: shortstring;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#intName">intName</a></b>: shortstring;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#article">article</a></b>: boolean;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code><b><a  href="entities.Creature.html#description">description</a></b>: string;</code></td>
@@ -45,7 +49,7 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemcode"><code><b><a  href="entities.Creature.html#attack">attack</a></b>: smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="entities.Creature.html#defense">defense</a></b>: smallint;</code></td>
+<td class="itemcode"><code><b><a  href="entities.Creature.html#defence">defence</a></b>: smallint;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code><b><a  href="entities.Creature.html#posX">posX</a></b>: smallint;</code></td>
@@ -72,37 +76,37 @@ Axes, Armour & Ale - a roguelike written in Free Pascal
 <td class="itemcode"><code><b><a  href="entities.Creature.html#weaponAdds">weaponAdds</a></b>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="entities.Creature.html#glyph">glyph</a></b>: char;</code></td>
+<td class="itemcode"><code><b><a  href="entities.Creature.html#glyph">glyph</a></b>: shortstring;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="entities.Creature.html#NPCsize">NPCsize</a></b>: smallint;</code></td>
+<td class="itemcode"><code><b><a  href="entities.Creature.html#glyphColour">glyphColour</a></b>: shortstring;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="entities.Creature.html#trackingTurns">trackingTurns</a></b>: smallint;</code></td>
-</tr>
-<tr class="list">
 <td class="itemcode"><code><b><a  href="entities.Creature.html#moveCount">moveCount</a></b>: smallint;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="entities.Creature.html#inView">inView</a></b>: boolean;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="entities.Creature.html#discovered">discovered</a></b>: boolean;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="entities.Creature.html#blocks">blocks</a></b>: boolean;</code></td>
 </tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#faction">faction</a></b>: <a  href="entities.html#Tfactions">Tfactions</a>;</code></td>
+</tr>
 <tr class="list">
+<td class="itemcode"><code><b><a  href="entities.Creature.html#state">state</a></b>: <a  href="entities.html#Tattitudes">Tattitudes</a>;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="entities.Creature.html#weaponEquipped">weaponEquipped</a></b>: boolean;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="entities.Creature.html#armourEquipped">armourEquipped</a></b>: boolean;</code></td>
 </tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="entities.Creature.html#isDead">isDead</a></b>: boolean;</code></td>
-</tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="entities.Creature.html#abilityTriggered">abilityTriggered</a></b>: boolean;</code></td>
+<td class="itemcode"><code><b><a  href="entities.Creature.html#isDead">isDead</a></b>: boolean;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code><b><a  href="entities.Creature.html#stsDrunk">stsDrunk</a></b>: boolean;</code></td>
@@ -140,7 +144,25 @@ Unique ID</p>
 </tr>
 <tr><td colspan="1">
 <p>
-<a class="normal" href="entities.Creature.html">Creature</a> type</p>
+Creature type</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="intName"></span><code><b>intName</b>: shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Internal name</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="article"></span><code><b>article</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Article (the)</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -149,7 +171,7 @@ Unique ID</p>
 </tr>
 <tr><td colspan="1">
 <p>
-<code>Description</code> of <a class="normal" href="entities.Creature.html">creature</a></p>
+Description of creature</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -158,7 +180,7 @@ Unique ID</p>
 </tr>
 <tr><td colspan="1">
 <p>
-health and position on game <a class="normal" href="map.html">map</a></p>
+health and position on game map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -167,7 +189,7 @@ health and position on game <a class="normal" href="map.html">map</a></p>
 </tr>
 <tr><td colspan="1">
 <p>
-health and position on game <a class="normal" href="map.html">map</a></p>
+health and position on game map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -176,16 +198,16 @@ health and position on game <a class="normal" href="map.html">map</a></p>
 </tr>
 <tr><td colspan="1">
 <p>
-health and position on game <a class="normal" href="map.html">map</a></p>
+health and position on game map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="defense"></span><code><b>defense</b>: smallint;</code></td>
+<td class="itemcode"><span id="defence"></span><code><b>defence</b>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-health and position on game <a class="normal" href="map.html">map</a></p>
+health and position on game map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -194,7 +216,7 @@ health and position on game <a class="normal" href="map.html">map</a></p>
 </tr>
 <tr><td colspan="1">
 <p>
-health and position on game <a class="normal" href="map.html">map</a></p>
+health and position on game map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -203,7 +225,7 @@ health and position on game <a class="normal" href="map.html">map</a></p>
 </tr>
 <tr><td colspan="1">
 <p>
-health and position on game <a class="normal" href="map.html">map</a></p>
+health and position on game map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -212,7 +234,7 @@ health and position on game <a class="normal" href="map.html">map</a></p>
 </tr>
 <tr><td colspan="1">
 <p>
-health and position on game <a class="normal" href="map.html">map</a></p>
+health and position on game map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -221,7 +243,7 @@ health and position on game <a class="normal" href="map.html">map</a></p>
 </tr>
 <tr><td colspan="1">
 <p>
-health and position on game <a class="normal" href="map.html">map</a></p>
+health and position on game map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -230,7 +252,7 @@ health and position on game <a class="normal" href="map.html">map</a></p>
 </tr>
 <tr><td colspan="1">
 <p>
-health and position on game <a class="normal" href="map.html">map</a></p>
+health and position on game map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -239,7 +261,7 @@ health and position on game <a class="normal" href="map.html">map</a></p>
 </tr>
 <tr><td colspan="1">
 <p>
-health and position on game <a class="normal" href="map.html">map</a></p>
+health and position on game map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -262,29 +284,20 @@ Weapon stats</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="glyph"></span><code><b>glyph</b>: char;</code></td>
+<td class="itemcode"><span id="glyph"></span><code><b>glyph</b>: shortstring;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Character used to represent NPC on game <a class="normal" href="map.html">map</a></p>
+Character used to represent NPC on game map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="NPCsize"></span><code><b>NPCsize</b>: smallint;</code></td>
+<td class="itemcode"><span id="glyphColour"></span><code><b>glyphColour</b>: shortstring;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Size of NPC</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="trackingTurns"></span><code><b>trackingTurns</b>: smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Number of turns the entity will track the <a class="normal" href="player.html">player</a> when they're out of sight</p>
+Colour of the glyph</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -293,7 +306,7 @@ Number of turns the entity will track the <a class="normal" href="player.html">p
 </tr>
 <tr><td colspan="1">
 <p>
-Count of turns the entity will keep tracking the <a class="normal" href="player.html">player</a> when they're out of sight</p>
+Count of turns the entity will keep tracking the player when they're out of sight</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -302,7 +315,7 @@ Count of turns the entity will keep tracking the <a class="normal" href="player.
 </tr>
 <tr><td colspan="1">
 <p>
-Is the NPC in the players <a class="normal" href="fov.html">FoV</a></p>
+Is the NPC in the players FoV</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -311,7 +324,7 @@ Is the NPC in the players <a class="normal" href="fov.html">FoV</a></p>
 </tr>
 <tr><td colspan="1">
 <p>
-First time the <a class="normal" href="player.html">player</a> discovers the NPC</p>
+First time the player discovers the NPC</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -320,7 +333,25 @@ First time the <a class="normal" href="player.html">player</a> discovers the NPC
 </tr>
 <tr><td colspan="1">
 <p>
-Some <a class="normal" href="entities.html">entities</a> block movement, i.e. barrels</p>
+Some entities block movement, i.e. barrels</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="faction"></span><code><b>faction</b>: <a  href="entities.html#Tfactions">Tfactions</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+NPC faction</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="state"></span><code><b>state</b>: <a  href="entities.html#Tattitudes">Tattitudes</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+NPC finite state</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -348,15 +379,6 @@ Is Armour equipped</p>
 <tr><td colspan="1">
 <p>
 Has the NPC been killed, to be removed at end of game loop</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="abilityTriggered"></span><code><b>abilityTriggered</b>: boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Whether a special ability has been activated</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -405,7 +427,4 @@ status timers</p>
 The procedure that allows each NPC to take a turn</p>
 </td></tr>
 </table>
-Axes, Armour & Ale - (c) 2020 Chris Hawkins
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
-</span>
 </td></tr></table></body></html>

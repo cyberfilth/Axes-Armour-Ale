@@ -6,77 +6,82 @@ unit player;
 interface
 
 uses
-  Graphics, SysUtils, plot_gen;
-
-type
-  (* Store information about the player *)
-  Creature = record
-    currentHP, maxHP, attack, defense, posX, posY, visionRange: smallint;
-    experience: integer;
-    playerName, title: string;
-    (* status effects *)
-    stsDrunk, stsPoison: boolean;
-    (* status timers *)
-    tmrDrunk, tmrPoison: smallint;
-    (* Player Glyph *)
-    glyph: TBitmap;
-  end;
+  SysUtils, player_inventory, player_stats, plot_gen, combat_resolver, items;
 
 (* Create player character *)
 procedure createPlayer;
-(* Players starting inventory *)
-procedure createEquipment;
 (* Moves the player on the map *)
 procedure movePlayer(dir: word);
 (* Process status effects *)
 procedure processStatus;
-(* Attack NPC *)
-procedure combat(npcID: smallint);
 (* Check if tile is occupied by an NPC *)
 function combatCheck(x, y: smallint): boolean;
 (* Pick up an item from the floor *)
 procedure pickUp;
 (*Increase Health, no more than maxHP *)
 procedure increaseHealth(amount: smallint);
-(* Display game over screen *)
-procedure gameOver;
+(* Increase health without messages *)
+procedure levelupHealth(amount: smallint);
 
 implementation
 
 uses
-  globalutils, map, fov, ui, entities, player_inventory, items, main;
+  map, fov, ui, entities;
 
 procedure createPlayer;
 begin
-  plot_gen.generateName;
-  // Add Player to the list of creatures
+  { Add Player to the list of creatures }
   entities.listLength := length(entities.entityList);
   SetLength(entities.entityList, entities.listLength + 1);
   with entities.entityList[0] do
   begin
     npcID := 0;
+    (* race is used for the player name, actual race is stored in player stats unit *)
     race := plot_gen.playerName;
-    description := 'your character';
+    description := plot_gen.playerTitle;
     glyph := '@';
-    maxHP := 20;
-    currentHP := 20;
-    attack := 5;
-    defense := 2;
+    glyphColour := 'yellow';
+    (* Elf stats *)
+    if (player_stats.playerRace = 'Elf') then
+    begin
+      maxHP := 15;
+      attack := 6;
+      defence := 2;
+    end
+    (* Dwarf stats *)
+    else if (player_stats.playerRace = 'Dwarf') then
+    begin
+      maxHP := 25;
+      attack := 5;
+      defence := 3;
+    end
+    else
+      (* Human stats *)
+    begin
+      maxHP := 20;
+      attack := 5;
+      defence := 2;
+    end;
+    currentHP := maxHP;
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := 0;
-    visionRange := 4;
-    NPCsize := 3;
-    trackingTurns := 3;
+    (* Non-human characters can see further *)
+    if (player_stats.playerRace = 'Human') then
+      visionRange := 4
+    else
+      visionRange := 5;
+    (* Set max vision range *)
+    player_stats.maxVisionRange := visionRange;
     moveCount := 0;
     targetX := 0;
     targetY := 0;
     inView := True;
+    blocks := False;
     discovered := True;
     weaponEquipped := False;
     armourEquipped := False;
     isDead := False;
-    abilityTriggered := False;
     stsDrunk := False;
     stsPoison := False;
     tmrDrunk := 0;
@@ -84,32 +89,33 @@ begin
     posX := map.startX;
     posY := map.startY;
   end;
-  (* Occupy tile *)
-  map.occupy(entityList[0].posX, entityList[0].posY);
+  (* Ability to cast enchantments *)
+  { Elf }
+  if (player_stats.playerRace = 'Elf') then
+  begin
+    player_stats.maxMagick := 20;
+    player_stats.currentMagick := 20;
+  end
+  { Human }
+  else if (player_stats.playerRace = 'Human') then
+  begin
+    player_stats.maxMagick := 12;
+    player_stats.currentMagick := 12;
+  end
+  { Dwarf - Cannot cast magic }
+  else
+  begin
+    player_stats.maxMagick := 0;
+    player_stats.currentMagick := 0;
+  end;
   (* set up inventory *)
   player_inventory.initialiseInventory;
+  ui.equippedWeapon := 'No weapon equipped';
+  ui.equippedArmour := 'No armour worn';
+  (* Occupy tile *)
+  map.occupy(entityList[0].posX, entityList[0].posY);
   (* Draw player and FOV *)
   fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
-end;
-
-procedure createEquipment;
-begin
-  { TODO : Once character creation is implemented, replace this with a function that generates starting equipment based on the type of player chosen. }
-  (* Add a club to the players inventory *)
-  with player_inventory.inventory[0] do
-  begin
-    id := 0;
-    Name := 'Wooden club';
-    equipped := True;
-    description := 'adds 1D6 to attack [equipped]';
-    itemType := 'weapon';
-    glyph := '4';
-    inInventory := True;
-    useID := 4;
-  end;
-  ui.updateWeapon('Wooden club');
-  entityList[0].weaponEquipped := True;
-  Inc(entityList[0].weaponDice);
 end;
 
 (* Move the player within the confines of the game map *)
@@ -161,14 +167,16 @@ begin
       entities.entityList[0].posX := originalX;
       entities.entityList[0].posY := originalY;
     end;
-  Inc(playerTurn);
+  Inc(entities.entityList[0].moveCount);
   (* check if tile is walkable *)
   if (map.canMove(entities.entityList[0].posX, entities.entityList[0].posY) = False) then
   begin
     entities.entityList[0].posX := originalX;
     entities.entityList[0].posY := originalY;
-    ui.displayMessage('You bump into a wall');
-    Dec(playerTurn);
+    (* display a clumsy message if player is intoxicated *)
+    if (entityList[0].stsDrunk = True) then
+      ui.displayMessage('You bump into a wall');
+    Dec(entities.entityList[0].moveCount);
   end;
   (* Occupy tile *)
   map.occupy(entityList[0].posX, entityList[0].posY);
@@ -191,6 +199,7 @@ begin
     else
       Dec(entities.entityList[0].tmrDrunk);
   end;
+
   (* Poison *)
   if (entities.entityList[0].stsPoison = True) then
   begin
@@ -199,6 +208,7 @@ begin
       (* Update UI *)
       ui.displayStatusEffect(1, 'poison');
       ui.poisonStatusSet := True;
+      entityList[0].glyphColour := 'green';
     end;
     if (entities.entityList[0].tmrPoison <= 0) then
     begin
@@ -207,6 +217,7 @@ begin
       (* Update UI *)
       ui.displayStatusEffect(0, 'poison');
       ui.poisonStatusSet := False;
+      entityList[0].glyphColour := 'yellow';
     end
     else
     begin
@@ -217,56 +228,6 @@ begin
   end;
 end;
 
-(*
-  Combat is decided by rolling a random number between 1 and the entity's ATTACK value.
-  Then modifiers are added, for example, a 1D6+4 axe will roll a 6 sided die and
-  add the result plus 4 to the total damage amount. This is then removed from the
-  opponents DEFENSE rating. If the opponents defense doesn't soak up the whole damage
-  amount, the remainder is taken from their Health. This is partly inspired by the
-  Tunnels & Trolls rules, my favourite tabletop RPG.
-*)
-
-procedure combat(npcID: smallint);
-var
-  damageAmount: smallint;
-begin
-  damageAmount :=
-    (globalutils.randomRange(1, entityList[0].attack) + // Base attack
-    globalutils.rollDice(entityList[0].weaponDice) +    // Weapon dice
-    entityList[0].weaponAdds) -                         // Weapon adds
-    entities.entityList[npcID].defense;
-
-  if ((damageAmount - entities.entityList[0].tmrDrunk) > 0) then
-  begin
-    entities.entityList[npcID].currentHP :=
-      (entities.entityList[npcID].currentHP - damageAmount);
-    if (entities.entityList[npcID].currentHP < 1) then
-    begin
-      if (entities.entityList[npcID].race = 'barrel') then
-        ui.bufferMessage('You break open the barrel')
-      else
-        ui.bufferMessage('You kill the ' + entities.entityList[npcID].race);
-      entities.killEntity(npcID);
-      entities.entityList[0].xpReward :=
-        entities.entityList[0].xpReward + entities.entityList[npcID].xpReward;
-      ui.updateXP;
-      exit;
-    end
-    else
-    if (damageAmount = 1) then
-      ui.bufferMessage('You slightly injure the ' + entities.entityList[npcID].race)
-    else
-      ui.bufferMessage('You hit the ' + entities.entityList[npcID].race +
-        ' for ' + IntToStr(damageAmount) + ' points of damage');
-  end
-  else
-  begin
-    if (entities.entityList[0].stsDrunk = True) then
-      ui.bufferMessage('You drunkenly miss')
-    else
-      ui.bufferMessage('You miss');
-  end;
-end;
 
 function combatCheck(x, y: smallint): boolean;
   { TODO : Replace this with a check to see if the tile is occupied }
@@ -279,7 +240,7 @@ begin
     if (x = entities.entityList[i].posX) then
     begin
       if (y = entities.entityList[i].posY) then
-        player.combat(i);
+        combat_resolver.combat(i);
       Result := True;
     end;
   end;
@@ -296,7 +257,7 @@ begin
       (itemList[i].onMap = True) then
     begin
       if (player_inventory.addToInventory(i) = True) then
-        Inc(playerTurn)
+        Inc(entities.entityList[0].moveCount)
       else
         ui.displayMessage('Your inventory is full');
     end
@@ -322,27 +283,16 @@ begin
     ui.bufferMessage('You are already at full health');
 end;
 
-procedure gameOver;
+procedure levelupHealth(amount: smallint);
 begin
-  globalutils.deleteGame;
-  main.gameState := 4;
-  currentScreen := RIPscreen;
-  (* Clear the screen *)
-  RIPscreen.Canvas.Brush.Color := globalutils.BACKGROUNDCOLOUR;
-  RIPscreen.Canvas.FillRect(0, 0, RIPscreen.Width, RIPscreen.Height);
-  (* Draw title *)
-  RIPscreen.Canvas.Font.Color := UITEXTCOLOUR;
-  RIPscreen.Canvas.Brush.Style := bsClear;
-  RIPscreen.Canvas.Font.Size := 12;
-  RIPscreen.Canvas.TextOut(100, 50, 'You have died...');
-  RIPscreen.Canvas.Font.Size := 10;
-  (* Display message *)
-  RIPscreen.Canvas.TextOut(30, 100, 'Killed by a ' + killer + ' after ' +
-    IntToStr(playerTurn) + ' turns, whilst testing a roguelike ;-)');
-  (* Menu options *)
-  RIPscreen.Canvas.Font.Size := 9;
-  RIPscreen.Canvas.TextOut(10, 410,
-    'Exit game?      [Q] - Quit game    |    [X] - Exit to main menu');
+  if (entities.entityList[0].currentHP <> entities.entityList[0].maxHP) then
+  begin
+    if ((entities.entityList[0].currentHP + amount) >= entities.entityList[0].maxHP) then
+      entities.entityList[0].currentHP := entities.entityList[0].maxHP
+    else
+      entities.entityList[0].currentHP := entities.entityList[0].currentHP + amount;
+    ui.updateHealth;
+  end;
 end;
 
 end.

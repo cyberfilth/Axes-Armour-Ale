@@ -1,27 +1,20 @@
+# Axes, Armour & Ale - terminal version
 <p align="center">
-  <img width="400" height="113" src="GITscreenshots/Logo.png">
+  <img width="300" height="230" src="GITscreenshots/Logo.png">
 </p>
-
-![build-test](https://github.com/cyberfilth/Axes-Armour-Ale/workflows/build-test/badge.svg)     ![Free Pascal](GITscreenshots/fpc.svg)      ![Lazarus](GITscreenshots/lazarus.svg)
 
 ### A low-fantasy, roguelike game
 
-##  This version has been superceded by the ASCII version at [ASCII Axe](https://github.com/cyberfilth/ASCII-axe).
-
 Alpha version, most features aren't implemented yet and what there is may change frequently. Currently there are the following features:
  - A randomly generated dungeon and a cave created using cellular automata
- - Each game is automatically saved when exiting and can be reloaded when continuing
- - Saved games are deleted when the player dies
  - Game runs natively on both GNU/Linux and Windows
  - Small, self-contained binary with no external dependencies.
  - Can be run without needing to be installed
- 
 
-![Cave screenshot](GITscreenshots/windows_screenshot1.png)
+The latest release can be downloaded from the [Releases page](https://github.com/cyberfilth/ASCII-axe/releases/tag/Alpha40)
 
-![Dungeon screenshot](GITscreenshots/windows_screenshot2.png)
+![Ubuntu screenshot](GITscreenshots/LinuxAAA.gif)
 
-![Dungeon screenshot](GITscreenshots/linux_screenshot1.png)
 
 
 ### Controls
@@ -40,10 +33,6 @@ View inventory with 'i'
 Drop an item with 'd'
 Quaff / drink with 'q'
 Wear armour or Wield a weapon with 'w'
-To exit a menu / quit the game press ESCAPE
-
-Use the mouse to click on enemies or items and the stats will display in the info box
+Zap magic with 'z'
+To exit a menu / quit the game press ESCAPE (on Linux you will need to double-tap the ESCAPE key)
 </pre>
-
-### documentation
-Technical documentation can be found at https://cyberfilth.github.io/Axes-Armour-Ale/

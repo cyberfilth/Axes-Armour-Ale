@@ -3,16 +3,17 @@
    Creatures can then track the player by finding a tile with a lower number
    than the one that they're standing on.
 
-   The below routine is based on code from Stephen Peter (aka speter) *)
+   The below routine is based on code from Stephen Peter (AKA speter) *)
 
 unit smell;
 
 {$mode objfpc}{$H+}
-
+{$RANGECHECKS OFF}
+{$WARN 6058 off : Call to subroutine "$1" marked as inline is not inlined}
 interface
 
 uses
-  globalutils;
+  SysUtils, Classes, Math, globalutils;
 
 const
   (* used on the smell map to denote a wall *)
@@ -20,43 +21,40 @@ const
 
 type
   TDist = array [1..MAXROWS, 1..MAXCOLUMNS] of smallint;
-  Tbkinds = (bWall, bClear);
+  Tbkinds = (bNone, bWall, bClear);
 
 var
   smellmap: array[1..MAXROWS, 1..MAXCOLUMNS] of smallint;
   distances: TDist;
-  (* TESTING - Write smell map to text file *)
-  filename: ShortString;
-  myfile: Text;
+  (* Tracks the scent decaying over time *)
+  smellCounter: byte;
 
-(* Check if tile is a wall or not *)
-function blockORnot(x, y: smallint): Tbkinds;
+  (* TESTING - Write smell map to text file *)
+  { filename: ShortString;
+  myfile: Text; }
+
+function blockORnot(x, y: integer): Tbkinds;
 (* Calculate distance from player *)
 procedure calcDistances(x, y: smallint);
 (* Generate smell map *)
 procedure sniff;
-(* Check tile to the North *)
-function sniffNorth(y, x: smallint): boolean;
-(* Check tile to the East *)
-function sniffEast(y, x: smallint): boolean;
-(* Check tile to the South *)
-function sniffSouth(y, x: smallint): boolean;
-(* Check tile to the West *)
-function sniffWest(y, x: smallint): boolean;
+(* Find the tile with the highest scent value *)
+function scentDirection(y, x: smallint): char;
 
 implementation
 
 uses
-  entities;
+  entities, map;
 
-function blockORnot(x, y: smallint): Tbkinds;
+(* Check if tile is a wall or not *)
+function blockORnot(x, y: integer): Tbkinds;
 begin
-  if (dungeon[y][x] = '#') then
+  if (map.maparea[y][x].Glyph = '*') then
     Result := bWall
-  else if (dungeon[y][x] = '.') then
+  else if (map.maparea[y][x].Glyph = '.') then
     Result := bClear
   else
-    Result := bWall;
+    Result := bNone;
 end;
 
 procedure calcDistances(x, y: smallint);
@@ -69,7 +67,7 @@ procedure calcDistances(x, y: smallint);
   (* Set distance around current tile *)
   procedure setaround(x, y: smallint; d: smallint);
   const
-    r: array[1..4] of tpoint =              // the four directions of movement
+    r: array[1..4] of tpoint =              { the four directions of movement }
       ((x: 0; y: -1), (x: 1; y: 0), (x: 0; y: 1), (x: -1; y: 0));
   var
     a: smallint;
@@ -107,58 +105,65 @@ begin
   (* flood map from players current position *)
   calcDistances(entityList[0].posX, entityList[0].posY);
 
-  /////////////////////////////
-  //Write map to text file for testing
-  //filename := 'smellmap.txt';
-  //AssignFile(myfile, filename);
-  //rewrite(myfile);
-  //for r := 1 to MAXROWS do
-  //begin
-  //  for c := 1 to MAXCOLUMNS do
-  //  begin
-  //    Write(myfile, smellmap[r][c], ' ');
-  //  end;
-  //  Write(myfile, sLineBreak);
-  //end;
-  //closeFile(myfile);
-  //////////////////////////////
+  (* create smell map *)
+  for r := 1 to MAXROWS do
+  begin
+    for c := 1 to MAXCOLUMNS do
+    begin
+      smellmap[r][c] := distances[r, c];
+    end;
+  end;
+
+  (* Set smell counter *)
+  smellCounter := 5;
+
+
+  // Write map to text file for testing
+  (* filename := 'smellmap.txt';
+  AssignFile(myfile, filename);
+  rewrite(myfile);
+  for r := 1 to MAXROWS do
+  begin
+    for c := 1 to MAXCOLUMNS do
+    begin
+      Write(myfile, smellmap[r][c], ' ');
+    end;
+    Write(myfile, sLineBreak);
+  end;
+  closeFile(myfile);  *)
+
 
 end;
 
-(* If the tile to the North has a lower value than current tile return true *)
-function sniffNorth(y, x: smallint): boolean;
+function scentDirection(y, x: smallint): char;
+var
+  surroundingArea: array[0..3] of integer;
 begin
-  if (smellmap[y - 1][x] < smellmap[y][x]) then
-    Result := True
-  else
-    Result := False;
-end;
+  { Initialise Result }
+  Result := 'n';
+  if (smellCounter < 1) then
+    (* Smell the surrounding area *)
+    sniff;
 
-(* If the tile to the East has a lower value than current tile return true *)
-function sniffEast(y, x: smallint): boolean;
-begin
-  if (smellmap[y][x + 1] < smellmap[y][x]) then
-    Result := True
-  else
-    Result := False;
-end;
+  (* Find the tile with the strongest scent *)
+  (* North *)
+  surroundingArea[0] := smellmap[y - 1][x];
+  (* South *)
+  surroundingArea[1] := smellmap[y + 1][x];
+  (* East *)
+  surroundingArea[2] := smellmap[y][x + 1];
+  (* West *)
+  surroundingArea[3] := smellmap[y][x - 1];
 
-(* If the tile to the South has a lower value than current tile return true *)
-function sniffSouth(y, x: smallint): boolean;
-begin
-  if (smellmap[y + 1][x] < smellmap[y][x]) then
-    Result := True
-  else
-    Result := False;
-end;
-
-(* If the tile to the West has a lower value than current tilem return true *)
-function sniffWest(y, x: smallint): boolean;
-begin
-  if (smellmap[y][x - 1] < smellmap[y][x]) then
-    Result := True
-  else
-    Result := False;
+  (* Return direction with strongest scent *)
+  if (surroundingArea[0] = MinValue(surroundingArea)) then
+    Result := 'n'
+  else if (surroundingArea[1] = MinValue(surroundingArea)) then
+    Result := 's'
+  else if (surroundingArea[2] = MinValue(surroundingArea)) then
+    Result := 'e'
+  else if (surroundingArea[3] = MinValue(surroundingArea)) then
+    Result := 'w';
 end;
 
 end.

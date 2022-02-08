@@ -2,12 +2,12 @@
 
 unit fov;
 
-{$mode objfpc}{$H+}
+{$mode fpc}{$H+}
 
 interface
 
 uses
-  map, globalutils;
+  map, globalUtils;
 
 (* Draw Bresenham lines in a circle *)
 procedure drawLine(x1, y1, x2, y2: smallint; hiDef: byte);
@@ -72,17 +72,17 @@ begin
     begin
       if (hiDef = 1) then
       begin
-        map.drawTile(x, y, 1);
         map.maparea[y][x].Visible := True;
         map.maparea[y][x].Discovered := True;
+        map.drawTile(x, y, 1);
         if (map.maparea[y][x].Blocks = True) then
           exit;
       end
       else
       begin
-        map.drawTile(x, y, 0);
         map.maparea[y][x].Visible := False;
         map.maparea[y][x].Discovered := True;
+        map.drawTile(x, y, 0);
         if (map.maparea[y][x].Blocks = True) then
           exit;
       end;
@@ -150,3 +150,4 @@ begin
 end;
 
 end.
+

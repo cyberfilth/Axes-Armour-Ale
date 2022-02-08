@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: universe</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
+<h1 class="unit">Unit universe</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Generate each dungeon, its levels and related info</p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>SysUtils</li><li><a  href="globalUtils.html">globalUtils</a></li><li>cave</li><li><a  href="smell.html">smell</a></li><li><a  href="player_stats.html">player_stats</a></li><li><a  href="logging.html">logging</a></li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="universe.html#createNewDungeon">createNewDungeon</a></b>(levelType: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="universe.html#spawnDenizens">spawnDenizens</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="universe.html#litterItems">litterItems</a></b>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="universe.html#dungeonTerrain">dungeonTerrain</a></b> = (...);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="universe.html#dlistLength">dlistLength</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="universe.html#uniqueID">uniqueID</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="universe.html#totalRooms">totalRooms</a></b>: byte;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="universe.html#currentDepth">currentDepth</a></b>: byte;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="universe.html#totalDepth">totalDepth</a></b>: byte;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="universe.html#dungeonType">dungeonType</a></b>: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="universe.html#title">title</a></b>: string;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="universe.html#currentDungeon">currentDungeon</a></b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="universe.html#levelVisited">levelVisited</a></b>: boolean;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="createNewDungeon"></span><code>procedure <b>createNewDungeon</b>(levelType: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Creates a dungeon of a specified type</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="spawnDenizens"></span><code>procedure <b>spawnDenizens</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Spawn creatures based on dungeon type and player level</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="litterItems"></span><code>procedure <b>litterItems</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Drop items based on dungeon type and player level</p>
+</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dungeonTerrain"></span><code><b>dungeonTerrain</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+<span id="tCave">tCave</span></li>
+<li>
+<span id="tDungeon">tDungeon</span></li>
+</ul>
+</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dlistLength"></span><code><b>dlistLength</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Number of dungeons</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="uniqueID"></span><code><b>uniqueID</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Number of dungeons</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="totalRooms"></span><code><b>totalRooms</b>: byte;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Info about current dungeon</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="currentDepth"></span><code><b>currentDepth</b>: byte;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Info about current dungeon</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="totalDepth"></span><code><b>totalDepth</b>: byte;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Info about current dungeon</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dungeonType"></span><code><b>dungeonType</b>: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="title"></span><code><b>title</b>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Name of the current dungeon</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="currentDungeon"></span><code><b>currentDungeon</b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Used when a dungeon is first generated</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="levelVisited"></span><code><b>levelVisited</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Flag to show if this level has been visited before</p>
+</td></tr>
+</table>
+</td></tr></table></body></html>

@@ -1,7 +1,8 @@
 (* A wooden club *)
+
 unit basic_club;
 
-{$mode objfpc}{$H+}
+{$mode fpc}{$H+}
 
 interface
 
@@ -24,9 +25,12 @@ begin
     itemID := uniqueid;
     itemName := 'wooden club';
     itemDescription := 'adds 1D6 to attack';
-    itemType := 'weapon';
+    itemArticle := 'a';
+    itemType := itmWeapon;
+    itemMaterial := matWood;
     useID := 4;
-    glyph := '4';
+    glyph := chr(24);
+    glyphColour := 'brown';
     inView := False;
     posX := itmx;
     posY := itmy;
@@ -37,14 +41,13 @@ end;
 
 procedure useItem(equipped: boolean);
 begin
-  { TODO : Add Throw Range and Throw Damage }
   if (equipped = False) then
     (* To equip the weapon *)
   begin
     entityList[0].weaponEquipped := True;
     Inc(entityList[0].weaponDice);
-    ui.bufferMessage('The club adds 1D6 to your attack');
-    ui.updateWeapon('Wooden club');
+    ui.displayMessage('You equip the wooden club. The club adds 1D6 to your attack');
+    ui.equippedWeapon := 'Wooden club';
     ui.writeBufferedMessages;
   end
   else
@@ -52,9 +55,11 @@ begin
   begin
     entityList[0].weaponEquipped := False;
     Dec(entityList[0].weaponDice);
-    ui.updateWeapon('none');
+    ui.displayMessage('You unequip the wooden club.');
+    ui.equippedWeapon := 'No weapon equipped';
     ui.writeBufferedMessages;
   end;
 end;
 
 end.
+

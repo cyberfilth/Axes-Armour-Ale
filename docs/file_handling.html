@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: file_handling</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
+<h1 class="unit">Unit file_handling</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Unit responsible for saving and loading data</p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>SysUtils</li><li>DOM</li><li>XMLWrite</li><li>XMLRead</li><li>TypInfo</li><li><a  href="globalUtils.html">globalutils</a></li><li><a  href="universe.html">universe</a></li><li>cave</li><li><a  href="items.html">items</a></li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="file_handling.html#writeNewDungeonLevel">writeNewDungeonLevel</a></b>(idNumber, lvlNum, totalDepth, totalRooms: byte; dtype: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="file_handling.html#saveDungeonLevel">saveDungeonLevel</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="file_handling.html#loadDungeonLevel">loadDungeonLevel</a></b>(lvl: byte);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="file_handling.html#deleteGameData">deleteGameData</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="file_handling.html#loadGame">loadGame</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="file_handling.html#saveGame">saveGame</a></b>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="writeNewDungeonLevel"></span><code>procedure <b>writeNewDungeonLevel</b>(idNumber, lvlNum, totalDepth, totalRooms: byte; dtype: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Write a newly generate level of a dungeon to disk</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="saveDungeonLevel"></span><code>procedure <b>saveDungeonLevel</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Write explored dungeon level to disk</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="loadDungeonLevel"></span><code>procedure <b>loadDungeonLevel</b>(lvl: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Read dungeon level from disk</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="deleteGameData"></span><code>procedure <b>deleteGameData</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Delete saved game files</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="loadGame"></span><code>procedure <b>loadGame</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Load a saved game</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="saveGame"></span><code>procedure <b>saveGame</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Save game state to file</p>
+</td></tr>
+</table>
+</td></tr></table></body></html>

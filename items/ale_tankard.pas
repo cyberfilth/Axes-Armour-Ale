@@ -24,9 +24,12 @@ begin
     itemID := uniqueid;
     itemName := 'tankard of ale';
     itemDescription := 'restores 5 health points';
-    itemType := 'drink';
+    itemArticle := 'a';
+    itemType := itmDrink;
+    itemMaterial := matSteel;
     useID := 1;
     glyph := '!';
+    glyphColour := 'lightCyan';
     inView := False;
     posX := itmx;
     posY := itmy;
@@ -40,9 +43,7 @@ begin
   player.increaseHealth(5);
   entities.entityList[0].stsDrunk := True;
   Inc(entities.entityList[0].tmrDrunk, 5);
-  ui.bufferMessage('The alcohol slows your reactions');
-  ui.writeBufferedMessages;
+  ui.displayMessage('You quaff the ale. The alcohol slows your reactions.');
 end;
 
 end.
-
