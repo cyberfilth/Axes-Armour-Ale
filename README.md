@@ -36,3 +36,5 @@ Wear armour or Wield a weapon with 'w'
 Zap magic with 'z'
 To exit a menu / quit the game press ESCAPE (on Linux you will need to double-tap the ESCAPE key)
 </pre>
+
+Code documentation can be found at https://cyberfilth.github.io/Axes-Armour-Ale/intro.html
