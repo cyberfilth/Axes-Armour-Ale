@@ -1,4 +1,4 @@
-# Axes, Armour & Ale - terminal version
+<h1 align="center">Axes, Armour & Ale</h1>
 <p align="center">
   <img width="300" height="230" src="GITscreenshots/Logo.png">
 </p>
@@ -6,8 +6,8 @@
 ### A low-fantasy, roguelike game
 
 Alpha version, most features aren't implemented yet and what there is may change frequently. Currently there are the following features:
- - A randomly generated dungeon and a cave created using cellular automata
- - Game runs natively on both GNU/Linux and Windows
+ - A procedurally generated cave, created using cellular automata
+ - Game runs natively on GNU/Linux, Windows & OSX
  - Small, self-contained binary with no external dependencies.
  - Can be run without needing to be installed
 
@@ -36,3 +36,5 @@ Wear armour or Wield a weapon with 'w'
 Zap magic with 'z'
 To exit a menu / quit the game press ESCAPE (on Linux you will need to double-tap the ESCAPE key)
 </pre>
+
+Code documentation can be found at https://cyberfilth.github.io/Axes-Armour-Ale/intro.html
