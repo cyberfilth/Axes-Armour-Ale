@@ -30,6 +30,8 @@ type
     useID: smallint;
     (* Position on game map *)
     posX, posY: smallint;
+    (* Number of uses for magic items / durability for breakable items *)
+    NumberOfUses: smallint;
     (* Character used to represent item on game map *)
     glyph: shortstring;
     (* Colour of the glyph *)

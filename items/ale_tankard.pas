@@ -33,6 +33,7 @@ begin
     inView := False;
     posX := itmx;
     posY := itmy;
+    NumberOfUses := 5;
     onMap := True;
     discovered := False;
   end;

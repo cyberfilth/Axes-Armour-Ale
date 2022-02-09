@@ -12,7 +12,7 @@ uses
 type
   (* Items in inventory *)
   Equipment = record
-    id, useID, sortIndex: smallint;
+    id, useID, sortIndex, numUses: smallint;
     Name, description, article, glyph, glyphColour: shortstring;
     itemType: tItem;
     itemMaterial: tMaterial;
@@ -76,6 +76,7 @@ begin
     inventory[i].itemMaterial := matEmpty;
     inventory[i].glyph := 'x';
     inventory[i].glyphColour := 'x';
+    inventory[i].numUses := 0;
     inventory[i].inInventory := False;
     inventory[i].useID := 0;
   end;
@@ -137,6 +138,7 @@ begin
         inventory[i].useID := itemList[itemNumber].useID;
         inventory[i].glyph := itemList[itemNumber].glyph;
         inventory[i].glyphColour := itemList[itemNumber].glyphColour;
+        inventory[i].numUses := itemList[itemNumber].NumberOfUses;
         inventory[i].inInventory := True;
         ui.displayMessage('You pick up the ' + inventory[i].Name);
       (* Set an empty flag for the item on the map, this
@@ -155,6 +157,7 @@ begin
           inView := False;
           posX := 1;
           posY := 1;
+          NumberOfUses := 0;
           onMap := False;
           discovered := False;
         end;
@@ -184,6 +187,7 @@ begin
       inView := False;
       posX := 1;
       posY := 1;
+      NumberOfUses := 0;
       onMap := False;
       discovered := False;
     end;
@@ -214,6 +218,7 @@ begin
     newItem.inView := True;
     newItem.posX := entities.entityList[0].posX;
     newItem.posY := entities.entityList[0].posY;
+    newItem.NumberOfUses := inventory[itemNumber].numUses;
     newItem.onMap := True;
     newItem.discovered := True;
 
@@ -234,6 +239,7 @@ begin
     inventory[itemNumber].glyph := 'x';
     inventory[itemNumber].glyphColour := 'x';
     inventory[itemNumber].inInventory := False;
+    inventory[itemNumber].numUses := 0;
     inventory[itemNumber].useID := 0;
     Result := True;
     (* Sort items in inventory *)
@@ -395,6 +401,7 @@ begin
     inventory[selection].glyph := 'x';
     inventory[selection].glyphColour := 'x';
     inventory[selection].inInventory := False;
+    inventory[selection].numUses := 0;
     inventory[selection].useID := 0;
     (* Sort items in inventory *)
     sortInventory(0, high(inventory));

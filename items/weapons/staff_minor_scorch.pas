@@ -19,11 +19,15 @@ procedure Zap;
 implementation
 
 uses
-  items, entities, ui, player_stats;
+  items, entities, ui, player_stats, globalUtils;
 
 (* Description of item depends on player race *)
 procedure createStaff(uniqueid, itmx, itmy: smallint);
+var
+  randUses: smallint;
 begin
+  (* Number of times the staff can be used *)
+  randUses:=randomRange(5, 8);
   items.listLength := length(items.itemList);
   SetLength(items.itemList, items.listLength + 1);
   with items.itemList[items.listLength] do
@@ -48,6 +52,7 @@ begin
     inView := False;
     posX := itmx;
     posY := itmy;
+    NumberOfUses := randUses;
     onMap := True;
     discovered := False;
   end;

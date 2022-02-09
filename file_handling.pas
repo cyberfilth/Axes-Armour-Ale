@@ -224,6 +224,7 @@ begin
           AddElement(DataNode, 'inView', BoolToStr(itemList[i].inView));
           AddElement(DataNode, 'posX', IntToStr(itemList[i].posX));
           AddElement(DataNode, 'posY', IntToStr(itemList[i].posY));
+          AddElement(DataNode, 'numUses', IntToStr(itemList[i].NumberOfUses));
           AddElement(DataNode, 'onMap', BoolToStr(itemList[i].onMap));
           AddElement(DataNode, 'discovered', BoolToStr(itemList[i].discovered));
         end;
@@ -369,6 +370,7 @@ begin
         items.itemList[i].inView := StrToBool(UTF8Encode(ItemsNode.FindNode('inView').TextContent));
         items.itemList[i].posX := StrToInt(UTF8Encode(ItemsNode.FindNode('posX').TextContent));
         items.itemList[i].posY := StrToInt(UTF8Encode(ItemsNode.FindNode('posY').TextContent));
+        items.itemList[i].NumberOfUses := StrToInt(UTF8Encode(ItemsNode.FindNode('numUses').TextContent));
         items.itemList[i].onMap := StrToBool(UTF8Encode(ItemsNode.FindNode('onMap').TextContent));
         items.itemList[i].discovered := StrToBool(UTF8Encode(ItemsNode.FindNode('discovered').TextContent));
         ParentNode := ItemsNode.NextSibling;
@@ -547,6 +549,7 @@ begin
         player_inventory.inventory[i].glyph := char(widechar(InventoryNode.FindNode('glyph').TextContent[1]));
 
       player_inventory.inventory[i].glyphColour := UTF8Encode(InventoryNode.FindNode('glyphColour').TextContent);
+      player_inventory.inventory[i].numUses := StrToInt(UTF8Encode(InventoryNode.FindNode('numUses').TextContent));
       player_inventory.inventory[i].inInventory := StrToBool(UTF8Encode(InventoryNode.FindNode('inInventory').TextContent));
       ParentNode := InventoryNode.NextSibling;
       InventoryNode := ParentNode;
@@ -676,6 +679,7 @@ begin
         AddElement(DataNode, 'glyph', inventory[i].glyph);
 
       AddElement(DataNode, 'glyphColour', inventory[i].glyphColour);
+      AddElement(DataNode, 'numUses', IntToStr(inventory[i].numUses));
       AddElement(DataNode, 'inInventory', BoolToStr(inventory[i].inInventory));
     end;
 
