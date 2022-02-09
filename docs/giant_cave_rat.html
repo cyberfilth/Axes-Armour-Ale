@@ -16,7 +16,7 @@
 <p>
 Weak enemy with simple AI, no pathfinding</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Math</li><li>combat_resolver</li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Math</li><li>ai_animal</li><li><a  href="globalUtils.html">globalUtils</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -35,19 +35,7 @@ Weak enemy with simple AI, no pathfinding</p>
 <td class="itemcode"><code>procedure <b><a  href="giant_cave_rat.html#decisionEscape">decisionEscape</a></b>(id: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="giant_cave_rat.html#wander">wander</a></b>(id, spx, spy: smallint);</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="giant_cave_rat.html#chasePlayer">chasePlayer</a></b>(id, spx, spy: smallint);</code></td>
-</tr>
-<tr class="list2">
 <td class="itemcode"><code>function <b><a  href="giant_cave_rat.html#isNextToPlayer">isNextToPlayer</a></b>(spx, spy: smallint): boolean;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="giant_cave_rat.html#escapePlayer">escapePlayer</a></b>(id, spx, spy: smallint);</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="giant_cave_rat.html#combat">combat</a></b>(id: smallint);</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -67,7 +55,7 @@ Create a cave rat</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Take a turn</p>
+The NPC takes their turn in the game loop</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -99,47 +87,11 @@ Decision tree for Escape state</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="wander"></span><code>procedure <b>wander</b>(id, spx, spy: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Move in a random direction</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="chasePlayer"></span><code>procedure <b>chasePlayer</b>(id, spx, spy: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Chase the player</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
 <td class="itemcode"><span id="isNextToPlayer"></span><code>function <b>isNextToPlayer</b>(spx, spy: smallint): boolean;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Check if player is next to NPC</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="escapePlayer"></span><code>procedure <b>escapePlayer</b>(id, spx, spy: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Run from player</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="combat"></span><code>procedure <b>combat</b>(id: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Combat</p>
 </td></tr>
 </table>
 </td></tr></table></body></html>

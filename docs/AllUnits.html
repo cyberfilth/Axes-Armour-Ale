@@ -24,6 +24,14 @@
 <td class="itemdesc"><p>Camera unit follows the player around and displays the surrounding game map</p></td>
 </tr>
 <tr class="list">
+<td class="itemname"><a class="bold" href="cave_rat.html">cave_rat</a></td>
+<td class="itemdesc"><p>Weak enemy with simple AI, no pathfinding</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="crude_dagger.html">crude_dagger</a></td>
+<td class="itemdesc"><p>A crude, iron dagger</p></td>
+</tr>
+<tr class="list">
 <td class="itemname"><a class="bold" href="entities.html">entities</a></td>
 <td class="itemdesc"><p>Unit responsible for NPC stat, initialising enemies and utility functions</p></td>
 </tr>
@@ -32,64 +40,80 @@
 <td class="itemdesc"><p>Unit responsible for saving and loading data</p></td>
 </tr>
 <tr class="list">
+<td class="itemname"><a class="bold" href="giant_cave_rat.html">giant_cave_rat</a></td>
+<td class="itemdesc"><p>Weak enemy with simple AI, no pathfinding</p></td>
+</tr>
+<tr class="list2">
 <td class="itemname"><a class="bold" href="globalUtils.html">globalUtils</a></td>
 <td class="itemdesc"><p>Common functions / utilities</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="items.html">items</a></td>
 <td class="itemdesc"><p>Items and objects in the game world</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="item_lookup.html">item_lookup</a></td>
 <td class="itemdesc"><p>Lookup table for items, based on the environment</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="KeyboardInput.html">KeyboardInput</a></td>
 <td class="itemdesc"><p>Player input for game controls and menu selections, grouped in procedures</p></td>
 </tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="large_blood_bat.html">large_blood_bat</a></td>
+<td class="itemdesc"><p>Weak enemy with simple AI, no pathfinding</p></td>
+</tr>
 <tr class="list">
+<td class="itemname"><a class="bold" href="leather_armour1.html">leather_armour1</a></td>
+<td class="itemdesc"><p>Low quality leather armour</p></td>
+</tr>
+<tr class="list2">
 <td class="itemname"><a class="bold" href="logging.html">logging</a></td>
 <td class="itemdesc"><p>Used for logging which procedures are called and in what order</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="los.html">los</a></td>
 <td class="itemdesc"><p>Line of sight &amp; targeting functions</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="magicEffects.html">magicEffects</a></td>
 <td class="itemdesc"><p>Magic and Spell effects are calculated here</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="main.html">main</a></td>
 <td class="itemdesc"><p>Axes, Armour &amp; Ale - A low-fantasy roguelike. </p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="map.html">map</a></td>
 <td class="itemdesc"><p>Organises the current level into an array together with helper functions</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="npc_lookup.html">npc_lookup</a></td>
 <td class="itemdesc"><p>Lookup table for NPC's, based on the environment</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="player.html">player</a></td>
 <td class="itemdesc"><p>Player setup and stats</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="player_inventory.html">player_inventory</a></td>
 <td class="itemdesc"><p>Handles player inventory and associated functions</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="player_stats.html">player_stats</a></td>
 <td class="itemdesc"><p>Additional player stats that are not shared with other entities are stored here</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="plot_gen.html">plot_gen</a></td>
 <td class="itemdesc"><p>Generate names and plot elements</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="potion_curePoison.html">potion_curePoison</a></td>
 <td class="itemdesc"><p>Potion that cures poison</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="redcap_lesser.html">redcap_lesser</a></td>
+<td class="itemdesc"><p>Intelligent enemy with scent tracking</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="resolution.html">resolution</a></td>
@@ -128,10 +152,18 @@
 <td class="itemdesc"><p>Game won screen - only used for Alpha testing</p></td>
 </tr>
 <tr class="list">
+<td class="itemname"><a class="bold" href="small_green_fungus.html">small_green_fungus</a></td>
+<td class="itemdesc"><p>Stationary hazard, deals poison damage in combat</p></td>
+</tr>
+<tr class="list2">
 <td class="itemname"><a class="bold" href="smell.html">smell</a></td>
 <td class="itemdesc"><p>Smell map, a copy of the map is floodfilled with integers. Each integer increments the further away it is from the player. Creatures can then track the player by finding a tile with a lower number than the one that they're standing on.
 
 <p>The below routine is based on code from Stephen Peter (AKA speter)</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="staff_minor_scorch.html">staff_minor_scorch</a></td>
+<td class="itemdesc"><p>A magical staff of minor scorch, area effect</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="ui.html">ui</a></td>
