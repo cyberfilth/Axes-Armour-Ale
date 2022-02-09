@@ -122,8 +122,8 @@ begin
   if (universe.currentDepth = 3) then
     smugglersMap.createSmugglersMap(itemAmount, c, r)
   else
-    ale_tankard.createAleTankard(itemAmount, c, r);
-    //staff_minor_scorch.createStaff(itemAmount, c, r);
+    //ale_tankard.createAleTankard(itemAmount, c, r);
+    staff_minor_scorch.createStaff(itemAmount, c, r);
 end;
 
 end.

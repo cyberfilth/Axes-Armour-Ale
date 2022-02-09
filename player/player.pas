@@ -303,19 +303,23 @@ end;
 
 procedure regenMagick;
 begin
-  { Elves regenerate magick every 3 turns }
-  if (player_stats.playerRace = 'Elf') then
+  (* Player cannot regenerate if they have status effects *)
+  if (entityList[0].stsPoison = False) and (entityList[0].stsDrunk = False) then
   begin
-    if ((entities.entityList[0].moveCount mod 8) = 0) and
-      (player_stats.currentMagick < player_stats.maxMagick) then
-      Inc(player_stats.currentMagick);
-  end
-  else
-  begin
-    { Humans regenerate magick every 8 turns }
-    if ((entities.entityList[0].moveCount mod 16) = 0) and
-      (player_stats.currentMagick < player_stats.maxMagick) then
-      Inc(player_stats.currentMagick);
+    { Elves regenerate magick every 3 turns }
+    if (player_stats.playerRace = 'Elf') then
+    begin
+      if ((entities.entityList[0].moveCount mod 8) = 0) and
+        (player_stats.currentMagick < player_stats.maxMagick) then
+        Inc(player_stats.currentMagick);
+    end
+    else
+    begin
+      { Humans regenerate magick every 8 turns }
+      if ((entities.entityList[0].moveCount mod 16) = 0) and
+        (player_stats.currentMagick < player_stats.maxMagick) then
+        Inc(player_stats.currentMagick);
+    end;
   end;
 end;
 

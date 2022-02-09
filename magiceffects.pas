@@ -7,7 +7,7 @@ unit magicEffects;
 interface
 
 uses
-  SysUtils, video, los, entities, ui, player_stats, animation;
+  SysUtils, video, los, entities, items, ui, player_stats, animation;
 
 type
   TSmallintArray = array of smallint;
@@ -19,7 +19,7 @@ implementation
 
 procedure minorScorch;
 var
-  i, damageAmount, targetAmount, cost: smallint;
+  i, i2, damageAmount, targetAmount, cost: smallint;
   anyTargetHit: boolean;
   targetList: TSmallintArray;
 begin
@@ -33,6 +33,7 @@ begin
     exit;
   end;
   i := 0;
+  i2 := 0;
   targetAmount := 1;
   anyTargetHit := False;
   (* Damage amount is 4 + player level *)
@@ -82,6 +83,23 @@ begin
       end;
     end;
   end;
+  (* Check if any flammable items are near *)
+  for i2 := 0 to items.itemAmount do
+  begin
+    (* First check an item is visible and flammable *)
+    if (itemList[i2].inView = True) and (itemList[i2].itemMaterial = matAlcohol) and
+      (itemList[i2].itemType <> itmEmptySlot) then
+    begin
+      itemList[i2].itemType := itmEmptySlot;
+      itemList[i2].onMap := False;
+      if (itemList[i2].itemArticle <> '') then
+        ui.displayMessage(itemList[i2].itemArticle + ' ' +
+          itemList[i2].itemName + ' ignites!')
+      else
+        ui.displayMessage(itemList[i2].itemName + ' ignites!');
+    end;
+  end;
+
   (* Display if there were any hits or not *)
   if (anyTargetHit = False) then
     ui.displayMessage('Flames shoot out, but hit nothing')

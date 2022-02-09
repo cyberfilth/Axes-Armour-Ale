@@ -1,4 +1,4 @@
-(* Unit responsible for projectile animation *)
+(* Unit responsible for projectile and magic animations *)
 
 unit animation;
 

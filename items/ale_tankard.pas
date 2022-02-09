@@ -26,7 +26,7 @@ begin
     itemDescription := 'restores 5 health points';
     itemArticle := 'a';
     itemType := itmDrink;
-    itemMaterial := matSteel;
+    itemMaterial := matAlcohol;
     useID := 1;
     glyph := '!';
     glyphColour := 'lightCyan';
