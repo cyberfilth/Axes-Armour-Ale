@@ -363,6 +363,8 @@ rangeok	vision/backup/smell.pas	/^  function rangeok(x, y: smallint): boolean;$/
 rangeok	vision/smell.pas	/^  function rangeok(x, y: smallint): boolean;$/;"	f
 redrawItems	items.pas	/^procedure redrawItems;$/;"	p
 redrawMapDisplay	entities.pas	/^procedure redrawMapDisplay(id: byte);$/;"	p
+regenMagick	player/backup/player.pas	/^procedure regenMagick;$/;"	p
+regenMagick	player/player.pas	/^procedure regenMagick;$/;"	p
 removeFromInventory	player/backup/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f
 removeFromInventory	player/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f
 restoreMessages	ui.pas	/^procedure restoreMessages;$/;"	p

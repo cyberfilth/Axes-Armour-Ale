@@ -22,6 +22,8 @@ procedure pickUp;
 procedure increaseHealth(amount: smallint);
 (* Increase health without messages *)
 procedure levelupHealth(amount: smallint);
+(* Regenerate Magickal power *)
+procedure regenMagick;
 
 implementation
 
@@ -183,6 +185,10 @@ begin
   fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
     entities.entityList[0].visionRange, 1);
   ui.writeBufferedMessages;
+
+  (* Regenerate Magick *)
+  if (player_stats.playerRace <> 'Dwarf') then
+    regenMagick;
 end;
 
 procedure processStatus;
@@ -292,6 +298,24 @@ begin
     else
       entities.entityList[0].currentHP := entities.entityList[0].currentHP + amount;
     ui.updateHealth;
+  end;
+end;
+
+procedure regenMagick;
+begin
+  { Elves regenerate magick every 3 turns }
+  if (player_stats.playerRace = 'Elf') then
+  begin
+    if ((entities.entityList[0].moveCount mod 8) = 0) and
+      (player_stats.currentMagick < player_stats.maxMagick) then
+      Inc(player_stats.currentMagick);
+  end
+  else
+  begin
+    { Humans regenerate magick every 8 turns }
+    if ((entities.entityList[0].moveCount mod 16) = 0) and
+      (player_stats.currentMagick < player_stats.maxMagick) then
+      Inc(player_stats.currentMagick);
   end;
 end;
 
