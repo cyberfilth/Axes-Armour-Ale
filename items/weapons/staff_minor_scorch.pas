@@ -122,6 +122,7 @@ begin
     { Remove the staff from inventory }
     ui.displayMessage('Magickal energy shatters your staff into splinters!');
     player_inventory.destroyWeapon;
+    entityList[0].weaponEquipped := False;
     ui.equippedWeapon := 'No weapon equipped';
     ui.updateWeapon;
     player_stats.enchantedWeaponEquipped := False;
