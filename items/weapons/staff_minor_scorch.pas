@@ -19,7 +19,7 @@ procedure Zap;
 implementation
 
 uses
-  items, entities, ui, player_stats, globalUtils;
+  items, entities, ui, player_stats, player_inventory, globalUtils;
 
 (* Description of item depends on player race *)
 procedure createStaff(uniqueid, itmx, itmy: smallint);
@@ -27,7 +27,7 @@ var
   randUses: smallint;
 begin
   (* Number of times the staff can be used *)
-  randUses:=randomRange(5, 8);
+  randUses := randomRange(5, 8);
   items.listLength := length(items.itemList);
   SetLength(items.itemList, items.listLength + 1);
   with items.itemList[items.listLength] do
@@ -67,12 +67,14 @@ begin
     Inc(entityList[0].weaponDice);
     if (player_stats.playerRace <> 'Dwarf') then
     begin
-      ui.displayMessage('You equip the enchanted staff. The staff can scorch nearby enemies [z]');
+      ui.displayMessage(
+        'You equip the enchanted staff. The staff can scorch nearby enemies [z]');
       ui.equippedWeapon := 'Staff of scorch';
     end
     else
     begin
-      ui.displayMessage('You equip the staff. You sense it has magical powers beyond your ability');
+      ui.displayMessage(
+        'You equip the staff. You sense it has magical powers beyond your ability');
       ui.equippedWeapon := 'Wooden staff';
     end;
     ui.writeBufferedMessages;
@@ -96,10 +98,35 @@ begin
 end;
 
 procedure Zap;
+var
+  damageChance, dmgAmount: smallint;
 begin
-  (* Check mana amount *)
-
+  damageChance := 1;
+  dmgAmount := 2 + player_stats.playerLevel;
   magicEffects.minorScorch;
+  (* Staff integrity begins to break down *)
+  Dec(player_stats.numEquippedUses);
+  if (player_stats.numEquippedUses = 1) then
+    ui.displayMessage('Your staff begins to splinter and spark')
+  else if (player_stats.numEquippedUses <= 0) then
+  begin
+    { Determine if player is hurt when staff explodes }
+    damageChance := randomRange(1, 5);
+    if (damageChance = 3) then
+    begin
+      { Damage amount is 2 + players level }
+      entityList[0].currentHP := (entityList[0].currentHP - dmgAmount);
+      if (entities.entityList[0].currentHP < 1) then
+        killer := 'an exploding magickal staff';
+    end;
+    { Remove the staff from inventory }
+    ui.displayMessage('Magickal energy shatters your staff into splinters!');
+    player_inventory.destroyWeapon;
+    ui.equippedWeapon := 'No weapon equipped';
+    ui.updateWeapon;
+    player_stats.enchantedWeaponEquipped := False;
+    player_stats.enchWeapType := 0;
+  end;
 end;
 
 end.

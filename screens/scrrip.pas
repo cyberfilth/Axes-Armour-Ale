@@ -43,7 +43,7 @@ begin
     epitaph := 'In Memoriam, ' + epitaph;
 
   (* Show which creature killed the player *)
-  deathMessage := 'Killed by a ' + globalUtils.killer + ', after ' +
+  deathMessage := 'Killed by ' + globalUtils.killer + ', after ' +
     IntToStr(entityList[0].moveCount) + ' moves.';
 
   { Closing screen update as it is currently in the main game loop }

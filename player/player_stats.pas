@@ -20,6 +20,8 @@ var
   enchantedWeaponEquipped: boolean;
   (* Magical ability *)
   maxMagick, currentMagick: smallint;
+  (* Durability of equipped / magical item *)
+  numEquippedUses: smallint;
 
 (* Check if the player has levelled up *)
 procedure checkLevel;

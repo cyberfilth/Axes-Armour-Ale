@@ -331,7 +331,7 @@ begin
       (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin
-      killer := entityList[id].race;
+      killer := 'a ' + entityList[id].race;
       exit;
     end
     else
@@ -417,7 +417,7 @@ begin
     entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin
-      killer := entityList[id].race;
+      killer := 'a ' + entityList[id].race;
     end
     else
     begin

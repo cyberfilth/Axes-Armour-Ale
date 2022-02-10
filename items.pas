@@ -10,7 +10,7 @@ uses
   ui;
 
 type
-  tItem = (itmDrink, itmWeapon, itmArmour, itmEnchantedWeapon, itmQuest, itmEmptySlot);
+  tItem = (itmDrink, itmWeapon, itmArmour, itmQuest, itmEmptySlot);
 
 type
   tMaterial = (matSteel, matIron, matWood, matLeather, matWool, matPaper, matAlcohol, matEmpty);

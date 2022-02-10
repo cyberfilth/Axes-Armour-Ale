@@ -165,6 +165,8 @@ decisionNeutral	entities/hobs/redcap_lesser_lobber.pas	/^procedure decisionNeutr
 deleteGameData	backup/file_handling.pas	/^procedure deleteGameData;$/;"	p
 deleteGameData	file_handling.pas	/^procedure deleteGameData;$/;"	p
 descendStairs	map.pas	/^procedure descendStairs;$/;"	p
+destroyWeapon	player/backup/player_inventory.pas	/^procedure destroyWeapon;$/;"	p
+destroyWeapon	player/player_inventory.pas	/^procedure destroyWeapon;$/;"	p
 dialogBoxInput	keyboardinput.pas	/^procedure dialogBoxInput(Keypress: TKeyEvent);$/;"	p
 digCave	dungeons/backup/cave.pas	/^procedure digCave(floorNumber: byte);$/;"	p
 digCave	dungeons/cave.pas	/^procedure digCave(floorNumber: byte);$/;"	p
@@ -368,6 +370,7 @@ quaffInput	keyboardinput.pas	/^procedure quaffInput(Keypress: TKeyEvent);$/;"	p
 quaffSelection	player/backup/player_inventory.pas	/^procedure quaffSelection(selection: smallint);$/;"	p
 quaffSelection	player/player_inventory.pas	/^procedure quaffSelection(selection: smallint);$/;"	p
 quitInput	keyboardinput.pas	/^procedure quitInput(Keypress: TKeyEvent);$/;"	p
+randomRange	backup/globalutils.pas	/^function randomRange(fromNumber, toNumber: smallint): smallint;$/;"	f
 randomRange	globalutils.pas	/^function randomRange(fromNumber, toNumber: smallint): smallint;$/;"	f
 randomTileFill	dungeons/backup/cave.pas	/^procedure randomTileFill;$/;"	p
 randomTileFill	dungeons/cave.pas	/^procedure randomTileFill;$/;"	p
@@ -386,6 +389,7 @@ restoreMessages	ui.pas	/^procedure restoreMessages;$/;"	p
 returnToGameScreen	main.pas	/^procedure returnToGameScreen;$/;"	p
 rightHasFloor	dungeons/backup/cave.pas	/^function rightHasFloor(): boolean;$/;"	f
 rightHasFloor	dungeons/cave.pas	/^function rightHasFloor(): boolean;$/;"	f
+rollDice	backup/globalutils.pas	/^function rollDice(numberOfDice: byte): smallint;$/;"	f
 rollDice	globalutils.pas	/^function rollDice(numberOfDice: byte): smallint;$/;"	f
 saveDungeonLevel	backup/file_handling.pas	/^procedure saveDungeonLevel;$/;"	p
 saveDungeonLevel	file_handling.pas	/^procedure saveDungeonLevel;$/;"	p

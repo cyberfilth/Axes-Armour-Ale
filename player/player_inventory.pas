@@ -7,7 +7,8 @@ unit player_inventory;
 interface
 
 uses
-  SysUtils, StrUtils, video, entities, items, item_lookup, player_stats, staff_minor_scorch;
+  SysUtils, StrUtils, video, entities, items, item_lookup, player_stats,
+  staff_minor_scorch;
 
 type
   (* Items in inventory *)
@@ -53,6 +54,8 @@ procedure wield(message: char);
 procedure wearWieldSelection(selection: smallint);
 (* Zap equipped item *)
 procedure Zzap(item: smallint);
+(* Equipped weapon is destroyed *)
+procedure destroyWeapon;
 
 implementation
 
@@ -91,8 +94,7 @@ begin
     if (inventory[i].equipped = True) then
     begin
       (* Check for weapons *)
-      if (inventory[i].itemType = itmWeapon) or
-        (inventory[i].itemType = itmEnchantedWeapon) then
+      if (inventory[i].itemType = itmWeapon) then
       begin
         ui.equippedWeapon := inventory[i].Name;
         ui.updateWeapon;
@@ -475,12 +477,14 @@ begin
         (* Equip *)
         inventory[selection].equipped := True;
         item_lookup.lookupUse(inventory[selection].useID, False);
+        player_stats.numEquippedUses := inventory[selection].numUses;
       end
       else
       begin
         (* Unequip *)
         inventory[selection].equipped := False;
         item_lookup.lookupUse(inventory[selection].useID, True);
+        inventory[selection].numUses := player_stats.numEquippedUses;
       end;
       { Increment turn counter }
       Inc(entityList[0].moveCount);
@@ -498,6 +502,32 @@ begin
     end;
     else { No enchanted weapon equipped }
       ui.displayMessage('You have no magical weapon equipped');
+  end;
+end;
+
+procedure destroyWeapon;
+var
+  i: smallint;
+begin
+  for i := 0 to 9 do
+  begin
+    (* Find the equipped weapon *)
+    if (inventory[i].equipped = True) and (inventory[i].itemType = itmWeapon) then
+    begin
+      (* Remove weapon from inventory *)
+      inventory[i].sortIndex := 10;
+      inventory[i].Name := 'Empty';
+      inventory[i].equipped := False;
+      inventory[i].description := 'x';
+      inventory[i].article := 'x';
+      inventory[i].itemType := itmEmptySlot;
+      inventory[i].itemMaterial := matEmpty;
+      inventory[i].glyph := 'x';
+      inventory[i].glyphColour := 'x';
+      inventory[i].inInventory := False;
+      inventory[i].numUses := 0;
+      inventory[i].useID := 0;
+    end;
   end;
 end;
 

@@ -115,7 +115,7 @@ begin
     begin
       if (idTarget = 0) then
       begin
-        killer := entityList[idOwner].race;
+        killer := 'a ' + entityList[idOwner].race;
         exit;
       end
       else

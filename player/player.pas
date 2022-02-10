@@ -110,6 +110,8 @@ begin
     player_stats.maxMagick := 0;
     player_stats.currentMagick := 0;
   end;
+  (* Equipped item durability *)
+  player_stats.numEquippedUses := 0;
   (* set up inventory *)
   player_inventory.initialiseInventory;
   ui.equippedWeapon := 'No weapon equipped';
