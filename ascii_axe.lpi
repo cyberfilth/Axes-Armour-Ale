@@ -115,7 +115,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="51">
+    <Units Count="52">
       <Unit0>
         <Filename Value="ascii_axe.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -334,6 +334,10 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="magicEffects"/>
       </Unit50>
+      <Unit51>
+        <Filename Value="entities\animals\small_hyena.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit51>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

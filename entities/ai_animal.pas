@@ -15,8 +15,10 @@ procedure wander(id, spx, spy: smallint);
 procedure chasePlayer(id, spx, spy: smallint);
 (* Run away from the player character *)
 procedure escapePlayer(id, spx, spy: smallint);
-(* NPC vs the player character *)
+(* NPC attacks the player *)
 procedure combat(id: smallint);
+(* NPC attacks another entity *)
+procedure infighting(npcID, enemyID: smallint);
 
 implementation
 
@@ -93,8 +95,17 @@ begin
     (* Else if tile does not contain player, check for another entity *)
     else if (map.isOccupied(newX, newY) = True) then
     begin
-      ui.bufferMessage('The ' + entityList[id].race + ' bumps into ' + getCreatureName(newX, newY));
-      entities.moveNPC(id, spx, spy);
+      if (entityList[entities.getCreatureID(newX, newY)].race <> entityList[id].race) then
+      begin
+        infighting(id, getCreatureID(newX, newY));
+        entities.moveNPC(id, spx, spy);
+      end
+      else
+      begin
+        (* If the entity is another animal, the NPC doesn't attack *)
+        ui.bufferMessage('The ' + entityList[id].race + ' bumps into ' + getCreatureName(newX, newY));
+        entities.moveNPC(id, spx, spy);
+      end;
     end
     (* if map is unoccupied, move to that tile *)
     else if (map.isOccupied(newX, newY) = False) then
@@ -154,12 +165,10 @@ procedure combat(id: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) -
-    entities.entityList[0].defence;
+  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) - entities.entityList[0].defence;
   if (damageAmount > 0) then
   begin
-    entities.entityList[0].currentHP :=
-      (entities.entityList[0].currentHP - damageAmount);
+    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin
       killer := 'a ' + entityList[id].race;
@@ -170,8 +179,7 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The ' + entityList[id].race + ' slightly wounds you')
       else
-        ui.displayMessage('The ' + entityList[id].race + ' bites you, inflicting ' +
-          IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The ' + entityList[id].race + ' bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
@@ -183,5 +191,22 @@ begin
   end;
 end;
 
-end.
+procedure infighting(npcID, enemyID: smallint);
+var
+  damageAmount: smallint;
+begin
+  damageAmount := globalutils.randomRange(1, entityList[npcID].attack) - entityList[enemyID].defence;
+   if (damageAmount > 0) then
+   begin
+     entityList[enemyID].currentHP := (entityList[enemyID].currentHP - damageAmount);
+     if (entities.entityList[enemyID].currentHP < 1) then
+     begin
+          killEntity(enemyID);
+          ui.displayMessage('The rat kills the ' + entityList[enemyID].race);
+     end
+     else
+         ui.displayMessage('The rat attacks the ' + entityList[enemyID].race);
+   end;
+end;
 
+end.

@@ -1,16 +1,16 @@
-(* Weak enemy with simple AI, no pathfinding *)
+(* Strong predator, attacks other animals *)
 
-unit blood_bat;
+unit small_hyena;
 
 {$mode objfpc}{$H+}
 
 interface
 
 uses
-  SysUtils, Math, combat_resolver;
+  SysUtils, Math, universe, combat_resolver;
 
-(* Create a blood bat *)
-procedure createBloodBat(uniqueid, npcx, npcy: smallint);
+(* Create a hyena *)
+procedure createSmallHyena(uniqueid, npcx, npcy: smallint);
 (* Take a turn *)
 procedure takeTurn(id: smallint);
 (* Decision tree for Neutral state *)
@@ -25,37 +25,35 @@ procedure chasePlayer(id, spx, spy: smallint);
 function isNextToPlayer(spx, spy: smallint): boolean;
 (* Run from player *)
 procedure escapePlayer(id, spx, spy: smallint);
-(* Player Combat *)
-procedure combat(id: smallint);
 (* NPC attacks another entity *)
-procedure infighting(npcID, enemyID: smallint);
+procedure combat(npcID, enemyID: smallint);
 
 implementation
 
 uses
   entities, globalutils, ui, los, map;
 
-procedure createBloodbat(uniqueid, npcx, npcy: smallint);
+procedure createSmallHyena(uniqueid, npcx, npcy: smallint);
 var
   mood: byte;
 begin
   (* Detemine hostility *)
   mood := randomRange(1, 3);
-  (* Add a blood bat to the list of creatures *)
+  (* Add a hyena to the list of creatures *)
   entities.listLength := length(entities.entityList);
   SetLength(entities.entityList, entities.listLength + 1);
   with entities.entityList[entities.listLength] do
   begin
     npcID := uniqueid;
-    race := 'Blood Bat';
-    intName := 'BloodBat';
+    race := 'Small Hyena';
+    intName := 'smallHyena';
     article := True;
-    description := 'a bloated red bat';
-    glyph := 'b';
-    glyphColour := 'red';
-    maxHP := randomRange(1, 3);
+    description := 'a skinny cave hyena';
+    glyph := 'h';
+    glyphColour := 'yellow';
+    maxHP := randomRange(3, 5) + universe.currentDepth;
     currentHP := maxHP;
-    attack := randomRange(entityList[0].attack - 2, entityList[0].attack + 2);
+    attack := randomRange(entityList[0].attack - 2, entityList[0].attack + 1);
     defence := randomRange(entityList[0].defence - 2, entityList[0].defence + 1);
     weaponDice := 0;
     weaponAdds := 0;
@@ -120,18 +118,16 @@ begin
     wander(id, entityList[id].posX, entityList[id].posY)
 
   { If NPC can see the player }
-  else if (los.inView(entityList[id].posX, entityList[id].posY,
-    entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
+  else if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
   begin
     { If next to the player }
     if (isNextToPlayer(entityList[id].posX, entityList[id].posY) = True) then
       { Attack the Player }
-      combat(id)
+      combat(id, 0)
     else
       { Chase the player }
       chasePlayer(id, entityList[id].posX, entityList[id].posY);
   end
-
   { If player not in sight }
   else
     wander(id, entityList[id].posX, entityList[id].posY);
@@ -201,22 +197,13 @@ begin
     begin
       (* Remain on original tile and attack *)
       entities.moveNPC(id, spx, spy);
-      combat(id);
+      combat(id, 0);
     end
     (* Else if tile does not contain player, check for another entity *)
     else if (map.isOccupied(newX, newY) = True) then
     begin
-      if (entityList[entities.getCreatureID(newX, newY)].race <> entityList[id].race) then
-      begin
-        infighting(id, getCreatureID(newX, newY));
-        entities.moveNPC(id, spx, spy);
-      end
-      else
-      begin
-        (* If the entity is another animal, the NPC doesn't attack *)
-        ui.bufferMessage('The bat flies into ' + getCreatureName(newX, newY));
-        entities.moveNPC(id, spx, spy);
-      end;
+      combat(id, getCreatureID(newX, newY));
+      entities.moveNPC(id, spx, spy);
     end
     (* if map is unoccupied, move to that tile *)
     else if (map.isOccupied(newX, newY) = False) then
@@ -276,7 +263,7 @@ begin
     if (map.hasPlayer(newX, newY) = True) then
     begin
       entities.moveNPC(id, spx, spy);
-      combat(id);
+      combat(id, 0);
     end
     else if (map.isOccupied(newX, newY) = False) then
       entities.moveNPC(id, newX, newY);
@@ -285,52 +272,66 @@ begin
     wander(id, spx, spy);
 end;
 
-procedure combat(id: smallint);
-var
-  damageAmount: smallint;
-begin
-  damageAmount := globalutils.randomRange(1, entityList[id].attack) - entityList[0].defence;
-  if (damageAmount > 0) then
-  begin
-    entityList[0].currentHP := (entityList[0].currentHP - damageAmount);
-    if (entityList[0].currentHP < 1) then
-    begin
-      killer := 'a ' + entityList[id].race;
-      exit;
-    end
-    else
-    begin
-      if (damageAmount = 1) then
-        ui.displayMessage('The bat slightly wounds you')
-      else
-        ui.displayMessage('The bat bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
-      (* Update health display to show damage *)
-      ui.updateHealth;
-    end;
-  end
-  else
-  begin
-    ui.displayMessage('The bat strikes but misses');
-    combat_resolver.spiteDMG(id);
-  end;
-end;
-
-procedure infighting(npcID, enemyID: smallint);
+procedure combat(npcID, enemyID: smallint);
 var
   damageAmount: smallint;
 begin
   damageAmount := globalutils.randomRange(1, entityList[npcID].attack) - entityList[enemyID].defence;
-   if (damageAmount > 0) then
-   begin
-     entityList[enemyID].currentHP := (entityList[enemyID].currentHP - damageAmount);
-     if (entities.entityList[enemyID].currentHP < 1) then
-     begin
-          killEntity(enemyID);
-          ui.displayMessage('The bat kills the ' + entityList[enemyID].race);
-     end
-     else
-         ui.displayMessage('The bat attacks the ' + entityList[enemyID].race);
-   end;
+  (* If damage is done *)
+  if (damageAmount > 0) then
+  begin
+    entityList[enemyID].currentHP := (entityList[enemyID].currentHP - damageAmount);
+    (* If the enemy is killed *)
+    if (entityList[enemyID].currentHP < 1) then
+    begin
+      if (enemyID = 0) then
+        (* If the enemy is the player *)
+      begin
+        killer := 'a ' + entityList[npcID].race;
+        exit;
+      end
+      else
+        (* If the enemy is an NPC *)
+        killEntity(enemyID);
+    end
+    else
+    begin
+      if (damageAmount = 1) then
+      begin
+        if (enemyID = 0) then
+          (* If the player is slightly wounded *)
+          ui.displayMessage('The hyena slightly wounds you')
+        else
+          (* If an NPC is slightly wounded *)
+          ui.displayMessage('The hyena slightly wounds the ' + entityList[enemyID].race);
+      end
+      else
+        (* If significant damage is done *)
+      begin
+        if (enemyID = 0) then
+          (* To the player *)
+        begin
+          ui.displayMessage('The hyena bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+          (* Update health display to show damage *)
+          ui.updateHealth;
+        end
+        else
+          (* To an NPC *)
+          ui.displayMessage('The hyena bites the ' + entityList[enemyID].race);
+      end;
+    end;
+  end
+  else
+    (* If no damage is done *)
+  begin
+    if (enemyID = 0) then
+    begin
+      ui.displayMessage('The hyena strikes but misses');
+      combat_resolver.spiteDMG(npcID);
+    end
+    else
+      ui.displayMessage('The hyena nips at the ' + entityList[enemyID].race + ', but misses');
+  end;
 end;
 
 end.
