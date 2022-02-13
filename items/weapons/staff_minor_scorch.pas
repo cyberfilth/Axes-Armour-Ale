@@ -101,32 +101,35 @@ procedure Zap;
 var
   damageChance, dmgAmount: smallint;
 begin
-  damageChance := 1;
-  dmgAmount := 2 + player_stats.playerLevel;
-  magicEffects.minorScorch;
-  (* Staff integrity begins to break down *)
-  Dec(player_stats.numEquippedUses);
-  if (player_stats.numEquippedUses = 1) then
-    ui.displayMessage('Your staff begins to splinter and spark')
-  else if (player_stats.numEquippedUses <= 0) then
+  if (player_stats.playerRace <> 'Dwarf') then
   begin
-    { Determine if player is hurt when staff explodes }
-    damageChance := randomRange(1, 5);
-    if (damageChance = 3) then
+    damageChance := 1;
+    dmgAmount := 2 + player_stats.playerLevel;
+    magicEffects.minorScorch;
+    (* Staff integrity begins to break down *)
+    Dec(player_stats.numEquippedUses);
+    if (player_stats.numEquippedUses = 1) then
+      ui.displayMessage('Your staff begins to splinter and spark')
+    else if (player_stats.numEquippedUses <= 0) then
     begin
-      { Damage amount is 2 + players level }
-      entityList[0].currentHP := (entityList[0].currentHP - dmgAmount);
-      if (entities.entityList[0].currentHP < 1) then
-        killer := 'an exploding magickal staff';
+      { Determine if player is hurt when staff explodes }
+      damageChance := randomRange(1, 5);
+      if (damageChance = 3) then
+      begin
+        { Damage amount is 2 + players level }
+        entityList[0].currentHP := (entityList[0].currentHP - dmgAmount);
+        if (entities.entityList[0].currentHP < 1) then
+          killer := 'an exploding magickal staff';
+      end;
+      { Remove the staff from inventory }
+      ui.displayMessage('Magickal energy shatters your staff into splinters!');
+      player_inventory.destroyWeapon;
+      entityList[0].weaponEquipped := False;
+      ui.equippedWeapon := 'No weapon equipped';
+      ui.updateWeapon;
+      player_stats.enchantedWeaponEquipped := False;
+      player_stats.enchWeapType := 0;
     end;
-    { Remove the staff from inventory }
-    ui.displayMessage('Magickal energy shatters your staff into splinters!');
-    player_inventory.destroyWeapon;
-    entityList[0].weaponEquipped := False;
-    ui.equippedWeapon := 'No weapon equipped';
-    ui.updateWeapon;
-    player_stats.enchantedWeaponEquipped := False;
-    player_stats.enchWeapType := 0;
   end;
 end;
 
