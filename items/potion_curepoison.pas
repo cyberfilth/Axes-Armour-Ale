@@ -42,9 +42,14 @@ end;
 
 procedure useItem;
 begin
-  entities.entityList[0].stsPoison := False;
-  Inc(entities.entityList[0].tmrPoison, 0);
-  ui.displayMessage('You quaff the potion. The poison leaves your system.');
+  if (entityList[0].stsPoison = True) then
+  begin
+    entityList[0].stsPoison := False;
+    Inc(entities.entityList[0].tmrPoison, 0);
+    ui.displayMessage('You quaff the potion. The poison leaves your system.');
+  end
+  else
+    ui.displayMessage('You quaff the potion. You don''t notice any effects');
 end;
 
 end.
