@@ -14,9 +14,9 @@ uses
 
 const
   (* Array of creatures found in a cave, ordered by cave level *)
-  caveNPC1: array[1..4] of string = ('smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
+  caveNPC1: array[1..5] of string = ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
   caveNPC2: array[1..6] of string =
-    ('caveRat', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus');
+    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus');
   caveNPC3: array[1..5] of string =
     ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'redcapLsrLbr');
 
