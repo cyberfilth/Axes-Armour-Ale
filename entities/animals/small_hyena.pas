@@ -1,4 +1,4 @@
-(* Strong predator, attacks other animals *)
+(* Weak predator, attacks other animals *)
 
 unit small_hyena;
 
@@ -99,7 +99,7 @@ procedure decisionNeutral(id: smallint);
 var
   stopAndSmellFlowers: byte;
 begin
-  stopAndSmellFlowers := globalutils.randomRange(1, 2);
+  stopAndSmellFlowers := globalutils.randomRange(1, 3);
   if (stopAndSmellFlowers = 1) then
     { Either wander randomly }
     wander(id, entityList[id].posX, entityList[id].posY)
