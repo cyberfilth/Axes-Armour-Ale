@@ -19,8 +19,16 @@ procedure getSize;
 implementation
 
 procedure getSize;
+var
+  terminalWidth: smallint;
 begin
-  if (ScreenWidth >= 103) then
+   {$IFDEF Linux}
+   terminalWidth := ScreenWidth;
+   {$ENDIF}
+   {$IFDEF Windows}
+   terminalWidth := WindMaxX;
+   {$ENDIF}
+  if (terminalWidth >= 103) then
   begin
     scrGame.minX := 81;
     camera.camWidth := 80;
