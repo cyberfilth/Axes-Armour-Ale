@@ -3,12 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: plot_gen</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
 <h1 class="unit">Unit plot_gen</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -20,28 +21,28 @@ Generate names and plot elements</p>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateHumanName">generateHumanName</a></b>;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateElfName">generateElfName</a></b>;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateDwarfName">generateDwarfName</a></b>;</code></td>
+<td class="itemcode"><code>function <b><a  href="plot_gen.html#elvenTown">elvenTown</a></b>: string;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateClanName">generateClanName</a></b>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="plot_gen.html#elvenTown">elvenTown</a></b>: string;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateDwarfName">generateDwarfName</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateElfName">generateElfName</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateHumanName">generateHumanName</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateTitle">generateTitle</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#getTrollDate">getTrollDate</a></b>;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>function <b><a  href="plot_gen.html#smallVillage">smallVillage</a></b>: string;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateTitle">generateTitle</a></b>;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#getTrollDate">getTrollDate</a></b>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
@@ -60,66 +61,129 @@ Generate names and plot elements</p>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#playerName">playerName</a></b>: string;</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianFemaleFirst">aquilonianFemaleFirst</a></b>: array[0..97] of
+  string = ('Adam', 'Aeg', 'Al', 'Alb', 'Albion', 'Alc', 'Alcim',
+    'Anger', 'Arac', 'Arac', 'Aracel', 'Arian', 'Ariann', 'Balb',
+    'Bith', 'Bolb', 'Cair', 'Cairist', 'Call', 'Card', 'Carm', 'Cat',
+    'Dac', 'Dac', 'Dam', 'Damian', 'Deid', 'Deidam', 'Dev', 'Don',
+    'Ech', 'Echidn', 'Elv', 'Elv', 'Em', 'Ep', 'Epion', 'Euandr',
+    'Euryd', 'Fel', 'Fluon', 'Gal', 'Gal', 'Galat', 'Gl', 'Gryn',
+    'Halac', 'Hec', 'Hecub', 'Heroph', 'Hor', 'Hor', 'Horac', 'Il',
+    'In', 'Iph', 'Kal', 'Kal', 'Korn', 'Lam', 'Lar', 'Lel', 'Let',
+    'Lev', 'Levan', 'Lor', 'Lor', 'Lorell', 'Malv', 'Mar', 'Mat',
+    'Mess', 'Naut', 'Nel', 'Nol', 'Nyd', 'Pall', 'Pan', 'Pasith',
+    'Pell', 'Ph', 'Ren', 'Rh', 'Ros', 'Ros', 'Sal', 'Salv', 'Sec',
+    'Suad', 'Teth', 'Tim', 'Tryph', 'Val', 'Vern', 'Vig', 'Vimand', 'Vir', 'Zel');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#playerTitle">playerTitle</a></b>: string;</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianFemaleLast">aquilonianFemaleLast</a></b>: array[0..99] of
+  string = ('a', 'e', 'ea', 'ia', 'ia', 'ya', 'ys', 'ana', 'ana',
+    'are', 'are', 'ata', 'ata', 'ede', 'ede', 'eia', 'eia', 'eis',
+    'eis', 'ele', 'ele', 'ena', 'ena', 'ene', 'ene', 'era', 'era',
+    'eta', 'ice', 'ice', 'ida', 'ida', 'ige', 'ige', 'ile', 'ina',
+    'ina', 'ita', 'ita', 'ona', 'ona', 'ope', 'ope', 'ota', 'ota',
+    'uba', 'uba', 'uta', 'uta', 'abel', 'abel', 'acia', 'acia', 'anne',
+    'anne', 'atea', 'atea', 'auce', 'auce', 'elia', 'elia', 'elle',
+    'elle', 'enta', 'enta', 'eria', 'eria', 'iana', 'iana', 'idna',
+    'idna', 'ilia', 'ilia', 'ilis', 'ilis', 'iona', 'iona', 'iona',
+    'iona', 'ione', 'ione', 'iope', 'iope', 'ista', 'ista', 'onia',
+    'onia', 'unda', 'unda', 'ynia', 'ynia', 'aedra', 'ameia', 'amina',
+    'andra', 'antia', 'autia', 'imede', 'inome', 'ithea');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#trollDate">trollDate</a></b>: string;</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianMaleFirst">aquilonianMaleFirst</a></b>: array[0..187] of
+  string = ('Abant', 'Abantiad', 'Ac', 'Acris', 'Act', 'Alc', 'Alcid',
+    'Am', 'Andr', 'Andr', 'Arct', 'Arct', 'Arp', 'Asclep', 'Atab',
+    'Atab', 'Attal', 'Auf', 'Aufid', 'Bal', 'Balend', 'Barr', 'Barr',
+    'Bor', 'Call', 'Call', 'Cenw', 'Cenw', 'Clad', 'Clad', 'Dard',
+    'Dard', 'Dec', 'Decual', 'Edr', 'Elig', 'Elig', 'Em', 'Er', 'Erast',
+    'Fabr', 'Fabr', 'Glac', 'Glac', 'Gr', 'Grat', 'Grat', 'Guil',
+    'Guil', 'Hil', 'Hilar', 'Inach', 'Iph', 'Kl', 'Kost', 'Kost',
+    'Laud', 'Laud', 'Lavon', 'Lib', 'Lorm', 'Lorm', 'Luc', 'Metab',
+    'Mez', 'Mezent', 'Ner', 'Num', 'Octa', 'Octa', 'Octav', 'Pallant',
+    'Parn', 'Parn', 'Periph', 'Periphet', 'Prosp', 'Rin', 'Sept',
+    'Sept', 'Sor', 'Soract', 'Th', 'Thor', 'Thor', 'Tib', 'Tiber',
+    'Val', 'Vict', 'Vict', 'Victor', 'Viler', 'Zav', 'Zor', 'Acast',
+    'Ach', 'Acrision', 'Aeg', 'Aegid', 'Al', 'Amalr', 'Amul', 'Amul',
+    'Andron', 'Ang', 'Arar', 'Arar', 'Ascl', 'Ascl', 'Atabul', 'Att',
+    'Attel', 'Aur', 'Aurel', 'Ball', 'Ball', 'Baracc', 'Bel', 'Cadm',
+    'Cadm', 'Carn', 'Carn', 'Ceph', 'Ceph', 'Codr', 'Codr', 'Dam',
+    'Dex', 'Dexith', 'Drag', 'Drag', 'El', 'Emil', 'Emil', 'Ep',
+    'Favon', 'Flav', 'Flav', 'Ful', 'Gl', 'Gonz', 'Gonz', 'Grom',
+    'Grom', 'Hor', 'Horat', 'Il', 'Kest', 'Kest', 'Klaud', 'Kr',
+    'Krel', 'Krel', 'Lar', 'Leon', 'Leon', 'Lor', 'Marin', 'Merc',
+    'Merc', 'Met', 'Mod', 'Modest', 'Nol', 'Numed', 'Orast', 'Pall',
+    'Pall', 'Parnass', 'Publ', 'Publ', 'Rig', 'Ruf', 'Septim', 'Serv',
+    'Serv', 'Sur', 'Thesp', 'Troc', 'Troc', 'Tul', 'Valann', 'Valer',
+    'Vil', 'Volm', 'Volm', 'Volman', 'Zet');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#Year">Year</a></b>: word;</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianMaleLast">aquilonianMaleLast</a></b>: array[0..99] of
+  string = ('a', 'i', 'o', 'as', 'el', 'er', 'es', 'ic', 'in', 'io',
+    'is', 'on', 'os', 'us', 'yc', 'ago', 'ald', 'ana', 'ana', 'eas',
+    'ell', 'ell', 'eri', 'eus', 'eus', 'ian', 'ias', 'ias', 'ion',
+    'ius', 'ius', 'uis', 'ulf', 'ulk', 'ura', 'abus', 'acus', 'ades',
+    'aeon', 'aeus', 'aime', 'alin', 'alle', 'alus', 'alvi', 'anus',
+    'ares', 'aris', 'elio', 'elis', 'elus', 'erus', 'etes', 'icus',
+    'ides', 'idos', 'idus', 'imer', 'imus', 'ocer', 'omel', 'orin',
+    'orus', 'ulio', 'ulus', 'accus', 'achus', 'actus', 'alion', 'alric',
+    'annus', 'arras', 'assus', 'astus', 'atian', 'atius', 'avian',
+    'avius', 'eades', 'elius', 'endin', 'entius', 'epius', 'ercer',
+    'erias', 'erius', 'estus', 'iades', 'igius', 'ilius', 'orian',
+    'ostas', 'arioin', 'audius', 'edides', 'ervius', 'espius', 'itheus',
+    'onicus', 'antides');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#Month">Month</a></b>: word;</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#clanFirst">clanFirst</a></b>: array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
+    'Grim', 'Rune', 'Storm', 'Frost', 'Thunder', 'Bright', 'Blood',
+    'Grey', 'Stone', 'Bronze', 'Silver', 'Bone', 'Mist', 'Ice');</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code><b><a  href="plot_gen.html#clanSecond">clanSecond</a></b>: array[0..19] of
+  string = ('Axe', 'Hammer', 'Anvil', 'Smith', 'Forge', 'Beard',
+    'Shield', 'Biter', 'Bane', 'Weaver', 'Mage', 'Spear', 'Seeker',
+    'Sword', 'Crafter', 'Breaker', 'Born', 'Helm', 'Hold', 'Fist');</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code><b><a  href="plot_gen.html#Day">Day</a></b>: word;</code></td>
 </tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#WDay">WDay</a></b>: word;</code></td>
-</tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#titles">titles</a></b>: array[0..108] of string = ('Abominable', 'Amorous',
-    'Afflicted', 'Ailing', 'Breathless', 'Broken', 'Bullish', 'Craggy',
-    'Bearded', 'Bony', 'Beastly', 'Drunken', 'Bitter', 'Fetid', 'Fierce',
-    'Fiery', 'Bold', 'Filthy', 'Craven', 'Fishy', 'Crooked', 'Flexible',
-    'Crusty', 'Forgetful', 'Brutal', 'Foul', 'Disturbed', 'Forgettable',
-    'Burly', 'Fragrant', 'Dramatic', 'Frisky', 'Gallant', 'Green',
-    'Delectable', 'Cold', 'Grey', 'Cursed', 'Grumpy', 'Grubby', 'Dark',
-    'Hairless', 'Hairy', 'Heathen', 'Defiant', 'Jaded', 'Knobbly',
-    'Indecent', 'Detestable', 'Dreaded', 'Jumpy', 'Aromatic', 'Wrinkled',
-    'Wild', 'Unsmiling', 'Warty', 'Towering', 'Valiant', 'Sweaty',
-    'Sour', 'Vain', 'Unseemly', 'Swarthy', 'Tragic', 'Strange', 'Stout',
-    'Stony', 'Stormy', 'Shameless', 'Stalwart', 'Quiet', 'Sleepy',
-    'Pure', 'Prickly', 'Scarred', 'Pimply', 'Pale', 'Savage', 'Ornate',
-    'Simple', 'Silly', 'Salty', 'Rotund', 'Miserable', 'Scrappy',
-    'Ragged', 'Lanky', 'Scowly', 'Hardy', 'Harsh', 'Gruesome', 'Gross',
-    'Grisly', 'Goodly', 'Gloomy', 'Nocturnal', 'Fair', 'Chiseled',
-    'Insatiable', 'Destructive', 'Dreadful', 'Musical', 'Frightful',
-    'Oily', 'Rascal', 'Remorseless', 'Squinty', 'Silvery', 'Thirsty');</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#dwarvenName">dwarvenName</a></b>: array[0..109] of
+  string = ('Ailgor', 'Ainion', 'Alon', 'Alvion', 'Amur', 'Andol',
+    'Argli', 'Arol', 'Artil', 'Artor', 'Avli', 'Balan', 'Balor',
+    'Bamon', 'Bandiol', 'Baril', 'Baron', 'Baviol', 'Bavor', 'Bodol',
+    'Bogrion', 'Bolvol', 'Bondiol', 'Borli', 'Bortur', 'Bovan', 'Dalin',
+    'Dalon', 'Dalvol', 'Damli', 'Dandil', 'Dargol', 'Dartion', 'Dartol',
+    'Dilgli', 'Dilgol', 'Dilin', 'Dilvir', 'Dinan', 'Dirgli', 'Dithur',
+    'Dogion', 'Dogron', 'Dogror', 'Domin', 'Domir', 'Dondan', 'Dondli',
+    'Dorgor', 'Doror', 'Dradan', 'Drartli', 'Drartol', 'Drartor',
+    'Drathiol', 'Dravil', 'Dravon', 'Dulon', 'Durgion', 'Durin',
+    'Duror', 'Durtin', 'Durtiol', 'Duviol', 'Galvan', 'Ganion',
+    'Gathion', 'Gidir', 'Gilvin', 'Gilvion', 'Gilvur', 'Gindil',
+    'Givion', 'Glodil', 'Glolgol', 'Glolol', 'Glolvan', 'Glonir',
+    'Gloror', 'Glothiol', 'Glothol', 'Glothur', 'Glovion', 'Madin',
+    'Maliol', 'Mandion', 'Manil', 'Margin', 'Martion', 'Mathiol',
+    'Mavan', 'Mavan', 'Ralan', 'Ralli', 'Ramli', 'Ranin', 'Rargin',
+    'Rarli', 'Rarol', 'Rartil', 'Rundin', 'Runin', 'Rurgir', 'Ruril',
+    'Rurir', 'Ruvil', 'Ruvli', 'Thogin', 'Thogrur', 'Thondir');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#firstSyllable">firstSyllable</a></b>: array[0..73] of
-  string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
-    'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con', 'Cor', 'Dag', 'Doo',
-    'Elen', 'El', 'En', 'Eo', 'Faf', 'Fan', 'Fara', 'Fre', 'Fro',
-    'Ga', 'Gala', 'Has', 'He', 'Heim', 'Ho', 'Isil', 'In', 'Ini',
-    'Is', 'Ka', 'Kuo', 'Lance', 'Lo', 'Ma', 'Mag', 'Mi', 'Mo', 'Moon',
-    'Mor', 'Mora', 'Nin', 'O', 'Obi', 'Og', 'Pelli', 'Por', 'Ran',
-    'Rud', 'Sam', 'She', 'Sheel', 'Shin', 'Shog', 'Son', 'Sur', 'Theo',
-    'Tho', 'Tris', 'U', 'Uh', 'Ul', 'Vap', 'Vish', 'Vor', 'Ya', 'Yo', 'Yyr');</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#elvenHomea">elvenHomea</a></b>: array[0..13] of
+  string = ('the Vale of', 'the Whispering Forest of', 'the forest of',
+    'the white peaks of', 'the woods of', 'the Cinderlands of',
+    'the Frostspike of', 'the snow pass of', 'the green fortress of',
+    'the Waterways of', 'the sorrowful streams of', 'the Whispering Glade of',
+    'the Hidden Spires of', 'the Shimmering of');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#secondSyllable">secondSyllable</a></b>: array[0..62] of
-  string = ('ba', 'bis', 'bo', 'bus', 'da', 'dal', 'dagz', 'den',
-    'di', 'dil', 'dinn', 'do', 'dor', 'dra', 'dur', 'gi', 'gauble',
-    'gen', 'glum', 'go', 'gorn', 'goth', 'had', 'hard', 'is', 'karrl',
-    'ki', 'koon', 'ku', 'lad', 'ler', 'li', 'lot', 'ma', 'man', 'mir',
-    'mus', 'nan', 'ni', 'nor', 'nu', 'pian', 'ra', 'rakh', 'ric',
-    'rin', 'rum', 'rus', 'rut', 'sekh', 'sha', 'thos', 'thur', 'toa',
-    'tu', 'tur', 'tred', 'varl', 'wain', 'wan', 'win', 'wise', 'ya');</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#elvenHomeb">elvenHomeb</a></b>: array[0..42] of
+  string = ('Felamae', 'Lorrom', 'Anorel', 'Weneres', 'Rathel',
+    'Lasbreg-Dwyr', 'Renamar', 'Sarriel', 'Vius', 'Viusand', 'Ethgal',
+    'Renfin', 'Syldar', 'Thrantor', 'Paceledrel', 'Borntae', 'Mai-Ionla',
+    'Marrion', 'Thorndal', 'Ladkur', 'Imorvo', 'Rescir', 'Godan',
+    'Vadan', 'Daggil', 'Saner', 'Evnall', 'Lexa', 'Alta', 'Lorandwyr',
+    'Saand-Riel', 'Mardír', 'Dorril', 'Thallor', 'Wingdal', 'Duil',
+    'Glanduil', 'Iliphar', 'Ilrune', 'Saleh', 'Urijyre', 'Inamys', 'Caiwraek');</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code><b><a  href="plot_gen.html#elvenName">elvenName</a></b>: array[0..885] of
@@ -253,53 +317,57 @@ Generate names and plot elements</p>
     'Lunella', 'Seron', 'Tharene', 'Nellino', 'Dushani', 'Raliar', 'Valaras', 'Liaro');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#dwarvenName">dwarvenName</a></b>: array[0..109] of
-  string = ('Ailgor', 'Ainion', 'Alon', 'Alvion', 'Amur', 'Andol',
-    'Argli', 'Arol', 'Artil', 'Artor', 'Avli', 'Balan', 'Balor',
-    'Bamon', 'Bandiol', 'Baril', 'Baron', 'Baviol', 'Bavor', 'Bodol',
-    'Bogrion', 'Bolvol', 'Bondiol', 'Borli', 'Bortur', 'Bovan', 'Dalin',
-    'Dalon', 'Dalvol', 'Damli', 'Dandil', 'Dargol', 'Dartion', 'Dartol',
-    'Dilgli', 'Dilgol', 'Dilin', 'Dilvir', 'Dinan', 'Dirgli', 'Dithur',
-    'Dogion', 'Dogron', 'Dogror', 'Domin', 'Domir', 'Dondan', 'Dondli',
-    'Dorgor', 'Doror', 'Dradan', 'Drartli', 'Drartol', 'Drartor',
-    'Drathiol', 'Dravil', 'Dravon', 'Dulon', 'Durgion', 'Durin',
-    'Duror', 'Durtin', 'Durtiol', 'Duviol', 'Galvan', 'Ganion',
-    'Gathion', 'Gidir', 'Gilvin', 'Gilvion', 'Gilvur', 'Gindil',
-    'Givion', 'Glodil', 'Glolgol', 'Glolol', 'Glolvan', 'Glonir',
-    'Gloror', 'Glothiol', 'Glothol', 'Glothur', 'Glovion', 'Madin',
-    'Maliol', 'Mandion', 'Manil', 'Margin', 'Martion', 'Mathiol',
-    'Mavan', 'Mavan', 'Ralan', 'Ralli', 'Ramli', 'Ranin', 'Rargin',
-    'Rarli', 'Rarol', 'Rartil', 'Rundin', 'Runin', 'Rurgir', 'Ruril',
-    'Rurir', 'Ruvil', 'Ruvli', 'Thogin', 'Thogrur', 'Thondir');</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#firstSyllable">firstSyllable</a></b>: array[0..73] of
+  string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
+    'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con', 'Cor', 'Dag', 'Doo',
+    'Elen', 'El', 'En', 'Eo', 'Faf', 'Fan', 'Fara', 'Fre', 'Fro',
+    'Ga', 'Gala', 'Has', 'He', 'Heim', 'Ho', 'Isil', 'In', 'Ini',
+    'Is', 'Ka', 'Kuo', 'Lance', 'Lo', 'Ma', 'Mag', 'Mi', 'Mo', 'Moon',
+    'Mor', 'Mora', 'Nin', 'O', 'Obi', 'Og', 'Pelli', 'Por', 'Ran',
+    'Rud', 'Sam', 'She', 'Sheel', 'Shin', 'Shog', 'Son', 'Sur', 'Theo',
+    'Tho', 'Tris', 'U', 'Uh', 'Ul', 'Vap', 'Vish', 'Vor', 'Ya', 'Yo', 'Yyr');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#clanFirst">clanFirst</a></b>: array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
-    'Grim', 'Rune', 'Storm', 'Frost', 'Thunder', 'Bright', 'Blood',
-    'Grey', 'Stone', 'Bronze', 'Silver', 'Bone', 'Mist', 'Ice');</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#Month">Month</a></b>: word;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#clanSecond">clanSecond</a></b>: array[0..19] of
-  string = ('Axe', 'Hammer', 'Anvil', 'Smith', 'Forge', 'Beard',
-    'Shield', 'Biter', 'Bane', 'Weaver', 'Mage', 'Spear', 'Seeker',
-    'Sword', 'Crafter', 'Breaker', 'Born', 'Helm', 'Hold', 'Fist');</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#playerName">playerName</a></b>: string;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#elvenHomea">elvenHomea</a></b>: array[0..13] of
-  string = ('the Vale of', 'the Whispering Forest of', 'the forest of',
-    'the white peaks of', 'the woods of', 'the Cinderlands of',
-    'the Frostspike of', 'the snow pass of', 'the green fortress of',
-    'the Waterways of', 'the sorrowful streams of', 'the Whispering Glade of',
-    'the Hidden Spires of', 'the Shimmering of');</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#playerTitle">playerTitle</a></b>: string;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#elvenHomeb">elvenHomeb</a></b>: array[0..42] of
-  string = ('Felamae', 'Lorrom', 'Anorel', 'Weneres', 'Rathel',
-    'Lasbreg-Dwyr', 'Renamar', 'Sarriel', 'Vius', 'Viusand', 'Ethgal',
-    'Renfin', 'Syldar', 'Thrantor', 'Paceledrel', 'Borntae', 'Mai-Ionla',
-    'Marrion', 'Thorndal', 'Ladkur', 'Imorvo', 'Rescir', 'Godan',
-    'Vadan', 'Daggil', 'Saner', 'Evnall', 'Lexa', 'Alta', 'Lorandwyr',
-    'Saand-Riel', 'Mardír', 'Dorril', 'Thallor', 'Wingdal', 'Duil',
-    'Glanduil', 'Iliphar', 'Ilrune', 'Saleh', 'Urijyre', 'Inamys', 'Caiwraek');</code></td>
+<td class="itemcode"><code><b><a  href="plot_gen.html#secondSyllable">secondSyllable</a></b>: array[0..62] of
+  string = ('ba', 'bis', 'bo', 'bus', 'da', 'dal', 'dagz', 'den',
+    'di', 'dil', 'dinn', 'do', 'dor', 'dra', 'dur', 'gi', 'gauble',
+    'gen', 'glum', 'go', 'gorn', 'goth', 'had', 'hard', 'is', 'karrl',
+    'ki', 'koon', 'ku', 'lad', 'ler', 'li', 'lot', 'ma', 'man', 'mir',
+    'mus', 'nan', 'ni', 'nor', 'nu', 'pian', 'ra', 'rakh', 'ric',
+    'rin', 'rum', 'rus', 'rut', 'sekh', 'sha', 'thos', 'thur', 'toa',
+    'tu', 'tur', 'tred', 'varl', 'wain', 'wan', 'win', 'wise', 'ya');</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="plot_gen.html#titles">titles</a></b>: array[0..108] of string = ('Abominable', 'Amorous',
+    'Afflicted', 'Ailing', 'Breathless', 'Broken', 'Bullish', 'Craggy',
+    'Bearded', 'Bony', 'Beastly', 'Drunken', 'Bitter', 'Fetid', 'Fierce',
+    'Fiery', 'Bold', 'Filthy', 'Craven', 'Fishy', 'Crooked', 'Flexible',
+    'Crusty', 'Forgetful', 'Brutal', 'Foul', 'Disturbed', 'Forgettable',
+    'Burly', 'Fragrant', 'Dramatic', 'Frisky', 'Gallant', 'Green',
+    'Delectable', 'Cold', 'Grey', 'Cursed', 'Grumpy', 'Grubby', 'Dark',
+    'Hairless', 'Hairy', 'Heathen', 'Defiant', 'Jaded', 'Knobbly',
+    'Indecent', 'Detestable', 'Dreaded', 'Jumpy', 'Aromatic', 'Wrinkled',
+    'Wild', 'Unsmiling', 'Warty', 'Towering', 'Valiant', 'Sweaty',
+    'Sour', 'Vain', 'Unseemly', 'Swarthy', 'Tragic', 'Strange', 'Stout',
+    'Stony', 'Stormy', 'Shameless', 'Stalwart', 'Quiet', 'Sleepy',
+    'Pure', 'Prickly', 'Scarred', 'Pimply', 'Pale', 'Savage', 'Ornate',
+    'Simple', 'Silly', 'Salty', 'Rotund', 'Miserable', 'Scrappy',
+    'Ragged', 'Lanky', 'Scowly', 'Hardy', 'Harsh', 'Gruesome', 'Gross',
+    'Grisly', 'Goodly', 'Gloomy', 'Nocturnal', 'Fair', 'Chiseled',
+    'Insatiable', 'Destructive', 'Dreadful', 'Musical', 'Frightful',
+    'Oily', 'Rascal', 'Remorseless', 'Squinty', 'Silvery', 'Thirsty');</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="plot_gen.html#trollDate">trollDate</a></b>: string;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code><b><a  href="plot_gen.html#villageName">villageName</a></b>: array[0..11] of
@@ -308,7 +376,147 @@ Generate names and plot elements</p>
     'Clagstone', 'Dogmire', 'Klart');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianMaleFirst">aquilonianMaleFirst</a></b>: array[0..187] of
+<td class="itemcode"><code><b><a  href="plot_gen.html#WDay">WDay</a></b>: word;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="plot_gen.html#Year">Year</a></b>: word;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="elvenTown"></span><code>function <b>elvenTown</b>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate name of an Elven home</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generateClanName"></span><code>procedure <b>generateClanName</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate Dwarven clan name</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generateDwarfName"></span><code>procedure <b>generateDwarfName</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate a Dwarven name for the player</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generateElfName"></span><code>procedure <b>generateElfName</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate an Elven name for the player</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generateHumanName"></span><code>procedure <b>generateHumanName</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate a human name for the player</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generateTitle"></span><code>procedure <b>generateTitle</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate a title or honorfic for the player</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getTrollDate"></span><code>procedure <b>getTrollDate</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get the current date and display it in the in-game calendar</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="smallVillage"></span><code>function <b>smallVillage</b>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate name of small village</p>
+</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="DayStr"></span><code><b>DayStr</b>: array[0..6] of string =
+    ('Fastday', 'Onesday', 'Twosday', 'Frogday', 'Hawksday', 'Feastday', 'Marketday');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MonthStr"></span><code><b>MonthStr</b>: array[1..12] of string =
+    ('Mistmon', 'Brittleice', 'Windmon', 'Gunther', 'Sweetbriar', 'Greenling',
+    'Frogsong', 'Sunmon', 'Southflight',
+    'Harvestmoon', 'Ghostmoon', 'Stormlight');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="aquilonianFemaleFirst"></span><code><b>aquilonianFemaleFirst</b>: array[0..97] of
+  string = ('Adam', 'Aeg', 'Al', 'Alb', 'Albion', 'Alc', 'Alcim',
+    'Anger', 'Arac', 'Arac', 'Aracel', 'Arian', 'Ariann', 'Balb',
+    'Bith', 'Bolb', 'Cair', 'Cairist', 'Call', 'Card', 'Carm', 'Cat',
+    'Dac', 'Dac', 'Dam', 'Damian', 'Deid', 'Deidam', 'Dev', 'Don',
+    'Ech', 'Echidn', 'Elv', 'Elv', 'Em', 'Ep', 'Epion', 'Euandr',
+    'Euryd', 'Fel', 'Fluon', 'Gal', 'Gal', 'Galat', 'Gl', 'Gryn',
+    'Halac', 'Hec', 'Hecub', 'Heroph', 'Hor', 'Hor', 'Horac', 'Il',
+    'In', 'Iph', 'Kal', 'Kal', 'Korn', 'Lam', 'Lar', 'Lel', 'Let',
+    'Lev', 'Levan', 'Lor', 'Lor', 'Lorell', 'Malv', 'Mar', 'Mat',
+    'Mess', 'Naut', 'Nel', 'Nol', 'Nyd', 'Pall', 'Pan', 'Pasith',
+    'Pell', 'Ph', 'Ren', 'Rh', 'Ros', 'Ros', 'Sal', 'Salv', 'Sec',
+    'Suad', 'Teth', 'Tim', 'Tryph', 'Val', 'Vern', 'Vig', 'Vimand', 'Vir', 'Zel');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="aquilonianFemaleLast"></span><code><b>aquilonianFemaleLast</b>: array[0..99] of
+  string = ('a', 'e', 'ea', 'ia', 'ia', 'ya', 'ys', 'ana', 'ana',
+    'are', 'are', 'ata', 'ata', 'ede', 'ede', 'eia', 'eia', 'eis',
+    'eis', 'ele', 'ele', 'ena', 'ena', 'ene', 'ene', 'era', 'era',
+    'eta', 'ice', 'ice', 'ida', 'ida', 'ige', 'ige', 'ile', 'ina',
+    'ina', 'ita', 'ita', 'ona', 'ona', 'ope', 'ope', 'ota', 'ota',
+    'uba', 'uba', 'uta', 'uta', 'abel', 'abel', 'acia', 'acia', 'anne',
+    'anne', 'atea', 'atea', 'auce', 'auce', 'elia', 'elia', 'elle',
+    'elle', 'enta', 'enta', 'eria', 'eria', 'iana', 'iana', 'idna',
+    'idna', 'ilia', 'ilia', 'ilis', 'ilis', 'iona', 'iona', 'iona',
+    'iona', 'ione', 'ione', 'iope', 'iope', 'ista', 'ista', 'onia',
+    'onia', 'unda', 'unda', 'ynia', 'ynia', 'aedra', 'ameia', 'amina',
+    'andra', 'antia', 'autia', 'imede', 'inome', 'ithea');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="aquilonianMaleFirst"></span><code><b>aquilonianMaleFirst</b>: array[0..187] of
   string = ('Abant', 'Abantiad', 'Ac', 'Acris', 'Act', 'Alc', 'Alcid',
     'Am', 'Andr', 'Andr', 'Arct', 'Arct', 'Arp', 'Asclep', 'Atab',
     'Atab', 'Attal', 'Auf', 'Aufid', 'Bal', 'Balend', 'Barr', 'Barr',
@@ -334,8 +542,12 @@ Generate names and plot elements</p>
     'Serv', 'Sur', 'Thesp', 'Troc', 'Troc', 'Tul', 'Valann', 'Valer',
     'Vil', 'Volm', 'Volm', 'Volman', 'Zet');</code></td>
 </tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianMaleLast">aquilonianMaleLast</a></b>: array[0..99] of
+<td class="itemcode"><span id="aquilonianMaleLast"></span><code><b>aquilonianMaleLast</b>: array[0..99] of
   string = ('a', 'i', 'o', 'as', 'el', 'er', 'es', 'ic', 'in', 'io',
     'is', 'on', 'os', 'us', 'yc', 'ago', 'ald', 'ana', 'ana', 'eas',
     'ell', 'ell', 'eri', 'eus', 'eus', 'ian', 'ias', 'ias', 'ion',
@@ -350,162 +562,24 @@ Generate names and plot elements</p>
     'ostas', 'arioin', 'audius', 'edides', 'ervius', 'espius', 'itheus',
     'onicus', 'antides');</code></td>
 </tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianFemaleFirst">aquilonianFemaleFirst</a></b>: array[0..97] of
-  string = ('Adam', 'Aeg', 'Al', 'Alb', 'Albion', 'Alc', 'Alcim',
-    'Anger', 'Arac', 'Arac', 'Aracel', 'Arian', 'Ariann', 'Balb',
-    'Bith', 'Bolb', 'Cair', 'Cairist', 'Call', 'Card', 'Carm', 'Cat',
-    'Dac', 'Dac', 'Dam', 'Damian', 'Deid', 'Deidam', 'Dev', 'Don',
-    'Ech', 'Echidn', 'Elv', 'Elv', 'Em', 'Ep', 'Epion', 'Euandr',
-    'Euryd', 'Fel', 'Fluon', 'Gal', 'Gal', 'Galat', 'Gl', 'Gryn',
-    'Halac', 'Hec', 'Hecub', 'Heroph', 'Hor', 'Hor', 'Horac', 'Il',
-    'In', 'Iph', 'Kal', 'Kal', 'Korn', 'Lam', 'Lar', 'Lel', 'Let',
-    'Lev', 'Levan', 'Lor', 'Lor', 'Lorell', 'Malv', 'Mar', 'Mat',
-    'Mess', 'Naut', 'Nel', 'Nol', 'Nyd', 'Pall', 'Pan', 'Pasith',
-    'Pell', 'Ph', 'Ren', 'Rh', 'Ros', 'Ros', 'Sal', 'Salv', 'Sec',
-    'Suad', 'Teth', 'Tim', 'Tryph', 'Val', 'Vern', 'Vig', 'Vimand', 'Vir', 'Zel');</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianFemaleLast">aquilonianFemaleLast</a></b>: array[0..99] of
-  string = ('a', 'e', 'ea', 'ia', 'ia', 'ya', 'ys', 'ana', 'ana',
-    'are', 'are', 'ata', 'ata', 'ede', 'ede', 'eia', 'eia', 'eis',
-    'eis', 'ele', 'ele', 'ena', 'ena', 'ene', 'ene', 'era', 'era',
-    'eta', 'ice', 'ice', 'ida', 'ida', 'ige', 'ige', 'ile', 'ina',
-    'ina', 'ita', 'ita', 'ona', 'ona', 'ope', 'ope', 'ota', 'ota',
-    'uba', 'uba', 'uta', 'uta', 'abel', 'abel', 'acia', 'acia', 'anne',
-    'anne', 'atea', 'atea', 'auce', 'auce', 'elia', 'elia', 'elle',
-    'elle', 'enta', 'enta', 'eria', 'eria', 'iana', 'iana', 'idna',
-    'idna', 'ilia', 'ilia', 'ilis', 'ilis', 'iona', 'iona', 'iona',
-    'iona', 'ione', 'ione', 'iope', 'iope', 'ista', 'ista', 'onia',
-    'onia', 'unda', 'unda', 'ynia', 'ynia', 'aedra', 'ameia', 'amina',
-    'andra', 'antia', 'autia', 'imede', 'inome', 'ithea');</code></td>
-</tr>
-</table>
-<h2 class="description">Description</h2>
-<h3 class="detail">Functions and Procedures</h3>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="generateHumanName"></span><code>procedure <b>generateHumanName</b>;</code></td>
-</tr>
 <tr><td colspan="1">
-<p>
-Generate a human name for the player</p>
-</td></tr>
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="generateElfName"></span><code>procedure <b>generateElfName</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Generate an Elven name for the player</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="generateDwarfName"></span><code>procedure <b>generateDwarfName</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Generate a Dwarven name for the player</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="generateClanName"></span><code>procedure <b>generateClanName</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Generate Dwarven clan name</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="elvenTown"></span><code>function <b>elvenTown</b>: string;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Generate name of an Elven home</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="smallVillage"></span><code>function <b>smallVillage</b>: string;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Generate name of small village</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="generateTitle"></span><code>procedure <b>generateTitle</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Generate a title or honorfic for the player</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="getTrollDate"></span><code>procedure <b>getTrollDate</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Get the current date and display it in the in-game calendar</p>
-</td></tr>
-</table>
-<h3 class="detail">Constants</h3>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="DayStr"></span><code><b>DayStr</b>: array[0..6] of string =
-    ('Fastday', 'Onesday', 'Twosday', 'Frogday', 'Hawksday', 'Feastday', 'Marketday');</code></td>
+<td class="itemcode"><span id="clanFirst"></span><code><b>clanFirst</b>: array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
+    'Grim', 'Rune', 'Storm', 'Frost', 'Thunder', 'Bright', 'Blood',
+    'Grey', 'Stone', 'Bronze', 'Silver', 'Bone', 'Mist', 'Ice');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="MonthStr"></span><code><b>MonthStr</b>: array[1..12] of string =
-    ('Mistmon', 'Brittleice', 'Windmon', 'Gunther', 'Sweetbriar', 'Greenling',
-    'Frogsong', 'Sunmon', 'Southflight',
-    'Harvestmoon', 'Ghostmoon', 'Stormlight');</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<h3 class="detail">Variables</h3>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="playerName"></span><code><b>playerName</b>: string;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="playerTitle"></span><code><b>playerTitle</b>: string;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="trollDate"></span><code><b>trollDate</b>: string;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="Year"></span><code><b>Year</b>: word;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="Month"></span><code><b>Month</b>: word;</code></td>
+<td class="itemcode"><span id="clanSecond"></span><code><b>clanSecond</b>: array[0..19] of
+  string = ('Axe', 'Hammer', 'Anvil', 'Smith', 'Forge', 'Beard',
+    'Shield', 'Biter', 'Bane', 'Weaver', 'Mage', 'Spear', 'Seeker',
+    'Sword', 'Crafter', 'Breaker', 'Born', 'Helm', 'Hold', 'Fist');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -519,60 +593,50 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="WDay"></span><code><b>WDay</b>: word;</code></td>
+<td class="itemcode"><span id="dwarvenName"></span><code><b>dwarvenName</b>: array[0..109] of
+  string = ('Ailgor', 'Ainion', 'Alon', 'Alvion', 'Amur', 'Andol',
+    'Argli', 'Arol', 'Artil', 'Artor', 'Avli', 'Balan', 'Balor',
+    'Bamon', 'Bandiol', 'Baril', 'Baron', 'Baviol', 'Bavor', 'Bodol',
+    'Bogrion', 'Bolvol', 'Bondiol', 'Borli', 'Bortur', 'Bovan', 'Dalin',
+    'Dalon', 'Dalvol', 'Damli', 'Dandil', 'Dargol', 'Dartion', 'Dartol',
+    'Dilgli', 'Dilgol', 'Dilin', 'Dilvir', 'Dinan', 'Dirgli', 'Dithur',
+    'Dogion', 'Dogron', 'Dogror', 'Domin', 'Domir', 'Dondan', 'Dondli',
+    'Dorgor', 'Doror', 'Dradan', 'Drartli', 'Drartol', 'Drartor',
+    'Drathiol', 'Dravil', 'Dravon', 'Dulon', 'Durgion', 'Durin',
+    'Duror', 'Durtin', 'Durtiol', 'Duviol', 'Galvan', 'Ganion',
+    'Gathion', 'Gidir', 'Gilvin', 'Gilvion', 'Gilvur', 'Gindil',
+    'Givion', 'Glodil', 'Glolgol', 'Glolol', 'Glolvan', 'Glonir',
+    'Gloror', 'Glothiol', 'Glothol', 'Glothur', 'Glovion', 'Madin',
+    'Maliol', 'Mandion', 'Manil', 'Margin', 'Martion', 'Mathiol',
+    'Mavan', 'Mavan', 'Ralan', 'Ralli', 'Ramli', 'Ranin', 'Rargin',
+    'Rarli', 'Rarol', 'Rartil', 'Rundin', 'Runin', 'Rurgir', 'Ruril',
+    'Rurir', 'Ruvil', 'Ruvli', 'Thogin', 'Thogrur', 'Thondir');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="titles"></span><code><b>titles</b>: array[0..108] of string = ('Abominable', 'Amorous',
-    'Afflicted', 'Ailing', 'Breathless', 'Broken', 'Bullish', 'Craggy',
-    'Bearded', 'Bony', 'Beastly', 'Drunken', 'Bitter', 'Fetid', 'Fierce',
-    'Fiery', 'Bold', 'Filthy', 'Craven', 'Fishy', 'Crooked', 'Flexible',
-    'Crusty', 'Forgetful', 'Brutal', 'Foul', 'Disturbed', 'Forgettable',
-    'Burly', 'Fragrant', 'Dramatic', 'Frisky', 'Gallant', 'Green',
-    'Delectable', 'Cold', 'Grey', 'Cursed', 'Grumpy', 'Grubby', 'Dark',
-    'Hairless', 'Hairy', 'Heathen', 'Defiant', 'Jaded', 'Knobbly',
-    'Indecent', 'Detestable', 'Dreaded', 'Jumpy', 'Aromatic', 'Wrinkled',
-    'Wild', 'Unsmiling', 'Warty', 'Towering', 'Valiant', 'Sweaty',
-    'Sour', 'Vain', 'Unseemly', 'Swarthy', 'Tragic', 'Strange', 'Stout',
-    'Stony', 'Stormy', 'Shameless', 'Stalwart', 'Quiet', 'Sleepy',
-    'Pure', 'Prickly', 'Scarred', 'Pimply', 'Pale', 'Savage', 'Ornate',
-    'Simple', 'Silly', 'Salty', 'Rotund', 'Miserable', 'Scrappy',
-    'Ragged', 'Lanky', 'Scowly', 'Hardy', 'Harsh', 'Gruesome', 'Gross',
-    'Grisly', 'Goodly', 'Gloomy', 'Nocturnal', 'Fair', 'Chiseled',
-    'Insatiable', 'Destructive', 'Dreadful', 'Musical', 'Frightful',
-    'Oily', 'Rascal', 'Remorseless', 'Squinty', 'Silvery', 'Thirsty');</code></td>
+<td class="itemcode"><span id="elvenHomea"></span><code><b>elvenHomea</b>: array[0..13] of
+  string = ('the Vale of', 'the Whispering Forest of', 'the forest of',
+    'the white peaks of', 'the woods of', 'the Cinderlands of',
+    'the Frostspike of', 'the snow pass of', 'the green fortress of',
+    'the Waterways of', 'the sorrowful streams of', 'the Whispering Glade of',
+    'the Hidden Spires of', 'the Shimmering of');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="firstSyllable"></span><code><b>firstSyllable</b>: array[0..73] of
-  string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
-    'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con', 'Cor', 'Dag', 'Doo',
-    'Elen', 'El', 'En', 'Eo', 'Faf', 'Fan', 'Fara', 'Fre', 'Fro',
-    'Ga', 'Gala', 'Has', 'He', 'Heim', 'Ho', 'Isil', 'In', 'Ini',
-    'Is', 'Ka', 'Kuo', 'Lance', 'Lo', 'Ma', 'Mag', 'Mi', 'Mo', 'Moon',
-    'Mor', 'Mora', 'Nin', 'O', 'Obi', 'Og', 'Pelli', 'Por', 'Ran',
-    'Rud', 'Sam', 'She', 'Sheel', 'Shin', 'Shog', 'Son', 'Sur', 'Theo',
-    'Tho', 'Tris', 'U', 'Uh', 'Ul', 'Vap', 'Vish', 'Vor', 'Ya', 'Yo', 'Yyr');</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="secondSyllable"></span><code><b>secondSyllable</b>: array[0..62] of
-  string = ('ba', 'bis', 'bo', 'bus', 'da', 'dal', 'dagz', 'den',
-    'di', 'dil', 'dinn', 'do', 'dor', 'dra', 'dur', 'gi', 'gauble',
-    'gen', 'glum', 'go', 'gorn', 'goth', 'had', 'hard', 'is', 'karrl',
-    'ki', 'koon', 'ku', 'lad', 'ler', 'li', 'lot', 'ma', 'man', 'mir',
-    'mus', 'nan', 'ni', 'nor', 'nu', 'pian', 'ra', 'rakh', 'ric',
-    'rin', 'rum', 'rus', 'rut', 'sekh', 'sha', 'thos', 'thur', 'toa',
-    'tu', 'tur', 'tred', 'varl', 'wain', 'wan', 'win', 'wise', 'ya');</code></td>
+<td class="itemcode"><span id="elvenHomeb"></span><code><b>elvenHomeb</b>: array[0..42] of
+  string = ('Felamae', 'Lorrom', 'Anorel', 'Weneres', 'Rathel',
+    'Lasbreg-Dwyr', 'Renamar', 'Sarriel', 'Vius', 'Viusand', 'Ethgal',
+    'Renfin', 'Syldar', 'Thrantor', 'Paceledrel', 'Borntae', 'Mai-Ionla',
+    'Marrion', 'Thorndal', 'Ladkur', 'Imorvo', 'Rescir', 'Godan',
+    'Vadan', 'Daggil', 'Saner', 'Evnall', 'Lexa', 'Alta', 'Lorandwyr',
+    'Saand-Riel', 'Mardír', 'Dorril', 'Thallor', 'Wingdal', 'Duil',
+    'Glanduil', 'Iliphar', 'Ilrune', 'Saleh', 'Urijyre', 'Inamys', 'Caiwraek');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -714,69 +778,81 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="dwarvenName"></span><code><b>dwarvenName</b>: array[0..109] of
-  string = ('Ailgor', 'Ainion', 'Alon', 'Alvion', 'Amur', 'Andol',
-    'Argli', 'Arol', 'Artil', 'Artor', 'Avli', 'Balan', 'Balor',
-    'Bamon', 'Bandiol', 'Baril', 'Baron', 'Baviol', 'Bavor', 'Bodol',
-    'Bogrion', 'Bolvol', 'Bondiol', 'Borli', 'Bortur', 'Bovan', 'Dalin',
-    'Dalon', 'Dalvol', 'Damli', 'Dandil', 'Dargol', 'Dartion', 'Dartol',
-    'Dilgli', 'Dilgol', 'Dilin', 'Dilvir', 'Dinan', 'Dirgli', 'Dithur',
-    'Dogion', 'Dogron', 'Dogror', 'Domin', 'Domir', 'Dondan', 'Dondli',
-    'Dorgor', 'Doror', 'Dradan', 'Drartli', 'Drartol', 'Drartor',
-    'Drathiol', 'Dravil', 'Dravon', 'Dulon', 'Durgion', 'Durin',
-    'Duror', 'Durtin', 'Durtiol', 'Duviol', 'Galvan', 'Ganion',
-    'Gathion', 'Gidir', 'Gilvin', 'Gilvion', 'Gilvur', 'Gindil',
-    'Givion', 'Glodil', 'Glolgol', 'Glolol', 'Glolvan', 'Glonir',
-    'Gloror', 'Glothiol', 'Glothol', 'Glothur', 'Glovion', 'Madin',
-    'Maliol', 'Mandion', 'Manil', 'Margin', 'Martion', 'Mathiol',
-    'Mavan', 'Mavan', 'Ralan', 'Ralli', 'Ramli', 'Ranin', 'Rargin',
-    'Rarli', 'Rarol', 'Rartil', 'Rundin', 'Runin', 'Rurgir', 'Ruril',
-    'Rurir', 'Ruvil', 'Ruvli', 'Thogin', 'Thogrur', 'Thondir');</code></td>
+<td class="itemcode"><span id="firstSyllable"></span><code><b>firstSyllable</b>: array[0..73] of
+  string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
+    'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con', 'Cor', 'Dag', 'Doo',
+    'Elen', 'El', 'En', 'Eo', 'Faf', 'Fan', 'Fara', 'Fre', 'Fro',
+    'Ga', 'Gala', 'Has', 'He', 'Heim', 'Ho', 'Isil', 'In', 'Ini',
+    'Is', 'Ka', 'Kuo', 'Lance', 'Lo', 'Ma', 'Mag', 'Mi', 'Mo', 'Moon',
+    'Mor', 'Mora', 'Nin', 'O', 'Obi', 'Og', 'Pelli', 'Por', 'Ran',
+    'Rud', 'Sam', 'She', 'Sheel', 'Shin', 'Shog', 'Son', 'Sur', 'Theo',
+    'Tho', 'Tris', 'U', 'Uh', 'Ul', 'Vap', 'Vish', 'Vor', 'Ya', 'Yo', 'Yyr');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="clanFirst"></span><code><b>clanFirst</b>: array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
-    'Grim', 'Rune', 'Storm', 'Frost', 'Thunder', 'Bright', 'Blood',
-    'Grey', 'Stone', 'Bronze', 'Silver', 'Bone', 'Mist', 'Ice');</code></td>
+<td class="itemcode"><span id="Month"></span><code><b>Month</b>: word;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="clanSecond"></span><code><b>clanSecond</b>: array[0..19] of
-  string = ('Axe', 'Hammer', 'Anvil', 'Smith', 'Forge', 'Beard',
-    'Shield', 'Biter', 'Bane', 'Weaver', 'Mage', 'Spear', 'Seeker',
-    'Sword', 'Crafter', 'Breaker', 'Born', 'Helm', 'Hold', 'Fist');</code></td>
+<td class="itemcode"><span id="playerName"></span><code><b>playerName</b>: string;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="elvenHomea"></span><code><b>elvenHomea</b>: array[0..13] of
-  string = ('the Vale of', 'the Whispering Forest of', 'the forest of',
-    'the white peaks of', 'the woods of', 'the Cinderlands of',
-    'the Frostspike of', 'the snow pass of', 'the green fortress of',
-    'the Waterways of', 'the sorrowful streams of', 'the Whispering Glade of',
-    'the Hidden Spires of', 'the Shimmering of');</code></td>
+<td class="itemcode"><span id="playerTitle"></span><code><b>playerTitle</b>: string;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="elvenHomeb"></span><code><b>elvenHomeb</b>: array[0..42] of
-  string = ('Felamae', 'Lorrom', 'Anorel', 'Weneres', 'Rathel',
-    'Lasbreg-Dwyr', 'Renamar', 'Sarriel', 'Vius', 'Viusand', 'Ethgal',
-    'Renfin', 'Syldar', 'Thrantor', 'Paceledrel', 'Borntae', 'Mai-Ionla',
-    'Marrion', 'Thorndal', 'Ladkur', 'Imorvo', 'Rescir', 'Godan',
-    'Vadan', 'Daggil', 'Saner', 'Evnall', 'Lexa', 'Alta', 'Lorandwyr',
-    'Saand-Riel', 'Mardír', 'Dorril', 'Thallor', 'Wingdal', 'Duil',
-    'Glanduil', 'Iliphar', 'Ilrune', 'Saleh', 'Urijyre', 'Inamys', 'Caiwraek');</code></td>
+<td class="itemcode"><span id="secondSyllable"></span><code><b>secondSyllable</b>: array[0..62] of
+  string = ('ba', 'bis', 'bo', 'bus', 'da', 'dal', 'dagz', 'den',
+    'di', 'dil', 'dinn', 'do', 'dor', 'dra', 'dur', 'gi', 'gauble',
+    'gen', 'glum', 'go', 'gorn', 'goth', 'had', 'hard', 'is', 'karrl',
+    'ki', 'koon', 'ku', 'lad', 'ler', 'li', 'lot', 'ma', 'man', 'mir',
+    'mus', 'nan', 'ni', 'nor', 'nu', 'pian', 'ra', 'rakh', 'ric',
+    'rin', 'rum', 'rus', 'rut', 'sekh', 'sha', 'thos', 'thur', 'toa',
+    'tu', 'tur', 'tred', 'varl', 'wain', 'wan', 'win', 'wise', 'ya');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="titles"></span><code><b>titles</b>: array[0..108] of string = ('Abominable', 'Amorous',
+    'Afflicted', 'Ailing', 'Breathless', 'Broken', 'Bullish', 'Craggy',
+    'Bearded', 'Bony', 'Beastly', 'Drunken', 'Bitter', 'Fetid', 'Fierce',
+    'Fiery', 'Bold', 'Filthy', 'Craven', 'Fishy', 'Crooked', 'Flexible',
+    'Crusty', 'Forgetful', 'Brutal', 'Foul', 'Disturbed', 'Forgettable',
+    'Burly', 'Fragrant', 'Dramatic', 'Frisky', 'Gallant', 'Green',
+    'Delectable', 'Cold', 'Grey', 'Cursed', 'Grumpy', 'Grubby', 'Dark',
+    'Hairless', 'Hairy', 'Heathen', 'Defiant', 'Jaded', 'Knobbly',
+    'Indecent', 'Detestable', 'Dreaded', 'Jumpy', 'Aromatic', 'Wrinkled',
+    'Wild', 'Unsmiling', 'Warty', 'Towering', 'Valiant', 'Sweaty',
+    'Sour', 'Vain', 'Unseemly', 'Swarthy', 'Tragic', 'Strange', 'Stout',
+    'Stony', 'Stormy', 'Shameless', 'Stalwart', 'Quiet', 'Sleepy',
+    'Pure', 'Prickly', 'Scarred', 'Pimply', 'Pale', 'Savage', 'Ornate',
+    'Simple', 'Silly', 'Salty', 'Rotund', 'Miserable', 'Scrappy',
+    'Ragged', 'Lanky', 'Scowly', 'Hardy', 'Harsh', 'Gruesome', 'Gross',
+    'Grisly', 'Goodly', 'Gloomy', 'Nocturnal', 'Fair', 'Chiseled',
+    'Insatiable', 'Destructive', 'Dreadful', 'Musical', 'Frightful',
+    'Oily', 'Rascal', 'Remorseless', 'Squinty', 'Silvery', 'Thirsty');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="trollDate"></span><code><b>trollDate</b>: string;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -793,91 +869,18 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="aquilonianMaleFirst"></span><code><b>aquilonianMaleFirst</b>: array[0..187] of
-  string = ('Abant', 'Abantiad', 'Ac', 'Acris', 'Act', 'Alc', 'Alcid',
-    'Am', 'Andr', 'Andr', 'Arct', 'Arct', 'Arp', 'Asclep', 'Atab',
-    'Atab', 'Attal', 'Auf', 'Aufid', 'Bal', 'Balend', 'Barr', 'Barr',
-    'Bor', 'Call', 'Call', 'Cenw', 'Cenw', 'Clad', 'Clad', 'Dard',
-    'Dard', 'Dec', 'Decual', 'Edr', 'Elig', 'Elig', 'Em', 'Er', 'Erast',
-    'Fabr', 'Fabr', 'Glac', 'Glac', 'Gr', 'Grat', 'Grat', 'Guil',
-    'Guil', 'Hil', 'Hilar', 'Inach', 'Iph', 'Kl', 'Kost', 'Kost',
-    'Laud', 'Laud', 'Lavon', 'Lib', 'Lorm', 'Lorm', 'Luc', 'Metab',
-    'Mez', 'Mezent', 'Ner', 'Num', 'Octa', 'Octa', 'Octav', 'Pallant',
-    'Parn', 'Parn', 'Periph', 'Periphet', 'Prosp', 'Rin', 'Sept',
-    'Sept', 'Sor', 'Soract', 'Th', 'Thor', 'Thor', 'Tib', 'Tiber',
-    'Val', 'Vict', 'Vict', 'Victor', 'Viler', 'Zav', 'Zor', 'Acast',
-    'Ach', 'Acrision', 'Aeg', 'Aegid', 'Al', 'Amalr', 'Amul', 'Amul',
-    'Andron', 'Ang', 'Arar', 'Arar', 'Ascl', 'Ascl', 'Atabul', 'Att',
-    'Attel', 'Aur', 'Aurel', 'Ball', 'Ball', 'Baracc', 'Bel', 'Cadm',
-    'Cadm', 'Carn', 'Carn', 'Ceph', 'Ceph', 'Codr', 'Codr', 'Dam',
-    'Dex', 'Dexith', 'Drag', 'Drag', 'El', 'Emil', 'Emil', 'Ep',
-    'Favon', 'Flav', 'Flav', 'Ful', 'Gl', 'Gonz', 'Gonz', 'Grom',
-    'Grom', 'Hor', 'Horat', 'Il', 'Kest', 'Kest', 'Klaud', 'Kr',
-    'Krel', 'Krel', 'Lar', 'Leon', 'Leon', 'Lor', 'Marin', 'Merc',
-    'Merc', 'Met', 'Mod', 'Modest', 'Nol', 'Numed', 'Orast', 'Pall',
-    'Pall', 'Parnass', 'Publ', 'Publ', 'Rig', 'Ruf', 'Septim', 'Serv',
-    'Serv', 'Sur', 'Thesp', 'Troc', 'Troc', 'Tul', 'Valann', 'Valer',
-    'Vil', 'Volm', 'Volm', 'Volman', 'Zet');</code></td>
+<td class="itemcode"><span id="WDay"></span><code><b>WDay</b>: word;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="aquilonianMaleLast"></span><code><b>aquilonianMaleLast</b>: array[0..99] of
-  string = ('a', 'i', 'o', 'as', 'el', 'er', 'es', 'ic', 'in', 'io',
-    'is', 'on', 'os', 'us', 'yc', 'ago', 'ald', 'ana', 'ana', 'eas',
-    'ell', 'ell', 'eri', 'eus', 'eus', 'ian', 'ias', 'ias', 'ion',
-    'ius', 'ius', 'uis', 'ulf', 'ulk', 'ura', 'abus', 'acus', 'ades',
-    'aeon', 'aeus', 'aime', 'alin', 'alle', 'alus', 'alvi', 'anus',
-    'ares', 'aris', 'elio', 'elis', 'elus', 'erus', 'etes', 'icus',
-    'ides', 'idos', 'idus', 'imer', 'imus', 'ocer', 'omel', 'orin',
-    'orus', 'ulio', 'ulus', 'accus', 'achus', 'actus', 'alion', 'alric',
-    'annus', 'arras', 'assus', 'astus', 'atian', 'atius', 'avian',
-    'avius', 'eades', 'elius', 'endin', 'entius', 'epius', 'ercer',
-    'erias', 'erius', 'estus', 'iades', 'igius', 'ilius', 'orian',
-    'ostas', 'arioin', 'audius', 'edides', 'ervius', 'espius', 'itheus',
-    'onicus', 'antides');</code></td>
+<td class="itemcode"><span id="Year"></span><code><b>Year</b>: word;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="aquilonianFemaleFirst"></span><code><b>aquilonianFemaleFirst</b>: array[0..97] of
-  string = ('Adam', 'Aeg', 'Al', 'Alb', 'Albion', 'Alc', 'Alcim',
-    'Anger', 'Arac', 'Arac', 'Aracel', 'Arian', 'Ariann', 'Balb',
-    'Bith', 'Bolb', 'Cair', 'Cairist', 'Call', 'Card', 'Carm', 'Cat',
-    'Dac', 'Dac', 'Dam', 'Damian', 'Deid', 'Deidam', 'Dev', 'Don',
-    'Ech', 'Echidn', 'Elv', 'Elv', 'Em', 'Ep', 'Epion', 'Euandr',
-    'Euryd', 'Fel', 'Fluon', 'Gal', 'Gal', 'Galat', 'Gl', 'Gryn',
-    'Halac', 'Hec', 'Hecub', 'Heroph', 'Hor', 'Hor', 'Horac', 'Il',
-    'In', 'Iph', 'Kal', 'Kal', 'Korn', 'Lam', 'Lar', 'Lel', 'Let',
-    'Lev', 'Levan', 'Lor', 'Lor', 'Lorell', 'Malv', 'Mar', 'Mat',
-    'Mess', 'Naut', 'Nel', 'Nol', 'Nyd', 'Pall', 'Pan', 'Pasith',
-    'Pell', 'Ph', 'Ren', 'Rh', 'Ros', 'Ros', 'Sal', 'Salv', 'Sec',
-    'Suad', 'Teth', 'Tim', 'Tryph', 'Val', 'Vern', 'Vig', 'Vimand', 'Vir', 'Zel');</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="aquilonianFemaleLast"></span><code><b>aquilonianFemaleLast</b>: array[0..99] of
-  string = ('a', 'e', 'ea', 'ia', 'ia', 'ya', 'ys', 'ana', 'ana',
-    'are', 'are', 'ata', 'ata', 'ede', 'ede', 'eia', 'eia', 'eis',
-    'eis', 'ele', 'ele', 'ena', 'ena', 'ene', 'ene', 'era', 'era',
-    'eta', 'ice', 'ice', 'ida', 'ida', 'ige', 'ige', 'ile', 'ina',
-    'ina', 'ita', 'ita', 'ona', 'ona', 'ope', 'ope', 'ota', 'ota',
-    'uba', 'uba', 'uta', 'uta', 'abel', 'abel', 'acia', 'acia', 'anne',
-    'anne', 'atea', 'atea', 'auce', 'auce', 'elia', 'elia', 'elle',
-    'elle', 'enta', 'enta', 'eria', 'eria', 'iana', 'iana', 'idna',
-    'idna', 'ilia', 'ilia', 'ilis', 'ilis', 'iona', 'iona', 'iona',
-    'iona', 'ione', 'ione', 'iope', 'iope', 'ista', 'ista', 'onia',
-    'onia', 'unda', 'unda', 'ynia', 'ynia', 'aedra', 'ameia', 'amina',
-    'andra', 'antia', 'autia', 'imede', 'inome', 'ithea');</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
 </td></tr></table></body></html>

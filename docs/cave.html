@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: cave</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
+<h1 class="unit">Unit cave</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Generate a cave using two passes of a cellular automata algorithm and then remove any unreachable areas by floodfilling the map and discarding maps that are less than 39% floor tiles. Stairs are placed on the top level and a connecting stairway is placed on the floor below. If the floor below has a wall tile where the stair should be, that floor is discarded and generated again.</p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>SysUtils</li><li><a  href="globalUtils.html">globalutils</a></li><li>Classes</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="cave.html#blockORnot">blockORnot</a></b>(x, y: integer): <a  href="cave.html#Tbkinds">Tbkinds</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="cave.html#calcDistances">calcDistances</a></b>(x, y: smallint);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="cave.html#digCave">digCave</a></b>(floorNumber: byte);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="cave.html#fillWithWalls">fillWithWalls</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="cave.html#generate">generate</a></b>(idNumber: smallint; totalDepth: byte);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="cave.html#leftHasFloor">leftHasFloor</a></b>(): boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="cave.html#randomTileFill">randomTileFill</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="cave.html#rightHasFloor">rightHasFloor</a></b>(): boolean;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="cave.html#Tbkinds">Tbkinds</a></b> = (...);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="cave.html#TDist">TDist</a></b> = array [1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of integer;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="cave.html#BLOCKVALUE">BLOCKVALUE</a></b> = 99;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="cave.html#c">c</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="cave.html#distances">distances</a></b>: <a  href="cave.html#TDist">TDist</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="cave.html#filename">filename</a></b>: ShortString;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="cave.html#i">i</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="cave.html#iterations">iterations</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="cave.html#myfile">myfile</a></b>: Text;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="cave.html#r">r</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="cave.html#stairX">stairX</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="cave.html#stairY">stairY</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="cave.html#tempArray">tempArray</a></b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="cave.html#tempArray2">tempArray2</a></b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="cave.html#terrainArray">terrainArray</a></b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="cave.html#tileCounter">tileCounter</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="cave.html#totalRooms">totalRooms</a></b>: byte;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="blockORnot"></span><code>function <b>blockORnot</b>(x, y: integer): <a  href="cave.html#Tbkinds">Tbkinds</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Determines if a tile is a wall or not</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="calcDistances"></span><code>procedure <b>calcDistances</b>(x, y: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Floodfill cave to find unreachable areas</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="digCave"></span><code>procedure <b>digCave</b>(floorNumber: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Dig out the cave</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="fillWithWalls"></span><code>procedure <b>fillWithWalls</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Fill array with walls</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generate"></span><code>procedure <b>generate</b>(idNumber: smallint; totalDepth: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate a caves and place the stairs</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="leftHasFloor"></span><code>function <b>leftHasFloor</b>(): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check that the left side of the map contains floor tiles</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="randomTileFill"></span><code>procedure <b>randomTileFill</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Fill array with random tiles</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="rightHasFloor"></span><code>function <b>rightHasFloor</b>(): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check that the right side of the map contains floor tiles</p>
+</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Tbkinds"></span><code><b>Tbkinds</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+<span id="bWall">bWall</span></li>
+<li>
+<span id="bClear">bClear</span></li>
+</ul>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TDist"></span><code><b>TDist</b> = array [1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="BLOCKVALUE"></span><code><b>BLOCKVALUE</b> = 99;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="c"></span><code><b>c</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="distances"></span><code><b>distances</b>: <a  href="cave.html#TDist">TDist</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="filename"></span><code><b>filename</b>: ShortString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+TESTING - Write cavern to text file</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="i"></span><code><b>i</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="iterations"></span><code><b>iterations</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="myfile"></span><code><b>myfile</b>: Text;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="r"></span><code><b>r</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stairX"></span><code><b>stairX</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stairY"></span><code><b>stairY</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="tempArray"></span><code><b>tempArray</b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="tempArray2"></span><code><b>tempArray2</b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="terrainArray"></span><code><b>terrainArray</b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="tileCounter"></span><code><b>tileCounter</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="totalRooms"></span><code><b>totalRooms</b>: byte;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

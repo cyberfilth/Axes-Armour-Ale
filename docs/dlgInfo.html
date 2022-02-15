@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: dlgInfo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
+<h1 class="unit">Unit dlgInfo</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Information Dialog box</p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>SysUtils</li><li>video</li><li><a  href="plot_gen.html">plot_gen</a></li><li><a  href="universe.html">universe</a></li><li><a  href="globalUtils.html">globalUtils</a></li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="dlgInfo.html#checkNotifications">checkNotifications</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="dlgInfo.html#foundMap">foundMap</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="dlgInfo.html#infoDialog">infoDialog</a></b>(message: shortstring);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="dlgInfo.html#levelUpDialog">levelUpDialog</a></b>(message: shortstring);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="dlgInfo.html#newGame">newGame</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="dlgInfo.html#newWarning">newWarning</a></b>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="dlgInfo.html#dialogFlag">dialogFlag</a></b> = (...);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="dlgInfo.html#dialogType">dialogType</a></b>: <a  href="dlgInfo.html#dialogFlag">dialogFlag</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="checkNotifications"></span><code>procedure <b>checkNotifications</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if there is a pop-up to display</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="foundMap"></span><code>procedure <b>foundMap</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+1st cave, found the Smugglers Map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="infoDialog"></span><code>procedure <b>infoDialog</b>(message: shortstring);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display Info dialog box</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="levelUpDialog"></span><code>procedure <b>levelUpDialog</b>(message: shortstring);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display level up dialog box</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="newGame"></span><code>procedure <b>newGame</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display welcome text</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="newWarning"></span><code>procedure <b>newWarning</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display a warning when starting a new game</p>
+</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dialogFlag"></span><code><b>dialogFlag</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Types of pop-up dialog box</p>
+<h6 class="description_section">Values</h6>
+<ul>
+<li>
+<span id="dlgNone">dlgNone</span></li>
+<li>
+<span id="dlgFoundSMap">dlgFoundSMap</span></li>
+</ul>
+</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dialogType"></span><code><b>dialogType</b>: <a  href="dlgInfo.html#dialogFlag">dialogFlag</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Notifies the game loop whether to display a pop-up or not</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

@@ -1,17 +1,236 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Axes, Armour &amp; Ale: Introduction</title>
+<title>Axes, Armour &amp; Ale: All Units</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
-<h1 class="externalitem">Introduction</h1>
-Axes, Armour &amp; Ale
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
+<h1 class="allitems">All Units</h1>
+<table class="unitstable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="ai_animal.html">ai_animal</a></td>
+<td class="itemdesc"><p>Shared Artificial Stupidity unit for animal AI</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="ale_tankard.html">ale_tankard</a></td>
+<td class="itemdesc"><p>A tankard of ale - health top up</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="animation.html">animation</a></td>
+<td class="itemdesc"><p>Unit responsible for projectile and magic animations</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="basic_club.html">basic_club</a></td>
+<td class="itemdesc"><p>A wooden club</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="blood_bat.html">blood_bat</a></td>
+<td class="itemdesc"><p>Weak enemy with simple AI, no pathfinding</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="camera.html">camera</a></td>
+<td class="itemdesc"><p>Camera unit follows the player around and displays the surrounding game map</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="cave.html">cave</a></td>
+<td class="itemdesc"><p>Generate a cave using two passes of a cellular automata algorithm and then remove any unreachable areas by floodfilling the map and discarding maps that are less than 39% floor tiles. Stairs are placed on the top level and a connecting stairway is placed on the floor below. If the floor below has a wall tile where the stair should be, that floor is discarded and generated again.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="cave_rat.html">cave_rat</a></td>
+<td class="itemdesc"><p>Weak enemy with simple AI, no pathfinding</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="cloth_armour1.html">cloth_armour1</a></td>
+<td class="itemdesc"><p>Low quality cloth armour</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="combat_resolver.html">combat_resolver</a></td>
+<td class="itemdesc"><p>Combat Resolver unit
 
-<p>A low-fantasy, ASCII roguelike game.
+<p>Combat is decided by rolling a random number between 1 and the entity's ATTACK value. Then modifiers are added, for example, a 1D6+4 axe will roll a 6 sided die and add the result plus 4 to the total damage amount. This is then removed from the opponents defence rating. If the opponents defence doesn't soak up the whole damage amount, the remainder is taken from their Health. Spite damage is when an entity loses a combat round and the player can roll a 6, dealing damage 'in spite' of losing the round.
 
-<p>Axes, Amour &amp; Ale runs in the terminal in Windows, Linux &amp; OSX. it is a standalone binary, and doesn't need to be installed. Currently at an incomplete 'alpha' stage of development, all bugfixes and suggestions are gratefully received.</td></tr></table></body></html>
+<p>This is partly inspired by the Tunnels &amp; Trolls rules, my favourite tabletop RPG.</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="crude_dagger.html">crude_dagger</a></td>
+<td class="itemdesc"><p>A crude, iron dagger</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="dlgInfo.html">dlgInfo</a></td>
+<td class="itemdesc"><p>Information Dialog box</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="entities.html">entities</a></td>
+<td class="itemdesc"><p>Unit responsible for NPC stat, initialising enemies and utility functions</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="file_handling.html">file_handling</a></td>
+<td class="itemdesc"><p>Unit responsible for saving and loading data</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="fov.html">fov</a></td>
+<td class="itemdesc"><p>Players Field of View function</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="giant_cave_rat.html">giant_cave_rat</a></td>
+<td class="itemdesc"><p>Weak enemy with simple AI, no pathfinding</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="globalUtils.html">globalUtils</a></td>
+<td class="itemdesc"><p>Common functions / utilities</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="green_fungus.html">green_fungus</a></td>
+<td class="itemdesc"><p>Stationary hazard, when attacked will either poison the player or release spores</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="items.html">items</a></td>
+<td class="itemdesc"><p>Items and objects in the game world</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="item_lookup.html">item_lookup</a></td>
+<td class="itemdesc"><p>Lookup table for items, based on the environment</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="KeyboardInput.html">KeyboardInput</a></td>
+<td class="itemdesc"><p>Player input for game controls and menu selections, grouped in procedures</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="large_blood_bat.html">large_blood_bat</a></td>
+<td class="itemdesc"><p>Weak enemy with simple AI, no pathfinding</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="leather_armour1.html">leather_armour1</a></td>
+<td class="itemdesc"><p>Low quality leather armour</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="logging.html">logging</a></td>
+<td class="itemdesc"><p>Used for logging which procedures are called and in what order</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="los.html">los</a></td>
+<td class="itemdesc"><p>Line of sight &amp; targeting functions</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="magicEffects.html">magicEffects</a></td>
+<td class="itemdesc"><p>Magic and Spell effects are calculated here</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="main.html">main</a></td>
+<td class="itemdesc"><p>Axes, Armour &amp; Ale - A low-fantasy roguelike. </p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="map.html">map</a></td>
+<td class="itemdesc"><p>Organises the current level into an array together with helper functions</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="npc_lookup.html">npc_lookup</a></td>
+<td class="itemdesc"><p>Lookup table for NPC's, based on the environment</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="player.html">player</a></td>
+<td class="itemdesc"><p>Player setup and stats</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="player_inventory.html">player_inventory</a></td>
+<td class="itemdesc"><p>Handles player inventory and associated functions</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="player_stats.html">player_stats</a></td>
+<td class="itemdesc"><p>Additional player stats that are not shared with other entities are stored here</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="plot_gen.html">plot_gen</a></td>
+<td class="itemdesc"><p>Generate names and plot elements</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="potion_curePoison.html">potion_curePoison</a></td>
+<td class="itemdesc"><p>Potion that cures poison</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="redcap_lesser.html">redcap_lesser</a></td>
+<td class="itemdesc"><p>Intelligent enemy with scent tracking</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="redcap_lesser_lobber.html">redcap_lesser_lobber</a></td>
+<td class="itemdesc"><p>Hunter enemy, fires projectiles</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="resolution.html">resolution</a></td>
+<td class="itemdesc"><p>Determines the terminal size when the game is first opened and resizes the user interface accordingly. For a typical 80x24 terminal size, the camera size will be 57x19 For a terminal size of 102x24 and greater, the camera size will be 80x19 This is kept to 19 rather than the full 20 to all for screenshake to be added in future versions.</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="scrCharIntro.html">scrCharIntro</a></td>
+<td class="itemdesc"><p>Character introduction and scene setting</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="scrCharSelect.html">scrCharSelect</a></td>
+<td class="itemdesc"><p>Choose your characters race</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="scrGame.html">scrGame</a></td>
+<td class="itemdesc"><p>Main game user interface</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="scrIntro.html">scrIntro</a></td>
+<td class="itemdesc"><p>Introduction screen</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="scrInventory.html">scrInventory</a></td>
+<td class="itemdesc"><p>Inventory screen</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="scrRIP.html">scrRIP</a></td>
+<td class="itemdesc"><p>Game over screen</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="scrTitle.html">scrTitle</a></td>
+<td class="itemdesc"><p>Title screen</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="scrWinAlpha.html">scrWinAlpha</a></td>
+<td class="itemdesc"><p>Game won screen - only used for Alpha testing</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="small_green_fungus.html">small_green_fungus</a></td>
+<td class="itemdesc"><p>Stationary hazard, deals poison damage in combat</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="small_hyena.html">small_hyena</a></td>
+<td class="itemdesc"><p>Weak predator, attacks other animals</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="smell.html">smell</a></td>
+<td class="itemdesc"><p>Smell map, a copy of the map is floodfilled with integers. Each integer increments the further away it is from the player. Creatures can then track the player by finding a tile with a lower number than the one that they're standing on.
+
+<p>The below routine is based on code from Stephen Peter (AKA speter)</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="smugglersMap.html">smugglersMap</a></td>
+<td class="itemdesc"><p>First quest MacGuffin, the smugglers map</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="staff_minor_scorch.html">staff_minor_scorch</a></td>
+<td class="itemdesc"><p>A magical staff of minor scorch, area effect</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="ui.html">ui</a></td>
+<td class="itemdesc"><p>User Interface - Unit responsible for displaying messages and screens</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="universe.html">universe</a></td>
+<td class="itemdesc"><p>Generate each dungeon, its levels and related info</p></td>
+</tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

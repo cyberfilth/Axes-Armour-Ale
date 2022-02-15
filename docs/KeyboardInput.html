@@ -3,12 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: KeyboardInput</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
 <h1 class="unit">Unit KeyboardInput</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
@@ -16,9 +17,45 @@
 <p>
 Player input for game controls and menu selections, grouped in procedures</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>Keyboard</li><li><a  href="map.html">map</a></li><li>dlgInfo</li><li><a  href="scrIntro.html">scrIntro</a></li><li><a  href="scrCharSelect.html">scrCharSelect</a></li><li><a  href="scrCharIntro.html">scrCharIntro</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>Keyboard</li><li><a  href="map.html">map</a></li><li><a  href="dlgInfo.html">dlgInfo</a></li><li><a  href="scrIntro.html">scrIntro</a></li><li><a  href="scrCharSelect.html">scrCharSelect</a></li><li><a  href="scrCharIntro.html">scrCharIntro</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#charIntroInput">charIntroInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#charSelInput">charSelInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#dialogBoxInput">dialogBoxInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#dropInput">dropInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#gameInput">gameInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#introInput">introInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#inventoryInput">inventoryInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#LevelUpInput">LevelUpInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#LoseSaveInput">LoseSaveInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#quaffInput">quaffInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#quitInput">quitInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#RIPInput">RIPInput</a></b>(Keypress: TKeyEvent);</code></td>
+</tr>
 <tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#setupKeyboard">setupKeyboard</a></b>;</code></td>
 </tr>
@@ -29,43 +66,7 @@ Player input for game controls and menu selections, grouped in procedures</p>
 <td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#titleInput">titleInput</a></b>(Keypress: TKeyEvent);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#charSelInput">charSelInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#charIntroInput">charIntroInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#introInput">introInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#quitInput">quitInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#inventoryInput">inventoryInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#dropInput">dropInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#quaffInput">quaffInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#wearWieldInput">wearWieldInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#RIPInput">RIPInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#LevelUpInput">LevelUpInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#gameInput">gameInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#LoseSaveInput">LoseSaveInput</a></b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#dialogBoxInput">dialogBoxInput</a></b>(Keypress: TKeyEvent);</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="KeyboardInput.html#WinAlphaInput">WinAlphaInput</a></b>(Keypress: TKeyEvent);</code></td>
@@ -73,6 +74,114 @@ Player input for game controls and menu selections, grouped in procedures</p>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="charIntroInput"></span><code>procedure <b>charIntroInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in the CHARACTER INTRO Menu state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="charSelInput"></span><code>procedure <b>charSelInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in the CHARACTER SELECT state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dialogBoxInput"></span><code>procedure <b>dialogBoxInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in the DIALOG state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dropInput"></span><code>procedure <b>dropInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in the DROP Menu state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="gameInput"></span><code>procedure <b>gameInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in GAME state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="introInput"></span><code>procedure <b>introInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in the INTRO Menu state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="inventoryInput"></span><code>procedure <b>inventoryInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in INVENTORY Menu state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="LevelUpInput"></span><code>procedure <b>LevelUpInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in the LEVEL UP state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="LoseSaveInput"></span><code>procedure <b>LoseSaveInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in LOSE SAVE state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="quaffInput"></span><code>procedure <b>quaffInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in the QUAFF Menu state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="quitInput"></span><code>procedure <b>quitInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input for QUIT Menu state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="RIPInput"></span><code>procedure <b>RIPInput</b>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in the GAME OVER state</p>
+</td></tr>
+</table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="setupKeyboard"></span><code>procedure <b>setupKeyboard</b>;</code></td>
@@ -102,119 +211,11 @@ Input in TITLE Menu state</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="charSelInput"></span><code>procedure <b>charSelInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input in the CHARACTER SELECT state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="charIntroInput"></span><code>procedure <b>charIntroInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input in the CHARACTER INTRO Menu state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="introInput"></span><code>procedure <b>introInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input in the INTRO Menu state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="quitInput"></span><code>procedure <b>quitInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input for QUIT Menu state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="inventoryInput"></span><code>procedure <b>inventoryInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input in INVENTORY Menu state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="dropInput"></span><code>procedure <b>dropInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input in the DROP Menu state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="quaffInput"></span><code>procedure <b>quaffInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input in the QUAFF Menu state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
 <td class="itemcode"><span id="wearWieldInput"></span><code>procedure <b>wearWieldInput</b>(Keypress: TKeyEvent);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Input in the WEAR / WIELD Menu state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="RIPInput"></span><code>procedure <b>RIPInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input in the GAME OVER state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="LevelUpInput"></span><code>procedure <b>LevelUpInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input in the LEVEL UP state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="gameInput"></span><code>procedure <b>gameInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input in GAME state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="LoseSaveInput"></span><code>procedure <b>LoseSaveInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input in LOSE SAVE state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="dialogBoxInput"></span><code>procedure <b>dialogBoxInput</b>(Keypress: TKeyEvent);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Input in the DIALOG state</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -226,4 +227,6 @@ Input in the DIALOG state</p>
 Input in WIN ALPHA state</p>
 </td></tr>
 </table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
 </td></tr></table></body></html>

@@ -3,12 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: player_stats</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p></td><td class="content">
 <h1 class="unit">Unit player_stats</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -23,52 +24,52 @@ Additional player stats that are not shared with other entities are stored here<
 <td class="itemcode"><code>procedure <b><a  href="player_stats.html#checkLevel">checkLevel</a></b>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_stats.html#showLevelUpOptions">showLevelUpOptions</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseAttack">increaseAttack</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseAttackDefence">increaseAttackDefence</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseDefence">increaseDefence</a></b>;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseMaxHealth">increaseMaxHealth</a></b>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseAttack">increaseAttack</a></b>;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseDefence">increaseDefence</a></b>;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseAttackDefence">increaseAttackDefence</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="player_stats.html#showLevelUpOptions">showLevelUpOptions</a></b>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="player_stats.html#playerLevel">playerLevel</a></b>: smallint;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="player_stats.html#maxVisionRange">maxVisionRange</a></b>: smallint;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_stats.html#enchWeapType">enchWeapType</a></b>: smallint;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="player_stats.html#playerRace">playerRace</a></b>: shortstring;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_stats.html#clanName">clanName</a></b>: shortstring;</code></td>
-</tr>
-<tr class="list2">
 <td class="itemcode"><code><b><a  href="player_stats.html#canExitDungeon">canExitDungeon</a></b>: boolean;</code></td>
 </tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_stats.html#enchantedWeaponEquipped">enchantedWeaponEquipped</a></b>: boolean;</code></td>
-</tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="player_stats.html#maxMagick">maxMagick</a></b>: smallint;</code></td>
+<td class="itemcode"><code><b><a  href="player_stats.html#clanName">clanName</a></b>: shortstring;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code><b><a  href="player_stats.html#currentMagick">currentMagick</a></b>: smallint;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code><b><a  href="player_stats.html#enchantedWeaponEquipped">enchantedWeaponEquipped</a></b>: boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="player_stats.html#enchWeapType">enchWeapType</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="player_stats.html#maxMagick">maxMagick</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="player_stats.html#maxVisionRange">maxVisionRange</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="player_stats.html#numEquippedUses">numEquippedUses</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="player_stats.html#playerLevel">playerLevel</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="player_stats.html#playerRace">playerRace</a></b>: shortstring;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -84,29 +85,20 @@ Check if the player has levelled up</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="showLevelUpOptions"></span><code>procedure <b>showLevelUpOptions</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Show level up dialog</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="increaseMaxHealth"></span><code>procedure <b>increaseMaxHealth</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Increase maximum health</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
 <td class="itemcode"><span id="increaseAttack"></span><code>procedure <b>increaseAttack</b>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Increase attack strength</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="increaseAttackDefence"></span><code>procedure <b>increaseAttackDefence</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Increase attack &amp; defence</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -120,21 +112,75 @@ Increase defence strength</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="increaseAttackDefence"></span><code>procedure <b>increaseAttackDefence</b>;</code></td>
+<td class="itemcode"><span id="increaseMaxHealth"></span><code>procedure <b>increaseMaxHealth</b>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Increase attack &amp; defence</p>
+Increase maximum health</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="showLevelUpOptions"></span><code>procedure <b>showLevelUpOptions</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Show level up dialog</p>
 </td></tr>
 </table>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="playerLevel"></span><code><b>playerLevel</b>: smallint;</code></td>
+<td class="itemcode"><span id="canExitDungeon"></span><code><b>canExitDungeon</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Is it possible to leave the current dungeon</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="clanName"></span><code><b>clanName</b>: shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Is the player Elf, Dwarf or Human. clanName is only used for Dwarven characters</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="currentMagick"></span><code><b>currentMagick</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Magical ability</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="enchantedWeaponEquipped"></span><code><b>enchantedWeaponEquipped</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Is a magical weapon equipped</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="enchWeapType"></span><code><b>enchWeapType</b>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Player level, maximum vision range and enchanted weapon type</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="maxMagick"></span><code><b>maxMagick</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Magical ability</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -148,7 +194,16 @@ Player level, maximum vision range and enchanted weapon type</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="enchWeapType"></span><code><b>enchWeapType</b>: smallint;</code></td>
+<td class="itemcode"><span id="numEquippedUses"></span><code><b>numEquippedUses</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Durability of equipped / magical item</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="playerLevel"></span><code><b>playerLevel</b>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -164,58 +219,6 @@ Player level, maximum vision range and enchanted weapon type</p>
 Is the player Elf, Dwarf or Human. clanName is only used for Dwarven characters</p>
 </td></tr>
 </table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="clanName"></span><code><b>clanName</b>: shortstring;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Is the player Elf, Dwarf or Human. clanName is only used for Dwarven characters</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="canExitDungeon"></span><code><b>canExitDungeon</b>: boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Is it possible to leave the current dungeon</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="enchantedWeaponEquipped"></span><code><b>enchantedWeaponEquipped</b>: boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Is a magical weapon equipped</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="maxMagick"></span><code><b>maxMagick</b>: smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Magical ability</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="currentMagick"></span><code><b>currentMagick</b>: smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Magical ability</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="numEquippedUses"></span><code><b>numEquippedUses</b>: smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Durability of equipped / magical item</p>
-</td></tr>
-</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
 </td></tr></table></body></html>
