@@ -282,7 +282,11 @@ begin
   case (entityList[i].intName) of
     'CaveRat': cave_rat.takeTurn(i);
     'GiantRat': giant_cave_rat.takeTurn(i);
-    'BloodBat': blood_bat.takeTurn(i);
+    'BloodBat':
+      begin
+        blood_bat.takeTurn(i);
+        blood_bat.takeTurn(i);
+      end;
     'LargeBloodBat': large_blood_bat.takeTurn(i);
     'GreenFungus': green_fungus.takeTurn(i);
     'SmallGreenFungus': small_green_fungus.takeTurn(i);
