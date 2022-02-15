@@ -3,6 +3,7 @@
 unit green_fungus;
 
 {$mode objfpc}{$H+}
+{$RANGECHECKS OFF}
 
 interface
 
@@ -107,10 +108,12 @@ procedure combat(idOwner, idTarget: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(2, entities.entityList[idOwner].attack) - entities.entityList[idTarget].defence;
+  damageAmount := globalutils.randomRange(2, entities.entityList[idOwner].attack) -
+    entities.entityList[idTarget].defence;
   if (damageAmount > 0) then
   begin
-    entities.entityList[idTarget].currentHP := (entities.entityList[idTarget].currentHP - damageAmount);
+    entities.entityList[idTarget].currentHP :=
+      (entities.entityList[idTarget].currentHP - damageAmount);
     if (entities.entityList[idTarget].currentHP < 1) then
     begin
       if (idTarget = 0) then
@@ -148,7 +151,8 @@ begin
       begin
         if (idTarget = 0) then { if target is the player }
         begin
-          ui.displayMessage('The fungus lashes you with its stinger, inflicting ' + IntToStr(damageAmount) + ' damage');
+          ui.displayMessage('The fungus lashes you with its stinger, inflicting ' +
+            IntToStr(damageAmount) + ' damage');
           (* Fungus does poison damage *)
           entityList[0].stsPoison := True;
           entityList[0].tmrPoison := damageAmount + 2;
@@ -182,17 +186,17 @@ begin
         for i := 1 to amount do
         begin
           (* Choose a space to place the fungus *)
-          r := globalutils.randomRange(entityList[id].posY - 4,
-            entityList[id].posY + 4);
-          c := globalutils.randomRange(entityList[id].posX - 4,
-            entityList[id].posX + 4);
+          r := globalutils.randomRange(entityList[id].posY - 4, entityList[id].posY + 4);
+          c := globalutils.randomRange(entityList[id].posX - 4, entityList[id].posX + 4);
           (* choose a location that is not a wall or occupied *)
-          if (maparea[r][c].Blocks <> True) and (maparea[r][c].Occupied <> True) and
-            (withinBounds(c, r) = True) then
+          if (maparea[r][c].Blocks <> True) and (maparea[r][c].Occupied <> True) and (withinBounds(c, r) = True) then
           begin
             Inc(npcAmount);
             small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
-          end;
+          end
+          else
+          (* If no suitable tile is found *)
+            exit;
         end;
         ui.writeBufferedMessages;
         ui.bufferMessage('The fungus releases spores into the air');
