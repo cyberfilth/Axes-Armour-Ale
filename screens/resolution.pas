@@ -22,12 +22,15 @@ procedure getSize;
 var
   terminalWidth: smallint;
 begin
-   {$IFDEF Linux}
-   terminalWidth := ScreenWidth;
-   {$ENDIF}
-   {$IFDEF Windows}
-   terminalWidth := WindMaxX;
-   {$ENDIF}
+  {$IFDEF Linux}
+  terminalWidth := ScreenWidth;
+  {$ENDIF}
+  {$IFDEF Windows}
+  terminalWidth := WindMaxX;
+  {$ENDIF}
+  {$IFDEF Darwin}
+  terminalWidth := ScreenWidth;
+  {$ENDIF}
   if (terminalWidth >= 103) then
   begin
     scrGame.minX := 81;
