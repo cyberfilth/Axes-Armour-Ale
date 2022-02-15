@@ -44,8 +44,12 @@ procedure useItem;
 begin
   if (entityList[0].stsPoison = True) then
   begin
-    entityList[0].stsPoison := False;
-    Inc(entities.entityList[0].tmrPoison, 0);
+    entities.entityList[0].tmrPoison := 0;
+    entities.entityList[0].stsPoison := False;
+    (* Update UI *)
+    ui.displayStatusEffect(0, 'poison');
+    ui.poisonStatusSet := False;
+    entityList[0].glyphColour := 'yellow';
     ui.displayMessage('You quaff the potion. The poison leaves your system.');
   end
   else
