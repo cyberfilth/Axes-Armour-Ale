@@ -30,12 +30,12 @@ begin
     5, 'cyan', ' Your character is controlled using either the numberpad or Vi keys.');
   TextOut(ui.centreX('  y  k  u      7  8  9                                              '),
     7, 'cyan', '  y  k  u      7  8  9                                              ');
-  TextOut(ui.centreX('   \ | /        \ | /                                               '),
-    8, 'cyan', '   \ | /        \ | /                                               ');
-  TextOut(ui.centreX('  h-   -l      4- 5 -6                                               '),
-    9, 'cyan', '  h-   -l      4- 5 -6                                               ');
-  TextOut(ui.centreX('   / | \        / | \                                               '),
-    10, 'cyan', '   / | \        / | \                                               ');
+  TextOut(ui.centreX('   \ | /        \ | /                You can also move up, down,    '),
+    8, 'cyan', '   \ | /        \ | /                You can also move up, down,    ');
+  TextOut(ui.centreX('  h-   -l      4- 5 -6               left and right using the       '),
+    9, 'cyan', '  h-   -l      4- 5 -6               left and right using the       ');
+  TextOut(ui.centreX('   / | \        / | \                arrow keys                     '),
+    10, 'cyan', '   / | \        / | \                arrow keys                     ');
   TextOut(ui.centreX('  b  j  n      1  2  3                                              '),
     11, 'cyan', '  b  j  n      1  2  3                                              ');
   TextOut(ui.centreX('  vi-keys      numpad                                               '),
