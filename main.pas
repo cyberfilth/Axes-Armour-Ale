@@ -19,7 +19,7 @@ uses
 type
   gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
     stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave,
-    stCharSelect, stCharIntro, stDialogBox, stWinAlpha);
+    stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stWinAlpha);
 
 var
   (* State machine for game menus / controls *)
@@ -336,6 +336,8 @@ begin
       stDialogLevel: LevelUpInput(Keypress);
       { ---------------------------------    In the Dialog pop-up }
       stDialogBox: dialogBoxInput(Keypress);
+      { ---------------------------------    In the Help screen }
+      stHelpScreen: helpScreenInput(Keypress);
       { ---------------------------------    Gameplay controls }
       stGame: gameInput(Keypress);
       { ---------------------------------    Confirm overwrite game }

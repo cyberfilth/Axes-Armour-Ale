@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="52">
+    <Units Count="53">
       <Unit0>
         <Filename Value="ascii_axe.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -337,6 +337,11 @@
         <Filename Value="entities\animals\small_hyena.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit51>
+      <Unit52>
+        <Filename Value="screens\scrhelpmaingame.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="scrHelpMainGame"/>
+      </Unit52>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -7,7 +7,7 @@ unit KeyboardInput;
 interface
 
 uses
-  Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro;
+  Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelpMainGame;
 
 (* Initialise keyboard unit *)
 procedure setupKeyboard;
@@ -41,6 +41,8 @@ procedure gameInput(Keypress: TKeyEvent);
 procedure LoseSaveInput(Keypress: TKeyEvent);
 (* Input in the DIALOG state *)
 procedure dialogBoxInput(Keypress: TKeyEvent);
+(* Input in the HELP SCREEN state *)
+procedure helpScreenInput(Keypress: TKeyEvent);
 (* Input in WIN ALPHA state *)
 procedure WinAlphaInput(Keypress: TKeyEvent);
 
@@ -456,6 +458,11 @@ begin
       player.pickUp;
       main.gameLoop;
     end;
+    '?': { Help screen }
+    begin
+      main.gameState := stHelpScreen;
+      scrHelpMainGame.displayHelpScreen;
+    end;
     #27: { Escape key - Quit }
     begin
       gameState := stQuitMenu;
@@ -489,6 +496,19 @@ begin
       main.gameState := stGame;
       { Redraw the map }
       ui.clearPopup;
+    end;
+  end;
+end;
+
+procedure helpScreenInput(Keypress: TKeyEvent);
+begin
+   case GetKeyEventChar(Keypress) of
+    'x', 'X': { Exit dialog box }
+    begin
+      { Clear the box }
+      main.gameState := stGame;
+      { Redraw the map }
+      main.returnToGameScreen;
     end;
   end;
 end;
