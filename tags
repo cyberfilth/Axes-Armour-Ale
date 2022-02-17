@@ -201,10 +201,12 @@ displayDwarf	screens/backup/scrcharselect.pas	/^procedure displayDwarf;$/;"	p
 displayDwarf	screens/scrcharselect.pas	/^procedure displayDwarf;$/;"	p
 displayElf	screens/backup/scrcharselect.pas	/^procedure displayElf;$/;"	p
 displayElf	screens/scrcharselect.pas	/^procedure displayElf;$/;"	p
+displayGameHelpScreen	screens/backup/scrhelp.pas	/^procedure displayGameHelpScreen;$/;"	p
 displayGameScreen	screens/backup/scrgame.pas	/^procedure displayGameScreen;$/;"	p
 displayGameScreen	screens/scrgame.pas	/^procedure displayGameScreen;$/;"	p
+displayHelpScreen	screens/backup/scrhelp.pas	/^procedure displayHelpScreen;$/;"	p
 displayHelpScreen	screens/backup/scrhelpmaingame.pas	/^procedure displayHelpScreen;$/;"	p
-displayHelpScreen	screens/scrhelpmaingame.pas	/^procedure displayHelpScreen;$/;"	p
+displayHelpScreen	screens/scrhelp.pas	/^procedure displayHelpScreen;$/;"	p
 displayHuman	screens/backup/scrcharselect.pas	/^procedure displayHuman;$/;"	p
 displayHuman	screens/scrcharselect.pas	/^procedure displayHuman;$/;"	p
 displayIntroScreen	screens/backup/scrintro.pas	/^procedure displayIntroScreen;$/;"	p
@@ -231,7 +233,10 @@ drawItemsOnMap	backup/items.pas	/^procedure drawItemsOnMap(id: byte);$/;"	p
 drawItemsOnMap	items.pas	/^procedure drawItemsOnMap(id: byte);$/;"	p
 drawLine	vision/fov.pas	/^procedure drawLine(x1, y1, x2, y2: smallint; hiDef: byte);$/;"	p
 drawMap	camera.pas	/^procedure drawMap;$/;"	p
+drawOutline	screens/backup/scrhelp.pas	/^procedure drawOutline;$/;"	p
+drawOutline	screens/backup/scrhelpmaingame.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/backup/scrinventory.pas	/^procedure drawOutline;$/;"	p
+drawOutline	screens/scrhelp.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/scrinventory.pas	/^procedure drawOutline;$/;"	p
 drawPlayer	camera.pas	/^procedure drawPlayer;$/;"	p
 drawSidepanel	screens/backup/scrgame.pas	/^procedure drawSidepanel;$/;"	p
@@ -322,6 +327,7 @@ getTrollDate	plot_gen.pas	/^procedure getTrollDate;$/;"	p
 getX	camera.pas	/^function getX(Xcoord: smallint): smallint;$/;"	f
 getY	camera.pas	/^function getY(Ycoord: smallint): smallint;$/;"	f
 hasPlayer	map.pas	/^function hasPlayer(checkX, checkY: smallint): boolean;$/;"	f
+helpScreenInput	backup/keyboardinput.pas	/^procedure helpScreenInput(Keypress: TKeyEvent);$/;"	p
 helpScreenInput	keyboardinput.pas	/^procedure helpScreenInput(Keypress: TKeyEvent);$/;"	p
 humanText	screens/backup/scrcharintro.pas	/^procedure humanText;$/;"	p
 humanText	screens/scrcharintro.pas	/^procedure humanText;$/;"	p
@@ -390,6 +396,10 @@ loadEquippedItems	player/player_inventory.pas	/^procedure loadEquippedItems;$/;"
 loadGame	backup/file_handling.pas	/^procedure loadGame;$/;"	p
 loadGame	file_handling.pas	/^procedure loadGame;$/;"	p
 logAction	logging.pas	/^procedure logAction(textString: string);$/;"	p
+look	screens/backup/scrtargeting.pas	/^procedure look(dir: word);$/;"	p
+look	screens/scrtargeting.pas	/^procedure look(dir: word);$/;"	p
+lookInput	backup/keyboardinput.pas	/^procedure lookInput(Keypress: TKeyEvent);$/;"	p
+lookInput	keyboardinput.pas	/^procedure lookInput(Keypress: TKeyEvent);$/;"	p
 lookupUse	items/backup/item_lookup.pas	/^procedure lookupUse(x: smallint; equipped: boolean);$/;"	p
 lookupUse	items/item_lookup.pas	/^procedure lookupUse(x: smallint; equipped: boolean);$/;"	p
 loop	backup/main.pas	/^procedure loop;$/;"	p
@@ -442,6 +452,8 @@ regenMagick	player/player.pas	/^procedure regenMagick;$/;"	p
 removeFromInventory	player/backup/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f
 removeFromInventory	player/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f
 restoreMessages	ui.pas	/^procedure restoreMessages;$/;"	p
+restorePlayerGlyph	screens/backup/scrtargeting.pas	/^procedure restorePlayerGlyph;$/;"	p
+restorePlayerGlyph	screens/scrtargeting.pas	/^procedure restorePlayerGlyph;$/;"	p
 returnToGameScreen	backup/main.pas	/^procedure returnToGameScreen;$/;"	p
 returnToGameScreen	main.pas	/^procedure returnToGameScreen;$/;"	p
 rightHasFloor	dungeons/backup/cave.pas	/^function rightHasFloor(): boolean;$/;"	f

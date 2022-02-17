@@ -43,8 +43,7 @@ begin
       (* Paint over previous rock *)
       if (i > 2) then
       begin
-        map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].GlyphColour :=
-          'lightGrey';
+        map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].GlyphColour := 'lightGrey';
         map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].Glyph := '.';
       end;
       (* Draw rock *)
@@ -54,8 +53,7 @@ begin
     end;
     (* Repaint map *)
     camera.drawMap;
-    fov.fieldOfView(entityList[0].posX, entityList[0].posY,
-      entityList[0].visionRange, 1);
+    fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
 
     UnlockScreenUpdate;
     UpdateScreen(False);
@@ -105,10 +103,8 @@ begin
     (* Loop through array and draw each NPC *)
     for i := Low(getEm) to High(getEm) do
     begin
-      map.mapDisplay[entityList[getEm[i]].posY,
-        entityList[getEm[i]].posX].GlyphColour := boom;
-      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].Glyph :=
-        entityList[getEm[i]].glyph;
+      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].GlyphColour := boom;
+      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].Glyph := entityList[getEm[i]].glyph;
     end;
 
     (* Repaint map *)

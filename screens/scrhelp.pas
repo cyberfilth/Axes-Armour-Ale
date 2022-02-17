@@ -1,6 +1,6 @@
 (* Help screen - accessed from main game screen *)
 
-unit scrHelpMainGame;
+unit scrHelp;
 
 {$mode fpc}{$H+}
 
@@ -9,19 +9,39 @@ interface
 uses
   ui, video, globalUtils;
 
+(* Draw a box around the title *)
+procedure drawOutline;
+(* Display controls and keyboard shortcuts *)
 procedure displayHelpScreen;
 
 
 implementation
 
+procedure drawOutline;
+begin
+  TextOut(10, 1, 'cyan', chr(218));
+  for x := 11 to 69 do
+    TextOut(x, 1, 'cyan', chr(196));
+  TextOut(70, 1, 'cyan', chr(191));
+  TextOut(10, 2, 'cyan', chr(180));
+  TextOut(70, 2, 'cyan', chr(195));
+  TextOut(10, 3, 'cyan', chr(192));
+  for x := 11 to 69 do
+    TextOut(x, 3, 'cyan', chr(196));
+  TextOut(70, 3, 'cyan', chr(217));
+end;
+
 procedure displayHelpScreen;
 var
   header, footer: string;
 begin
-  header := 'Axes, Armour & Ale :: Commands';
+  header := 'Help ' + chr(240) + ' commands and controls';
   footer := '[x] to exit this screen';
   LockScreenUpdate;
   screenBlank;
+  (* Draw box around the title *)
+  drawOutline;
+
   TextOut(ui.centreX(header), 2, 'cyan', header);
   (* This was intended to centre text on screen, no matter the terminal size.
      It doesn't seem to work as intended though *)

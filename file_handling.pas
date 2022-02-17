@@ -245,7 +245,7 @@ begin
 
            { Convert extended ASCII to plain text }
           if (entities.entityList[i].glyph = chr(1)) then
-            AddElement(DataNode, 'glyph', 'h')
+            AddElement(DataNode, 'glyph', '=') { Hob }
           else
             AddElement(DataNode, 'glyph', entities.entityList[i].glyph);
 
@@ -397,7 +397,7 @@ begin
         entities.entityList[i].description := UTF8Encode(NPCnode.FindNode('description').TextContent);
 
         { Convert plain text to extended ASCII }
-        if (NPCnode.FindNode('glyph').TextContent[1] = 'h') then
+        if (NPCnode.FindNode('glyph').TextContent[1] = '=') then
           entities.entityList[i].glyph := chr(1)
         else
           entities.entityList[i].glyph := UTF8Encode(char(widechar(NPCnode.FindNode('glyph').TextContent[1])));

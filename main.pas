@@ -11,7 +11,7 @@ interface
 
 uses
   SysUtils, Video, keyboard, KeyboardInput, ui, camera, map, scrGame, globalUtils,
-  universe, fov, scrRIP, plot_gen, file_handling, smell, scrTitle, scrWinAlpha,
+  universe, fov, scrRIP, plot_gen, file_handling, smell, scrTitle, scrTargeting, scrWinAlpha,
   dlgInfo
   {$IFDEF DEBUG}, logging{$ENDIF};
 
@@ -19,7 +19,7 @@ uses
 type
   gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
     stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave,
-    stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stWinAlpha);
+    stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha);
 
 var
   (* State machine for game menus / controls *)
@@ -206,6 +206,8 @@ begin
   player_stats.playerLevel := 1;
   player_stats.enchantedWeaponEquipped := False;
   player_stats.enchWeapType := 0;
+  scrTargeting.targetX := 0;
+  scrTargeting.targetY := 0;
   (* Spawn game entities *)
   universe.spawnDenizens;
   (* Initialise items list *)
@@ -340,6 +342,8 @@ begin
       stHelpScreen: helpScreenInput(Keypress);
       { ---------------------------------    Gameplay controls }
       stGame: gameInput(Keypress);
+      { ---------------------------------    using Look command }
+      stLook: lookInput(Keypress);
       { ---------------------------------    Confirm overwrite game }
       stLoseSave: LoseSaveInput(Keypress);
       { ---------------------------------    Winning Alpha version of game }

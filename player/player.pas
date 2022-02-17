@@ -131,8 +131,7 @@ begin
   (* Unoccupy tile *)
   map.unoccupy(entityList[0].posX, entityList[0].posY);
   (* Repaint visited tiles *)
-  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
-    entities.entityList[0].visionRange, 0);
+  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 0);
   originalX := entities.entityList[0].posX;
   originalY := entities.entityList[0].posY;
   case dir of
@@ -162,11 +161,9 @@ begin
     end;
   end;
   (* check if tile is occupied *)
-  if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) =
-    True) then
+  if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
     (* check if tile is occupied by hostile NPC *)
-    if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) =
-      True) then
+    if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
     begin
       entities.entityList[0].posX := originalX;
       entities.entityList[0].posY := originalY;
@@ -184,8 +181,7 @@ begin
   end;
   (* Occupy tile *)
   map.occupy(entityList[0].posX, entityList[0].posY);
-  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
-    entities.entityList[0].visionRange, 1);
+  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY, entities.entityList[0].visionRange, 1);
   ui.writeBufferedMessages;
 
   (* Regenerate Magick *)

@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="53">
+    <Units Count="55">
       <Unit0>
         <Filename Value="ascii_axe.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -342,6 +342,16 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="scrHelpMainGame"/>
       </Unit52>
+      <Unit53>
+        <Filename Value="screens\scrhelp.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="scrHelp"/>
+      </Unit53>
+      <Unit54>
+        <Filename Value="screens\scrtargeting.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="scrTargeting"/>
+      </Unit54>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -7,7 +7,7 @@ unit KeyboardInput;
 interface
 
 uses
-  Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelpMainGame;
+  Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelp, scrTargeting;
 
 (* Initialise keyboard unit *)
 procedure setupKeyboard;
@@ -43,13 +43,15 @@ procedure LoseSaveInput(Keypress: TKeyEvent);
 procedure dialogBoxInput(Keypress: TKeyEvent);
 (* Input in the HELP SCREEN state *)
 procedure helpScreenInput(Keypress: TKeyEvent);
+(* Input in the LOOK state *)
+procedure lookInput(Keypress: TKeyEvent);
 (* Input in WIN ALPHA state *)
 procedure WinAlphaInput(Keypress: TKeyEvent);
 
 implementation
 
 uses
-  main, ui, player, player_inventory, player_stats;
+  main, ui, player, player_inventory, player_stats, entities;
 
 procedure setupKeyboard;
 begin
@@ -458,10 +460,17 @@ begin
       player.pickUp;
       main.gameLoop;
     end;
+    ';': { Look command }
+    begin
+      gameState := stLook;
+      scrTargeting.targetX := entityList[0].posX;
+      scrTargeting.targetY := entityList[0].posY;
+      scrTargeting.look(0);
+    end;
     '?': { Help screen }
     begin
       main.gameState := stHelpScreen;
-      scrHelpMainGame.displayHelpScreen;
+      scrHelp.displayHelpScreen;
     end;
     #27: { Escape key - Quit }
     begin
@@ -502,13 +511,33 @@ end;
 
 procedure helpScreenInput(Keypress: TKeyEvent);
 begin
-   case GetKeyEventChar(Keypress) of
+  case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit dialog box }
     begin
       { Clear the box }
       main.gameState := stGame;
       { Redraw the map }
       main.returnToGameScreen;
+    end;
+  end;
+end;
+
+procedure lookInput(Keypress: TKeyEvent);
+begin
+  case GetKeyEventCode(Keypress) of
+    { Arrow keys }
+    kbdLeft: scrTargeting.look(2);
+    kbdRight: scrTargeting.look(4);
+    kbdUp: scrTargeting.look(1);
+    KbdDown: scrTargeting.look(3);
+  end;
+
+  case GetKeyEventChar(Keypress) of
+    'x', 'X': { Exit Look input }
+    begin
+      main.gameState := stGame;
+      scrTargeting.restorePlayerGlyph;
+      ui.clearPopup;
     end;
   end;
 end;
