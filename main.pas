@@ -208,6 +208,8 @@ begin
   player_stats.enchWeapType := 0;
   scrTargeting.targetX := 0;
   scrTargeting.targetY := 0;
+  scrTargeting.safeX := 0;
+  scrTargeting.safeY := 0;
   (* Spawn game entities *)
   universe.spawnDenizens;
   (* Initialise items list *)
