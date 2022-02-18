@@ -309,6 +309,7 @@ generateDwarfName	plot_gen.pas	/^procedure generateDwarfName;$/;"	p
 generateElfName	plot_gen.pas	/^procedure generateElfName;$/;"	p
 generateHumanName	plot_gen.pas	/^procedure generateHumanName;$/;"	p
 generateTitle	plot_gen.pas	/^procedure generateTitle;$/;"	p
+getCreatureDescription	entities.pas	/^function getCreatureDescription(x, y: smallint): shortstring;$/;"	f
 getCreatureHP	backup/entities.pas	/^function getCreatureHP(x, y: smallint): smallint;$/;"	f
 getCreatureHP	entities.pas	/^function getCreatureHP(x, y: smallint): smallint;$/;"	f
 getCreatureID	backup/entities.pas	/^function getCreatureID(x, y: smallint): smallint;$/;"	f
@@ -423,6 +424,8 @@ obtainMap	items/macguffins/smugglersmap.pas	/^procedure obtainMap;$/;"	p
 occupy	map.pas	/^procedure occupy(x, y: smallint);$/;"	p
 occupyUpdate	backup/entities.pas	/^procedure occupyUpdate;$/;"	p
 occupyUpdate	entities.pas	/^procedure occupyUpdate;$/;"	p
+paintOverMsg	screens/backup/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
+paintOverMsg	screens/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
 pickUp	player/backup/player.pas	/^procedure pickUp;$/;"	p
 pickUp	player/player.pas	/^procedure pickUp;$/;"	p
 processStatus	player/backup/player.pas	/^procedure processStatus;$/;"	p

@@ -87,6 +87,8 @@ function getCreatureMaxHP(x, y: smallint): smallint;
 function getCreatureID(x, y: smallint): smallint;
 (* Get creature name at coordinates *)
 function getCreatureName(x, y: smallint): shortstring;
+(* Get creature description *)
+function getCreatureDescription(x, y: smallint): shortstring;
 (* Check if creature is visible at coordinates *)
 function isCreatureVisible(x, y: smallint): boolean;
 (* Ensure all NPC's are correctly occupying tiles *)
@@ -200,7 +202,6 @@ begin
 end;
 
 function getCreatureName(x, y: smallint): shortstring;
-
 var
   i: smallint;
 begin
@@ -209,6 +210,18 @@ begin
   begin
     if (entityList[i].posX = x) and (entityList[i].posY = y) then
       Result := entityList[i].race;
+  end;
+end;
+
+function getCreatureDescription(x, y: smallint): shortstring;
+var
+  i: smallint;
+begin
+  Result := '';
+  for i := 0 to npcAmount do
+  begin
+    if (entityList[i].posX = x) and (entityList[i].posY = y) then
+      Result := entityList[i].description;
   end;
 end;
 
