@@ -57,5 +57,6 @@ bin/*
 # Save game files
 axesData/
 
-# Notes and logs
+# Notes, scripts and logs
 *.txt
+findInFiles.sh
