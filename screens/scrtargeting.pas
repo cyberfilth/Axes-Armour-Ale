@@ -26,7 +26,7 @@ implementation
 procedure look(dir: word);
 var
   i: byte;
-  healthMsg: shortstring;
+  healthMsg, playerName: shortstring;
 begin
   LockScreenUpdate;
   (* Clear the message log *)
@@ -49,6 +49,30 @@ begin
       3: Inc(targetY);
       { E }
       4: Inc(targetX);
+      {NE}
+      5:
+      begin
+        Inc(targetX);
+        Dec(targetY);
+      end;
+      { SE }
+      6:
+      begin
+        Inc(targetX);
+        Inc(targetY);
+      end;
+      { SW }
+      7:
+      begin
+        Dec(targetX);
+        Inc(targetY);
+      end;
+      { NW }
+      8:
+      begin
+        Dec(targetX);
+        Dec(targetY);
+      end;
     end;
     if (map.withinBounds(targetX, targetY) = False) or
       (map.maparea[targetY, targetX].Visible = False) then
@@ -74,7 +98,8 @@ begin
       begin
         healthMsg := 'Health: ' + IntToStr(entities.getCreatureHP(targetX, targetY)) +
           '/' + IntToStr(entities.getCreatureMaxHP(targetX, targetY));
-        TextOut(centreX(entityList[0].race), 21, 'white', entityList[0].race);
+        playerName := entityList[0].race + ' the ' + entityList[0].description;
+        TextOut(centreX(playerName), 21, 'white', playerName);
         TextOut(centreX(healthMsg), 22, 'white', healthMsg);
       end
       else
@@ -86,18 +111,29 @@ begin
           21, 'white', entities.getCreatureDescription(targetX, targetY));
         TextOut(centreX(healthMsg), 22, 'white', healthMsg);
       end;
-    end;
-
+    end
     (* else to see if an item is under the cursor *)
-
+    else if (items.containsItem(targetX, targetY) = True) then
+    begin
+      TextOut(centreX(getItemName(targetX, targetY)), 21, 'white',
+        getItemName(targetX, targetY));
+      TextOut(centreX(getItemDescription(targetX, targetY)), 22,
+        'white', getItemDescription(targetX, targetY));
+    end
     (* else describe the terrain *)
+    else if (map.maparea[targetY, targetX].Glyph = '.') then
+      TextOut(centreX('floor'), 21, 'lightGrey', 'floor')
+    else if (map.maparea[targetY, targetX].Glyph = '*') then
+      TextOut(centreX('floor'), 21, 'lightGrey', 'cave wall')
+    else if (map.maparea[targetY, targetX].Glyph = '<') then
+      TextOut(centreX('floor'), 21, 'lightGrey', 'stairs leading up')
+    else if (map.maparea[targetY, targetX].Glyph = '>') then
+      TextOut(centreX('floor'), 21, 'lightGrey', 'stairs leading down');
   end;
-
 
   (* Repaint map *)
   camera.drawMap;
   fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
-
   UnlockScreenUpdate;
   UpdateScreen(False);
   (* Store the coordinates, so the cursor doesn't get lost off screen *)

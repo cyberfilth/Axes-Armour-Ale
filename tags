@@ -201,7 +201,6 @@ displayDwarf	screens/backup/scrcharselect.pas	/^procedure displayDwarf;$/;"	p
 displayDwarf	screens/scrcharselect.pas	/^procedure displayDwarf;$/;"	p
 displayElf	screens/backup/scrcharselect.pas	/^procedure displayElf;$/;"	p
 displayElf	screens/scrcharselect.pas	/^procedure displayElf;$/;"	p
-displayGameHelpScreen	screens/backup/scrhelp.pas	/^procedure displayGameHelpScreen;$/;"	p
 displayGameScreen	screens/backup/scrgame.pas	/^procedure displayGameScreen;$/;"	p
 displayGameScreen	screens/scrgame.pas	/^procedure displayGameScreen;$/;"	p
 displayHelpScreen	screens/backup/scrhelp.pas	/^procedure displayHelpScreen;$/;"	p

@@ -531,7 +531,17 @@ begin
     kbdUp: scrTargeting.look(1);
     KbdDown: scrTargeting.look(3);
   end;
-
+  { Numpad and VI keys }
+  case GetKeyEventChar(Keypress) of
+    '8', 'k', 'K': scrTargeting.look(1);
+    '9', 'u', 'U': scrTargeting.look(5);
+    '6', 'l', 'L': scrTargeting.look(4);
+    '3', 'n', 'N': scrTargeting.look(6);
+    '2', 'j', 'J': scrTargeting.look(3);
+    '1', 'b', 'B': scrTargeting.look(7);
+    '4', 'h', 'H': scrTargeting.look(2);
+    '7', 'y', 'Y': scrTargeting.look(8);
+  end;
   case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit Look input }
     begin
