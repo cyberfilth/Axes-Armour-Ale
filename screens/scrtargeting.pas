@@ -156,6 +156,21 @@ begin
   LockScreenUpdate;
   (* Clear the message log *)
   paintOverMsg;
+  (* Check inventory for an item to throw *)
+
+  (* Check the ground under the player for an item to throw *)
+
+  (* Get a list of all entities in view *)
+
+  (* If there are no entities in view, exit *)
+
+  (* Display list of items for player to select *)
+
+  (* Cycle through entities with Left and Right *)
+
+
+
+
   (* Display hint text *)
   TextOut(centreX('[x] to exit the Look screen'), 24, 'lightGrey',
     '[x] to exit the Target screen');
