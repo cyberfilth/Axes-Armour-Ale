@@ -213,6 +213,18 @@ begin
     if (items.isItemWeapon(entityList[0].posX, entityList[0].posY) = True) then
       groundThrow := True;
   end;
+
+  (* Check to see if player has anything to throw *)
+  if (invThrow = False) and (groundThrow = False) then
+  begin
+    ui.displayMessage('You have nothing to throw');
+    restorePlayerGlyph;
+    UnlockScreenUpdate;
+    UpdateScreen(False);
+    main.gameState := stGame;
+    exit;
+  end;
+
   (* Get a list of all entities in view *)
   for i := 1 to entities.npcAmount do
   begin
@@ -230,6 +242,7 @@ begin
   if (anyTargetHit = False) then
   begin
     ui.displayMessage('There are no enemies in sight');
+    restorePlayerGlyph;
     UnlockScreenUpdate;
     UpdateScreen(False);
     main.gameState := stGame;
