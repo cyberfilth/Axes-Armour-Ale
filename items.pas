@@ -14,7 +14,7 @@ type
 
 type
   tMaterial = (matSteel, matIron, matWood, matLeather, matWool, matPaper, matAlcohol,
-              matStone, matEmpty);
+    matStone, matEmpty);
 
 (* Store information about items *)
 type
@@ -59,6 +59,8 @@ function containsItem(x, y: smallint): boolean;
 function getItemName(x, y: smallint): shortstring;
 (* Get description of item at coordinates *)
 function getItemDescription(x, y: smallint): shortstring;
+(* Is item on floor a weapon *)
+function isItemWeapon(x, y: smallint): boolean;
 (* Count non-empty items in array *)
 function countNonEmptyItems: byte;
 (* Redraw all items *)
@@ -127,6 +129,22 @@ begin
   end;
 end;
 
+function isItemWeapon(x, y: smallint): boolean;
+var
+  i: smallint;
+begin
+  Result := False;
+  for i := 1 to itemAmount do
+  begin
+    if (itemList[i].posX = x) and (itemList[i].posY = y) then
+    begin
+      if (itemList[i].itemType = itmWeapon) then
+        Result := True;
+      exit;
+    end;
+  end;
+end;
+
 function countNonEmptyItems: byte;
 var
   i, Count: byte;
@@ -154,7 +172,8 @@ begin
         (* Display a message if this is the first time seeing this item *)
         if (items.itemList[i].discovered = False) then
         begin
-          ui.displayMessage('You see ' + items.itemList[i].itemArticle + ' ' + items.itemList[i].itemName);
+          ui.displayMessage('You see ' + items.itemList[i].itemArticle +
+            ' ' + items.itemList[i].itemName);
           items.itemList[i].discovered := True;
         end;
       end

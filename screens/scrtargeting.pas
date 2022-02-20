@@ -10,6 +10,16 @@ interface
 uses
   SysUtils, Classes, map, entities, video, ui, camera, fov, items, scrGame;
 
+type
+  (* Weapons *)
+  Equipment = record
+    id: smallint;
+    Name, glyph, glyphColour: shortstring;
+  end;
+
+type
+  TSmallintArray = array of smallint;
+
 var
   (* Target coordinates *)
   targetX, targetY: smallint;
@@ -30,6 +40,9 @@ procedure restorePlayerGlyph;
 procedure paintOverMsg;
 
 implementation
+
+uses
+  player_inventory, main;
 
 procedure look(dir: word);
 var
@@ -151,29 +164,86 @@ end;
 
 procedure target(dir: word; Xcolour: shortstring);
 var
-  i: byte;
+  i, b: byte;
+  (* Is there anything in the inventory to throw *)
+  invThrow: boolean;
+  (* Is there anything on the ground to throw *)
+  groundThrow: boolean;
+  anyTargetHit: boolean;
+  (* Throwable items *)
+  inventoryWeapons: array[0..9] of Equipment;
+  (* Potential targets *)
+  targetList: TSmallintArray;
+  targetAmount: smallint;
 begin
   LockScreenUpdate;
   (* Clear the message log *)
   paintOverMsg;
+  (* Initialise variables *)
+  invThrow := False;
+  groundThrow := False;
+  anyTargetHit := False;
+  i := 0;
+  b := 0;
+  (*  Set array to 0 *)
+  SetLength(targetList, 0);
+  (* Initialise array *)
+  for b := 0 to 9 do
+  begin
+    inventoryWeapons[b].id := b;
+    inventoryWeapons[b].Name := 'Empty';
+    inventoryWeapons[b].glyph := 'x';
+    inventoryWeapons[b].glyphColour := 'x';
+  end;
   (* Check inventory for an item to throw *)
-
+  for b := 0 to 9 do
+  begin
+    if (inventory[b].itemType = itmWeapon) and (inventory[b].equipped = False) then
+    begin
+      inventoryWeapons[b].id := inventory[b].id;
+      inventoryWeapons[b].Name := inventory[b].Name;
+      inventoryWeapons[b].glyph := inventory[b].glyph;
+      inventoryWeapons[b].glyphColour := inventory[b].glyphColour;
+      invThrow := True;
+    end;
+  end;
   (* Check the ground under the player for an item to throw *)
-
+  if (items.containsItem(entityList[0].posX, entityList[0].posY) = True) then
+  begin
+    if (items.isItemWeapon(entityList[0].posX, entityList[0].posY) = True) then
+      groundThrow := True;
+  end;
   (* Get a list of all entities in view *)
-
+  for i := 1 to entities.npcAmount do
+  begin
+    (* First check an NPC is visible (and not dead) *)
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    begin
+      anyTargetHit := True;
+      (* Add NPC to list of targets *)
+      SetLength(targetList, targetAmount);
+      targetList[targetAmount - 1] := i;
+      Inc(targetAmount);
+    end;
+  end;
   (* If there are no entities in view, exit *)
-
+  if (anyTargetHit = False) then
+  begin
+    ui.displayMessage('There are no enemies in sight');
+    UnlockScreenUpdate;
+    UpdateScreen(False);
+    main.gameState := stGame;
+    exit;
+  end;
   (* Display list of items for player to select *)
 
   (* Cycle through entities with Left and Right *)
 
 
-
-
   (* Display hint text *)
   TextOut(centreX('[x] to exit the Look screen'), 24, 'lightGrey',
     '[x] to exit the Target screen');
+
   (* Turn player glyph to an + *)
   entityList[0].glyph := '+';
   entityList[0].glyphColour := Xcolour;
