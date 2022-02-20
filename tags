@@ -286,6 +286,8 @@ fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
 fireMissile	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure fireMissile(id: smallint);$/;"	p
 fireMissile	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure fireMissile(id: smallint);$/;"	p
 fireMissile	entities/hobs/redcap_lesser_lobber.pas	/^procedure fireMissile(id: smallint);$/;"	p
+firingLine	screens/backup/scrtargeting.pas	/^procedure firingLine(Xcol: shortstring; x1, y1, x2, y2: smallint);$/;"	p
+firingLine	screens/scrtargeting.pas	/^procedure firingLine(Xcol: shortstring; x1, y1, x2, y2: smallint);$/;"	p
 firingLine	vision/backup/los.pas	/^procedure firingLine(id, x1, y1, x2, y2: smallint);$/;"	p
 firingLine	vision/los.pas	/^procedure firingLine(id, x1, y1, x2, y2: smallint);$/;"	p
 followScent	entities/hobs/backup/redcap_lesser.pas	/^procedure followScent(id: smallint);$/;"	p
@@ -516,6 +518,10 @@ takeTurn	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure takeTurn(id: 
 takeTurn	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
+target	screens/backup/scrtargeting.pas	/^procedure target(dir: word; Xcolour: shortstring);$/;"	p
+target	screens/scrtargeting.pas	/^procedure target(dir: word; Xcolour: shortstring);$/;"	p
+targetInput	backup/keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
+targetInput	keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
 throwRock	animation.pas	/^procedure throwRock(id: smallint; var flightPath: a);$/;"	p
 throwRock	backup/animation.pas	/^procedure throwRock(id: smallint; var flightPath: a);$/;"	p
 titleInput	backup/keyboardinput.pas	/^procedure titleInput(Keypress: TKeyEvent);$/;"	p

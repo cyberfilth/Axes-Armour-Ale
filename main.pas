@@ -18,7 +18,7 @@ uses
 (* Finite State Machine game states *)
 type
   gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
-    stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave,
+    stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget,
     stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha);
 
 var
@@ -346,6 +346,8 @@ begin
       stGame: gameInput(Keypress);
       { ---------------------------------    using Look command }
       stLook: lookInput(Keypress);
+      { ---------------------------------    Targeting screen  }
+      stTarget: targetInput(Keypress);
       { ---------------------------------    Confirm overwrite game }
       stLoseSave: LoseSaveInput(Keypress);
       { ---------------------------------    Winning Alpha version of game }

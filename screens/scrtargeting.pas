@@ -8,7 +8,7 @@ unit scrTargeting;
 interface
 
 uses
-  SysUtils, map, entities, video, ui, camera, fov, items, scrGame;
+  SysUtils, Classes, map, entities, video, ui, camera, fov, items, scrGame;
 
 var
   (* Target coordinates *)
@@ -16,7 +16,13 @@ var
   (* The last safe coordinates *)
   safeX, safeY: smallint;
 
+(* Look around the map *)
 procedure look(dir: word);
+(* Target something on the map, reusable for missiles & spells *)
+procedure target(dir: word; Xcolour: shortstring);
+(* Draws a Bresenham line between the player and the target *)
+procedure firingLine(Xcol: shortstring; x1, y1, x2, y2: smallint);
+(* Repaint the player when exiting look/target screen *)
 procedure restorePlayerGlyph;
 (* Paint over the message log *)
 procedure paintOverMsg;
@@ -139,6 +145,154 @@ begin
   (* Store the coordinates, so the cursor doesn't get lost off screen *)
   safeX := targetX;
   safeY := targetY;
+end;
+
+procedure target(dir: word; Xcolour: shortstring);
+var
+  i: byte;
+begin
+  LockScreenUpdate;
+  (* Clear the message log *)
+  paintOverMsg;
+  (* Display hint text *)
+  TextOut(centreX('[x] to exit the Look screen'), 24, 'lightGrey',
+    '[x] to exit the Target screen');
+  (* Turn player glyph to an + *)
+  entityList[0].glyph := '+';
+  entityList[0].glyphColour := Xcolour;
+
+  if (dir <> 0) then
+  begin
+    case dir of
+      { N }
+      1: Dec(targetY);
+      { W }
+      2: Dec(targetX);
+      { S }
+      3: Inc(targetY);
+      { E }
+      4: Inc(targetX);
+      {NE}
+      5:
+      begin
+        Inc(targetX);
+        Dec(targetY);
+      end;
+      { SE }
+      6:
+      begin
+        Inc(targetX);
+        Inc(targetY);
+      end;
+      { SW }
+      7:
+      begin
+        Dec(targetX);
+        Inc(targetY);
+      end;
+      { NW }
+      8:
+      begin
+        Dec(targetX);
+        Dec(targetY);
+      end;
+    end;
+    if (map.withinBounds(targetX, targetY) = False) or
+      (map.maparea[targetY, targetX].Visible = False) then
+    begin
+      targetX := safeX;
+      targetY := safeY;
+    end;
+  end;
+  (* Redraw all NPC's *)
+  for i := 1 to entities.npcAmount do
+    entities.redrawMapDisplay(i);
+  (* Draw a cross on target *)
+  map.mapDisplay[targetY, targetX].GlyphColour := Xcolour;
+  map.mapDisplay[targetY, targetX].Glyph := '+';
+  (* Draw a bresenham line of circles between the 2 points *)
+  firingLine(Xcolour, entityList[0].posX, entityList[0].posY, targetX, targetY);
+
+  (* Repaint map *)
+  camera.drawMap;
+  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+  UnlockScreenUpdate;
+  UpdateScreen(False);
+  (* Store the coordinates, so the cursor doesn't get lost off screen *)
+  safeX := targetX;
+  safeY := targetY;
+end;
+
+procedure firingLine(Xcol: shortstring; x1, y1, x2, y2: smallint);
+var
+  i, deltax, deltay, numpixels, d, dinc1, dinc2, x, xinc1, xinc2, y,
+  yinc1, yinc2: smallint;
+begin
+  (* Calculate delta X and delta Y for initialisation *)
+  deltax := abs(x2 - x1);
+  deltay := abs(y2 - y1);
+  (* Initialise all vars based on which is the independent variable *)
+  if deltax >= deltay then
+  begin
+    (* x is independent variable *)
+    numpixels := deltax + 1;
+    d := (2 * deltay) - deltax;
+    dinc1 := deltay shl 1;
+    dinc2 := (deltay - deltax) shl 1;
+    xinc1 := 1;
+    xinc2 := 1;
+    yinc1 := 0;
+    yinc2 := 1;
+  end
+  else
+  begin
+    (* y is independent variable *)
+    numpixels := deltay + 1;
+    d := (2 * deltax) - deltay;
+    dinc1 := deltax shl 1;
+    dinc2 := (deltax - deltay) shl 1;
+    xinc1 := 0;
+    xinc2 := 1;
+    yinc1 := 1;
+    yinc2 := 1;
+  end;
+  (* Make sure x and y move in the right directions *)
+  if x1 > x2 then
+  begin
+    xinc1 := -xinc1;
+    xinc2 := -xinc2;
+  end;
+  if y1 > y2 then
+  begin
+    yinc1 := -yinc1;
+    yinc2 := -yinc2;
+  end;
+  (* Start drawing at *)
+  x := x1;
+  y := y1;
+  (* Draw the path *)
+  for i := 1 to numpixels do
+  begin
+    (* Check that we are not searching out of bounds of map *)
+    if (map.withinBounds(x, y) = True) then
+      (* draw here *)
+    begin
+      map.mapDisplay[y, x].GlyphColour := Xcol;
+      map.mapDisplay[y, x].Glyph := '+';
+    end;
+    if d < 0 then
+    begin
+      d := d + dinc1;
+      x := x + xinc1;
+      y := y + yinc1;
+    end
+    else
+    begin
+      d := d + dinc2;
+      x := x + xinc2;
+      y := y + yinc2;
+    end;
+  end;
 end;
 
 procedure restorePlayerGlyph;

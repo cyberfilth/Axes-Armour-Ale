@@ -45,6 +45,8 @@ procedure dialogBoxInput(Keypress: TKeyEvent);
 procedure helpScreenInput(Keypress: TKeyEvent);
 (* Input in the LOOK state *)
 procedure lookInput(Keypress: TKeyEvent);
+(* Input in the TARGET state *)
+procedure targetInput(Keypress: TKeyEvent);
 (* Input in WIN ALPHA state *)
 procedure WinAlphaInput(Keypress: TKeyEvent);
 
@@ -467,6 +469,13 @@ begin
       scrTargeting.targetY := entityList[0].posY;
       scrTargeting.look(0);
     end;
+    't', 'T': { Target / Throw command }
+    begin
+      gameState := stTarget;
+      scrTargeting.targetX := entityList[0].posX;
+      scrTargeting.targetY := entityList[0].posY;
+      scrTargeting.target(0, 'yellow');
+    end;
     '?': { Help screen }
     begin
       main.gameState := stHelpScreen;
@@ -541,6 +550,36 @@ begin
     '1', 'b', 'B': scrTargeting.look(7);
     '4', 'h', 'H': scrTargeting.look(2);
     '7', 'y', 'Y': scrTargeting.look(8);
+  end;
+  case GetKeyEventChar(Keypress) of
+    'x', 'X': { Exit Look input }
+    begin
+      main.gameState := stGame;
+      scrTargeting.restorePlayerGlyph;
+      ui.clearPopup;
+    end;
+  end;
+end;
+
+procedure targetInput(Keypress: TKeyEvent);
+begin
+  case GetKeyEventCode(Keypress) of
+    { Arrow keys }
+    kbdLeft: scrTargeting.target(2, 'yellow');
+    kbdRight: scrTargeting.target(4, 'yellow');
+    kbdUp: scrTargeting.target(1, 'yellow');
+    KbdDown: scrTargeting.target(3, 'yellow');
+  end;
+  { Numpad and VI keys }
+  case GetKeyEventChar(Keypress) of
+    '8', 'k', 'K': scrTargeting.target(1, 'yellow');
+    '9', 'u', 'U': scrTargeting.target(5, 'yellow');
+    '6', 'l', 'L': scrTargeting.target(4, 'yellow');
+    '3', 'n', 'N': scrTargeting.target(6, 'yellow');
+    '2', 'j', 'J': scrTargeting.target(3, 'yellow');
+    '1', 'b', 'B': scrTargeting.target(7, 'yellow');
+    '4', 'h', 'H': scrTargeting.target(2, 'yellow');
+    '7', 'y', 'Y': scrTargeting.target(8, 'yellow');
   end;
   case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit Look input }
