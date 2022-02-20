@@ -426,7 +426,9 @@ begin
   else if (message = 'a') then
     TextOut(6, 20, 'cyan', 'You must first remove the armour you already wear')
   else if (message = 'i') then
-    TextOut(6, 20, 'cyan', 'You are unable to use iron items');
+    TextOut(6, 20, 'cyan', 'You are unable to use iron items')
+   else if (message = 'r') then
+    TextOut(6, 20, 'cyan', 'You cannot equip a rock as a weapon');
   { Write those changes to the screen }
   UnlockScreenUpdate;
   { only redraws the parts that have been updated }
@@ -457,6 +459,13 @@ begin
         exit;
       end;
 
+      (* Check if the item is a rock, which cannot be equipped *)
+      if (inventory[selection].Name = 'rock') then
+      begin
+        wield('r');
+        exit;
+      end;
+
     (* If the item is an unequipped weapon, and the player already has a weapon
     equipped prompt the player to unequip their weapon first *)
       if (inventory[selection].equipped = False) and
@@ -464,7 +473,7 @@ begin
         (entityList[0].weaponEquipped = True) then
         msg := 'w'
 
-(* If the item is unworn armour, and the player is already wearing armour
+    (* If the item is unworn armour, and the player is already wearing armour
          prompt the player to unequip their armour first *)
       else if (inventory[selection].equipped = False) and
         (inventory[selection].itemType = itmArmour) and

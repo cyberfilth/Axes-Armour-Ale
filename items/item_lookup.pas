@@ -11,7 +11,7 @@ uses
   { List of drinks }
   ale_tankard, potion_curePoison,
   { List of weapons }
-  crude_dagger, basic_club,
+  crude_dagger, basic_club, rock,
   { List of armour }
   leather_armour1, cloth_armour1,
   { Quest items }
@@ -21,8 +21,8 @@ uses
 
 const
   (* Array of items found in a cave, ordered by cave level *)
-  caveItems1: array[1..4] of string =
-    ('aleTankard', 'clothArmour1', 'curePotion', 'basicClub');
+  caveItems1: array[1..5] of string =
+    ('aleTankard', 'clothArmour1', 'curePotion', 'basicClub', 'rock');
   caveItems2: array[1..4] of string =
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1');
   caveItems3: array[1..5] of string =
@@ -83,6 +83,7 @@ begin
   (* Create Item *)
   case thing of
     'aleTankard': ale_tankard.createAleTankard(i, c, r);
+    'rock': rock.createRock(i, c, r);
     'curePotion': potion_curePoison.createCurePotion(i, c, r);
     'crudeDagger': crude_dagger.createDagger(i, c, r);
     'leatherArmour1': leather_armour1.createLeatherArmour(i, c, r);
@@ -103,6 +104,7 @@ begin
     6: potion_curePoison.useItem;
     7: smugglersMap.obtainMap;
     8: staff_minor_scorch.useItem(equipped);
+    9: rock.useItem;
   end;
 end;
 
@@ -122,8 +124,7 @@ begin
   if (universe.currentDepth = 3) then
     smugglersMap.createSmugglersMap(itemAmount, c, r)
   else
-    //ale_tankard.createAleTankard(itemAmount, c, r);
-    staff_minor_scorch.createStaff(itemAmount, c, r);
+    rock.createRock(itemAmount, c, r);
 end;
 
 end.

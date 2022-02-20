@@ -138,6 +138,8 @@ createRedcap	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure createRed
 createRedcap	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
 createRedcap	entities/hobs/redcap_lesser.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
 createRedcap	entities/hobs/redcap_lesser_lobber.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
+createRock	items/backup/rock.pas	/^procedure createRock(uniqueid, itmx, itmy: smallint);$/;"	p
+createRock	items/rock.pas	/^procedure createRock(uniqueid, itmx, itmy: smallint);$/;"	p
 createSmallGreenFungus	entities/backup/small_green_fungus.pas	/^procedure createSmallGreenFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createSmallGreenFungus	entities/fungus/small_green_fungus.pas	/^procedure createSmallGreenFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createSmallHyena	entities/animals/backup/small_hyena.pas	/^procedure createSmallHyena(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -542,7 +544,9 @@ useItem	items/armour/cloth_armour1.pas	/^procedure useItem(equipped: boolean);$/
 useItem	items/armour/leather_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/backup/ale_tankard.pas	/^procedure useItem;$/;"	p
 useItem	items/backup/potion_curepoison.pas	/^procedure useItem;$/;"	p
+useItem	items/backup/rock.pas	/^procedure useItem;$/;"	p
 useItem	items/potion_curepoison.pas	/^procedure useItem;$/;"	p
+useItem	items/rock.pas	/^procedure useItem;$/;"	p
 useItem	items/weapons/backup/basic_club.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/backup/crude_dagger.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/backup/staff_minor_scorch.pas	/^procedure useItem(equipped: boolean);$/;"	p
