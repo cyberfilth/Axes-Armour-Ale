@@ -101,7 +101,6 @@ procedure firingLine(id, x1, y1, x2, y2: smallint);
 var
   i, deltax, deltay, numpixels, d, dinc1, dinc2, x, xinc1, xinc2, y,
   yinc1, yinc2: smallint;
-var
   (* Path of projectiles *)
   targetArray: array[1..10] of TPoint;
 begin

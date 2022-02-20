@@ -15,6 +15,8 @@ var
   targetX, targetY: smallint;
   (* The last safe coordinates *)
   safeX, safeY: smallint;
+  (* Path of projectiles *)
+  targetArray: array[1..30] of TPoint;
 
 (* Look around the map *)
 procedure look(dir: word);
@@ -228,6 +230,12 @@ var
   i, deltax, deltay, numpixels, d, dinc1, dinc2, x, xinc1, xinc2, y,
   yinc1, yinc2: smallint;
 begin
+  (* Initialise array *)
+  for i := 1 to 10 do
+  begin
+    targetArray[i].X := 0;
+    targetArray[i].Y := 0;
+  end;
   (* Calculate delta X and delta Y for initialisation *)
   deltax := abs(x2 - x1);
   deltay := abs(y2 - y1);
@@ -270,16 +278,19 @@ begin
   (* Start drawing at *)
   x := x1;
   y := y1;
-  (* Draw the path *)
   for i := 1 to numpixels do
   begin
     (* Check that we are not searching out of bounds of map *)
     if (map.withinBounds(x, y) = True) then
-      (* draw here *)
     begin
+      (* Add coordinates to the array *)
+      targetArray[i].X := x;
+      targetArray[i].Y := y;
+      (* Draw the path on the screen *)
       map.mapDisplay[y, x].GlyphColour := Xcol;
       map.mapDisplay[y, x].Glyph := '+';
     end;
+
     if d < 0 then
     begin
       d := d + dinc1;
