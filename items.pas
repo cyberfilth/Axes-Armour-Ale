@@ -13,8 +13,7 @@ type
   tItem = (itmDrink, itmWeapon, itmArmour, itmQuest, itmEmptySlot);
 
 type
-  tMaterial = (matSteel, matIron, matWood, matLeather, matWool, matPaper, matAlcohol,
-    matStone, matEmpty);
+  tMaterial = (matSteel, matIron, matWood, matLeather, matWool, matPaper, matAlcohol, matStone, matEmpty);
 
 (* Store information about items *)
 type
@@ -59,6 +58,14 @@ function containsItem(x, y: smallint): boolean;
 function getItemName(x, y: smallint): shortstring;
 (* Get description of item at coordinates *)
 function getItemDescription(x, y: smallint): shortstring;
+(* Get item ID at coordinates *)
+function getItemID(x, y: smallint): smallint;
+(* Get the item glyph at coordinates *)
+function getItemGlyph(x, y: smallint): shortstring;
+(* Get the glyph colour at coordinates *)
+function getItemColour(x, y: smallint): shortstring;
+
+// change the below to 'is throawable?'
 (* Is item on floor a weapon *)
 function isItemWeapon(x, y: smallint): boolean;
 (* Count non-empty items in array *)
@@ -126,6 +133,42 @@ begin
   begin
     if (itemList[i].posX = x) and (itemList[i].posY = y) then
       Result := itemList[i].itemDescription;
+  end;
+end;
+
+function getItemID(x, y: smallint): smallint;
+var
+  i: smallint;
+begin
+  Result := 0;
+  for i := 1 to itemAmount do
+  begin
+    if (itemList[i].posX = x) and (itemList[i].posY = y) then
+      Result := itemList[i].itemID;
+  end;
+end;
+
+function getItemGlyph(x, y: smallint): shortstring;
+var
+  i: smallint;
+begin
+  Result := '';
+  for i := 1 to itemAmount do
+  begin
+    if (itemList[i].posX = x) and (itemList[i].posY = y) then
+      Result := itemList[i].glyph;
+  end;
+end;
+
+function getItemColour(x, y: smallint): shortstring;
+var
+  i: smallint;
+begin
+  Result := '';
+  for i := 1 to itemAmount do
+  begin
+    if (itemList[i].posX = x) and (itemList[i].posY = y) then
+      Result := itemList[i].glyphColour;
   end;
 end;
 

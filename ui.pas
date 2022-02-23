@@ -90,6 +90,7 @@ begin
     'green': tint := video.Green;
     'lightGreen': tint := video.LightGreen;
     'greenBlink': tint := video.Green + video.Blink;
+    'pinkBlink': tint := video.LightRed + video.Blink;
     'cyan': tint := video.Cyan;
     'cyanBGblackTXT': tint := ($03 shl 4);
     'red': tint := video.Red;

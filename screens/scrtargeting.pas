@@ -2,7 +2,7 @@
 
 unit scrTargeting;
 
-{$mode fpc}{$H+}
+{$mode objfpc}{$H+}
 {$RANGECHECKS OFF}
 
 interface
@@ -14,6 +14,7 @@ type
   (* Weapons *)
   Equipment = record
     id: smallint;
+    mnuOption: char;
     Name, glyph, glyphColour: shortstring;
   end;
 
@@ -27,11 +28,20 @@ var
   safeX, safeY: smallint;
   (* Path of projectiles *)
   targetArray: array[1..30] of TPoint;
+  (* Throwable items *)
+  inventoryWeapons: array[0..9] of Equipment;
+  (* Potential targets *)
+  targetList: TSmallintArray;
+  targetAmount, weaponAmount: smallint;
 
 (* Look around the map *)
 procedure look(dir: word);
+(* Confirm there are NPC's and projectiles *)
+function canThrow(): boolean;
+
 (* Target something on the map, reusable for missiles & spells *)
 procedure target(dir: word; Xcolour: shortstring);
+
 (* Draws a Bresenham line between the player and the target *)
 procedure firingLine(Xcol: shortstring; x1, y1, x2, y2: smallint);
 (* Repaint the player when exiting look/target screen *)
@@ -162,29 +172,22 @@ begin
   safeY := targetY;
 end;
 
-procedure target(dir: word; Xcolour: shortstring);
+function canThrow(): boolean;
 var
-  i, b: byte;
-  (* Is there anything in the inventory to throw *)
-  invThrow: boolean;
-  (* Is there anything on the ground to throw *)
-  groundThrow: boolean;
-  anyTargetHit: boolean;
-  (* Throwable items *)
-  inventoryWeapons: array[0..9] of Equipment;
-  (* Potential targets *)
-  targetList: TSmallintArray;
-  targetAmount: smallint;
+   projectileAvailable, NPCinRange: boolean;
+   i, b: byte;
+   mnuChar: char;
 begin
-  LockScreenUpdate;
-  (* Clear the message log *)
-  paintOverMsg;
   (* Initialise variables *)
-  invThrow := False;
-  groundThrow := False;
-  anyTargetHit := False;
+  projectileAvailable := False;
+  NPCinRange := False;
   i := 0;
   b := 0;
+  mnuChar := 'a';
+  Result := False;
+
+  {       Check for projectiles     }
+
   (*  Set array to 0 *)
   SetLength(targetList, 0);
   (* Initialise array *)
@@ -192,6 +195,7 @@ begin
   begin
     inventoryWeapons[b].id := b;
     inventoryWeapons[b].Name := 'Empty';
+    inventoryWeapons[b].mnuOption := 'x';
     inventoryWeapons[b].glyph := 'x';
     inventoryWeapons[b].glyphColour := 'x';
   end;
@@ -202,22 +206,30 @@ begin
     begin
       inventoryWeapons[b].id := inventory[b].id;
       inventoryWeapons[b].Name := inventory[b].Name;
+      inventoryWeapons[b].mnuOption := mnuChar;
       inventoryWeapons[b].glyph := inventory[b].glyph;
       inventoryWeapons[b].glyphColour := inventory[b].glyphColour;
-      invThrow := True;
+      Inc(mnuChar);
+      projectileAvailable := True;
     end;
   end;
   (* Check the ground under the player for an item to throw *)
   if (items.containsItem(entityList[0].posX, entityList[0].posY) = True) then
   begin
     if (items.isItemWeapon(entityList[0].posX, entityList[0].posY) = True) then
-      groundThrow := True;
+    begin
+      inventoryWeapons[b].id := items.getItemID(entityList[0].posX, entityList[0].posY);
+      inventoryWeapons[b].Name := items.getItemName(entityList[0].posX, entityList[0].posY) + ' (on the ground)';
+      inventoryWeapons[b].mnuOption := mnuChar;
+      inventoryWeapons[b].glyph := items.getItemGlyph(entityList[0].posX, entityList[0].posY);
+      inventoryWeapons[b].glyphColour := items.getItemColour(entityList[0].posX, entityList[0].posY);
+      projectileAvailable := True;
+    end;
   end;
-
-  (* Check to see if player has anything to throw *)
-  if (invThrow = False) and (groundThrow = False) then
+  (* If there are no projectiles available *)
+  if (projectileAvailable = False) then
   begin
-    ui.displayMessage('You have nothing to throw');
+    ui.displayMessage('There is nothing you can throw');
     restorePlayerGlyph;
     UnlockScreenUpdate;
     UpdateScreen(False);
@@ -225,102 +237,156 @@ begin
     exit;
   end;
 
-  (* Get a list of all entities in view *)
+    {       Check for NPC's in range     }
+
+    (* Get a list of all entities in view *)
   for i := 1 to entities.npcAmount do
   begin
     (* First check an NPC is visible (and not dead) *)
     if (entityList[i].inView = True) and (entityList[i].isDead = False) then
     begin
-      anyTargetHit := True;
+      NPCinRange := True;
       (* Add NPC to list of targets *)
       SetLength(targetList, targetAmount);
       targetList[targetAmount - 1] := i;
       Inc(targetAmount);
     end;
   end;
-  (* If there are no entities in view, exit *)
-  if (anyTargetHit = False) then
+  (* Return True if there are projectiles and enemies *)
+  if (projectileAvailable = True) and (NPCinRange = True) then
+     Result := True;
+end;
+
+procedure target(dir: word; Xcolour: shortstring);
+var
+  i, b, yPOS: byte;
+  (* Weapon selection options *)
+  mnuChar, inputChar: char;
+begin
+  LockScreenUpdate;
+  (* Clear the message log *)
+  paintOverMsg;
+  (* Initialise variables *)
+  inputChar := 'a';
+  targetAmount := 1;
+  yPOS := 0;
+
+  (* Check if can throw something at something *)
+  if (canThrow() = True) then
   begin
-    ui.displayMessage('There are no enemies in sight');
-    restorePlayerGlyph;
-    UnlockScreenUpdate;
-    UpdateScreen(False);
-    main.gameState := stGame;
-    exit;
-  end;
   (* Display list of items for player to select *)
-
-  (* Cycle through entities with Left and Right *)
-
-
-  (* Display hint text *)
-  TextOut(centreX('[x] to exit the Look screen'), 24, 'lightGrey',
-    '[x] to exit the Target screen');
-
-  (* Turn player glyph to an + *)
-  entityList[0].glyph := '+';
-  entityList[0].glyphColour := Xcolour;
-
-  if (dir <> 0) then
+  yPOS := (19 - weaponAmount);
+  for i := 0 to 9 do
   begin
-    case dir of
-      { N }
-      1: Dec(targetY);
-      { W }
-      2: Dec(targetX);
-      { S }
-      3: Inc(targetY);
-      { E }
-      4: Inc(targetX);
-      {NE}
-      5:
-      begin
-        Inc(targetX);
-        Dec(targetY);
-      end;
-      { SE }
-      6:
-      begin
-        Inc(targetX);
-        Inc(targetY);
-      end;
-      { SW }
-      7:
-      begin
-        Dec(targetX);
-        Inc(targetY);
-      end;
-      { NW }
-      8:
-      begin
-        Dec(targetX);
-        Dec(targetY);
-      end;
-    end;
-    if (map.withinBounds(targetX, targetY) = False) or
-      (map.maparea[targetY, targetX].Visible = False) then
+    if (inventoryWeapons[i].Name <> 'Empty') then
     begin
-      targetX := safeX;
-      targetY := safeY;
+      TextOut(10, yPOS, 'white', '[' + inventoryWeapons[i].mnuOption + '] ' + inventoryWeapons[i].Name);
+      Inc(yPOS);
     end;
   end;
-  (* Redraw all NPC's *)
-  for i := 1 to entities.npcAmount do
-    entities.redrawMapDisplay(i);
-  (* Draw a cross on target *)
-  map.mapDisplay[targetY, targetX].GlyphColour := Xcolour;
-  map.mapDisplay[targetY, targetX].Glyph := '+';
-  (* Draw a bresenham line of circles between the 2 points *)
-  firingLine(Xcolour, entityList[0].posX, entityList[0].posY, targetX, targetY);
 
+//
+//  // update a global with total range of valid choices???
+//  // then call this?
+//
+//  (* Wait for selection *)
+//  gameState := stSelectAmmo;
+//
+//
+//
+//  (* Redraw the map *)
+//
+//
+//  (* Cycle through entities with Left and Right *)
+//
+//  // entity changes to pinkBlink when selected
+//
+//
+//
+//
+//  (* Display hint text *)
+  TextOut(centreX('[x] to exit the Look screen'), 24, 'lightGrey', '[x] to exit the Target screen');
+//
+//  (* Turn player glyph to an + *)
+//  entityList[0].glyph := '+';
+//  entityList[0].glyphColour := Xcolour;
+//
+//
+//  if (dir <> 0) then
+//  begin
+//    case dir of
+//      { N }
+//      1: Dec(targetY);
+//      { W }
+//      2: Dec(targetX);
+//      { S }
+//      3: Inc(targetY);
+//      { E }
+//      4: Inc(targetX);
+//      {NE}
+//      5:
+//      begin
+//        Inc(targetX);
+//        Dec(targetY);
+//      end;
+//      { SE }
+//      6:
+//      begin
+//        Inc(targetX);
+//        Inc(targetY);
+//      end;
+//      { SW }
+//      7:
+//      begin
+//        Dec(targetX);
+//        Inc(targetY);
+//      end;
+//      { NW }
+//      8:
+//      begin
+//        Dec(targetX);
+//        Dec(targetY);
+//      end;
+//    end;
+//    if (map.withinBounds(targetX, targetY) = False) or
+//      (map.maparea[targetY, targetX].Visible = False) then
+//    begin
+//      targetX := safeX;
+//      targetY := safeY;
+//    end;
+//  end;
+//  (* Redraw all NPC's *)
+//  for i := 1 to entities.npcAmount do
+//    entities.redrawMapDisplay(i);
+//  (* Draw a cross on target *)
+//  map.mapDisplay[targetY, targetX].GlyphColour := Xcolour;
+//  map.mapDisplay[targetY, targetX].Glyph := '+';
+//  (* Draw a bresenham line of circles between the 2 points *)
+//  //firingLine(Xcolour, entityList[0].posX, entityList[0].posY, targetX, targetY);
+//
   (* Repaint map *)
-  camera.drawMap;
-  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+  //camera.drawMap;
+  //fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
   UnlockScreenUpdate;
   UpdateScreen(False);
   (* Store the coordinates, so the cursor doesn't get lost off screen *)
   safeX := targetX;
   safeY := targetY;
+
+
+
+  end
+  else
+  begin
+       (* Repaint map *)
+       camera.drawMap;
+       fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+       UnlockScreenUpdate;
+       UpdateScreen(False);
+       gameState := stGame;
+       exit;
+  end;
+
 end;
 
 procedure firingLine(Xcol: shortstring; x1, y1, x2, y2: smallint);
@@ -412,6 +478,9 @@ begin
     entityList[0].glyphColour := 'green'
   else
     entityList[0].glyphColour := 'yellow';
+  (* Restore the game map *)
+  camera.drawMap;
+  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
   (* Repaint the message log *)
   paintOverMsg;
   ui.restoreMessages;
@@ -423,7 +492,7 @@ procedure paintOverMsg;
 var
   x, y: smallint;
 begin
-  for y := 21 to 25 do
+  for y := 20 to 25 do
   begin
     for x := 1 to scrGame.minX do
     begin

@@ -47,6 +47,8 @@ procedure helpScreenInput(Keypress: TKeyEvent);
 procedure lookInput(Keypress: TKeyEvent);
 (* Input in the TARGET state *)
 procedure targetInput(Keypress: TKeyEvent);
+(* Input in SELECTAMMO state *)
+procedure ammoProjectile(Keypress: TKeyEvent);
 (* Input in WIN ALPHA state *)
 procedure WinAlphaInput(Keypress: TKeyEvent);
 
@@ -589,6 +591,11 @@ begin
       ui.clearPopup;
     end;
   end;
+end;
+
+procedure ammoProjectile(Keypress: TKeyEvent);
+begin
+
 end;
 
 procedure WinAlphaInput(Keypress: TKeyEvent);
