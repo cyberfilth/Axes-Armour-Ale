@@ -226,7 +226,6 @@ begin
 end;
 
 function isCreatureVisible(x, y: smallint): boolean;
-
 var
   i: smallint;
 begin
@@ -238,7 +237,6 @@ begin
 end;
 
 procedure occupyUpdate;
-
 var
   i: smallint;
 begin
@@ -253,10 +251,8 @@ begin
      entity list in the camera unit wasn't working *)
   if (entityList[id].isDead = False) and (entityList[id].inView = True) then
   begin
-    map.mapDisplay[entityList[id].posY, entityList[id].posX].GlyphColour :=
-      entityList[id].glyphColour;
-    map.mapDisplay[entityList[id].posY, entityList[id].posX].Glyph :=
-      entityList[id].glyph;
+    map.mapDisplay[entityList[id].posY, entityList[id].posX].GlyphColour := entityList[id].glyphColour;
+    map.mapDisplay[entityList[id].posY, entityList[id].posX].Glyph := entityList[id].glyph;
   end;
 end;
 

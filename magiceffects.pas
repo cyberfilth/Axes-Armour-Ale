@@ -45,9 +45,7 @@ begin
     if (entityList[i].inView = True) and (entityList[i].isDead = False) then
     begin
       (* Area of effect is Players vision range - 1 *)
-      if (los.inView(entityList[0].posX, entityList[0].posY,
-        entityList[i].posX, entityList[i].posY, entityList[0].visionRange - 1) =
-        True) then
+      if (los.inView(entityList[0].posX, entityList[0].posY, entityList[i].posX, entityList[i].posY, entityList[0].visionRange - 1) = True) then
       begin
         anyTargetHit := True;
         (* Add NPC to list of targets *)
