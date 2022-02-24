@@ -435,7 +435,7 @@ procedure paintOverMsg;
 var
   x, y: smallint;
 begin
-  for y := 20 to 25 do
+  for y := 21 to 25 do
   begin
     for x := 1 to scrGame.minX do
     begin
