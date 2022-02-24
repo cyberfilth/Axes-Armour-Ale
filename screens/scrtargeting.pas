@@ -29,7 +29,7 @@ var
   (* Path of projectiles *)
   targetArray: array[1..30] of TPoint;
   (* Throwable items *)
-  inventoryWeapons: array[0..10] of Equipment;
+  throwableWeapons: array[0..10] of Equipment;
   (* Potential targets *)
   targetList: TSmallintArray;
   targetAmount, weaponAmount: smallint;
@@ -187,7 +187,6 @@ begin
   b := 0;
   mnuChar := 'a';
   Result := False;
-
   {       Check for projectiles     }
 
   (*  Set array to 0 *)
@@ -195,25 +194,27 @@ begin
   (* Initialise array *)
   for b := 0 to 10 do
   begin
-    inventoryWeapons[b].id := 0;
-    inventoryWeapons[b].Name := 'Empty';
-    inventoryWeapons[b].mnuOption := 'x';
-    inventoryWeapons[b].baseDMG := 0;
-    inventoryWeapons[b].glyph := 'x';
-    inventoryWeapons[b].glyphColour := 'x';
+    throwableWeapons[b].id := 0;
+    throwableWeapons[b].Name := 'Empty';
+    throwableWeapons[b].mnuOption := 'x';
+    throwableWeapons[b].baseDMG := 0;
+    throwableWeapons[b].glyph := 'x';
+    throwableWeapons[b].glyphColour := 'x';
   end;
   (* Check inventory for an item to throw *)
   for b := 0 to 10 do
   begin
     if (inventory[b].throwable = True) and (inventory[b].equipped = False) then
     begin
-      inventoryWeapons[b].id := inventory[b].id;
-      inventoryWeapons[b].Name := inventory[b].Name;
-      inventoryWeapons[b].mnuOption := mnuChar;
-      inventoryWeapons[b].baseDMG := inventory[b].throwDamage;
-      inventoryWeapons[b].glyph := inventory[b].glyph;
-      inventoryWeapons[b].glyphColour := inventory[b].glyphColour;
+      (* Add to list of throwable weapons *)
+      throwableWeapons[b].id := inventory[b].id;
+      throwableWeapons[b].Name := inventory[b].Name;
+      throwableWeapons[b].mnuOption := mnuChar;
+      throwableWeapons[b].baseDMG := inventory[b].throwDamage;
+      throwableWeapons[b].glyph := inventory[b].glyph;
+      throwableWeapons[b].glyphColour := inventory[b].glyphColour;
       Inc(mnuChar);
+      Inc(weaponAmount);
       projectileAvailable := True;
     end;
   end;
@@ -221,17 +222,16 @@ begin
   if (items.containsItem(entityList[0].posX, entityList[0].posY) = True) then
   begin
     if (items.isItemThrowable(entityList[0].posX, entityList[0].posY) = True) then
+    (* Add to list of throwable weapons *)
     begin
-      inventoryWeapons[b].id := items.getItemID(entityList[0].posX, entityList[0].posY);
-      inventoryWeapons[b].Name :=
-        items.getItemName(entityList[0].posX, entityList[0].posY) + ' (on the ground)';
-      inventoryWeapons[b].mnuOption := mnuChar;
-      inventoryWeapons[b].baseDMG :=
-        items.getThrowDamage(entityList[0].posX, entityList[0].posY);
-      inventoryWeapons[b].glyph :=
-        items.getItemGlyph(entityList[0].posX, entityList[0].posY);
-      inventoryWeapons[b].glyphColour :=
-        items.getItemColour(entityList[0].posX, entityList[0].posY);
+      throwableWeapons[b].id := items.getItemID(entityList[0].posX, entityList[0].posY);
+      throwableWeapons[b].Name := items.getItemName(entityList[0].posX, entityList[0].posY) + ' (on the ground)';
+      throwableWeapons[b].mnuOption := mnuChar;
+      throwableWeapons[b].baseDMG := items.getThrowDamage(entityList[0].posX, entityList[0].posY);
+      throwableWeapons[b].glyph := items.getItemGlyph(entityList[0].posX, entityList[0].posY);
+      throwableWeapons[b].glyphColour := items.getItemColour(entityList[0].posX, entityList[0].posY);
+      Inc(mnuChar);
+      Inc(weaponAmount);
       projectileAvailable := True;
     end;
   end;
@@ -250,7 +250,6 @@ begin
     main.gameState := stGame;
     exit;
   end;
-
   {       Check for NPC's in range     }
 
   (* Get a list of all entities in view *)
@@ -295,9 +294,9 @@ begin
   Result := False;
   for i := 0 to 10 do
   begin
-    if (inventoryWeapons[i].mnuOption = selection) then
+    if (throwableWeapons[i].mnuOption = selection) then
     begin
-      chosenProjectile := inventoryWeapons[i].id;
+      chosenProjectile := throwableWeapons[i].id;
       Result := True;
       gameState := stTarget;
     end;
@@ -332,6 +331,7 @@ begin
   (* Initialise variables *)
   targetAmount := 1;
   yPOS := 0;
+  weaponAmount := 0;
 
   (* Check if player can throw something at someone *)
   if (canThrow() = True) then
@@ -340,10 +340,10 @@ begin
     yPOS := (19 - weaponAmount);
     for i := 0 to 9 do
     begin
-      if (inventoryWeapons[i].Name <> 'Empty') then
+      if (throwableWeapons[i].Name <> 'Empty') then
       begin
-        TextOut(10, yPOS, 'white', '[' + inventoryWeapons[i].mnuOption +
-          '] ' + inventoryWeapons[i].Name);
+        TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption +
+          '] ' + throwableWeapons[i].Name);
         Inc(yPOS);
       end;
     end;
