@@ -8,7 +8,7 @@ unit scrTargeting;
 interface
 
 uses
-  SysUtils, Classes, map, entities, video, ui, camera, fov, items, scrGame;
+  SysUtils, Classes, map, entities, video, ui, camera, fov, items, scrGame, los;
 
 type
   (* Weapons *)
@@ -19,20 +19,20 @@ type
   end;
 
 type
-  TSmallintArray = array of smallint;
+  (* Enemies *)
+  throwTargets = record
+    id, x, y: smallint;
+    Name: string;
+  end;
 
 var
   (* Target coordinates *)
   targetX, targetY: smallint;
   (* The last safe coordinates *)
   safeX, safeY: smallint;
-  (* Path of projectiles *)
-  targetArray: array[1..30] of TPoint;
   (* Throwable items *)
   throwableWeapons: array[0..10] of Equipment;
-  (* Potential targets *)
-  targetList: TSmallintArray;
-  targetAmount, weaponAmount: smallint;
+  weaponAmount: smallint;
   (* Selected projectile *)
   chosenProjectile: smallint;
 
@@ -186,8 +186,6 @@ begin
   Result := False;
   {       Check for projectiles     }
 
-  (*  Set array to 0 *)
-  SetLength(targetList, 0);
   (* Initialise array *)
   for b := 0 to 10 do
   begin
@@ -253,13 +251,7 @@ begin
   begin
     (* First check an NPC is visible (and not dead) *)
     if (entityList[i].inView = True) and (entityList[i].isDead = False) then
-    begin
       NPCinRange := True;
-      (* Add NPC to list of targets *)
-      SetLength(targetList, targetAmount);
-      targetList[targetAmount - 1] := i;
-      Inc(targetAmount);
-    end;
   end;
 
   (* If there are no enemies in sight *)
@@ -300,12 +292,50 @@ begin
 end;
 
 procedure projectileTarget;
+var
+  tgtAmount, i, i2: smallint;
+  tgtList:  array[0..30] of throwTargets;
 begin
   LockScreenUpdate;
   (* Clear the message log *)
   paintOverMsg;
+  (*  Initialise array *)
+  i := 0;
+  i2 := 0;
+  for i := 0 to 30 do
+  begin
+    tgtList[i].id := 0;
+    tgtList[i].x := 0;
+    tgtList[i].y := 0;
+    tgtList[i].Name := 'empty';
+  end;
 
-  ui.displayMessage('Valid weapon selection');
+  (* Check if any enemies are near *)
+  for i := 1 to entities.npcAmount do
+  begin
+    (* First check an NPC is visible (and not dead) *)
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    begin
+      (* Doubling down on this as the list didn't update correctly without the following line *)
+      if (los.inView(entityList[0].posX, entityList[0].posY, entityList[i].posX, entityList[i].posY, entityList[0].visionRange) = True) then
+      begin
+        (* Add NPC to list of targets *)
+        tgtList[i2].id := entityList[i].npcID;
+        tgtList[i2].x := entityList[i].posX;
+        tgtList[i2].y := entityList[i].posY;
+        tgtList[i2].Name := entityList[i].race;
+        Inc(i2);
+      end;
+    end;
+  end;
+
+  (* Show the entities *)
+  for i := 0 to 30 do
+  begin
+    if (tgtList[i].Name <> 'empty') then
+       ui.displayMessage(tgtList[i].Name);
+  end;
+
 
   (* Repaint map *)
   camera.drawMap;
@@ -326,7 +356,6 @@ begin
   (* Clear the message log *)
   paintOverMsg;
   (* Initialise variables *)
-  targetAmount := 1;
   yPOS := 0;
   weaponAmount := 0;
   lastOption := 'a';

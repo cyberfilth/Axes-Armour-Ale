@@ -7,7 +7,7 @@ unit animation;
 interface
 
 uses
-  SysUtils, Classes, video, ui, entities, main, fov, map, camera;
+  SysUtils, Classes, video, ui, entities, fov, map, camera;
 
 type
   a = array[1..10] of TPoint;
@@ -18,6 +18,9 @@ procedure throwRock(id: smallint; var flightPath: a);
 procedure areaBurnEffect(getEm: array of smallint);
 
 implementation
+
+uses
+  main;
 
 procedure throwRock(id: smallint; var flightPath: a);
 var

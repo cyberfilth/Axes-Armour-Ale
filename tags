@@ -325,6 +325,7 @@ generateDwarfName	plot_gen.pas	/^procedure generateDwarfName;$/;"	p
 generateElfName	plot_gen.pas	/^procedure generateElfName;$/;"	p
 generateHumanName	plot_gen.pas	/^procedure generateHumanName;$/;"	p
 generateTitle	plot_gen.pas	/^procedure generateTitle;$/;"	p
+getCreatureDescription	backup/entities.pas	/^function getCreatureDescription(x, y: smallint): shortstring;$/;"	f
 getCreatureDescription	entities.pas	/^function getCreatureDescription(x, y: smallint): shortstring;$/;"	f
 getCreatureHP	backup/entities.pas	/^function getCreatureHP(x, y: smallint): smallint;$/;"	f
 getCreatureHP	entities.pas	/^function getCreatureHP(x, y: smallint): smallint;$/;"	f
