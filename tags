@@ -548,7 +548,6 @@ takeTurn	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure takeTurn(id: 
 takeTurn	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
-target	screens/backup/scrtargeting.pas	/^procedure target(dir: word; Xcolour: shortstring);$/;"	p
 target	screens/backup/scrtargeting.pas	/^procedure target;$/;"	p
 target	screens/scrtargeting.pas	/^procedure target;$/;"	p
 targetInput	backup/keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p

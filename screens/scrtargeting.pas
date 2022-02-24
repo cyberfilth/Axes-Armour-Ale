@@ -194,7 +194,7 @@ begin
   (* Initialise array *)
   for b := 0 to 10 do
   begin
-    throwableWeapons[b].id := 0;
+    throwableWeapons[b].id := b;
     throwableWeapons[b].Name := 'Empty';
     throwableWeapons[b].mnuOption := 'x';
     throwableWeapons[b].baseDMG := 0;
@@ -230,7 +230,6 @@ begin
       throwableWeapons[b].baseDMG := items.getThrowDamage(entityList[0].posX, entityList[0].posY);
       throwableWeapons[b].glyph := items.getItemGlyph(entityList[0].posX, entityList[0].posY);
       throwableWeapons[b].glyphColour := items.getItemColour(entityList[0].posX, entityList[0].posY);
-      Inc(mnuChar);
       Inc(weaponAmount);
       projectileAvailable := True;
     end;
@@ -338,7 +337,7 @@ begin
   begin
     (* Display list of items for player to select *)
     yPOS := (19 - weaponAmount);
-    for i := 0 to 9 do
+    for i := 0 to 10 do
     begin
       if (throwableWeapons[i].Name <> 'Empty') then
       begin
