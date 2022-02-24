@@ -129,8 +129,7 @@ begin
       (* Check to see if the entity is the player *)
       if (entities.getCreatureID(targetX, targetY) = 0) then
       begin
-        healthMsg := 'Health: ' + IntToStr(entities.getCreatureHP(targetX, targetY)) +
-          '/' + IntToStr(entities.getCreatureMaxHP(targetX, targetY));
+        healthMsg := 'Health: ' + IntToStr(entities.getCreatureHP(targetX, targetY)) + '/' + IntToStr(entities.getCreatureMaxHP(targetX, targetY));
         playerName := entityList[0].race + ' the ' + entityList[0].description;
         TextOut(centreX(playerName), 21, 'white', playerName);
         TextOut(centreX(healthMsg), 22, 'white', healthMsg);
@@ -148,10 +147,8 @@ begin
     (* else to see if an item is under the cursor *)
     else if (items.containsItem(targetX, targetY) = True) then
     begin
-      TextOut(centreX(getItemName(targetX, targetY)), 21, 'white',
-        getItemName(targetX, targetY));
-      TextOut(centreX(getItemDescription(targetX, targetY)), 22,
-        'white', getItemDescription(targetX, targetY));
+      TextOut(centreX(getItemName(targetX, targetY)), 21, 'white', getItemName(targetX, targetY));
+      TextOut(centreX(getItemDescription(targetX, targetY)), 22, 'white', getItemDescription(targetX, targetY));
     end
     (* else describe the terrain *)
     else if (map.maparea[targetY, targetX].Glyph = '.') then
@@ -312,8 +309,7 @@ begin
 
   (* Repaint map *)
   camera.drawMap;
-  fov.fieldOfView(entityList[0].posX, entityList[0].posY,
-    entityList[0].visionRange, 1);
+  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
   UnlockScreenUpdate;
   UpdateScreen(False);
   gameState := stGame;
@@ -323,6 +319,8 @@ end;
 procedure target;
 var
   i, yPOS: byte;
+  lastOption: char;
+  targetOptsMessage: string;
 begin
   LockScreenUpdate;
   (* Clear the message log *)
@@ -331,6 +329,8 @@ begin
   targetAmount := 1;
   yPOS := 0;
   weaponAmount := 0;
+  lastOption := 'a';
+  targetOptsMessage := 'Select something to throw';
 
   (* Check if player can throw something at someone *)
   if (canThrow() = True) then
@@ -347,12 +347,17 @@ begin
       end;
     end;
 
-    // make the choice a-k, get the last letter in range
+    (* Get the range of choices *)
+    for i := 0 to 10 do
+    begin
+      if (throwableWeapons[i].Name <> 'Empty') then
+         lastOption := throwableWeapons[i].mnuOption;
+    end;
+    if (lastOption <> 'a') then
+       targetOptsMessage := 'a - ' + lastOption + ' to select something to throw';
 
-    TextOut(centreX('Select something to throw'), 23, 'white',
-      'Select something to throw');
-    TextOut(centreX('[x] to exit the Throw screen'), 24, 'lightGrey',
-      '[x] to exit the Throw screen');
+    TextOut(centreX(targetOptsMessage), 23, 'white', targetOptsMessage);
+    TextOut(centreX('[x] to exit the Throw screen'), 24, 'lightGrey', '[x] to exit the Throw screen');
     UnlockScreenUpdate;
     UpdateScreen(False);
     (* Wait for selection *)
@@ -362,8 +367,7 @@ begin
   begin
     (* Repaint map *)
     camera.drawMap;
-    fov.fieldOfView(entityList[0].posX, entityList[0].posY,
-      entityList[0].visionRange, 1);
+    fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
     UnlockScreenUpdate;
     UpdateScreen(False);
     gameState := stGame;
