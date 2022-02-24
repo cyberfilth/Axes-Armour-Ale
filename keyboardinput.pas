@@ -476,7 +476,7 @@ begin
       gameState := stTarget;
       scrTargeting.targetX := entityList[0].posX;
       scrTargeting.targetY := entityList[0].posY;
-      scrTargeting.target(0, 'yellow');
+      scrTargeting.target;
     end;
     '?': { Help screen }
     begin
@@ -565,24 +565,6 @@ end;
 
 procedure targetInput(Keypress: TKeyEvent);
 begin
-  case GetKeyEventCode(Keypress) of
-    { Arrow keys }
-    kbdLeft: scrTargeting.target(2, 'yellow');
-    kbdRight: scrTargeting.target(4, 'yellow');
-    kbdUp: scrTargeting.target(1, 'yellow');
-    KbdDown: scrTargeting.target(3, 'yellow');
-  end;
-  { Numpad and VI keys }
-  case GetKeyEventChar(Keypress) of
-    '8', 'k', 'K': scrTargeting.target(1, 'yellow');
-    '9', 'u', 'U': scrTargeting.target(5, 'yellow');
-    '6', 'l', 'L': scrTargeting.target(4, 'yellow');
-    '3', 'n', 'N': scrTargeting.target(6, 'yellow');
-    '2', 'j', 'J': scrTargeting.target(3, 'yellow');
-    '1', 'b', 'B': scrTargeting.target(7, 'yellow');
-    '4', 'h', 'H': scrTargeting.target(2, 'yellow');
-    '7', 'y', 'Y': scrTargeting.target(8, 'yellow');
-  end;
   case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit Look input }
     begin
@@ -595,8 +577,36 @@ end;
 
 procedure ammoProjectile(Keypress: TKeyEvent);
 begin
-  // a to k
-
+  case GetKeyEventChar(Keypress) of
+    'a', 'A':
+    if (scrTargeting.validProjectile('a') = True) then scrTargeting.projectileTarget;
+    'b', 'B':
+    if (scrTargeting.validProjectile('b') = True) then scrTargeting.projectileTarget;
+    'c', 'C':
+    if (scrTargeting.validProjectile('c') = True) then scrTargeting.projectileTarget;
+    'd', 'D':
+    if (scrTargeting.validProjectile('d') = True) then scrTargeting.projectileTarget;
+    'e', 'E':
+    if (scrTargeting.validProjectile('e') = True) then scrTargeting.projectileTarget;
+    'f', 'F':
+    if (scrTargeting.validProjectile('f') = True) then scrTargeting.projectileTarget;
+    'g', 'G':
+    if (scrTargeting.validProjectile('g') = True) then scrTargeting.projectileTarget;
+    'h', 'H':
+    if (scrTargeting.validProjectile('h') = True) then scrTargeting.projectileTarget;
+    'i', 'I':
+    if (scrTargeting.validProjectile('i') = True) then scrTargeting.projectileTarget;
+    'j', 'J':
+    if (scrTargeting.validProjectile('j') = True) then scrTargeting.projectileTarget;
+    'k', 'K':
+    if (scrTargeting.validProjectile('k') = True) then scrTargeting.projectileTarget;
+    'x', 'X': { Exit Look input }
+    begin
+      main.gameState := stGame;
+      scrTargeting.restorePlayerGlyph;
+      ui.clearPopup;
+    end;
+  end;
 
 end;
 

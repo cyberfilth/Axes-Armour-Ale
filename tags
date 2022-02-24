@@ -455,6 +455,8 @@ pickUp	player/backup/player.pas	/^procedure pickUp;$/;"	p
 pickUp	player/player.pas	/^procedure pickUp;$/;"	p
 processStatus	player/backup/player.pas	/^procedure processStatus;$/;"	p
 processStatus	player/player.pas	/^procedure processStatus;$/;"	p
+projectileTarget	screens/backup/scrtargeting.pas	/^procedure projectileTarget;$/;"	p
+projectileTarget	screens/scrtargeting.pas	/^procedure projectileTarget;$/;"	p
 quaff	player/backup/player_inventory.pas	/^procedure quaff;$/;"	p
 quaff	player/player_inventory.pas	/^procedure quaff;$/;"	p
 quaffInput	backup/keyboardinput.pas	/^procedure quaffInput(Keypress: TKeyEvent);$/;"	p
@@ -547,7 +549,8 @@ takeTurn	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure takeTurn(id: 
 takeTurn	entities/hobs/redcap_lesser.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
 target	screens/backup/scrtargeting.pas	/^procedure target(dir: word; Xcolour: shortstring);$/;"	p
-target	screens/scrtargeting.pas	/^procedure target(dir: word; Xcolour: shortstring);$/;"	p
+target	screens/backup/scrtargeting.pas	/^procedure target;$/;"	p
+target	screens/scrtargeting.pas	/^procedure target;$/;"	p
 targetInput	backup/keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
 targetInput	keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
 throwRock	animation.pas	/^procedure throwRock(id: smallint; var flightPath: a);$/;"	p
@@ -587,6 +590,8 @@ useItem	items/weapons/backup/staff_minor_scorch.pas	/^procedure useItem(equipped
 useItem	items/weapons/basic_club.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/crude_dagger.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/staff_minor_scorch.pas	/^procedure useItem(equipped: boolean);$/;"	p
+validProjectile	screens/backup/scrtargeting.pas	/^function validProjectile(selection: char): boolean;$/;"	f
+validProjectile	screens/scrtargeting.pas	/^function validProjectile(selection: char): boolean;$/;"	f
 wander	entities/ai_animal.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/backup/large_blood_bat.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/backup/small_hyena.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
