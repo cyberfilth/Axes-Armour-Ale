@@ -232,6 +232,11 @@ begin
   begin
     ui.displayMessage('There is nothing you can throw');
     restorePlayerGlyph;
+    (* Redraw all NPC's *)
+    for i := 1 to entities.npcAmount do
+      entities.redrawMapDisplay(i);
+    (* Redraw all items *)
+    items.redrawItems;
     UnlockScreenUpdate;
     UpdateScreen(False);
     main.gameState := stGame;
@@ -253,6 +258,23 @@ begin
       Inc(targetAmount);
     end;
   end;
+
+  (* If there are no enemies in sight *)
+  if (NPCinRange = False) then
+  begin
+    ui.displayMessage('There are no enemies in sight');
+    restorePlayerGlyph;
+    (* Redraw all NPC's *)
+    for i := 1 to entities.npcAmount do
+      entities.redrawMapDisplay(i);
+    (* Redraw all items *)
+    items.redrawItems;
+    UnlockScreenUpdate;
+    UpdateScreen(False);
+    main.gameState := stGame;
+    exit;
+  end;
+
   (* Return True if there are projectiles and enemies *)
   if (projectileAvailable = True) and (NPCinRange = True) then
      Result := True;
@@ -306,7 +328,8 @@ begin
 //
 //
 //  (* Display hint text *)
-  TextOut(centreX('[x] to exit the Look screen'), 24, 'lightGrey', '[x] to exit the Target screen');
+     TextOut(centreX('Select something to throw'), 23, 'white', 'Select something to throw');
+     TextOut(centreX('[x] to exit the Throw screen'), 24, 'lightGrey', '[x] to exit the Throw screen');
 //
 //  (* Turn player glyph to an + *)
 //  entityList[0].glyph := '+';
