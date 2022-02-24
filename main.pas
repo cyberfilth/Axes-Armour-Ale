@@ -348,7 +348,7 @@ begin
       stLook: lookInput(Keypress);
       { ---------------------------------    Targeting screen  }
       stTarget: targetInput(Keypress);
-      { ---------------------------------   Select projectile screen  }
+      { ---------------------------------    Select projectile screen  }
       stSelectAmmo: ammoProjectile(Keypress);
       { ---------------------------------    Confirm overwrite game }
       stLoseSave: LoseSaveInput(Keypress);

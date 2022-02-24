@@ -134,7 +134,9 @@ begin
         else if (itemList[itemNumber].itemType = itmArmour) then
           inventory[i].sortIndex := 2
         else if (itemList[itemNumber].itemType = itmDrink) then
-          inventory[i].sortIndex := 3;
+          inventory[i].sortIndex := 3
+        else if (itemList[itemNumber].itemType = itmProjectile) then
+          inventory[i].sortIndex := 4;
         inventory[i].Name := itemList[itemNumber].itemname;
         inventory[i].description := itemList[itemNumber].itemDescription;
         inventory[i].article := itemList[itemNumber].itemArticle;
@@ -441,9 +443,7 @@ begin
   else if (message = 'a') then
     TextOut(6, 20, 'cyan', 'You must first remove the armour you already wear')
   else if (message = 'i') then
-    TextOut(6, 20, 'cyan', 'You are unable to use iron items')
-   else if (message = 'r') then
-    TextOut(6, 20, 'cyan', 'You cannot equip a rock as a weapon');
+    TextOut(6, 20, 'cyan', 'You are unable to use iron items');
   { Write those changes to the screen }
   UnlockScreenUpdate;
   { only redraws the parts that have been updated }
@@ -471,13 +471,6 @@ begin
         (player_stats.playerRace = 'Elf') then
       begin
         wield('i');
-        exit;
-      end;
-
-      (* Check if the item is a rock, which cannot be equipped *)
-      if (inventory[selection].Name = 'rock') then
-      begin
-        wield('r');
         exit;
       end;
 

@@ -26,7 +26,7 @@ begin
     itemName := 'rock';
     itemDescription := 'causes damage if thrown';
     itemArticle := 'a';
-    itemType := itmWeapon;
+    itemType := itmProjectile;
     itemMaterial := matStone;
     useID := 9;
     glyph := chr(7);

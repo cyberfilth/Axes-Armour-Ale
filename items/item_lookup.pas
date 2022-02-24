@@ -116,7 +116,7 @@ begin
   repeat
     r := globalutils.randomRange(3, (MAXROWS - 3));
     c := globalutils.randomRange(3, (MAXCOLUMNS - 3));
-    (* choose a location that is not a wall or occupied *)
+  (* choose a location that is not a wall or occupied *)
   until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
   items.listLength := Length(items.itemList);
   SetLength(items.itemList, items.itemAmount + 1);

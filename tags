@@ -139,6 +139,7 @@ createGreenFungus	entities/backup/green_fungus.pas	/^procedure createGreenFungus
 createGreenFungus	entities/fungus/green_fungus.pas	/^procedure createGreenFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createLeatherArmour	items/armour/backup/leather_armour1.pas	/^procedure createLeatherArmour(uniqueid, itmx, itmy: smallint);$/;"	p
 createLeatherArmour	items/armour/leather_armour1.pas	/^procedure createLeatherArmour(uniqueid, itmx, itmy: smallint);$/;"	p
+createNewDungeon	backup/universe.pas	/^procedure createNewDungeon(levelType: dungeonTerrain);$/;"	p
 createNewDungeon	universe.pas	/^procedure createNewDungeon(levelType: dungeonTerrain);$/;"	p
 createPlayer	player/backup/player.pas	/^procedure createPlayer;$/;"	p
 createPlayer	player/player.pas	/^procedure createPlayer;$/;"	p
@@ -413,6 +414,7 @@ levelUpDialog	screens/backup/dlginfo.pas	/^procedure levelUpDialog(message: shor
 levelUpDialog	screens/dlginfo.pas	/^procedure levelUpDialog(message: shortstring);$/;"	p
 levelupHealth	player/backup/player.pas	/^procedure levelupHealth(amount: smallint);$/;"	p
 levelupHealth	player/player.pas	/^procedure levelupHealth(amount: smallint);$/;"	p
+litterItems	backup/universe.pas	/^procedure litterItems;$/;"	p
 litterItems	universe.pas	/^procedure litterItems;$/;"	p
 loadDisplayedMap	map.pas	/^procedure loadDisplayedMap;$/;"	p
 loadDungeonLevel	backup/file_handling.pas	/^procedure loadDungeonLevel(lvl: byte);$/;"	p
@@ -525,6 +527,7 @@ sniff	vision/backup/smell.pas	/^procedure sniff;$/;"	p
 sniff	vision/smell.pas	/^procedure sniff;$/;"	p
 sortInventory	player/backup/player_inventory.pas	/^procedure sortInventory(iLo, iHi: integer);$/;"	p
 sortInventory	player/player_inventory.pas	/^procedure sortInventory(iLo, iHi: integer);$/;"	p
+spawnDenizens	backup/universe.pas	/^procedure spawnDenizens;$/;"	p
 spawnDenizens	universe.pas	/^procedure spawnDenizens;$/;"	p
 spawnPlayer	backup/entities.pas	/^procedure spawnPlayer;$/;"	p
 spawnPlayer	entities.pas	/^procedure spawnPlayer;$/;"	p
