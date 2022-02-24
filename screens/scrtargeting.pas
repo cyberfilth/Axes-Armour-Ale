@@ -13,7 +13,7 @@ uses
 type
   (* Weapons *)
   Equipment = record
-    id: smallint;
+    id, baseDMG: smallint;
     mnuOption: char;
     Name, glyph, glyphColour: shortstring;
   end;
@@ -38,12 +38,10 @@ var
 procedure look(dir: word);
 (* Confirm there are NPC's and projectiles *)
 function canThrow(): boolean;
+(* Check if the projectile selection is valid *)
 
 (* Target something on the map, reusable for missiles & spells *)
 procedure target(dir: word; Xcolour: shortstring);
-
-(* Draws a Bresenham line between the player and the target *)
-procedure firingLine(Xcol: shortstring; x1, y1, x2, y2: smallint);
 (* Repaint the player when exiting look/target screen *)
 procedure restorePlayerGlyph;
 (* Paint over the message log *)
@@ -196,17 +194,19 @@ begin
     inventoryWeapons[b].id := b;
     inventoryWeapons[b].Name := 'Empty';
     inventoryWeapons[b].mnuOption := 'x';
+    inventoryWeapons[b].baseDMG := 0;
     inventoryWeapons[b].glyph := 'x';
     inventoryWeapons[b].glyphColour := 'x';
   end;
   (* Check inventory for an item to throw *)
   for b := 0 to 9 do
   begin
-    if (inventory[b].itemType = itmWeapon) and (inventory[b].equipped = False) then
+    if (inventory[b].throwable = True) and (inventory[b].equipped = False) then
     begin
       inventoryWeapons[b].id := inventory[b].id;
       inventoryWeapons[b].Name := inventory[b].Name;
       inventoryWeapons[b].mnuOption := mnuChar;
+      inventoryWeapons[b].baseDMG := inventory[b].throwDamage;
       inventoryWeapons[b].glyph := inventory[b].glyph;
       inventoryWeapons[b].glyphColour := inventory[b].glyphColour;
       Inc(mnuChar);
@@ -216,11 +216,12 @@ begin
   (* Check the ground under the player for an item to throw *)
   if (items.containsItem(entityList[0].posX, entityList[0].posY) = True) then
   begin
-    if (items.isItemWeapon(entityList[0].posX, entityList[0].posY) = True) then
+    if (items.isItemThrowable(entityList[0].posX, entityList[0].posY) = True) then
     begin
       inventoryWeapons[b].id := items.getItemID(entityList[0].posX, entityList[0].posY);
       inventoryWeapons[b].Name := items.getItemName(entityList[0].posX, entityList[0].posY) + ' (on the ground)';
       inventoryWeapons[b].mnuOption := mnuChar;
+      inventoryWeapons[b].baseDMG := items.getThrowDamage(entityList[0].posX, entityList[0].posY);
       inventoryWeapons[b].glyph := items.getItemGlyph(entityList[0].posX, entityList[0].posY);
       inventoryWeapons[b].glyphColour := items.getItemColour(entityList[0].posX, entityList[0].posY);
       projectileAvailable := True;
@@ -387,87 +388,6 @@ begin
        exit;
   end;
 
-end;
-
-procedure firingLine(Xcol: shortstring; x1, y1, x2, y2: smallint);
-var
-  i, deltax, deltay, numpixels, d, dinc1, dinc2, x, xinc1, xinc2, y,
-  yinc1, yinc2: smallint;
-begin
-  (* Initialise array *)
-  for i := 1 to 10 do
-  begin
-    targetArray[i].X := 0;
-    targetArray[i].Y := 0;
-  end;
-  (* Calculate delta X and delta Y for initialisation *)
-  deltax := abs(x2 - x1);
-  deltay := abs(y2 - y1);
-  (* Initialise all vars based on which is the independent variable *)
-  if deltax >= deltay then
-  begin
-    (* x is independent variable *)
-    numpixels := deltax + 1;
-    d := (2 * deltay) - deltax;
-    dinc1 := deltay shl 1;
-    dinc2 := (deltay - deltax) shl 1;
-    xinc1 := 1;
-    xinc2 := 1;
-    yinc1 := 0;
-    yinc2 := 1;
-  end
-  else
-  begin
-    (* y is independent variable *)
-    numpixels := deltay + 1;
-    d := (2 * deltax) - deltay;
-    dinc1 := deltax shl 1;
-    dinc2 := (deltax - deltay) shl 1;
-    xinc1 := 0;
-    xinc2 := 1;
-    yinc1 := 1;
-    yinc2 := 1;
-  end;
-  (* Make sure x and y move in the right directions *)
-  if x1 > x2 then
-  begin
-    xinc1 := -xinc1;
-    xinc2 := -xinc2;
-  end;
-  if y1 > y2 then
-  begin
-    yinc1 := -yinc1;
-    yinc2 := -yinc2;
-  end;
-  (* Start drawing at *)
-  x := x1;
-  y := y1;
-  for i := 1 to numpixels do
-  begin
-    (* Check that we are not searching out of bounds of map *)
-    if (map.withinBounds(x, y) = True) then
-    begin
-      (* Add coordinates to the array *)
-      targetArray[i].X := x;
-      targetArray[i].Y := y;
-      (* Draw the path on the screen *)
-      map.mapDisplay[y, x].GlyphColour := Xcol;
-      map.mapDisplay[y, x].Glyph := '+';
-    end;
-
-    if d < 0 then
-    begin
-      d := d + dinc1;
-      x := x + xinc1;
-      y := y + yinc1;
-    end
-    else
-    begin
-      d := d + dinc2;
-      x := x + xinc2;
-      y := y + yinc2;
-    end;
-  end;
 end;
 
 procedure restorePlayerGlyph;

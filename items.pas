@@ -40,6 +40,10 @@ type
     inView: boolean;
     (* Is the item on the map *)
     onMap: boolean;
+    (* Can the item be thrown *)
+    throwable: boolean;
+    (* Damage when thrown *)
+    throwDamage: smallint;
     (* Displays a message the first time item is seen *)
     discovered: boolean;
   end;
@@ -64,10 +68,10 @@ function getItemID(x, y: smallint): smallint;
 function getItemGlyph(x, y: smallint): shortstring;
 (* Get the glyph colour at coordinates *)
 function getItemColour(x, y: smallint): shortstring;
-
-// change the below to 'is throawable?'
-(* Is item on floor a weapon *)
-function isItemWeapon(x, y: smallint): boolean;
+(* Is item on floor throwable *)
+function isItemThrowable(x, y: smallint): boolean;
+(* Get the Throw Damage at coordinates *)
+function getThrowDamage(x, y: smallint): smallint;
 (* Count non-empty items in array *)
 function countNonEmptyItems: byte;
 (* Redraw all items *)
@@ -172,7 +176,7 @@ begin
   end;
 end;
 
-function isItemWeapon(x, y: smallint): boolean;
+function isItemThrowable(x, y: smallint): boolean;
 var
   i: smallint;
 begin
@@ -181,8 +185,23 @@ begin
   begin
     if (itemList[i].posX = x) and (itemList[i].posY = y) then
     begin
-      if (itemList[i].itemType = itmWeapon) then
+      if (itemList[i].throwable = True) then
         Result := True;
+      exit;
+    end;
+  end;
+end;
+
+function getThrowDamage(x, y: smallint): smallint;
+var
+  i: smallint;
+begin
+  Result := 0;
+  for i := 1 to itemAmount do
+  begin
+    if (itemList[i].posX = x) and (itemList[i].posY = y) then
+    begin
+        Result := itemList[i].throwDamage;
       exit;
     end;
   end;

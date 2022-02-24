@@ -228,6 +228,8 @@ begin
           AddElement(DataNode, 'posY', IntToStr(itemList[i].posY));
           AddElement(DataNode, 'numUses', IntToStr(itemList[i].NumberOfUses));
           AddElement(DataNode, 'onMap', BoolToStr(itemList[i].onMap));
+          AddElement(DataNode, 'throwable', BoolToStr(itemList[i].throwable));
+          AddElement(DataNode, 'throwDamage', IntToStr(itemList[i].throwDamage));
           AddElement(DataNode, 'discovered', BoolToStr(itemList[i].discovered));
         end;
       end;
@@ -376,6 +378,8 @@ begin
         items.itemList[i].posY := StrToInt(UTF8Encode(ItemsNode.FindNode('posY').TextContent));
         items.itemList[i].NumberOfUses := StrToInt(UTF8Encode(ItemsNode.FindNode('numUses').TextContent));
         items.itemList[i].onMap := StrToBool(UTF8Encode(ItemsNode.FindNode('onMap').TextContent));
+        items.itemList[i].throwable := StrToBool(UTF8Encode(ItemsNode.FindNode('throwable').TextContent));
+        items.itemList[i].throwDamage := StrToInt(UTF8Encode(ItemsNode.FindNode('throwDamage').TextContent));
         items.itemList[i].discovered := StrToBool(UTF8Encode(ItemsNode.FindNode('discovered').TextContent));
         ParentNode := ItemsNode.NextSibling;
         ItemsNode := ParentNode;
@@ -556,6 +560,8 @@ begin
 
       player_inventory.inventory[i].glyphColour := UTF8Encode(InventoryNode.FindNode('glyphColour').TextContent);
       player_inventory.inventory[i].numUses := StrToInt(UTF8Encode(InventoryNode.FindNode('numUses').TextContent));
+      player_inventory.inventory[i].throwable := StrToBool(UTF8Encode(InventoryNode.FindNode('throwable').TextContent));
+      player_inventory.inventory[i].throwDamage := StrToInt(UTF8Encode(InventoryNode.FindNode('throwDamage').TextContent));
       player_inventory.inventory[i].inInventory := StrToBool(UTF8Encode(InventoryNode.FindNode('inInventory').TextContent));
       ParentNode := InventoryNode.NextSibling;
       InventoryNode := ParentNode;
@@ -688,6 +694,8 @@ begin
 
       AddElement(DataNode, 'glyphColour', inventory[i].glyphColour);
       AddElement(DataNode, 'numUses', IntToStr(inventory[i].numUses));
+      AddElement(DataNode, 'throwable', BoolToStr(inventory[i].throwable));
+      AddElement(DataNode, 'throwDamage', IntToStr(inventory[i].throwDamage));
       AddElement(DataNode, 'inInventory', BoolToStr(inventory[i].inInventory));
     end;
 

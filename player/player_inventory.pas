@@ -13,10 +13,11 @@ uses
 type
   (* Items in inventory *)
   Equipment = record
-    id, useID, sortIndex, numUses: smallint;
+    id, useID, sortIndex, numUses, throwDamage: smallint;
     Name, description, article, glyph, glyphColour: shortstring;
     itemType: tItem;
     itemMaterial: tMaterial;
+    throwable: boolean;
     (* Is the item still in the inventory *)
     inInventory: boolean;
     (* Is the item being worn or wielded *)
@@ -81,6 +82,8 @@ begin
     inventory[i].glyphColour := 'x';
     inventory[i].numUses := 0;
     inventory[i].inInventory := False;
+    inventory[i].throwable := False;
+    inventory[i].throwDamage := 0;
     inventory[i].useID := 0;
   end;
 end;
@@ -141,6 +144,8 @@ begin
         inventory[i].glyph := itemList[itemNumber].glyph;
         inventory[i].glyphColour := itemList[itemNumber].glyphColour;
         inventory[i].numUses := itemList[itemNumber].NumberOfUses;
+        inventory[i].throwable := itemList[itemNumber].throwable;
+        inventory[i].throwDamage := itemList[itemNumber].throwDamage;
         inventory[i].inInventory := True;
         ui.displayMessage('You pick up the ' + inventory[i].Name);
       (* Set an empty flag for the item on the map, this
@@ -161,6 +166,8 @@ begin
           posY := 1;
           NumberOfUses := 0;
           onMap := False;
+          throwable := False;
+          throwDamage := 0;
           discovered := False;
         end;
         (* Sort items in inventory *)
@@ -191,6 +198,8 @@ begin
       posY := 1;
       NumberOfUses := 0;
       onMap := False;
+      throwable := False;
+      throwDamage := 0;
       discovered := False;
     end;
     Result := True;
@@ -222,6 +231,8 @@ begin
     newItem.posY := entities.entityList[0].posY;
     newItem.NumberOfUses := inventory[itemNumber].numUses;
     newItem.onMap := True;
+    newItem.throwable := inventory[itemNumber].throwable;
+    newItem.throwDamage := inventory[itemNumber].throwDamage;
     newItem.discovered := True;
 
     { Place item on the game map }
@@ -242,6 +253,8 @@ begin
     inventory[itemNumber].glyphColour := 'x';
     inventory[itemNumber].inInventory := False;
     inventory[itemNumber].numUses := 0;
+    inventory[itemNumber].throwable := False;
+    inventory[itemNumber].throwDamage := 0;
     inventory[itemNumber].useID := 0;
     Result := True;
     (* Sort items in inventory *)
@@ -404,6 +417,8 @@ begin
     inventory[selection].glyphColour := 'x';
     inventory[selection].inInventory := False;
     inventory[selection].numUses := 0;
+    inventory[selection].throwable := False;
+    inventory[selection].throwDamage := 0;
     inventory[selection].useID := 0;
     (* Sort items in inventory *)
     sortInventory(0, high(inventory));
@@ -535,6 +550,8 @@ begin
       inventory[i].glyphColour := 'x';
       inventory[i].inInventory := False;
       inventory[i].numUses := 0;
+      inventory[i].throwable := False;
+      inventory[i].throwDamage := 0;
       inventory[i].useID := 0;
     end;
   end;

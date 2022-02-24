@@ -54,6 +54,8 @@ begin
     posY := itmy;
     NumberOfUses := randUses;
     onMap := True;
+    throwable := False;
+    throwDamage := 0;
     discovered := False;
   end;
 end;
