@@ -293,7 +293,7 @@ end;
 
 procedure projectileTarget;
 var
-  tgtAmount, i, i2: smallint;
+  i, i2: smallint;
   tgtList:  array[0..30] of throwTargets;
 begin
   LockScreenUpdate;
@@ -329,13 +329,25 @@ begin
     end;
   end;
 
+  (* Get the closest target *)
+ // use a distance function like
+
+ (*
+
+dx := entityList[0].posX - NPC.posX;
+dy := entityList[0].posY - NPC.posY;
+distance := sqrt(dx ** 2 + dy ** 2);
+
+Result := distance
+
+ *)
+
   (* Show the entities *)
   for i := 0 to 30 do
   begin
     if (tgtList[i].Name <> 'empty') then
        ui.displayMessage(tgtList[i].Name);
   end;
-
 
   (* Repaint map *)
   camera.drawMap;
