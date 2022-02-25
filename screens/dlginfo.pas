@@ -171,8 +171,6 @@ begin
   case dialogType of
     dlgNone: exit;
     dlgFoundSMap: foundMap;
-    else
-      exit;
   end;
 end;
 

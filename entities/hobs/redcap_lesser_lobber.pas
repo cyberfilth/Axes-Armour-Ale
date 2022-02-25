@@ -91,8 +91,6 @@ begin
     stateNeutral: decisionNeutral(id);
     stateHostile: decisionHostile(id);
     stateEscape: decisionEscape(id);
-    else
-      decisionNeutral(id);
   end;
 end;
 
