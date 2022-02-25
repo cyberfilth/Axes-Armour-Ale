@@ -36,6 +36,8 @@ var
   weaponAmount: smallint;
   (* Selected projectile *)
   chosenProjectile: smallint;
+  (* List of projectile targets *)
+  tgtList: array[0..30] of throwTargets;
 
 (* Look around the map *)
 procedure look(dir: word);
@@ -45,7 +47,9 @@ function canThrow(): boolean;
 function validProjectile(selection: char): boolean;
 (* Choose target for projectile *)
 procedure projectileTarget;
-(* Target something on the map *)
+(* Cycle between the targets *)
+procedure cycleTargets(selection: smallint);
+(* Start the Target / Throw process *)
 procedure target;
 (* Repaint the player when exiting look/target screen *)
 procedure restorePlayerGlyph;
@@ -295,7 +299,6 @@ end;
 procedure projectileTarget;
 var
   i, i2, dx, dy, closestID: smallint;
-  tgtList:  array[0..30] of throwTargets;
   i3: single;
 begin
   LockScreenUpdate;
@@ -349,13 +352,28 @@ begin
     end;
   end;
 
-  ui.displayMessage('The closest enemy is ' + tgtList[closestID].Name);
+  cycleTargets(closestID);
+end;
 
-   map.mapDisplay[tgtList[closestID].y, tgtList[closestID].x - 1].GlyphColour := 'pinkBlink';
-   map.mapDisplay[tgtList[closestID].y, tgtList[closestID].x - 1].Glyph := '[';
-   map.mapDisplay[tgtList[closestID].y, tgtList[closestID].x + 1].GlyphColour := 'pinkBlink';
-   map.mapDisplay[tgtList[closestID].y, tgtList[closestID].x + 1].Glyph := ']';
+procedure cycleTargets(selection: smallint);
+begin
+  gameState := stSelectTarget;
 
+  // redraw the game and NPC's
+
+
+  if (selection < 900) then
+  (* Highlight the closest NPC *)
+  begin
+    map.mapDisplay[tgtList[selection].y, tgtList[selection].x - 1].GlyphColour := 'pinkBlink';
+    map.mapDisplay[tgtList[selection].y, tgtList[selection].x - 1].Glyph := '[';
+    map.mapDisplay[tgtList[selection].y, tgtList[selection].x + 1].GlyphColour := 'pinkBlink';
+    map.mapDisplay[tgtList[selection].y, tgtList[selection].x + 1].Glyph := ']';
+  end;
+
+  // else
+  // Left = 999
+  // right = 998
 
 
   (* Repaint map *)
@@ -363,8 +381,8 @@ begin
   fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
   UnlockScreenUpdate;
   UpdateScreen(False);
-  gameState := stGame;
-  exit;
+  //gameState := stGame;
+  //exit;
 end;
 
 procedure target;

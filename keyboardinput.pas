@@ -49,6 +49,8 @@ procedure lookInput(Keypress: TKeyEvent);
 procedure targetInput(Keypress: TKeyEvent);
 (* Input in SELECTAMMO state *)
 procedure ammoProjectile(Keypress: TKeyEvent);
+(* Input in the SELECTTARGET state *)
+procedure ammoTarget(Keypress: TKeyEvent);
 (* Input in WIN ALPHA state *)
 procedure WinAlphaInput(Keypress: TKeyEvent);
 
@@ -607,7 +609,34 @@ begin
       ui.clearPopup;
     end;
   end;
+end;
 
+procedure ammoTarget(Keypress: TKeyEvent);
+begin
+   case GetKeyEventCode(Keypress) of
+    { Arrow keys }
+    kbdLeft: scrTargeting.cycleTargets(999);
+    kbdRight: scrTargeting.cycleTargets(998);
+    kbdUp: scrTargeting.cycleTargets(999);
+    KbdDown: scrTargeting.cycleTargets(998);
+  end;
+   { Numpad and VI keys }
+   case GetKeyEventChar(Keypress) of
+     '8', 'k', 'K': scrTargeting.cycleTargets(999);
+     '9', 'u', 'U': scrTargeting.cycleTargets(999);
+     '6', 'l', 'L': scrTargeting.cycleTargets(998);
+     '3', 'n', 'N': scrTargeting.cycleTargets(998);
+     '2', 'j', 'J': scrTargeting.cycleTargets(998);
+     '1', 'b', 'B': scrTargeting.cycleTargets(999);
+     '4', 'h', 'H': scrTargeting.cycleTargets(999);
+     '7', 'y', 'Y': scrTargeting.cycleTargets(998);
+     'x', 'X': { Exit Look input }
+      begin
+        main.gameState := stGame;
+        scrTargeting.restorePlayerGlyph;
+        ui.clearPopup;
+      end;
+   end;
 end;
 
 procedure WinAlphaInput(Keypress: TKeyEvent);

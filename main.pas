@@ -19,7 +19,8 @@ uses
 type
   gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
     stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget,
-    stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha, stSelectAmmo);
+    stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha,
+    stSelectAmmo, stSelectTarget);
 
 var
   (* State machine for game menus / controls *)
@@ -350,6 +351,8 @@ begin
       stTarget: targetInput(Keypress);
       { ---------------------------------    Select projectile screen  }
       stSelectAmmo: ammoProjectile(Keypress);
+      { ---------------------------------    Cycle through targets  }
+      stSelectTarget: ammoTarget(Keypress);
       { ---------------------------------    Confirm overwrite game }
       stLoseSave: LoseSaveInput(Keypress);
       { ---------------------------------    Winning Alpha version of game }
