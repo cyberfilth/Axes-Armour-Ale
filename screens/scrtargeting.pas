@@ -8,7 +8,7 @@ unit scrTargeting;
 interface
 
 uses
-  SysUtils, Classes, map, entities, video, ui, camera, fov, items, scrGame, los;
+  SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, scrGame, los;
 
 type
   (* Weapons *)
@@ -22,6 +22,7 @@ type
   (* Enemies *)
   throwTargets = record
     id, x, y: smallint;
+    distance: single;
     Name: string;
   end;
 
@@ -293,8 +294,9 @@ end;
 
 procedure projectileTarget;
 var
-  i, i2: smallint;
+  i, i2, dx, dy, closestID: smallint;
   tgtList:  array[0..30] of throwTargets;
+  i3: single;
 begin
   LockScreenUpdate;
   (* Clear the message log *)
@@ -302,12 +304,15 @@ begin
   (*  Initialise array *)
   i := 0;
   i2 := 0;
+  i3 := 30.0;
+  closestID := 0;
   for i := 0 to 30 do
   begin
     tgtList[i].id := 0;
     tgtList[i].x := 0;
     tgtList[i].y := 0;
     tgtList[i].Name := 'empty';
+    tgtList[i].distance := 100.0;
   end;
 
   (* Check if any enemies are near *)
@@ -324,30 +329,34 @@ begin
         tgtList[i2].x := entityList[i].posX;
         tgtList[i2].y := entityList[i].posY;
         tgtList[i2].Name := entityList[i].race;
+        (* Calculate distance from the player *)
+        dx := entityList[0].posX - entityList[i].posX;
+        dy := entityList[0].posY - entityList[i].posY;
+        (* Add the distance to the array *)
+        tgtList[i2].distance := sqrt(dx ** 2 + dy ** 2);
         Inc(i2);
       end;
     end;
   end;
 
   (* Get the closest target *)
- // use a distance function like
-
- (*
-
-dx := entityList[0].posX - NPC.posX;
-dy := entityList[0].posY - NPC.posY;
-distance := sqrt(dx ** 2 + dy ** 2);
-
-Result := distance
-
- *)
-
-  (* Show the entities *)
   for i := 0 to 30 do
   begin
-    if (tgtList[i].Name <> 'empty') then
-       ui.displayMessage(tgtList[i].Name);
+    if (tgtList[i].distance < i3) and (tgtList[i].Name <> 'empty') then
+    begin
+      i3 := tgtList[i].distance;
+      closestID := i;
+    end;
   end;
+
+  ui.displayMessage('The closest enemy is ' + tgtList[closestID].Name);
+
+   map.mapDisplay[tgtList[closestID].y, tgtList[closestID].x - 1].GlyphColour := 'pinkBlink';
+   map.mapDisplay[tgtList[closestID].y, tgtList[closestID].x - 1].Glyph := '[';
+   map.mapDisplay[tgtList[closestID].y, tgtList[closestID].x + 1].GlyphColour := 'pinkBlink';
+   map.mapDisplay[tgtList[closestID].y, tgtList[closestID].x + 1].Glyph := ']';
+
+
 
   (* Repaint map *)
   camera.drawMap;
