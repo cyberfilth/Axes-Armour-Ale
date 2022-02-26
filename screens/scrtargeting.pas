@@ -8,7 +8,7 @@ unit scrTargeting;
 interface
 
 uses
-  SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, scrGame, los;
+  SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, scrGame, logging;
 
 type
   (* Weapons *)
@@ -26,6 +26,10 @@ type
     Name: string;
   end;
 
+const
+  maxTgts = 30;
+  empty = 'xxx';
+
 var
   (* Target coordinates *)
   targetX, targetY: smallint;
@@ -33,11 +37,11 @@ var
   safeX, safeY: smallint;
   (* Throwable items *)
   throwableWeapons: array[0..10] of Equipment;
-  weaponAmount: smallint;
+  weaponAmount, selectedTarget: smallint;
   (* Selected projectile *)
   chosenProjectile: smallint;
   (* List of projectile targets *)
-  tgtList: array[0..30] of throwTargets;
+  tgtList: array[0..maxTgts] of throwTargets;
 
 (* Look around the map *)
 procedure look(dir: word);
@@ -134,7 +138,8 @@ begin
       (* Check to see if the entity is the player *)
       if (entities.getCreatureID(targetX, targetY) = 0) then
       begin
-        healthMsg := 'Health: ' + IntToStr(entities.getCreatureHP(targetX, targetY)) + '/' + IntToStr(entities.getCreatureMaxHP(targetX, targetY));
+        healthMsg := 'Health: ' + IntToStr(entities.getCreatureHP(targetX, targetY)) +
+          '/' + IntToStr(entities.getCreatureMaxHP(targetX, targetY));
         playerName := entityList[0].race + ' the ' + entityList[0].description;
         TextOut(centreX(playerName), 21, 'white', playerName);
         TextOut(centreX(healthMsg), 22, 'white', healthMsg);
@@ -152,8 +157,10 @@ begin
     (* else to see if an item is under the cursor *)
     else if (items.containsItem(targetX, targetY) = True) then
     begin
-      TextOut(centreX(getItemName(targetX, targetY)), 21, 'white', getItemName(targetX, targetY));
-      TextOut(centreX(getItemDescription(targetX, targetY)), 22, 'white', getItemDescription(targetX, targetY));
+      TextOut(centreX(getItemName(targetX, targetY)), 21, 'white',
+        getItemName(targetX, targetY));
+      TextOut(centreX(getItemDescription(targetX, targetY)), 22,
+        'white', getItemDescription(targetX, targetY));
     end
     (* else describe the terrain *)
     else if (map.maparea[targetY, targetX].Glyph = '.') then
@@ -195,7 +202,7 @@ begin
   for b := 0 to 10 do
   begin
     throwableWeapons[b].id := b;
-    throwableWeapons[b].Name := 'Empty';
+    throwableWeapons[b].Name := empty;
     throwableWeapons[b].mnuOption := 'x';
     throwableWeapons[b].baseDMG := 0;
     throwableWeapons[b].glyph := 'x';
@@ -222,14 +229,18 @@ begin
   if (items.containsItem(entityList[0].posX, entityList[0].posY) = True) then
   begin
     if (items.isItemThrowable(entityList[0].posX, entityList[0].posY) = True) then
-    (* Add to list of throwable weapons *)
+      (* Add to list of throwable weapons *)
     begin
       throwableWeapons[b].id := items.getItemID(entityList[0].posX, entityList[0].posY);
-      throwableWeapons[b].Name := items.getItemName(entityList[0].posX, entityList[0].posY) + ' (on the ground)';
+      throwableWeapons[b].Name :=
+        items.getItemName(entityList[0].posX, entityList[0].posY) + ' (on the ground)';
       throwableWeapons[b].mnuOption := mnuChar;
-      throwableWeapons[b].baseDMG := items.getThrowDamage(entityList[0].posX, entityList[0].posY);
-      throwableWeapons[b].glyph := items.getItemGlyph(entityList[0].posX, entityList[0].posY);
-      throwableWeapons[b].glyphColour := items.getItemColour(entityList[0].posX, entityList[0].posY);
+      throwableWeapons[b].baseDMG :=
+        items.getThrowDamage(entityList[0].posX, entityList[0].posY);
+      throwableWeapons[b].glyph :=
+        items.getItemGlyph(entityList[0].posX, entityList[0].posY);
+      throwableWeapons[b].glyphColour :=
+        items.getItemColour(entityList[0].posX, entityList[0].posY);
       Inc(weaponAmount);
       projectileAvailable := True;
     end;
@@ -309,12 +320,12 @@ begin
   i2 := 0;
   i3 := 30.0;
   closestID := 0;
-  for i := 0 to 30 do
+  for i := 0 to maxTgts do
   begin
-    tgtList[i].id := 0;
+    tgtList[i].id := i;
     tgtList[i].x := 0;
     tgtList[i].y := 0;
-    tgtList[i].Name := 'empty';
+    tgtList[i].Name := empty;
     tgtList[i].distance := 100.0;
   end;
 
@@ -324,57 +335,90 @@ begin
     (* First check an NPC is visible (and not dead) *)
     if (entityList[i].inView = True) and (entityList[i].isDead = False) then
     begin
-      (* Doubling down on this as the list didn't update correctly without the following line *)
-      if (los.inView(entityList[0].posX, entityList[0].posY, entityList[i].posX, entityList[i].posY, entityList[0].visionRange) = True) then
-      begin
-        (* Add NPC to list of targets *)
-        tgtList[i2].id := entityList[i].npcID;
-        tgtList[i2].x := entityList[i].posX;
-        tgtList[i2].y := entityList[i].posY;
-        tgtList[i2].Name := entityList[i].race;
-        (* Calculate distance from the player *)
-        dx := entityList[0].posX - entityList[i].posX;
-        dy := entityList[0].posY - entityList[i].posY;
-        (* Add the distance to the array *)
-        tgtList[i2].distance := sqrt(dx ** 2 + dy ** 2);
-        Inc(i2);
-      end;
+      (* Add NPC to list of targets *)
+      tgtList[i].x := entityList[i].posX;
+      tgtList[i].y := entityList[i].posY;
+      tgtList[i].Name := entityList[i].race;
+      (* Calculate distance from the player *)
+      dx := entityList[0].posX - entityList[i].posX;
+      dy := entityList[0].posY - entityList[i].posY;
+      (* Add the distance to the array *)
+      tgtList[i].distance := sqrt(dx ** 2 + dy ** 2);
+      Inc(i2);
     end;
   end;
 
   (* Get the closest target *)
-  for i := 0 to 30 do
+  for i := 0 to maxTgts do
   begin
-    if (tgtList[i].distance < i3) and (tgtList[i].Name <> 'empty') then
+    if (tgtList[i].distance < i3) and (tgtList[i].Name <> empty) then
     begin
       i3 := tgtList[i].distance;
       closestID := i;
     end;
   end;
-
+  selectedTarget := closestID;
   cycleTargets(closestID);
 end;
 
 procedure cycleTargets(selection: smallint);
+var
+  i: smallint;
+  targetName: string;
 begin
   gameState := stSelectTarget;
+  ui.clearPopup;
+  paintOverMsg;
+  (* Redraw all NPC's *)
+  for i := 1 to entities.npcAmount do
+    entities.redrawMapDisplay(i);
+  (* Redraw all items *)
+  items.redrawItems;
 
-  // redraw the game and NPC's
 
 
   if (selection < 900) then
-  (* Highlight the closest NPC *)
+    (* Highlight the closest NPC *)
+    targetName := tgtList[selection].Name
+
+ (* Cycle through the NPC's to beginning of list *)
+  else if (selection = 999) then
   begin
-    map.mapDisplay[tgtList[selection].y, tgtList[selection].x - 1].GlyphColour := 'pinkBlink';
-    map.mapDisplay[tgtList[selection].y, tgtList[selection].x - 1].Glyph := '[';
-    map.mapDisplay[tgtList[selection].y, tgtList[selection].x + 1].GlyphColour := 'pinkBlink';
-    map.mapDisplay[tgtList[selection].y, tgtList[selection].x + 1].Glyph := ']';
+    while (selectedTarget > 0) and (tgtList[selectedTarget].Name <> empty) do
+    begin
+      Dec(selectedTarget);
+      if (tgtList[selectedTarget].Name <> empty) then
+         begin
+              targetName := tgtList[selectedTarget].Name;
+              exit;
+         end;
+      if (selectedTarget = 0) then
+        selectedTarget := maxTgts;
+    end;
+  end
+  (* Cycle through the NPC's to end of list *)
+  else if (selection = 999) then
+  begin
+    while (selectedTarget < maxTgts) and (tgtList[selectedTarget].Name <> empty) do
+    begin
+      Inc(selectedTarget);
+      if (tgtList[selectedTarget].Name <> empty) then
+         begin
+              targetName := tgtList[selectedTarget].Name;
+              exit;
+         end;
+      if (selectedTarget = maxTgts) then
+        selectedTarget := 0;
+    end;
   end;
 
-  // else
-  // Left = 999
-  // right = 998
+  logAction(IntToStr(selectedTarget));
 
+  (* Highlight the targeted NPC *)
+  map.mapDisplay[tgtList[selectedTarget].y, tgtList[selectedTarget].x].GlyphColour := 'pinkBlink';
+
+  TextOut(centreX(targetName), 23, 'white', targetName);
+  TextOut(centreX('[x] to exit the Throw screen'), 24, 'lightGrey', '[x] to exit the Throw screen');
 
   (* Repaint map *)
   camera.drawMap;
@@ -407,10 +451,9 @@ begin
     yPOS := (19 - weaponAmount);
     for i := 0 to 10 do
     begin
-      if (throwableWeapons[i].Name <> 'Empty') then
+      if (throwableWeapons[i].Name <> empty) then
       begin
-        TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption +
-          '] ' + throwableWeapons[i].Name);
+        TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name);
         Inc(yPOS);
       end;
     end;
@@ -418,14 +461,15 @@ begin
     (* Get the range of choices *)
     for i := 0 to 10 do
     begin
-      if (throwableWeapons[i].Name <> 'Empty') then
-         lastOption := throwableWeapons[i].mnuOption;
+      if (throwableWeapons[i].Name <> empty) then
+        lastOption := throwableWeapons[i].mnuOption;
     end;
     if (lastOption <> 'a') then
-       targetOptsMessage := 'a - ' + lastOption + ' to select something to throw';
+      targetOptsMessage := 'a - ' + lastOption + ' to select something to throw';
 
     TextOut(centreX(targetOptsMessage), 23, 'white', targetOptsMessage);
-    TextOut(centreX('[x] to exit the Throw screen'), 24, 'lightGrey', '[x] to exit the Throw screen');
+    TextOut(centreX('[x] to exit the Throw screen'), 24, 'lightGrey',
+      '[x] to exit the Throw screen');
     UnlockScreenUpdate;
     UpdateScreen(False);
     (* Wait for selection *)
@@ -435,7 +479,8 @@ begin
   begin
     (* Repaint map *)
     camera.drawMap;
-    fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+    fov.fieldOfView(entityList[0].posX, entityList[0].posY,
+      entityList[0].visionRange, 1);
     UnlockScreenUpdate;
     UpdateScreen(False);
     gameState := stGame;
