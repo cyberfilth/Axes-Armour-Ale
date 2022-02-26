@@ -36,6 +36,7 @@ addToInventory	player/backup/player_inventory.pas	/^function addToInventory(item
 addToInventory	player/player_inventory.pas	/^function addToInventory(itemNumber: smallint): boolean;$/;"	f
 ammoProjectile	backup/keyboardinput.pas	/^procedure ammoProjectile(Keypress: TKeyEvent);$/;"	p
 ammoProjectile	keyboardinput.pas	/^procedure ammoProjectile(Keypress: TKeyEvent);$/;"	p
+ammoTarget	backup/keyboardinput.pas	/^procedure ammoTarget(Keypress: TKeyEvent);$/;"	p
 ammoTarget	keyboardinput.pas	/^procedure ammoTarget(Keypress: TKeyEvent);$/;"	p
 areaBurnEffect	animation.pas	/^procedure areaBurnEffect(getEm: array of smallint);$/;"	p
 areaBurnEffect	backup/animation.pas	/^procedure areaBurnEffect(getEm: array of smallint);$/;"	p
