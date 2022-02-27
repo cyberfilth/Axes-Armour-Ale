@@ -637,6 +637,8 @@ begin
     'U': scrTargeting.cycleTargets(999);
     '6', 'l', 'L', '7', 'y', 'Y', '2', 'j', 'J', '3', 'n',
     'N': scrTargeting.cycleTargets(998);
+    't', 'T': { Throw selected projectile }
+    scrTargeting.chuckProjectile;
     'x', 'X': { Exit Look input }
     begin
       main.gameState := stGame;

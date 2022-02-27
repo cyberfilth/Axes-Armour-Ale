@@ -8,8 +8,7 @@ unit scrTargeting;
 interface
 
 uses
-  SysUtils, Classes, Math, map, entities, video, ui, camera, fov,
-  items, scrGame;
+  SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, los, scrGame;
 
 type
   (* Weapons *)
@@ -55,6 +54,8 @@ procedure projectileTarget;
 procedure cycleTargets(selection: smallint);
 (* Start the Target / Throw process *)
 procedure target;
+(* Throw projectile at confirmed target *)
+procedure chuckProjectile;
 (* Repaint the player when exiting look/target screen *)
 procedure restorePlayerGlyph;
 (* Paint over the message log *)
@@ -466,6 +467,27 @@ begin
   end;
 
 end;
+
+procedure chuckProjectile;
+var
+  i: smallint;
+begin
+
+  (* Calculate damage caused *)
+
+  (* Calculate the path of the projectile *)
+  los.playerProjectilePath(entityList[0].posX, entityList[0].posY, tgtList[selectedTarget].x, tgtList[selectedTarget].y, throwableWeapons[chosenProjectile].glyph, throwableWeapons[chosenProjectile].glyphColour);
+
+  LockScreenUpdate;
+  (* Restore the game map *)
+  main.returnToGameScreen;
+  (* Restore screen *)
+  paintOverMsg;
+  ui.restoreMessages;
+  UnlockScreenUpdate;
+  UpdateScreen(False);
+  main.gameState := stGame;
+ end;
 
 procedure restorePlayerGlyph;
 begin

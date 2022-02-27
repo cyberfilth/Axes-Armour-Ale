@@ -82,6 +82,8 @@ checkNotifications	screens/backup/dlginfo.pas	/^procedure checkNotifications;$/;
 checkNotifications	screens/dlginfo.pas	/^procedure checkNotifications;$/;"	p
 choose	screens/backup/scrcharselect.pas	/^procedure choose;$/;"	p
 choose	screens/scrcharselect.pas	/^procedure choose;$/;"	p
+chuckProjectile	screens/backup/scrtargeting.pas	/^procedure chuckProjectile;$/;"	p
+chuckProjectile	screens/scrtargeting.pas	/^procedure chuckProjectile;$/;"	p
 clearPopup	backup/ui.pas	/^procedure clearPopup;$/;"	p
 clearPopup	ui.pas	/^procedure clearPopup;$/;"	p
 clearStatusBar	backup/ui.pas	/^procedure clearStatusBar;$/;"	p
@@ -460,6 +462,8 @@ paintOverMsg	screens/backup/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
 paintOverMsg	screens/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
 pickUp	player/backup/player.pas	/^procedure pickUp;$/;"	p
 pickUp	player/player.pas	/^procedure pickUp;$/;"	p
+playerProjectilePath	vision/backup/los.pas	/^procedure playerProjectilePath(x2, y2, x1, y1: smallint; g, col: shortstring);$/;"	p
+playerProjectilePath	vision/los.pas	/^procedure playerProjectilePath(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
 processStatus	player/backup/player.pas	/^procedure processStatus;$/;"	p
 processStatus	player/player.pas	/^procedure processStatus;$/;"	p
 projectileTarget	screens/backup/scrtargeting.pas	/^procedure projectileTarget;$/;"	p
@@ -562,6 +566,8 @@ targetInput	backup/keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent
 targetInput	keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
 throwRock	animation.pas	/^procedure throwRock(id: smallint; var flightPath: a);$/;"	p
 throwRock	backup/animation.pas	/^procedure throwRock(id: smallint; var flightPath: a);$/;"	p
+thrownObjectAnim	animation.pas	/^procedure thrownObjectAnim(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
+thrownObjectAnim	backup/animation.pas	/^procedure thrownObjectAnim(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
 titleInput	backup/keyboardinput.pas	/^procedure titleInput(Keypress: TKeyEvent);$/;"	p
 titleInput	keyboardinput.pas	/^procedure titleInput(Keypress: TKeyEvent);$/;"	p
 unoccupy	map.pas	/^procedure unoccupy(x, y: smallint);$/;"	p

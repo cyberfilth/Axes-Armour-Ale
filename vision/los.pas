@@ -10,14 +10,20 @@ interface
 uses
   Classes, map, animation;
 
+const
+  plyrTargetRange = 30;
+
 var
   totalSpaces: smallint;
 
+{ TODO -cRefactoring : Refactor all projectile code to make one reusable procedure }
 
 (* Checks that the distance to the target is within vision range *)
 function inView(x1, y1, x2, y2, visRange: smallint): boolean;
 (* Line of sight for projectiles *)
 procedure firingLine(id, x1, y1, x2, y2: smallint);
+(* Player throws projectiles *)
+procedure playerProjectilePath(x1, y1, x2, y2: smallint; g, col: shortstring);
 
 implementation
 
@@ -180,6 +186,87 @@ begin
   end;
   (* Write the target path to the animation unit *)
   animation.throwRock(id, targetArray);
+end;
+
+procedure playerProjectilePath(x1, y1, x2, y2: smallint; g, col: shortstring);
+var
+  i, deltax, deltay, numpixels, d, dinc1, dinc2, x, xinc1, xinc2, y,
+  yinc1, yinc2: smallint;
+  (* Path of player launched projectiles *)
+  playerTargetArray: array[1..plyrTargetRange] of TPoint;
+begin
+  (* Initialise array *)
+  for i := 1 to plyrTargetRange do
+  begin
+    playerTargetArray[i].X := 0;
+    playerTargetArray[i].Y := 0;
+  end;
+  (* Calculate delta X and delta Y for initialisation *)
+  deltax := abs(x2 - x1);
+  deltay := abs(y2 - y1);
+  (* Initialise all vars based on which is the independent variable *)
+  if deltax >= deltay then
+  begin
+    (* x is independent variable *)
+    numpixels := deltax + 1;
+    d := (2 * deltay) - deltax;
+    dinc1 := deltay shl 1;
+    dinc2 := (deltay - deltax) shl 1;
+    xinc1 := 1;
+    xinc2 := 1;
+    yinc1 := 0;
+    yinc2 := 1;
+  end
+  else
+  begin
+    (* y is independent variable *)
+    numpixels := deltay + 1;
+    d := (2 * deltax) - deltay;
+    dinc1 := deltax shl 1;
+    dinc2 := (deltax - deltay) shl 1;
+    xinc1 := 0;
+    xinc2 := 1;
+    yinc1 := 1;
+    yinc2 := 1;
+  end;
+  (* Make sure x and y move in the right directions *)
+  if x1 > x2 then
+  begin
+    xinc1 := -xinc1;
+    xinc2 := -xinc2;
+  end;
+  if y1 > y2 then
+  begin
+    yinc1 := -yinc1;
+    yinc2 := -yinc2;
+  end;
+  (* Start drawing at *)
+  x := x1;
+  y := y1;
+  (* Draw the pixels *)
+  for i := 1 to numpixels do
+  begin
+    (* Write path to the target array *)
+    if (numpixels <= plyrTargetRange) then
+    begin
+      playerTargetArray[i].X := x;
+      playerTargetArray[i].Y := y;
+    end;
+    if d < 0 then
+    begin
+      d := d + dinc1;
+      x := x + xinc1;
+      y := y + yinc1;
+    end
+    else
+    begin
+      d := d + dinc2;
+      x := x + xinc2;
+      y := y + yinc2;
+    end;
+  end;
+  (* Write the target path to the animation unit *)
+  animation.thrownObjectAnim(playerTargetArray, g, col);
 end;
 
 end.
