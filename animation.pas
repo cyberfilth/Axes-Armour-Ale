@@ -53,8 +53,8 @@ begin
         map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].Glyph := '.';
       end;
       (* Draw rock *)
-      map.mapDisplay[flightPath[i].Y, flightPath[i].X].GlyphColour := 'white';
-      map.mapDisplay[flightPath[i].Y, flightPath[i].X].Glyph := '*';
+      map.mapDisplay[flightPath[i].Y, flightPath[i].X].GlyphColour := 'lightGrey';
+      map.mapDisplay[flightPath[i].Y, flightPath[i].X].Glyph := chr(7);
       sleep(100);
     end;
     (* Repaint map *)

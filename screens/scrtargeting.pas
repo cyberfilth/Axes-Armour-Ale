@@ -469,8 +469,6 @@ begin
 end;
 
 procedure chuckProjectile;
-var
-  i: smallint;
 begin
 
   (* Calculate damage caused *)

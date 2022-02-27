@@ -49,6 +49,11 @@ begin
       maxHP := 15;
       attack := 6;
       defence := 2;
+      visionRange := 5;
+      (* Ability to cast enchantments *)
+      player_stats.maxMagick := 20;
+      player_stats.currentMagick := 20;
+      player_stats.dexterity := 4;
     end
     (* Dwarf stats *)
     else if (player_stats.playerRace = 'Dwarf') then
@@ -56,6 +61,10 @@ begin
       maxHP := 25;
       attack := 5;
       defence := 3;
+      visionRange := 5;
+      player_stats.maxMagick := 0;
+      player_stats.currentMagick := 0;
+      player_stats.dexterity := 4;
     end
     else
       (* Human stats *)
@@ -63,16 +72,15 @@ begin
       maxHP := 20;
       attack := 5;
       defence := 2;
+      visionRange := 4;
+      player_stats.maxMagick := 12;
+      player_stats.currentMagick := 12;
+      player_stats.dexterity := 4;
     end;
     currentHP := maxHP;
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := 0;
-    (* Non-human characters can see further *)
-    if (player_stats.playerRace = 'Human') then
-      visionRange := 4
-    else
-      visionRange := 5;
     (* Set max vision range *)
     player_stats.maxVisionRange := visionRange;
     moveCount := 0;
@@ -90,25 +98,6 @@ begin
     tmrPoison := 0;
     posX := map.startX;
     posY := map.startY;
-  end;
-  (* Ability to cast enchantments *)
-  { Elf }
-  if (player_stats.playerRace = 'Elf') then
-  begin
-    player_stats.maxMagick := 20;
-    player_stats.currentMagick := 20;
-  end
-  { Human }
-  else if (player_stats.playerRace = 'Human') then
-  begin
-    player_stats.maxMagick := 12;
-    player_stats.currentMagick := 12;
-  end
-  { Dwarf - Cannot cast magic }
-  else
-  begin
-    player_stats.maxMagick := 0;
-    player_stats.currentMagick := 0;
   end;
   (* Equipped item durability *)
   player_stats.numEquippedUses := 0;
