@@ -353,6 +353,7 @@ var
   targetName: string;
 begin
   gameState := stSelectTarget;
+  targetName := '';
   ui.clearPopup;
   paintOverMsg;
   (* Redraw all NPC's *)
@@ -397,8 +398,9 @@ begin
   (* Highlight the targeted NPC *)
   map.mapDisplay[tgtList[selectedTarget].y, tgtList[selectedTarget].x].GlyphColour := 'pinkBlink';
   (* Help text *)
-  TextOut(centreX(targetName), 23, 'white', targetName);
-  TextOut(centreX('[x] to exit the Throw screen'), 24, 'lightGrey', '[x] to exit the Throw screen');
+  TextOut(centreX(targetName), 22, 'white', targetName);
+  TextOut(centreX('Left and Right to cycle between targets'), 23, 'lightGrey', 'Left and Right to cycle between targets');
+  TextOut(centreX('[t] Throw ' + throwableWeapons[chosenProjectile].Name + '  |  [x] Cancel'), 24, 'lightGrey', '[t] Throw ' + throwableWeapons[chosenProjectile].Name + '  |  [x] Cancel');
 
   (* Repaint map *)
   camera.drawMap;
