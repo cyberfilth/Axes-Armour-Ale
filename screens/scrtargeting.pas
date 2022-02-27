@@ -8,7 +8,7 @@ unit scrTargeting;
 interface
 
 uses
-  SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, los, scrGame;
+  SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, los, scrGame, player_stats;
 
 type
   (* Weapons *)
@@ -469,9 +469,36 @@ begin
 end;
 
 procedure chuckProjectile;
+var
+  tgtDistance, dex, damage, diff: smallint;
 begin
-
   (* Calculate damage caused *)
+
+  { Convert distance to target from real number to integer }
+   tgtDistance := round(tgtList[selectedTarget].distance);
+  { Get the players Dexterity }
+  dex := player_stats.dexterity;
+  { if dex > tgtDistance = the remainder is added to projectile damage
+    if dex < tgtDistance = the difference is removed from the damage.
+    Closer targets take more damage                                    }
+  damage := throwableWeapons[chosenProjectile].baseDMG;
+  (* Add the difference to damage *)
+  if (dex > tgtDistance) then
+  begin
+    diff := dex - tgtDistance;
+    Inc(damage, diff);
+  end
+  else
+  (* Subtract the difference from damage *)
+  begin
+    diff := dexterity - tgtDistance;
+    if (diff > 0) then
+       Dec(damage, diff)
+    else
+        diff := 0;
+  end;
+
+
 
   (* Calculate the path of the projectile *)
   los.playerProjectilePath(entityList[0].posX, entityList[0].posY, tgtList[selectedTarget].x, tgtList[selectedTarget].y, throwableWeapons[chosenProjectile].glyph, throwableWeapons[chosenProjectile].glyphColour);
