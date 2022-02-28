@@ -5,27 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link rel="stylesheet" type="text/css" href="tipuesearch/tipuesearch.css">
-
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><form class="search-form" action="_tipue_results.html"><div class="search-input"><input type="text" name="q" id="tipue_search_input"></div><div class="search-button"><input type="button" id="tipue_search_button" onclick="this.form.submit();"></div></form>
-<div style="clear: both"></div>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#tipue_search_input').tipuesearch({
-        /* 10 items to display seems standard */
-        'show': 10,
-        /* For PasDoc docs, showing urls is not very useful,
-           since the page title already shows the unit and identifier. */
-        'showURL': false
-    });
-});
-</script>
-</td><td class="content">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
 <h1 class="unit">Unit item_lookup</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section">Variables</div></div>
@@ -33,7 +17,7 @@ $(document).ready(function() {
 <p>
 Lookup table for items, based on the environment</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li><a  href="universe.html">universe</a></li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="ale_tankard.html">ale_tankard</a></li><li><a  href="potion_curePoison.html">potion_curePoison</a></li><li><a  href="crude_dagger.html">crude_dagger</a></li><li><a  href="basic_club.html">basic_club</a></li><li><a  href="leather_armour1.html">leather_armour1</a></li><li><a  href="cloth_armour1.html">cloth_armour1</a></li><li><a  href="smugglersMap.html">smugglersMap</a></li><li><a  href="staff_minor_scorch.html">staff_minor_scorch</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li><a  href="universe.html">universe</a></li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="ale_tankard.html">ale_tankard</a></li><li><a  href="potion_curePoison.html">potion_curePoison</a></li><li><a  href="crude_dagger.html">crude_dagger</a></li><li><a  href="basic_club.html">basic_club</a></li><li>rock</li><li><a  href="leather_armour1.html">leather_armour1</a></li><li><a  href="cloth_armour1.html">cloth_armour1</a></li><li><a  href="smugglersMap.html">smugglersMap</a></li><li><a  href="staff_minor_scorch.html">staff_minor_scorch</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -49,8 +33,8 @@ Lookup table for items, based on the environment</p>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="item_lookup.html#caveItems1">caveItems1</a></b>: array[1..4] of string =
-    ('aleTankard', 'clothArmour1', 'curePotion', 'basicClub');</code></td>
+<td class="itemcode"><code><b><a  href="item_lookup.html#caveItems1">caveItems1</a></b>: array[1..5] of string =
+    ('aleTankard', 'clothArmour1', 'curePotion', 'basicClub', 'rock');</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code><b><a  href="item_lookup.html#caveItems2">caveItems2</a></b>: array[1..4] of string =
@@ -93,8 +77,8 @@ Execute useItem procedure</p>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="caveItems1"></span><code><b>caveItems1</b>: array[1..4] of string =
-    ('aleTankard', 'clothArmour1', 'curePotion', 'basicClub');</code></td>
+<td class="itemcode"><span id="caveItems1"></span><code><b>caveItems1</b>: array[1..5] of string =
+    ('aleTankard', 'clothArmour1', 'curePotion', 'basicClub', 'rock');</code></td>
 </tr>
 <tr><td colspan="1">
 <p>

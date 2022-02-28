@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Axes, Armour &amp; Ale: globalUtils: Record coordinates</title>
+<title>Axes, Armour &amp; Ale: scrTargeting: Record TthrowTargets</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -10,28 +10,46 @@
 <body>
 <table class="container"><tr><td class="navigation">
 <h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
-<span id="coordinates"></span><h1 class="cio">Record coordinates</h1>
+<span id="TthrowTargets"></span><h1 class="cio">Record TthrowTargets</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Hierarchy</div><div class="one_section"><a class="section" href="#PasDoc-Fields">Fields</a></div><div class="one_section">Methods</div><div class="one_section">Properties</div></div>
 <span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
 <p class="unitlink">
-<a  href="globalUtils.html">globalUtils</a></p>
+<a  href="scrTargeting.html">scrTargeting</a></p>
 <h2 class="declaration">Declaration</h2>
 <p class="declaration">
-<code>type coordinates = record</code></p>
+<code>type TthrowTargets = record</code></p>
 <h2 class="description">Description</h2>
-&nbsp;<h2 class="overview">Overview</h2>
+<p>
+Enemies</p>
+<h2 class="overview">Overview</h2>
 <span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="globalUtils.coordinates.html#x">x</a></b>: smallint;</code></td>
+<td class="itemcode"><code><b><a  href="scrTargeting.TthrowTargets.html#id">id</a></b>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="globalUtils.coordinates.html#y">y</a></b>: smallint;</code></td>
+<td class="itemcode"><code><b><a  href="scrTargeting.TthrowTargets.html#x">x</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="scrTargeting.TthrowTargets.html#y">y</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="scrTargeting.TthrowTargets.html#distance">distance</a></b>: single;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="scrTargeting.TthrowTargets.html#Name">Name</a></b>: string;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Fields</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="id"></span><code><b>id</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="x"></span><code><b>x</b>: smallint;</code></td>
@@ -42,6 +60,20 @@
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="y"></span><code><b>y</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="distance"></span><code><b>distance</b>: single;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Name"></span><code><b>Name</b>: string;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>

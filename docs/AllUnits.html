@@ -5,27 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<link rel="stylesheet" type="text/css" href="tipuesearch/tipuesearch.css">
-
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
 <table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p><form class="search-form" action="_tipue_results.html"><div class="search-input"><input type="text" name="q" id="tipue_search_input"></div><div class="search-button"><input type="button" id="tipue_search_button" onclick="this.form.submit();"></div></form>
-<div style="clear: both"></div>
-
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#tipue_search_input').tipuesearch({
-        /* 10 items to display seems standard */
-        'show': 10,
-        /* For PasDoc docs, showing urls is not very useful,
-           since the page title already shows the unit and identifier. */
-        'showURL': false
-    });
-});
-</script>
-</td><td class="content">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
 <h1 class="allitems">All Units</h1>
 <table class="unitstable wide_list">
 <tr class="listheader">
@@ -72,7 +56,7 @@ $(document).ready(function() {
 <td class="itemname"><a class="bold" href="combat_resolver.html">combat_resolver</a></td>
 <td class="itemdesc"><p>Combat Resolver unit
 
-<p>Combat is decided by rolling a random number between 1 and the entity's ATTACK value. Then modifiers are added, for example, a 1D6+4 axe will roll a 6 sided die and add the result plus 4 to the total damage amount. This is then removed from the opponents defence rating. If the opponents defence doesn't soak up the whole damage amount, the remainder is taken from their Health. Spite damage is when an entity loses a combat round and the player can roll a 6, dealing damage 'in spite' of losing the round.
+<p>Melee combat is decided by rolling a random number between 1 and the entity's ATTACK value. Then modifiers are added, for example, a 1D6+4 axe will roll a 6 sided die and add the result plus 4 to the total damage amount. This is then removed from the opponents defence rating. If the opponents defence doesn't soak up the whole damage amount, the remainder is taken from their Health. Spite damage is when an entity loses a combat round and the player can roll a 6, dealing damage 'in spite' of losing the round.
 
 <p>This is partly inspired by the Tunnels &amp; Trolls rules, my favourite tabletop RPG.</p></td>
 </tr>
@@ -209,40 +193,44 @@ $(document).ready(function() {
 <td class="itemdesc"><p>Game over screen</p></td>
 </tr>
 <tr class="list2">
+<td class="itemname"><a class="bold" href="scrTargeting.html">scrTargeting</a></td>
+<td class="itemdesc"><p>Screen used for Look command and Throwing projectiles</p></td>
+</tr>
+<tr class="list">
 <td class="itemname"><a class="bold" href="scrTitle.html">scrTitle</a></td>
 <td class="itemdesc"><p>Title screen</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="scrWinAlpha.html">scrWinAlpha</a></td>
 <td class="itemdesc"><p>Game won screen - only used for Alpha testing</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="small_green_fungus.html">small_green_fungus</a></td>
 <td class="itemdesc"><p>Stationary hazard, deals poison damage in combat</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="small_hyena.html">small_hyena</a></td>
 <td class="itemdesc"><p>Weak predator, attacks other animals</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="smell.html">smell</a></td>
 <td class="itemdesc"><p>Smell map, a copy of the map is floodfilled with integers. Each integer increments the further away it is from the player. Creatures can then track the player by finding a tile with a lower number than the one that they're standing on.
 
 <p>The below routine is based on code from Stephen Peter (AKA speter)</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="smugglersMap.html">smugglersMap</a></td>
 <td class="itemdesc"><p>First quest MacGuffin, the smugglers map</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="staff_minor_scorch.html">staff_minor_scorch</a></td>
 <td class="itemdesc"><p>A magical staff of minor scorch, area effect</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="ui.html">ui</a></td>
 <td class="itemdesc"><p>User Interface - Unit responsible for displaying messages and screens</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="universe.html">universe</a></td>
 <td class="itemdesc"><p>Generate each dungeon, its levels and related info</p></td>
 </tr>
