@@ -60,6 +60,8 @@ procedure target;
 procedure chuckProjectile;
 (* Remove a thrown item from the ground *)
 procedure removeFromGround;
+(* Remove a thrown item from inventory *)
+procedure removeThrownFromInventory;
 (* Repaint the player when exiting look/target screen *)
 procedure restorePlayerGlyph;
 (* Paint over the message log *)
@@ -550,7 +552,6 @@ begin
           UnlockScreenUpdate;
           UpdateScreen(False);
           main.gameState := stGame;
-
         end
         else
             ui.displayMessage('The ' + throwableWeapons[chosenProjectile].Name + ' hits ' + opponent);
@@ -561,8 +562,9 @@ begin
 
   (* Remove item from ground or inventory *)
   if (throwableWeapons[chosenProjectile].onGround = True) then
-     removeFromGround;
-
+    removeFromGround
+  else
+    removeThrownFromInventory;
 
   LockScreenUpdate;
   (* Restore the game map *)
@@ -603,6 +605,28 @@ begin
           throwDamage := 0;
           discovered := False;
         end;
+end;
+
+procedure removeThrownFromInventory;
+var
+  itemNumber: smallint;
+begin
+  itemNumber := throwableWeapons[chosenProjectile].id;
+  (* Remove from inventory *)
+  player_inventory.inventory[itemNumber].sortIndex := 10;
+  player_inventory.inventory[itemNumber].Name := 'Empty';
+  player_inventory.inventory[itemNumber].equipped := False;
+  player_inventory.inventory[itemNumber].description := 'x';
+  player_inventory.inventory[itemNumber].article := 'x';
+  player_inventory.inventory[itemNumber].itemType := itmEmptySlot;
+  player_inventory.inventory[itemNumber].itemMaterial := matEmpty;
+  player_inventory.inventory[itemNumber].glyph := 'x';
+  player_inventory.inventory[itemNumber].glyphColour := 'x';
+  player_inventory.inventory[itemNumber].inInventory := False;
+  player_inventory.inventory[itemNumber].numUses := 0;
+  player_inventory.inventory[itemNumber].throwable := False;
+  player_inventory.inventory[itemNumber].throwDamage := 0;
+  player_inventory.inventory[itemNumber].useID := 0;
 end;
 
 procedure restorePlayerGlyph;

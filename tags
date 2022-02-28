@@ -490,8 +490,12 @@ redrawMapDisplay	backup/entities.pas	/^procedure redrawMapDisplay(id: byte);$/;"
 redrawMapDisplay	entities.pas	/^procedure redrawMapDisplay(id: byte);$/;"	p
 regenMagick	player/backup/player.pas	/^procedure regenMagick;$/;"	p
 regenMagick	player/player.pas	/^procedure regenMagick;$/;"	p
+removeFromGround	screens/backup/scrtargeting.pas	/^procedure removeFromGround;$/;"	p
+removeFromGround	screens/scrtargeting.pas	/^procedure removeFromGround;$/;"	p
 removeFromInventory	player/backup/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f
 removeFromInventory	player/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f
+removeThrownFromInventory	screens/backup/scrtargeting.pas	/^procedure removeThrownFromInventory;$/;"	p
+removeThrownFromInventory	screens/scrtargeting.pas	/^procedure removeThrownFromInventory;$/;"	p
 restoreMessages	backup/ui.pas	/^procedure restoreMessages;$/;"	p
 restoreMessages	ui.pas	/^procedure restoreMessages;$/;"	p
 restorePlayerGlyph	screens/backup/scrtargeting.pas	/^procedure restorePlayerGlyph;$/;"	p
