@@ -613,6 +613,9 @@ begin
     'k', 'K':
       if (scrTargeting.validProjectile('k') = True) then
         scrTargeting.projectileTarget;
+    'l', 'L':
+      if (scrTargeting.validProjectile('k') = True) then
+        scrTargeting.projectileTarget;
     'x', 'X': { Exit Look input }
     begin
       main.gameState := stGame;

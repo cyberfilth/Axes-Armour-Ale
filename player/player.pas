@@ -53,7 +53,7 @@ begin
       (* Ability to cast enchantments *)
       player_stats.maxMagick := 20;
       player_stats.currentMagick := 20;
-      player_stats.dexterity := 4;
+      player_stats.dexterity := 8;
     end
     (* Dwarf stats *)
     else if (player_stats.playerRace = 'Dwarf') then
@@ -64,7 +64,7 @@ begin
       visionRange := 5;
       player_stats.maxMagick := 0;
       player_stats.currentMagick := 0;
-      player_stats.dexterity := 4;
+      player_stats.dexterity := 6;
     end
     else
       (* Human stats *)
@@ -75,7 +75,7 @@ begin
       visionRange := 4;
       player_stats.maxMagick := 12;
       player_stats.currentMagick := 12;
-      player_stats.dexterity := 4;
+      player_stats.dexterity := 6;
     end;
     currentHP := maxHP;
     weaponDice := 0;

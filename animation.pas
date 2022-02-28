@@ -157,12 +157,17 @@ begin
       (* Draw projectile *)
       map.mapDisplay[flightPath[i].Y, flightPath[i].X].GlyphColour := prjColour;
       map.mapDisplay[flightPath[i].Y, flightPath[i].X].Glyph := prjGlyph;
+      (* Redraw all NPC'S *)
+      for p := 1 to entities.npcAmount do
+          entities.redrawMapDisplay(p);
       sleep(100);
     end;
     (* Repaint map *)
     camera.drawMap;
     fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
-
+    (* Redraw all NPC'S *)
+    for p := 1 to entities.npcAmount do
+        entities.redrawMapDisplay(p);
     UnlockScreenUpdate;
     UpdateScreen(False);
   end;

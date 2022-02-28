@@ -1,4 +1,4 @@
-(* Screen used for Look and targeting *)
+(* Screen used for Look command and Throwing projectiles *)
 
 unit scrTargeting;
 
@@ -16,6 +16,7 @@ type
     id, baseDMG: smallint;
     mnuOption: char;
     Name, glyph, glyphColour: shortstring;
+    onGround: boolean;
   end;
 
 type
@@ -28,6 +29,7 @@ type
 
 const
   empty = 'xxx';
+  maxWeapons = 11;
 
 var
   (* Target coordinates *)
@@ -35,7 +37,7 @@ var
   (* The last safe coordinates *)
   safeX, safeY: smallint;
   (* Throwable items *)
-  throwableWeapons: array[0..10] of Equipment;
+  throwableWeapons: array[0..maxWeapons] of Equipment;
   weaponAmount, selectedTarget, tgtAmount: smallint;
   (* Selected projectile *)
   chosenProjectile: smallint;
@@ -56,6 +58,8 @@ procedure cycleTargets(selection: smallint);
 procedure target;
 (* Throw projectile at confirmed target *)
 procedure chuckProjectile;
+(* Remove a thrown item from the ground *)
+procedure removeFromGround;
 (* Repaint the player when exiting look/target screen *)
 procedure restorePlayerGlyph;
 (* Paint over the message log *)
@@ -195,7 +199,7 @@ begin
   {       Check for projectiles     }
 
   (* Initialise array *)
-  for b := 0 to 10 do
+  for b := 0 to maxWeapons do
   begin
     throwableWeapons[b].id := b;
     throwableWeapons[b].Name := empty;
@@ -203,9 +207,10 @@ begin
     throwableWeapons[b].baseDMG := 0;
     throwableWeapons[b].glyph := 'x';
     throwableWeapons[b].glyphColour := 'x';
+    throwableWeapons[b].onGround := False;
   end;
   (* Check inventory for an item to throw *)
-  for b := 0 to 10 do
+  for b := 0 to maxWeapons - 1 do
   begin
     if (inventory[b].throwable = True) and (inventory[b].equipped = False) then
     begin
@@ -216,27 +221,28 @@ begin
       throwableWeapons[b].baseDMG := inventory[b].throwDamage;
       throwableWeapons[b].glyph := inventory[b].glyph;
       throwableWeapons[b].glyphColour := inventory[b].glyphColour;
+      throwableWeapons[b].onGround := False;
       Inc(mnuChar);
       Inc(weaponAmount);
       projectileAvailable := True;
     end;
   end;
+
   (* Check the ground under the player for an item to throw *)
-  if (items.containsItem(entityList[0].posX, entityList[0].posY) = True) then
+  if (items.containsItem(entityList[0].posX, entityList[0].posY) = True) and (items.isItemThrowable(entityList[0].posX, entityList[0].posY) = True) then
   begin
-    if (items.isItemThrowable(entityList[0].posX, entityList[0].posY) = True) then
       (* Add to list of throwable weapons *)
-    begin
       throwableWeapons[b].id := items.getItemID(entityList[0].posX, entityList[0].posY);
-      throwableWeapons[b].Name := items.getItemName(entityList[0].posX, entityList[0].posY) + ' (on the ground)';
+      throwableWeapons[b].Name := items.getItemName(entityList[0].posX, entityList[0].posY);
       throwableWeapons[b].mnuOption := mnuChar;
       throwableWeapons[b].baseDMG := items.getThrowDamage(entityList[0].posX, entityList[0].posY);
       throwableWeapons[b].glyph := items.getItemGlyph(entityList[0].posX, entityList[0].posY);
       throwableWeapons[b].glyphColour := items.getItemColour(entityList[0].posX, entityList[0].posY);
+      throwableWeapons[b].onGround := True;
       Inc(weaponAmount);
       projectileAvailable := True;
-    end;
   end;
+
   (* If there are no projectiles available *)
   if (projectileAvailable = False) then
   begin
@@ -288,11 +294,11 @@ var
   i: byte;
 begin
   Result := False;
-  for i := 0 to 10 do
+  for i := 0 to maxWeapons do
   begin
     if (throwableWeapons[i].mnuOption = selection) then
     begin
-      chosenProjectile := throwableWeapons[i].id;
+      chosenProjectile := i;
       Result := True;
       gameState := stTarget;
     end;
@@ -430,17 +436,20 @@ begin
   begin
     (* Display list of items for player to select *)
     yPOS := (19 - weaponAmount);
-    for i := 0 to 10 do
+    for i := 0 to maxWeapons do
     begin
       if (throwableWeapons[i].Name <> empty) then
       begin
-        TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name);
+        if (throwableWeapons[i].onGround = False) then
+          TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name)
+        else
+          TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name + ' [on the ground]');
         Inc(yPOS);
       end;
     end;
 
     (* Get the range of choices *)
-    for i := 0 to 10 do
+    for i := 0 to maxWeapons do
     begin
       if (throwableWeapons[i].Name <> empty) then
         lastOption := throwableWeapons[i].mnuOption;
@@ -470,8 +479,19 @@ end;
 
 procedure chuckProjectile;
 var
-  tgtDistance, dex, damage, diff: smallint;
+  tgtDistance, dex, damage, dmgAmount, diff: smallint;
+  opponent: shortstring;
 begin
+  (* Get the opponents name *)
+  opponent := entityList[tgtList[selectedTarget].id].race;
+  if (entityList[tgtList[selectedTarget].id].article = True) then
+    opponent := 'the ' + opponent;
+
+  (* Attacking an NPC automatically makes it hostile *)
+  entityList[tgtList[selectedTarget].id].state := stateHostile;
+  (* Number of turns NPC will follow you if out of sight *)
+  entityList[tgtList[selectedTarget].id].moveCount := 10;
+
   (* Calculate damage caused *)
 
   { Convert distance to target from real number to integer }
@@ -491,17 +511,58 @@ begin
   else
   (* Subtract the difference from damage *)
   begin
-    diff := dexterity - tgtDistance;
-    if (diff > 0) then
+    diff := dex - tgtDistance;
+    if (diff > 0) and (diff < damage) then
        Dec(damage, diff)
     else
+      begin
         diff := 0;
+        damage := 0;
+      end;
   end;
-
-
 
   (* Calculate the path of the projectile *)
   los.playerProjectilePath(entityList[0].posX, entityList[0].posY, tgtList[selectedTarget].x, tgtList[selectedTarget].y, throwableWeapons[chosenProjectile].glyph, throwableWeapons[chosenProjectile].glyphColour);
+
+  (* Apply damage *)
+  if (damage = 0) then
+     ui.displayMessage('The ' + throwableWeapons[chosenProjectile].Name + ' misses')
+  else
+    begin
+      dmgAmount := damage - entityList[tgtList[selectedTarget].id].defence;
+      (* If it was a hit *)
+      if ((dmgAmount - entityList[0].tmrDrunk) > 0) then
+      begin
+        Dec(entityList[tgtList[selectedTarget].id].currentHP, dmgAmount);
+        (* If it was a killing blow *)
+        if (entityList[tgtList[selectedTarget].id].currentHP < 1) then
+        begin
+          ui.displayMessage('You kill ' + opponent);
+          entities.killEntity(tgtList[selectedTarget].id);
+          entityList[0].xpReward := entities.entityList[0].xpReward + entityList[tgtList[selectedTarget].id].xpReward;
+          ui.updateXP;
+          LockScreenUpdate;
+          (* Restore the game map *)
+          main.returnToGameScreen;
+          (* Restore screen *)
+          paintOverMsg;
+          ui.restoreMessages;
+          UnlockScreenUpdate;
+          UpdateScreen(False);
+          main.gameState := stGame;
+
+        end
+        else
+            ui.displayMessage('The ' + throwableWeapons[chosenProjectile].Name + ' hits ' + opponent);
+      end
+      else
+         ui.displayMessage('The ' + throwableWeapons[chosenProjectile].Name + ' doesn''t injure ' + opponent);
+    end;
+
+  (* Remove item from ground or inventory *)
+  if (throwableWeapons[chosenProjectile].onGround = True) then
+     removeFromGround;
+
 
   LockScreenUpdate;
   (* Restore the game map *)
@@ -513,6 +574,36 @@ begin
   UpdateScreen(False);
   main.gameState := stGame;
  end;
+
+procedure removeFromGround;
+var
+  i, itmID: smallint;
+begin
+  for i := 1 to itemAmount do
+    if (entityList[0].posX = itemList[i].posX) and (entityList[0].posY = itemList[i].posY) and (itemList[i].onMap = True) then
+       itmID := i;
+
+(* Set an empty flag for the item on the map, this gets deleted when saving the map *)
+  with itemList[itmID] do
+        begin
+          itemName := 'empty';
+          itemDescription := '';
+          itemArticle := '';
+          itemType := itmEmptySlot;
+          itemMaterial := matEmpty;
+          useID := 1;
+          glyph := 'x';
+          glyphColour := 'lightCyan';
+          inView := False;
+          posX := 1;
+          posY := 1;
+          NumberOfUses := 0;
+          onMap := False;
+          throwable := False;
+          throwDamage := 0;
+          discovered := False;
+        end;
+end;
 
 procedure restorePlayerGlyph;
 begin

@@ -37,7 +37,7 @@ begin
     NumberOfUses := 5;
     onMap := True;
     throwable := True;
-    throwDamage := 2;
+    throwDamage := 4;
     discovered := False;
   end;
 end;
