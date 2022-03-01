@@ -43,6 +43,8 @@ var
   chosenProjectile: smallint;
   (* List of projectile targets *)
   tgtList: array of TthrowTargets;
+  (* Coordinates where the projectile lands *)
+  landingX, landingY: smallint;
 
 (* Look around the map *)
 procedure look(dir: word);
@@ -476,14 +478,16 @@ begin
     gameState := stGame;
     exit;
   end;
-
 end;
 
 procedure chuckProjectile;
 var
-  tgtDistance, dex, damage, dmgAmount, diff: smallint;
+  tgtDistance, dex, damage, dmgAmount, diff, i: smallint;
   opponent: shortstring;
 begin
+  (* Initialise variables *)
+  landingX := 0;
+  landingY := 0;
   (* Get the opponents name *)
   opponent := entityList[tgtList[selectedTarget].id].race;
   if (entityList[tgtList[selectedTarget].id].article = True) then
@@ -572,9 +576,14 @@ begin
   (* Restore screen *)
   paintOverMsg;
   ui.restoreMessages;
+
+  (* Redraw all NPC's *)
+    for i := 1 to entities.npcAmount do
+      entities.redrawMapDisplay(i);
   UnlockScreenUpdate;
   UpdateScreen(False);
   main.gameState := stGame;
+  main.gameLoop;
  end;
 
 procedure removeFromGround;
@@ -584,27 +593,29 @@ begin
   for i := 1 to itemAmount do
     if (entityList[0].posX = itemList[i].posX) and (entityList[0].posY = itemList[i].posY) and (itemList[i].onMap = True) then
        itmID := i;
+  itemList[itmID].posX:=landingX;
+  itemList[itmID].posY:=landingY;
 
 (* Set an empty flag for the item on the map, this gets deleted when saving the map *)
-  with itemList[itmID] do
-        begin
-          itemName := 'empty';
-          itemDescription := '';
-          itemArticle := '';
-          itemType := itmEmptySlot;
-          itemMaterial := matEmpty;
-          useID := 1;
-          glyph := 'x';
-          glyphColour := 'lightCyan';
-          inView := False;
-          posX := 1;
-          posY := 1;
-          NumberOfUses := 0;
-          onMap := False;
-          throwable := False;
-          throwDamage := 0;
-          discovered := False;
-        end;
+  //with itemList[itmID] do
+  //    begin
+  //      itemName := 'empty';
+  //      itemDescription := '';
+  //      itemArticle := '';
+  //      itemType := itmEmptySlot;
+  //      itemMaterial := matEmpty;
+  //      useID := 1;
+  //      glyph := 'x';
+  //      glyphColour := 'lightCyan';
+  //      inView := False;
+  //      posX := 1;
+  //      posY := 1;
+  //      NumberOfUses := 0;
+  //      onMap := False;
+  //      throwable := False;
+  //      throwDamage := 0;
+  //      discovered := False;
+  //    end;
 end;
 
 procedure removeThrownFromInventory;

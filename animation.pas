@@ -23,7 +23,7 @@ procedure thrownObjectAnim(var flightPath: b; prjGlyph, prjColour: shortstring);
 implementation
 
 uses
-  main;
+  main, scrTargeting;
 
 procedure throwRock(id: smallint; var flightPath: a);
 var
@@ -137,7 +137,6 @@ begin
   (* Redraw all NPC'S *)
   for p := 1 to entities.npcAmount do
     entities.redrawMapDisplay(p);
-
   camera.drawMap;
   fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
   UnlockScreenUpdate;
@@ -157,6 +156,8 @@ begin
       (* Draw projectile *)
       map.mapDisplay[flightPath[i].Y, flightPath[i].X].GlyphColour := prjColour;
       map.mapDisplay[flightPath[i].Y, flightPath[i].X].Glyph := prjGlyph;
+      scrTargeting.landingY := flightPath[i].Y;
+      scrTargeting.landingX := flightPath[i].X;
       (* Redraw all NPC'S *)
       for p := 1 to entities.npcAmount do
           entities.redrawMapDisplay(p);
