@@ -71,8 +71,10 @@ begin
     18, 'cyan', '  [w] Wear armour or Wield a weapon                                 ');
   TextOut(ui.centreX('  [z] Zap a magical item                                            '),
     19, 'cyan', '  [z] Zap a magical item                                            ');
+  TextOut(ui.centreX('  [t] Throw a weapon                                                '),
+    20, 'cyan', '  [t] Throw a weapon                                                ');
   TextOut(ui.centreX('  [;] Look around the map                                           '),
-    20, 'cyan', '  [;] Look around the map                                           ');
+    21, 'cyan', '  [;] Look around the map                                           ');
 
   TextOut(ui.centreX(footer), 24, 'cyan', footer);
   UnlockScreenUpdate;
