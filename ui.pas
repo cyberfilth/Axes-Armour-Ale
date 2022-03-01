@@ -233,7 +233,10 @@ procedure bufferMessage(message: shortstring);
 begin
   buffer := buffer + message + '. ';
   if (Length(buffer) >= 45) then
+  begin
     displayMessage(buffer);
+    buffer := '';
+  end;
 end;
 
 procedure writeBufferedMessages;
