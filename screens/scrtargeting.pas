@@ -532,7 +532,7 @@ begin
 
   (* Apply damage *)
   if (damage = 0) then
-     ui.displayMessage('The ' + throwableWeapons[chosenProjectile].Name + ' misses')
+     ui.bufferMessage('The ' + throwableWeapons[chosenProjectile].Name + ' misses')
   else
     begin
       dmgAmount := damage - entityList[tgtList[selectedTarget].id].defence;
@@ -543,7 +543,7 @@ begin
         (* If it was a killing blow *)
         if (entityList[tgtList[selectedTarget].id].currentHP < 1) then
         begin
-          ui.displayMessage('You kill ' + opponent);
+          ui.bufferMessage('You kill ' + opponent);
           entities.killEntity(tgtList[selectedTarget].id);
           entityList[0].xpReward := entities.entityList[0].xpReward + entityList[tgtList[selectedTarget].id].xpReward;
           ui.updateXP;
@@ -558,10 +558,10 @@ begin
           main.gameState := stGame;
         end
         else
-            ui.displayMessage('The ' + throwableWeapons[chosenProjectile].Name + ' hits ' + opponent);
+            ui.bufferMessage('The ' + throwableWeapons[chosenProjectile].Name + ' hits ' + opponent);
       end
       else
-         ui.displayMessage('The ' + throwableWeapons[chosenProjectile].Name + ' doesn''t injure ' + opponent);
+         ui.bufferMessage('The ' + throwableWeapons[chosenProjectile].Name + ' doesn''t injure ' + opponent);
     end;
 
   (* Remove item from ground or inventory *)
@@ -569,6 +569,8 @@ begin
     removeFromGround
   else
     removeThrownFromInventory;
+
+  ui.writeBufferedMessages;
 
   LockScreenUpdate;
   (* Restore the game map *)
@@ -593,29 +595,36 @@ begin
   for i := 1 to itemAmount do
     if (entityList[0].posX = itemList[i].posX) and (entityList[0].posY = itemList[i].posY) and (itemList[i].onMap = True) then
        itmID := i;
-  itemList[itmID].posX:=landingX;
-  itemList[itmID].posY:=landingY;
-
-(* Set an empty flag for the item on the map, this gets deleted when saving the map *)
-  //with itemList[itmID] do
-  //    begin
-  //      itemName := 'empty';
-  //      itemDescription := '';
-  //      itemArticle := '';
-  //      itemType := itmEmptySlot;
-  //      itemMaterial := matEmpty;
-  //      useID := 1;
-  //      glyph := 'x';
-  //      glyphColour := 'lightCyan';
-  //      inView := False;
-  //      posX := 1;
-  //      posY := 1;
-  //      NumberOfUses := 0;
-  //      onMap := False;
-  //      throwable := False;
-  //      throwDamage := 0;
-  //      discovered := False;
-  //    end;
+  (* Rocks break on impact *)
+  if (itemList[itmID].itemName <> 'rock') then
+  begin
+       itemList[itmID].posX:=landingX;
+       itemList[itmID].posY:=landingY;
+  end
+  else
+  begin
+(* Set an empty flag for the rock on the map, this gets deleted when saving the map *)
+  with itemList[itmID] do
+      begin
+        itemName := 'empty';
+        itemDescription := '';
+        itemArticle := '';
+        itemType := itmEmptySlot;
+        itemMaterial := matEmpty;
+        useID := 1;
+        glyph := 'x';
+        glyphColour := 'lightCyan';
+        inView := False;
+        posX := 1;
+        posY := 1;
+        NumberOfUses := 0;
+        onMap := False;
+        throwable := False;
+        throwDamage := 0;
+        discovered := False;
+      end;
+  ui.bufferMessage('The rock breaks on impact');
+  end;
 end;
 
 procedure removeThrownFromInventory;
