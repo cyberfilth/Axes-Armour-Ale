@@ -543,6 +543,7 @@ begin
         (* If it was a killing blow *)
         if (entityList[tgtList[selectedTarget].id].currentHP < 1) then
         begin
+          ui.writeBufferedMessages;
           ui.bufferMessage('You kill ' + opponent);
           entities.killEntity(tgtList[selectedTarget].id);
           entityList[0].xpReward := entities.entityList[0].xpReward + entityList[tgtList[selectedTarget].id].xpReward;
@@ -630,10 +631,39 @@ end;
 procedure removeThrownFromInventory;
 var
   itemNumber: smallint;
+  newItem: Item;
 begin
   itemNumber := throwableWeapons[chosenProjectile].id;
+  (* Rocks break on impact *)
+  if (throwableWeapons[chosenProjectile].Name <> 'rock') then
+  { Create an item }
+  begin
+    newItem.itemID := items.itemAmount;
+    newItem.itemName := player_inventory.inventory[itemNumber].Name;
+    newItem.itemDescription := player_inventory.inventory[itemNumber].description;
+    newItem.itemArticle := player_inventory.inventory[itemNumber].article;
+    newItem.itemType := player_inventory.inventory[itemNumber].itemType;
+    newItem.itemMaterial := player_inventory.inventory[itemNumber].itemMaterial;
+    newItem.useID := player_inventory.inventory[itemNumber].useID;
+    newItem.glyph := player_inventory.inventory[itemNumber].glyph;
+    newItem.glyphColour := player_inventory.inventory[itemNumber].glyphColour;
+    newItem.inView := True;
+    newItem.posX := landingX;
+    newItem.posY := landingY;
+    newItem.NumberOfUses := player_inventory.inventory[itemNumber].numUses;
+    newItem.onMap := True;
+    newItem.throwable := player_inventory.inventory[itemNumber].throwable;
+    newItem.throwDamage := player_inventory.inventory[itemNumber].throwDamage;
+    newItem.discovered := True;
+
+  { Place item on the game map }
+  Inc(items.itemAmount);
+  Insert(newitem, itemList, itemAmount);
+  end
+  else
+      ui.bufferMessage('The rock breaks on impact');
+
   (* Remove from inventory *)
-  player_inventory.inventory[itemNumber].sortIndex := 10;
   player_inventory.inventory[itemNumber].Name := 'Empty';
   player_inventory.inventory[itemNumber].equipped := False;
   player_inventory.inventory[itemNumber].description := 'x';
