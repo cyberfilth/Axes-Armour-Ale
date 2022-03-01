@@ -13,6 +13,8 @@ uses
 procedure createStaff(uniqueid, itmx, itmy: smallint);
 (* Equip weapon *)
 procedure useItem(equipped: boolean);
+(* Remove weapon from inventory when thrown *)
+procedure throw;
 (* Use the staff to zap nearby enemies *)
 procedure Zap;
 
@@ -97,6 +99,15 @@ begin
     player_stats.enchantedWeaponEquipped := False;
     player_stats.enchWeapType := 0;
   end;
+end;
+
+procedure throw;
+begin
+  entityList[0].weaponEquipped := False;
+  Dec(entityList[0].weaponDice);
+  ui.equippedWeapon := 'No weapon equipped';
+  player_stats.enchantedWeaponEquipped := False;
+  player_stats.enchWeapType := 0;
 end;
 
 procedure Zap;

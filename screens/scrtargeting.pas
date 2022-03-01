@@ -8,7 +8,8 @@ unit scrTargeting;
 interface
 
 uses
-  SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, los, scrGame, player_stats;
+  SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, los,
+  scrGame, player_stats, crude_dagger, basic_club, staff_minor_scorch;
 
 type
   (* Weapons *)
@@ -16,7 +17,7 @@ type
     id, baseDMG: smallint;
     mnuOption: char;
     Name, glyph, glyphColour: shortstring;
-    onGround: boolean;
+    onGround, equppd: boolean;
   end;
 
 type
@@ -212,11 +213,12 @@ begin
     throwableWeapons[b].glyph := 'x';
     throwableWeapons[b].glyphColour := 'x';
     throwableWeapons[b].onGround := False;
+    throwableWeapons[b].equppd := False;
   end;
   (* Check inventory for an item to throw *)
   for b := 0 to maxWeapons - 1 do
   begin
-    if (inventory[b].throwable = True) and (inventory[b].equipped = False) then
+    if (inventory[b].throwable = True) then
     begin
       (* Add to list of throwable weapons *)
       throwableWeapons[b].id := inventory[b].id;
@@ -226,6 +228,10 @@ begin
       throwableWeapons[b].glyph := inventory[b].glyph;
       throwableWeapons[b].glyphColour := inventory[b].glyphColour;
       throwableWeapons[b].onGround := False;
+      if (inventory[b].equipped = True) then
+         throwableWeapons[b].equppd := True
+      else
+        throwableWeapons[b].equppd := False;
       Inc(mnuChar);
       Inc(weaponAmount);
       projectileAvailable := True;
@@ -243,6 +249,7 @@ begin
       throwableWeapons[b].glyph := items.getItemGlyph(entityList[0].posX, entityList[0].posY);
       throwableWeapons[b].glyphColour := items.getItemColour(entityList[0].posX, entityList[0].posY);
       throwableWeapons[b].onGround := True;
+      throwableWeapons[b].equppd := False;
       Inc(weaponAmount);
       projectileAvailable := True;
   end;
@@ -444,10 +451,12 @@ begin
     begin
       if (throwableWeapons[i].Name <> empty) then
       begin
-        if (throwableWeapons[i].onGround = False) then
-          TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name)
+        if (throwableWeapons[i].equppd = True) then
+           TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name + ' [equipped]')
+        else if (throwableWeapons[i].onGround = True) then
+          TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name + ' [on the ground]')
         else
-          TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name + ' [on the ground]');
+          TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name);
         Inc(yPOS);
       end;
     end;
@@ -662,6 +671,16 @@ begin
   end
   else
       ui.bufferMessage('The rock breaks on impact');
+
+  (* Unequip weapon if equipped *)
+  if (throwableWeapons[chosenProjectile].equppd = True) then
+  begin
+       case player_inventory.inventory[itemNumber].useID of
+         2: crude_dagger.throw;
+         4: basic_club.throw;
+         8: staff_minor_scorch.throw;
+       end;
+  end;
 
   (* Remove from inventory *)
   player_inventory.inventory[itemNumber].Name := 'Empty';

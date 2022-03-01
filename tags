@@ -568,6 +568,10 @@ target	screens/backup/scrtargeting.pas	/^procedure target;$/;"	p
 target	screens/scrtargeting.pas	/^procedure target;$/;"	p
 targetInput	backup/keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
 targetInput	keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
+throw	items/weapons/backup/crude_dagger.pas	/^procedure throw;$/;"	p
+throw	items/weapons/basic_club.pas	/^procedure throw;$/;"	p
+throw	items/weapons/crude_dagger.pas	/^procedure throw;$/;"	p
+throw	items/weapons/staff_minor_scorch.pas	/^procedure throw;$/;"	p
 throwRock	animation.pas	/^procedure throwRock(id: smallint; var flightPath: a);$/;"	p
 throwRock	backup/animation.pas	/^procedure throwRock(id: smallint; var flightPath: a);$/;"	p
 thrownObjectAnim	animation.pas	/^procedure thrownObjectAnim(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p

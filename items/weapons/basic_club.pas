@@ -10,6 +10,8 @@ interface
 procedure createClub(uniqueid, itmx, itmy: smallint);
 (* Equip weapon *)
 procedure useItem(equipped: boolean);
+(* Remove weapon from inventory when thrown *)
+procedure throw;
 
 implementation
 
@@ -62,6 +64,14 @@ begin
     ui.equippedWeapon := 'No weapon equipped';
     ui.writeBufferedMessages;
   end;
+end;
+
+procedure throw;
+begin
+  entityList[0].weaponEquipped := False;
+  Dec(entityList[0].weaponDice);
+  ui.equippedWeapon := 'No weapon equipped';
+  ui.writeBufferedMessages;
 end;
 
 end.
