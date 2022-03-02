@@ -38,6 +38,8 @@ begin
     onMap := True;
     throwable := True;
     throwDamage := 3;
+    dice := 0;
+    adds := 0;
     discovered := False;
   end;
 end;

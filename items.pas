@@ -44,6 +44,8 @@ type
     throwable: boolean;
     (* Damage when thrown *)
     throwDamage: smallint;
+    (* Weapon damage *)
+    dice, adds: smallint;
     (* Displays a message the first time item is seen *)
     discovered: boolean;
   end;

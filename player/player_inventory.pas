@@ -13,7 +13,7 @@ uses
 type
   (* Items in inventory *)
   Equipment = record
-    id, useID, sortIndex, numUses, throwDamage: smallint;
+    id, useID, sortIndex, numUses, throwDamage, dice, adds: smallint;
     Name, description, article, glyph, glyphColour: shortstring;
     itemType: tItem;
     itemMaterial: tMaterial;
@@ -84,6 +84,8 @@ begin
     inventory[i].inInventory := False;
     inventory[i].throwable := False;
     inventory[i].throwDamage := 0;
+    inventory[i].dice := 0;
+    inventory[i].adds := 0;
     inventory[i].useID := 0;
   end;
 end;
@@ -148,6 +150,8 @@ begin
         inventory[i].numUses := itemList[itemNumber].NumberOfUses;
         inventory[i].throwable := itemList[itemNumber].throwable;
         inventory[i].throwDamage := itemList[itemNumber].throwDamage;
+        inventory[i].dice := itemList[itemNumber].dice;
+        inventory[i].adds := itemList[itemNumber].adds;
         inventory[i].inInventory := True;
         ui.displayMessage('You pick up the ' + inventory[i].Name);
       (* Set an empty flag for the item on the map, this
@@ -170,6 +174,8 @@ begin
           onMap := False;
           throwable := False;
           throwDamage := 0;
+          dice := 0;
+          adds := 0;
           discovered := False;
         end;
         (* Sort items in inventory *)
@@ -202,6 +208,8 @@ begin
       onMap := False;
       throwable := False;
       throwDamage := 0;
+      dice := 0;
+      adds := 0;
       discovered := False;
     end;
     Result := True;
@@ -235,6 +243,8 @@ begin
     newItem.onMap := True;
     newItem.throwable := inventory[itemNumber].throwable;
     newItem.throwDamage := inventory[itemNumber].throwDamage;
+    newItem.dice := inventory[itemNumber].dice;
+    newItem.adds := inventory[itemNumber].adds;
     newItem.discovered := True;
 
     { Place item on the game map }
@@ -257,6 +267,8 @@ begin
     inventory[itemNumber].numUses := 0;
     inventory[itemNumber].throwable := False;
     inventory[itemNumber].throwDamage := 0;
+    inventory[itemNumber].dice := 0;
+    inventory[itemNumber].adds := 0;
     inventory[itemNumber].useID := 0;
     Result := True;
     (* Sort items in inventory *)
@@ -421,6 +433,8 @@ begin
     inventory[selection].numUses := 0;
     inventory[selection].throwable := False;
     inventory[selection].throwDamage := 0;
+    inventory[selection].dice := 0;
+    inventory[selection].adds := 0;
     inventory[selection].useID := 0;
     (* Sort items in inventory *)
     sortInventory(0, high(inventory));
@@ -545,6 +559,8 @@ begin
       inventory[i].numUses := 0;
       inventory[i].throwable := False;
       inventory[i].throwDamage := 0;
+      inventory[i].dice := 0;
+      inventory[i].adds := 0;
       inventory[i].useID := 0;
     end;
   end;

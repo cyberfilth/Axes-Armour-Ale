@@ -230,6 +230,8 @@ begin
           AddElement(DataNode, 'onMap', BoolToStr(itemList[i].onMap));
           AddElement(DataNode, 'throwable', BoolToStr(itemList[i].throwable));
           AddElement(DataNode, 'throwDamage', IntToStr(itemList[i].throwDamage));
+          AddElement(DataNode, 'dice', IntToStr(itemList[i].dice));
+          AddElement(DataNode, 'adds', IntToStr(itemList[i].adds));
           AddElement(DataNode, 'discovered', BoolToStr(itemList[i].discovered));
         end;
       end;
@@ -380,6 +382,8 @@ begin
         items.itemList[i].onMap := StrToBool(UTF8Encode(ItemsNode.FindNode('onMap').TextContent));
         items.itemList[i].throwable := StrToBool(UTF8Encode(ItemsNode.FindNode('throwable').TextContent));
         items.itemList[i].throwDamage := StrToInt(UTF8Encode(ItemsNode.FindNode('throwDamage').TextContent));
+        items.itemList[i].dice := StrToInt(UTF8Encode(ItemsNode.FindNode('dice').TextContent));
+        items.itemList[i].adds := StrToInt(UTF8Encode(ItemsNode.FindNode('adds').TextContent));
         items.itemList[i].discovered := StrToBool(UTF8Encode(ItemsNode.FindNode('discovered').TextContent));
         ParentNode := ItemsNode.NextSibling;
         ItemsNode := ParentNode;
@@ -563,6 +567,8 @@ begin
       player_inventory.inventory[i].numUses := StrToInt(UTF8Encode(InventoryNode.FindNode('numUses').TextContent));
       player_inventory.inventory[i].throwable := StrToBool(UTF8Encode(InventoryNode.FindNode('throwable').TextContent));
       player_inventory.inventory[i].throwDamage := StrToInt(UTF8Encode(InventoryNode.FindNode('throwDamage').TextContent));
+      player_inventory.inventory[i].dice := StrToInt(UTF8Encode(InventoryNode.FindNode('dice').TextContent));
+      player_inventory.inventory[i].adds := StrToInt(UTF8Encode(InventoryNode.FindNode('adds').TextContent));
       player_inventory.inventory[i].inInventory := StrToBool(UTF8Encode(InventoryNode.FindNode('inInventory').TextContent));
       ParentNode := InventoryNode.NextSibling;
       InventoryNode := ParentNode;
@@ -698,6 +704,8 @@ begin
       AddElement(DataNode, 'numUses', IntToStr(inventory[i].numUses));
       AddElement(DataNode, 'throwable', BoolToStr(inventory[i].throwable));
       AddElement(DataNode, 'throwDamage', IntToStr(inventory[i].throwDamage));
+      AddElement(DataNode, 'dice', IntToStr(inventory[i].dice));
+      AddElement(DataNode, 'adds', IntToStr(inventory[i].adds));
       AddElement(DataNode, 'inInventory', BoolToStr(inventory[i].inInventory));
     end;
 

@@ -602,9 +602,17 @@ procedure removeFromGround;
 var
   i, itmID: smallint;
 begin
+  i := 0;
+
   for i := 1 to itemAmount do
     if (entityList[0].posX = itemList[i].posX) and (entityList[0].posY = itemList[i].posY) and (itemList[i].onMap = True) then
        itmID := i;
+
+   (* Weapon damage for edged weapons *)
+  case itemList[i].useID of
+       2: crude_dagger.thrownDamaged(i, False);
+  end;
+
   (* Rocks break on impact *)
   if (itemList[itmID].itemName <> 'rock') then
   begin
@@ -639,10 +647,17 @@ end;
 
 procedure removeThrownFromInventory;
 var
-  itemNumber: smallint;
+  itemNumber, dmgID: smallint;
   newItem: Item;
 begin
   itemNumber := throwableWeapons[chosenProjectile].id;
+  dmgID := player_inventory.inventory[itemNumber].id;
+
+  (* Weapon damage for edged weapons *)
+  case player_inventory.inventory[itemNumber].useID of
+       2: crude_dagger.thrownDamaged(dmgID, True);
+  end;
+
   (* Rocks break on impact *)
   if (throwableWeapons[chosenProjectile].Name <> 'rock') then
   { Create an item }
