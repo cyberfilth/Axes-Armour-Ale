@@ -22,8 +22,7 @@ uses
 const
   (* Array of items found in a cave, ordered by cave level *)
   caveItems1: array[1..5] of string =
-    //('aleTankard', 'clothArmour1', 'curePotion', 'basicClub', 'rock');
-  ('crudeDagger', 'crudeDagger', 'crudeDagger', 'crudeDagger', 'crudeDagger');
+    ('aleTankard', 'clothArmour1', 'curePotion', 'basicClub', 'rock');
   caveItems2: array[1..4] of string =
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1');
   caveItems3: array[1..5] of string =
