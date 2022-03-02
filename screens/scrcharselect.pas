@@ -19,11 +19,12 @@ implementation
 procedure choose;
 var
   yLine, randSelect: smallint;
-  options, randSelectText: shortstring;
+  options, hintText, randSelectText: shortstring;
 begin
   yLine := 4;
   randSelect := 2;
   options := 'a - Dwarf     b - Elf     c - Human';
+  hintText := 'a - c to select race';
   randSelectText := '[SPACE] to randomly select a race';
   (* Randomly select a race, in case the player doesn't choose one *)
   randSelect := randomRange(1, 3);
@@ -47,6 +48,7 @@ begin
   screenBlank;
   TextOut(ui.centreX('Choose your character'), 2, 'cyan', 'Choose your character');
   TextOut(ui.centreX(options), yLine, 'cyan', options);
+  TextOut(ui.centreX(hintText), 19, 'cyan', hintText);
   TextOut(ui.centreX(randSelectText), 20, 'cyan', randSelectText);
   UnlockScreenUpdate;
   UpdateScreen(False);
