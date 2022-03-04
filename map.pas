@@ -133,8 +133,7 @@ end;
 procedure ascendStairs;
 begin
   (* Check if the player is standing on up staircase *)
-  if (maparea[entities.entityList[0].posY][entities.entityList[0].posX].Glyph =
-    '<') then
+  if (maparea[entities.entityList[0].posY][entities.entityList[0].posX].Glyph = '<') then
   begin
     (* Check the player can leave the dungeon *)
     if (universe.currentDepth = 1) then

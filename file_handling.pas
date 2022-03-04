@@ -64,8 +64,7 @@ var
 
 begin
   id_int := 0;
-  dfileName := globalUtils.saveDirectory + PathDelim + 'd_' +
-    IntToStr(idNumber) + '_f' + IntToStr(lvlNum) + '.dat';
+  dfileName := globalUtils.saveDirectory + PathDelim + 'd_' + IntToStr(idNumber) + '_f' + IntToStr(lvlNum) + '.dat';
   try
     { Create a document }
     Doc := TXMLDocument.Create;
@@ -156,8 +155,7 @@ var
 
 begin
   id_int := 0;
-  dfileName := (globalUtils.saveDirectory + PathDelim + 'd_' +
-    IntToStr(uniqueID) + '_f' + IntToStr(currentDepth) + '.dat');
+  dfileName := (globalUtils.saveDirectory + PathDelim + 'd_' + IntToStr(uniqueID) + '_f' + IntToStr(currentDepth) + '.dat');
   try
     { Create a document }
     Doc := TXMLDocument.Create;
@@ -299,11 +297,10 @@ var
   RootNode, Tile, ItemsNode, ParentNode, NPCnode, NextNode, Blocks,
   Visible, Occupied, Discovered, GlyphNode: TDOMNode;
   Doc: TXMLDocument;
-  r, c: integer;
+  r, c, itemAmount: integer;
   levelVisited: boolean;
 begin
-  dfileName := globalUtils.saveDirectory + PathDelim + 'd_' +
-    IntToStr(uniqueID) + '_f' + IntToStr(lvl) + '.dat';
+  dfileName := globalUtils.saveDirectory + PathDelim + 'd_' + IntToStr(uniqueID) + '_f' + IntToStr(lvl) + '.dat';
   try
     (* Read in dat file from disk *)
     ReadXMLFile(Doc, dfileName);
@@ -313,8 +310,8 @@ begin
     title := RootNode.FindNode('title').TextContent;
     (* Has this level been explored already *)
     levelVisited := StrToBool(UTF8Encode(RootNode.FindNode('levelVisited').TextContent));
-    (* Item Index ID *)
-    items.indexID:= StrToInt(UTF8Encode(RootNode.FindNode('indexID').TextContent));
+    (* Number of items on current level *)
+    itemAmount := StrToInt(UTF8Encode(RootNode.FindNode('itemsOnThisFloor').TextContent));
     (* Number of entities on current level *)
     entities.npcAmount := StrToInt(UTF8Encode(RootNode.FindNode('entitiesOnThisFloor').TextContent));
     (* Total depth of current dungeon *)
@@ -350,9 +347,8 @@ begin
     if (levelVisited = True) then
     begin
       (* Items on the map *)
-      SetLength(items.itemList, 1);
       ItemsNode := Doc.DocumentElement.FindNode('Items');
-      for i := 0 to High(itemList) do
+      for i := 0 to itemAmount do
       begin
         SetLength(itemList, Length(itemList) + 1);
         items.itemList[i].itemID := StrToInt(UTF8Encode(ItemsNode.Attributes.Item[0].NodeValue));

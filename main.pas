@@ -214,6 +214,7 @@ begin
   (* Spawn game entities *)
   universe.spawnDenizens;
   (* Initialise items list *)
+  items.indexID := 0;
   items.initialiseItems;
   (* Start dropping items on map *)
   universe.litterItems;

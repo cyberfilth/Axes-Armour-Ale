@@ -89,8 +89,7 @@ uses
 
 procedure initialiseItems;
 begin
-  itemList := nil;
-  indexID := 0;
+  SetLength(itemList, 0);
 end;
 
 procedure drawItemsOnMap(id: byte);
