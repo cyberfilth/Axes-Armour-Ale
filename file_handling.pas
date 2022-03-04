@@ -8,7 +8,7 @@ interface
 
 uses
   SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe,
-  cave, items, logging;
+  cave, items;
 
 (* Write a newly generate level of a dungeon to disk *)
 procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;
@@ -192,11 +192,7 @@ begin
         AddElement(datanode, 'Glyph', map.maparea[r][c].Glyph);
       end;
     end;
-    logAction(' ');
-    logAction('>saveDungeonLevel ' + IntToStr(currentDepth));
-    logAction(' ');
-    logAction('>saveDungeonLevel  Saving ' + IntToStr(items.countNonEmptyItems) + ' items');
-    logAction(' ');
+   ;
     (* Items on the map *)
     for i := 0 to High(itemList) do
       (* Don't save empty items *)
@@ -236,7 +232,6 @@ begin
           AddElement(DataNode, 'adds', IntToStr(itemList[i].adds));
           AddElement(DataNode, 'discovered', BoolToStr(itemList[i].discovered));
 
-          logAction(IntToStr(i) + '  ' + itemList[i].itemName);
         end;
       end;
 
@@ -349,17 +344,13 @@ begin
       end;
     end;
 
-    logAction('>loadDungeonLevel ' + IntToStr(lvl));
-    logAction('  ');
     (* Load items on this level if already visited *)
     if (levelVisited = True) then
     begin
-      logAction('>loadDungeonLevel: levelVisited = True');
-      logAction('  ');
       (* Items on the map *)
       ItemsNode := Doc.DocumentElement.FindNode('Items');
       SetLength(itemList, itemAmount);
-      for i := 0 to itemAmount do
+      for i := 0 to (itemAmount - 1) do
       begin
         items.itemList[i].itemID := StrToInt(UTF8Encode(ItemsNode.Attributes.Item[0].NodeValue));
         items.itemList[i].itemName := UTF8Encode(ItemsNode.FindNode('Name').TextContent);
@@ -392,16 +383,11 @@ begin
         items.itemList[i].discovered := StrToBool(UTF8Encode(ItemsNode.FindNode('discovered').TextContent));
         ParentNode := ItemsNode.NextSibling;
         ItemsNode := ParentNode;
-        logAction('>loadDungeonLevel: loaded ' + IntToStr(i) + ' ' + items.itemList[i].itemName);
       end;
     end
     else
       (* Generate new items if floor not already visited *)
       universe.litterItems;
-
-    logAction(' ');
-    logAction('>loadDungeonLevel: All ' + IntToStr(Length(itemList)) + ' items loaded');
-
 
     (* Load entities on this level if already visited *)
     if (levelVisited = True) then
