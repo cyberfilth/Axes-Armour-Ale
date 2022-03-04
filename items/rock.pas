@@ -7,7 +7,7 @@ unit rock;
 interface
 
 (* Create a rock *)
-procedure createRock(uniqueid, itmx, itmy: smallint);
+procedure createRock(itmx, itmy: smallint);
 (* Item cannot be equipped *)
 procedure useItem;
 
@@ -16,13 +16,12 @@ implementation
 uses
   items, ui;
 
-procedure createRock(uniqueid, itmx, itmy: smallint);
+procedure createRock(itmx, itmy: smallint);
 begin
-  items.listLength := length(items.itemList);
-  SetLength(items.itemList, items.listLength + 1);
-  with items.itemList[items.listLength] do
+  SetLength(itemList, length(itemList) + 1);
+  with itemList[High(itemList)] do
   begin
-    itemID := uniqueid;
+    itemID := indexID;
     itemName := 'rock';
     itemDescription := 'causes damage if thrown';
     itemArticle := 'a';
@@ -41,6 +40,7 @@ begin
     dice := 0;
     adds := 0;
     discovered := False;
+    Inc(indexID);
   end;
 end;
 

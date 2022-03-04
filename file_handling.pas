@@ -196,7 +196,7 @@ begin
     end;
 
     (* Items on the map *)
-    for i := 1 to items.itemAmount do
+    for i := 0 to High(itemList) do
       (* Don't save empty items *)
       if (items.itemList[i].itemType <> itmEmptySlot) then
       begin
@@ -313,8 +313,8 @@ begin
     title := RootNode.FindNode('title').TextContent;
     (* Has this level been explored already *)
     levelVisited := StrToBool(UTF8Encode(RootNode.FindNode('levelVisited').TextContent));
-    (* Number of items on current level *)
-    items.itemAmount := StrToInt(UTF8Encode(RootNode.FindNode('itemsOnThisFloor').TextContent));
+    (* Item Index ID *)
+    items.indexID:= StrToInt(UTF8Encode(RootNode.FindNode('indexID').TextContent));
     (* Number of entities on current level *)
     entities.npcAmount := StrToInt(UTF8Encode(RootNode.FindNode('entitiesOnThisFloor').TextContent));
     (* Total depth of current dungeon *)
@@ -352,10 +352,9 @@ begin
       (* Items on the map *)
       SetLength(items.itemList, 1);
       ItemsNode := Doc.DocumentElement.FindNode('Items');
-      for i := 1 to items.itemAmount do
+      for i := 0 to High(itemList) do
       begin
-        items.listLength := length(items.itemList);
-        SetLength(items.itemList, items.listLength + 1);
+        SetLength(itemList, Length(itemList) + 1);
         items.itemList[i].itemID := StrToInt(UTF8Encode(ItemsNode.Attributes.Item[0].NodeValue));
         items.itemList[i].itemName := UTF8Encode(ItemsNode.FindNode('Name').TextContent);
         items.itemList[i].itemDescription := UTF8Encode(ItemsNode.FindNode('description').TextContent);
@@ -629,13 +628,12 @@ begin
     AddElement(datanode, 'dungeonID', IntToStr(uniqueID));
     AddElement(datanode, 'currentDepth', IntToStr(currentDepth));
     AddElement(datanode, 'levelVisited', BoolToStr(True));
-    AddElement(datanode, 'itemsOnThisFloor', IntToStr(items.itemAmount));
+    AddElement(datanode, 'indexID', IntToStr(items.indexID));
     AddElement(datanode, 'totalDepth', IntToStr(totalDepth));
     AddElement(datanode, 'canExitDungeon', UTF8Encode(BoolToStr(player_stats.canExitDungeon)));
     WriteStr(Value, dungeonType);
     AddElement(datanode, 'mapType', Value);
     AddElement(datanode, 'npcAmount', IntToStr(entities.npcAmount));
-    AddElement(datanode, 'itemAmount', IntToStr(items.itemAmount));
 
     (* Player data *)
     DataNode := AddChild(RootNode, 'PlayerData');

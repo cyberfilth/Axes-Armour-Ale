@@ -187,7 +187,7 @@ begin
   end
   else
   begin
-    item_lookup.lookupUse(itemList[itemNumber].useID, False);
+    item_lookup.lookupUse(itemList[itemNumber].useID, False, 0);
        (* Set an empty flag for the item on the map, this
          gets deleted when saving the map *)
     with itemList[itemNumber] do
@@ -227,7 +227,7 @@ begin
   if (items.containsItem(entityList[0].posX, entityList[0].posY) = False) then
     { Create an item }
   begin
-    newItem.itemID := items.itemAmount;
+    newItem.itemID := indexID;
     newItem.itemName := inventory[itemNumber].Name;
     newItem.itemDescription := inventory[itemNumber].description;
     newItem.itemArticle := inventory[itemNumber].article;
@@ -246,10 +246,11 @@ begin
     newItem.dice := inventory[itemNumber].dice;
     newItem.adds := inventory[itemNumber].adds;
     newItem.discovered := True;
+    Inc(indexID);
 
     { Place item on the game map }
-    Inc(items.itemAmount);
-    Insert(newitem, itemList, itemAmount);
+    SetLength(itemList, Length(itemList) + 1);
+    Insert(newitem, itemList, Length(itemList));
     WriteStr(ss, 'You drop the ', newItem.itemName);
     ui.bufferMessage(ss);
 
@@ -417,7 +418,7 @@ begin
   if (inventory[selection].inInventory = True) and
     (inventory[selection].itemType = itmDrink) then
   begin
-    item_lookup.lookupUse(inventory[selection].useID, False);
+    item_lookup.lookupUse(inventory[selection].useID, False, 0);
     (* Increase turn counter for this action *)
     Inc(entityList[0].moveCount);
     (* Remove from inventory *)
@@ -507,14 +508,14 @@ begin
       begin
         (* Equip *)
         inventory[selection].equipped := True;
-        item_lookup.lookupUse(inventory[selection].useID, False);
+        item_lookup.lookupUse(inventory[selection].useID, False, selection);
         player_stats.numEquippedUses := inventory[selection].numUses;
       end
       else
       begin
         (* Unequip *)
         inventory[selection].equipped := False;
-        item_lookup.lookupUse(inventory[selection].useID, True);
+        item_lookup.lookupUse(inventory[selection].useID, True, selection);
         inventory[selection].numUses := player_stats.numEquippedUses;
       end;
       { Increment turn counter }

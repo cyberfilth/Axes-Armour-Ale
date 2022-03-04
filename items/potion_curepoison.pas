@@ -7,7 +7,7 @@ unit potion_curePoison;
 interface
 
 (* Create a Potion of Cure Poison *)
-procedure createCurePotion(uniqueid, itmx, itmy: smallint);
+procedure createCurePotion(itmx, itmy: smallint);
 (* Drink Potion *)
 procedure useItem;
 
@@ -16,13 +16,12 @@ implementation
 uses
   items, entities, ui;
 
-procedure createCurePotion(uniqueid, itmx, itmy: smallint);
+procedure createCurePotion(itmx, itmy: smallint);
 begin
-  items.listLength := length(items.itemList);
-  SetLength(items.itemList, items.listLength + 1);
-  with items.itemList[items.listLength] do
+  SetLength(itemList, length(itemList) + 1);
+  with itemList[High(itemList)] do
   begin
-    itemID := uniqueid;
+    itemID := indexID;
     itemName := 'potion of Cure';
     itemDescription := 'cures poison';
     itemArticle := 'a';
@@ -41,6 +40,7 @@ begin
     dice := 0;
     adds := 0;
     discovered := False;
+    Inc(indexID);
   end;
 end;
 

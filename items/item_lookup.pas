@@ -29,9 +29,9 @@ const
     ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'curePotion');
 
 (* Choose an item and call the generate code directly *)
-procedure dispenseItem(i: byte; dungeon: dungeonTerrain);
+procedure dispenseItem(dungeon: dungeonTerrain);
 (* Execute useItem procedure *)
-procedure lookupUse(x: smallint; equipped: boolean);
+procedure lookupUse(x: smallint; equipped: boolean; id: smallint);
 (* Used to drop a specific special item on each level *)
 procedure dropFirstItem;
 
@@ -40,7 +40,7 @@ implementation
 uses
   items, map;
 
-procedure dispenseItem(i: byte; dungeon: dungeonTerrain);
+procedure dispenseItem(dungeon: dungeonTerrain);
 var
   r, c: smallint;
   randSelect: byte;
@@ -82,22 +82,22 @@ begin
 
   (* Create Item *)
   case thing of
-    'aleTankard': ale_tankard.createAleTankard(i, c, r);
-    'rock': rock.createRock(i, c, r);
-    'curePotion': potion_curePoison.createCurePotion(i, c, r);
-    'crudeDagger': crude_dagger.createDagger(i, c, r);
-    'leatherArmour1': leather_armour1.createLeatherArmour(i, c, r);
-    'basicClub': basic_club.createClub(i, c, r);
-    'clothArmour1': cloth_armour1.createClothArmour(i, c, r);
-    'staffMnrScorch': staff_minor_scorch.createStaff(itemAmount, c, r);
+    'aleTankard': ale_tankard.createAleTankard(c, r);
+    'rock': rock.createRock(c, r);
+    'curePotion': potion_curePoison.createCurePotion(c, r);
+    'crudeDagger': crude_dagger.createDagger(c, r);
+    'leatherArmour1': leather_armour1.createLeatherArmour(c, r);
+    'basicClub': basic_club.createClub(c, r);
+    'clothArmour1': cloth_armour1.createClothArmour(c, r);
+    'staffMnrScorch': staff_minor_scorch.createStaff(c, r);
   end;
 end;
 
-procedure lookupUse(x: smallint; equipped: boolean);
+procedure lookupUse(x: smallint; equipped: boolean; id: smallint);
 begin
   case x of
     1: ale_tankard.useItem;
-    2: crude_dagger.useItem(equipped);
+    2: crude_dagger.useItem(equipped, id);
     3: leather_armour1.useItem(equipped);
     4: basic_club.useItem(equipped);
     5: cloth_armour1.useItem(equipped);
@@ -118,13 +118,12 @@ begin
     c := globalutils.randomRange(3, (MAXCOLUMNS - 3));
   (* choose a location that is not a wall or occupied *)
   until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
-  items.listLength := Length(items.itemList);
-  SetLength(items.itemList, items.itemAmount + 1);
+  SetLength(itemList, High(itemList) + 1);
   (* Drop the quest object *)
   if (universe.currentDepth = 3) then
-    smugglersMap.createSmugglersMap(itemAmount, c, r)
+    smugglersMap.createSmugglersMap(c, r)
   else
-    rock.createRock(itemAmount, c, r);
+    rock.createRock(c, r);
 end;
 
 end.

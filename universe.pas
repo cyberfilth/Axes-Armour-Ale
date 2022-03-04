@@ -110,17 +110,16 @@ begin
   item_lookup.dropFirstItem;
   { Based on number of rooms in current level, dungeon type & dungeon level }
   ItemNumber := (totalRooms div 3) + currentDepth;
-  items.itemAmount := ItemNumber;
 
   case dungeonType of
     tDungeon: ;
     tCave: { Cave }
     begin
       (* Create the items *);
-      for i := 1 to ItemNumber do
+      for i := 0 to ItemNumber do
       begin
         { create an encounter table: Item type: Dungeon type: floor number }
-        item_lookup.dispenseItem(i, tCave);
+        item_lookup.dispenseItem(tCave);
       end;
     end;
   end;

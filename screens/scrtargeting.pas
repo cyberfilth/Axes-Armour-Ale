@@ -603,8 +603,7 @@ var
   i, itmID: smallint;
 begin
   i := 0;
-
-  for i := 1 to itemAmount do
+  for i := 0 to High(itemList) do
     if (entityList[0].posX = itemList[i].posX) and (entityList[0].posY = itemList[i].posY) and (itemList[i].onMap = True) then
        itmID := i;
 
@@ -662,7 +661,7 @@ begin
   if (throwableWeapons[chosenProjectile].Name <> 'rock') then
   { Create an item }
   begin
-    newItem.itemID := items.itemAmount;
+    newItem.itemID := indexID;
     newItem.itemName := player_inventory.inventory[itemNumber].Name;
     newItem.itemDescription := player_inventory.inventory[itemNumber].description;
     newItem.itemArticle := player_inventory.inventory[itemNumber].article;
@@ -679,10 +678,11 @@ begin
     newItem.throwable := player_inventory.inventory[itemNumber].throwable;
     newItem.throwDamage := player_inventory.inventory[itemNumber].throwDamage;
     newItem.discovered := True;
+    Inc(indexID);
 
   { Place item on the game map }
-  Inc(items.itemAmount);
-  Insert(newitem, itemList, itemAmount);
+  SetLength(itemList, Length(itemList) + 1);
+  Insert(newitem, itemList, Length(itemList));
   end
   else
       ui.bufferMessage('The rock breaks on impact');

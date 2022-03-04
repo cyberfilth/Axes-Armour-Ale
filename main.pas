@@ -227,7 +227,7 @@ begin
   (* Place the NPC's *)
   entities.NPCgameLoop;
   (* Redraw all items *)
-  for i := 1 to items.itemAmount do
+  for i := 0 to High(itemList) do
     if (map.canSee(items.itemList[i].posX, items.itemList[i].posY) = True) then
     begin
       items.itemList[i].inView := True;
@@ -440,7 +440,7 @@ begin
   for i := 1 to entities.npcAmount do
     entities.redrawMapDisplay(i);
   (* Redraw all items *)
-  for i := 1 to items.itemAmount do
+  for i := 0 to High(itemList) do
     if (map.canSee(items.itemList[i].posX, items.itemList[i].posY) = True) then
     begin
       items.itemList[i].inView := True;

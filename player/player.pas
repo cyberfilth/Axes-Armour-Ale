@@ -243,7 +243,7 @@ procedure pickUp;
 var
   i: smallint;
 begin
-  for i := 1 to itemAmount do
+  for i := 0 to High(itemList) do
   begin
     if (entities.entityList[0].posX = itemList[i].posX) and
       (entities.entityList[0].posY = itemList[i].posY) and

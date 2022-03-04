@@ -82,7 +82,7 @@ begin
     end;
   end;
   (* Check if any flammable items are near *)
-  for i2 := 0 to items.itemAmount do
+  for i2 := 0 to High(itemList) do
   begin
     (* First check an item is visible and flammable *)
     if (itemList[i2].inView = True) and (itemList[i2].itemMaterial = matAlcohol) and

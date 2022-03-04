@@ -50,9 +50,12 @@ type
     discovered: boolean;
   end;
 
+type
+  TitemList = array of Item;
+
 var
-  itemList: array of Item;
-  itemAmount, listLength: smallint;
+  itemList: TitemList;
+  indexID: smallint;
 
 (* Generate list of items on the map *)
 procedure initialiseItems;
@@ -86,9 +89,8 @@ uses
 
 procedure initialiseItems;
 begin
-  itemAmount := 0;
-  { initialise array }
-  SetLength(itemList, 0);
+  itemList := nil;
+  indexID := 0;
 end;
 
 procedure drawItemsOnMap(id: byte);
@@ -96,10 +98,8 @@ begin
   (* Redraw all items on the map display *)
   if (itemList[id].inView = True) then
   begin
-    map.mapDisplay[itemList[id].posY, itemList[id].posX].glyphColour :=
-      itemList[id].glyphColour;
-    map.mapDisplay[itemList[id].posY, itemList[id].posX].glyph :=
-      itemList[id].glyph;
+    map.mapDisplay[itemList[id].posY, itemList[id].posX].glyphColour := itemList[id].glyphColour;
+    map.mapDisplay[itemList[id].posY, itemList[id].posX].glyph := itemList[id].glyph;
   end;
 end;
 
@@ -108,7 +108,7 @@ var
   i: smallint;
 begin
   Result := False;
-  for i := 1 to itemAmount do
+  for i := 0 to High(itemList) do
   begin
     if (itemList[i].posX = x) and (itemList[i].posY = y) then
     begin
@@ -123,7 +123,7 @@ var
   i: smallint;
 begin
   Result := '';
-  for i := 1 to itemAmount do
+  for i := 0 to High(itemList) do
   begin
     if (itemList[i].posX = x) and (itemList[i].posY = y) then
       Result := itemList[i].itemName;
@@ -135,7 +135,7 @@ var
   i: smallint;
 begin
   Result := '';
-  for i := 1 to itemAmount do
+  for i := 0 to High(itemList) do
   begin
     if (itemList[i].posX = x) and (itemList[i].posY = y) then
       Result := itemList[i].itemDescription;
@@ -147,7 +147,7 @@ var
   i: smallint;
 begin
   Result := 0;
-  for i := 1 to itemAmount do
+  for i := 0 to High(itemList) do
   begin
     if (itemList[i].posX = x) and (itemList[i].posY = y) then
       Result := itemList[i].itemID;
@@ -159,7 +159,7 @@ var
   i: smallint;
 begin
   Result := '';
-  for i := 1 to itemAmount do
+  for i := 0 to High(itemList) do
   begin
     if (itemList[i].posX = x) and (itemList[i].posY = y) then
       Result := itemList[i].glyph;
@@ -171,7 +171,7 @@ var
   i: smallint;
 begin
   Result := '';
-  for i := 1 to itemAmount do
+  for i := 0 to High(itemList) do
   begin
     if (itemList[i].posX = x) and (itemList[i].posY = y) then
       Result := itemList[i].glyphColour;
@@ -183,7 +183,7 @@ var
   i: smallint;
 begin
   Result := False;
-  for i := 1 to itemAmount do
+  for i := 0 to High(itemList) do
   begin
     if (itemList[i].posX = x) and (itemList[i].posY = y) then
     begin
@@ -199,7 +199,7 @@ var
   i: smallint;
 begin
   Result := 0;
-  for i := 1 to itemAmount do
+  for i := 0 to High(itemList) do
   begin
     if (itemList[i].posX = x) and (itemList[i].posY = y) then
     begin
@@ -214,7 +214,7 @@ var
   i, Count: byte;
 begin
   Count := 0;
-  for i := 1 to items.itemAmount do
+  for i := 0 to High(itemList) do
     if (itemList[i].itemType <> itmEmptySlot) then
       Inc(Count);
   Result := Count;
@@ -224,7 +224,7 @@ procedure redrawItems;
 var
   i: byte;
 begin
-  for i := 1 to items.itemAmount do
+  for i := 0 to High(itemList) do
   begin
     { Don't draw used items on the map }
     if (items.itemList[i].itemType <> itmEmptySlot) then
@@ -236,8 +236,7 @@ begin
         (* Display a message if this is the first time seeing this item *)
         if (items.itemList[i].discovered = False) then
         begin
-          ui.displayMessage('You see ' + items.itemList[i].itemArticle +
-            ' ' + items.itemList[i].itemName);
+          ui.displayMessage('You see ' + items.itemList[i].itemArticle + ' ' + items.itemList[i].itemName);
           items.itemList[i].discovered := True;
         end;
       end

@@ -10,7 +10,7 @@ uses
   magicEffects;
 
 (* Create a staff *)
-procedure createStaff(uniqueid, itmx, itmy: smallint);
+procedure createStaff(itmx, itmy: smallint);
 (* Equip weapon *)
 procedure useItem(equipped: boolean);
 (* Remove weapon from inventory when thrown *)
@@ -24,17 +24,16 @@ uses
   items, entities, ui, player_stats, player_inventory, globalUtils;
 
 (* Description of item depends on player race *)
-procedure createStaff(uniqueid, itmx, itmy: smallint);
+procedure createStaff(itmx, itmy: smallint);
 var
   randUses: smallint;
 begin
   (* Number of times the staff can be used *)
   randUses := randomRange(5, 8);
-  items.listLength := length(items.itemList);
-  SetLength(items.itemList, items.listLength + 1);
-  with items.itemList[items.listLength] do
+  SetLength(itemList, length(itemList) + 1);
+  with itemList[High(itemList)] do
   begin
-    itemID := uniqueid;
+    itemID := indexID;
     if (player_stats.playerRace <> 'Dwarf') then
     begin
       itemName := 'Staff of minor scorch';
@@ -61,6 +60,7 @@ begin
     dice := 1;
     adds := 0;
     discovered := False;
+    Inc(indexID);
   end;
 end;
 

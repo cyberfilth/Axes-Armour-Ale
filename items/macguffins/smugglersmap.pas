@@ -9,7 +9,7 @@ interface
 uses SysUtils, player_stats, dlgInfo, video;
 
 (* Create the map *)
-procedure createSmugglersMap(uniqueid, itmx, itmy: smallint);
+procedure createSmugglersMap(itmx, itmy: smallint);
 (* Collect quest item *)
 procedure obtainMap;
 
@@ -18,13 +18,12 @@ implementation
 uses
   items, ui;
 
-procedure createSmugglersMap(uniqueid, itmx, itmy: smallint);
+procedure createSmugglersMap(itmx, itmy: smallint);
 begin
-  items.listLength := length(items.itemList);
-  SetLength(items.itemList, items.listLength + 1);
-  with items.itemList[items.listLength] do
+  SetLength(itemList, length(itemList) + 1);
+  with itemList[High(itemList)] do
   begin
-    itemID := uniqueid;
+    itemID := indexID;
     itemName := 'Smugglers Map';
     itemDescription := 'The map you''ve been searching for';
     itemArticle := 'the';
@@ -43,6 +42,7 @@ begin
     dice := 0;
     adds := 0;
     discovered := False;
+    Inc(indexID);
   end;
 end;
 

@@ -1,13 +1,13 @@
-(* A wooden club *)
+(* A short bow *)
 
-unit basic_club;
+unit short_bow;
 
 {$mode fpc}{$H+}
 
 interface
 
-(* Create a club *)
-procedure createClub(itmx, itmy: smallint);
+(* Create a bow *)
+procedure createShortBow(itmx, itmy: smallint);
 (* Equip weapon *)
 procedure useItem(equipped: boolean);
 (* Remove weapon from inventory when thrown *)
@@ -18,29 +18,29 @@ implementation
 uses
   items, entities, ui;
 
-procedure createClub(itmx, itmy: smallint);
+procedure createShortBow(itmx, itmy: smallint);
 begin
   SetLength(itemList, length(itemList) + 1);
   with itemList[High(itemList)] do
   begin
     itemID := indexID;
-    itemName := 'wooden club';
-    itemDescription := 'adds 1D6 to attack';
+    itemName := 'short bow';
+    itemDescription := 'small hunting bow';
     itemArticle := 'a';
-    itemType := itmWeapon;
+    itemType :=
     itemMaterial := matWood;
-    useID := 4;
-    glyph := chr(24);
+    useID :=
+    glyph := '}';
     glyphColour := 'brown';
     inView := False;
     posX := itmx;
     posY := itmy;
-    NumberOfUses := 5;
+    NumberOfUses := 1;
     onMap := True;
     throwable := True;
-    throwDamage := 4;
-    dice := 1;
-    adds := 6;
+    throwDamage := 0;
+    dice := 0;
+    adds := 0;
     discovered := False;
     Inc(indexID);
   end;
@@ -77,4 +77,3 @@ begin
 end;
 
 end.
-

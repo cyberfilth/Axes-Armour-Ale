@@ -10,9 +10,9 @@ uses
   SysUtils, logging;
 
 (* Create a dagger *)
-procedure createDagger(uniqueid, itmx, itmy: smallint);
+procedure createDagger(itmx, itmy: smallint);
 (* Equip weapon *)
-procedure useItem(equipped: boolean);
+procedure useItem(equipped: boolean; ident: smallint);
 (* Remove weapon from inventory when thrown *)
 procedure throw;
 (* Check if weapon is damaged when thrown *)
@@ -23,13 +23,12 @@ implementation
 uses
   items, entities, ui, player_inventory;
 
-procedure createDagger(uniqueid, itmx, itmy: smallint);
+procedure createDagger(itmx, itmy: smallint);
 begin
-  items.listLength := length(items.itemList);
-  SetLength(items.itemList, items.listLength + 1);
-  with items.itemList[items.listLength] do
+  SetLength(itemList, length(itemList) + 1);
+  with itemList[High(itemList)] do
   begin
-    itemID := uniqueid;
+    itemID := indexID;
     itemName := 'crude dagger';
     itemDescription := 'adds 1D+2 to attack';
     itemArticle := 'a';
@@ -48,18 +47,18 @@ begin
     dice := 1;
     adds := 2;
     discovered := False;
+    Inc(indexID);
   end;
 end;
 
-procedure useItem(equipped: boolean);
+procedure useItem(equipped: boolean; ident: smallint);
 begin
-  { TODO : Add Throw Range and Throw Damage }
   if (equipped = False) then
     (* To equip the weapon *)
   begin
     entityList[0].weaponEquipped := True;
     Inc(entityList[0].weaponDice);
-    Inc(entityList[0].weaponAdds, 2);
+    Inc(entityList[0].weaponAdds, player_inventory.inventory[ident].adds);
     ui.displayMessage('You equip the crude dagger.');
     ui.equippedWeapon := 'Crude dagger';
     ui.writeBufferedMessages;
@@ -69,7 +68,7 @@ begin
   begin
     entityList[0].weaponEquipped := False;
     Dec(entityList[0].weaponDice);
-    Dec(entityList[0].weaponAdds, 2);
+    Dec(entityList[0].weaponAdds, player_inventory.inventory[ident].adds);
     ui.displayMessage('You unequip the crude dagger.');
     ui.equippedWeapon := 'No weapon equipped';
     ui.writeBufferedMessages;

@@ -6,7 +6,7 @@ unit ale_tankard;
 interface
 
 (* Create a tankard of ale *)
-procedure createAleTankard(uniqueid, itmx, itmy: smallint);
+procedure createAleTankard(itmx, itmy: smallint);
 (* Drink Ale *)
 procedure useItem;
 
@@ -15,13 +15,12 @@ implementation
 uses
   items, entities, ui, player;
 
-procedure createAleTankard(uniqueid, itmx, itmy: smallint);
+procedure createAleTankard(itmx, itmy: smallint);
 begin
-  items.listLength := length(items.itemList);
-  SetLength(items.itemList, items.listLength + 1);
-  with items.itemList[items.listLength] do
+  SetLength(itemList, length(itemList) + 1);
+  with itemList[High(itemList)] do
   begin
-    itemID := uniqueid;
+    itemID := indexID;
     itemName := 'tankard of ale';
     itemDescription := 'restores 5 health points';
     itemArticle := 'a';
@@ -40,6 +39,7 @@ begin
     dice := 0;
     adds := 0;
     discovered := False;
+    Inc(indexID);
   end;
 end;
 

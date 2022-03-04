@@ -7,7 +7,7 @@ unit leather_armour1;
 interface
 
 (* Create armour *)
-procedure createLeatherArmour(uniqueid, itmx, itmy: smallint);
+procedure createLeatherArmour(itmx, itmy: smallint);
 (* Wear armour *)
 procedure useItem(equipped: boolean);
 
@@ -16,13 +16,12 @@ implementation
 uses
   items, entities, ui;
 
-procedure createLeatherArmour(uniqueid, itmx, itmy: smallint);
+procedure createLeatherArmour(itmx, itmy: smallint);
 begin
-  items.listLength := length(items.itemList);
-  SetLength(items.itemList, items.listLength + 1);
-  with items.itemList[items.listLength] do
+  SetLength(itemList, length(itemList) + 1);
+  with itemList[High(itemList)] do
   begin
-    itemID := uniqueid;
+    itemID := indexID;
     itemName := 'Leather armour';
     itemDescription := 'adds 2 to defence';
     itemArticle := 'some';
@@ -41,6 +40,7 @@ begin
     dice := 0;
     adds := 0;
     discovered := False;
+    Inc(indexID);
   end;
 end;
 
