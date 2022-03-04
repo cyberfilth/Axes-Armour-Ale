@@ -8,7 +8,7 @@ unit map;
 interface
 
 uses
-  SysUtils, globalUtils, universe, ui, file_handling, player_stats;
+  SysUtils, globalUtils, universe, ui, file_handling, player_stats, logging;
 
 type
   (* Tiles that make up the game world *)
@@ -148,15 +148,27 @@ begin
     end
     else  (* If not the first floor *)
     begin
+      logAction('>Map saving current dungeon level');
       (* Ascend the stairs *)
       { Write current level to disk }
       file_handling.saveDungeonLevel;
+      logAction('>Map Success!...');
+      logAction(' ');
       (* Clear list of items *)
+      logAction('>Map Set array length to zero');
       items.initialiseItems;
+      logAction('>Map Success!...');
+      logAction(' ');
       (* Clear list of NPC's *)
+      logAction('>Map Spawn new NPC''s');
       entities.newFloorNPCs;
+      logAction('>Map Success!...');
+      logAction(' ');
       { Read next level from disk }
+      logAction('>Map Load new floor');
       file_handling.loadDungeonLevel(universe.currentDepth - 1);
+      logAction('>Map Success!...');
+      logAction(' ');
       { Show already discovered tiles }
       for r := 1 to globalUtils.MAXROWS do
       begin
