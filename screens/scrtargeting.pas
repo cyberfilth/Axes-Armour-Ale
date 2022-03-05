@@ -678,6 +678,8 @@ begin
     newItem.throwable := player_inventory.inventory[itemNumber].throwable;
     newItem.throwDamage := player_inventory.inventory[itemNumber].throwDamage;
     newItem.discovered := True;
+    newItem.adds := player_inventory.inventory[itemNumber].adds;
+    newItem.dice := player_inventory.inventory[itemNumber].dice;
     Inc(indexID);
 
   { Place item on the game map }
@@ -691,7 +693,7 @@ begin
   if (throwableWeapons[chosenProjectile].equppd = True) then
   begin
        case player_inventory.inventory[itemNumber].useID of
-         2: crude_dagger.throw;
+         2: crude_dagger.throw(itemNumber);
          4: basic_club.throw;
          8: staff_minor_scorch.throw;
        end;
@@ -711,6 +713,8 @@ begin
   player_inventory.inventory[itemNumber].throwable := False;
   player_inventory.inventory[itemNumber].throwDamage := 0;
   player_inventory.inventory[itemNumber].useID := 0;
+  player_inventory.inventory[itemNumber].adds := 0;
+  player_inventory.inventory[itemNumber].dice := 0;
 end;
 
 procedure restorePlayerGlyph;

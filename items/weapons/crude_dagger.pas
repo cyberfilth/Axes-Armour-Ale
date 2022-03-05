@@ -1,4 +1,4 @@
-(* A crude, iron dagger *)
+(* A crude, iron dagger. Easily broken if thrown *)
 
 unit crude_dagger;
 
@@ -7,14 +7,14 @@ unit crude_dagger;
 interface
 
 uses
-  SysUtils, logging;
+  SysUtils;
 
 (* Create a dagger *)
 procedure createDagger(itmx, itmy: smallint);
 (* Equip weapon *)
 procedure useItem(equipped: boolean; ident: smallint);
 (* Remove weapon from inventory when thrown *)
-procedure throw;
+procedure throw(itemID: smallint);
 (* Check if weapon is damaged when thrown *)
 procedure thrownDamaged(itmID: smallint; inventory: boolean);
 
@@ -52,14 +52,22 @@ begin
 end;
 
 procedure useItem(equipped: boolean; ident: smallint);
+var
+  info: shortstring;
 begin
+  info := 'You unequip the crude dagger.';
   if (equipped = False) then
     (* To equip the weapon *)
   begin
+    info := 'You equip the crude dagger.';
+    if (player_inventory.inventory[ident].adds > 0) then
+       info := info + ' The dagger add 1D6+' + IntToStr(player_inventory.inventory[ident].adds) + ' to your attack'
+    else
+       info := info + ' The dagger add 1D6 to your attack';
     entityList[0].weaponEquipped := True;
     Inc(entityList[0].weaponDice);
     Inc(entityList[0].weaponAdds, player_inventory.inventory[ident].adds);
-    ui.displayMessage('You equip the crude dagger.');
+    ui.displayMessage(info);
     ui.equippedWeapon := 'Crude dagger';
     ui.writeBufferedMessages;
   end
@@ -69,23 +77,22 @@ begin
     entityList[0].weaponEquipped := False;
     Dec(entityList[0].weaponDice);
     Dec(entityList[0].weaponAdds, player_inventory.inventory[ident].adds);
-    ui.displayMessage('You unequip the crude dagger.');
+    ui.displayMessage(info);
     ui.equippedWeapon := 'No weapon equipped';
     ui.writeBufferedMessages;
   end;
 end;
 
-procedure throw;
+procedure throw(itemID: smallint);
 begin
   entityList[0].weaponEquipped := False;
   Dec(entityList[0].weaponDice);
-  Dec(entityList[0].weaponAdds, 2);
+  Dec(entityList[0].weaponAdds, player_inventory.inventory[itemID].adds);
   ui.equippedWeapon := 'No weapon equipped';
 end;
 
 procedure thrownDamaged(itmID: smallint; inventory: boolean);
 begin
-  logAction('thrownDamaged');
   if (inventory = True) then
   begin
     if (player_inventory.inventory[itmID].numUses = 3) then
@@ -109,7 +116,6 @@ begin
   end
   else
   begin
-    logAction('Not in inventory');
      if (itemList[itmID].NumberOfUses = 3) then
     begin
       itemList[itmID].NumberOfUses := 2;
