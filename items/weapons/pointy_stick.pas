@@ -1,13 +1,13 @@
-(* A short bow *)
+(* A pointy stick *)
 
-unit short_bow;
+unit pointy_stick;
 
 {$mode fpc}{$H+}
 
 interface
 
-(* Create a bow *)
-procedure createShortBow(itmx, itmy: smallint);
+(* Create a pointy stick *)
+procedure createPointyStick(itmx, itmy: smallint);
 (* Equip weapon *)
 procedure useItem(equipped: boolean);
 (* Remove weapon from inventory when thrown *)
@@ -18,29 +18,29 @@ implementation
 uses
   items, entities, ui;
 
-procedure createShortBow(itmx, itmy: smallint);
+procedure createPointyStick(itmx, itmy: smallint);
 begin
   SetLength(itemList, length(itemList) + 1);
   with itemList[High(itemList)] do
   begin
     itemID := indexID;
-    itemName := 'short bow';
-    itemDescription := 'small hunting bow';
+    itemName := 'pointy stick';
+    itemDescription := 'adds 1D6+1 to attack';
     itemArticle := 'a';
-    itemType := itmProjectileWeapon;
+    itemType := itmWeapon;
     itemMaterial := matWood;
-    useID := 10;
-    glyph := '}';
+    useID := 11;
+    glyph := chr(173);
     glyphColour := 'brown';
     inView := False;
     posX := itmx;
     posY := itmy;
-    NumberOfUses := 1;
+    NumberOfUses := 5;
     onMap := True;
     throwable := True;
-    throwDamage := 1;
-    dice := 0;
-    adds := 0;
+    throwDamage := 4;
+    dice := 1;
+    adds := 1;
     discovered := False;
     Inc(indexID);
   end;
@@ -52,15 +52,19 @@ begin
     (* To equip the weapon *)
   begin
     entityList[0].weaponEquipped := True;
-    ui.displayMessage('You equip the short bow.');
-    ui.equippedWeapon := 'Short bow';
+    Inc(entityList[0].weaponDice);
+    Inc(entityList[0].weaponAdds);
+    ui.displayMessage('You equip the pointy stick. The stick adds 1D6+1 to your attack');
+    ui.equippedWeapon := 'Pointy stick';
     ui.writeBufferedMessages;
   end
   else
     (* To unequip the weapon *)
   begin
     entityList[0].weaponEquipped := False;
-    ui.displayMessage('You unequip the short bow.');
+    Dec(entityList[0].weaponDice);
+    Dec(entityList[0].weaponAdds);
+    ui.displayMessage('You unequip the pointy stick.');
     ui.equippedWeapon := 'No weapon equipped';
     ui.writeBufferedMessages;
   end;
@@ -69,6 +73,7 @@ end;
 procedure throw;
 begin
   entityList[0].weaponEquipped := False;
+  Dec(entityList[0].weaponDice);
   ui.equippedWeapon := 'No weapon equipped';
   ui.writeBufferedMessages;
 end;

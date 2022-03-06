@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="57">
+    <Units Count="59">
       <Unit0>
         <Filename Value="ascii_axe.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -360,6 +360,14 @@
         <Filename Value="items\weapons\short_bow.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit56>
+      <Unit57>
+        <Filename Value="items\wine_flask.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit57>
+      <Unit58>
+        <Filename Value="items\weapons\pointy_stick.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit58>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

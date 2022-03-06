@@ -9,9 +9,9 @@ interface
 uses
   universe, globalUtils,
   { List of drinks }
-  ale_tankard, potion_curePoison,
+  ale_tankard, wine_flask,
   { List of weapons }
-  crude_dagger, basic_club, rock,
+  crude_dagger, basic_club, rock, short_bow, pointy_stick,
   { List of armour }
   leather_armour1, cloth_armour1,
   { Quest items }
@@ -21,12 +21,12 @@ uses
 
 const
   (* Array of items found in a cave, ordered by cave level *)
-  caveItems1: array[1..5] of string =
-    ('aleTankard', 'clothArmour1', 'curePotion', 'basicClub', 'rock');
+  caveItems1: array[1..7] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'shortBow', 'pointyStick');
   caveItems2: array[1..4] of string =
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1');
   caveItems3: array[1..5] of string =
-    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'curePotion');
+    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask');
 
 (* Choose an item and call the generate code directly *)
 procedure dispenseItem(dungeon: dungeonTerrain);
@@ -84,12 +84,14 @@ begin
   case thing of
     'aleTankard': ale_tankard.createAleTankard(c, r);
     'rock': rock.createRock(c, r);
-    'curePotion': potion_curePoison.createCurePotion(c, r);
+    'wineFlask': wine_flask.createWineFlask(c, r);
     'crudeDagger': crude_dagger.createDagger(c, r);
     'leatherArmour1': leather_armour1.createLeatherArmour(c, r);
     'basicClub': basic_club.createClub(c, r);
     'clothArmour1': cloth_armour1.createClothArmour(c, r);
     'staffMnrScorch': staff_minor_scorch.createStaff(c, r);
+    'shortBow': short_bow.createShortBow(c, r);
+    'pointyStick': pointy_stick.createPointyStick(c, r);
   end;
 end;
 
@@ -101,10 +103,12 @@ begin
     3: leather_armour1.useItem(equipped);
     4: basic_club.useItem(equipped);
     5: cloth_armour1.useItem(equipped);
-    6: potion_curePoison.useItem;
+    6: wine_flask.useItem;
     7: smugglersMap.obtainMap;
     8: staff_minor_scorch.useItem(equipped);
     9: rock.useItem;
+    10: short_bow.useItem(equipped);
+    11: pointy_stick.useItem(equipped);
   end;
 end;
 

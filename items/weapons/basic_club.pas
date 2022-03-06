@@ -40,7 +40,7 @@ begin
     throwable := True;
     throwDamage := 4;
     dice := 1;
-    adds := 6;
+    adds := 0;
     discovered := False;
     Inc(indexID);
   end;

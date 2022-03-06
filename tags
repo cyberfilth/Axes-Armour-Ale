@@ -137,7 +137,6 @@ createClothArmour	items/armour/cloth_armour1.pas	/^procedure createClothArmour(i
 createClub	items/weapons/backup/basic_club.pas	/^procedure createClub(itmx, itmy: smallint);$/;"	p
 createClub	items/weapons/basic_club.pas	/^procedure createClub(itmx, itmy: smallint);$/;"	p
 createCurePotion	items/backup/potion_curepoison.pas	/^procedure createCurePotion(itmx, itmy: smallint);$/;"	p
-createCurePotion	items/potion_curepoison.pas	/^procedure createCurePotion(itmx, itmy: smallint);$/;"	p
 createDagger	items/weapons/backup/crude_dagger.pas	/^procedure createDagger(itmx, itmy: smallint);$/;"	p
 createDagger	items/weapons/crude_dagger.pas	/^procedure createDagger(itmx, itmy: smallint);$/;"	p
 createGiantCaveRat	entities/animals/giant_cave_rat.pas	/^procedure createGiantCaveRat(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -150,6 +149,8 @@ createNewDungeon	backup/universe.pas	/^procedure createNewDungeon(levelType: dun
 createNewDungeon	universe.pas	/^procedure createNewDungeon(levelType: dungeonTerrain);$/;"	p
 createPlayer	player/backup/player.pas	/^procedure createPlayer;$/;"	p
 createPlayer	player/player.pas	/^procedure createPlayer;$/;"	p
+createPointyStick	items/weapons/backup/pointy_stick.pas	/^procedure createPointyStick(itmx, itmy: smallint);$/;"	p
+createPointyStick	items/weapons/pointy_stick.pas	/^procedure createPointyStick(itmx, itmy: smallint);$/;"	p
 createRedcap	entities/hobs/backup/redcap_lesser.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
 createRedcap	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
 createRedcap	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -167,6 +168,8 @@ createSmugglersMap	items/macguffins/backup/smugglersmap.pas	/^procedure createSm
 createSmugglersMap	items/macguffins/smugglersmap.pas	/^procedure createSmugglersMap(itmx, itmy: smallint);$/;"	p
 createStaff	items/weapons/backup/staff_minor_scorch.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
 createStaff	items/weapons/staff_minor_scorch.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
+createWineFlask	items/backup/wine_flask.pas	/^procedure createWineFlask(itmx, itmy: smallint);$/;"	p
+createWineFlask	items/wine_flask.pas	/^procedure createWineFlask(itmx, itmy: smallint);$/;"	p
 cycleTargets	screens/backup/scrtargeting.pas	/^procedure cycleTargets(selection: smallint);$/;"	p
 cycleTargets	screens/scrtargeting.pas	/^procedure cycleTargets(selection: smallint);$/;"	p
 death	entities/fungus/green_fungus.pas	/^procedure death(id: smallint);$/;"	p
@@ -582,10 +585,12 @@ targetInput	backup/keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent
 targetInput	keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
 throw	items/weapons/backup/basic_club.pas	/^procedure throw;$/;"	p
 throw	items/weapons/backup/crude_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
+throw	items/weapons/backup/pointy_stick.pas	/^procedure throw;$/;"	p
 throw	items/weapons/backup/short_bow.pas	/^procedure throw;$/;"	p
 throw	items/weapons/backup/staff_minor_scorch.pas	/^procedure throw;$/;"	p
 throw	items/weapons/basic_club.pas	/^procedure throw;$/;"	p
 throw	items/weapons/crude_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
+throw	items/weapons/pointy_stick.pas	/^procedure throw;$/;"	p
 throw	items/weapons/short_bow.pas	/^procedure throw;$/;"	p
 throw	items/weapons/staff_minor_scorch.pas	/^procedure throw;$/;"	p
 throwRock	animation.pas	/^procedure throwRock(id: smallint; var flightPath: a);$/;"	p
@@ -622,16 +627,19 @@ useItem	items/armour/leather_armour1.pas	/^procedure useItem(equipped: boolean);
 useItem	items/backup/ale_tankard.pas	/^procedure useItem;$/;"	p
 useItem	items/backup/potion_curepoison.pas	/^procedure useItem;$/;"	p
 useItem	items/backup/rock.pas	/^procedure useItem;$/;"	p
-useItem	items/potion_curepoison.pas	/^procedure useItem;$/;"	p
+useItem	items/backup/wine_flask.pas	/^procedure useItem;$/;"	p
 useItem	items/rock.pas	/^procedure useItem;$/;"	p
-useItem	items/weapons/backup/basic_club.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
+useItem	items/weapons/backup/basic_club.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/backup/crude_dagger.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
+useItem	items/weapons/backup/pointy_stick.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/backup/short_bow.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/backup/staff_minor_scorch.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/basic_club.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/crude_dagger.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
+useItem	items/weapons/pointy_stick.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/short_bow.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/staff_minor_scorch.pas	/^procedure useItem(equipped: boolean);$/;"	p
+useItem	items/wine_flask.pas	/^procedure useItem;$/;"	p
 validProjectile	screens/backup/scrtargeting.pas	/^function validProjectile(selection: char): boolean;$/;"	f
 validProjectile	screens/scrtargeting.pas	/^function validProjectile(selection: char): boolean;$/;"	f
 wander	entities/ai_animal.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p

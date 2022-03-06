@@ -30,7 +30,7 @@ begin
   begin
     itemID := indexID;
     itemName := 'crude dagger';
-    itemDescription := 'adds 1D+2 to attack';
+    itemDescription := 'adds 1D6+2 to attack';
     itemArticle := 'a';
     itemType := itmWeapon;
     itemMaterial := matIron;

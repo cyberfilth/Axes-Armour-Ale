@@ -1,13 +1,13 @@
-(* Potion that cures poison *)
+(* Flask of wine - cures poison *)
 
-unit potion_curePoison;
+unit wine_flask;
 
 {$mode objfpc}{$H+}
 
 interface
 
 (* Create a Potion of Cure Poison *)
-procedure createCurePotion(itmx, itmy: smallint);
+procedure createWineFlask(itmx, itmy: smallint);
 (* Drink Potion *)
 procedure useItem;
 
@@ -16,13 +16,13 @@ implementation
 uses
   items, entities, ui;
 
-procedure createCurePotion(itmx, itmy: smallint);
+procedure createWineFlask(itmx, itmy: smallint);
 begin
   SetLength(itemList, length(itemList) + 1);
   with itemList[High(itemList)] do
   begin
     itemID := indexID;
-    itemName := 'potion of Cure';
+    itemName := 'flask of wine';
     itemDescription := 'cures poison';
     itemArticle := 'a';
     itemType := itmDrink;
@@ -50,14 +50,20 @@ begin
   begin
     entities.entityList[0].tmrPoison := 0;
     entities.entityList[0].stsPoison := False;
+    Inc(entities.entityList[0].tmrDrunk, 5);
     (* Update UI *)
     ui.displayStatusEffect(0, 'poison');
     ui.poisonStatusSet := False;
     entityList[0].glyphColour := 'yellow';
-    ui.displayMessage('You quaff the potion. The poison leaves your system.');
+    ui.displayMessage('The alcohol slows your reactions.');
+    ui.displayMessage('You drink the wine. The poison leaves your system.');
   end
   else
-    ui.displayMessage('You quaff the potion. You don''t notice any effects');
+  begin
+    Inc(entities.entityList[0].tmrDrunk, 5);
+    ui.displayMessage('The alcohol slows your reactions.');
+    ui.displayMessage('You drink the wine. You don''t notice any effects');
+  end;
 end;
 
 end.
