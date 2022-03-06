@@ -123,6 +123,8 @@ countNonEmptyItems	backup/items.pas	/^function countNonEmptyItems: byte;$/;"	f
 countNonEmptyItems	items.pas	/^function countNonEmptyItems: byte;$/;"	f
 createAleTankard	items/ale_tankard.pas	/^procedure createAleTankard(itmx, itmy: smallint);$/;"	p
 createAleTankard	items/backup/ale_tankard.pas	/^procedure createAleTankard(itmx, itmy: smallint);$/;"	p
+createArrow	items/arrow.pas	/^procedure createArrow(itmx, itmy: smallint);$/;"	p
+createArrow	items/backup/arrow.pas	/^procedure createArrow(itmx, itmy: smallint);$/;"	p
 createBloodBat	entities/animals/backup/large_blood_bat.pas	/^procedure createBloodBat(uniqueid, npcx, npcy: smallint);$/;"	p
 createBloodBat	entities/animals/blood_bat.pas	/^procedure createBloodBat(uniqueid, npcx, npcy: smallint);$/;"	p
 createBloodBat	entities/animals/large_blood_bat.pas	/^procedure createBloodBat(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -624,7 +626,9 @@ useItem	items/armour/backup/cloth_armour1.pas	/^procedure useItem(equipped: bool
 useItem	items/armour/backup/leather_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/armour/cloth_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/armour/leather_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
+useItem	items/arrow.pas	/^procedure useItem;$/;"	p
 useItem	items/backup/ale_tankard.pas	/^procedure useItem;$/;"	p
+useItem	items/backup/arrow.pas	/^procedure useItem;$/;"	p
 useItem	items/backup/potion_curepoison.pas	/^procedure useItem;$/;"	p
 useItem	items/backup/rock.pas	/^procedure useItem;$/;"	p
 useItem	items/backup/wine_flask.pas	/^procedure useItem;$/;"	p

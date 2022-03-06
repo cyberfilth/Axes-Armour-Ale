@@ -17,16 +17,18 @@ uses
   { Quest items }
   smugglersMap,
   { Magical items }
-  staff_minor_scorch;
+  staff_minor_scorch,
+  { Ammunition }
+  arrow;
 
 const
   (* Array of items found in a cave, ordered by cave level *)
-  caveItems1: array[1..7] of string =
-    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'shortBow', 'pointyStick');
-  caveItems2: array[1..4] of string =
-    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1');
-  caveItems3: array[1..5] of string =
-    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask');
+  caveItems1: array[1..8] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'shortBow', 'pointyStick', 'arrow');
+  caveItems2: array[1..7] of string =
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'rock', 'arrow', 'shortBow');
+  caveItems3: array[1..6] of string =
+    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
 
 (* Choose an item and call the generate code directly *)
 procedure dispenseItem(dungeon: dungeonTerrain);
@@ -92,6 +94,7 @@ begin
     'staffMnrScorch': staff_minor_scorch.createStaff(c, r);
     'shortBow': short_bow.createShortBow(c, r);
     'pointyStick': pointy_stick.createPointyStick(c, r);
+    'arrow': arrow.createArrow(c, r);
   end;
 end;
 
@@ -109,6 +112,7 @@ begin
     9: rock.useItem;
     10: short_bow.useItem(equipped);
     11: pointy_stick.useItem(equipped);
+    12: arrow.useItem;
   end;
 end;
 

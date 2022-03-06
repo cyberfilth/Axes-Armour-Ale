@@ -219,6 +219,8 @@ begin
             AddElement(DataNode, 'glyph', '*')
           else if (itemList[i].glyph = chr(173)) then
             AddElement(DataNode, 'glyph', 'i')
+          else if (itemList[i].glyph = chr(140)) then
+            AddElement(DataNode, 'glyph', 'A')
           else
             AddElement(DataNode, 'glyph', itemList[i].glyph);
 
@@ -369,6 +371,8 @@ begin
           items.itemList[i].glyph := chr(186)
         else if (ItemsNode.FindNode('glyph').TextContent[1] = '*') then
           items.itemList[i].glyph := chr(7)
+        else if (ItemsNode.FindNode('glyph').TextContent[1] = 'A') then
+          items.itemList[i].glyph := chr(140)
         else if (ItemsNode.FindNode('glyph').TextContent[1] = 'i') then
           items.itemList[i].glyph := chr(173)
         else
@@ -562,6 +566,8 @@ begin
         player_inventory.inventory[i].glyph := chr(7)
       else if (InventoryNode.FindNode('glyph').TextContent[1] = 'i') then
         player_inventory.inventory[i].glyph := chr(173)
+      else if (InventoryNode.FindNode('glyph').TextContent[1] = 'A') then
+        player_inventory.inventory[i].glyph := chr(140)
       else
         player_inventory.inventory[i].glyph := char(widechar(InventoryNode.FindNode('glyph').TextContent[1]));
 
@@ -698,8 +704,10 @@ begin
         AddElement(DataNode, 'glyph', '=')
       else if (inventory[i].glyph = chr(7)) then
         AddElement(DataNode, 'glyph', '*')
-       else if (inventory[i].glyph = chr(173)) then
+      else if (inventory[i].glyph = chr(173)) then
         AddElement(DataNode, 'glyph', 'i')
+      else if (inventory[i].glyph = chr(140)) then
+        AddElement(DataNode, 'glyph', 'A')
       else
         AddElement(DataNode, 'glyph', inventory[i].glyph);
 
