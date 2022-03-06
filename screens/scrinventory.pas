@@ -62,11 +62,11 @@ begin
   for letter := 'a' to 'j' do
   begin
     if (player_inventory.inventory[invItem].Name = 'Empty') then
-      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + chr(174) +
-        ' empty slot ' + chr(175))
+      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + chr(174) + ' empty slot ' + chr(175))
+    else if (player_inventory.inventory[invItem].Name = 'arrow') and (player_inventory.inventory[invItem].numUses > 1) then
+      TextOut(10, y, 'cyan', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name + ' x' + IntToStr(player_inventory.inventory[invItem].numUses))
     else
-      TextOut(10, y, 'cyan', '[' + letter + ']  ' +
-        player_inventory.inventory[invItem].Name);
+      TextOut(10, y, 'cyan', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name);
     Inc(y);
     Inc(invItem);
   end;

@@ -24,7 +24,8 @@ uses
 const
   (* Array of items found in a cave, ordered by cave level *)
   caveItems1: array[1..8] of string =
-    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'shortBow', 'pointyStick', 'arrow');
+  ('arrow', 'arrow', 'arrow', 'arrow', 'arrow', 'arrow', 'arrow', 'arrow');
+    //('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'shortBow', 'pointyStick', 'arrow');
   caveItems2: array[1..7] of string =
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'rock', 'arrow', 'shortBow');
   caveItems3: array[1..6] of string =
@@ -130,6 +131,8 @@ begin
   (* Drop the quest object *)
   if (universe.currentDepth = 3) then
     smugglersMap.createSmugglersMap(c, r)
+  else if (universe.currentDepth = 3) then
+    staff_minor_scorch.createStaff(c, r)
   else
     rock.createRock(c, r);
 end;

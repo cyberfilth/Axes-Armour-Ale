@@ -28,7 +28,7 @@ begin
     itemType := itmAmmo;
     itemMaterial := matWood;
     useID := 12;
-    glyph := chr(140);
+    glyph := chr(6);
     glyphColour := 'brown';
     inView := False;
     posX := itmx;

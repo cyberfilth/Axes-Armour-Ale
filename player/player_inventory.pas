@@ -123,6 +123,19 @@ begin
   if (itemList[itemNumber].itemType <> itmQuest) then
   begin
     Result := False;
+    (* Check for adding an arrow to existing arrow slot *)
+    if (itemList[itemNumber].itemName = 'arrow') then
+    begin
+      for i := 0 to 9 do
+      begin
+           if (inventory[i].Name = 'arrow') then
+           begin
+             Inc(inventory[i].numUses);
+             exit;
+           end;
+      end;
+    end;
+    (* Check for an empty inventory slot *)
     for i := 0 to 9 do
     begin
       if (inventory[i].Name = 'Empty') then
@@ -133,12 +146,16 @@ begin
         (* Set sortIndex for sorting inventory *)
         if (itemList[itemNumber].itemType = itmWeapon) then
           inventory[i].sortIndex := 1
-        else if (itemList[itemNumber].itemType = itmArmour) then
+        else if (itemList[itemNumber].itemType = itmProjectileWeapon) then
           inventory[i].sortIndex := 2
-        else if (itemList[itemNumber].itemType = itmDrink) then
+        else if (itemList[itemNumber].itemType = itmArmour) then
           inventory[i].sortIndex := 3
+        else if (itemList[itemNumber].itemType = itmDrink) then
+          inventory[i].sortIndex := 4
         else if (itemList[itemNumber].itemType = itmProjectile) then
-          inventory[i].sortIndex := 4;
+          inventory[i].sortIndex := 5
+        else if (itemList[itemNumber].itemType = itmAmmo) then
+          inventory[i].sortIndex := 6;
         inventory[i].Name := itemList[itemNumber].itemname;
         inventory[i].description := itemList[itemNumber].itemDescription;
         inventory[i].article := itemList[itemNumber].itemArticle;
@@ -272,8 +289,6 @@ begin
     inventory[itemNumber].adds := 0;
     inventory[itemNumber].useID := 0;
     Result := True;
-    (* Sort items in inventory *)
-    sortInventory(0, high(inventory));
     (* Redraw the Drop menu *)
     drop;
   end
