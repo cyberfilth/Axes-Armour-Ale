@@ -34,6 +34,10 @@ Zzap	player/backup/player_inventory.pas	/^procedure Zzap(item: smallint);$/;"	p
 Zzap	player/player_inventory.pas	/^procedure Zzap(item: smallint);$/;"	p
 addToInventory	player/backup/player_inventory.pas	/^function addToInventory(itemNumber: smallint): boolean;$/;"	f
 addToInventory	player/player_inventory.pas	/^function addToInventory(itemNumber: smallint): boolean;$/;"	f
+addToInventory_emptySlot	player/backup/player_inventory.pas	/^function addToInventory_emptySlot(itemNumber: smallint; skip: boolean): boolean;$/;"	f
+addToInventory_emptySlot	player/backup/player_inventory.pas	/^function addToInventory_emptySlot(itemNumber: smallint; skip: boolean):boolean;$/;"	f
+addToInventory_emptySlot	player/player_inventory.pas	/^function addToInventory_emptySlot(itemNumber: smallint; skip: boolean): boolean;$/;"	f
+addToInventory_emptySlot	player/player_inventory.pas	/^function addToInventory_emptySlot(itemNumber: smallint; skip: boolean):boolean;$/;"	f
 ammoProjectile	backup/keyboardinput.pas	/^procedure ammoProjectile(Keypress: TKeyEvent);$/;"	p
 ammoProjectile	keyboardinput.pas	/^procedure ammoProjectile(Keypress: TKeyEvent);$/;"	p
 ammoTarget	backup/keyboardinput.pas	/^procedure ammoTarget(Keypress: TKeyEvent);$/;"	p

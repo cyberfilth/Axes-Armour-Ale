@@ -33,6 +33,8 @@ procedure initialiseInventory;
 procedure loadEquippedItems;
 (* Add to inventory *)
 function addToInventory(itemNumber: smallint): boolean;
+(* Add to an empty slot in inventory *)
+function addToInventory_emptySlot(itemNumber: smallint; skip: boolean): boolean;
 (* Remove from inventory *)
 function removeFromInventory(itemNumber: smallint): boolean;
 (* Sort inventory *)
@@ -118,7 +120,12 @@ end;
 function addToInventory(itemNumber: smallint): boolean;
 var
   i: smallint;
+  stacked, skip: boolean;
 begin
+  { Are items stacked }
+  stacked := False;
+  { Don't add to a new slot if item is stacked }
+  skip := False;
   (* If this is not a quest item *)
   if (itemList[itemNumber].itemType <> itmQuest) then
   begin
@@ -130,13 +137,85 @@ begin
       begin
            if (inventory[i].Name = 'arrow') then
            begin
-             Inc(inventory[i].numUses);
-             exit;
+             Inc(inventory[i].numUses, itemList[itemNumber].NumberOfUses);
+             stacked := True;
+             skip := True;
+             if (itemList[itemNumber].NumberOfUses > 1) then
+                ui.displayMessage('You pick up the ' + inventory[i].Name + 's')
+             else
+                ui.displayMessage('You pick up the ' + inventory[i].Name);
            end;
       end;
     end;
     (* Check for an empty inventory slot *)
-    for i := 0 to 9 do
+    if (addToInventory_emptySlot(itemNumber, skip) = True) or (stacked = True) then
+    begin
+(* Set an empty flag for the item on the map, this gets deleted when saving the map *)
+        with itemList[itemNumber] do
+        begin
+          itemID := itemNumber;
+          itemName := 'empty';
+          itemDescription := '';
+          itemArticle := '';
+          itemType := itmEmptySlot;
+          itemMaterial := matEmpty;
+          useID := 1;
+          glyph := 'x';
+          glyphColour := 'lightCyan';
+          inView := False;
+          posX := 1;
+          posY := 1;
+          NumberOfUses := 0;
+          onMap := False;
+          throwable := False;
+          throwDamage := 0;
+          dice := 0;
+          adds := 0;
+          discovered := False;
+        end;
+        (* Sort items in inventory *)
+        sortInventory(0, high(inventory));
+        Result := True;
+        exit;
+      end;
+  end
+  else  { Quest item }
+  begin
+    item_lookup.lookupUse(itemList[itemNumber].useID, False, 0);
+(* Set an empty flag for the item on the map, this gets deleted when saving the map *)
+    with itemList[itemNumber] do
+    begin
+      itemID := itemNumber;
+      itemName := 'empty';
+      itemDescription := '';
+      itemArticle := '';
+      itemType := itmEmptySlot;
+      itemMaterial := matEmpty;
+      useID := 1;
+      glyph := 'x';
+      glyphColour := 'lightCyan';
+      inView := False;
+      posX := 1;
+      posY := 1;
+      NumberOfUses := 0;
+      onMap := False;
+      throwable := False;
+      throwDamage := 0;
+      dice := 0;
+      adds := 0;
+      discovered := False;
+    end;
+    Result := True;
+  end;
+end;
+
+function addToInventory_emptySlot(itemNumber: smallint; skip: boolean):boolean;
+var i: smallint;
+begin
+  Result := False;
+  if (skip = False) then
+  begin
+  for i := 0 to 9 do
     begin
       if (inventory[i].Name = 'Empty') then
       begin
@@ -170,67 +249,14 @@ begin
         inventory[i].dice := itemList[itemNumber].dice;
         inventory[i].adds := itemList[itemNumber].adds;
         inventory[i].inInventory := True;
-        ui.displayMessage('You pick up the ' + inventory[i].Name);
-      (* Set an empty flag for the item on the map, this
-         gets deleted when saving the map *)
-        with itemList[itemNumber] do
-        begin
-          itemID := itemNumber;
-          itemName := 'empty';
-          itemDescription := '';
-          itemArticle := '';
-          itemType := itmEmptySlot;
-          itemMaterial := matEmpty;
-          useID := 1;
-          glyph := 'x';
-          glyphColour := 'lightCyan';
-          inView := False;
-          posX := 1;
-          posY := 1;
-          NumberOfUses := 0;
-          onMap := False;
-          throwable := False;
-          throwDamage := 0;
-          dice := 0;
-          adds := 0;
-          discovered := False;
-        end;
-        (* Sort items in inventory *)
-        sortInventory(0, high(inventory));
+        if (itemList[itemNumber].itemName = 'arrow') and (itemList[itemNumber].NumberOfUses > 1) then
+           ui.displayMessage('You pick up the ' + inventory[i].Name + 's')
+        else
+            ui.displayMessage('You pick up the ' + inventory[i].Name);
         Result := True;
         exit;
       end;
     end;
-  end
-  else
-  begin
-    item_lookup.lookupUse(itemList[itemNumber].useID, False, 0);
-       (* Set an empty flag for the item on the map, this
-         gets deleted when saving the map *)
-    with itemList[itemNumber] do
-    begin
-      itemID := itemNumber;
-      itemName := 'empty';
-      itemDescription := '';
-      itemArticle := '';
-      itemType := itmEmptySlot;
-      itemMaterial := matEmpty;
-      useID := 1;
-      glyph := 'x';
-      glyphColour := 'lightCyan';
-      inView := False;
-      posX := 1;
-      posY := 1;
-      NumberOfUses := 0;
-      onMap := False;
-      throwable := False;
-      throwDamage := 0;
-      dice := 0;
-      adds := 0;
-      discovered := False;
-    end;
-    Result := True;
-    exit;
   end;
 end;
 
@@ -408,8 +434,16 @@ end;
 
 procedure dropSelection(selection: smallint);
 begin
+  (* Cannot drop an equipped item *)
+  if (inventory[selection].equipped = True) then
+  begin
+    LockScreenUpdate;
+    TextOut(6, 20, 'cyan', 'You must unequip an item before dropping it');
+    UnlockScreenUpdate;
+    UpdateScreen(False);
+  end
   (* Check that the slot is not empty *)
-  if (inventory[selection].inInventory = True) then
+  else if (inventory[selection].inInventory = True) and (inventory[selection].equipped = False) then
     removeFromInventory(selection);
 end;
 

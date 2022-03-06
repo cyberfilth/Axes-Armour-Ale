@@ -61,10 +61,15 @@ begin
   y := 6;
   for letter := 'a' to 'j' do
   begin
+    (* Empty slots *)
     if (player_inventory.inventory[invItem].Name = 'Empty') then
       TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + chr(174) + ' empty slot ' + chr(175))
+    (* Several arrows *)
     else if (player_inventory.inventory[invItem].Name = 'arrow') and (player_inventory.inventory[invItem].numUses > 1) then
       TextOut(10, y, 'cyan', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name + ' x' + IntToStr(player_inventory.inventory[invItem].numUses))
+    (* Equipped items *)
+    else if (player_inventory.inventory[invItem].equipped = True) then
+      TextOut(10, y, 'cyan', '[' + letter + ']  ' + '[equipped] ' + player_inventory.inventory[invItem].Name)
     else
       TextOut(10, y, 'cyan', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name);
     Inc(y);
@@ -93,16 +98,16 @@ begin
   begin
     { Empty slots }
     if (player_inventory.inventory[invItem].Name = 'Empty') then
-      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + chr(174) +
-        ' empty slot ' + chr(175))
+      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + chr(174) + ' empty slot ' + chr(175))
+    { Several arrows }
+    else if (player_inventory.inventory[invItem].Name = 'arrow') and (player_inventory.inventory[invItem].numUses > 1) then
+      TextOut(10, y, 'cyan', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name + ' x' + IntToStr(player_inventory.inventory[invItem].numUses))
     { Equipped items cannot be dropped }
     else if (player_inventory.inventory[invItem].equipped = True) then
-      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' +
-        player_inventory.inventory[invItem].Name)
+      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + '[equipped] ' + player_inventory.inventory[invItem].Name)
     { Items that can be dropped }
     else
-      TextOut(10, y, 'cyan', '[' + letter + ']  ' +
-        player_inventory.inventory[invItem].Name);
+      TextOut(10, y, 'cyan', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name);
     Inc(y);
     Inc(invItem);
   end;
@@ -133,16 +138,19 @@ begin
   begin
     { Empty slots }
     if (player_inventory.inventory[invItem].Name = 'Empty') then
-      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + chr(174) +
-        ' empty slot ' + chr(175))
+      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + chr(174) + ' empty slot ' + chr(175))
+    { Several arrows }
+    else if (player_inventory.inventory[invItem].Name = 'arrow') and (player_inventory.inventory[invItem].numUses > 1) then
+      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name + ' x' + IntToStr(player_inventory.inventory[invItem].numUses))
+    { Equipped items }
+    else if (player_inventory.inventory[invItem].equipped = True) then
+      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + '[equipped] ' + player_inventory.inventory[invItem].Name)
     { Non-drinkable items }
     else if (player_inventory.inventory[invItem].itemType <> itmDrink) then
-      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' +
-        player_inventory.inventory[invItem].Name)
+      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name)
     { Items that can be drunk }
     else
-      TextOut(10, y, 'cyan', '[' + letter + ']  ' +
-        player_inventory.inventory[invItem].Name);
+      TextOut(10, y, 'cyan', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name);
     Inc(y);
     Inc(invItem);
   end;
@@ -169,25 +177,24 @@ begin
   begin
     { Empty slots }
     if (player_inventory.inventory[invItem].Name = 'Empty') then
-      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + chr(174) +
-        ' empty slot ' + chr(175))
+      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + chr(174) + ' empty slot ' + chr(175))
     { Items that can be wielded or worn }
     else if (player_inventory.inventory[invItem].itemType = itmWeapon) or
       (player_inventory.inventory[invItem].itemType = itmArmour) then
     begin
       (* Show equipped items *)
       if (player_inventory.inventory[invItem].equipped = True) then
-        TextOut(10, y, 'cyan', '[' + letter + ']  ' + '[equipped] ' +
-          player_inventory.inventory[invItem].Name)
+        TextOut(10, y, 'cyan', '[' + letter + ']  ' + '[equipped] ' + player_inventory.inventory[invItem].Name)
       else
         (* Show non-equipped items *)
-        TextOut(10, y, 'cyan', '[' + letter + ']  ' +
-          player_inventory.inventory[invItem].Name);
+        TextOut(10, y, 'cyan', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name);
     end
     { if not a weapon or armour }
+    { Several arrows }
+    else if (player_inventory.inventory[invItem].Name = 'arrow') and (player_inventory.inventory[invItem].numUses > 1) then
+      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name + ' x' + IntToStr(player_inventory.inventory[invItem].numUses))
     else
-      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' +
-        player_inventory.inventory[invItem].Name);
+      TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + player_inventory.inventory[invItem].Name);
     Inc(y);
     Inc(invItem);
   end;
