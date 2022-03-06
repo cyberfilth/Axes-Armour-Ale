@@ -180,7 +180,8 @@ begin
       TextOut(10, y, 'darkGrey', '[' + letter + ']  ' + chr(174) + ' empty slot ' + chr(175))
     { Items that can be wielded or worn }
     else if (player_inventory.inventory[invItem].itemType = itmWeapon) or
-      (player_inventory.inventory[invItem].itemType = itmArmour) then
+         (player_inventory.inventory[invItem].itemType = itmProjectileWeapon) or
+         (player_inventory.inventory[invItem].itemType = itmArmour) then
     begin
       (* Show equipped items *)
       if (player_inventory.inventory[invItem].equipped = True) then

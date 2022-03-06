@@ -526,8 +526,7 @@ begin
   if (inventory[selection].inInventory = True) then
   begin
     (* Check that the selected item is armour or a weapon *)
-    if (inventory[selection].itemType = itmWeapon) or
-      (inventory[selection].itemType = itmArmour) then
+    if (inventory[selection].itemType = itmWeapon) or (inventory[selection].itemType = itmProjectileWeapon) or (inventory[selection].itemType = itmArmour) then
     begin
 
       (* Check if an elf is trying to use an iron item *)
@@ -542,6 +541,13 @@ begin
     equipped prompt the player to unequip their weapon first *)
       if (inventory[selection].equipped = False) and
         (inventory[selection].itemType = itmWeapon) and
+        (entityList[0].weaponEquipped = True) then
+        msg := 'w'
+
+    (* If the item is an unequipped projectie weapon, and the player already has
+    a weapon equipped prompt the player to unequip their weapon first *)
+      else if (inventory[selection].equipped = False) and
+        (inventory[selection].itemType = itmProjectileWeapon) and
         (entityList[0].weaponEquipped = True) then
         msg := 'w'
 
