@@ -212,15 +212,13 @@ begin
 
           { Convert extended ASCII to plain text }
           if (itemList[i].glyph = chr(24)) then
-            AddElement(DataNode, 'glyph', '|')
+            AddElement(DataNode, 'glyph', 'T')
           else if (itemList[i].glyph = chr(186)) then
             AddElement(DataNode, 'glyph', '=')
           else if (itemList[i].glyph = chr(7)) then
             AddElement(DataNode, 'glyph', '*')
           else if (itemList[i].glyph = chr(173)) then
             AddElement(DataNode, 'glyph', 'i')
-          else if (itemList[i].glyph = chr(6)) then
-            AddElement(DataNode, 'glyph', 'A')
           else
             AddElement(DataNode, 'glyph', itemList[i].glyph);
 
@@ -365,15 +363,13 @@ begin
         items.itemList[i].useID := StrToInt(UTF8Encode(ItemsNode.FindNode('useID').TextContent));
 
         { Convert plain text to extended ASCII }
-        if (ItemsNode.FindNode('glyph').TextContent[1] = '|') then
+        if (ItemsNode.FindNode('glyph').TextContent[1] = 'T') then { club / dagger }
           items.itemList[i].glyph := chr(24)
-        else if (ItemsNode.FindNode('glyph').TextContent[1] = '=') then
+        else if (ItemsNode.FindNode('glyph').TextContent[1] = '=') then { staff_minor_scorch}
           items.itemList[i].glyph := chr(186)
-        else if (ItemsNode.FindNode('glyph').TextContent[1] = '*') then
+        else if (ItemsNode.FindNode('glyph').TextContent[1] = '*') then { rock }
           items.itemList[i].glyph := chr(7)
-        else if (ItemsNode.FindNode('glyph').TextContent[1] = 'A') then
-          items.itemList[i].glyph := chr(6)
-        else if (ItemsNode.FindNode('glyph').TextContent[1] = 'i') then
+        else if (ItemsNode.FindNode('glyph').TextContent[1] = 'i') then { pointy stick }
           items.itemList[i].glyph := chr(173)
         else
           items.itemList[i].glyph := char(widechar(ItemsNode.FindNode('glyph').TextContent[1]));
@@ -539,6 +535,7 @@ begin
     player_stats.playerRace:=UTF8Encode(PlayerDataNode.FindNode('playerRace').TextContent);
     player_stats.clanName:=UTF8Encode(PlayerDataNode.FindNode('clanName').TextContent);
     player_stats.enchantedWeaponEquipped:=StrToBool(UTF8Encode(PlayerDataNode.FindNode('enchantedWeapon').TextContent));
+    player_stats.projectileWeaponEquipped:=StrToBool(UTF8Encode(PlayerDataNode.FindNode('projectileWeapon').TextContent));
     player_stats.enchWeapType := StrToInt(UTF8Encode(PlayerDataNode.FindNode('enchWeapType').TextContent));
 
     (* Player Inventory *)
@@ -558,7 +555,7 @@ begin
       player_inventory.inventory[i].useID := StrToInt(UTF8Encode(InventoryNode.FindNode('useID').TextContent));
 
       { Convert plain text to extended ASCII }
-      if (InventoryNode.FindNode('glyph').TextContent[1] = '|') then
+      if (InventoryNode.FindNode('glyph').TextContent[1] = 'T') then
         player_inventory.inventory[i].glyph := chr(24)
       else if (InventoryNode.FindNode('glyph').TextContent[1] = '=') then
         player_inventory.inventory[i].glyph := chr(186)
@@ -566,8 +563,6 @@ begin
         player_inventory.inventory[i].glyph := chr(7)
       else if (InventoryNode.FindNode('glyph').TextContent[1] = 'i') then
         player_inventory.inventory[i].glyph := chr(173)
-      else if (InventoryNode.FindNode('glyph').TextContent[1] = 'A') then
-        player_inventory.inventory[i].glyph := chr(6)
       else
         player_inventory.inventory[i].glyph := char(widechar(InventoryNode.FindNode('glyph').TextContent[1]));
 
@@ -679,6 +674,7 @@ begin
     AddElement(DataNode, 'playerRace', player_stats.playerRace);
     AddElement(DataNode, 'clanName', player_stats.clanName);
     AddElement(DataNode, 'enchantedWeapon', BoolToStr(player_stats.enchantedWeaponEquipped));
+    AddElement(DataNode, 'projectileWeapon', BoolToStr(player_stats.projectileWeaponEquipped));
     AddElement(DataNode, 'enchWeapType', IntToStr(player_stats.enchWeapType));
 
     (* Player inventory *)
@@ -699,15 +695,13 @@ begin
 
       { Convert extended ASCII to plain text }
       if (inventory[i].glyph = chr(24)) then
-        AddElement(DataNode, 'glyph', '|')
+        AddElement(DataNode, 'glyph', 'T')
       else if (inventory[i].glyph = chr(186)) then
         AddElement(DataNode, 'glyph', '=')
       else if (inventory[i].glyph = chr(7)) then
         AddElement(DataNode, 'glyph', '*')
       else if (inventory[i].glyph = chr(173)) then
         AddElement(DataNode, 'glyph', 'i')
-      else if (inventory[i].glyph = chr(6)) then
-        AddElement(DataNode, 'glyph', 'A')
       else
         AddElement(DataNode, 'glyph', inventory[i].glyph);
 

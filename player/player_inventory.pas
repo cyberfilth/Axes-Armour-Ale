@@ -314,6 +314,8 @@ begin
     inventory[itemNumber].dice := 0;
     inventory[itemNumber].adds := 0;
     inventory[itemNumber].useID := 0;
+    (* Sort items in inventory *)
+    sortInventory(0, high(inventory));
     Result := True;
     (* Redraw the Drop menu *)
     drop;

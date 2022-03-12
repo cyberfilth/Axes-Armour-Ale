@@ -18,6 +18,8 @@ var
   canExitDungeon: boolean;
   (* Is a magical weapon equipped *)
   enchantedWeaponEquipped: boolean;
+  (* Is a bow equipped *)
+  projectileWeaponEquipped: boolean;
   (* Magical ability *)
   maxMagick, currentMagick: smallint;
   (* Durability of equipped / magical item *)

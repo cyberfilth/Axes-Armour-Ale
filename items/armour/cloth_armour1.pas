@@ -28,7 +28,7 @@ begin
     itemType := itmArmour;
     itemMaterial := matWool;
     useID := 5;
-    glyph := '(';
+    glyph := '[';
     glyphColour := 'magenta';
     inView := False;
     posX := itmx;

@@ -45,6 +45,8 @@ procedure dialogBoxInput(Keypress: TKeyEvent);
 procedure helpScreenInput(Keypress: TKeyEvent);
 (* Input in the LOOK state *)
 procedure lookInput(Keypress: TKeyEvent);
+(* Input in the FIREBOW state *)
+procedure fireBowInput(Keypress: TKeyEvent);
 (* Input in the TARGET state *)
 procedure targetInput(Keypress: TKeyEvent);
 (* Input in SELECTAMMO state *)
@@ -480,6 +482,13 @@ begin
       scrTargeting.targetY := entityList[0].posY;
       scrTargeting.target;
     end;
+    'f', 'F': { Fire bow }
+    begin
+      gameState := stFireBow;
+      scrTargeting.targetX := entityList[0].posX;
+      scrTargeting.targetY := entityList[0].posY;
+      scrTargeting.fireBow(0);
+    end;
     '?': { Help screen }
     begin
       main.gameState := stHelpScreen;
@@ -557,6 +566,36 @@ begin
   end;
   case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit Look input }
+    begin
+      main.gameState := stGame;
+      scrTargeting.restorePlayerGlyph;
+      ui.clearPopup;
+    end;
+  end;
+end;
+
+procedure fireBowInput(Keypress: TKeyEvent);
+begin
+   case GetKeyEventCode(Keypress) of
+    { Arrow keys }
+    kbdLeft: scrTargeting.fireBow(2);
+    kbdRight: scrTargeting.fireBow(4);
+    kbdUp: scrTargeting.fireBow(1);
+    KbdDown: scrTargeting.fireBow(3);
+  end;
+  { Numpad and VI keys }
+  case GetKeyEventChar(Keypress) of
+    '8', 'k', 'K': scrTargeting.fireBow(1);
+    '9', 'u', 'U': scrTargeting.fireBow(5);
+    '6', 'l', 'L': scrTargeting.fireBow(4);
+    '3', 'n', 'N': scrTargeting.fireBow(6);
+    '2', 'j', 'J': scrTargeting.fireBow(3);
+    '1', 'b', 'B': scrTargeting.fireBow(7);
+    '4', 'h', 'H': scrTargeting.fireBow(2);
+    '7', 'y', 'Y': scrTargeting.fireBow(8);
+  end;
+  case GetKeyEventChar(Keypress) of
+    'x', 'X': { Exit Fire Bow input }
     begin
       main.gameState := stGame;
       scrTargeting.restorePlayerGlyph;

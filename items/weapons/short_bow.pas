@@ -16,7 +16,7 @@ procedure throw;
 implementation
 
 uses
-  items, entities, ui;
+  items, entities, ui, player_stats;
 
 procedure createShortBow(itmx, itmy: smallint);
 begin
@@ -54,6 +54,7 @@ begin
     entityList[0].weaponEquipped := True;
     ui.displayMessage('You equip the short bow.');
     ui.equippedWeapon := 'Short bow';
+    player_stats.projectileWeaponEquipped := True;
     ui.writeBufferedMessages;
   end
   else
@@ -62,6 +63,7 @@ begin
     entityList[0].weaponEquipped := False;
     ui.displayMessage('You unequip the short bow.');
     ui.equippedWeapon := 'No weapon equipped';
+    player_stats.projectileWeaponEquipped := False;
     ui.writeBufferedMessages;
   end;
 end;

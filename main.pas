@@ -20,7 +20,7 @@ type
   gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
     stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget,
     stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha,
-    stSelectAmmo, stSelectTarget);
+    stSelectAmmo, stSelectTarget, stFireBow);
 
 var
   (* State machine for game menus / controls *)
@@ -348,6 +348,8 @@ begin
       stGame: gameInput(Keypress);
       { ---------------------------------    using Look command }
       stLook: lookInput(Keypress);
+      { ---------------------------------    Firing a bow }
+      stFireBow: fireBow(Keypress);
       { ---------------------------------    Targeting screen  }
       stTarget: targetInput(Keypress);
       { ---------------------------------    Select projectile screen  }

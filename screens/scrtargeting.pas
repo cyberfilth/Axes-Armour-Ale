@@ -49,6 +49,8 @@ var
 
 (* Look around the map *)
 procedure look(dir: word);
+(* Fire bow and arrow *)
+procedure fireBow(dir: word);
 (* Confirm there are NPC's and projectiles *)
 function canThrow(): boolean;
 (* Check if the projectile selection is valid *)
@@ -74,6 +76,8 @@ implementation
 
 uses
   player_inventory, main;
+
+{ Look action }
 
 procedure look(dir: word);
 var
@@ -188,6 +192,15 @@ begin
   safeY := targetY;
 end;
 
+{ Fire bow }
+
+procedure fireBow(dir: word);
+begin
+
+end;
+
+{ Throw function }
+
 function canThrow(): boolean;
 var
   projectileAvailable, NPCinRange: boolean;
@@ -215,6 +228,7 @@ begin
     throwableWeapons[b].onGround := False;
     throwableWeapons[b].equppd := False;
   end;
+
   (* Check inventory for an item to throw *)
   for b := 0 to maxWeapons - 1 do
   begin
@@ -453,8 +467,10 @@ begin
       begin
         if (throwableWeapons[i].equppd = True) then
            TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name + ' [equipped]')
+        (* Projectiles on the ground *)
         else if (throwableWeapons[i].onGround = True) then
           TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name + ' [on the ground]')
+        (* Everything else *)
         else
           TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name);
         Inc(yPOS);
@@ -623,22 +639,24 @@ begin
 (* Set an empty flag for the rock on the map, this gets deleted when saving the map *)
   with itemList[itmID] do
       begin
-        itemName := 'empty';
-        itemDescription := '';
-        itemArticle := '';
-        itemType := itmEmptySlot;
-        itemMaterial := matEmpty;
-        useID := 1;
-        glyph := 'x';
-        glyphColour := 'lightCyan';
-        inView := False;
-        posX := 1;
-        posY := 1;
-        NumberOfUses := 0;
-        onMap := False;
-        throwable := False;
-        throwDamage := 0;
-        discovered := False;
+          itemName := 'empty';
+          itemDescription := '';
+          itemArticle := '';
+          itemType := itmEmptySlot;
+          itemMaterial := matEmpty;
+          useID := 1;
+          glyph := 'x';
+          glyphColour := 'lightCyan';
+          inView := False;
+          posX := 1;
+          posY := 1;
+          NumberOfUses := 0;
+          onMap := False;
+          throwable := False;
+          throwDamage := 0;
+          dice := 0;
+          adds := 0;
+          discovered := False;
       end;
   ui.bufferMessage('The rock breaks on impact');
   end;
@@ -674,7 +692,7 @@ begin
     newItem.posX := landingX;
     newItem.posY := landingY;
     newItem.NumberOfUses := player_inventory.inventory[itemNumber].numUses;
-    newItem.onMap := True;
+    newItem.onMap := False;
     newItem.throwable := player_inventory.inventory[itemNumber].throwable;
     newItem.throwDamage := player_inventory.inventory[itemNumber].throwDamage;
     newItem.discovered := True;
@@ -716,6 +734,8 @@ begin
   player_inventory.inventory[itemNumber].adds := 0;
   player_inventory.inventory[itemNumber].dice := 0;
 end;
+
+{ Repaint screen }
 
 procedure restorePlayerGlyph;
 begin

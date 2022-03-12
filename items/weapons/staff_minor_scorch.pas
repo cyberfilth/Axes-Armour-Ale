@@ -73,14 +73,12 @@ begin
     Inc(entityList[0].weaponDice);
     if (player_stats.playerRace <> 'Dwarf') then
     begin
-      ui.displayMessage(
-        'You equip the enchanted staff. The staff can scorch nearby enemies [z]');
+      ui.displayMessage('You equip the enchanted staff. The staff can scorch nearby enemies [z]');
       ui.equippedWeapon := 'Staff of scorch';
     end
     else
     begin
-      ui.displayMessage(
-        'You equip the staff. You sense it has magical powers beyond your ability');
+      ui.displayMessage('You equip the staff. You sense it has magical powers beyond your ability');
       ui.equippedWeapon := 'Wooden staff';
     end;
     ui.writeBufferedMessages;
