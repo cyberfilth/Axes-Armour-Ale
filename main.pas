@@ -349,7 +349,7 @@ begin
       { ---------------------------------    using Look command }
       stLook: lookInput(Keypress);
       { ---------------------------------    Firing a bow }
-      stFireBow: fireBow(Keypress);
+      stFireBow: fireBowInput(Keypress);
       { ---------------------------------    Targeting screen  }
       stTarget: targetInput(Keypress);
       { ---------------------------------    Select projectile screen  }

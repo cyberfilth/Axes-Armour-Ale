@@ -57,6 +57,8 @@ procedure wield(message: char);
 procedure wearWieldSelection(selection: smallint);
 (* Zap equipped item *)
 procedure Zzap(item: smallint);
+(* Check if arrows are in inventory *)
+function carryingArrows: boolean;
 (* Equipped weapon is destroyed *)
 procedure destroyWeapon;
 
@@ -592,6 +594,18 @@ begin
     else { No enchanted weapon equipped }
       ui.displayMessage('You have no magical weapon equipped');
   end;
+end;
+
+function carryingArrows: boolean;
+var i: byte;
+begin
+  i := 0;
+  Result := False;
+  for i := 0 to 9 do
+    begin
+      if (inventory[i].itemType = itmAmmo) then
+         Result := True;
+    end;
 end;
 
 procedure destroyWeapon;

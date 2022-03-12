@@ -38,6 +38,8 @@ addToInventory_emptySlot	player/backup/player_inventory.pas	/^function addToInve
 addToInventory_emptySlot	player/backup/player_inventory.pas	/^function addToInventory_emptySlot(itemNumber: smallint; skip: boolean):boolean;$/;"	f
 addToInventory_emptySlot	player/player_inventory.pas	/^function addToInventory_emptySlot(itemNumber: smallint; skip: boolean): boolean;$/;"	f
 addToInventory_emptySlot	player/player_inventory.pas	/^function addToInventory_emptySlot(itemNumber: smallint; skip: boolean):boolean;$/;"	f
+aimBow	screens/backup/scrtargeting.pas	/^procedure aimBow(dir: word);$/;"	p
+aimBow	screens/scrtargeting.pas	/^procedure aimBow(dir: word);$/;"	p
 ammoProjectile	backup/keyboardinput.pas	/^procedure ammoProjectile(Keypress: TKeyEvent);$/;"	p
 ammoProjectile	keyboardinput.pas	/^procedure ammoProjectile(Keypress: TKeyEvent);$/;"	p
 ammoTarget	backup/keyboardinput.pas	/^procedure ammoTarget(Keypress: TKeyEvent);$/;"	p
@@ -63,6 +65,8 @@ canSee	backup/map.pas	/^function canSee(checkX, checkY: smallint): boolean;$/;"	
 canSee	map.pas	/^function canSee(checkX, checkY: smallint): boolean;$/;"	f
 canThrow	screens/backup/scrtargeting.pas	/^function canThrow(): boolean;$/;"	f
 canThrow	screens/scrtargeting.pas	/^function canThrow(): boolean;$/;"	f
+carryingArrows	player/backup/player_inventory.pas	/^function carryingArrows: boolean;$/;"	f
+carryingArrows	player/player_inventory.pas	/^function carryingArrows: boolean;$/;"	f
 centreX	backup/ui.pas	/^function centreX(textstring: shortstring): byte;$/;"	f
 centreX	ui.pas	/^function centreX(textstring: shortstring): byte;$/;"	f
 charIntroInput	backup/keyboardinput.pas	/^procedure charIntroInput(Keypress: TKeyEvent);$/;"	p
@@ -280,6 +284,8 @@ drawSkull	screens/backup/scrrip.pas	/^procedure drawSkull;$/;"	p
 drawSkull	screens/scrrip.pas	/^procedure drawSkull;$/;"	p
 drawTile	backup/map.pas	/^procedure drawTile(c, r: smallint; hiDef: byte);$/;"	p
 drawTile	map.pas	/^procedure drawTile(c, r: smallint; hiDef: byte);$/;"	p
+drawTrajectory	screens/backup/scrtargeting.pas	/^procedure drawTrajectory(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
+drawTrajectory	screens/scrtargeting.pas	/^procedure drawTrajectory(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
 drop	player/backup/player_inventory.pas	/^procedure drop;$/;"	p
 drop	player/player_inventory.pas	/^procedure drop;$/;"	p
 dropFirstItem	items/backup/item_lookup.pas	/^procedure dropFirstItem;$/;"	p
@@ -322,8 +328,7 @@ exitToTitleMenu	main.pas	/^procedure exitToTitleMenu;$/;"	p
 fieldOfView	vision/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
 fillWithWalls	dungeons/backup/cave.pas	/^procedure fillWithWalls;$/;"	p
 fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
-fireBow	screens/backup/scrtargeting.pas	/^procedure fireBow$/;"	p
-fireBow	screens/scrtargeting.pas	/^procedure fireBow(dir: word);$/;"	p
+fireBowInput	backup/keyboardinput.pas	/^procedure fireBowInput(Keypress: TKeyEvent);$/;"	p
 fireBowInput	keyboardinput.pas	/^procedure fireBowInput(Keypress: TKeyEvent);$/;"	p
 fireMissile	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure fireMissile(id: smallint);$/;"	p
 fireMissile	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure fireMissile(id: smallint);$/;"	p
@@ -459,7 +464,6 @@ lookInput	backup/keyboardinput.pas	/^procedure lookInput(Keypress: TKeyEvent);$/
 lookInput	keyboardinput.pas	/^procedure lookInput(Keypress: TKeyEvent);$/;"	p
 lookupUse	items/backup/item_lookup.pas	/^procedure lookupUse(x: smallint; equipped: boolean; id: smallint);$/;"	p
 lookupUse	items/item_lookup.pas	/^procedure lookupUse(x: smallint; equipped: boolean; id: smallint);$/;"	p
-loop	backup/main.pas	/^procedure loop;$/;"	p
 minorScorch	backup/magiceffects.pas	/^procedure minorScorch;$/;"	p
 minorScorch	magiceffects.pas	/^procedure minorScorch;$/;"	p
 moveNPC	backup/entities.pas	/^procedure moveNPC(id, newX, newY: smallint);$/;"	p
@@ -569,6 +573,7 @@ spawnPlayer	backup/entities.pas	/^procedure spawnPlayer;$/;"	p
 spawnPlayer	entities.pas	/^procedure spawnPlayer;$/;"	p
 spiteDMG	player/backup/combat_resolver.pas	/^procedure spiteDMG(npc: smallint);$/;"	p
 spiteDMG	player/combat_resolver.pas	/^procedure spiteDMG(npc: smallint);$/;"	p
+stateInputLoop	backup/main.pas	/^procedure stateInputLoop;$/;"	p
 stateInputLoop	main.pas	/^procedure stateInputLoop;$/;"	p
 takeTurn	entities/animals/backup/large_blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/backup/small_hyena.pas	/^procedure takeTurn(id: smallint);$/;"	p
