@@ -34,7 +34,7 @@ procedure exitApplication;
 procedure exitToTitleMenu;
 procedure newGame;
 procedure continue;
-procedure loop;
+procedure stateInputLoop;
 procedure gameLoop;
 procedure returnToGameScreen;
 procedure gameOver;
@@ -309,7 +309,7 @@ begin
 end;
 
 (* Take input from player for the KeyboardInput unit, based on current game state *)
-procedure loop;
+procedure stateInputLoop;
 var
   Keypress: TKeyEvent;
 begin

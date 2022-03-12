@@ -25,5 +25,5 @@ begin
   resolution.getSize;
   (* Initialise the display, keyboard and game variables *)
   main.initialise;
-  main.loop;
+  main.stateInputLoop;
 end.

@@ -460,7 +460,6 @@ lookInput	keyboardinput.pas	/^procedure lookInput(Keypress: TKeyEvent);$/;"	p
 lookupUse	items/backup/item_lookup.pas	/^procedure lookupUse(x: smallint; equipped: boolean; id: smallint);$/;"	p
 lookupUse	items/item_lookup.pas	/^procedure lookupUse(x: smallint; equipped: boolean; id: smallint);$/;"	p
 loop	backup/main.pas	/^procedure loop;$/;"	p
-loop	main.pas	/^procedure loop;$/;"	p
 minorScorch	backup/magiceffects.pas	/^procedure minorScorch;$/;"	p
 minorScorch	magiceffects.pas	/^procedure minorScorch;$/;"	p
 moveNPC	backup/entities.pas	/^procedure moveNPC(id, newX, newY: smallint);$/;"	p
@@ -570,6 +569,7 @@ spawnPlayer	backup/entities.pas	/^procedure spawnPlayer;$/;"	p
 spawnPlayer	entities.pas	/^procedure spawnPlayer;$/;"	p
 spiteDMG	player/backup/combat_resolver.pas	/^procedure spiteDMG(npc: smallint);$/;"	p
 spiteDMG	player/combat_resolver.pas	/^procedure spiteDMG(npc: smallint);$/;"	p
+stateInputLoop	main.pas	/^procedure stateInputLoop;$/;"	p
 takeTurn	entities/animals/backup/large_blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/backup/small_hyena.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p
