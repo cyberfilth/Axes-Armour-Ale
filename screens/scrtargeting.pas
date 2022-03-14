@@ -1,4 +1,4 @@
-(* Screen used for Look command and Throwing projectiles *)
+(* Screen used for Look command, Firing a bow, and Throwing projectiles *)
 
 unit scrTargeting;
 
@@ -44,6 +44,8 @@ var
   chosenProjectile: smallint;
   (* List of projectile targets *)
   tgtList: array of TthrowTargets;
+  (* Path of arrows *)
+  arrowFlightArray: array[1..plyrTargetRange] of TPoint;
   (* Coordinates where the projectile lands *)
   landingX, landingY: smallint;
 
@@ -53,6 +55,8 @@ function glyphAngle(targetX, targetY: smallint): shortstring;
 procedure look(dir: word);
 (* Aim bow and arrow *)
 procedure aimBow(dir: word);
+(* Fire bow and arrow *)
+procedure fireBow;
 (* Draw trajectory of arrow *)
 procedure drawTrajectory(x1, y1, x2, y2: smallint; g, col: shortstring);
 (* Confirm there are NPC's and projectiles *)
@@ -279,7 +283,7 @@ begin
   TextOut(centreX('[f] to fire your bow'), 23, 'lightGrey', '[f] to fire your bow');
   TextOut(centreX('[x] to exit the targeting screen'), 24, 'lightGrey', '[x] to exit the targeting screen');
 
-   if (dir <> 0) then
+  if (dir <> 0) then
   begin
     case dir of
       { N }
@@ -332,24 +336,17 @@ begin
     (* Draw X on target *)
     map.mapDisplay[targetY, targetX].GlyphColour := 'white';
     map.mapDisplay[targetY, targetX].Glyph := 'X';
-
-
-
-  (* Store the coordinates, so the cursor doesn't get lost off screen *)
-  safeX := targetX;
-  safeY := targetY;
-  end;
+    (* Store the coordinates, so the cursor doesn't get lost off screen *)
+    safeX := targetX;
+    safeY := targetY;
+    end;
   end
   (* If bow equipped but no arrows in inventory *)
   else if (bowCheck = True) and (arrowCheck = False) then
-  begin
-
-  end
+       ui.displayMessage('You have no arrows')
   (* If no bow equipped *)
   else
-  begin
-
-  end;
+      ui.displayMessage('You have no bow to fire');
   (* Repaint map *)
   camera.drawMap;
   fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
@@ -357,11 +354,22 @@ begin
   UpdateScreen(False);
 end;
 
+procedure fireBow;
+begin
+
+end;
+
 procedure drawTrajectory(x1, y1, x2, y2: smallint; g, col: shortstring);
 var
   i, deltax, deltay, numpixels, d, dinc1, dinc2, x, xinc1, xinc2, y,
   yinc1, yinc2: smallint;
 begin
+  (* Initialise array *)
+  for i := 1 to plyrTargetRange do
+  begin
+    arrowFlightArray[i].X := 0;
+    arrowFlightArray[i].Y := 0;
+  end;
   (* Calculate delta X and delta Y for initialisation *)
   deltax := abs(x2 - x1);
   deltay := abs(y2 - y1);
@@ -407,11 +415,14 @@ begin
   (* Draw the pixels *)
   for i := 1 to numpixels do
   begin
-    (* Draw the trajectory *)
     if (numpixels <= plyrTargetRange) then
     begin
+      (* Draw the trajectory *)
       map.mapDisplay[y, x].GlyphColour := col;
       map.mapDisplay[y, x].Glyph := g;
+      (* Add to array *)
+      arrowFlightArray[i].X := x;
+      arrowFlightArray[i].Y := y;
     end;
     if d < 0 then
     begin
