@@ -103,7 +103,7 @@ begin
     if (inventory[i].equipped = True) then
     begin
       (* Check for weapons *)
-      if (inventory[i].itemType = itmWeapon) then
+      if (inventory[i].itemType = itmWeapon) or (inventory[i].itemType = itmProjectileWeapon) then
       begin
         ui.equippedWeapon := inventory[i].Name;
         ui.updateWeapon;

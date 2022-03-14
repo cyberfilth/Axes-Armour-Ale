@@ -382,6 +382,8 @@ getThrowDamage	items.pas	/^function getThrowDamage(x, y: smallint): smallint;$/;
 getTrollDate	plot_gen.pas	/^procedure getTrollDate;$/;"	p
 getX	camera.pas	/^function getX(Xcoord: smallint): smallint;$/;"	f
 getY	camera.pas	/^function getY(Ycoord: smallint): smallint;$/;"	f
+glyphAngle	screens/backup/scrtargeting.pas	/^function glyphAngle(targetX, targetY: smallint): shortstring;$/;"	f
+glyphAngle	screens/scrtargeting.pas	/^function glyphAngle(targetX, targetY: smallint): shortstring;$/;"	f
 hasPlayer	backup/map.pas	/^function hasPlayer(checkX, checkY: smallint): boolean;$/;"	f
 hasPlayer	map.pas	/^function hasPlayer(checkX, checkY: smallint): boolean;$/;"	f
 helpScreenInput	backup/keyboardinput.pas	/^procedure helpScreenInput(Keypress: TKeyEvent);$/;"	p

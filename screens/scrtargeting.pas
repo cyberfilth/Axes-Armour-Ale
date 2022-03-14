@@ -47,6 +47,8 @@ var
   (* Coordinates where the projectile lands *)
   landingX, landingY: smallint;
 
+(* Calculate what angle of arrow to use *)
+function glyphAngle(targetX, targetY: smallint): shortstring;
 (* Look around the map *)
 procedure look(dir: word);
 (* Aim bow and arrow *)
@@ -80,6 +82,64 @@ uses
   player_inventory, main;
 
 { Look action }
+
+function glyphAngle(targetX, targetY: smallint): shortstring;
+var
+  playerX, playerY, Yresult, Xresult, trajectory: smallint;
+  angleGlyph: shortstring;
+begin
+  playerX := entityList[0].posX;
+  playerY := entityList[0].posY;
+  angleGlyph := '|';
+  if (targetX > playerX) then
+     begin
+       Yresult:=playerY - targetY;
+       Xresult := targetX - playerX;
+     end
+  else if (targetX < playerX) then
+     begin
+       Yresult := targetY - playerY;
+       Xresult:=playerX - targetX;
+     end;
+  (* Store trajectory *)
+  trajectory := Trunc(RadToDeg(arctan2(Yresult, Xresult)));
+  (* Calculate glyph *)
+  if (playerY = targetY) then
+     angleGlyph:='-'
+  else if (playerX = targetX) then
+     angleGlyph:='|'
+  (* If target is to the right of the player *)
+  else if (targetX > playerX) then
+     begin
+       if (trajectory <= 90) and (trajectory >= 68) then
+          angleGlyph:='|'
+       else if (trajectory < 68) and (trajectory >= 5) then
+          angleGlyph:='/'
+       else if (trajectory < 5) and (trajectory > -5) then
+          angleGlyph:='-'
+       else if (trajectory > -68 ) and (trajectory <= -5) then
+          angleGlyph:='\'
+       else if (trajectory >= -78 ) and (trajectory <= -68) then
+          angleGlyph:='|'
+     end
+  (* If target is to the left of the player *)
+  else if (targetX < playerX) then
+     begin
+       if (trajectory >= -90) and (trajectory <= -68) then
+          angleGlyph:='|'
+       else if (trajectory > -68) and (trajectory <= -5) then
+          angleGlyph:='\'
+       else if (trajectory > -5) and (trajectory < 5) then
+          angleGlyph:='-'
+       else if (trajectory < 68 ) and (trajectory >= 5) then
+          angleGlyph:='/'
+       else if (trajectory <= 90 ) and (trajectory >= 68) then
+          angleGlyph:='|'
+     end
+     else angleGlyph:='|';
+
+  Result := angleGlyph;
+end;
 
 procedure look(dir: word);
 var
@@ -218,9 +278,6 @@ begin
   (* Display hint text *)
   TextOut(centreX('[f] to fire your bow'), 23, 'lightGrey', '[f] to fire your bow');
   TextOut(centreX('[x] to exit the targeting screen'), 24, 'lightGrey', '[x] to exit the targeting screen');
-  (* Turn player glyph to an X *)
-  entityList[0].glyph := 'X';
-  entityList[0].glyphColour := 'white';
 
    if (dir <> 0) then
   begin
@@ -270,17 +327,14 @@ begin
       entities.redrawMapDisplay(i);
     (* Redraw all items *)
     items.redrawItems;
+    (* Draw line from player to target *)
+    drawTrajectory(entityList[0].posX, entityList[0].posY, targetX, targetY, glyphAngle(targetX, targetY), 'yellow');
     (* Draw X on target *)
     map.mapDisplay[targetY, targetX].GlyphColour := 'white';
     map.mapDisplay[targetY, targetX].Glyph := 'X';
-    (* Draw line from player to target *)
-    drawTrajectory(entityList[0].posX, entityList[0].posY, targetX, targetY, '-', 'yellow');
 
 
 
-  (* Repaint map *)
-  camera.drawMap;
-  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
   (* Store the coordinates, so the cursor doesn't get lost off screen *)
   safeX := targetX;
   safeY := targetY;
@@ -296,6 +350,9 @@ begin
   begin
 
   end;
+  (* Repaint map *)
+  camera.drawMap;
+  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
   UnlockScreenUpdate;
   UpdateScreen(False);
 end;
