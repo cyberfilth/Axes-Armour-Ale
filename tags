@@ -328,6 +328,8 @@ exitToTitleMenu	main.pas	/^procedure exitToTitleMenu;$/;"	p
 fieldOfView	vision/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
 fillWithWalls	dungeons/backup/cave.pas	/^procedure fillWithWalls;$/;"	p
 fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
+fireBow	screens/backup/scrtargeting.pas	/^procedure fireBow;$/;"	p
+fireBow	screens/scrtargeting.pas	/^procedure fireBow;$/;"	p
 fireBowInput	backup/keyboardinput.pas	/^procedure fireBowInput(Keypress: TKeyEvent);$/;"	p
 fireBowInput	keyboardinput.pas	/^procedure fireBowInput(Keypress: TKeyEvent);$/;"	p
 fireMissile	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure fireMissile(id: smallint);$/;"	p
@@ -441,6 +443,8 @@ isNextToPlayer	entities/hobs/redcap_lesser.pas	/^function isNextToPlayer(spx, sp
 isNextToPlayer	entities/hobs/redcap_lesser_lobber.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isOccupied	backup/map.pas	/^function isOccupied(checkX, checkY: smallint): boolean;$/;"	f
 isOccupied	map.pas	/^function isOccupied(checkX, checkY: smallint): boolean;$/;"	f
+isWall	backup/map.pas	/^function isWall(x, y: smallint): boolean;$/;"	f
+isWall	map.pas	/^function isWall(x, y: smallint): boolean;$/;"	f
 killEntity	backup/entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 killEntity	entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 leftHasFloor	dungeons/backup/cave.pas	/^function leftHasFloor(): boolean;$/;"	f

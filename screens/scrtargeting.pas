@@ -320,7 +320,7 @@ begin
       end;
     end;
     if (map.withinBounds(targetX, targetY) = False) or
-      (map.maparea[targetY, targetX].Visible = False) then
+      (map.maparea[targetY, targetX].Visible = False) or (map.isWall(targetX, targetY) = True) then
     begin
       targetX := safeX;
       targetY := safeY;
@@ -417,8 +417,13 @@ begin
   begin
     if (numpixels <= plyrTargetRange) then
     begin
+      if (map.isWall(x, y) = True) then
+         exit;
       (* Draw the trajectory *)
-      map.mapDisplay[y, x].GlyphColour := col;
+      if (map.maparea[y][x].Blocks = True) then
+         map.mapDisplay[y, x].GlyphColour := 'red'
+      else
+          map.mapDisplay[y, x].GlyphColour := col;
       map.mapDisplay[y, x].Glyph := g;
       (* Add to array *)
       arrowFlightArray[i].X := x;

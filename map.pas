@@ -55,6 +55,8 @@ procedure unoccupy(x, y: smallint);
 function isOccupied(checkX, checkY: smallint): boolean;
 (* Check if the coordinates are within the bounds of the gamemap *)
 function withinBounds(x, y: smallint): boolean;
+(* Check if a tile contains a wall *)
+function isWall(x, y: smallint): boolean;
 (* Check if the direction to move to is valid *)
 function canMove(checkX, checkY: smallint): boolean;
 (* Check if an object is in players FoV *)
@@ -102,6 +104,13 @@ begin
     Result := True
   else
     Result := False;
+end;
+
+function isWall(x, y: smallint): boolean;
+begin
+  Result := False;
+  if (mapDisplay[y][x].Glyph = Chr(177)) or (mapDisplay[y][x].Glyph = Chr(176)) then
+    Result := True;
 end;
 
 function canMove(checkX, checkY: smallint): boolean;
