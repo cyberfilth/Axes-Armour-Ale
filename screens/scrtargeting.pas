@@ -10,7 +10,7 @@ interface
 uses
   SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, los,
   scrGame, player_stats, crude_dagger, basic_club, staff_minor_scorch, animation,
-  globalUtils;
+  globalUtils, arrow;
 
 type
   (* Weapons *)
@@ -522,17 +522,24 @@ begin
        else
            begin
              if (rndOption = 0) then
-                  ui.bufferMessage('The arrow strikes ' + opponent)
+                  ui.bufferMessage('The arrow wounds ' + opponent)
              else if (rndOption = 1) then
                   ui.bufferMessage('The arrow hits ' + opponent)
-             else if (rndOption = 2) then
-                  ui.bufferMessage('The arrow punches through ' + opponent)
              else
-                 ui.bufferMessage('The arrow wounds ' + opponent);
+                 ui.bufferMessage('The arrow strikes ' + opponent);
            end;
       end
       else
          ui.bufferMessage('The arrow glances off ' + opponent);
+
+  (* Chance of arrow being damaged or recovered *)
+  rndOption := globalUtils.randomRange(0,2);
+  if (rndOption <> 2) then
+  { Create an arrow }
+  begin
+    arrow.createArrow(targetX, targetY);
+    Inc(indexID);
+  end;
 
   ui.writeBufferedMessages;
   (* Remove arrow from inventory *)
