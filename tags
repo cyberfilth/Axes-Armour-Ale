@@ -46,6 +46,10 @@ ammoTarget	backup/keyboardinput.pas	/^procedure ammoTarget(Keypress: TKeyEvent);
 ammoTarget	keyboardinput.pas	/^procedure ammoTarget(Keypress: TKeyEvent);$/;"	p
 areaBurnEffect	animation.pas	/^procedure areaBurnEffect(getEm: array of smallint);$/;"	p
 areaBurnEffect	backup/animation.pas	/^procedure areaBurnEffect(getEm: array of smallint);$/;"	p
+arrowAnimation	animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
+arrowAnimation	backup/animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
+arrowHit	screens/backup/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
+arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	backup/map.pas	/^procedure ascendStairs;$/;"	p
 ascendStairs	map.pas	/^procedure ascendStairs;$/;"	p
 beginLogging	logging.pas	/^procedure beginLogging;$/;"	p
@@ -522,6 +526,8 @@ redrawMapDisplay	backup/entities.pas	/^procedure redrawMapDisplay(id: byte);$/;"
 redrawMapDisplay	entities.pas	/^procedure redrawMapDisplay(id: byte);$/;"	p
 regenMagick	player/backup/player.pas	/^procedure regenMagick;$/;"	p
 regenMagick	player/player.pas	/^procedure regenMagick;$/;"	p
+removeArrow	player/backup/player_inventory.pas	/^procedure removeArrow;$/;"	p
+removeArrow	player/player_inventory.pas	/^procedure removeArrow;$/;"	p
 removeFromGround	screens/backup/scrtargeting.pas	/^procedure removeFromGround;$/;"	p
 removeFromGround	screens/scrtargeting.pas	/^procedure removeFromGround;$/;"	p
 removeFromInventory	player/backup/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f

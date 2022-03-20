@@ -9,7 +9,8 @@ interface
 
 uses
   SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, los,
-  scrGame, player_stats, crude_dagger, basic_club, staff_minor_scorch;
+  scrGame, player_stats, crude_dagger, basic_club, staff_minor_scorch, animation,
+  globalUtils;
 
 type
   (* Weapons *)
@@ -46,6 +47,8 @@ var
   tgtList: array of TthrowTargets;
   (* Path of arrows *)
   arrowFlightArray: array[1..plyrTargetRange] of TPoint;
+  (* Arrow Glyph to use in animation *)
+  arrowGlyph: shortstring;
   (* Coordinates where the projectile lands *)
   landingX, landingY: smallint;
 
@@ -59,6 +62,8 @@ procedure aimBow(dir: word);
 procedure fireBow;
 (* Draw trajectory of arrow *)
 procedure drawTrajectory(x1, y1, x2, y2: smallint; g, col: shortstring);
+(* Arrow hits an entity *)
+procedure arrowHit(x, y: smallint);
 (* Confirm there are NPC's and projectiles *)
 function canThrow(): boolean;
 (* Check if the projectile selection is valid *)
@@ -142,6 +147,7 @@ begin
      end
      else angleGlyph:='|';
 
+  arrowGlyph := angleGlyph;
   Result := angleGlyph;
 end;
 
@@ -263,7 +269,7 @@ end;
 procedure aimBow(dir: word);
 var
   bowCheck, arrowCheck: boolean;
-  i: byte;
+  i, p: byte;
 begin
   bowCheck := False;
   arrowCheck := False;
@@ -277,6 +283,10 @@ begin
   (* If bow equipped and arrows in inventory *)
   if (bowCheck = True) and (arrowCheck = True) then
   begin
+       items.redrawItems;
+       (* Redraw NPC's *)
+       for p := 1 to entities.npcAmount do
+           entities.redrawMapDisplay(p);
   (* Clear the message log *)
   paintOverMsg;
   (* Display hint text *)
@@ -343,10 +353,16 @@ begin
   end
   (* If bow equipped but no arrows in inventory *)
   else if (bowCheck = True) and (arrowCheck = False) then
-       ui.displayMessage('You have no arrows')
+  begin
+       ui.displayMessage('You have no arrows');
+       gameState := stGame;
+  end
   (* If no bow equipped *)
   else
+  begin
       ui.displayMessage('You have no bow to fire');
+      gameState := stGame;
+  end;
   (* Repaint map *)
   camera.drawMap;
   fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
@@ -355,8 +371,32 @@ begin
 end;
 
 procedure fireBow;
+var
+  p: byte;
 begin
+  (* If the players tile is selected, fire an arrow into the ground *)
+  if (targetX = entityList[0].posX) and (targetY = entityList[0].posY) then
+  begin
+     ui.displayMessage('You fire an arrow into the ground at your feet');
+     (* Draw items *)
+     items.redrawItems;
+     (* redraw NPC's *)
+     LockScreenUpdate;
+     for p := 1 to entities.npcAmount do
+         entities.redrawMapDisplay(p);
+     scrTargeting.restorePlayerGlyph;
+     ui.clearPopup;;
+     UnlockScreenUpdate;
+     UpdateScreen(False);
+  end
+  (* Fire the arrow *)
+  else
+      animation.arrowAnimation(arrowFlightArray, arrowGlyph, 'white');
+  (* Remove an arrow from inventory *)
 
+  (* Return control of game back to stGame *)
+  restorePlayerGlyph;
+  gameState := stGame;
 end;
 
 procedure drawTrajectory(x1, y1, x2, y2: smallint; g, col: shortstring);
@@ -442,6 +482,73 @@ begin
       y := y + yinc2;
     end;
   end;
+end;
+
+procedure arrowHit(x, y: smallint);
+var
+  opponent: shortstring;
+  p: byte;
+  opponentID, dmgAmount, rndOption: smallint;
+begin
+  dmgAmount := 0;
+  rndOption := globalUtils.randomRange(0,3);
+  (* Get target info *)
+  opponentID := getCreatureID(x, y);
+  opponent := getCreatureName(x, y);
+  if (entityList[opponentID].article = True) then
+     opponent := 'the ' + opponent;
+
+  (* Attacking an NPC automatically makes it hostile *)
+  entityList[opponentID].state := stateHostile;
+  (* Number of turns NPC will follow you if out of sight *)
+  entityList[opponentID].moveCount := 10;
+
+  (* Damage is caused by player Dexterity *)
+
+  dmgAmount := player_stats.dexterity - entityList[opponentID].defence;
+  (* If it was a hit *)
+  if ((dmgAmount - entityList[0].tmrDrunk) > 0) then
+  begin
+       Dec(entityList[opponentID].currentHP, dmgAmount);
+       (* If it was a killing blow *)
+       if (entityList[opponentID].currentHP < 1) then
+       begin
+          ui.writeBufferedMessages;
+          ui.bufferMessage('You kill ' + opponent);
+          entities.killEntity(opponentID);
+          entityList[0].xpReward := entities.entityList[0].xpReward + entityList[opponentID].xpReward;
+          ui.updateXP;
+       end
+       else
+           begin
+             if (rndOption = 0) then
+                  ui.bufferMessage('The arrow strikes ' + opponent)
+             else if (rndOption = 1) then
+                  ui.bufferMessage('The arrow hits ' + opponent)
+             else if (rndOption = 2) then
+                  ui.bufferMessage('The arrow punches through ' + opponent)
+             else
+                 ui.bufferMessage('The arrow wounds ' + opponent);
+           end;
+      end
+      else
+         ui.bufferMessage('The arrow glances off ' + opponent);
+
+  ui.writeBufferedMessages;
+  (* Remove arrow from inventory *)
+  player_inventory.removeArrow;
+  (* Draw items *)
+  items.redrawItems;
+  for p := 1 to entities.npcAmount do
+      entities.redrawMapDisplay(p);
+  scrTargeting.restorePlayerGlyph;
+  ui.clearPopup;;
+  UnlockScreenUpdate;
+  UpdateScreen(False);
+  (* Increase turn counter for this action *)
+  Inc(entityList[0].moveCount);
+  gameState := stGame;
+  main.gameLoop;
 end;
 
 { Throw function }
@@ -855,6 +962,8 @@ begin
       entities.redrawMapDisplay(i);
   UnlockScreenUpdate;
   UpdateScreen(False);
+  (* Increase turn counter for this action *)
+  Inc(entityList[0].moveCount);
   main.gameState := stGame;
   main.gameLoop;
  end;

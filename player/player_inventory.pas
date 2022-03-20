@@ -59,6 +59,8 @@ procedure wearWieldSelection(selection: smallint);
 procedure Zzap(item: smallint);
 (* Check if arrows are in inventory *)
 function carryingArrows: boolean;
+(* Remove an arrow from inventory *)
+procedure removeArrow;
 (* Equipped weapon is destroyed *)
 procedure destroyWeapon;
 
@@ -606,6 +608,41 @@ begin
       if (inventory[i].itemType = itmAmmo) then
          Result := True;
     end;
+end;
+
+procedure removeArrow;
+var i: byte;
+begin
+   i := 0;
+   for i := 0 to 9 do
+    begin
+      if (inventory[i].itemType = itmAmmo) then
+      begin
+      (* If it's the last arrow, remove from inventory *)
+      if (inventory[i].numUses = 1) then
+      begin
+         (* Remove from inventory *)
+         inventory[i].Name := 'Empty';
+         inventory[i].equipped := False;
+         inventory[i].description := 'x';
+         inventory[i].article := 'x';
+         inventory[i].itemType := itmEmptySlot;
+         inventory[i].itemMaterial := matEmpty;
+         inventory[i].glyph := 'x';
+         inventory[i].glyphColour := 'x';
+         inventory[i].inInventory := False;
+         inventory[i].numUses := 0;
+         inventory[i].throwable := False;
+         inventory[i].throwDamage := 0;
+         inventory[i].dice := 0;
+         inventory[i].adds := 0;
+         inventory[i].useID := 0;
+      end
+      (* If it's not the last arrow, decrement the number of arrows *)
+      else
+          Dec(inventory[i].numUses);
+    end;
+   end;
 end;
 
 procedure destroyWeapon;

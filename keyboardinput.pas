@@ -595,6 +595,10 @@ begin
     '7', 'y', 'Y': scrTargeting.aimBow(8);
   end;
   case GetKeyEventChar(Keypress) of
+    'f', 'F': { Fire the bow }
+    begin
+      scrTargeting.fireBow;
+    end;
     'x', 'X': { Exit Fire Bow input }
     begin
       main.gameState := stGame;
