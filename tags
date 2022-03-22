@@ -585,6 +585,8 @@ spawnPlayer	backup/entities.pas	/^procedure spawnPlayer;$/;"	p
 spawnPlayer	entities.pas	/^procedure spawnPlayer;$/;"	p
 spiteDMG	player/backup/combat_resolver.pas	/^procedure spiteDMG(npc: smallint);$/;"	p
 spiteDMG	player/combat_resolver.pas	/^procedure spiteDMG(npc: smallint);$/;"	p
+startingInventory	player/backup/player_inventory.pas	/^procedure startingInventory;$/;"	p
+startingInventory	player/player_inventory.pas	/^procedure startingInventory;$/;"	p
 stateInputLoop	backup/main.pas	/^procedure stateInputLoop;$/;"	p
 stateInputLoop	main.pas	/^procedure stateInputLoop;$/;"	p
 takeTurn	entities/animals/backup/large_blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p

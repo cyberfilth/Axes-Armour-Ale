@@ -10,7 +10,7 @@ interface
 uses
   SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, los,
   scrGame, player_stats, crude_dagger, basic_club, staff_minor_scorch, animation,
-  globalUtils, arrow;
+  globalUtils, arrow, pointy_stick;
 
 type
   (* Weapons *)
@@ -594,14 +594,14 @@ begin
     if (inventory[b].throwable = True) then
     begin
       (* Add to list of throwable weapons *)
-      throwableWeapons[b].id := inventory[b].id;
-      throwableWeapons[b].Name := inventory[b].Name;
+      throwableWeapons[b].id := player_inventory.inventory[b].id;
+      throwableWeapons[b].Name := player_inventory.inventory[b].Name;
       throwableWeapons[b].mnuOption := mnuChar;
-      throwableWeapons[b].baseDMG := inventory[b].throwDamage;
-      throwableWeapons[b].glyph := inventory[b].glyph;
-      throwableWeapons[b].glyphColour := inventory[b].glyphColour;
+      throwableWeapons[b].baseDMG := player_inventory.inventory[b].throwDamage;
+      throwableWeapons[b].glyph := player_inventory.inventory[b].glyph;
+      throwableWeapons[b].glyphColour := player_inventory.inventory[b].glyphColour;
       throwableWeapons[b].onGround := False;
-      if (inventory[b].equipped = True) then
+      if (player_inventory.inventory[b].equipped = True) then
          throwableWeapons[b].equppd := True
       else
         throwableWeapons[b].equppd := False;
@@ -641,7 +641,8 @@ begin
     UpdateScreen(False);
     main.gameState := stGame;
     exit;
-  end;
+    end;
+
   {       Check for NPC's in range     }
 
   (* Get a list of all entities in view *)
@@ -1075,6 +1076,7 @@ begin
          2: crude_dagger.throw(itemNumber);
          4: basic_club.throw;
          8: staff_minor_scorch.throw;
+         11: pointy_stick.throw;
        end;
   end;
 

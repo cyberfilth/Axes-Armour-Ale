@@ -211,6 +211,8 @@ begin
   scrTargeting.targetY := 0;
   scrTargeting.safeX := 0;
   scrTargeting.safeY := 0;
+  (* Set starting inventory *)
+  player_inventory.startingInventory;
   (* Spawn game entities *)
   universe.spawnDenizens;
   (* Initialise items list *)

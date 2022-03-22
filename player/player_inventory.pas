@@ -31,6 +31,8 @@ var
 procedure initialiseInventory;
 (* Setup equipped items when loading a saved game *)
 procedure loadEquippedItems;
+(* Add items to an inventory when new game starts *)
+procedure startingInventory;
 (* Add to inventory *)
 function addToInventory(itemNumber: smallint): boolean;
 (* Add to an empty slot in inventory *)
@@ -117,6 +119,38 @@ begin
         ui.updateArmour;
       end;
     end;
+  end;
+end;
+
+procedure startingInventory;
+begin
+  (* Humans start off with a pointy stick *)
+  if (player_stats.playerRace = 'Human') then
+  begin
+    with inventory[0] do
+    begin
+      id := 0;
+      sortIndex := 0;
+      Name := 'pointy stick';
+      equipped := True;
+      description := 'adds 1D6+1 to attack';
+      article := 'a';
+      itemType := itmWeapon;
+      itemMaterial := matWood;
+      glyph := chr(173);
+      glyphColour := 'brown';
+      numUses := 5;
+      inInventory := True;
+      throwable := True;
+      throwDamage := 4;
+      dice := 1;
+      adds := 1;
+      useID := 11;
+    end;
+    entityList[0].weaponEquipped := True;
+    Inc(entityList[0].weaponDice);
+    Inc(entityList[0].weaponAdds);
+    ui.equippedWeapon := 'Pointy stick';
   end;
 end;
 

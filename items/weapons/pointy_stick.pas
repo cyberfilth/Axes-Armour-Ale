@@ -74,6 +74,7 @@ procedure throw;
 begin
   entityList[0].weaponEquipped := False;
   Dec(entityList[0].weaponDice);
+  Dec(entityList[0].weaponAdds);
   ui.equippedWeapon := 'No weapon equipped';
   ui.writeBufferedMessages;
 end;
