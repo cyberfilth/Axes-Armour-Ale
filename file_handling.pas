@@ -192,11 +192,11 @@ begin
         AddElement(datanode, 'Glyph', map.maparea[r][c].Glyph);
       end;
     end;
-   ;
+
     (* Items on the map *)
-    for i := 0 to High(itemList) do
+    for i := Low(itemList) to High(itemList) do
       (* Don't save empty items *)
-      if (items.itemList[i].itemType <> itmEmptySlot) then
+      if (items.itemList[i].itemType <> itmEmptySlot) and ((items.itemList[i].itemName <> '')) then
       begin
         begin
           DataNode := AddChild(RootNode, 'Items');
@@ -352,7 +352,7 @@ begin
       (* Items on the map *)
       ItemsNode := Doc.DocumentElement.FindNode('Items');
       SetLength(itemList, itemAmount);
-      for i := 0 to (itemAmount - 1) do
+      for i := Low(itemList) to High(itemList) do
       begin
         items.itemList[i].itemID := StrToInt(UTF8Encode(ItemsNode.Attributes.Item[0].NodeValue));
         items.itemList[i].itemName := UTF8Encode(ItemsNode.FindNode('Name').TextContent);

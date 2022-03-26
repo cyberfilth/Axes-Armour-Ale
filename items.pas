@@ -214,7 +214,7 @@ var
 begin
   Count := 0;
   for i := 0 to High(itemList) do
-    if (itemList[i].itemType <> itmEmptySlot) then
+    if (itemList[i].itemType <> itmEmptySlot) and (itemList[i].itemName <> '') then
       Inc(Count);
   Result := Count;
 end;

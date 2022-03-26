@@ -151,6 +151,33 @@ begin
     Inc(entityList[0].weaponDice);
     Inc(entityList[0].weaponAdds);
     ui.equippedWeapon := 'Pointy stick';
+    end
+    (* Dwarves start off with a basic club *)
+    else if (player_stats.playerRace = 'Dwarf') then
+    begin
+    with inventory[0] do
+    begin
+      id := 0;
+      sortIndex := 0;
+      Name := 'wooden club';
+      equipped := True;
+      description := 'adds 1D6 to attack';
+      article := 'a';
+      itemType := itmWeapon;
+      itemMaterial := matWood;
+      glyph := chr(24);
+      glyphColour := 'brown';
+      numUses := 5;
+      inInventory := True;
+      throwable := True;
+      throwDamage := 4;
+      dice := 1;
+      adds := 0;
+      useID := 4;
+    end;
+    entityList[0].weaponEquipped := True;
+    Inc(entityList[0].weaponDice);
+    ui.equippedWeapon := 'Wooden club';
   end;
 end;
 

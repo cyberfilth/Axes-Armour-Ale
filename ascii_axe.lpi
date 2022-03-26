@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="60">
+    <Units Count="62">
       <Unit0>
         <Filename Value="ascii_axe.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -372,6 +372,16 @@
         <Filename Value="items\arrow.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit59>
+      <Unit60>
+        <Filename Value="screens\scrlook.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="scrLook"/>
+      </Unit60>
+      <Unit61>
+        <Filename Value="screens\scrthrow.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="scrThrow"/>
+      </Unit61>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

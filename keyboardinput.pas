@@ -7,7 +7,8 @@ unit KeyboardInput;
 interface
 
 uses
-  Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelp, scrTargeting;
+  Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelp, scrTargeting,
+  scrLook, scrThrow;
 
 (* Initialise keyboard unit *)
 procedure setupKeyboard;
@@ -471,16 +472,16 @@ begin
     ';': { Look command }
     begin
       gameState := stLook;
-      scrTargeting.targetX := entityList[0].posX;
-      scrTargeting.targetY := entityList[0].posY;
-      scrTargeting.look(0);
+      scrLook.targetX := entityList[0].posX;
+      scrLook.targetY := entityList[0].posY;
+      scrLook.look(0);
     end;
-    't', 'T': { Target / Throw command }
+    't', 'T': { Throw command }
     begin
       gameState := stTarget;
-      scrTargeting.targetX := entityList[0].posX;
-      scrTargeting.targetY := entityList[0].posY;
-      scrTargeting.target;
+      scrThrow.throwX := entityList[0].posX;
+      scrThrow.throwY := entityList[0].posY;
+      scrThrow.target;
     end;
     'f', 'F': { Fire bow }
     begin
@@ -548,21 +549,21 @@ procedure lookInput(Keypress: TKeyEvent);
 begin
   case GetKeyEventCode(Keypress) of
     { Arrow keys }
-    kbdLeft: scrTargeting.look(2);
-    kbdRight: scrTargeting.look(4);
-    kbdUp: scrTargeting.look(1);
-    KbdDown: scrTargeting.look(3);
+    kbdLeft: scrLook.look(2);
+    kbdRight: scrLook.look(4);
+    kbdUp: scrLook.look(1);
+    KbdDown: scrLook.look(3);
   end;
   { Numpad and VI keys }
   case GetKeyEventChar(Keypress) of
-    '8', 'k', 'K': scrTargeting.look(1);
-    '9', 'u', 'U': scrTargeting.look(5);
-    '6', 'l', 'L': scrTargeting.look(4);
-    '3', 'n', 'N': scrTargeting.look(6);
-    '2', 'j', 'J': scrTargeting.look(3);
-    '1', 'b', 'B': scrTargeting.look(7);
-    '4', 'h', 'H': scrTargeting.look(2);
-    '7', 'y', 'Y': scrTargeting.look(8);
+    '8', 'k', 'K': scrLook.look(1);
+    '9', 'u', 'U': scrLook.look(5);
+    '6', 'l', 'L': scrLook.look(4);
+    '3', 'n', 'N': scrLook.look(6);
+    '2', 'j', 'J': scrLook.look(3);
+    '1', 'b', 'B': scrLook.look(7);
+    '4', 'h', 'H': scrLook.look(2);
+    '7', 'y', 'Y': scrLook.look(8);
   end;
   case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit Look input }
@@ -624,41 +625,41 @@ procedure ammoProjectile(Keypress: TKeyEvent);
 begin
   case GetKeyEventChar(Keypress) of
     'a', 'A':
-      if (scrTargeting.validProjectile('a') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('a') = True) then
+        scrThrow.projectileTarget;
     'b', 'B':
-      if (scrTargeting.validProjectile('b') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('b') = True) then
+        scrThrow.projectileTarget;
     'c', 'C':
-      if (scrTargeting.validProjectile('c') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('c') = True) then
+        scrThrow.projectileTarget;
     'd', 'D':
-      if (scrTargeting.validProjectile('d') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('d') = True) then
+        scrThrow.projectileTarget;
     'e', 'E':
-      if (scrTargeting.validProjectile('e') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('e') = True) then
+        scrThrow.projectileTarget;
     'f', 'F':
-      if (scrTargeting.validProjectile('f') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('f') = True) then
+        scrThrow.projectileTarget;
     'g', 'G':
-      if (scrTargeting.validProjectile('g') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('g') = True) then
+        scrThrow.projectileTarget;
     'h', 'H':
-      if (scrTargeting.validProjectile('h') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('h') = True) then
+        scrThrow.projectileTarget;
     'i', 'I':
-      if (scrTargeting.validProjectile('i') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('i') = True) then
+        scrThrow.projectileTarget;
     'j', 'J':
-      if (scrTargeting.validProjectile('j') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('j') = True) then
+        scrThrow.projectileTarget;
     'k', 'K':
-      if (scrTargeting.validProjectile('k') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('k') = True) then
+        scrThrow.projectileTarget;
     'l', 'L':
-      if (scrTargeting.validProjectile('k') = True) then
-        scrTargeting.projectileTarget;
+      if (scrThrow.validProjectile('k') = True) then
+        scrThrow.projectileTarget;
     'x', 'X': { Exit Look input }
     begin
       main.gameState := stGame;
@@ -672,19 +673,19 @@ procedure ammoTarget(Keypress: TKeyEvent);
 begin
   case GetKeyEventCode(Keypress) of
     { Arrow keys }
-    kbdLeft: scrTargeting.cycleTargets(999);
-    kbdRight: scrTargeting.cycleTargets(998);
-    kbdUp: scrTargeting.cycleTargets(999);
-    KbdDown: scrTargeting.cycleTargets(998);
+    kbdLeft: scrThrow.cycleTargets(999);
+    kbdRight: scrThrow.cycleTargets(998);
+    kbdUp: scrThrow.cycleTargets(999);
+    KbdDown: scrThrow.cycleTargets(998);
   end;
   { Numpad and VI keys }
   case GetKeyEventChar(Keypress) of
     '8', 'k', 'K', '4', 'h', 'H', '1', 'b', 'B', '9', 'u',
-    'U': scrTargeting.cycleTargets(999);
+    'U': scrThrow.cycleTargets(999);
     '6', 'l', 'L', '7', 'y', 'Y', '2', 'j', 'J', '3', 'n',
-    'N': scrTargeting.cycleTargets(998);
+    'N': scrThrow.cycleTargets(998);
     't', 'T': { Throw selected projectile }
-    scrTargeting.chuckProjectile;
+    scrThrow.chuckProjectile;
     'x', 'X': { Exit Look input }
     begin
       main.gameState := stGame;

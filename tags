@@ -67,8 +67,8 @@ canMove	backup/map.pas	/^function canMove(checkX, checkY: smallint): boolean;$/;
 canMove	map.pas	/^function canMove(checkX, checkY: smallint): boolean;$/;"	f
 canSee	backup/map.pas	/^function canSee(checkX, checkY: smallint): boolean;$/;"	f
 canSee	map.pas	/^function canSee(checkX, checkY: smallint): boolean;$/;"	f
-canThrow	screens/backup/scrtargeting.pas	/^function canThrow(): boolean;$/;"	f
-canThrow	screens/scrtargeting.pas	/^function canThrow(): boolean;$/;"	f
+canThrow	screens/backup/scrthrow.pas	/^function canThrow: boolean;$/;"	f
+canThrow	screens/scrthrow.pas	/^function canThrow: boolean;$/;"	f
 carryingArrows	player/backup/player_inventory.pas	/^function carryingArrows: boolean;$/;"	f
 carryingArrows	player/player_inventory.pas	/^function carryingArrows: boolean;$/;"	f
 centreX	backup/ui.pas	/^function centreX(textstring: shortstring): byte;$/;"	f
@@ -97,8 +97,8 @@ checkNotifications	screens/backup/dlginfo.pas	/^procedure checkNotifications;$/;
 checkNotifications	screens/dlginfo.pas	/^procedure checkNotifications;$/;"	p
 choose	screens/backup/scrcharselect.pas	/^procedure choose;$/;"	p
 choose	screens/scrcharselect.pas	/^procedure choose;$/;"	p
-chuckProjectile	screens/backup/scrtargeting.pas	/^procedure chuckProjectile;$/;"	p
-chuckProjectile	screens/scrtargeting.pas	/^procedure chuckProjectile;$/;"	p
+chuckProjectile	screens/backup/scrthrow.pas	/^procedure chuckProjectile;$/;"	p
+chuckProjectile	screens/scrthrow.pas	/^procedure chuckProjectile;$/;"	p
 clearPopup	backup/ui.pas	/^procedure clearPopup;$/;"	p
 clearPopup	ui.pas	/^procedure clearPopup;$/;"	p
 clearStatusBar	backup/ui.pas	/^procedure clearStatusBar;$/;"	p
@@ -184,8 +184,8 @@ createStaff	items/weapons/backup/staff_minor_scorch.pas	/^procedure createStaff(
 createStaff	items/weapons/staff_minor_scorch.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
 createWineFlask	items/backup/wine_flask.pas	/^procedure createWineFlask(itmx, itmy: smallint);$/;"	p
 createWineFlask	items/wine_flask.pas	/^procedure createWineFlask(itmx, itmy: smallint);$/;"	p
-cycleTargets	screens/backup/scrtargeting.pas	/^procedure cycleTargets(selection: smallint);$/;"	p
-cycleTargets	screens/scrtargeting.pas	/^procedure cycleTargets(selection: smallint);$/;"	p
+cycleTargets	screens/backup/scrthrow.pas	/^procedure cycleTargets(selection: smallint);$/;"	p
+cycleTargets	screens/scrthrow.pas	/^procedure cycleTargets(selection: smallint);$/;"	p
 death	entities/fungus/green_fungus.pas	/^procedure death(id: smallint);$/;"	p
 decisionEscape	entities/animals/cave_rat.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/animals/giant_cave_rat.pas	/^procedure decisionEscape(id: smallint);$/;"	p
@@ -468,8 +468,8 @@ loadEquippedItems	player/player_inventory.pas	/^procedure loadEquippedItems;$/;"
 loadGame	backup/file_handling.pas	/^procedure loadGame;$/;"	p
 loadGame	file_handling.pas	/^procedure loadGame;$/;"	p
 logAction	logging.pas	/^procedure logAction(textString: string);$/;"	p
-look	screens/backup/scrtargeting.pas	/^procedure look(dir: word);$/;"	p
-look	screens/scrtargeting.pas	/^procedure look(dir: word);$/;"	p
+look	screens/backup/scrlook.pas	/^procedure look(dir: word);$/;"	p
+look	screens/scrlook.pas	/^procedure look(dir: word);$/;"	p
 lookInput	backup/keyboardinput.pas	/^procedure lookInput(Keypress: TKeyEvent);$/;"	p
 lookInput	keyboardinput.pas	/^procedure lookInput(Keypress: TKeyEvent);$/;"	p
 lookupUse	items/backup/item_lookup.pas	/^procedure lookupUse(x: smallint; equipped: boolean; id: smallint);$/;"	p
@@ -502,8 +502,8 @@ playerProjectilePath	vision/backup/los.pas	/^procedure playerProjectilePath(x2, 
 playerProjectilePath	vision/los.pas	/^procedure playerProjectilePath(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
 processStatus	player/backup/player.pas	/^procedure processStatus;$/;"	p
 processStatus	player/player.pas	/^procedure processStatus;$/;"	p
-projectileTarget	screens/backup/scrtargeting.pas	/^procedure projectileTarget;$/;"	p
-projectileTarget	screens/scrtargeting.pas	/^procedure projectileTarget;$/;"	p
+projectileTarget	screens/backup/scrthrow.pas	/^procedure projectileTarget;$/;"	p
+projectileTarget	screens/scrthrow.pas	/^procedure projectileTarget;$/;"	p
 quaff	player/backup/player_inventory.pas	/^procedure quaff;$/;"	p
 quaff	player/player_inventory.pas	/^procedure quaff;$/;"	p
 quaffInput	backup/keyboardinput.pas	/^procedure quaffInput(Keypress: TKeyEvent);$/;"	p
@@ -528,12 +528,12 @@ regenMagick	player/backup/player.pas	/^procedure regenMagick;$/;"	p
 regenMagick	player/player.pas	/^procedure regenMagick;$/;"	p
 removeArrow	player/backup/player_inventory.pas	/^procedure removeArrow;$/;"	p
 removeArrow	player/player_inventory.pas	/^procedure removeArrow;$/;"	p
-removeFromGround	screens/backup/scrtargeting.pas	/^procedure removeFromGround;$/;"	p
-removeFromGround	screens/scrtargeting.pas	/^procedure removeFromGround;$/;"	p
+removeFromGround	screens/backup/scrthrow.pas	/^procedure removeFromGround;$/;"	p
+removeFromGround	screens/scrthrow.pas	/^procedure removeFromGround;$/;"	p
 removeFromInventory	player/backup/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f
 removeFromInventory	player/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f
-removeThrownFromInventory	screens/backup/scrtargeting.pas	/^procedure removeThrownFromInventory;$/;"	p
-removeThrownFromInventory	screens/scrtargeting.pas	/^procedure removeThrownFromInventory;$/;"	p
+removeThrownFromInventory	screens/backup/scrthrow.pas	/^procedure removeThrownFromInventory;$/;"	p
+removeThrownFromInventory	screens/scrthrow.pas	/^procedure removeThrownFromInventory;$/;"	p
 restoreMessages	backup/ui.pas	/^procedure restoreMessages;$/;"	p
 restoreMessages	ui.pas	/^procedure restoreMessages;$/;"	p
 restorePlayerGlyph	screens/backup/scrtargeting.pas	/^procedure restorePlayerGlyph;$/;"	p
@@ -607,8 +607,8 @@ takeTurn	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure takeTurn(id: 
 takeTurn	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
-target	screens/backup/scrtargeting.pas	/^procedure target;$/;"	p
-target	screens/scrtargeting.pas	/^procedure target;$/;"	p
+target	screens/backup/scrthrow.pas	/^procedure target;$/;"	p
+target	screens/scrthrow.pas	/^procedure target;$/;"	p
 targetInput	backup/keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
 targetInput	keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
 throw	items/weapons/backup/basic_club.pas	/^procedure throw;$/;"	p
@@ -670,8 +670,8 @@ useItem	items/weapons/pointy_stick.pas	/^procedure useItem(equipped: boolean);$/
 useItem	items/weapons/short_bow.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/staff_minor_scorch.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/wine_flask.pas	/^procedure useItem;$/;"	p
-validProjectile	screens/backup/scrtargeting.pas	/^function validProjectile(selection: char): boolean;$/;"	f
-validProjectile	screens/scrtargeting.pas	/^function validProjectile(selection: char): boolean;$/;"	f
+validProjectile	screens/backup/scrthrow.pas	/^function validProjectile(selection: char): boolean;$/;"	f
+validProjectile	screens/scrthrow.pas	/^function validProjectile(selection: char): boolean;$/;"	f
 wander	entities/ai_animal.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/backup/large_blood_bat.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/backup/small_hyena.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
