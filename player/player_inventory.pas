@@ -178,6 +178,53 @@ begin
     entityList[0].weaponEquipped := True;
     Inc(entityList[0].weaponDice);
     ui.equippedWeapon := 'Wooden club';
+  end
+  (* Elves start off with a short bow and some arrows *)
+  else
+  begin
+    with inventory[0] do
+    begin
+      id := 0;
+      sortIndex := 0;
+      Name := 'short bow';
+      equipped := True;
+      description := 'small hunting bow';
+      article := 'a';
+      itemType := itmProjectileWeapon;
+      itemMaterial := matWood;
+      glyph := '}';
+      glyphColour := 'brown';
+      numUses := 1;
+      inInventory := True;
+      throwable := True;
+      throwDamage := 1;
+      dice := 0;
+      adds := 0;
+      useID := 10;
+    end;
+    entityList[0].weaponEquipped := True;
+    player_stats.projectileWeaponEquipped := True;
+    ui.equippedWeapon := 'Short bow';
+    with inventory[1] do
+    begin
+      id := 1;
+      sortIndex := 6;
+      Name := 'arrow';
+      equipped := False;
+      description := 'wooden flight arrow';
+      article := 'an';
+      itemType := itmAmmo;
+      itemMaterial := matWood;
+      glyph := '|';
+      glyphColour := 'brown';
+      numUses := 5;
+      inInventory := True;
+      throwable := False;
+      throwDamage := 5;
+      dice := 0;
+      adds := 0;
+      useID := 12;
+    end;
   end;
 end;
 
