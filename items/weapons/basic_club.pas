@@ -6,8 +6,6 @@ unit basic_club;
 
 interface
 
-uses logging;
-
 (* Create a club *)
 procedure createClub(itmx, itmy: smallint);
 (* Equip weapon *)
@@ -72,7 +70,6 @@ end;
 
 procedure throw;
 begin
-  logAction('> basic_club.throw');
   entityList[0].weaponEquipped := False;
   Dec(entityList[0].weaponDice);
   ui.equippedWeapon := 'No weapon equipped';

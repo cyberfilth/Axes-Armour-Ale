@@ -9,7 +9,7 @@ interface
 
 uses
   SysUtils, Math, video, map, camera, fov, los, ui, player_inventory, player_stats,
-  items, entities, scrTargeting, crude_dagger, basic_club, staff_minor_scorch, pointy_stick, logging;
+  items, entities, scrTargeting, crude_dagger, basic_club, staff_minor_scorch, pointy_stick;
 
 type
   (* Enemies *)
@@ -532,8 +532,6 @@ begin
        2: crude_dagger.thrownDamaged(dmgID, True);
   end;
 
-  logAction('indexID: ' + IntToStr(indexID));
-
   (* Rocks break on impact *)
   if (throwableWeapons[selectedProjectile].Name <> 'rock') then
   { Create an item }
@@ -551,7 +549,7 @@ begin
     newItem.posX := landingX;
     newItem.posY := landingY;
     newItem.NumberOfUses := player_inventory.inventory[itemNumber].numUses;
-    newItem.onMap := False;
+    newItem.onMap := True;
     newItem.throwable := player_inventory.inventory[itemNumber].throwable;
     newItem.throwDamage := player_inventory.inventory[itemNumber].throwDamage;
     newItem.discovered := True;
