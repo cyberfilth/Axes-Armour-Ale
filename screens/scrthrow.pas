@@ -65,8 +65,10 @@ begin
   NPCinRange := False;
   i := 0;
   b := 0;
+  NumOfWeapons := 0;
   mnuChar := 'a';
   Result := False;
+
   {       Check for projectiles     }
 
   (* Initialise array *)

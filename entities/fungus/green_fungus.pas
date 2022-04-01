@@ -193,13 +193,13 @@ begin
           begin
             Inc(npcAmount);
             small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
+            ui.writeBufferedMessages;
+            ui.displayMessage('The fungus releases spores into the air');
           end
           else
           (* If no suitable tile is found *)
             exit;
         end;
-        ui.writeBufferedMessages;
-        ui.bufferMessage('The fungus releases spores into the air');
       end;
       Inc(fungusSpawnAttempts);
     end;

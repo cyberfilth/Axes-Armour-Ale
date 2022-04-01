@@ -1,4 +1,4 @@
-(* Screen used for Look command, Firing a bow, and Throwing projectiles *)
+(* Screen used for Firing a bow *)
 
 unit scrTargeting;
 
@@ -9,8 +9,7 @@ interface
 
 uses
   SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, los,
-  scrGame, player_stats, animation,
-  globalUtils, arrow;
+  scrGame, player_stats, animation, globalUtils, arrow;
 
 type
   (* Weapons *)
