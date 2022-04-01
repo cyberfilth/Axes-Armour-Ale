@@ -180,7 +180,7 @@ begin
   Result := False;
   for i := 0 to maxWeapons do
   begin
-    if (throwableWeapons[i].mnuOption = selection) then
+    if (throwableWeapons[i].mnuOption = selection) and (throwableWeapons[i].Name <> '') then
     begin
       selectedProjectile := i;
       Result := True;
@@ -322,7 +322,7 @@ begin
     yPOS := (19 - NumOfWeapons);
     for i := 0 to maxWeapons do
     begin
-      if (throwableWeapons[i].Name <> scrTargeting.empty) then
+      if (throwableWeapons[i].Name <> scrTargeting.empty) and (throwableWeapons[i].Name <> '') then
       begin
         if (throwableWeapons[i].equppd = True) then
            TextOut(10, yPOS, 'white', '[' + throwableWeapons[i].mnuOption + '] ' + throwableWeapons[i].Name + ' [equipped]')
