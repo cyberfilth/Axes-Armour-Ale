@@ -72,6 +72,7 @@ begin
   (* Initialise array *)
   for b := 0 to maxWeapons do
   begin
+    throwableWeapons[b].playerInventoryID := 99;
     throwableWeapons[b].id := b;
     throwableWeapons[b].Name := scrTargeting.empty;
     throwableWeapons[b].mnuOption := 'x';
@@ -88,6 +89,7 @@ begin
     if (inventory[b].throwable = True) then
     begin
       (* Add to list of throwable weapons *)
+      throwableWeapons[b].playerInventoryID := b;
       throwableWeapons[b].id := player_inventory.inventory[b].id;
       throwableWeapons[b].Name := player_inventory.inventory[b].Name;
       throwableWeapons[b].mnuOption := mnuChar;
@@ -109,6 +111,7 @@ begin
   if (items.containsItem(entityList[0].posX, entityList[0].posY) = True) and (items.isItemThrowable(entityList[0].posX, entityList[0].posY) = True) then
   begin
       (* Add to list of throwable weapons *)
+      throwableWeapons[b].playerInventoryID := 99;
       throwableWeapons[b].id := items.getItemID(entityList[0].posX, entityList[0].posY);
       throwableWeapons[b].Name := items.getItemName(entityList[0].posX, entityList[0].posY);
       throwableWeapons[b].mnuOption := mnuChar;
@@ -521,10 +524,11 @@ end;
 
 procedure removeThrownFromInventory;
 var
-  itemNumber, dmgID: smallint;
+  itemNumber, dmgID, b: smallint;
   newItem: Item;
 begin
   itemNumber := throwableWeapons[selectedProjectile].id;
+  b := throwableWeapons[selectedProjectile].playerInventoryID;
   dmgID := player_inventory.inventory[itemNumber].id;
 
   (* Weapon damage for edged weapons *)
@@ -576,22 +580,22 @@ begin
   end;
 
   (* Remove from inventory *)
-  player_inventory.inventory[itemNumber].sortIndex := 10;
-  player_inventory.inventory[itemNumber].Name := scrTargeting.empty;
-  player_inventory.inventory[itemNumber].equipped := False;
-  player_inventory.inventory[itemNumber].description := 'x';
-  player_inventory.inventory[itemNumber].article := 'x';
-  player_inventory.inventory[itemNumber].itemType := itmEmptySlot;
-  player_inventory.inventory[itemNumber].itemMaterial := matEmpty;
-  player_inventory.inventory[itemNumber].glyph := 'x';
-  player_inventory.inventory[itemNumber].glyphColour := 'x';
-  player_inventory.inventory[itemNumber].inInventory := False;
-  player_inventory.inventory[itemNumber].numUses := 0;
-  player_inventory.inventory[itemNumber].throwable := False;
-  player_inventory.inventory[itemNumber].throwDamage := 0;
-  player_inventory.inventory[itemNumber].useID := 0;
-  player_inventory.inventory[itemNumber].adds := 0;
-  player_inventory.inventory[itemNumber].dice := 0;
+  player_inventory.inventory[b].sortIndex := 10;
+  player_inventory.inventory[b].Name := scrTargeting.empty;
+  player_inventory.inventory[b].equipped := False;
+  player_inventory.inventory[b].description := 'x';
+  player_inventory.inventory[b].article := 'x';
+  player_inventory.inventory[b].itemType := itmEmptySlot;
+  player_inventory.inventory[b].itemMaterial := matEmpty;
+  player_inventory.inventory[b].glyph := 'x';
+  player_inventory.inventory[b].glyphColour := 'x';
+  player_inventory.inventory[b].inInventory := False;
+  player_inventory.inventory[b].numUses := 0;
+  player_inventory.inventory[b].throwable := False;
+  player_inventory.inventory[b].throwDamage := 0;
+  player_inventory.inventory[b].useID := 0;
+  player_inventory.inventory[b].adds := 0;
+  player_inventory.inventory[b].dice := 0;
 end;
 
 end.

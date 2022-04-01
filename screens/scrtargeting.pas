@@ -15,7 +15,7 @@ uses
 type
   (* Weapons *)
   Equipment = record
-    id, baseDMG: smallint;
+    id, baseDMG, playerInventoryID: smallint;
     mnuOption: char;
     Name, glyph, glyphColour: shortstring;
     onGround, equppd: boolean;
