@@ -1,5 +1,5 @@
 (*
-Axes, Armour & Ale - The ASCII version
+Axes, Armour & Ale - The low fantasy roguelike
 Copyright 2021-2022 Chris Hawkins
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, m
@@ -9,7 +9,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 *)
 
-program ascii_axe;
+program Axes;
 
 {$mode fpc}{$H+}
 {$IFDEF WINDOWS}

@@ -130,7 +130,7 @@ begin
   (* Drop the quest object *)
   if (universe.currentDepth = 3) then
     smugglersMap.createSmugglersMap(c, r)
-  else if (universe.currentDepth = 3) then
+  else if (universe.currentDepth = 2) then
     staff_minor_scorch.createStaff(c, r)
   else
     rock.createRock(c, r);
