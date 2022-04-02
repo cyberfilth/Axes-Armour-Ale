@@ -11,7 +11,7 @@ Alpha version, most features aren't implemented yet and what there is may change
  - Small, self-contained binary with no external dependencies.
  - Can be run without needing to be installed
 
-The latest release can be downloaded from the [Releases page](https://github.com/cyberfilth/Axes-Armour-Ale/releases/tag/Alpha50)
+The latest release can be downloaded from the [Releases page](https://github.com/cyberfilth/Axes-Armour-Ale/releases/tag/Alpha51)
 
 ![Ubuntu screenshot](GITscreenshots/LinuxAAA.gif)
 
