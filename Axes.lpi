@@ -19,7 +19,7 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <MinorVersionNr Value="49"/>
+      <MinorVersionNr Value="50"/>
       <Language Value="0809"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable FileDescription="ASCII roguelike game"/>
