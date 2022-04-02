@@ -543,24 +543,24 @@ begin
   { Create an item }
   begin
     newItem.itemID := indexID;
-    newItem.itemName := player_inventory.inventory[itemNumber].Name;
-    newItem.itemDescription := player_inventory.inventory[itemNumber].description;
-    newItem.itemArticle := player_inventory.inventory[itemNumber].article;
-    newItem.itemType := player_inventory.inventory[itemNumber].itemType;
-    newItem.itemMaterial := player_inventory.inventory[itemNumber].itemMaterial;
-    newItem.useID := player_inventory.inventory[itemNumber].useID;
-    newItem.glyph := player_inventory.inventory[itemNumber].glyph;
-    newItem.glyphColour := player_inventory.inventory[itemNumber].glyphColour;
+    newItem.itemName := player_inventory.inventory[b].Name;
+    newItem.itemDescription := player_inventory.inventory[b].description;
+    newItem.itemArticle := player_inventory.inventory[b].article;
+    newItem.itemType := player_inventory.inventory[b].itemType;
+    newItem.itemMaterial := player_inventory.inventory[b].itemMaterial;
+    newItem.useID := player_inventory.inventory[b].useID;
+    newItem.glyph := player_inventory.inventory[b].glyph;
+    newItem.glyphColour := player_inventory.inventory[b].glyphColour;
     newItem.inView := True;
     newItem.posX := landingX;
     newItem.posY := landingY;
-    newItem.NumberOfUses := player_inventory.inventory[itemNumber].numUses;
+    newItem.NumberOfUses := player_inventory.inventory[b].numUses;
     newItem.onMap := True;
-    newItem.throwable := player_inventory.inventory[itemNumber].throwable;
-    newItem.throwDamage := player_inventory.inventory[itemNumber].throwDamage;
+    newItem.throwable := player_inventory.inventory[b].throwable;
+    newItem.throwDamage := player_inventory.inventory[b].throwDamage;
     newItem.discovered := True;
-    newItem.adds := player_inventory.inventory[itemNumber].adds;
-    newItem.dice := player_inventory.inventory[itemNumber].dice;
+    newItem.adds := player_inventory.inventory[b].adds;
+    newItem.dice := player_inventory.inventory[b].dice;
     Inc(indexID);
 
   { Place item on the game map }
