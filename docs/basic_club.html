@@ -20,9 +20,12 @@ A wooden club</p>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="basic_club.html#createClub">createClub</a></b>(uniqueid, itmx, itmy: smallint);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="basic_club.html#createClub">createClub</a></b>(itmx, itmy: smallint);</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="basic_club.html#throw">throw</a></b>;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="basic_club.html#useItem">useItem</a></b>(equipped: boolean);</code></td>
 </tr>
 </table>
@@ -30,11 +33,20 @@ A wooden club</p>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="createClub"></span><code>procedure <b>createClub</b>(uniqueid, itmx, itmy: smallint);</code></td>
+<td class="itemcode"><span id="createClub"></span><code>procedure <b>createClub</b>(itmx, itmy: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Create a club</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="throw"></span><code>procedure <b>throw</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Remove weapon from inventory when thrown</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

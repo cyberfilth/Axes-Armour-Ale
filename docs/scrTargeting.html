@@ -15,9 +15,9 @@
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
-Screen used for Look command and Throwing projectiles</p>
+Screen used for Firing a bow</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Classes</li><li>Math</li><li><a  href="map.html">map</a></li><li><a  href="entities.html">entities</a></li><li>video</li><li><a  href="ui.html">ui</a></li><li><a  href="camera.html">camera</a></li><li><a  href="fov.html">fov</a></li><li><a  href="items.html">items</a></li><li><a  href="los.html">los</a></li><li><a  href="scrGame.html">scrGame</a></li><li><a  href="player_stats.html">player_stats</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Classes</li><li>Math</li><li><a  href="map.html">map</a></li><li><a  href="entities.html">entities</a></li><li>video</li><li><a  href="ui.html">ui</a></li><li><a  href="camera.html">camera</a></li><li><a  href="fov.html">fov</a></li><li><a  href="items.html">items</a></li><li><a  href="los.html">los</a></li><li><a  href="scrGame.html">scrGame</a></li><li><a  href="player_stats.html">player_stats</a></li><li><a  href="animation.html">animation</a></li><li><a  href="globalUtils.html">globalUtils</a></li><li>arrow</li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -28,83 +28,70 @@ Screen used for Look command and Throwing projectiles</p>
 <td class="itemname">Record&nbsp;<a class="bold" href="scrTargeting.Equipment.html"><code>Equipment</code></a></td>
 <td class="itemdesc">&nbsp;</td>
 </tr>
-<tr class="list2">
-<td class="itemname">Record&nbsp;<a class="bold" href="scrTargeting.TthrowTargets.html"><code>TthrowTargets</code></a></td>
-<td class="itemdesc">&nbsp;</td>
-</tr>
 </table>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="scrTargeting.html#canThrow">canThrow</a></b>(): boolean;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#aimBow">aimBow</a></b>(dir: word);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#chuckProjectile">chuckProjectile</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#arrowHit">arrowHit</a></b>(x, y: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#cycleTargets">cycleTargets</a></b>(selection: smallint);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#drawTrajectory">drawTrajectory</a></b>(x1, y1, x2, y2: smallint; g, col: shortstring);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#look">look</a></b>(dir: word);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#fireBow">fireBow</a></b>;</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>function <b><a  href="scrTargeting.html#glyphAngle">glyphAngle</a></b>(targetX, targetY: smallint): shortstring;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#paintOverMsg">paintOverMsg</a></b>;</code></td>
 </tr>
-<tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#projectileTarget">projectileTarget</a></b>;</code></td>
-</tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#removeFromGround">removeFromGround</a></b>;</code></td>
-</tr>
-<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#restorePlayerGlyph">restorePlayerGlyph</a></b>;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#target">target</a></b>;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code>function <b><a  href="scrTargeting.html#validProjectile">validProjectile</a></b>(selection: char): boolean;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#empty">empty</a></b> = 'xxx';</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#maxWeapons">maxWeapons</a></b> = 11;</code></td>
+<td class="itemcode"><code><b><a  href="scrTargeting.html#empty">empty</a></b> = 'Empty';</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#chosenProjectile">chosenProjectile</a></b>: smallint;</code></td>
+<td class="itemcode"><code><b><a  href="scrTargeting.html#arrowFlightArray">arrowFlightArray</a></b>: array[1..<a  href="los.html#plyrTargetRange">plyrTargetRange</a>] of TPoint;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code><b><a  href="scrTargeting.html#arrowGlyph">arrowGlyph</a></b>: shortstring;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="scrTargeting.html#landingX">landingX</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="scrTargeting.html#landingY">landingY</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code><b><a  href="scrTargeting.html#safeX">safeX</a></b>: smallint;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="scrTargeting.html#safeY">safeY</a></b>: smallint;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="scrTargeting.html#selectedTarget">selectedTarget</a></b>: smallint;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="scrTargeting.html#targetX">targetX</a></b>: smallint;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="scrTargeting.html#targetY">targetY</a></b>: smallint;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="scrTargeting.html#tgtAmount">tgtAmount</a></b>: smallint;</code></td>
 </tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#tgtList">tgtList</a></b>: array of <a  href="scrTargeting.TthrowTargets.html">TthrowTargets</a>;</code></td>
-</tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#throwableWeapons">throwableWeapons</a></b>: array[0..<a  href="scrTargeting.html#maxWeapons">maxWeapons</a>] of <a  href="scrTargeting.Equipment.html">Equipment</a>;</code></td>
-</tr>
-<tr class="list2">
 <td class="itemcode"><code><b><a  href="scrTargeting.html#weaponAmount">weaponAmount</a></b>: smallint;</code></td>
 </tr>
 </table>
@@ -112,38 +99,47 @@ Screen used for Look command and Throwing projectiles</p>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="canThrow"></span><code>function <b>canThrow</b>(): boolean;</code></td>
+<td class="itemcode"><span id="aimBow"></span><code>procedure <b>aimBow</b>(dir: word);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Confirm there are NPC's and projectiles</p>
+Aim bow and arrow</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="chuckProjectile"></span><code>procedure <b>chuckProjectile</b>;</code></td>
+<td class="itemcode"><span id="arrowHit"></span><code>procedure <b>arrowHit</b>(x, y: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Throw projectile at confirmed target</p>
+Arrow hits an entity</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="cycleTargets"></span><code>procedure <b>cycleTargets</b>(selection: smallint);</code></td>
+<td class="itemcode"><span id="drawTrajectory"></span><code>procedure <b>drawTrajectory</b>(x1, y1, x2, y2: smallint; g, col: shortstring);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Cycle between the targets</p>
+Draw trajectory of arrow</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="look"></span><code>procedure <b>look</b>(dir: word);</code></td>
+<td class="itemcode"><span id="fireBow"></span><code>procedure <b>fireBow</b>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Look around the map</p>
+Fire bow and arrow</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="glyphAngle"></span><code>function <b>glyphAngle</b>(targetX, targetY: smallint): shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Calculate what angle of arrow to use</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -157,24 +153,6 @@ Paint over the message log</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="projectileTarget"></span><code>procedure <b>projectileTarget</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Choose target for projectile</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="removeFromGround"></span><code>procedure <b>removeFromGround</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Remove a thrown item from the ground</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
 <td class="itemcode"><span id="restorePlayerGlyph"></span><code>procedure <b>restorePlayerGlyph</b>;</code></td>
 </tr>
 <tr><td colspan="1">
@@ -182,35 +160,10 @@ Remove a thrown item from the ground</p>
 Repaint the player when exiting look/target screen</p>
 </td></tr>
 </table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="target"></span><code>procedure <b>target</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Start the Target / Throw process</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="validProjectile"></span><code>function <b>validProjectile</b>(selection: char): boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Check if the projectile selection is valid</p>
-</td></tr>
-</table>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="empty"></span><code><b>empty</b> = 'xxx';</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="maxWeapons"></span><code><b>maxWeapons</b> = 11;</code></td>
+<td class="itemcode"><span id="empty"></span><code><b>empty</b> = 'Empty';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -218,11 +171,38 @@ Check if the projectile selection is valid</p>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="chosenProjectile"></span><code><b>chosenProjectile</b>: smallint;</code></td>
+<td class="itemcode"><span id="arrowFlightArray"></span><code><b>arrowFlightArray</b>: array[1..<a  href="los.html#plyrTargetRange">plyrTargetRange</a>] of TPoint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Selected projectile</p>
+Path of arrows</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="arrowGlyph"></span><code><b>arrowGlyph</b>: shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Arrow Glyph to use in animation</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="landingX"></span><code><b>landingX</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Coordinates where the projectile lands</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="landingY"></span><code><b>landingY</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Coordinates where the projectile lands</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -274,24 +254,6 @@ Target coordinates</p>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="tgtList"></span><code><b>tgtList</b>: array of <a  href="scrTargeting.TthrowTargets.html">TthrowTargets</a>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-List of projectile targets</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="throwableWeapons"></span><code><b>throwableWeapons</b>: array[0..<a  href="scrTargeting.html#maxWeapons">maxWeapons</a>] of <a  href="scrTargeting.Equipment.html">Equipment</a>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Throwable items</p>
-</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">

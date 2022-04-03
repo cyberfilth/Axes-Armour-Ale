@@ -57,18 +57,21 @@ Organises the current level into an array together with helper functions</p>
 <td class="itemcode"><code>function <b><a  href="map.html#isOccupied">isOccupied</a></b>(checkX, checkY: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>function <b><a  href="map.html#isWall">isWall</a></b>(x, y: smallint): boolean;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="map.html#loadDisplayedMap">loadDisplayedMap</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="map.html#occupy">occupy</a></b>(x, y: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="map.html#setupMap">setupMap</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="map.html#unoccupy">unoccupy</a></b>(x, y: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>function <b><a  href="map.html#withinBounds">withinBounds</a></b>(x, y: smallint): boolean;</code></td>
 </tr>
 </table>
@@ -159,6 +162,15 @@ Check if player is on a tile</p>
 <tr><td colspan="1">
 <p>
 Check if a map tile is occupied</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="isWall"></span><code>function <b>isWall</b>(x, y: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if a tile contains a wall</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

@@ -74,19 +74,19 @@ Items and objects in the game world</p>
 <td class="itemcode"><code><b><a  href="items.html#tItem">tItem</a></b> = (...);</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code><b><a  href="items.html#TitemList">TitemList</a></b> = array of <a  href="items.Item.html">Item</a>;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code><b><a  href="items.html#tMaterial">tMaterial</a></b> = (...);</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="items.html#itemAmount">itemAmount</a></b>: smallint;</code></td>
+<td class="itemcode"><code><b><a  href="items.html#indexID">indexID</a></b>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="items.html#itemList">itemList</a></b>: array of <a  href="items.Item.html">Item</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="items.html#listLength">listLength</a></b>: smallint;</code></td>
+<td class="itemcode"><code><b><a  href="items.html#itemList">itemList</a></b>: <a  href="items.html#TitemList">TitemList</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -219,8 +219,19 @@ Redraw all items</p>
 <span id="itmProjectile">itmProjectile</span></li>
 <li>
 <span id="itmEmptySlot">itmEmptySlot</span></li>
+<li>
+<span id="itmProjectileWeapon">itmProjectileWeapon</span></li>
+<li>
+<span id="itmAmmo">itmAmmo</span></li>
 </ul>
 </td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TitemList"></span><code><b>TitemList</b> = array of <a  href="items.Item.html">Item</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
@@ -253,21 +264,14 @@ Redraw all items</p>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="itemAmount"></span><code><b>itemAmount</b>: smallint;</code></td>
+<td class="itemcode"><span id="indexID"></span><code><b>indexID</b>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="itemList"></span><code><b>itemList</b>: array of <a  href="items.Item.html">Item</a>;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="listLength"></span><code><b>listLength</b>: smallint;</code></td>
+<td class="itemcode"><span id="itemList"></span><code><b>itemList</b>: <a  href="items.html#TitemList">TitemList</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
