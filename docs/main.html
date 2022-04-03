@@ -39,16 +39,16 @@ Axes, Armour &amp; Ale - A low-fantasy roguelike. </p>
 <td class="itemcode"><code>procedure <b><a  href="main.html#initialise">initialise</a></b>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="main.html#loop">loop</a></b>;</code></td>
-</tr>
-<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="main.html#newGame">newGame</a></b>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="main.html#returnToGameScreen">returnToGameScreen</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="main.html#setSeed">setSeed</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="main.html#stateInputLoop">stateInputLoop</a></b>;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="main.html#WinningScreen">WinningScreen</a></b>;</code></td>
@@ -115,13 +115,6 @@ Axes, Armour &amp; Ale - A low-fantasy roguelike. </p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="loop"></span><code>procedure <b>loop</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
 <td class="itemcode"><span id="newGame"></span><code>procedure <b>newGame</b>;</code></td>
 </tr>
 <tr><td colspan="1">
@@ -137,6 +130,13 @@ Axes, Armour &amp; Ale - A low-fantasy roguelike. </p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="setSeed"></span><code>procedure <b>setSeed</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stateInputLoop"></span><code>procedure <b>stateInputLoop</b>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -200,6 +200,8 @@ Finite State Machine game states</p>
 <span id="stSelectAmmo">stSelectAmmo</span></li>
 <li>
 <span id="stSelectTarget">stSelectTarget</span></li>
+<li>
+<span id="stFireBow">stFireBow</span></li>
 </ul>
 </td></tr>
 </table>

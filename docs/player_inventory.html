@@ -35,6 +35,12 @@ Handles player inventory and associated functions</p>
 <td class="itemcode"><code>function <b><a  href="player_inventory.html#addToInventory">addToInventory</a></b>(itemNumber: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>function <b><a  href="player_inventory.html#addToInventory_emptySlot">addToInventory_emptySlot</a></b>(itemNumber: smallint; skip: boolean): boolean;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="player_inventory.html#carryingArrows">carryingArrows</a></b>: boolean;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="player_inventory.html#destroyWeapon">destroyWeapon</a></b>;</code></td>
 </tr>
 <tr class="list">
@@ -59,13 +65,19 @@ Handles player inventory and associated functions</p>
 <td class="itemcode"><code>procedure <b><a  href="player_inventory.html#quaffSelection">quaffSelection</a></b>(selection: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="player_inventory.html#removeFromInventory">removeFromInventory</a></b>(itemNumber: smallint): boolean;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#removeArrow">removeArrow</a></b>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#showInventory">showInventory</a></b>;</code></td>
+<td class="itemcode"><code>function <b><a  href="player_inventory.html#removeFromInventory">removeFromInventory</a></b>(itemNumber: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#showInventory">showInventory</a></b>;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="player_inventory.html#sortInventory">sortInventory</a></b>(iLo, iHi: integer);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#startingInventory">startingInventory</a></b>;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="player_inventory.html#wearWieldSelection">wearWieldSelection</a></b>(selection: smallint);</code></td>
@@ -92,6 +104,24 @@ Handles player inventory and associated functions</p>
 <tr><td colspan="1">
 <p>
 Add to inventory</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="addToInventory_emptySlot"></span><code>function <b>addToInventory_emptySlot</b>(itemNumber: smallint; skip: boolean): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Add to an empty slot in inventory</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="carryingArrows"></span><code>function <b>carryingArrows</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if arrows are in inventory</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -168,6 +198,15 @@ Quaff selected item</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="removeArrow"></span><code>procedure <b>removeArrow</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Remove an arrow from inventory</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="removeFromInventory"></span><code>function <b>removeFromInventory</b>(itemNumber: smallint): boolean;</code></td>
 </tr>
 <tr><td colspan="1">
@@ -191,6 +230,15 @@ Display the inventory screen</p>
 <tr><td colspan="1">
 <p>
 Sort inventory</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="startingInventory"></span><code>procedure <b>startingInventory</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Add items to an inventory when new game starts</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: scrThrow</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<h1 class="unit">Unit scrThrow</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Screen used for Throwing projectiles</p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>SysUtils</li><li>Math</li><li>video</li><li><a  href="map.html">map</a></li><li><a  href="camera.html">camera</a></li><li><a  href="fov.html">fov</a></li><li><a  href="los.html">los</a></li><li><a  href="ui.html">ui</a></li><li><a  href="player_inventory.html">player_inventory</a></li><li><a  href="player_stats.html">player_stats</a></li><li><a  href="items.html">items</a></li><li><a  href="entities.html">entities</a></li><li><a  href="scrTargeting.html">scrTargeting</a></li><li><a  href="crude_dagger.html">crude_dagger</a></li><li><a  href="basic_club.html">basic_club</a></li><li><a  href="staff_minor_scorch.html">staff_minor_scorch</a></li><li>pointy_stick</li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">Record&nbsp;<a class="bold" href="scrThrow.TthrowTargets.html"><code>TthrowTargets</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="scrThrow.html#canThrow">canThrow</a></b>: boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="scrThrow.html#chuckProjectile">chuckProjectile</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="scrThrow.html#cycleTargets">cycleTargets</a></b>(selection: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="scrThrow.html#projectileTarget">projectileTarget</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="scrThrow.html#removeFromGround">removeFromGround</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="scrThrow.html#removeThrownFromInventory">removeThrownFromInventory</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="scrThrow.html#target">target</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="scrThrow.html#validProjectile">validProjectile</a></b>(selection: char): boolean;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="scrThrow.html#maxWeapons">maxWeapons</a></b> = 11;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="scrThrow.html#NumOfTargets">NumOfTargets</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="scrThrow.html#NumOfWeapons">NumOfWeapons</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="scrThrow.html#selectedProjectile">selectedProjectile</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="scrThrow.html#selTarget">selTarget</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="scrThrow.html#tgtList">tgtList</a></b>: array of <a  href="scrThrow.TthrowTargets.html">TthrowTargets</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="scrThrow.html#throwableWeapons">throwableWeapons</a></b>: array[0..<a  href="scrThrow.html#maxWeapons">maxWeapons</a>] of <a  href="player_inventory.Equipment.html">Equipment</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="scrThrow.html#throwX">throwX</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="scrThrow.html#throwY">throwY</a></b>: smallint;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="canThrow"></span><code>function <b>canThrow</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Confirm there are NPC's and projectiles</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="chuckProjectile"></span><code>procedure <b>chuckProjectile</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Throw projectile at confirmed target</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="cycleTargets"></span><code>procedure <b>cycleTargets</b>(selection: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Cycle between the targets</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="projectileTarget"></span><code>procedure <b>projectileTarget</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Choose target for projectile</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="removeFromGround"></span><code>procedure <b>removeFromGround</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Remove a thrown item from the ground</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="removeThrownFromInventory"></span><code>procedure <b>removeThrownFromInventory</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Remove a thrown item from inventory</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="target"></span><code>procedure <b>target</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Start the Target / Throw process</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="validProjectile"></span><code>function <b>validProjectile</b>(selection: char): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if the projectile selection is valid</p>
+</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="maxWeapons"></span><code><b>maxWeapons</b> = 11;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="NumOfTargets"></span><code><b>NumOfTargets</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="NumOfWeapons"></span><code><b>NumOfWeapons</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="selectedProjectile"></span><code><b>selectedProjectile</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="selTarget"></span><code><b>selTarget</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="tgtList"></span><code><b>tgtList</b>: array of <a  href="scrThrow.TthrowTargets.html">TthrowTargets</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+List of projectile targets</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="throwableWeapons"></span><code><b>throwableWeapons</b>: array[0..<a  href="scrThrow.html#maxWeapons">maxWeapons</a>] of <a  href="player_inventory.Equipment.html">Equipment</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Throwable items</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="throwX"></span><code><b>throwX</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Target coordinates</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="throwY"></span><code><b>throwY</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Target coordinates</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

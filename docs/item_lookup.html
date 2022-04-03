@@ -17,39 +17,39 @@
 <p>
 Lookup table for items, based on the environment</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li><a  href="universe.html">universe</a></li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="ale_tankard.html">ale_tankard</a></li><li><a  href="potion_curePoison.html">potion_curePoison</a></li><li><a  href="crude_dagger.html">crude_dagger</a></li><li><a  href="basic_club.html">basic_club</a></li><li>rock</li><li><a  href="leather_armour1.html">leather_armour1</a></li><li><a  href="cloth_armour1.html">cloth_armour1</a></li><li><a  href="smugglersMap.html">smugglersMap</a></li><li><a  href="staff_minor_scorch.html">staff_minor_scorch</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li><a  href="universe.html">universe</a></li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="ale_tankard.html">ale_tankard</a></li><li>wine_flask</li><li><a  href="crude_dagger.html">crude_dagger</a></li><li><a  href="basic_club.html">basic_club</a></li><li>rock</li><li>short_bow</li><li>pointy_stick</li><li><a  href="leather_armour1.html">leather_armour1</a></li><li><a  href="cloth_armour1.html">cloth_armour1</a></li><li><a  href="smugglersMap.html">smugglersMap</a></li><li><a  href="staff_minor_scorch.html">staff_minor_scorch</a></li><li>arrow</li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="item_lookup.html#dispenseItem">dispenseItem</a></b>(i: byte; dungeon: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="item_lookup.html#dispenseItem">dispenseItem</a></b>(dungeon: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="item_lookup.html#dropFirstItem">dropFirstItem</a></b>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="item_lookup.html#lookupUse">lookupUse</a></b>(x: smallint; equipped: boolean);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="item_lookup.html#lookupUse">lookupUse</a></b>(x: smallint; equipped: boolean; id: smallint);</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="item_lookup.html#caveItems1">caveItems1</a></b>: array[1..5] of string =
-    ('aleTankard', 'clothArmour1', 'curePotion', 'basicClub', 'rock');</code></td>
+<td class="itemcode"><code><b><a  href="item_lookup.html#caveItems1">caveItems1</a></b>: array[1..8] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'pointyStick', 'arrow', 'arrow');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="item_lookup.html#caveItems2">caveItems2</a></b>: array[1..4] of string =
-    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1');</code></td>
+<td class="itemcode"><code><b><a  href="item_lookup.html#caveItems2">caveItems2</a></b>: array[1..7] of string =
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'rock', 'arrow', 'shortBow');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="item_lookup.html#caveItems3">caveItems3</a></b>: array[1..5] of string =
-    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'curePotion');</code></td>
+<td class="itemcode"><code><b><a  href="item_lookup.html#caveItems3">caveItems3</a></b>: array[1..6] of string =
+    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="dispenseItem"></span><code>procedure <b>dispenseItem</b>(i: byte; dungeon: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
+<td class="itemcode"><span id="dispenseItem"></span><code>procedure <b>dispenseItem</b>(dungeon: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -67,7 +67,7 @@ Used to drop a specific special item on each level</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="lookupUse"></span><code>procedure <b>lookupUse</b>(x: smallint; equipped: boolean);</code></td>
+<td class="itemcode"><span id="lookupUse"></span><code>procedure <b>lookupUse</b>(x: smallint; equipped: boolean; id: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -77,8 +77,8 @@ Execute useItem procedure</p>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="caveItems1"></span><code><b>caveItems1</b>: array[1..5] of string =
-    ('aleTankard', 'clothArmour1', 'curePotion', 'basicClub', 'rock');</code></td>
+<td class="itemcode"><span id="caveItems1"></span><code><b>caveItems1</b>: array[1..8] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'pointyStick', 'arrow', 'arrow');</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -87,16 +87,16 @@ Array of items found in a cave, ordered by cave level</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="caveItems2"></span><code><b>caveItems2</b>: array[1..4] of string =
-    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1');</code></td>
+<td class="itemcode"><span id="caveItems2"></span><code><b>caveItems2</b>: array[1..7] of string =
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'rock', 'arrow', 'shortBow');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="caveItems3"></span><code><b>caveItems3</b>: array[1..5] of string =
-    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'curePotion');</code></td>
+<td class="itemcode"><span id="caveItems3"></span><code><b>caveItems3</b>: array[1..6] of string =
+    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
