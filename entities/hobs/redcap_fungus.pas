@@ -151,16 +151,16 @@ begin
     begin
     escapePlayer(id, entityList[id].posX, entityList[id].posY);
     (* Randomly decide if the infected hob says anything *)
-    i := randomRange(1, 3);
+    i := randomRange(1, 10);
     if (i = 2) then
       begin
-           x := randomRange(1, 3);
+           x := randomRange(1, 4);
            case x of
-             1 : ui.displayMessage('Help me! It''s growing inside meee!');
-             2 : ui.displayMessage('Aah, it''s taking over my mind!');
-             3 : ui.displayMessage('Noooo! I''m changing....');
+             1 : ui.displayMessage('The Hob screams "Noooo!"');
+             2 : ui.displayMessage('The Hob mutters "M M.. Matangoooo!"');
+             3 : ui.displayMessage('The Hob wails "It''sss tooo late...."');
              else
-               ui.displayMessage('The mushrooms! Don''t let them touch yoooooo!');
+               ui.displayMessage('"The mushrooms! Don''t let them touch yoooooo!"');
            end;
       end;
     end
@@ -180,6 +180,7 @@ end;
 procedure wander(id, spx, spy: smallint);
 var
   direction, attempts, testx, testy: smallint;
+  i, x: byte;
 begin
   { Set NPC state }
   entityList[id].state := stateNeutral;
@@ -209,6 +210,22 @@ begin
     end
   until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = False);
   entities.moveNPC(id, testx, testy);
+  (* Randomly decide if the infected hob says anything *)
+  if (entityList[id].inView = True) then
+  begin
+  i := randomRange(1, 10);
+  if (i = 2) then
+      begin
+         x := randomRange(1, 4);
+         case x of
+           1 : ui.displayMessage('The Hob screams "Help me! It''s growing inside meee!"');
+           2 : ui.displayMessage('The Hob yells "Aah, it''s taking over my mind!"');
+           3 : ui.displayMessage('The Hob whimpers "Noooo! I''m changing...."');
+           else
+             ui.displayMessage('The Hob screams "The mushrooms! Don''t let them touch yoooooo!"');
+           end;
+      end;
+  end;
 end;
 
 procedure chaseTarget(id, spx, spy: smallint);
