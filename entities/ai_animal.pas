@@ -179,7 +179,17 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The ' + entityList[id].race + ' slightly wounds you')
       else
-        ui.displayMessage('The ' + entityList[id].race + ' bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+        begin
+             ui.displayMessage('The ' + entityList[id].race + ' bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+             if (entityList[id].intName = 'Matango') then
+             begin
+               (* Fungus does poison damage *)
+               entityList[0].stsPoison := True;
+               entityList[0].tmrPoison := damageAmount + 4;
+               if (killer = 'empty') then
+                  killer := 'infected mushroom person';
+             end;
+        end;
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
@@ -202,10 +212,10 @@ begin
      if (entities.entityList[enemyID].currentHP < 1) then
      begin
           killEntity(enemyID);
-          ui.displayMessage('The rat kills the ' + entityList[enemyID].race);
+          ui.displayMessage('The ' + entityList[npcID].race + ' kills the ' + entityList[enemyID].race);
      end
      else
-         ui.displayMessage('The rat attacks the ' + entityList[enemyID].race);
+         ui.displayMessage('The ' + entityList[npcID].race + ' attacks the ' + entityList[enemyID].race);
    end;
 end;
 

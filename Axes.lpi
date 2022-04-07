@@ -19,7 +19,7 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <MinorVersionNr Value="51"/>
+      <MinorVersionNr Value="52"/>
       <Language Value="0809"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable Comments="ASCII roguelike game" FileDescription="Axes, Armour &amp; Ale"/>
@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="62">
+    <Units Count="63">
       <Unit0>
         <Filename Value="Axes.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -254,7 +254,7 @@
         <IsPartOfProject Value="True"/>
       </Unit32>
       <Unit33>
-        <Filename Value="entities\hobs\redcap_lesser.pas"/>
+        <Filename Value="entities\hobs\redcap_fungus.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit33>
       <Unit34>
@@ -382,6 +382,10 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="scrThrow"/>
       </Unit61>
+      <Unit62>
+        <Filename Value="entities\hobs\redcap_lesser.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit62>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

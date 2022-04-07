@@ -151,8 +151,7 @@ begin
       begin
         if (idTarget = 0) then { if target is the player }
         begin
-          ui.displayMessage('The fungus lashes you with its stinger, inflicting ' +
-            IntToStr(damageAmount) + ' damage');
+          ui.displayMessage('The fungus lashes you with its stinger, inflicting ' + IntToStr(damageAmount) + ' damage');
           (* Fungus does poison damage *)
           entityList[0].stsPoison := True;
           entityList[0].tmrPoison := damageAmount + 2;

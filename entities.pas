@@ -12,7 +12,7 @@ uses
   SysUtils, globalUtils,
   { List of creatures }
   cave_rat, giant_cave_rat, blood_bat, green_fungus, redcap_lesser, redcap_lesser_lobber,
-  small_green_fungus, large_blood_bat, small_hyena;
+  small_green_fungus, large_blood_bat, small_hyena, redcap_fungus, mushroom_person;
 
 type { NPC attitudes }
   Tattitudes = (stateNeutral, stateHostile, stateEscape);
@@ -299,9 +299,11 @@ begin
     'LargeBloodBat': large_blood_bat.takeTurn(i);
     'GreenFungus': green_fungus.takeTurn(i);
     'SmallGreenFungus': small_green_fungus.takeTurn(i);
+    'Matango': mushroom_person.takeTurn(i);
     'Hob': redcap_lesser.takeTurn(i);
     'HobLobber': redcap_lesser_lobber.takeTurn(i);
     'smallHyena': small_hyena.takeTurn(i);
+    'HobFungus': redcap_fungus.takeTurn(i);
   end;
   (* Occupy their current tile *)
   occupyUpdate;
