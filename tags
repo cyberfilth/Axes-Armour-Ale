@@ -25,11 +25,13 @@ Zzap	player/player_inventory.pas	/^procedure Zzap(item: smallint);$/;"	p
 addToInventory	player/player_inventory.pas	/^function addToInventory(itemNumber: smallint): boolean;$/;"	f
 addToInventory_emptySlot	player/player_inventory.pas	/^function addToInventory_emptySlot(itemNumber: smallint; skip: boolean): boolean;$/;"	f
 addToInventory_emptySlot	player/player_inventory.pas	/^function addToInventory_emptySlot(itemNumber: smallint; skip: boolean):boolean;$/;"	f
+aimBow	screens/backup/scrtargeting.pas	/^procedure aimBow(dir: word);$/;"	p
 aimBow	screens/scrtargeting.pas	/^procedure aimBow(dir: word);$/;"	p
 ammoProjectile	keyboardinput.pas	/^procedure ammoProjectile(Keypress: TKeyEvent);$/;"	p
 ammoTarget	keyboardinput.pas	/^procedure ammoTarget(Keypress: TKeyEvent);$/;"	p
 areaBurnEffect	animation.pas	/^procedure areaBurnEffect(getEm: array of smallint);$/;"	p
 arrowAnimation	animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
+arrowHit	screens/backup/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	map.pas	/^procedure ascendStairs;$/;"	p
 beginLogging	logging.pas	/^procedure beginLogging;$/;"	p
@@ -209,6 +211,7 @@ drawPlayer	camera.pas	/^procedure drawPlayer;$/;"	p
 drawSidepanel	screens/scrgame.pas	/^procedure drawSidepanel;$/;"	p
 drawSkull	screens/scrrip.pas	/^procedure drawSkull;$/;"	p
 drawTile	map.pas	/^procedure drawTile(c, r: smallint; hiDef: byte);$/;"	p
+drawTrajectory	screens/backup/scrtargeting.pas	/^procedure drawTrajectory(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
 drawTrajectory	screens/scrtargeting.pas	/^procedure drawTrajectory(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
 drop	player/player_inventory.pas	/^procedure drop;$/;"	p
 dropFirstItem	items/backup/item_lookup.pas	/^procedure dropFirstItem;$/;"	p
@@ -241,6 +244,7 @@ exitPrompt	ui.pas	/^procedure exitPrompt;$/;"	p
 exitToTitleMenu	main.pas	/^procedure exitToTitleMenu;$/;"	p
 fieldOfView	vision/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
 fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
+fireBow	screens/backup/scrtargeting.pas	/^procedure fireBow;$/;"	p
 fireBow	screens/scrtargeting.pas	/^procedure fireBow;$/;"	p
 fireBowInput	keyboardinput.pas	/^procedure fireBowInput(Keypress: TKeyEvent);$/;"	p
 fireMissile	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure fireMissile(id: smallint);$/;"	p
@@ -284,6 +288,7 @@ getThrowDamage	items.pas	/^function getThrowDamage(x, y: smallint): smallint;$/;
 getTrollDate	plot_gen.pas	/^procedure getTrollDate;$/;"	p
 getX	camera.pas	/^function getX(Xcoord: smallint): smallint;$/;"	f
 getY	camera.pas	/^function getY(Ycoord: smallint): smallint;$/;"	f
+glyphAngle	screens/backup/scrtargeting.pas	/^function glyphAngle(targetX, targetY: smallint): shortstring;$/;"	f
 glyphAngle	screens/scrtargeting.pas	/^function glyphAngle(targetX, targetY: smallint): shortstring;$/;"	f
 hasPlayer	map.pas	/^function hasPlayer(checkX, checkY: smallint): boolean;$/;"	f
 helpScreenInput	keyboardinput.pas	/^procedure helpScreenInput(Keypress: TKeyEvent);$/;"	p
@@ -354,6 +359,7 @@ obtainMap	items/macguffins/smugglersmap.pas	/^procedure obtainMap;$/;"	p
 occupy	map.pas	/^procedure occupy(x, y: smallint);$/;"	p
 occupyUpdate	backup/entities.pas	/^procedure occupyUpdate;$/;"	p
 occupyUpdate	entities.pas	/^procedure occupyUpdate;$/;"	p
+paintOverMsg	screens/backup/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
 paintOverMsg	screens/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
 pickUp	player/player.pas	/^procedure pickUp;$/;"	p
 playerProjectilePath	vision/los.pas	/^procedure playerProjectilePath(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
@@ -380,6 +386,7 @@ removeFromInventory	player/player_inventory.pas	/^function removeFromInventory(i
 removeThrownFromInventory	screens/backup/scrthrow.pas	/^procedure removeThrownFromInventory;$/;"	p
 removeThrownFromInventory	screens/scrthrow.pas	/^procedure removeThrownFromInventory;$/;"	p
 restoreMessages	ui.pas	/^procedure restoreMessages;$/;"	p
+restorePlayerGlyph	screens/backup/scrtargeting.pas	/^procedure restorePlayerGlyph;$/;"	p
 restorePlayerGlyph	screens/scrtargeting.pas	/^procedure restorePlayerGlyph;$/;"	p
 returnToGameScreen	main.pas	/^procedure returnToGameScreen;$/;"	p
 rightHasFloor	dungeons/cave.pas	/^function rightHasFloor(): boolean;$/;"	f

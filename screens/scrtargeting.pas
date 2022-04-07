@@ -221,8 +221,6 @@ begin
   end;
   (* Draw items *)
   items.redrawItems;
-  for p := 1 to entities.npcAmount do
-      entities.redrawMapDisplay(p);
   (* Repaint map *)
   camera.drawMap;
   fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
