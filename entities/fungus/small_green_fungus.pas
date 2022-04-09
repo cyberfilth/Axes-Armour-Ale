@@ -105,12 +105,10 @@ procedure combat(idOwner, idTarget: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(2, entities.entityList[idOwner].attack) -
-    entities.entityList[idTarget].defence;
+  damageAmount := globalutils.randomRange(2, entities.entityList[idOwner].attack) - entities.entityList[idTarget].defence;
   if (damageAmount > 0) then
   begin
-    entities.entityList[idTarget].currentHP :=
-      (entities.entityList[idTarget].currentHP - damageAmount);
+    entities.entityList[idTarget].currentHP := (entities.entityList[idTarget].currentHP - damageAmount);
     if (entities.entityList[idTarget].currentHP < 1) then
     begin
       if (idTarget = 0) then
@@ -133,17 +131,17 @@ begin
     begin
       if (idTarget = 0) then { if target is the player }
       begin
-        ui.displayMessage('The fungus lashes you with its stinger, inflicting ' +
-          IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The fungus lashes you with its stinger, inflicting ' + IntToStr(damageAmount) + ' damage');
         (* Fungus does poison damage *)
         entityList[0].stsPoison := True;
         entityList[0].tmrPoison := damageAmount + universe.currentDepth;
+        (* Update health display to show damage *)
+        ui.updateHealth;
         if (killer = 'empty') then
           killer := 'poisonous fungus';
       end
       else
-        ui.bufferMessage('The fungus stings the ' +
-          entities.entityList[idTarget].race);
+        ui.bufferMessage('The fungus stings the ' + entities.entityList[idTarget].race);
     end;
   end
   else

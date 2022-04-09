@@ -2,7 +2,7 @@
    the user interface accordingly.
    For a typical 80x24 terminal size, the camera size will be 57x19
    For a terminal size of 102x24 and greater, the camera size will be 80x19
-   This is kept to 19 rather than the full 20 to all for screenshake to
+   This is kept to 19 rather than the full 20 to allow for screenshake to
    be added in future versions.*)
 
 unit resolution;

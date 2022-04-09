@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="63">
+    <Units Count="64">
       <Unit0>
         <Filename Value="Axes.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -386,6 +386,10 @@
         <Filename Value="entities\hobs\redcap_lesser.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit62>
+      <Unit63>
+        <Filename Value="entities\animals\hyena_fungus.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit63>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

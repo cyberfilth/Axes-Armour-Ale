@@ -58,7 +58,7 @@ begin
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;
-    visionRange := 4;
+    visionRange := 3;
     (* Counts number of turns the NPC is in pursuit *)
     moveCount := 0;
     targetX := 0;
@@ -346,7 +346,7 @@ begin
       (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin
-      killer := 'a ' + entityList[id].race;
+      killer := 'an ' + entityList[id].race;
       exit;
     end
     else

@@ -10,15 +10,16 @@ uses
   globalUtils, universe, map, smell,
   { List of creatures }
   cave_rat, giant_cave_rat, blood_bat, large_blood_bat, green_fungus, mushroom_person,
-  redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus;
+  redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
+  hyena_fungus;
 
 const
   (* Array of creatures found in a cave, ordered by cave level *)
   caveNPC1: array[1..5] of string = ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
   caveNPC2: array[1..7] of string =
     ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
-  caveNPC3: array[1..6] of string =
-    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'redcapLsrLbr', 'matango');
+  caveNPC3: array[1..7] of string =
+    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'redcapLsrLbr', 'matango', 'hyenaFungus');
 
 
 (* randomly choose a creature and call the generate code directly *)
@@ -37,7 +38,7 @@ begin
   repeat
     r := globalutils.randomRange(2, (MAXROWS - 1));
     c := globalutils.randomRange(2, (MAXCOLUMNS - 1));
-    (* choose a location that is not a wall, occupied or stair *)
+  (* choose a location that is not a wall, occupied or stair, also not next to the player *)
   until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False) and
     (smellmap[r][c] > 4) and (maparea[r][c].Glyph = '.');
 
@@ -80,6 +81,7 @@ begin
     'redcapLsrLbr': redcap_lesser_lobber.createRedcap(i, c, r);
     'hobFungus': redcap_fungus.createRedcapFungus(i, c, r);
     'smallHyena': small_hyena.createSmallHyena(i, c, r);
+    'hyenaFungus': hyena_fungus.createInfectedHyena(i, c, r);
   end;
 end;
 
