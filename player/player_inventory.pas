@@ -124,10 +124,32 @@ end;
 
 procedure startingInventory;
 begin
+  (* Every race carries a Pixie in a jar as a lantern *)
+  with inventory[0] do
+    begin
+      id := 0;
+      sortIndex := 0;
+      Name := 'Pixie in a jar';
+      equipped := False;
+      description := 'glowing source of light';
+      article := 'a';
+      itemType := itmLightSource;
+      itemMaterial := matGlass;
+      glyph := chr(232);
+      glyphColour := 'yellow';
+      numUses := 150;
+      inInventory := True;
+      throwable := False;
+      throwDamage := 0;
+      dice := 0;
+      adds := 0;
+      useID := 13;
+    end;
+
   (* Humans start off with a pointy stick *)
   if (player_stats.playerRace = 'Human') then
   begin
-    with inventory[0] do
+    with inventory[1] do
     begin
       id := 0;
       sortIndex := 0;
@@ -155,7 +177,7 @@ begin
     (* Dwarves start off with a basic club *)
     else if (player_stats.playerRace = 'Dwarf') then
     begin
-    with inventory[0] do
+    with inventory[1] do
     begin
       id := 0;
       sortIndex := 0;
@@ -182,7 +204,7 @@ begin
   (* Elves start off with a short bow and some arrows *)
   else
   begin
-    with inventory[0] do
+    with inventory[1] do
     begin
       id := 0;
       sortIndex := 0;
@@ -335,18 +357,20 @@ begin
         (* Populate inventory with item description *)
         inventory[i].id := i;
         (* Set sortIndex for sorting inventory *)
-        if (itemList[itemNumber].itemType = itmWeapon) then
+        if (itemList[itemNumber].itemType = itmLightSource) then
           inventory[i].sortIndex := 1
-        else if (itemList[itemNumber].itemType = itmProjectileWeapon) then
+        else if (itemList[itemNumber].itemType = itmWeapon) then
           inventory[i].sortIndex := 2
-        else if (itemList[itemNumber].itemType = itmArmour) then
+        else if (itemList[itemNumber].itemType = itmProjectileWeapon) then
           inventory[i].sortIndex := 3
-        else if (itemList[itemNumber].itemType = itmDrink) then
+        else if (itemList[itemNumber].itemType = itmArmour) then
           inventory[i].sortIndex := 4
-        else if (itemList[itemNumber].itemType = itmProjectile) then
+        else if (itemList[itemNumber].itemType = itmDrink) then
           inventory[i].sortIndex := 5
+        else if (itemList[itemNumber].itemType = itmProjectile) then
+          inventory[i].sortIndex := 6
         else if (itemList[itemNumber].itemType = itmAmmo) then
-          inventory[i].sortIndex := 6;
+          inventory[i].sortIndex := 7;
         inventory[i].Name := itemList[itemNumber].itemname;
         inventory[i].description := itemList[itemNumber].itemDescription;
         inventory[i].article := itemList[itemNumber].itemArticle;
