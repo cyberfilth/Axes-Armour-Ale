@@ -540,7 +540,9 @@ begin
     player_stats.clanName:=UTF8Encode(PlayerDataNode.FindNode('clanName').TextContent);
     player_stats.enchantedWeaponEquipped:=StrToBool(UTF8Encode(PlayerDataNode.FindNode('enchantedWeapon').TextContent));
     player_stats.projectileWeaponEquipped:=StrToBool(UTF8Encode(PlayerDataNode.FindNode('projectileWeapon').TextContent));
+    player_stats.lightEquipped:=StrToBool(UTF8Encode(PlayerDataNode.FindNode('lightEquipped').TextContent));
     player_stats.enchWeapType := StrToInt(UTF8Encode(PlayerDataNode.FindNode('enchWeapType').TextContent));
+    player_stats.lightCounter := StrToInt(UTF8Encode(PlayerDataNode.FindNode('lightCounter').TextContent));
 
     (* Player Inventory *)
     player_inventory.initialiseInventory;
@@ -681,7 +683,9 @@ begin
     AddElement(DataNode, 'clanName', player_stats.clanName);
     AddElement(DataNode, 'enchantedWeapon', BoolToStr(player_stats.enchantedWeaponEquipped));
     AddElement(DataNode, 'projectileWeapon', BoolToStr(player_stats.projectileWeaponEquipped));
+    AddElement(DataNode, 'lightEquipped', BoolToStr(player_stats.lightEquipped));
     AddElement(DataNode, 'enchWeapType', IntToStr(player_stats.enchWeapType));
+    AddElement(DataNode, 'lightCounter', IntToStr(player_stats.lightCounter));
 
     (* Player inventory *)
     for i := 0 to 9 do

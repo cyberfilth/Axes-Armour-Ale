@@ -20,6 +20,10 @@ var
   enchantedWeaponEquipped: boolean;
   (* Is a bow equipped *)
   projectileWeaponEquipped: boolean;
+  (* Is player carrying a light source *)
+  lightEquipped: boolean;
+  (* Number of turns light will shine *)
+  lightCounter: smallint;
   (* Magical ability *)
   maxMagick, currentMagick: smallint;
   (* Durability of equipped / magical item *)
@@ -37,6 +41,12 @@ procedure increaseAttack;
 procedure increaseDefence;
 (* Increase attack & defence *)
 procedure increaseAttackDefence;
+(* Check the light source, decrease the timer *)
+procedure processLight;
+(* Remove light source from inventory *)
+procedure removeLight;
+(* Add a light sourcec to inventory *)
+procedure addLight;
 
 implementation
 
@@ -119,6 +129,24 @@ begin
   ui.updateAttack;
   ui.updateDefence;
   ui.updateHealth;
+end;
+
+procedure processLight;
+begin
+  if (lightEquipped = True) then
+    begin
+      Dec(lightCounter);
+    end;
+end;
+
+procedure removeLight;
+begin
+
+end;
+
+procedure addLight;
+begin
+
 end;
 
 end.

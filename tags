@@ -21,11 +21,13 @@ NPCpicker	entities/npc_lookup.pas	/^procedure NPCpicker(i: byte; dungeon: dungeo
 RIPInput	keyboardinput.pas	/^procedure RIPInput(Keypress: TKeyEvent);$/;"	p
 TextOut	ui.pas	/^procedure TextOut(X, Y: word; textcol: shortstring; const S: string);$/;"	p
 WinAlphaInput	keyboardinput.pas	/^procedure WinAlphaInput(Keypress: TKeyEvent);$/;"	p
+WinningScreen	backup/main.pas	/^procedure WinningScreen;$/;"	p
 WinningScreen	main.pas	/^procedure WinningScreen;$/;"	p
 Zap	items/weapons/backup/staff_minor_scorch.pas	/^procedure Zap;$/;"	p
 Zap	items/weapons/staff_minor_scorch.pas	/^procedure Zap;$/;"	p
 Zzap	player/backup/player_inventory.pas	/^procedure Zzap(item: smallint);$/;"	p
 Zzap	player/player_inventory.pas	/^procedure Zzap(item: smallint);$/;"	p
+addLight	player/player_stats.pas	/^procedure addLight;$/;"	p
 addToInventory	player/backup/player_inventory.pas	/^function addToInventory(itemNumber: smallint): boolean;$/;"	f
 addToInventory	player/player_inventory.pas	/^function addToInventory(itemNumber: smallint): boolean;$/;"	f
 addToInventory_emptySlot	player/backup/player_inventory.pas	/^function addToInventory_emptySlot(itemNumber: smallint; skip: boolean): boolean;$/;"	f
@@ -72,6 +74,7 @@ chaseTarget	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure chaseTarge
 chaseTarget	entities/hobs/redcap_fungus.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/hobs/redcap_lesser.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/hobs/redcap_lesser_lobber.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
+checkLevel	player/backup/player_stats.pas	/^procedure checkLevel;$/;"	p
 checkLevel	player/player_stats.pas	/^procedure checkLevel;$/;"	p
 checkNotifications	screens/dlginfo.pas	/^procedure checkNotifications;$/;"	p
 choose	screens/scrcharselect.pas	/^procedure choose;$/;"	p
@@ -101,6 +104,7 @@ combat	player/combat_resolver.pas	/^procedure combat(npcID: smallint);$/;"	p
 combatCheck	player/player.pas	/^function combatCheck(x, y: smallint): boolean;$/;"	f
 containsItem	backup/items.pas	/^function containsItem(x, y: smallint): boolean;$/;"	f
 containsItem	items.pas	/^function containsItem(x, y: smallint): boolean;$/;"	f
+continue	backup/main.pas	/^procedure continue;$/;"	p
 continue	main.pas	/^procedure continue;$/;"	p
 countLivingEntities	backup/entities.pas	/^function countLivingEntities: byte;$/;"	f
 countLivingEntities	entities.pas	/^function countLivingEntities: byte;$/;"	f
@@ -268,9 +272,11 @@ escapePlayer	entities/hobs/redcap_lesser.pas	/^procedure escapePlayer(id, spx, s
 escapePlayer	entities/hobs/redcap_lesser_lobber.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 examineInventory	player/backup/player_inventory.pas	/^procedure examineInventory(selection: smallint);$/;"	p
 examineInventory	player/player_inventory.pas	/^procedure examineInventory(selection: smallint);$/;"	p
+exitApplication	backup/main.pas	/^procedure exitApplication;$/;"	p
 exitApplication	main.pas	/^procedure exitApplication;$/;"	p
 exitMessage	ui.pas	/^procedure exitMessage;$/;"	p
 exitPrompt	ui.pas	/^procedure exitPrompt;$/;"	p
+exitToTitleMenu	backup/main.pas	/^procedure exitToTitleMenu;$/;"	p
 exitToTitleMenu	main.pas	/^procedure exitToTitleMenu;$/;"	p
 fieldOfView	vision/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
 fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
@@ -290,7 +296,9 @@ followScent	entities/hobs/redcap_lesser.pas	/^procedure followScent(id: smallint
 followScent	entities/hobs/redcap_lesser_lobber.pas	/^procedure followScent(id: smallint);$/;"	p
 foundMap	screens/dlginfo.pas	/^procedure foundMap;$/;"	p
 gameInput	keyboardinput.pas	/^procedure gameInput(Keypress: TKeyEvent);$/;"	p
+gameLoop	backup/main.pas	/^procedure gameLoop;$/;"	p
 gameLoop	main.pas	/^procedure gameLoop;$/;"	p
+gameOver	backup/main.pas	/^procedure gameOver;$/;"	p
 gameOver	main.pas	/^procedure gameOver;$/;"	p
 generate	dungeons/cave.pas	/^procedure generate(idNumber: smallint; totalDepth: byte);$/;"	p
 generateClanName	plot_gen.pas	/^procedure generateClanName;$/;"	p
@@ -331,15 +339,20 @@ hasPlayer	map.pas	/^function hasPlayer(checkX, checkY: smallint): boolean;$/;"	f
 helpScreenInput	keyboardinput.pas	/^procedure helpScreenInput(Keypress: TKeyEvent);$/;"	p
 humanText	screens/scrcharintro.pas	/^procedure humanText;$/;"	p
 inView	vision/los.pas	/^function inView(x1, y1, x2, y2, visRange: smallint): boolean;$/;"	f
+increaseAttack	player/backup/player_stats.pas	/^procedure increaseAttack;$/;"	p
 increaseAttack	player/player_stats.pas	/^procedure increaseAttack;$/;"	p
+increaseAttackDefence	player/backup/player_stats.pas	/^procedure increaseAttackDefence;$/;"	p
 increaseAttackDefence	player/player_stats.pas	/^procedure increaseAttackDefence;$/;"	p
+increaseDefence	player/backup/player_stats.pas	/^procedure increaseDefence;$/;"	p
 increaseDefence	player/player_stats.pas	/^procedure increaseDefence;$/;"	p
 increaseHealth	player/player.pas	/^procedure increaseHealth(amount: smallint);$/;"	p
+increaseMaxHealth	player/backup/player_stats.pas	/^procedure increaseMaxHealth;$/;"	p
 increaseMaxHealth	player/player_stats.pas	/^procedure increaseMaxHealth;$/;"	p
 infighting	entities/ai_animal.pas	/^procedure infighting(npcID, enemyID: smallint);$/;"	p
 infighting	entities/animals/blood_bat.pas	/^procedure infighting(npcID, enemyID: smallint);$/;"	p
 infighting	entities/backup/ai_animal.pas	/^procedure infighting(npcID, enemyID: smallint);$/;"	p
 infoDialog	screens/dlginfo.pas	/^procedure infoDialog(message: shortstring);$/;"	p
+initialise	backup/main.pas	/^procedure initialise;$/;"	p
 initialise	main.pas	/^procedure initialise;$/;"	p
 initialiseInventory	player/backup/player_inventory.pas	/^procedure initialiseInventory;$/;"	p
 initialiseInventory	player/player_inventory.pas	/^procedure initialiseInventory;$/;"	p
@@ -396,6 +409,7 @@ moveNPC	entities.pas	/^procedure moveNPC(id, newX, newY: smallint);$/;"	p
 movePlayer	player/player.pas	/^procedure movePlayer(dir: word);$/;"	p
 newFloorNPCs	backup/entities.pas	/^procedure newFloorNPCs;$/;"	p
 newFloorNPCs	entities.pas	/^procedure newFloorNPCs;$/;"	p
+newGame	backup/main.pas	/^procedure newGame;$/;"	p
 newGame	main.pas	/^procedure newGame;$/;"	p
 newGame	screens/dlginfo.pas	/^procedure newGame;$/;"	p
 newWarning	screens/dlginfo.pas	/^procedure newWarning;$/;"	p
@@ -408,6 +422,8 @@ paintOverMsg	screens/backup/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
 paintOverMsg	screens/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
 pickUp	player/player.pas	/^procedure pickUp;$/;"	p
 playerProjectilePath	vision/los.pas	/^procedure playerProjectilePath(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
+processLight	player/backup/player_stats.pas	/^procedure processLight;$/;"	p
+processLight	player/player_stats.pas	/^procedure processLight;$/;"	p
 processStatus	player/player.pas	/^procedure processStatus;$/;"	p
 projectileTarget	screens/backup/scrthrow.pas	/^procedure projectileTarget;$/;"	p
 projectileTarget	screens/scrthrow.pas	/^procedure projectileTarget;$/;"	p
@@ -433,11 +449,13 @@ removeFromGround	screens/backup/scrthrow.pas	/^procedure removeFromGround;$/;"	p
 removeFromGround	screens/scrthrow.pas	/^procedure removeFromGround;$/;"	p
 removeFromInventory	player/backup/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f
 removeFromInventory	player/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f
+removeLight	player/player_stats.pas	/^procedure removeLight;$/;"	p
 removeThrownFromInventory	screens/backup/scrthrow.pas	/^procedure removeThrownFromInventory;$/;"	p
 removeThrownFromInventory	screens/scrthrow.pas	/^procedure removeThrownFromInventory;$/;"	p
 restoreMessages	ui.pas	/^procedure restoreMessages;$/;"	p
 restorePlayerGlyph	screens/backup/scrtargeting.pas	/^procedure restorePlayerGlyph;$/;"	p
 restorePlayerGlyph	screens/scrtargeting.pas	/^procedure restorePlayerGlyph;$/;"	p
+returnToGameScreen	backup/main.pas	/^procedure returnToGameScreen;$/;"	p
 returnToGameScreen	main.pas	/^procedure returnToGameScreen;$/;"	p
 rightHasFloor	dungeons/cave.pas	/^function rightHasFloor(): boolean;$/;"	f
 rollDice	backup/globalutils.pas	/^function rollDice(numberOfDice: byte): smallint;$/;"	f
@@ -448,6 +466,7 @@ saveGame	backup/file_handling.pas	/^procedure saveGame;$/;"	p
 saveGame	file_handling.pas	/^procedure saveGame;$/;"	p
 scentDirection	vision/smell.pas	/^function scentDirection(y, x: smallint): char;$/;"	f
 screenBlank	ui.pas	/^procedure screenBlank;$/;"	p
+setSeed	backup/main.pas	/^procedure setSeed;$/;"	p
 setSeed	main.pas	/^procedure setSeed;$/;"	p
 setTheScene	screens/scrcharintro.pas	/^procedure setTheScene;$/;"	p
 setaround	dungeons/cave.pas	/^  procedure setaround(x, y: smallint; d: smallint);$/;"	p
@@ -457,6 +476,7 @@ setupMap	map.pas	/^procedure setupMap;$/;"	p
 setupScreen	ui.pas	/^procedure setupScreen(yn: byte);$/;"	p
 showInventory	player/backup/player_inventory.pas	/^procedure showInventory;$/;"	p
 showInventory	player/player_inventory.pas	/^procedure showInventory;$/;"	p
+showLevelUpOptions	player/backup/player_stats.pas	/^procedure showLevelUpOptions;$/;"	p
 showLevelUpOptions	player/player_stats.pas	/^procedure showLevelUpOptions;$/;"	p
 shutdownKeyboard	keyboardinput.pas	/^procedure shutdownKeyboard;$/;"	p
 shutdownScreen	ui.pas	/^procedure shutdownScreen;$/;"	p
@@ -470,6 +490,7 @@ spawnPlayer	entities.pas	/^procedure spawnPlayer;$/;"	p
 spiteDMG	player/combat_resolver.pas	/^procedure spiteDMG(npc: smallint);$/;"	p
 startingInventory	player/backup/player_inventory.pas	/^procedure startingInventory;$/;"	p
 startingInventory	player/player_inventory.pas	/^procedure startingInventory;$/;"	p
+stateInputLoop	backup/main.pas	/^procedure stateInputLoop;$/;"	p
 stateInputLoop	main.pas	/^procedure stateInputLoop;$/;"	p
 takeTurn	entities/animals/backup/hyena_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/backup/large_blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p

@@ -137,7 +137,7 @@ begin
       itemMaterial := matGlass;
       glyph := chr(232);
       glyphColour := 'yellow';
-      numUses := 150;
+      numUses := 1;
       inInventory := True;
       throwable := False;
       throwDamage := 0;
@@ -400,6 +400,7 @@ function removeFromInventory(itemNumber: smallint): boolean;
 var
   newItem: item;
   ss: shortstring;
+  lightYN: boolean;
 begin
   Result := False;
   (* Check if there is already an item on the floor here *)
@@ -418,7 +419,14 @@ begin
     newItem.inView := True;
     newItem.posX := entities.entityList[0].posX;
     newItem.posY := entities.entityList[0].posY;
-    newItem.NumberOfUses := inventory[itemNumber].numUses;
+    (* If the item is a light *)
+    if (inventory[itemNumber].itemType = itmLightSource) then
+    begin
+         lightYN := True;
+         newItem.NumberOfUses := player_stats.lightCounter;
+    end
+    else
+        newItem.NumberOfUses := inventory[itemNumber].numUses;
     newItem.onMap := True;
     newItem.throwable := inventory[itemNumber].throwable;
     newItem.throwDamage := inventory[itemNumber].throwDamage;
@@ -455,6 +463,9 @@ begin
     Result := True;
     (* Redraw the Drop menu *)
     drop;
+    (* No light source in inventory *)
+    if (lightYN = True) then
+       player_stats.removeLight;
   end
   else
   begin
