@@ -128,7 +128,7 @@ begin
   with inventory[0] do
     begin
       id := 0;
-      sortIndex := 0;
+      sortIndex := 1;
       Name := 'Pixie in a jar';
       equipped := False;
       description := 'glowing source of light';
@@ -152,7 +152,7 @@ begin
     with inventory[1] do
     begin
       id := 0;
-      sortIndex := 0;
+      sortIndex := 2;
       Name := 'pointy stick';
       equipped := True;
       description := 'adds 1D6+1 to attack';
@@ -180,7 +180,7 @@ begin
     with inventory[1] do
     begin
       id := 0;
-      sortIndex := 0;
+      sortIndex := 2;
       Name := 'wooden club';
       equipped := True;
       description := 'adds 1D6 to attack';
@@ -207,7 +207,7 @@ begin
     with inventory[1] do
     begin
       id := 0;
-      sortIndex := 0;
+      sortIndex := 2;
       Name := 'short bow';
       equipped := True;
       description := 'small hunting bow';
