@@ -71,6 +71,8 @@ procedure descendStairs;
 procedure drawTile(c, r: smallint; hiDef: byte);
 (* Display explored sections of map when reloading game *)
 procedure loadDisplayedMap;
+(* Set the whole map to invisible *)
+procedure notInView;
 (* Setup the current level *)
 procedure setupMap;
 
@@ -295,6 +297,17 @@ begin
     for c := 1 to globalUtils.MAXCOLUMNS do
     begin
       drawTile(c, r, 0);
+    end;
+  end;
+end;
+
+procedure notInView;
+begin
+  for r := 1 to globalUtils.MAXROWS do
+  begin
+    for c := 1 to globalUtils.MAXCOLUMNS do
+    begin
+      maparea[r, c].Visible := False;
     end;
   end;
 end;

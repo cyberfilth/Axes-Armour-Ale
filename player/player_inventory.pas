@@ -124,35 +124,13 @@ end;
 
 procedure startingInventory;
 begin
-  (* Every race carries a Pixie in a jar as a lantern *)
-  with inventory[0] do
-    begin
-      id := 0;
-      sortIndex := 1;
-      Name := 'Pixie in a jar';
-      equipped := False;
-      description := 'glowing source of light';
-      article := 'a';
-      itemType := itmLightSource;
-      itemMaterial := matGlass;
-      glyph := chr(232);
-      glyphColour := 'yellow';
-      numUses := 1;
-      inInventory := True;
-      throwable := False;
-      throwDamage := 0;
-      dice := 0;
-      adds := 0;
-      useID := 13;
-    end;
-
   (* Humans start off with a pointy stick *)
   if (player_stats.playerRace = 'Human') then
   begin
-    with inventory[1] do
+    with inventory[0] do
     begin
       id := 0;
-      sortIndex := 2;
+      sortIndex := 1;
       Name := 'pointy stick';
       equipped := True;
       description := 'adds 1D6+1 to attack';
@@ -177,10 +155,10 @@ begin
     (* Dwarves start off with a basic club *)
     else if (player_stats.playerRace = 'Dwarf') then
     begin
-    with inventory[1] do
+    with inventory[0] do
     begin
       id := 0;
-      sortIndex := 2;
+      sortIndex := 1;
       Name := 'wooden club';
       equipped := True;
       description := 'adds 1D6 to attack';
@@ -204,10 +182,10 @@ begin
   (* Elves start off with a short bow and some arrows *)
   else
   begin
-    with inventory[1] do
+    with inventory[0] do
     begin
       id := 0;
-      sortIndex := 2;
+      sortIndex := 1;
       Name := 'short bow';
       equipped := True;
       description := 'small hunting bow';
@@ -357,20 +335,18 @@ begin
         (* Populate inventory with item description *)
         inventory[i].id := i;
         (* Set sortIndex for sorting inventory *)
-        if (itemList[itemNumber].itemType = itmLightSource) then
+        if (itemList[itemNumber].itemType = itmWeapon) then
           inventory[i].sortIndex := 1
-        else if (itemList[itemNumber].itemType = itmWeapon) then
-          inventory[i].sortIndex := 2
         else if (itemList[itemNumber].itemType = itmProjectileWeapon) then
-          inventory[i].sortIndex := 3
+          inventory[i].sortIndex := 2
         else if (itemList[itemNumber].itemType = itmArmour) then
-          inventory[i].sortIndex := 4
+          inventory[i].sortIndex := 3
         else if (itemList[itemNumber].itemType = itmDrink) then
-          inventory[i].sortIndex := 5
+          inventory[i].sortIndex := 4
         else if (itemList[itemNumber].itemType = itmProjectile) then
-          inventory[i].sortIndex := 6
+          inventory[i].sortIndex := 5
         else if (itemList[itemNumber].itemType = itmAmmo) then
-          inventory[i].sortIndex := 7;
+          inventory[i].sortIndex := 6;
         inventory[i].Name := itemList[itemNumber].itemname;
         inventory[i].description := itemList[itemNumber].itemDescription;
         inventory[i].article := itemList[itemNumber].itemArticle;
@@ -400,7 +376,6 @@ function removeFromInventory(itemNumber: smallint): boolean;
 var
   newItem: item;
   ss: shortstring;
-  lightYN: boolean;
 begin
   Result := False;
   (* Check if there is already an item on the floor here *)
@@ -419,14 +394,7 @@ begin
     newItem.inView := True;
     newItem.posX := entities.entityList[0].posX;
     newItem.posY := entities.entityList[0].posY;
-    (* If the item is a light *)
-    if (inventory[itemNumber].itemType = itmLightSource) then
-    begin
-         lightYN := True;
-         newItem.NumberOfUses := player_stats.lightCounter;
-    end
-    else
-        newItem.NumberOfUses := inventory[itemNumber].numUses;
+    newItem.NumberOfUses := inventory[itemNumber].numUses;
     newItem.onMap := True;
     newItem.throwable := inventory[itemNumber].throwable;
     newItem.throwDamage := inventory[itemNumber].throwDamage;
@@ -463,9 +431,6 @@ begin
     Result := True;
     (* Redraw the Drop menu *)
     drop;
-    (* No light source in inventory *)
-    if (lightYN = True) then
-       player_stats.removeLight;
   end
   else
   begin

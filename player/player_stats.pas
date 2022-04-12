@@ -43,15 +43,13 @@ procedure increaseDefence;
 procedure increaseAttackDefence;
 (* Check the light source, decrease the timer *)
 procedure processLight;
-(* Remove light source from inventory *)
-procedure removeLight;
 (* Add a light sourcec to inventory *)
 procedure addLight;
 
 implementation
 
 uses
-  ui, entities, main, player;
+  ui, entities, main, player, map;
 
 procedure checkLevel;
 begin
@@ -134,14 +132,50 @@ end;
 procedure processLight;
 begin
   if (lightEquipped = True) then
-    begin
+  begin
       Dec(lightCounter);
+
+  (* Light starts growing dimmer *)
+  if (lightCounter = 140) then
+    ui.displayMessage(chr(16) + ' The light grows dimmer, your Pixie is growing weak')
+
+  else if (lightCounter = 130) and (entityList[0].visionRange > 1) then
+    begin
+         Dec(entityList[0].visionRange);
+         ui.displayMessage(chr(16) + ' The light grows dimmer');
+    end
+
+  else if (lightCounter = 120) and (entityList[0].visionRange > 1)  then
+    begin
+         Dec(entityList[0].visionRange);
+         entities.outOfView;
+         map.notInView;
+         map.loadDisplayedMap;
+         ui.displayMessage(chr(16) + ' The light grows dimmer, your Pixie is dying!');
+    end
+
+  else if (lightCounter = 110) and (entityList[0].visionRange > 1)  then
+    begin
+         Dec(entityList[0].visionRange);
+         entities.outOfView;
+         map.notInView;
+         map.loadDisplayedMap;
+         ui.displayMessage(chr(16) + ' The light grows dimmer...');
+    end
+
+  (* The light goes out *)
+  else if (lightCounter = 100) then
+    begin
+         entityList[0].visionRange := 0;
+         ui.displayMessage(chr(16) + ' The light goes out');
+         lightEquipped := False;
+         entities.outOfView;
+         map.notInView;
+         map.loadDisplayedMap;
     end;
-end;
-
-procedure removeLight;
-begin
-
+  end
+  else
+      map.loadDisplayedMap;
 end;
 
 procedure addLight;

@@ -188,15 +188,14 @@ begin
     messageArray[1] := messageArray[1] + ' x2';
     TextOut(1, 21, 'white', messageArray[1]);
   end
-  else if (ansistartstext(message, messageArray[1]) = True) then
+  else if (ansistartstext(message, messageArray[1]) = True) and (LeftStr(message, 1) <> chr(16)) then
   begin
     (* Clear first line *)
     for x := 1 to 80 do
     begin
       TextOut(x, 21, 'black', ' ');
     end;
-    tempStr := rightstr(messageArray[1], Length(messageArray[1]) -
-      lastdelimiter('x', messageArray[1]));
+    tempStr := rightstr(messageArray[1], Length(messageArray[1]) - lastdelimiter('x', messageArray[1]));
     tempCounter := StrToInt(tempStr);
     Inc(tempCounter);
     messageArray[1] := message + ' x' + IntToStr(tempCounter);
