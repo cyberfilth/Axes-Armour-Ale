@@ -7,24 +7,31 @@ unit pixie_jar;
 interface
 
 (* Create a pixie jar *)
-procedure createPixieJar(itmx, itmy: smallint);
+procedure createPixieJar;
 (* Item cannot be equipped *)
 procedure useItem;
 
 implementation
 
 uses
-  items, ui, globalUtils;
+  items, ui, globalUtils, map, player_stats, entities;
 
-procedure createPixieJar(itmx, itmy: smallint);
+procedure createPixieJar;
 var
-  duration: smallint;
+  duration, r, c: smallint;
 begin
+  (* Choose random location on the map *)
+  repeat
+    r := globalutils.randomRange(3, (MAXROWS - 3));
+    c := globalutils.randomRange(3, (MAXCOLUMNS - 3));
+    (* choose a location that is not a wall or occupied *)
+  until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
+
   duration := randomRange(150, 160);
   SetLength(itemList, length(itemList) + 1);
   with itemList[High(itemList)] do
   begin
-    itemID := indexID;
+    itemID := High(itemList);
     itemName := 'Pixie in a jar';
     itemDescription := 'glowing source of light';
     itemArticle := 'a';
@@ -34,8 +41,8 @@ begin
     glyph := chr(232);
     glyphColour := 'yellow';
     inView := False;
-    posX := itmx;
-    posY := itmy;
+    posX := c;
+    posY := r;
     NumberOfUses := duration;
     onMap := True;
     throwable := False;
@@ -49,7 +56,9 @@ end;
 
 procedure useItem;
 begin
-  ui.displayMessage('You can''t find a use for the jar.');
+  ui.displayMessage('You pick up the Pixie in the jar.');
+  if (entityList[0].visionRange < player_stats.maxVisionRange) then
+     entityList[0].visionRange := player_stats.maxVisionRange;
 end;
 
 end.

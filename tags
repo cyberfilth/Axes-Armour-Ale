@@ -147,8 +147,8 @@ createLeatherArmour	items/armour/leather_armour1.pas	/^procedure createLeatherAr
 createMushroomPerson	entities/fungus/mushroom_person.pas	/^procedure createMushroomPerson(uniqueid, npcx, npcy: smallint);$/;"	p
 createNewDungeon	backup/universe.pas	/^procedure createNewDungeon(levelType: dungeonTerrain);$/;"	p
 createNewDungeon	universe.pas	/^procedure createNewDungeon(levelType: dungeonTerrain);$/;"	p
-createPixieJar	items/backup/pixie_jar.pas	/^procedure createPixieJar(itmx, itmy: smallint);$/;"	p
-createPixieJar	items/pixie_jar.pas	/^procedure createPixieJar(itmx, itmy: smallint);$/;"	p
+createPixieJar	items/backup/pixie_jar.pas	/^procedure createPixieJar;$/;"	p
+createPixieJar	items/pixie_jar.pas	/^procedure createPixieJar;$/;"	p
 createPlayer	player/player.pas	/^procedure createPlayer;$/;"	p
 createPointyStick	items/weapons/backup/pointy_stick.pas	/^procedure createPointyStick(itmx, itmy: smallint);$/;"	p
 createPointyStick	items/weapons/pointy_stick.pas	/^procedure createPointyStick(itmx, itmy: smallint);$/;"	p

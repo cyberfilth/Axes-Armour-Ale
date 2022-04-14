@@ -9,7 +9,7 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar
   {$IFDEF DEBUG}, logging{$ENDIF};
 
 type
@@ -116,11 +116,12 @@ begin
     tCave: { Cave }
     begin
       (* Create the items *);
-      for i := 0 to ItemNumber do
+      for i := 0 to (ItemNumber - 1) do
       begin
-        { create an encounter table: Item type: Dungeon type: floor number }
         item_lookup.dispenseItem(tCave);
       end;
+      (* Drop a single light source on each floor *)
+      pixie_jar.createPixieJar;
     end;
   end;
 end;
