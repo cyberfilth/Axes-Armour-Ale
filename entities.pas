@@ -11,8 +11,9 @@ interface
 uses
   SysUtils, globalUtils, player_stats,
   { List of creatures }
-  cave_rat, giant_cave_rat, blood_bat, green_fungus, redcap_lesser, redcap_lesser_lobber,
-  small_green_fungus, large_blood_bat, small_hyena, redcap_fungus, mushroom_person, hyena_fungus;
+  cave_rat, giant_cave_rat, blood_bat, green_fungus, redcap_lesser,
+  redcap_lesser_lobber, small_green_fungus, large_blood_bat, small_hyena,
+  redcap_fungus, mushroom_person, hyena_fungus, shadowCreature;
 
 type { NPC attitudes }
   Tattitudes = (stateNeutral, stateHostile, stateEscape);
@@ -299,6 +300,7 @@ end;
 procedure Creature.entityTakeTurn(i: smallint);
 begin
   case (entityList[i].intName) of
+    'shadowCreature': shadowCreature.takeTurn(i);
     'CaveRat': cave_rat.takeTurn(i);
     'GiantRat': giant_cave_rat.takeTurn(i);
     'BloodBat':

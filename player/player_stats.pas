@@ -49,7 +49,7 @@ procedure addLight;
 implementation
 
 uses
-  ui, entities, main, player, map;
+  ui, entities, main, player, map, globalUtils, shadowCreature;
 
 procedure checkLevel;
 begin
@@ -130,22 +130,24 @@ begin
 end;
 
 procedure processLight;
+var
+  response: smallint;
 begin
   if (lightEquipped = True) then
   begin
       Dec(lightCounter);
 
   (* Light starts growing dimmer *)
-  if (lightCounter = 140) then
+  if (lightCounter = 50) then
     ui.displayMessage(chr(16) + ' The light grows dimmer, your Pixie is growing weak')
 
-  else if (lightCounter = 130) and (entityList[0].visionRange > 1) then
+  else if (lightCounter = 35) and (entityList[0].visionRange > 1) then
     begin
          Dec(entityList[0].visionRange);
          ui.displayMessage(chr(16) + ' The light grows dimmer');
     end
 
-  else if (lightCounter = 120) and (entityList[0].visionRange > 1)  then
+  else if (lightCounter = 20) and (entityList[0].visionRange > 1)  then
     begin
          Dec(entityList[0].visionRange);
          entities.outOfView;
@@ -154,7 +156,7 @@ begin
          ui.displayMessage(chr(16) + ' The light grows dimmer, your Pixie is dying!');
     end
 
-  else if (lightCounter = 110) and (entityList[0].visionRange > 1)  then
+  else if (lightCounter = 10) and (entityList[0].visionRange > 1)  then
     begin
          Dec(entityList[0].visionRange);
          entities.outOfView;
@@ -164,14 +166,21 @@ begin
     end
 
   (* The light goes out *)
-  else if (lightCounter = 100) then
+  else if (lightCounter = 0) then
     begin
+         response := randomRange(1, 2);
          entityList[0].visionRange := 0;
-         ui.displayMessage(chr(16) + ' The light goes out');
+         if response = 1 then
+            ui.displayMessage(chr(16) + ' The light goes out. The Pixie has expired')
+         else
+            ui.displayMessage(chr(16) + ' The light goes out. Your Pixie has died');
          lightEquipped := False;
          entities.outOfView;
          map.notInView;
          map.loadDisplayedMap;
+         (* Spawn a shadow creature near the player *)
+         ui.displayMessage('You hear something frightful in the darkness!');
+         shadowCreature.createShadowCreature;
     end;
   end
   else

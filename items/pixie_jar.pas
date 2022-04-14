@@ -14,10 +14,13 @@ procedure useItem;
 implementation
 
 uses
-  items, ui;
+  items, ui, globalUtils;
 
 procedure createPixieJar(itmx, itmy: smallint);
+var
+  duration: smallint;
 begin
+  duration := randomRange(150, 160);
   SetLength(itemList, length(itemList) + 1);
   with itemList[High(itemList)] do
   begin
@@ -33,7 +36,7 @@ begin
     inView := False;
     posX := itmx;
     posY := itmy;
-    NumberOfUses := 150;
+    NumberOfUses := duration;
     onMap := True;
     throwable := False;
     throwDamage := 0;
