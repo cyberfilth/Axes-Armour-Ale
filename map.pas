@@ -238,12 +238,18 @@ begin
       begin
         if (hiDef = 1) then
         begin
-          mapDisplay[r][c].GlyphColour := 'lightGrey';
+           if (player_stats.lightEquipped = True) then
+             mapDisplay[r][c].GlyphColour := 'darkGrey'
+          else
+              mapDisplay[r][c].GlyphColour := 'lightGrey';
           mapDisplay[r][c].Glyph := '.';
         end
         else
         begin
-          mapDisplay[r][c].GlyphColour := 'darkGrey';
+          if (player_stats.lightEquipped = True) then
+             mapDisplay[r][c].GlyphColour := 'darkGrey'
+          else
+             mapDisplay[r][c].GlyphColour := 'black';
           mapDisplay[r][c].Glyph := '.';
         end;
       end;
@@ -277,13 +283,47 @@ begin
       begin
         if (hiDef = 1) then
         begin
-          mapDisplay[r][c].GlyphColour := 'brown';
-          mapDisplay[r][c].Glyph := Chr(177);
+          if (player_stats.lightEquipped = True) then
+           begin
+             if (player_stats.lightCounter <= 20) then
+              begin
+                mapDisplay[r][c].GlyphColour := 'grey';
+                mapDisplay[r][c].Glyph := Chr(177);
+              end
+              else
+              begin
+                  mapDisplay[r][c].GlyphColour := 'brown';
+                  mapDisplay[r][c].Glyph := Chr(177);
+              end;
+           end
+           else
+           begin
+                mapDisplay[r][c].GlyphColour := 'grey';
+                mapDisplay[r][c].Glyph := Chr(177);
+           end;
         end
         else
         begin
-          mapDisplay[r][c].GlyphColour := 'brown';
-          mapDisplay[r][c].Glyph := Chr(176);
+           if (player_stats.lightEquipped = True) then
+           begin
+              begin
+              if (player_stats.lightCounter <= 20) then
+              begin
+                   mapDisplay[r][c].GlyphColour := 'darkGrey';
+                   mapDisplay[r][c].Glyph := Chr(176);
+              end
+              else
+              begin
+                   mapDisplay[r][c].GlyphColour := 'brown';
+                   mapDisplay[r][c].Glyph := Chr(176);
+              end;
+           end;
+           end
+           else
+             begin
+                  mapDisplay[r][c].GlyphColour := 'darkGrey';
+                  mapDisplay[r][c].Glyph := Chr(176);
+             end;
         end;
       end;
     end;

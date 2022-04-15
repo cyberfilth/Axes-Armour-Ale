@@ -43,13 +43,11 @@ procedure increaseDefence;
 procedure increaseAttackDefence;
 (* Check the light source, decrease the timer *)
 procedure processLight;
-(* Add a light sourcec to inventory *)
-procedure addLight;
 
 implementation
 
 uses
-  ui, entities, main, player, map, globalUtils, shadowCreature;
+  ui, entities, main, player, map, globalUtils;
 
 procedure checkLevel;
 begin
@@ -139,11 +137,16 @@ begin
 
   (* Light starts growing dimmer *)
   if (lightCounter = 50) then
+  begin
     ui.displayMessage(chr(16) + ' The light grows dimmer, your Pixie is growing weak')
+  end
 
   else if (lightCounter = 35) and (entityList[0].visionRange > 1) then
     begin
          Dec(entityList[0].visionRange);
+         entities.outOfView;
+         map.notInView;
+         map.loadDisplayedMap;
          ui.displayMessage(chr(16) + ' The light grows dimmer');
     end
 
@@ -178,18 +181,14 @@ begin
          entities.outOfView;
          map.notInView;
          map.loadDisplayedMap;
-         (* Spawn a shadow creature near the player *)
          ui.displayMessage('You hear something frightful in the darkness!');
-         shadowCreature.createShadowCreature;
     end;
   end
   else
-      map.loadDisplayedMap;
-end;
-
-procedure addLight;
-begin
-
+      begin
+        killer := 'an unseen shadow';
+        entityList[0].currentHP := 0;
+      end;
 end;
 
 end.

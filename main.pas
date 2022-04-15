@@ -208,7 +208,7 @@ begin
   player_stats.enchantedWeaponEquipped := False;
   player_stats.enchWeapType := 0;
   player_stats.lightEquipped := True;
-  player_stats.lightCounter := 150;
+  player_stats.lightCounter := 250;
   scrTargeting.targetX := 0;
   scrTargeting.targetY := 0;
   scrTargeting.safeX := 0;

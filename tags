@@ -28,8 +28,6 @@ Zap	items/weapons/backup/staff_minor_scorch.pas	/^procedure Zap;$/;"	p
 Zap	items/weapons/staff_minor_scorch.pas	/^procedure Zap;$/;"	p
 Zzap	player/backup/player_inventory.pas	/^procedure Zzap(item: smallint);$/;"	p
 Zzap	player/player_inventory.pas	/^procedure Zzap(item: smallint);$/;"	p
-addLight	player/backup/player_stats.pas	/^procedure addLight;$/;"	p
-addLight	player/player_stats.pas	/^procedure addLight;$/;"	p
 addToInventory	player/backup/player_inventory.pas	/^function addToInventory(itemNumber: smallint): boolean;$/;"	f
 addToInventory	player/player_inventory.pas	/^function addToInventory(itemNumber: smallint): boolean;$/;"	f
 addToInventory_emptySlot	player/backup/player_inventory.pas	/^function addToInventory_emptySlot(itemNumber: smallint; skip: boolean): boolean;$/;"	f
@@ -75,7 +73,6 @@ chasePlayer	entities/animals/large_blood_bat.pas	/^procedure chasePlayer(id, spx
 chasePlayer	entities/animals/small_hyena.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/backup/ai_animal.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/backup/shadowcreature.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
-chasePlayer	entities/shadowcreature.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/hobs/backup/redcap_fungus.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/hobs/backup/redcap_lesser.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
@@ -112,7 +109,6 @@ combat	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure combat(id: smal
 combat	entities/hobs/redcap_fungus.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/hobs/redcap_lesser.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/hobs/redcap_lesser_lobber.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/shadowcreature.pas	/^procedure combat(npcID, enemyID: smallint);$/;"	p
 combat	player/combat_resolver.pas	/^procedure combat(npcID: smallint);$/;"	p
 combatCheck	player/player.pas	/^function combatCheck(x, y: smallint): boolean;$/;"	f
 containsItem	backup/items.pas	/^function containsItem(x, y: smallint): boolean;$/;"	f
@@ -161,7 +157,6 @@ createRedcapFungus	entities/hobs/backup/redcap_fungus.pas	/^procedure createRedc
 createRedcapFungus	entities/hobs/redcap_fungus.pas	/^procedure createRedcapFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createRock	items/rock.pas	/^procedure createRock(itmx, itmy: smallint);$/;"	p
 createShadowCreature	entities/backup/shadowcreature.pas	/^procedure createShadowCreature;$/;"	p
-createShadowCreature	entities/shadowcreature.pas	/^procedure createShadowCreature;$/;"	p
 createShortBow	items/weapons/backup/short_bow.pas	/^procedure createShortBow(itmx, itmy: smallint);$/;"	p
 createShortBow	items/weapons/short_bow.pas	/^procedure createShortBow(itmx, itmy: smallint);$/;"	p
 createSmallGreenFungus	entities/fungus/small_green_fungus.pas	/^procedure createSmallGreenFungus(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -203,7 +198,6 @@ decisionHostile	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure decisi
 decisionHostile	entities/hobs/redcap_fungus.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/hobs/redcap_lesser.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/hobs/redcap_lesser_lobber.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/shadowcreature.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionNeutral	entities/animals/backup/hyena_fungus.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/backup/large_blood_bat.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/backup/small_hyena.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
@@ -222,7 +216,6 @@ decisionNeutral	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure decisi
 decisionNeutral	entities/hobs/redcap_fungus.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/hobs/redcap_lesser.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/hobs/redcap_lesser_lobber.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/shadowcreature.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 deleteGameData	backup/file_handling.pas	/^procedure deleteGameData;$/;"	p
 deleteGameData	file_handling.pas	/^procedure deleteGameData;$/;"	p
 descendStairs	backup/map.pas	/^procedure descendStairs;$/;"	p
@@ -301,7 +294,6 @@ escapePlayer	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure escapePla
 escapePlayer	entities/hobs/redcap_fungus.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/hobs/redcap_lesser.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/hobs/redcap_lesser_lobber.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/shadowcreature.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 examineInventory	player/backup/player_inventory.pas	/^procedure examineInventory(selection: smallint);$/;"	p
 examineInventory	player/player_inventory.pas	/^procedure examineInventory(selection: smallint);$/;"	p
 exitApplication	backup/main.pas	/^procedure exitApplication;$/;"	p
@@ -419,7 +411,6 @@ isNextToPlayer	entities/hobs/backup/redcap_lesser_lobber.pas	/^function isNextTo
 isNextToPlayer	entities/hobs/redcap_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/hobs/redcap_lesser.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/hobs/redcap_lesser_lobber.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/shadowcreature.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isOccupied	backup/map.pas	/^function isOccupied(checkX, checkY: smallint): boolean;$/;"	f
 isOccupied	map.pas	/^function isOccupied(checkX, checkY: smallint): boolean;$/;"	f
 isWall	backup/map.pas	/^function isWall(x, y: smallint): boolean;$/;"	f
@@ -454,6 +445,7 @@ newGame	backup/main.pas	/^procedure newGame;$/;"	p
 newGame	main.pas	/^procedure newGame;$/;"	p
 newGame	screens/dlginfo.pas	/^procedure newGame;$/;"	p
 newWarning	screens/dlginfo.pas	/^procedure newWarning;$/;"	p
+notInView	backup/map.pas	/^procedure notInView;$/;"	p
 notInView	map.pas	/^procedure notInView;$/;"	p
 obtainMap	items/macguffins/backup/smugglersmap.pas	/^procedure obtainMap;$/;"	p
 obtainMap	items/macguffins/smugglersmap.pas	/^procedure obtainMap;$/;"	p
@@ -562,7 +554,6 @@ takeTurn	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure takeTurn(id: 
 takeTurn	entities/hobs/redcap_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/shadowcreature.pas	/^procedure takeTurn(id: smallint);$/;"	p
 target	screens/backup/scrthrow.pas	/^procedure target;$/;"	p
 target	screens/scrthrow.pas	/^procedure target;$/;"	p
 targetInput	keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
@@ -638,7 +629,6 @@ wander	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure wander(id, spx,
 wander	entities/hobs/redcap_fungus.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/hobs/redcap_lesser.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/hobs/redcap_lesser_lobber.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/shadowcreature.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wearWieldInput	keyboardinput.pas	/^procedure wearWieldInput(Keypress: TKeyEvent);$/;"	p
 wearWieldSelection	player/backup/player_inventory.pas	/^procedure wearWieldSelection(selection: smallint);$/;"	p
 wearWieldSelection	player/player_inventory.pas	/^procedure wearWieldSelection(selection: smallint);$/;"	p
