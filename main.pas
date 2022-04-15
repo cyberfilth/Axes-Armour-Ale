@@ -207,6 +207,8 @@ begin
   player_stats.playerLevel := 1;
   player_stats.enchantedWeaponEquipped := False;
   player_stats.enchWeapType := 0;
+  player_stats.lightEquipped := True;
+  player_stats.lightCounter := 250;
   scrTargeting.targetX := 0;
   scrTargeting.targetY := 0;
   scrTargeting.safeX := 0;
@@ -380,6 +382,9 @@ begin
   (* ALPHA VERSION ONLY - Check if player has won *)
   if (gameState = stWinAlpha) then
     Exit;
+
+  (* Light source acts as a timer or 'hunger clock' *)
+  player_stats.processLight;
 
   (* move NPC's *)
   entities.NPCgameLoop;

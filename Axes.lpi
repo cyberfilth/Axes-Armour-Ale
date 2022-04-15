@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="64">
+    <Units Count="66">
       <Unit0>
         <Filename Value="Axes.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -390,6 +390,15 @@
         <Filename Value="entities\animals\hyena_fungus.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit63>
+      <Unit64>
+        <Filename Value="items\pixie_jar.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit64>
+      <Unit65>
+        <Filename Value="entities\shadowcreature.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="shadowCreature"/>
+      </Unit65>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

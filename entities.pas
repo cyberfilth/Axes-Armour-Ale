@@ -9,10 +9,11 @@ unit entities;
 interface
 
 uses
-  SysUtils, globalUtils,
+  SysUtils, globalUtils, player_stats,
   { List of creatures }
-  cave_rat, giant_cave_rat, blood_bat, green_fungus, redcap_lesser, redcap_lesser_lobber,
-  small_green_fungus, large_blood_bat, small_hyena, redcap_fungus, mushroom_person, hyena_fungus;
+  cave_rat, giant_cave_rat, blood_bat, green_fungus, redcap_lesser,
+  redcap_lesser_lobber, small_green_fungus, large_blood_bat, small_hyena,
+  redcap_fungus, mushroom_person, hyena_fungus;
 
 type { NPC attitudes }
   Tattitudes = (stateNeutral, stateHostile, stateEscape);
@@ -99,6 +100,8 @@ procedure redrawMapDisplay(id: byte);
 procedure newFloorNPCs;
 (* Count all living NPC's *)
 function countLivingEntities: byte;
+(* When the light source goes out *)
+procedure outOfView;
 (* Call Creatures.takeTurn procedure *)
 procedure NPCgameLoop;
 
@@ -232,7 +235,7 @@ begin
   Result := False;
   for i := 0 to npcAmount do
     if (entityList[i].posX = x) and (entityList[i].posY = y) then
-      if (entityList[i].inView = True) and (entityList[i].glyph <> '%') then
+      if (entityList[i].inView = True) and (entityList[i].glyph <> '%') and (player_stats.lightEquipped = True) then
         Result := True;
 end;
 
@@ -273,6 +276,14 @@ begin
     if (entityList[i].isDead = False) then
       Inc(Count);
   Result := Count;
+end;
+
+procedure outOfView;
+var
+  i: smallint;
+begin
+  for i := 1 to npcAmount do
+    entityList[i].inView := False;
 end;
 
 procedure NPCgameLoop;
