@@ -20,6 +20,10 @@ var
   enchantedWeaponEquipped: boolean;
   (* Is a bow equipped *)
   projectileWeaponEquipped: boolean;
+  (* Is player carrying a light source *)
+  lightEquipped: boolean;
+  (* Number of turns light will shine *)
+  lightCounter: smallint;
   (* Magical ability *)
   maxMagick, currentMagick: smallint;
   (* Durability of equipped / magical item *)
@@ -37,11 +41,13 @@ procedure increaseAttack;
 procedure increaseDefence;
 (* Increase attack & defence *)
 procedure increaseAttackDefence;
+(* Check the light source, decrease the timer *)
+procedure processLight;
 
 implementation
 
 uses
-  ui, entities, main, player;
+  ui, entities, main, player, map, globalUtils;
 
 procedure checkLevel;
 begin
@@ -119,6 +125,70 @@ begin
   ui.updateAttack;
   ui.updateDefence;
   ui.updateHealth;
+end;
+
+procedure processLight;
+var
+  response: smallint;
+begin
+  if (lightEquipped = True) then
+  begin
+      Dec(lightCounter);
+
+  (* Light starts growing dimmer *)
+  if (lightCounter = 50) then
+  begin
+    ui.displayMessage(chr(16) + ' The light grows dimmer, your Pixie is growing weak')
+  end
+
+  else if (lightCounter = 35) and (entityList[0].visionRange > 1) then
+    begin
+         Dec(entityList[0].visionRange);
+         entities.outOfView;
+         map.notInView;
+         map.loadDisplayedMap;
+         ui.displayMessage(chr(16) + ' The light grows dimmer');
+    end
+
+  else if (lightCounter = 20) and (entityList[0].visionRange > 1)  then
+    begin
+         Dec(entityList[0].visionRange);
+         entities.outOfView;
+         map.notInView;
+         map.loadDisplayedMap;
+         ui.displayMessage(chr(16) + ' The light grows dimmer, your Pixie is dying!');
+    end
+
+  else if (lightCounter = 10) and (entityList[0].visionRange > 1)  then
+    begin
+         Dec(entityList[0].visionRange);
+         entities.outOfView;
+         map.notInView;
+         map.loadDisplayedMap;
+         ui.displayMessage(chr(16) + ' The light grows dimmer...');
+    end
+
+  (* The light goes out *)
+  else if (lightCounter = 0) then
+    begin
+         response := randomRange(1, 2);
+         entityList[0].visionRange := 0;
+         if response = 1 then
+            ui.displayMessage(chr(16) + ' The light goes out. The Pixie has expired')
+         else
+            ui.displayMessage(chr(16) + ' The light goes out. Your Pixie has died');
+         lightEquipped := False;
+         entities.outOfView;
+         map.notInView;
+         map.loadDisplayedMap;
+         ui.displayMessage('You hear something frightful in the darkness!');
+    end;
+  end
+  else
+      begin
+        killer := 'an unseen shadow';
+        entityList[0].currentHP := 0;
+      end;
 end;
 
 end.

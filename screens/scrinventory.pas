@@ -7,7 +7,7 @@ unit scrInventory;
 interface
 
 uses
-  SysUtils, entities;
+  SysUtils, entities, player_stats;
 
 (* Draw the outline of the screen *)
 procedure drawOutline;
@@ -75,6 +75,19 @@ begin
     Inc(y);
     Inc(invItem);
   end;
+
+  (* Display light source stats *)
+  if (player_stats.lightEquipped = True) then
+    begin
+         TextOut(55, 6, 'yellow', chr(232));
+         TextOut(57, 6, 'cyan', 'Pixie in a jar');
+         TextOut(55, 7, 'cyan', 'Used as a lantern');
+         TextOut(55, 8, 'cyan', IntToStr(player_stats.lightCounter) + ' turns remaining');
+    end;
+
+  (* Display current health *)
+  TextOut(55, 14, 'cyan', 'Current health:');
+  TextOut(55, 15, 'cyan', IntToStr(entityList[0].currentHP) + '/' + IntToStr(entityList[0].maxHP));
 end;
 
 procedure displayDropMenu;
@@ -111,6 +124,19 @@ begin
     Inc(y);
     Inc(invItem);
   end;
+
+  (* Display light source stats *)
+  if (player_stats.lightEquipped = True) then
+    begin
+         TextOut(55, 6, 'grey', chr(232));
+         TextOut(57, 6, 'darkGrey', 'Pixie in a jar');
+         TextOut(55, 7, 'darkGrey', 'Used as a lantern');
+         TextOut(55, 8, 'darkGrey', IntToStr(player_stats.lightCounter) + ' turns remaining');
+    end;
+
+  (* Display current health *)
+  TextOut(55, 14, 'cyan', 'Current health:');
+  TextOut(55, 15, 'cyan', IntToStr(entityList[0].currentHP) + '/' + IntToStr(entityList[0].maxHP));
 end;
 
 procedure displayQuaffMenu;
@@ -127,10 +153,6 @@ begin
   TextOut(25, 23, 'cyanBGblackTXT', ' D - Drop item ');
   TextOut(42, 23, 'cyanBGblackTXT', ' W - Weapons/Armour ');
   TextOut(64, 23, 'cyanBGblackTXT', ' X - Exit ');
-  (* Display current health *)
-  TextOut(55, 6, 'cyan', 'Current health:');
-  TextOut(55, 7, 'cyan', IntToStr(entities.entityList[0].currentHP) +
-    '/' + IntToStr(entities.entityList[0].maxHP));
 
   { Display items in inventory }
   y := 6;
@@ -154,6 +176,19 @@ begin
     Inc(y);
     Inc(invItem);
   end;
+
+  (* Display light source stats *)
+  if (player_stats.lightEquipped = True) then
+    begin
+         TextOut(55, 6, 'grey', chr(232));
+         TextOut(57, 6, 'darkGrey', 'Pixie in a jar');
+         TextOut(55, 7, 'darkGrey', 'Used as a lantern');
+         TextOut(55, 8, 'darkGrey', IntToStr(player_stats.lightCounter) + ' turns remaining');
+    end;
+
+  (* Display current health *)
+  TextOut(55, 14, 'cyan', 'Current health:');
+  TextOut(55, 15, 'cyan', IntToStr(entityList[0].currentHP) + '/' + IntToStr(entityList[0].maxHP));
 end;
 
 procedure displayWieldMenu;
@@ -199,6 +234,19 @@ begin
     Inc(y);
     Inc(invItem);
   end;
+
+  (* Display light source stats *)
+  if (player_stats.lightEquipped = True) then
+    begin
+         TextOut(55, 6, 'grey', chr(232));
+         TextOut(57, 6, 'darkGrey', 'Pixie in a jar');
+         TextOut(55, 7, 'darkGrey', 'Used as a lantern');
+         TextOut(55, 8, 'darkGrey', IntToStr(player_stats.lightCounter) + ' turns remaining');
+    end;
+
+  (* Display current health *)
+  TextOut(55, 14, 'cyan', 'Current health:');
+  TextOut(55, 15, 'cyan', IntToStr(entityList[0].currentHP) + '/' + IntToStr(entityList[0].maxHP));
 end;
 
 end.

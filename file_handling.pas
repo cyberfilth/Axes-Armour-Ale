@@ -219,6 +219,8 @@ begin
             AddElement(DataNode, 'glyph', '*')
           else if (itemList[i].glyph = chr(173)) then
             AddElement(DataNode, 'glyph', 'i')
+          else if (itemList[i].glyph = chr(232)) then
+            AddElement(DataNode, 'glyph', '0')
           else
             AddElement(DataNode, 'glyph', itemList[i].glyph);
 
@@ -371,6 +373,8 @@ begin
           items.itemList[i].glyph := chr(7)
         else if (ItemsNode.FindNode('glyph').TextContent[1] = 'i') then { pointy stick }
           items.itemList[i].glyph := chr(173)
+        else if (ItemsNode.FindNode('glyph').TextContent[1] = '0') then { Pixie in a jar }
+          items.itemList[i].glyph := chr(232)
         else
           items.itemList[i].glyph := char(widechar(ItemsNode.FindNode('glyph').TextContent[1]));
 
@@ -536,7 +540,9 @@ begin
     player_stats.clanName:=UTF8Encode(PlayerDataNode.FindNode('clanName').TextContent);
     player_stats.enchantedWeaponEquipped:=StrToBool(UTF8Encode(PlayerDataNode.FindNode('enchantedWeapon').TextContent));
     player_stats.projectileWeaponEquipped:=StrToBool(UTF8Encode(PlayerDataNode.FindNode('projectileWeapon').TextContent));
+    player_stats.lightEquipped:=StrToBool(UTF8Encode(PlayerDataNode.FindNode('lightEquipped').TextContent));
     player_stats.enchWeapType := StrToInt(UTF8Encode(PlayerDataNode.FindNode('enchWeapType').TextContent));
+    player_stats.lightCounter := StrToInt(UTF8Encode(PlayerDataNode.FindNode('lightCounter').TextContent));
 
     (* Player Inventory *)
     player_inventory.initialiseInventory;
@@ -563,6 +569,8 @@ begin
         player_inventory.inventory[i].glyph := chr(7)
       else if (InventoryNode.FindNode('glyph').TextContent[1] = 'i') then
         player_inventory.inventory[i].glyph := chr(173)
+      else if (InventoryNode.FindNode('glyph').TextContent[1] = '0') then
+        player_inventory.inventory[i].glyph := chr(232)
       else
         player_inventory.inventory[i].glyph := char(widechar(InventoryNode.FindNode('glyph').TextContent[1]));
 
@@ -675,7 +683,9 @@ begin
     AddElement(DataNode, 'clanName', player_stats.clanName);
     AddElement(DataNode, 'enchantedWeapon', BoolToStr(player_stats.enchantedWeaponEquipped));
     AddElement(DataNode, 'projectileWeapon', BoolToStr(player_stats.projectileWeaponEquipped));
+    AddElement(DataNode, 'lightEquipped', BoolToStr(player_stats.lightEquipped));
     AddElement(DataNode, 'enchWeapType', IntToStr(player_stats.enchWeapType));
+    AddElement(DataNode, 'lightCounter', IntToStr(player_stats.lightCounter));
 
     (* Player inventory *)
     for i := 0 to 9 do
@@ -702,6 +712,8 @@ begin
         AddElement(DataNode, 'glyph', '*')
       else if (inventory[i].glyph = chr(173)) then
         AddElement(DataNode, 'glyph', 'i')
+      else if (inventory[i].glyph = chr(232)) then
+        AddElement(DataNode, 'glyph', '0')
       else
         AddElement(DataNode, 'glyph', inventory[i].glyph);
 

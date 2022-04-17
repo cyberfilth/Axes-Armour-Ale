@@ -15,7 +15,7 @@ uses
   { List of armour }
   leather_armour1, cloth_armour1,
   { Quest items }
-  smugglersMap,
+  smugglersMap, pixie_jar,
   { Magical items }
   staff_minor_scorch,
   { Ammunition }
@@ -113,6 +113,7 @@ begin
     10: short_bow.useItem(equipped);
     11: pointy_stick.useItem(equipped);
     12: arrow.useItem;
+    13: pixie_jar.useItem;
   end;
 end;
 

@@ -8,7 +8,7 @@ interface
 
 uses
   SysUtils, StrUtils, video, entities, items, item_lookup, player_stats,
-  staff_minor_scorch;
+  staff_minor_scorch, pixie_jar;
 
 type
   (* Items in inventory *)
@@ -130,7 +130,7 @@ begin
     with inventory[0] do
     begin
       id := 0;
-      sortIndex := 0;
+      sortIndex := 1;
       Name := 'pointy stick';
       equipped := True;
       description := 'adds 1D6+1 to attack';
@@ -158,7 +158,7 @@ begin
     with inventory[0] do
     begin
       id := 0;
-      sortIndex := 0;
+      sortIndex := 1;
       Name := 'wooden club';
       equipped := True;
       description := 'adds 1D6 to attack';
@@ -185,7 +185,7 @@ begin
     with inventory[0] do
     begin
       id := 0;
-      sortIndex := 0;
+      sortIndex := 1;
       Name := 'short bow';
       equipped := True;
       description := 'small hunting bow';
@@ -239,7 +239,7 @@ begin
   { Don't add to a new slot if item is stacked }
   skip := False;
   (* If this is not a quest item *)
-  if (itemList[itemNumber].itemType <> itmQuest) then
+  if (itemList[itemNumber].itemType <> itmQuest) and (itemList[itemNumber].itemType <> itmLightSource) then
   begin
     Result := False;
     (* Check for adding an arrow to existing arrow slot *)
@@ -290,6 +290,35 @@ begin
         Result := True;
         exit;
       end;
+  end
+  else if (itemList[itemNumber].itemType = itmLightSource) then
+  begin { Pixie in a Jar }
+    Inc(player_stats.lightCounter, itemList[itemNumber].NumberOfUses);
+    (* Set an empty flag for the item on the map, this gets deleted when saving the map *)
+    with itemList[itemNumber] do
+    begin
+      itemID := itemNumber;
+      itemName := 'empty';
+      itemDescription := '';
+      itemArticle := '';
+      itemType := itmEmptySlot;
+      itemMaterial := matEmpty;
+      useID := 1;
+      glyph := 'x';
+      glyphColour := 'lightCyan';
+      inView := False;
+      posX := 1;
+      posY := 1;
+      NumberOfUses := 0;
+      onMap := False;
+      throwable := False;
+      throwDamage := 0;
+      dice := 0;
+      adds := 0;
+      discovered := False;
+    end;
+    Result := True;
+    pixie_jar.useItem;
   end
   else  { Quest item }
   begin
