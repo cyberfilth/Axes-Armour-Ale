@@ -3,7 +3,7 @@
   <img width="300" height="230" src="GITscreenshots/Logo.png">
 </p>
 
-### A low-fantasy, roguelike game
+### A terminal-based, dungeon crawl game
 
 Alpha version, most features aren't implemented yet and what there is may change frequently. Currently there are the following features:
  - A procedurally generated cave, created using cellular automata
