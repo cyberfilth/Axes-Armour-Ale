@@ -17,7 +17,7 @@
 <p>
 Unit responsible for NPC stat, initialising enemies and utility functions</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="cave_rat.html">cave_rat</a></li><li><a  href="giant_cave_rat.html">giant_cave_rat</a></li><li><a  href="blood_bat.html">blood_bat</a></li><li><a  href="green_fungus.html">green_fungus</a></li><li><a  href="redcap_lesser.html">redcap_lesser</a></li><li><a  href="redcap_lesser_lobber.html">redcap_lesser_lobber</a></li><li><a  href="small_green_fungus.html">small_green_fungus</a></li><li><a  href="large_blood_bat.html">large_blood_bat</a></li><li><a  href="small_hyena.html">small_hyena</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="player_stats.html">player_stats</a></li><li><a  href="cave_rat.html">cave_rat</a></li><li><a  href="giant_cave_rat.html">giant_cave_rat</a></li><li><a  href="blood_bat.html">blood_bat</a></li><li><a  href="green_fungus.html">green_fungus</a></li><li><a  href="redcap_lesser.html">redcap_lesser</a></li><li><a  href="redcap_lesser_lobber.html">redcap_lesser_lobber</a></li><li><a  href="small_green_fungus.html">small_green_fungus</a></li><li><a  href="large_blood_bat.html">large_blood_bat</a></li><li><a  href="small_hyena.html">small_hyena</a></li><li><a  href="redcap_fungus.html">redcap_fungus</a></li><li><a  href="mushroom_person.html">mushroom_person</a></li><li><a  href="hyena_fungus.html">hyena_fungus</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -68,9 +68,12 @@ Unit responsible for NPC stat, initialising enemies and utility functions</p>
 <td class="itemcode"><code>procedure <b><a  href="entities.html#occupyUpdate">occupyUpdate</a></b>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="entities.html#redrawMapDisplay">redrawMapDisplay</a></b>(id: byte);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="entities.html#outOfView">outOfView</a></b>;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="entities.html#redrawMapDisplay">redrawMapDisplay</a></b>(id: byte);</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="entities.html#spawnPlayer">spawnPlayer</a></b>;</code></td>
 </tr>
 </table>
@@ -203,6 +206,15 @@ Call Creatures.takeTurn procedure</p>
 <tr><td colspan="1">
 <p>
 Ensure all NPC's are correctly occupying tiles</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="outOfView"></span><code>procedure <b>outOfView</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+When the light source goes out</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

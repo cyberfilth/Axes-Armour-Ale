@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Axes, Armour &amp; Ale: scrInventory</title>
+<title>Axes, Armour &amp; Ale: mushroom_person</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="PasDoc 0.15.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -10,77 +10,89 @@
 <body>
 <table class="container"><tr><td class="navigation">
 <h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
-<h1 class="unit">Unit scrInventory</h1>
+<h1 class="unit">Unit mushroom_person</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
-Inventory screen</p>
+Mushroom person - slow bu can poison the player</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li><a  href="entities.html">entities</a></li><li><a  href="player_stats.html">player_stats</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Math</li><li><a  href="ai_animal.html">ai_animal</a></li><li><a  href="globalUtils.html">globalUtils</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="scrInventory.html#displayDropMenu">displayDropMenu</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="mushroom_person.html#createMushroomPerson">createMushroomPerson</a></b>(uniqueid, npcx, npcy: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="scrInventory.html#displayInventoryScreen">displayInventoryScreen</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="mushroom_person.html#decisionEscape">decisionEscape</a></b>(id: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="scrInventory.html#displayQuaffMenu">displayQuaffMenu</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="mushroom_person.html#decisionHostile">decisionHostile</a></b>(id: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="scrInventory.html#displayWieldMenu">displayWieldMenu</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="mushroom_person.html#decisionNeutral">decisionNeutral</a></b>(id: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="scrInventory.html#drawOutline">drawOutline</a></b>;</code></td>
+<td class="itemcode"><code>function <b><a  href="mushroom_person.html#isNextToPlayer">isNextToPlayer</a></b>(spx, spy: smallint): boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="mushroom_person.html#takeTurn">takeTurn</a></b>(id: smallint);</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="displayDropMenu"></span><code>procedure <b>displayDropMenu</b>;</code></td>
+<td class="itemcode"><span id="createMushroomPerson"></span><code>procedure <b>createMushroomPerson</b>(uniqueid, npcx, npcy: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Show the drop menu</p>
+Create a mushroom person</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="displayInventoryScreen"></span><code>procedure <b>displayInventoryScreen</b>;</code></td>
+<td class="itemcode"><span id="decisionEscape"></span><code>procedure <b>decisionEscape</b>(id: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Show the main inventory screen</p>
+Decision tree for Escape state</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="displayQuaffMenu"></span><code>procedure <b>displayQuaffMenu</b>;</code></td>
+<td class="itemcode"><span id="decisionHostile"></span><code>procedure <b>decisionHostile</b>(id: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Show the quaff menu</p>
+Decision tree for Hostile state</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="displayWieldMenu"></span><code>procedure <b>displayWieldMenu</b>;</code></td>
+<td class="itemcode"><span id="decisionNeutral"></span><code>procedure <b>decisionNeutral</b>(id: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Show the wear / wield menu</p>
+Decision tree for Neutral state</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="drawOutline"></span><code>procedure <b>drawOutline</b>;</code></td>
+<td class="itemcode"><span id="isNextToPlayer"></span><code>function <b>isNextToPlayer</b>(spx, spy: smallint): boolean;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Draw the outline of the screen</p>
+Check if player is next to NPC</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="takeTurn"></span><code>procedure <b>takeTurn</b>(id: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+The NPC takes their turn in the game loop</p>
 </td></tr>
 </table>
 <hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>

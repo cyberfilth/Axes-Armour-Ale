@@ -63,15 +63,18 @@ Organises the current level into an array together with helper functions</p>
 <td class="itemcode"><code>procedure <b><a  href="map.html#loadDisplayedMap">loadDisplayedMap</a></b>;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="map.html#notInView">notInView</a></b>;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="map.html#occupy">occupy</a></b>(x, y: smallint);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="map.html#setupMap">setupMap</a></b>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="map.html#unoccupy">unoccupy</a></b>(x, y: smallint);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>function <b><a  href="map.html#withinBounds">withinBounds</a></b>(x, y: smallint): boolean;</code></td>
 </tr>
 </table>
@@ -180,6 +183,15 @@ Check if a tile contains a wall</p>
 <tr><td colspan="1">
 <p>
 Display explored sections of map when reloading game</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="notInView"></span><code>procedure <b>notInView</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Set the whole map to invisible</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
