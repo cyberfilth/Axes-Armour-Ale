@@ -39,7 +39,9 @@ aimBow	screens/scrtargeting.pas	/^procedure aimBow(dir: word);$/;"	p
 ammoProjectile	keyboardinput.pas	/^procedure ammoProjectile(Keypress: TKeyEvent);$/;"	p
 ammoTarget	keyboardinput.pas	/^procedure ammoTarget(Keypress: TKeyEvent);$/;"	p
 areaBurnEffect	animation.pas	/^procedure areaBurnEffect(getEm: array of smallint);$/;"	p
+areaBurnEffect	backup/animation.pas	/^procedure areaBurnEffect(getEm: array of smallint);$/;"	p
 arrowAnimation	animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
+arrowAnimation	backup/animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
 arrowHit	screens/backup/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	backup/map.pas	/^procedure ascendStairs;$/;"	p
@@ -568,9 +570,11 @@ throw	items/weapons/pointy_stick.pas	/^procedure throw;$/;"	p
 throw	items/weapons/short_bow.pas	/^procedure throw;$/;"	p
 throw	items/weapons/staff_minor_scorch.pas	/^procedure throw;$/;"	p
 throwRock	animation.pas	/^procedure throwRock(id: smallint; var flightPath: a);$/;"	p
+throwRock	backup/animation.pas	/^procedure throwRock(id: smallint; var flightPath: a);$/;"	p
 thrownDamaged	items/weapons/backup/crude_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownDamaged	items/weapons/crude_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownObjectAnim	animation.pas	/^procedure thrownObjectAnim(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
+thrownObjectAnim	backup/animation.pas	/^procedure thrownObjectAnim(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
 titleInput	keyboardinput.pas	/^procedure titleInput(Keypress: TKeyEvent);$/;"	p
 unoccupy	backup/map.pas	/^procedure unoccupy(x, y: smallint);$/;"	p
 unoccupy	map.pas	/^procedure unoccupy(x, y: smallint);$/;"	p

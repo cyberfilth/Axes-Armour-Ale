@@ -19,10 +19,10 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <MinorVersionNr Value="52"/>
+      <MinorVersionNr Value="53"/>
       <Language Value="0809"/>
       <Attributes pvaPreRelease="True"/>
-      <StringTable Comments="ASCII roguelike game" FileDescription="Axes, Armour &amp; Ale"/>
+      <StringTable Comments="ASCII roguelike game" CompanyName="Chris Hawkins" FileDescription="Axes, Armour &amp; Ale" LegalCopyright="The MIT License"/>
     </VersionInfo>
     <BuildModes Count="3">
       <Item1 Name="Default" Default="True"/>

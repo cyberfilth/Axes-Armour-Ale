@@ -57,6 +57,9 @@ begin
       (* Draw rock *)
       map.mapDisplay[flightPath[i].Y, flightPath[i].X].GlyphColour := 'lightGrey';
       map.mapDisplay[flightPath[i].Y, flightPath[i].X].Glyph := chr(7);
+      (* Redraw all NPC'S *)
+      for p := 1 to entities.npcAmount do
+          entities.redrawMapDisplay(p);
       sleep(100);
     end;
     (* Repaint map *)
