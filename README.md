@@ -1,6 +1,6 @@
 <h1 align="center">Axes, Armour & Ale</h1>
 <p align="center">
-  <img width="300" height="230" src="GITscreenshots/Logo.png">
+  <img width="450" height="209" src="GITscreenshots/NewLogo.png">
 </p>
 
 ### A terminal-based, dungeon crawl game

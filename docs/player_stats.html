@@ -36,6 +36,9 @@ Additional player stats that are not shared with other entities are stored here<
 <td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseMaxHealth">increaseMaxHealth</a></b>;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player_stats.html#processLight">processLight</a></b>;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="player_stats.html#showLevelUpOptions">showLevelUpOptions</a></b>;</code></td>
 </tr>
 </table>
@@ -58,6 +61,12 @@ Additional player stats that are not shared with other entities are stored here<
 </tr>
 <tr class="list2">
 <td class="itemcode"><code><b><a  href="player_stats.html#enchWeapType">enchWeapType</a></b>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="player_stats.html#lightCounter">lightCounter</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="player_stats.html#lightEquipped">lightEquipped</a></b>: boolean;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code><b><a  href="player_stats.html#maxMagick">maxMagick</a></b>: smallint;</code></td>
@@ -127,6 +136,15 @@ Increase maximum health</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="processLight"></span><code>procedure <b>processLight</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check the light source, decrease the timer</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="showLevelUpOptions"></span><code>procedure <b>showLevelUpOptions</b>;</code></td>
 </tr>
 <tr><td colspan="1">
@@ -187,6 +205,24 @@ Is a magical weapon equipped</p>
 <tr><td colspan="1">
 <p>
 Player level, dexterity, maximum vision range and enchanted weapon type</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="lightCounter"></span><code><b>lightCounter</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Number of turns light will shine</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="lightEquipped"></span><code><b>lightEquipped</b>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Is player carrying a light source</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
