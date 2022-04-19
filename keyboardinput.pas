@@ -359,6 +359,13 @@ begin
       main.gameState := stGame;
       main.returnToGameScreen;
     end;
+    'e', 'E': { Increase dexterity }
+    begin
+      player_stats.increaseDexterity;
+      ui.displayMessage('You find you can see further.');
+      main.gameState := stGame;
+      main.returnToGameScreen;
+    end;
   end;
 end;
 

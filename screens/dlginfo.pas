@@ -48,8 +48,7 @@ begin
   TextOut(46, y, 'LgreyBGblack', chr(187));
   (* Vertical sides *)
   for y := 6 to 12 do
-    TextOut(8, y, 'LgreyBGblack', chr(186) + '                                     ' +
-      chr(186));
+    TextOut(8, y, 'LgreyBGblack', chr(186) + '                                     ' + chr(186));
   (* Bottom border *)
   TextOut(8, y + 1, 'LgreyBGblack', chr(200)); // bottom left corner
   for x := 9 to 45 do
@@ -73,9 +72,8 @@ begin
     TextOut(x, 5, 'LgreyBGblack', chr(205));
   TextOut(47, y, 'LgreyBGblack', chr(187));
   (* Vertical sides *)
-  for y := 6 to 16 do
-    TextOut(8, y, 'LgreyBGblack', chr(186) + '                                      ' +
-      chr(186));
+  for y := 6 to 17 do
+    TextOut(8, y, 'LgreyBGblack', chr(186) + '                                      ' + chr(186));
   (* Bottom border *)
   TextOut(8, y + 1, 'LgreyBGblack', chr(200)); // bottom left corner
   for x := 9 to 46 do
@@ -90,17 +88,17 @@ begin
   TextOut(10, 9, 'LgreyBGblack', 'You have advanced to level ' + message);
   TextOut(10, 11, 'LgreyBGblack', 'Increase one of the following:');
   { Increase max health by 10 % }
-  TextOut(10, 12, 'LgreyBGblack', 'A - Increase Max Health by ' +
-    IntToStr(round((entityList[0].maxHP / 100) * 10)));
+  TextOut(10, 12, 'LgreyBGblack', 'A - Increase Max Health by ' + IntToStr(round((entityList[0].maxHP / 100) * 10)));
   { Increase attack strength by level number }
   TextOut(10, 13, 'LgreyBGblack', 'B - Increase Attack by ' + message);
   { Increase defence by level number }
   TextOut(10, 14, 'LgreyBGblack', 'C - Increase Defence by ' + message);
   { Increase both attack and defence by half of level number }
-  TextOut(10, 15, 'LgreyBGblack', 'D - Increase Attack & Defence by ' +
-    IntToStr(StrToInt(message) div 2));
+  TextOut(10, 15, 'LgreyBGblack', 'D - Increase Attack & Defence by ' + IntToStr(StrToInt(message) div 2));
+  { Increase dexterity by half of level number }
+  TextOut(10, 16, 'LgreyBGblack', 'E - Increase Dexterity by ' + IntToStr(StrToInt(message) div 2));
   { Options }
-  TextOut(18, 17, 'LgreyBGblack', '[A]   [B]   [C]   [D]');
+  TextOut(13, 18, 'LgreyBGblack', '[A]   [B]   [C]   [D]   [E]');
 end;
 
 procedure newGame;

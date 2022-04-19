@@ -1,4 +1,4 @@
-(* Mushroom person - slow bu can poison the player *)
+(* Mushroom person - slow but can poison the player *)
 
 unit mushroom_person;
 

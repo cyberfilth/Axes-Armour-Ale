@@ -41,6 +41,8 @@ procedure increaseAttack;
 procedure increaseDefence;
 (* Increase attack & defence *)
 procedure increaseAttackDefence;
+(* Increase dexterity *)
+procedure increaseDexterity;
 (* Check the light source, decrease the timer *)
 procedure processLight;
 
@@ -124,6 +126,12 @@ begin
   player.levelupHealth(player_stats.playerLevel);
   ui.updateAttack;
   ui.updateDefence;
+  ui.updateHealth;
+end;
+
+procedure increaseDexterity;
+begin
+  Inc(dexterity, (player_stats.playerLevel div 2));
   ui.updateHealth;
 end;
 
