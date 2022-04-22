@@ -32,16 +32,16 @@ end;
 
 procedure displayCharacterSheet;
 var
-  header, footer, whoami, statsBar, dmg: string;
+  header, footer, whoami, statsBar, dmg, statusFX: string;
   y: smallint;
 begin
   y := 6;
   dmg := '';
+  statusFX := '';
   header := 'Character sheet';
   footer := '[x] to exit this screen';
-  whoami := 'Name: ' + entityList[0].race + ' the ' +
-    entityList[0].description + '      ' + 'Level ' + IntToStr(player_stats.playerLevel) +
-    ' ' + player_stats.playerRace;
+  whoami := 'Name: ' + entityList[0].race + ' the ' + entityList[0].description +
+  '     Kin: ' + player_stats.playerRace + '     Level ' + IntToStr(player_stats.playerLevel) + ' adventurer';
 
   statsBar := 'Attack [' + IntToStr(entityList[0].attack) +
     ']   Defence [' + IntToStr(entityList[0].defence) + ']   Dexterity [' +
@@ -66,9 +66,47 @@ begin
      TextOut(10, y, 'cyan', 'Equipped weapon: ' + equippedWeapon + ' (' + dmg + ')')
   else
      TextOut(10, y, 'cyan', 'Equipped weapon: ' + equippedWeapon);
-
+  (* Get the armour protection *)
   Inc(y, 1);
-  TextOut(10, y, 'cyan', 'Equipped armour: ' + equippedArmour);
+  if (player_stats.armourPoints > 0) then
+    TextOut(10, y, 'cyan', 'Equipped armour: ' + equippedArmour + ' (+' + IntToStr(player_stats.armourPoints) + ')')
+  else
+     TextOut(10, y, 'cyan', 'Equipped armour: ' + equippedArmour);
+  (* XP points to the next level *)
+  Inc(y, 2);
+  if (player_stats.playerLevel = 1) then
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(100 - entityList[0].xpReward) + ' experience points to advance to level 2')
+  else if (player_stats.playerLevel = 2) then
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(250 - entityList[0].xpReward) + ' experience points to advance to level 3')
+  else if (player_stats.playerLevel = 3) then
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(450 - entityList[0].xpReward) + ' experience points to advance to level 4')
+  else if (player_stats.playerLevel = 4) then
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(700 - entityList[0].xpReward) + ' experience points to advance to level 5')
+  else if (player_stats.playerLevel = 5) then
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(1000 - entityList[0].xpReward) + ' experience points to advance to level 6')
+  else if (player_stats.playerLevel = 6) then
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(1350 - entityList[0].xpReward) + ' experience points to advance to level 7')
+  else if (player_stats.playerLevel = 7) then
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(1750 - entityList[0].xpReward) + ' experience points to advance to level 8')
+  else if (player_stats.playerLevel = 8) then
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(2200 - entityList[0].xpReward) + ' experience points to advance to level 9')
+  else if (player_stats.playerLevel = 9) then
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(2700 - entityList[0].xpReward) + ' experience points to advance to level 10')
+  else if (player_stats.playerLevel = 10) then
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(3250 - entityList[0].xpReward) + ' experience points to advance to level 11');
+
+  (* Status effects *)
+  if (entityList[0].stsDrunk = True) or (entityList[0].stsPoison = True) then
+    begin
+         Inc(y, 2);
+         if (entityList[0].stsDrunk = True) then
+           statusFX := statusFX + '  [ drunk ]  ';
+         if (entityList[0].stsPoison = True) then
+           statusFX := statusFX + '  [ poisoned ]  ';
+         TextOut(10, y, 'cyan', 'Current status:');
+         Inc(y);
+         TextOut(centreX(statusFX), y, 'cyan', statusFX);
+    end;
 
   TextOut(ui.centreX(footer), 24, 'cyan', footer);
   UnlockScreenUpdate;

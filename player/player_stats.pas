@@ -10,8 +10,8 @@ uses
   SysUtils, video;
 
 var
-  (* Player level, dexterity, maximum vision range and enchanted weapon type *)
-  playerLevel, dexterity, maxVisionRange, enchWeapType: smallint;
+  (* Player level, dexterity, maximum vision range, enchanted weapon type and armour points *)
+  playerLevel, dexterity, maxVisionRange, enchWeapType, armourPoints: smallint;
   (* Is the player Elf, Dwarf or Human. clanName is only used for Dwarven characters *)
   playerRace, clanName: shortstring;
   (* Is it possible to leave the current dungeon *)

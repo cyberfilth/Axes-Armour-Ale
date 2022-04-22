@@ -209,6 +209,7 @@ begin
   player_stats.enchWeapType := 0;
   player_stats.lightEquipped := True;
   player_stats.lightCounter := 250;
+  player_stats.armourPoints := 0;
   scrTargeting.targetX := 0;
   scrTargeting.targetY := 0;
   scrTargeting.safeX := 0;

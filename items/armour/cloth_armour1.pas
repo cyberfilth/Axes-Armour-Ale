@@ -14,7 +14,7 @@ procedure useItem(equipped: boolean);
 implementation
 
 uses
-  items, entities, ui;
+  items, entities, ui, player_stats;
 
 procedure createClothArmour(itmx, itmy: smallint);
 begin
@@ -51,6 +51,7 @@ begin
   begin
     entityList[0].armourEquipped := True;
     Inc(entityList[0].defence);
+    Inc(player_stats.armourPoints);
     ui.displayMessage('You don the cloth armour. The armour adds 1 point to your defence');
     ui.equippedArmour:='Cloth armour';
     ui.writeBufferedMessages;
@@ -60,6 +61,7 @@ begin
   begin
     entityList[0].armourEquipped := False;
     Dec(entityList[0].defence);
+    Dec(player_stats.armourPoints);
     ui.displayMessage('You remove the cloth armour.');
     ui.equippedArmour:='No armour worn';
     ui.writeBufferedMessages;
