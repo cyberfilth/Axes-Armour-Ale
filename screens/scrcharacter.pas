@@ -32,11 +32,14 @@ end;
 
 procedure displayCharacterSheet;
 var
-  header, footer, whoami, statsBar, dmg, statusFX: string;
+  header, footer, whoami, statsBar, dmg, statusFX, HPmana: string;
   y: smallint;
 begin
   y := 6;
   dmg := '';
+  HPmana := 'Health: ' + IntToStr(entityList[0].currentHP) + '/' + IntToStr(entityList[0].maxHP);
+  if (player_stats.playerRace <> 'Dwarf') then
+    HPmana := HPmana + '      Magick: ' + IntToStr(player_stats.currentMagick) + '/' + IntToStr(player_stats.maxMagick);
   statusFX := '';
   header := 'Character sheet';
   footer := '[x] to exit this screen';
@@ -56,6 +59,8 @@ begin
   TextOut(ui.centreX(whoami), y, 'cyan', whoami);
   Inc(y, 2);
   TextOut(ui.centreX(statsBar), y, 'cyan', statsBar);
+  Inc(y, 2);
+  TextOut(ui.centreX(HPmana), y, 'cyan', HPmana);
   Inc(y, 3);
   (* Get the weapon adds *)
   if (entityList[0].weaponDice <> 0) then
@@ -66,12 +71,14 @@ begin
      TextOut(10, y, 'cyan', 'Equipped weapon: ' + equippedWeapon + ' (' + dmg + ')')
   else
      TextOut(10, y, 'cyan', 'Equipped weapon: ' + equippedWeapon);
+
   (* Get the armour protection *)
   Inc(y, 1);
   if (player_stats.armourPoints > 0) then
     TextOut(10, y, 'cyan', 'Equipped armour: ' + equippedArmour + ' (+' + IntToStr(player_stats.armourPoints) + ')')
   else
      TextOut(10, y, 'cyan', 'Equipped armour: ' + equippedArmour);
+
   (* XP points to the next level *)
   Inc(y, 2);
   if (player_stats.playerLevel = 1) then
@@ -98,7 +105,7 @@ begin
   (* Status effects *)
   if (entityList[0].stsDrunk = True) or (entityList[0].stsPoison = True) then
     begin
-         Inc(y, 2);
+         Inc(y, 3);
          if (entityList[0].stsDrunk = True) then
            statusFX := statusFX + '  [ drunk ]  ';
          if (entityList[0].stsPoison = True) then
