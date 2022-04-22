@@ -10,6 +10,8 @@ AddElement	backup/file_handling.pas	/^  procedure AddElement(Node: TDOMNode; Nam
 AddElement	backup/file_handling.pas	/^  procedure AddElement(Node: TDOMNode; Name, Value: shortstring);$/;"	p
 AddElement	file_handling.pas	/^  procedure AddElement(Node: TDOMNode; Name, Value: UnicodeString);$/;"	p
 AddElement	file_handling.pas	/^  procedure AddElement(Node: TDOMNode; Name, Value: shortstring);$/;"	p
+CharInfoInput	backup/keyboardinput.pas	/^procedure CharInfoInput(Keypress: TKeyEvent);$/;"	p
+CharInfoInput	keyboardinput.pas	/^procedure CharInfoInput(Keypress: TKeyEvent);$/;"	p
 Creature.entityTakeTurn	backup/entities.pas	/^procedure Creature.entityTakeTurn(i: smallint);$/;"	p
 Creature.entityTakeTurn	entities.pas	/^procedure Creature.entityTakeTurn(i: smallint);$/;"	p
 LevelUpInput	backup/keyboardinput.pas	/^procedure LevelUpInput(Keypress: TKeyEvent);$/;"	p
@@ -238,12 +240,15 @@ dialogBoxInput	keyboardinput.pas	/^procedure dialogBoxInput(Keypress: TKeyEvent)
 digCave	dungeons/cave.pas	/^procedure digCave(floorNumber: byte);$/;"	p
 dispenseItem	items/backup/item_lookup.pas	/^procedure dispenseItem(dungeon: dungeonTerrain);$/;"	p
 dispenseItem	items/item_lookup.pas	/^procedure dispenseItem(dungeon: dungeonTerrain);$/;"	p
+displayCharacterSheet	screens/backup/scrcharacter.pas	/^procedure displayCharacterSheet;$/;"	p
+displayCharacterSheet	screens/scrcharacter.pas	/^procedure displayCharacterSheet;$/;"	p
 displayDialog	backup/ui.pas	/^procedure displayDialog(title, message: shortstring);$/;"	p
 displayDialog	ui.pas	/^procedure displayDialog(title, message: shortstring);$/;"	p
 displayDropMenu	screens/backup/scrinventory.pas	/^procedure displayDropMenu;$/;"	p
 displayDropMenu	screens/scrinventory.pas	/^procedure displayDropMenu;$/;"	p
 displayDwarf	screens/scrcharselect.pas	/^procedure displayDwarf;$/;"	p
 displayElf	screens/scrcharselect.pas	/^procedure displayElf;$/;"	p
+displayGameScreen	screens/backup/scrgame.pas	/^procedure displayGameScreen;$/;"	p
 displayGameScreen	screens/scrgame.pas	/^procedure displayGameScreen;$/;"	p
 displayHelpScreen	screens/scrhelp.pas	/^procedure displayHelpScreen;$/;"	p
 displayHuman	screens/scrcharselect.pas	/^procedure displayHuman;$/;"	p
@@ -267,10 +272,13 @@ drawItemsOnMap	backup/items.pas	/^procedure drawItemsOnMap(id: byte);$/;"	p
 drawItemsOnMap	items.pas	/^procedure drawItemsOnMap(id: byte);$/;"	p
 drawLine	vision/fov.pas	/^procedure drawLine(x1, y1, x2, y2: smallint; hiDef: byte);$/;"	p
 drawMap	camera.pas	/^procedure drawMap;$/;"	p
+drawOutline	screens/backup/scrcharacter.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/backup/scrinventory.pas	/^procedure drawOutline;$/;"	p
+drawOutline	screens/scrcharacter.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/scrhelp.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/scrinventory.pas	/^procedure drawOutline;$/;"	p
 drawPlayer	camera.pas	/^procedure drawPlayer;$/;"	p
+drawSidepanel	screens/backup/scrgame.pas	/^procedure drawSidepanel;$/;"	p
 drawSidepanel	screens/scrgame.pas	/^procedure drawSidepanel;$/;"	p
 drawSkull	screens/scrrip.pas	/^procedure drawSkull;$/;"	p
 drawTile	backup/map.pas	/^procedure drawTile(c, r: smallint; hiDef: byte);$/;"	p
@@ -614,6 +622,8 @@ updateAttack	backup/ui.pas	/^procedure updateAttack;$/;"	p
 updateAttack	ui.pas	/^procedure updateAttack;$/;"	p
 updateDefence	backup/ui.pas	/^procedure updateDefence;$/;"	p
 updateDefence	ui.pas	/^procedure updateDefence;$/;"	p
+updateDexterity	backup/ui.pas	/^procedure updateDexterity;$/;"	p
+updateDexterity	ui.pas	/^procedure updateDexterity;$/;"	p
 updateHealth	backup/ui.pas	/^procedure updateHealth;$/;"	p
 updateHealth	ui.pas	/^procedure updateHealth;$/;"	p
 updateLevel	backup/ui.pas	/^procedure updateLevel;$/;"	p

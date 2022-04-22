@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="66">
+    <Units Count="67">
       <Unit0>
         <Filename Value="Axes.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -399,6 +399,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="shadowCreature"/>
       </Unit65>
+      <Unit66>
+        <Filename Value="screens\scrcharacter.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="scrCharacter"/>
+      </Unit66>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

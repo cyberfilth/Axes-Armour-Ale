@@ -543,6 +543,7 @@ begin
     player_stats.lightEquipped:=StrToBool(UTF8Encode(PlayerDataNode.FindNode('lightEquipped').TextContent));
     player_stats.enchWeapType := StrToInt(UTF8Encode(PlayerDataNode.FindNode('enchWeapType').TextContent));
     player_stats.lightCounter := StrToInt(UTF8Encode(PlayerDataNode.FindNode('lightCounter').TextContent));
+    player_stats.armourPoints := StrToInt(UTF8Encode(PlayerDataNode.FindNode('armourPoints').TextContent));
 
     (* Player Inventory *)
     player_inventory.initialiseInventory;
@@ -686,6 +687,7 @@ begin
     AddElement(DataNode, 'lightEquipped', BoolToStr(player_stats.lightEquipped));
     AddElement(DataNode, 'enchWeapType', IntToStr(player_stats.enchWeapType));
     AddElement(DataNode, 'lightCounter', IntToStr(player_stats.lightCounter));
+    AddElement(DataNode, 'armourPoints', IntToStr(player_stats.armourPoints));
 
     (* Player inventory *)
     for i := 0 to 9 do

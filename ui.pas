@@ -54,6 +54,8 @@ procedure updateMagick;
 procedure updateAttack;
 (* Update player defence value *)
 procedure updateDefence;
+(* Update player dexterity value *)
+procedure updateDexterity;
 (* Display equipped weapon *)
 procedure updateWeapon;
 (* Display equipped armour *)
@@ -407,8 +409,8 @@ begin
   TextOut(scrGame.minX + 10, position, 'black', Chr(219) + Chr(219) +
     Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) +
     Chr(219) + Chr(219) + Chr(219) + Chr(219));
-  (* Write out XP amount *)
-  TextOut(scrGame.minX + 10, position, 'cyan', IntToStr(entities.entityList[0].attack));
+  (* Write out Attack amount *)
+  TextOut(scrGame.minX + 13, position, 'cyan', IntToStr(entities.entityList[0].attack));
 end;
 
 procedure updateDefence;
@@ -423,8 +425,24 @@ begin
   TextOut(scrGame.minX + 11, position, 'black', Chr(219) + Chr(219) +
     Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) +
     Chr(219) + Chr(219) + Chr(219));
-  (* Write out XP amount *)
-  TextOut(scrGame.minX + 11, position, 'cyan', IntToStr(entities.entityList[0].defence));
+  (* Write out Defence amount *)
+  TextOut(scrGame.minX + 13, position, 'cyan', IntToStr(entities.entityList[0].defence));
+end;
+
+procedure updateDexterity;
+var
+  position: byte;
+begin
+    if (player_stats.playerRace = 'Dwarf') then
+    position := 11
+  else
+    position := 13;
+  (* Paint over previous stats *)
+  TextOut(scrGame.minX + 12, position, 'black', Chr(219) + Chr(219) +
+    Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) +
+    Chr(219) + Chr(219));
+  (* Write out Dexterity amount *)
+  TextOut(scrGame.minX + 13, position, 'cyan', IntToStr(player_stats.dexterity));
 end;
 
 procedure updateWeapon;

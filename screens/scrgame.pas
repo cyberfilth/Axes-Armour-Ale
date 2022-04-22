@@ -81,12 +81,14 @@ begin
   begin
     TextOut(minX + 2, 9, 'cyan', 'Attack:');
     TextOut(minX + 2, 10, 'cyan', 'Defence:');
+    TextOut(minX + 2, 11, 'cyan', 'Dexterity:');
   end
   else
   begin
     TextOut(minX + 2, 9, 'cyan', 'Magick:');
     TextOut(minX + 2, 11, 'cyan', 'Attack:');
     TextOut(minX + 2, 12, 'cyan', 'Defence:');
+    TextOut(minX + 2, 13, 'cyan', 'Dexterity:');
   end;
 
   (* Write stats *)
@@ -97,6 +99,7 @@ begin
     ui.updateMagick;
   ui.updateAttack;
   ui.updateDefence;
+  ui.updateDexterity;
   ui.updateWeapon;
   ui.updateArmour;
 end;
