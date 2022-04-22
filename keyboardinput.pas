@@ -8,7 +8,7 @@ interface
 
 uses
   Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelp, scrTargeting,
-  scrLook, scrThrow;
+  scrLook, scrThrow, scrCharacter;
 
 (* Initialise keyboard unit *)
 procedure setupKeyboard;
@@ -54,6 +54,8 @@ procedure targetInput(Keypress: TKeyEvent);
 procedure ammoProjectile(Keypress: TKeyEvent);
 (* Input in the SELECTTARGET state *)
 procedure ammoTarget(Keypress: TKeyEvent);
+(* Input in the CHARACTER INFO state *)
+procedure CharInfoInput(Keypress: TKeyEvent);
 (* Input in WIN ALPHA state *)
 procedure WinAlphaInput(Keypress: TKeyEvent);
 
@@ -502,6 +504,11 @@ begin
       main.gameState := stHelpScreen;
       scrHelp.displayHelpScreen;
     end;
+    'c', 'C': { Character sheet }
+    begin
+      main.gameState := stCharInfo;
+      scrCharacter.displayCharacterSheet;
+    end;
     #27: { Escape key - Quit }
     begin
       gameState := stQuitMenu;
@@ -698,6 +705,19 @@ begin
       main.gameState := stGame;
       scrTargeting.restorePlayerGlyph;
       ui.clearPopup;
+    end;
+  end;
+end;
+
+procedure CharInfoInput(Keypress: TKeyEvent);
+begin
+  case GetKeyEventChar(Keypress) of
+    'x', 'X': { Exit dialog box }
+    begin
+      { Clear the box }
+      main.gameState := stGame;
+      { Redraw the map }
+      main.returnToGameScreen;
     end;
   end;
 end;
