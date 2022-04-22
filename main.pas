@@ -20,7 +20,7 @@ type
   gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
     stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget,
     stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha,
-    stSelectAmmo, stSelectTarget, stFireBow);
+    stSelectAmmo, stSelectTarget, stFireBow, stCharInfo);
 
 var
   (* State machine for game menus / controls *)
@@ -209,6 +209,7 @@ begin
   player_stats.enchWeapType := 0;
   player_stats.lightEquipped := True;
   player_stats.lightCounter := 250;
+  player_stats.armourPoints := 0;
   scrTargeting.targetX := 0;
   scrTargeting.targetY := 0;
   scrTargeting.safeX := 0;
@@ -348,6 +349,8 @@ begin
       stDialogBox: dialogBoxInput(Keypress);
       { ---------------------------------    In the Help screen }
       stHelpScreen: helpScreenInput(Keypress);
+      { ---------------------------------    Character Info screen }
+      stCharInfo: CharInfoInput(Keypress);
       { ---------------------------------    Gameplay controls }
       stGame: gameInput(Keypress);
       { ---------------------------------    using Look command }
