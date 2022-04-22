@@ -248,6 +248,7 @@ displayDropMenu	screens/backup/scrinventory.pas	/^procedure displayDropMenu;$/;"
 displayDropMenu	screens/scrinventory.pas	/^procedure displayDropMenu;$/;"	p
 displayDwarf	screens/scrcharselect.pas	/^procedure displayDwarf;$/;"	p
 displayElf	screens/scrcharselect.pas	/^procedure displayElf;$/;"	p
+displayGameScreen	screens/backup/scrgame.pas	/^procedure displayGameScreen;$/;"	p
 displayGameScreen	screens/scrgame.pas	/^procedure displayGameScreen;$/;"	p
 displayHelpScreen	screens/scrhelp.pas	/^procedure displayHelpScreen;$/;"	p
 displayHuman	screens/scrcharselect.pas	/^procedure displayHuman;$/;"	p
@@ -277,6 +278,7 @@ drawOutline	screens/scrcharacter.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/scrhelp.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/scrinventory.pas	/^procedure drawOutline;$/;"	p
 drawPlayer	camera.pas	/^procedure drawPlayer;$/;"	p
+drawSidepanel	screens/backup/scrgame.pas	/^procedure drawSidepanel;$/;"	p
 drawSidepanel	screens/scrgame.pas	/^procedure drawSidepanel;$/;"	p
 drawSkull	screens/scrrip.pas	/^procedure drawSkull;$/;"	p
 drawTile	backup/map.pas	/^procedure drawTile(c, r: smallint; hiDef: byte);$/;"	p
@@ -620,6 +622,8 @@ updateAttack	backup/ui.pas	/^procedure updateAttack;$/;"	p
 updateAttack	ui.pas	/^procedure updateAttack;$/;"	p
 updateDefence	backup/ui.pas	/^procedure updateDefence;$/;"	p
 updateDefence	ui.pas	/^procedure updateDefence;$/;"	p
+updateDexterity	backup/ui.pas	/^procedure updateDexterity;$/;"	p
+updateDexterity	ui.pas	/^procedure updateDexterity;$/;"	p
 updateHealth	backup/ui.pas	/^procedure updateHealth;$/;"	p
 updateHealth	ui.pas	/^procedure updateHealth;$/;"	p
 updateLevel	backup/ui.pas	/^procedure updateLevel;$/;"	p

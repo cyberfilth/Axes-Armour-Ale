@@ -132,7 +132,7 @@ end;
 procedure increaseDexterity;
 begin
   Inc(dexterity, (player_stats.playerLevel div 2));
-  ui.updateHealth;
+  ui.updateDexterity;
 end;
 
 procedure processLight;
