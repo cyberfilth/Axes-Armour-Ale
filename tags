@@ -325,6 +325,7 @@ exitPrompt	backup/ui.pas	/^procedure exitPrompt;$/;"	p
 exitPrompt	ui.pas	/^procedure exitPrompt;$/;"	p
 exitToTitleMenu	backup/main.pas	/^procedure exitToTitleMenu;$/;"	p
 exitToTitleMenu	main.pas	/^procedure exitToTitleMenu;$/;"	p
+fade	dungeons/noise.pas	/^  function fade(t: float64): float64; inline;$/;"	f
 fieldOfView	vision/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
 fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
 fireBow	screens/backup/scrtargeting.pas	/^procedure fireBow;$/;"	p
@@ -350,11 +351,14 @@ gameLoop	backup/main.pas	/^procedure gameLoop;$/;"	p
 gameLoop	main.pas	/^procedure gameLoop;$/;"	p
 gameOver	backup/main.pas	/^procedure gameOver;$/;"	p
 gameOver	main.pas	/^procedure gameOver;$/;"	p
+generate	dungeons/backup/overworld.pas	/^procedure generate;$/;"	p
 generate	dungeons/cave.pas	/^procedure generate(idNumber: smallint; totalDepth: byte);$/;"	p
+generate	dungeons/overworld.pas	/^procedure generate;$/;"	p
 generateClanName	plot_gen.pas	/^procedure generateClanName;$/;"	p
 generateDwarfName	plot_gen.pas	/^procedure generateDwarfName;$/;"	p
 generateElfName	plot_gen.pas	/^procedure generateElfName;$/;"	p
 generateHumanName	plot_gen.pas	/^procedure generateHumanName;$/;"	p
+generateNoise	dungeons/noise.pas	/^function generateNoise(z: double; x, y: integer):double;$/;"	f
 generateTitle	plot_gen.pas	/^procedure generateTitle;$/;"	p
 getCreatureDescription	backup/entities.pas	/^function getCreatureDescription(x, y: smallint): shortstring;$/;"	f
 getCreatureDescription	entities.pas	/^function getCreatureDescription(x, y: smallint): shortstring;$/;"	f
@@ -385,6 +389,7 @@ getX	camera.pas	/^function getX(Xcoord: smallint): smallint;$/;"	f
 getY	camera.pas	/^function getY(Ycoord: smallint): smallint;$/;"	f
 glyphAngle	screens/backup/scrtargeting.pas	/^function glyphAngle(targetX, targetY: smallint): shortstring;$/;"	f
 glyphAngle	screens/scrtargeting.pas	/^function glyphAngle(targetX, targetY: smallint): shortstring;$/;"	f
+grad	dungeons/noise.pas	/^  function grad(hash: integer; x, y, z: float64): float64;$/;"	f
 hasPlayer	backup/map.pas	/^function hasPlayer(checkX, checkY: smallint): boolean;$/;"	f
 hasPlayer	map.pas	/^function hasPlayer(checkX, checkY: smallint): boolean;$/;"	f
 helpScreenInput	backup/keyboardinput.pas	/^procedure helpScreenInput(Keypress: TKeyEvent);$/;"	p
@@ -448,6 +453,7 @@ isWall	map.pas	/^function isWall(x, y: smallint): boolean;$/;"	f
 killEntity	backup/entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 killEntity	entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 leftHasFloor	dungeons/cave.pas	/^function leftHasFloor(): boolean;$/;"	f
+lerp	dungeons/noise.pas	/^  function lerp(t, a, b: float64): float64; inline;$/;"	f
 levelUpDialog	screens/backup/dlginfo.pas	/^procedure levelUpDialog(message: shortstring);$/;"	p
 levelUpDialog	screens/dlginfo.pas	/^procedure levelUpDialog(message: shortstring);$/;"	p
 levelupHealth	player/player.pas	/^procedure levelupHealth(amount: smallint);$/;"	p
@@ -479,6 +485,7 @@ newGame	screens/backup/dlginfo.pas	/^procedure newGame;$/;"	p
 newGame	screens/dlginfo.pas	/^procedure newGame;$/;"	p
 newWarning	screens/backup/dlginfo.pas	/^procedure newWarning;$/;"	p
 newWarning	screens/dlginfo.pas	/^procedure newWarning;$/;"	p
+noise	dungeons/noise.pas	/^  function noise(x, y, z: float64): float64;$/;"	f
 notInView	backup/map.pas	/^procedure notInView;$/;"	p
 notInView	map.pas	/^procedure notInView;$/;"	p
 obtainMap	items/macguffins/backup/smugglersmap.pas	/^procedure obtainMap;$/;"	p

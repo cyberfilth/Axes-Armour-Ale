@@ -1,4 +1,4 @@
-(* Generate each dungeon, its levels and related info *)
+(* Generate the game world, caves, dungeons, its levels and related info *)
 
 unit universe;
 
@@ -9,7 +9,7 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, overworld
   {$IFDEF DEBUG}, logging{$ENDIF};
 
 type
