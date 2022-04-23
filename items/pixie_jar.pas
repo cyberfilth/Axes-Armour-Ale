@@ -59,6 +59,8 @@ begin
   ui.displayMessage('You pick up the Pixie in the jar.');
   if (entityList[0].visionRange < player_stats.maxVisionRange) then
      entityList[0].visionRange := player_stats.maxVisionRange;
+  lightEquipped := True;
+  map.loadDisplayedMap;
 end;
 
 end.

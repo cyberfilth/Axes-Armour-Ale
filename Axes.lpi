@@ -19,7 +19,7 @@
     </General>
     <VersionInfo>
       <UseVersionInfo Value="True"/>
-      <MinorVersionNr Value="53"/>
+      <MinorVersionNr Value="54"/>
       <Language Value="0809"/>
       <Attributes pvaPreRelease="True"/>
       <StringTable Comments="ASCII roguelike game" CompanyName="Chris Hawkins" FileDescription="Axes, Armour &amp; Ale" LegalCopyright="The MIT License"/>

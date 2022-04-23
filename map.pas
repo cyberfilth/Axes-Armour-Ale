@@ -296,11 +296,6 @@ begin
                   mapDisplay[r][c].Glyph := Chr(177);
               end;
            end
-           else
-           begin
-                mapDisplay[r][c].GlyphColour := 'grey';
-                mapDisplay[r][c].Glyph := Chr(177);
-           end;
         end
         else
         begin
