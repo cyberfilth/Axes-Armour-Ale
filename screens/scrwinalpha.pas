@@ -1,4 +1,4 @@
-(* Game won screen - only used for Alpha testing *)
+(* Shown when exiting the Smugglers cave and starting the larger adventure *)
 
 unit scrWinAlpha;
 
@@ -23,12 +23,13 @@ begin
   LockScreenUpdate;
 
   ui.screenBlank;
-  TextOut(36, 2, 'white', ' You exit the cave! ');
-  TextOut(5, 7, 'cyan', 'You have retrieved the map & escaped!');
-  TextOut(5, 8, 'cyan', 'Thanks for testing the alpha version of Axes, Armour & Ale.');
-
-  TextOut(5, 11, 'cyan', 'More content and bugfixes coming soon...');
-
+  TextOut(centreX('You exit the cave!'), 2, 'white', 'You exit the cave!');
+  TextOut(5, 5, 'cyan', 'Battered and bruised, you climb out of the cave and hand over');
+  TextOut(5, 6, 'cyan', 'the map. The smugglers grin, thank you for your trouble, and');
+  TextOut(5, 7, 'cyan', 'leave.');
+  TextOut(5, 9, 'cyan', 'You are once again alone, on the isle of Ellan Toll. The way');
+  TextOut(5, 10, 'cyan', 'ahead promises adventure, and more than a little danger.');
+  TextOut(5, 11, 'cyan', 'There are ruins to explore and treasure to plunder, you set out...');
 
   (* Write those changes to the screen *)
   UnlockScreenUpdate;
@@ -36,10 +37,9 @@ begin
   UpdateScreen(False);
   universe.createEllanToll;
   LockScreenUpdate;
-  TextOut(5, 13, 'cyan', 'q - quit the game');
+  TextOut(centreX('x - to continue'), 24, 'cyan', 'x - to continue');
   UnlockScreenUpdate;
   UpdateScreen(False);
 end;
 
 end.
-

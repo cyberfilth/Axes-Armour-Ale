@@ -725,7 +725,7 @@ end;
 procedure WinAlphaInput(Keypress: TKeyEvent);
 begin
   case GetKeyEventChar(Keypress) of
-    'q', 'Q': { Quit the game }
+    'x', 'X': { Exit the first cave }
     begin
       main.exitApplication;
     end;
