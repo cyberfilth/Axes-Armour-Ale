@@ -9,11 +9,32 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, overworld
-  {$IFDEF DEBUG}, logging{$ENDIF};
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, overworld;
 
 type
   dungeonTerrain = (tCave, tDungeon);
+
+type
+  overworldTerrain = (tSea, tForest, tPlains);
+
+type
+  (* Tiles that make up the overworld *)
+  overworldTile = record
+    (* Unique tile ID *)
+    id: smallint;
+    (* Does the tile block movement *)
+    Blocks: boolean;
+    (* Does the tile contain a dungeon *)
+    Occupied: boolean;
+    (* Has the tile been discovered already *)
+    Discovered: boolean;
+    (* Type of terrain *)
+    TerrainType: overworldTerrain;
+    (* Character used to represent the tile *)
+    Glyph: shortstring;
+    (* Colour of the glyph *)
+    GlyphColour: shortstring;
+  end;
 
 var
   (* Number of dungeons *)
@@ -27,6 +48,8 @@ var
   currentDungeon: array[1..MAXROWS, 1..MAXCOLUMNS] of shortstring;
   (* Flag to show if this level has been visited before *)
   levelVisited: boolean;
+  (* The overworld map *)
+  overworldMap: array[1..overworld.MAXR, 1..overworld.MAXC] of overworldTile;
 
 (* Creates a dungeon of a specified type *)
 procedure createNewDungeon(levelType: dungeonTerrain);
@@ -34,12 +57,14 @@ procedure createNewDungeon(levelType: dungeonTerrain);
 procedure spawnDenizens;
 (* Drop items based on dungeon type and player level *)
 procedure litterItems;
+(* Generate the overworld *)
+procedure createEllanToll;
 
 
 implementation
 
 uses
-  map, npc_lookup, entities, items, item_lookup;
+  map, npc_lookup, entities, items, item_lookup, file_handling;
 
 procedure createNewDungeon(levelType: dungeonTerrain);
 begin
@@ -59,10 +84,6 @@ begin
   dungeonType := levelType;
   totalDepth := 3;
   currentDepth := 1;
-
-  {$IFDEF DEBUG}
-  logging.logAction('About to generate cave');
-  {$ENDIF}
 
   (* generate the dungeon *)
   case levelType of
@@ -124,6 +145,12 @@ begin
       pixie_jar.createPixieJar;
     end;
   end;
+end;
+
+procedure createEllanToll;
+begin
+  overworld.generate;
+  file_handling.writeOverworldMap;
 end;
 
 end.

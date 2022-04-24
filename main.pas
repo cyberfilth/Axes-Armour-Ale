@@ -38,6 +38,7 @@ procedure stateInputLoop;
 procedure gameLoop;
 procedure returnToGameScreen;
 procedure gameOver;
+(* Shown when the player first exits the Smugglers Cave *)
 procedure WinningScreen;
 
 implementation

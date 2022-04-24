@@ -147,6 +147,8 @@ createClub	items/weapons/backup/basic_club.pas	/^procedure createClub(itmx, itmy
 createClub	items/weapons/basic_club.pas	/^procedure createClub(itmx, itmy: smallint);$/;"	p
 createDagger	items/weapons/backup/crude_dagger.pas	/^procedure createDagger(itmx, itmy: smallint);$/;"	p
 createDagger	items/weapons/crude_dagger.pas	/^procedure createDagger(itmx, itmy: smallint);$/;"	p
+createEllanToll	backup/universe.pas	/^procedure createEllanToll;$/;"	p
+createEllanToll	universe.pas	/^procedure createEllanToll;$/;"	p
 createGiantCaveRat	entities/animals/giant_cave_rat.pas	/^procedure createGiantCaveRat(uniqueid, npcx, npcy: smallint);$/;"	p
 createGreenFungus	entities/fungus/green_fungus.pas	/^procedure createGreenFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createInfectedHyena	entities/animals/backup/hyena_fungus.pas	/^procedure createInfectedHyena(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -265,6 +267,7 @@ displayStatusEffect	ui.pas	/^procedure displayStatusEffect(onoff: byte; effectTy
 displayTitleScreen	screens/scrtitle.pas	/^procedure displayTitleScreen(yn: byte);$/;"	p
 displayWieldMenu	screens/backup/scrinventory.pas	/^procedure displayWieldMenu;$/;"	p
 displayWieldMenu	screens/scrinventory.pas	/^procedure displayWieldMenu;$/;"	p
+displayWinscreen	screens/backup/scrwinalpha.pas	/^procedure displayWinscreen;$/;"	p
 displayWinscreen	screens/scrwinalpha.pas	/^procedure displayWinscreen;$/;"	p
 drawBat	screens/scrrip.pas	/^procedure drawBat;$/;"	p
 drawGrave	screens/scrrip.pas	/^procedure drawGrave;$/;"	p
@@ -325,6 +328,7 @@ exitPrompt	backup/ui.pas	/^procedure exitPrompt;$/;"	p
 exitPrompt	ui.pas	/^procedure exitPrompt;$/;"	p
 exitToTitleMenu	backup/main.pas	/^procedure exitToTitleMenu;$/;"	p
 exitToTitleMenu	main.pas	/^procedure exitToTitleMenu;$/;"	p
+fade	dungeons/backup/noise.pas	/^  function fade(t: float64): float64; inline;$/;"	f
 fade	dungeons/noise.pas	/^  function fade(t: float64): float64; inline;$/;"	f
 fieldOfView	vision/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
 fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
@@ -358,6 +362,7 @@ generateClanName	plot_gen.pas	/^procedure generateClanName;$/;"	p
 generateDwarfName	plot_gen.pas	/^procedure generateDwarfName;$/;"	p
 generateElfName	plot_gen.pas	/^procedure generateElfName;$/;"	p
 generateHumanName	plot_gen.pas	/^procedure generateHumanName;$/;"	p
+generateNoise	dungeons/backup/noise.pas	/^function generateNoise(z: double; x, y: integer):double;$/;"	f
 generateNoise	dungeons/noise.pas	/^function generateNoise(z: double; x, y: integer):double;$/;"	f
 generateTitle	plot_gen.pas	/^procedure generateTitle;$/;"	p
 getCreatureDescription	backup/entities.pas	/^function getCreatureDescription(x, y: smallint): shortstring;$/;"	f
@@ -389,6 +394,7 @@ getX	camera.pas	/^function getX(Xcoord: smallint): smallint;$/;"	f
 getY	camera.pas	/^function getY(Ycoord: smallint): smallint;$/;"	f
 glyphAngle	screens/backup/scrtargeting.pas	/^function glyphAngle(targetX, targetY: smallint): shortstring;$/;"	f
 glyphAngle	screens/scrtargeting.pas	/^function glyphAngle(targetX, targetY: smallint): shortstring;$/;"	f
+grad	dungeons/backup/noise.pas	/^  function grad(hash: integer; x, y, z: float64): float64;$/;"	f
 grad	dungeons/noise.pas	/^  function grad(hash: integer; x, y, z: float64): float64;$/;"	f
 hasPlayer	backup/map.pas	/^function hasPlayer(checkX, checkY: smallint): boolean;$/;"	f
 hasPlayer	map.pas	/^function hasPlayer(checkX, checkY: smallint): boolean;$/;"	f
@@ -453,6 +459,7 @@ isWall	map.pas	/^function isWall(x, y: smallint): boolean;$/;"	f
 killEntity	backup/entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 killEntity	entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 leftHasFloor	dungeons/cave.pas	/^function leftHasFloor(): boolean;$/;"	f
+lerp	dungeons/backup/noise.pas	/^  function lerp(t, a, b: float64): float64; inline;$/;"	f
 lerp	dungeons/noise.pas	/^  function lerp(t, a, b: float64): float64; inline;$/;"	f
 levelUpDialog	screens/backup/dlginfo.pas	/^procedure levelUpDialog(message: shortstring);$/;"	p
 levelUpDialog	screens/dlginfo.pas	/^procedure levelUpDialog(message: shortstring);$/;"	p
@@ -485,6 +492,7 @@ newGame	screens/backup/dlginfo.pas	/^procedure newGame;$/;"	p
 newGame	screens/dlginfo.pas	/^procedure newGame;$/;"	p
 newWarning	screens/backup/dlginfo.pas	/^procedure newWarning;$/;"	p
 newWarning	screens/dlginfo.pas	/^procedure newWarning;$/;"	p
+noise	dungeons/backup/noise.pas	/^  function noise(x, y, z: float64): float64;$/;"	f
 noise	dungeons/noise.pas	/^  function noise(x, y, z: float64): float64;$/;"	f
 notInView	backup/map.pas	/^procedure notInView;$/;"	p
 notInView	map.pas	/^procedure notInView;$/;"	p
@@ -694,3 +702,5 @@ writeBufferedMessages	backup/ui.pas	/^procedure writeBufferedMessages;$/;"	p
 writeBufferedMessages	ui.pas	/^procedure writeBufferedMessages;$/;"	p
 writeNewDungeonLevel	backup/file_handling.pas	/^procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;$/;"	p
 writeNewDungeonLevel	file_handling.pas	/^procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;$/;"	p
+writeOverworldMap	backup/file_handling.pas	/^procedure writeOverworldMap;$/;"	p
+writeOverworldMap	file_handling.pas	/^procedure writeOverworldMap;$/;"	p

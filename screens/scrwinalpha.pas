@@ -7,7 +7,7 @@ unit scrWinAlpha;
 interface
 
 uses
-  SysUtils, video, file_handling, ui;
+  SysUtils, video, ui, universe;
 
 (* Show the Win screen *)
 procedure displayWinscreen;
@@ -28,14 +28,16 @@ begin
   TextOut(5, 8, 'cyan', 'Thanks for testing the alpha version of Axes, Armour & Ale.');
 
   TextOut(5, 11, 'cyan', 'More content and bugfixes coming soon...');
-  TextOut(5, 13, 'cyan', 'q - quit the game');
 
-  (* Delete all saved data from disk *)
-  file_handling.deleteGameData;
 
   (* Write those changes to the screen *)
   UnlockScreenUpdate;
   (* only redraws the parts that have been updated *)
+  UpdateScreen(False);
+  universe.createEllanToll;
+  LockScreenUpdate;
+  TextOut(5, 13, 'cyan', 'q - quit the game');
+  UnlockScreenUpdate;
   UpdateScreen(False);
 end;
 

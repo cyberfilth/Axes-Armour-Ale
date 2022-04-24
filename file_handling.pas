@@ -10,6 +10,8 @@ uses
   SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe,
   cave, items;
 
+(* Write the overworld map to disk *)
+procedure writeOverworldMap;
 (* Write a newly generate level of a dungeon to disk *)
 procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;
   dtype: dungeonTerrain);
@@ -27,7 +29,108 @@ procedure saveGame;
 implementation
 
 uses
-  map, main, entities, player_stats, player_inventory;
+  map, main, entities, player_stats, player_inventory, overworld;
+
+procedure writeOverworldMap;
+var
+  r, c, id_int: smallint;
+  Doc: TXMLDocument;
+  RootNode, dataNode: TDOMNode;
+  dfileName: shortstring;
+
+  procedure AddElement(Node: TDOMNode; Name, Value: UnicodeString);
+  var
+    NameNode, ValueNode: TDomNode;
+  begin
+    { creates future Node/Name }
+    NameNode := Doc.CreateElement(Name);
+    { creates future Node/Name/Value }
+    ValueNode := Doc.CreateTextNode(Value);
+    { place value in place }
+    NameNode.Appendchild(ValueNode);
+    { place Name in place }
+    Node.Appendchild(NameNode);
+  end;
+
+  function AddChild(Node: TDOMNode; ChildName: shortstring): TDomNode;
+
+  var
+    ChildNode: TDomNode;
+  begin
+    ChildNode := Doc.CreateElement(UTF8Decode(ChildName));
+    Node.AppendChild(ChildNode);
+    Result := ChildNode;
+  end;
+
+begin
+  id_int := 0;
+  dfileName := globalUtils.saveDirectory + PathDelim + 'ellantoll' + '.dat';
+  try
+    { Create a document }
+    Doc := TXMLDocument.Create;
+    { Create a root node }
+    RootNode := Doc.CreateElement('root');
+    Doc.Appendchild(RootNode);
+    RootNode := Doc.DocumentElement;
+
+    (* map tiles *)
+    for r := 1 to overworld.MAXR do
+    begin
+      for c := 1 to overworld.MAXC do
+      begin
+        Inc(id_int);
+        DataNode := AddChild(RootNode, 'map_tiles');
+        TDOMElement(dataNode).SetAttribute('id', UTF8Decode(IntToStr(id_int)));
+        { if dungeon type is a cave }
+          if (overworld.terrainArray[r][c] = '~') or (overworld.terrainArray[r][c] = '-') then
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)))
+          else
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)));
+        AddElement(datanode, 'Occupied', UTF8Decode(BoolToStr(False)));
+        AddElement(datanode, 'Discovered', UTF8Decode(BoolToStr(False)));
+        { Add terrain type and glyph colour}
+        if (overworld.terrainArray[r][c] = 'A') or (overworld.terrainArray[r][c] = 'D') or
+           (overworld.terrainArray[r][c] = 'E') or (overworld.terrainArray[r][c] = 'F') or
+           (overworld.terrainArray[r][c] = 'G') then
+           begin
+             AddElement(datanode, 'TerrainType', 'tForest');
+             AddElement(datanode, 'GlyphColour', 'green');
+           end
+        else if (overworld.terrainArray[r][c] = 'B') or (overworld.terrainArray[r][c] = 'C') then
+          begin
+             AddElement(datanode, 'TerrainType', 'tForest');
+             AddElement(datanode, 'GlyphColour', 'lightGreen');
+          end
+        else if (overworld.terrainArray[r][c] = '~') then
+          begin
+             AddElement(datanode, 'TerrainType', 'tSea');
+             AddElement(datanode, 'GlyphColour', 'blue');
+          end
+        else if (overworld.terrainArray[r][c] = '-') then
+          begin
+             AddElement(datanode, 'TerrainType', 'tSea');
+             AddElement(datanode, 'GlyphColour', 'lightBlue');
+          end
+        else if (overworld.terrainArray[r][c] = 'J') or (overworld.terrainArray[r][c] = 'L') then
+          begin
+             AddElement(datanode, 'TerrainType', 'tPlains');
+             AddElement(datanode, 'GlyphColour', 'brown');
+          end
+        else
+        begin
+          AddElement(datanode, 'TerrainType', 'tPlains');
+          AddElement(datanode, 'GlyphColour', 'yellow');
+        end;
+          AddElement(datanode, 'Glyph', UTF8Decode(overworld.terrainArray[r][c]));
+      end;
+    end;
+    (* Save XML as a .dat file *)
+    WriteXMLFile(Doc, dfileName);
+  finally
+    { free memory }
+    Doc.Free;
+  end;
+end;
 
 procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;
   dtype: dungeonTerrain);

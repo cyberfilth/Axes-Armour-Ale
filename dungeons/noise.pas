@@ -3,6 +3,7 @@
 unit noise;
 
 {$mode objfpc}{$H+}
+{$RANGECHECKS OFF}
 
 interface
 
@@ -47,6 +48,7 @@ implementation
 
   function grad(hash: integer; x, y, z: float64): float64;
   begin
+    Result := 0;
     case (hash and 15) of
       0:
         Result := x + y;

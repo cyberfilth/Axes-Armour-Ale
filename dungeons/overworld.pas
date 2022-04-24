@@ -3,7 +3,8 @@
 
 unit overworld;
 
-{$mode fpc}{$H+}
+{$mode objfpc}{$H+}
+{$RANGECHECKS OFF}
 
 interface
 
@@ -179,7 +180,6 @@ begin
       end;
     end;
 
-
     (* Run the temporary array through the perlin array *)
     for r := 1 to MAXR do
     begin
@@ -237,7 +237,7 @@ begin
       end;
     end;
 
-    (* Copy temporary map back to main dungeon map array *)
+    (* Copy temporary map back to terrain array *)
     for r := 1 to MAXR do
     begin
       for c := 1 to MAXC do
@@ -245,7 +245,6 @@ begin
         terrainArray[r][c] := tempArray[r][c];
       end;
     end;
-
 
  (* Draw outline of island *)
  for r := 1 to MAXR do
@@ -261,7 +260,5 @@ begin
     end;
   end;
 
-
 end;
-
 end.
