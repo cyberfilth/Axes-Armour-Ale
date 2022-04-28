@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="69">
+    <Units Count="70">
       <Unit0>
         <Filename Value="Axes.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -412,6 +412,10 @@
         <Filename Value="dungeons\overworld.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit68>
+      <Unit69>
+        <Filename Value="island.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit69>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

@@ -7,11 +7,11 @@ unit file_handling;
 interface
 
 uses
-  SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe,
+  SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe, island,
   cave, items;
 
-(* Write the overworld map to disk *)
-procedure writeOverworldMap;
+(* Save the overworld map to disk *)
+procedure saveOverworldMap;
 (* Write a newly generate level of a dungeon to disk *)
 procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;
   dtype: dungeonTerrain);
@@ -31,21 +31,22 @@ implementation
 uses
   map, main, entities, player_stats, player_inventory, overworld;
 
-procedure writeOverworldMap;
+procedure saveOverworldMap;
 var
-  r, c, id_int: smallint;
+  r, c: smallint;
   Doc: TXMLDocument;
   RootNode, dataNode: TDOMNode;
-  dfileName: shortstring;
+  dfileName, Value: shortstring;
 
-  procedure AddElement(Node: TDOMNode; Name, Value: UnicodeString);
+  procedure AddElement(Node: TDOMNode; Name, Value: shortstring);
+
   var
     NameNode, ValueNode: TDomNode;
   begin
     { creates future Node/Name }
-    NameNode := Doc.CreateElement(Name);
+    NameNode := Doc.CreateElement(UTF8Decode(Name));
     { creates future Node/Name/Value }
-    ValueNode := Doc.CreateTextNode(Value);
+    ValueNode := Doc.CreateTextNode(UTF8Decode(Value));
     { place value in place }
     NameNode.Appendchild(ValueNode);
     { place Name in place }
@@ -53,7 +54,6 @@ var
   end;
 
   function AddChild(Node: TDOMNode; ChildName: shortstring): TDomNode;
-
   var
     ChildNode: TDomNode;
   begin
@@ -63,8 +63,7 @@ var
   end;
 
 begin
-  id_int := 0;
-  dfileName := globalUtils.saveDirectory + PathDelim + 'ellantoll' + '.dat';
+  dfileName := (globalUtils.saveDirectory + PathDelim + 'ellanToll.dat');
   try
     { Create a document }
     Doc := TXMLDocument.Create;
@@ -78,57 +77,22 @@ begin
     begin
       for c := 1 to overworld.MAXC do
       begin
-        Inc(id_int);
-        DataNode := AddChild(RootNode, 'map_tiles');
-        TDOMElement(dataNode).SetAttribute('id', UTF8Decode(IntToStr(id_int)));
-        { if dungeon type is a cave }
-          if (overworld.terrainArray[r][c] = '~') or (overworld.terrainArray[r][c] = '-') then
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)))
-          else
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)));
-        AddElement(datanode, 'Occupied', UTF8Decode(BoolToStr(False)));
-        AddElement(datanode, 'Discovered', UTF8Decode(BoolToStr(False)));
-        { Add terrain type and glyph colour}
-        if (overworld.terrainArray[r][c] = 'A') or (overworld.terrainArray[r][c] = 'D') or
-           (overworld.terrainArray[r][c] = 'E') or (overworld.terrainArray[r][c] = 'F') or
-           (overworld.terrainArray[r][c] = 'G') then
-           begin
-             AddElement(datanode, 'TerrainType', 'tForest');
-             AddElement(datanode, 'GlyphColour', 'green');
-           end
-        else if (overworld.terrainArray[r][c] = 'B') or (overworld.terrainArray[r][c] = 'C') then
-          begin
-             AddElement(datanode, 'TerrainType', 'tForest');
-             AddElement(datanode, 'GlyphColour', 'lightGreen');
-          end
-        else if (overworld.terrainArray[r][c] = '~') then
-          begin
-             AddElement(datanode, 'TerrainType', 'tSea');
-             AddElement(datanode, 'GlyphColour', 'blue');
-          end
-        else if (overworld.terrainArray[r][c] = '-') then
-          begin
-             AddElement(datanode, 'TerrainType', 'tSea');
-             AddElement(datanode, 'GlyphColour', 'lightBlue');
-          end
-        else if (overworld.terrainArray[r][c] = 'J') or (overworld.terrainArray[r][c] = 'L') then
-          begin
-             AddElement(datanode, 'TerrainType', 'tPlains');
-             AddElement(datanode, 'GlyphColour', 'brown');
-          end
-        else
-        begin
-          AddElement(datanode, 'TerrainType', 'tPlains');
-          AddElement(datanode, 'GlyphColour', 'yellow');
-        end;
-          AddElement(datanode, 'Glyph', UTF8Decode(overworld.terrainArray[r][c]));
+        DataNode := AddChild(RootNode, 'et');
+        TDOMElement(dataNode).SetAttribute('id', UTF8Decode(IntToStr(island.overworldMap[r][c].id)));
+        AddElement(datanode, 'Blk', BoolToStr(island.overworldMap[r][c].Blocks));
+        AddElement(datanode, 'Occ', BoolToStr(island.overworldMap[r][c].Occupied));
+        AddElement(datanode, 'Dsc', BoolToStr(island.overworldMap[r][c].Discovered));
+        WriteStr(Value, island.overworldMap[r][c].TerrainType);
+        AddElement(datanode, 'TT', Value);
+        AddElement(datanode, 'G', island.overworldMap[r][c].Glyph);
+        AddElement(datanode, 'GC', island.overworldMap[r][c].GlyphColour);
       end;
     end;
-    (* Save XML as a .dat file *)
+    (* Save XML *)
     WriteXMLFile(Doc, dfileName);
   finally
-    { free memory }
-    Doc.Free;
+         { free memory }
+         Doc.Free;
   end;
 end;
 

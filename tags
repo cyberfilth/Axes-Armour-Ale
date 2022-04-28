@@ -241,6 +241,7 @@ dialogBoxInput	backup/keyboardinput.pas	/^procedure dialogBoxInput(Keypress: TKe
 dialogBoxInput	keyboardinput.pas	/^procedure dialogBoxInput(Keypress: TKeyEvent);$/;"	p
 digCave	dungeons/cave.pas	/^procedure digCave(floorNumber: byte);$/;"	p
 dispenseItem	items/backup/item_lookup.pas	/^procedure dispenseItem(dungeon: dungeonTerrain);$/;"	p
+dispenseItem	items/backup/item_lookup.pas	/^procedure dispenseItem(dungeon: island.dungeonTerrain);$/;"	p
 dispenseItem	items/item_lookup.pas	/^procedure dispenseItem(dungeon: dungeonTerrain);$/;"	p
 displayCharacterSheet	screens/backup/scrcharacter.pas	/^procedure displayCharacterSheet;$/;"	p
 displayCharacterSheet	screens/scrcharacter.pas	/^procedure displayCharacterSheet;$/;"	p
@@ -552,6 +553,8 @@ saveDungeonLevel	backup/file_handling.pas	/^procedure saveDungeonLevel;$/;"	p
 saveDungeonLevel	file_handling.pas	/^procedure saveDungeonLevel;$/;"	p
 saveGame	backup/file_handling.pas	/^procedure saveGame;$/;"	p
 saveGame	file_handling.pas	/^procedure saveGame;$/;"	p
+saveOverworldMap	backup/file_handling.pas	/^procedure saveOverworldMap;$/;"	p
+saveOverworldMap	file_handling.pas	/^procedure saveOverworldMap;$/;"	p
 scentDirection	vision/smell.pas	/^function scentDirection(y, x: smallint): char;$/;"	f
 screenBlank	backup/ui.pas	/^procedure screenBlank;$/;"	p
 screenBlank	ui.pas	/^procedure screenBlank;$/;"	p
@@ -587,6 +590,8 @@ startingInventory	player/backup/player_inventory.pas	/^procedure startingInvento
 startingInventory	player/player_inventory.pas	/^procedure startingInventory;$/;"	p
 stateInputLoop	backup/main.pas	/^procedure stateInputLoop;$/;"	p
 stateInputLoop	main.pas	/^procedure stateInputLoop;$/;"	p
+storeEllanToll	backup/island.pas	/^procedure storeEllanToll;$/;"	p
+storeEllanToll	island.pas	/^procedure storeEllanToll;$/;"	p
 takeTurn	entities/animals/backup/hyena_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/backup/large_blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/backup/small_hyena.pas	/^procedure takeTurn(id: smallint);$/;"	p
@@ -702,5 +707,3 @@ writeBufferedMessages	backup/ui.pas	/^procedure writeBufferedMessages;$/;"	p
 writeBufferedMessages	ui.pas	/^procedure writeBufferedMessages;$/;"	p
 writeNewDungeonLevel	backup/file_handling.pas	/^procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;$/;"	p
 writeNewDungeonLevel	file_handling.pas	/^procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;$/;"	p
-writeOverworldMap	backup/file_handling.pas	/^procedure writeOverworldMap;$/;"	p
-writeOverworldMap	file_handling.pas	/^procedure writeOverworldMap;$/;"	p

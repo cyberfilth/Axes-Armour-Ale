@@ -1,4 +1,4 @@
-(* Axes, Armour & Ale - A low-fantasy roguelike.
+(* Axes, Armour & Ale - A fantasy roguelike.
    @author (Chris Hawkins)
 *)
 
@@ -20,7 +20,7 @@ type
   gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
     stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget,
     stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha,
-    stSelectAmmo, stSelectTarget, stFireBow, stCharInfo);
+    stSelectAmmo, stSelectTarget, stFireBow, stCharInfo, stOverworld);
 
 var
   (* State machine for game menus / controls *)
@@ -383,7 +383,7 @@ begin
     gameOver;
   end;
 
-  (* ALPHA VERSION ONLY - Check if player has won *)
+  (* Check if player completed the first cave *)
   if (gameState = stWinAlpha) then
     Exit;
 

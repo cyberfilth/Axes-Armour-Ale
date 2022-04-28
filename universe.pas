@@ -9,32 +9,10 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, overworld;
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, overworld, island;
 
 type
   dungeonTerrain = (tCave, tDungeon);
-
-type
-  overworldTerrain = (tSea, tForest, tPlains);
-
-type
-  (* Tiles that make up the overworld *)
-  overworldTile = record
-    (* Unique tile ID *)
-    id: smallint;
-    (* Does the tile block movement *)
-    Blocks: boolean;
-    (* Does the tile contain a dungeon *)
-    Occupied: boolean;
-    (* Has the tile been discovered already *)
-    Discovered: boolean;
-    (* Type of terrain *)
-    TerrainType: overworldTerrain;
-    (* Character used to represent the tile *)
-    Glyph: shortstring;
-    (* Colour of the glyph *)
-    GlyphColour: shortstring;
-  end;
 
 var
   (* Number of dungeons *)
@@ -48,8 +26,6 @@ var
   currentDungeon: array[1..MAXROWS, 1..MAXCOLUMNS] of shortstring;
   (* Flag to show if this level has been visited before *)
   levelVisited: boolean;
-  (* The overworld map *)
-  overworldMap: array[1..overworld.MAXR, 1..overworld.MAXC] of overworldTile;
 
 (* Creates a dungeon of a specified type *)
 procedure createNewDungeon(levelType: dungeonTerrain);
@@ -149,8 +125,12 @@ end;
 
 procedure createEllanToll;
 begin
+  (* Generate the island *)
   overworld.generate;
-  file_handling.writeOverworldMap;
+  (* Store the island *)
+  island.storeEllanToll;
+  (* Save the island to disk *)
+  file_handling.saveOverworldMap;
 end;
 
 end.
