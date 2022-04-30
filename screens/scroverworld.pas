@@ -1,6 +1,6 @@
-(* Main game user interface *)
+(* Overworld screen user interface *)
 
-unit scrGame;
+unit scrOverworld;
 
 {$mode fpc}{$H+}
 
@@ -12,15 +12,15 @@ uses
 var
   minX: smallint;
 
-(* Clear screen and load various panels for game *)
-procedure displayGameScreen;
+(* Draws the panel on side of screen *)
+procedure drawSidepanel;
 
 implementation
 
 uses
   ui, entities;
 
-procedure displayGameScreen;
+procedure drawSidepanel;
 var
   i: smallint;
 begin
