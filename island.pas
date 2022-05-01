@@ -38,6 +38,7 @@ var
 (* Store the newly generated island in memory *)
 procedure storeEllanToll;
 
+
 implementation
 
 procedure storeEllanToll;
@@ -55,42 +56,123 @@ begin
       with overworldMap[r][c] do
       begin
         id := id_int;
-        if (overworld.terrainArray[r][c] = '~') or
-          (overworld.terrainArray[r][c] = '-') then
-          Blocks := True
-        else
-          Blocks := False;
         Occupied := False;
         Discovered := False;
-        if (overworld.terrainArray[r][c] = 'A') or (overworld.terrainArray[r][c] = 'D') or
-           (overworld.terrainArray[r][c] = 'E') or (overworld.terrainArray[r][c] = 'F') or
-           (overworld.terrainArray[r][c] = 'G') then
+        { Forest }
+        if (overworld.terrainArray[r][c] = 'A') then
         begin
+          Glyph := chr(6);
           TerrainType := tForest;
           GlyphColour := 'green';
+          Blocks := False;
         end
-        else if (overworld.terrainArray[r][c] = 'B') or
-          (overworld.terrainArray[r][c] = 'C') then
+        else if (overworld.terrainArray[r][c] = 'B') then
         begin
+          Glyph := chr(6);
           TerrainType := tForest;
           GlyphColour := 'lightGreen';
+          Blocks := False;
         end
+        else if (overworld.terrainArray[r][c] = 'C') then
+        begin
+          Glyph := chr(5);
+          TerrainType := tForest;
+          GlyphColour := 'green';
+          Blocks := False;
+        end
+        else if (overworld.terrainArray[r][c] = 'D') then
+        begin
+          Glyph := '\';
+          TerrainType := tForest;
+          GlyphColour := 'green';
+          Blocks := False;
+        end
+        else if (overworld.terrainArray[r][c] = 'E') then
+        begin
+          Glyph := '/';
+          TerrainType := tForest;
+          GlyphColour := 'green';
+          Blocks := False;
+        end
+        else if (overworld.terrainArray[r][c] = 'F') then
+        begin
+          Glyph := '\';
+          TerrainType := tForest;
+          GlyphColour := 'lightGreen';
+          Blocks := False;
+        end
+        else if (overworld.terrainArray[r][c] = 'G') then
+        begin
+          Glyph := '/';
+          TerrainType := tForest;
+          GlyphColour := 'lightGreen';
+          Blocks := False;
+        end
+        { Sea }
         else if (overworld.terrainArray[r][c] = '~') then
         begin
+          Glyph := chr(247);
           TerrainType := tSea;
           GlyphColour := 'blue';
+          Blocks := True;
         end
         else if (overworld.terrainArray[r][c] = '-') then
         begin
+          Glyph := '~';
           TerrainType := tSea;
           GlyphColour := 'lightBlue';
+          Blocks := True;
         end
-        else if (overworld.terrainArray[r][c] = 'J') or (overworld.terrainArray[r][c] = 'L') then
+        { Plains }
+        else if (overworld.terrainArray[r][c] = 'H') then
         begin
+          Glyph := '.';
           TerrainType := tPlains;
           GlyphColour := 'brown';
+          Blocks := True;
+        end
+        else if (overworld.terrainArray[r][c] = 'I') then
+        begin
+          Glyph := ',';
+          TerrainType := tPlains;
+          GlyphColour := 'brown';
+          Blocks := True;
+        end
+        else if (overworld.terrainArray[r][c] = 'J') then
+        begin
+          Glyph := '.';
+          TerrainType := tPlains;
+          GlyphColour := 'yellow';
+          Blocks := True;
+        end
+        else if (overworld.terrainArray[r][c] = 'K') then
+        begin
+          Glyph := chr(94);
+          TerrainType := tPlains;
+          GlyphColour := 'brown';
+          Blocks := True;
+        end
+        else if (overworld.terrainArray[r][c] = 'L') then
+        begin
+          Glyph := ':';
+          TerrainType := tPlains;
+          GlyphColour := 'brown';
+          Blocks := True;
+        end
+        else if (overworld.terrainArray[r][c] = 'M') then
+        begin
+          Glyph := ';';
+          TerrainType := tPlains;
+          GlyphColour := 'brown';
+          Blocks := True;
+        end
+        else if (overworld.terrainArray[r][c] = 'N') then
+        begin
+          Glyph := ':';
+          TerrainType := tPlains;
+          GlyphColour := 'yellow';
+          Blocks := True;
         end;
-        Glyph := overworld.terrainArray[r][c];
       end;
     end;
   end;

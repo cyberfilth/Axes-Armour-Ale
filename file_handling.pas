@@ -37,6 +37,7 @@ var
   Doc: TXMLDocument;
   RootNode, dataNode: TDOMNode;
   dfileName, Value: shortstring;
+  Gplaceholder: char;
 
   procedure AddElement(Node: TDOMNode; Name, Value: shortstring);
 
@@ -84,7 +85,40 @@ begin
         AddElement(datanode, 'Dsc', BoolToStr(island.overworldMap[r][c].Discovered));
         WriteStr(Value, island.overworldMap[r][c].TerrainType);
         AddElement(datanode, 'TT', Value);
-        AddElement(datanode, 'G', island.overworldMap[r][c].Glyph);
+        { Translate the Glyph to ASCII }
+        if (island.overworldMap[r][c].Glyph = chr(6)) and (island.overworldMap[r][c].GlyphColour = 'green') then
+           Gplaceholder := 'A'
+        else if (island.overworldMap[r][c].Glyph = chr(6)) and (island.overworldMap[r][c].GlyphColour = 'lightGreen') then
+           Gplaceholder := 'B'
+        else if (island.overworldMap[r][c].Glyph = chr(5)) then
+           Gplaceholder := 'C'
+        else if (island.overworldMap[r][c].Glyph = '\') and (island.overworldMap[r][c].GlyphColour = 'green') then
+           Gplaceholder := 'D'
+        else if (island.overworldMap[r][c].Glyph = '/') and (island.overworldMap[r][c].GlyphColour = 'green') then
+           Gplaceholder := 'E'
+        else if (island.overworldMap[r][c].Glyph = '\') and (island.overworldMap[r][c].GlyphColour = 'lightGreen') then
+           Gplaceholder := 'F'
+        else if (island.overworldMap[r][c].Glyph = '/') and (island.overworldMap[r][c].GlyphColour = 'lightGreen') then
+           Gplaceholder := 'G'
+        else if (island.overworldMap[r][c].Glyph = '~') then
+           Gplaceholder := '~'
+        else if (island.overworldMap[r][c].Glyph = chr(247)) then
+           Gplaceholder := '+'
+        else if (island.overworldMap[r][c].Glyph = '.') and (island.overworldMap[r][c].GlyphColour = 'brown') then
+           Gplaceholder := 'H'
+        else if (island.overworldMap[r][c].Glyph = ',') and (island.overworldMap[r][c].GlyphColour = 'brown') then
+           Gplaceholder := 'I'
+        else if (island.overworldMap[r][c].Glyph = chr(94)) then
+           Gplaceholder := 'K'
+        else if (island.overworldMap[r][c].Glyph = ':') and (island.overworldMap[r][c].GlyphColour = 'brown') then
+           Gplaceholder := 'L'
+        else if (island.overworldMap[r][c].Glyph = ';') and (island.overworldMap[r][c].GlyphColour = 'brown') then
+           Gplaceholder := 'M'
+        else if (island.overworldMap[r][c].Glyph = ':') and (island.overworldMap[r][c].GlyphColour = 'yellow') then
+           Gplaceholder := 'N'
+        else
+            Gplaceholder := '~';
+        AddElement(datanode, 'G', Gplaceholder);
         AddElement(datanode, 'GC', island.overworldMap[r][c].GlyphColour);
       end;
     end;
