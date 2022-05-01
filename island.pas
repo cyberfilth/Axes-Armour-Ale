@@ -31,12 +31,25 @@ type
     GlyphColour: shortstring;
   end;
 
+type
+  (* Visible tiles that display the overworld *)
+  displayTile = record
+    (* Character used to represent the tile *)
+    Glyph: shortstring;
+    (* Colour of the tile *)
+    GlyphColour: shortstring;
+  end;
+
 var
-  (* The overworld map *)
+  (* The overworld map data *)
   overworldMap: array[1..overworld.MAXR, 1..overworld.MAXC] of overworldTile;
+  (* The overworld map that the camera uses *)
+  overworldDisplay: array[1..overworld.MAXR, 1..overworld.MAXC] of displayTile;
 
 (* Store the newly generated island in memory *)
 procedure storeEllanToll;
+(* Draw a tile on the map *)
+procedure drawOWTile(c, r: smallint);
 
 
 implementation
@@ -175,6 +188,21 @@ begin
         end;
       end;
     end;
+  end;
+end;
+
+procedure drawOWTile(c, r: smallint);
+begin
+  (* Draw black space if tile is not visible *)
+  if (overworldMap[r][c].Discovered = False) then
+  begin
+    overworldDisplay[r][c].Glyph := ' ';
+    overworldDisplay[r][c].GlyphColour := 'black';
+  end
+  else
+  begin
+    overworldDisplay[r][c].Glyph := overworldMap[r][c].Glyph;
+    overworldDisplay[r][c].GlyphColour := overworldMap[r][c].GlyphColour;
   end;
 end;
 

@@ -275,13 +275,23 @@ drawBat	screens/scrrip.pas	/^procedure drawBat;$/;"	p
 drawGrave	screens/scrrip.pas	/^procedure drawGrave;$/;"	p
 drawItemsOnMap	backup/items.pas	/^procedure drawItemsOnMap(id: byte);$/;"	p
 drawItemsOnMap	items.pas	/^procedure drawItemsOnMap(id: byte);$/;"	p
+drawLine	vision/backup/fov.pas	/^procedure drawLine(x1, y1, x2, y2: smallint; hiDef: byte);$/;"	p
 drawLine	vision/fov.pas	/^procedure drawLine(x1, y1, x2, y2: smallint; hiDef: byte);$/;"	p
+drawMap	backup/camera.pas	/^procedure drawMap;$/;"	p
 drawMap	camera.pas	/^procedure drawMap;$/;"	p
+drawOWMap	backup/camera.pas	/^procedure drawOWMap;$/;"	p
+drawOWMap	camera.pas	/^procedure drawOWMap;$/;"	p
+drawOWPlayer	backup/camera.pas	/^procedure drawOWPlayer;$/;"	p
+drawOWPlayer	camera.pas	/^procedure drawOWPlayer;$/;"	p
+drawOWTile	island.pas	/^procedure drawOWTile(c, r: smallint);$/;"	p
 drawOutline	screens/backup/scrcharacter.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/backup/scrinventory.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/scrcharacter.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/scrhelp.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/scrinventory.pas	/^procedure drawOutline;$/;"	p
+drawOverLine	vision/backup/fov.pas	/^procedure drawOverLine(x1, y1, x2, y2: smallint);$/;"	p
+drawOverLine	vision/fov.pas	/^procedure drawOverLine(x1, y1, x2, y2: smallint);$/;"	p
+drawPlayer	backup/camera.pas	/^procedure drawPlayer;$/;"	p
 drawPlayer	camera.pas	/^procedure drawPlayer;$/;"	p
 drawSidepanel	screens/backup/scrgame.pas	/^procedure drawSidepanel;$/;"	p
 drawSidepanel	screens/backup/scroverworld.pas	/^procedure drawSidepanel;$/;"	p
@@ -333,6 +343,7 @@ exitToTitleMenu	backup/main.pas	/^procedure exitToTitleMenu;$/;"	p
 exitToTitleMenu	main.pas	/^procedure exitToTitleMenu;$/;"	p
 fade	dungeons/backup/noise.pas	/^  function fade(t: float64): float64; inline;$/;"	f
 fade	dungeons/noise.pas	/^  function fade(t: float64): float64; inline;$/;"	f
+fieldOfView	vision/backup/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
 fieldOfView	vision/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
 fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
 fireBow	screens/backup/scrtargeting.pas	/^procedure fireBow;$/;"	p
@@ -393,8 +404,14 @@ getSize	screens/resolution.pas	/^procedure getSize;$/;"	p
 getThrowDamage	backup/items.pas	/^function getThrowDamage(x, y: smallint): smallint;$/;"	f
 getThrowDamage	items.pas	/^function getThrowDamage(x, y: smallint): smallint;$/;"	f
 getTrollDate	plot_gen.pas	/^procedure getTrollDate;$/;"	p
+getX	backup/camera.pas	/^function getX(Xcoord: smallint): smallint;$/;"	f
 getX	camera.pas	/^function getX(Xcoord: smallint): smallint;$/;"	f
+getXOW	backup/camera.pas	/^function getXOW(Xcoord: smallint): smallint;$/;"	f
+getXOW	camera.pas	/^function getXOW(Xcoord: smallint): smallint;$/;"	f
+getY	backup/camera.pas	/^function getY(Ycoord: smallint): smallint;$/;"	f
 getY	camera.pas	/^function getY(Ycoord: smallint): smallint;$/;"	f
+getYOW	backup/camera.pas	/^function getYOW(Ycoord: smallint): smallint;$/;"	f
+getYOW	camera.pas	/^function getYOW(Ycoord: smallint): smallint;$/;"	f
 glyphAngle	screens/backup/scrtargeting.pas	/^function glyphAngle(targetX, targetY: smallint): shortstring;$/;"	f
 glyphAngle	screens/scrtargeting.pas	/^function glyphAngle(targetX, targetY: smallint): shortstring;$/;"	f
 grad	dungeons/backup/noise.pas	/^  function grad(hash: integer; x, y, z: float64): float64;$/;"	f
@@ -459,6 +476,8 @@ isOccupied	backup/map.pas	/^function isOccupied(checkX, checkY: smallint): boole
 isOccupied	map.pas	/^function isOccupied(checkX, checkY: smallint): boolean;$/;"	f
 isWall	backup/map.pas	/^function isWall(x, y: smallint): boolean;$/;"	f
 isWall	map.pas	/^function isWall(x, y: smallint): boolean;$/;"	f
+islandFOV	vision/backup/fov.pas	/^procedure islandFOV(centreX, centreY: smallint);$/;"	p
+islandFOV	vision/fov.pas	/^procedure islandFOV(centreX, centreY: smallint);$/;"	p
 killEntity	backup/entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 killEntity	entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 leftHasFloor	dungeons/cave.pas	/^function leftHasFloor(): boolean;$/;"	f
