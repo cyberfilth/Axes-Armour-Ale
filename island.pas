@@ -99,7 +99,7 @@ begin
         end
         else if (overworld.terrainArray[r][c] = 'D') then
         begin
-          Glyph := '\';
+          Glyph := '"';
           TerrainType := tForest;
           GlyphColour := 'green';
           Blocks := False;
@@ -108,7 +108,7 @@ begin
         end
         else if (overworld.terrainArray[r][c] = 'E') then
         begin
-          Glyph := '/';
+          Glyph := '''';
           TerrainType := tForest;
           GlyphColour := 'green';
           Blocks := False;
@@ -117,7 +117,7 @@ begin
         end
         else if (overworld.terrainArray[r][c] = 'F') then
         begin
-          Glyph := '\';
+          Glyph := '"';
           TerrainType := tForest;
           GlyphColour := 'lightGreen';
           Blocks := False;
@@ -126,7 +126,7 @@ begin
         end
         else if (overworld.terrainArray[r][c] = 'G') then
         begin
-          Glyph := '/';
+          Glyph := '''';
           TerrainType := tForest;
           GlyphColour := 'lightGreen';
           Blocks := False;

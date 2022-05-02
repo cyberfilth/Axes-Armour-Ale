@@ -92,13 +92,13 @@ begin
            Gplaceholder := 'B'
         else if (island.overworldMap[r][c].Glyph = chr(5)) then
            Gplaceholder := 'C'
-        else if (island.overworldMap[r][c].Glyph = '\') and (island.overworldMap[r][c].GlyphColour = 'green') then
+        else if (island.overworldMap[r][c].Glyph = '"') and (island.overworldMap[r][c].GlyphColour = 'green') then
            Gplaceholder := 'D'
-        else if (island.overworldMap[r][c].Glyph = '/') and (island.overworldMap[r][c].GlyphColour = 'green') then
+        else if (island.overworldMap[r][c].Glyph = '''') and (island.overworldMap[r][c].GlyphColour = 'green') then
            Gplaceholder := 'E'
-        else if (island.overworldMap[r][c].Glyph = '\') and (island.overworldMap[r][c].GlyphColour = 'lightGreen') then
+        else if (island.overworldMap[r][c].Glyph = '"') and (island.overworldMap[r][c].GlyphColour = 'lightGreen') then
            Gplaceholder := 'F'
-        else if (island.overworldMap[r][c].Glyph = '/') and (island.overworldMap[r][c].GlyphColour = 'lightGreen') then
+        else if (island.overworldMap[r][c].Glyph = '''') and (island.overworldMap[r][c].GlyphColour = 'lightGreen') then
            Gplaceholder := 'G'
         else if (island.overworldMap[r][c].Glyph = '~') then
            Gplaceholder := '~'
