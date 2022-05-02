@@ -398,6 +398,49 @@ begin
       main.overworldGameLoop;
     end;
   end;
+  { Numpad and VI keys }
+  case GetKeyEventChar(Keypress) of
+    '8', 'k', 'K': { N }
+    begin
+      player.movePlayerOW(1);
+      main.overworldGameLoop;
+    end;
+    '9', 'u', 'U': { NE }
+    begin
+      player.movePlayerOW(5);
+      main.overworldGameLoop;
+    end;
+    '6', 'l', 'L': { E }
+    begin
+      player.movePlayerOW(4);
+      main.overworldGameLoop;
+    end;
+    '3', 'n', 'N': { SE }
+    begin
+      player.movePlayerOW(6);
+      main.overworldGameLoop;
+    end;
+    '2', 'j', 'J': { S }
+    begin
+      player.movePlayerOW(3);
+      main.overworldGameLoop;
+    end;
+    '1', 'b', 'B': { SW }
+    begin
+      player.movePlayerOW(7);
+      main.overworldGameLoop;
+    end;
+    '4', 'h', 'H': { W }
+    begin
+      player.movePlayerOW(2);
+      main.overworldGameLoop;
+    end;
+    '7', 'y', 'Y': { NW }
+    begin
+      player.movePlayerOW(8);
+      main.overworldGameLoop;
+    end;
+  end;
 end;
 
 procedure gameInput(Keypress: TKeyEvent);
