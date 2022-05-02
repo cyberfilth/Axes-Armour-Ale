@@ -123,6 +123,7 @@ combat	entities/hobs/redcap_fungus.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/hobs/redcap_lesser.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/hobs/redcap_lesser_lobber.pas	/^procedure combat(id: smallint);$/;"	p
 combat	player/combat_resolver.pas	/^procedure combat(npcID: smallint);$/;"	p
+combatCheck	player/backup/player.pas	/^function combatCheck(x, y: smallint): boolean;$/;"	f
 combatCheck	player/player.pas	/^function combatCheck(x, y: smallint): boolean;$/;"	f
 containsItem	backup/items.pas	/^function containsItem(x, y: smallint): boolean;$/;"	f
 containsItem	items.pas	/^function containsItem(x, y: smallint): boolean;$/;"	f
@@ -160,6 +161,7 @@ createNewDungeon	backup/universe.pas	/^procedure createNewDungeon(levelType: dun
 createNewDungeon	universe.pas	/^procedure createNewDungeon(levelType: dungeonTerrain);$/;"	p
 createPixieJar	items/backup/pixie_jar.pas	/^procedure createPixieJar;$/;"	p
 createPixieJar	items/pixie_jar.pas	/^procedure createPixieJar;$/;"	p
+createPlayer	player/backup/player.pas	/^procedure createPlayer;$/;"	p
 createPlayer	player/player.pas	/^procedure createPlayer;$/;"	p
 createPointyStick	items/weapons/backup/pointy_stick.pas	/^procedure createPointyStick(itmx, itmy: smallint);$/;"	p
 createPointyStick	items/weapons/pointy_stick.pas	/^procedure createPointyStick(itmx, itmy: smallint);$/;"	p
@@ -252,7 +254,6 @@ displayDropMenu	screens/scrinventory.pas	/^procedure displayDropMenu;$/;"	p
 displayDwarf	screens/scrcharselect.pas	/^procedure displayDwarf;$/;"	p
 displayElf	screens/scrcharselect.pas	/^procedure displayElf;$/;"	p
 displayGameScreen	screens/backup/scrgame.pas	/^procedure displayGameScreen;$/;"	p
-displayGameScreen	screens/backup/scroverworld.pas	/^procedure displayGameScreen;$/;"	p
 displayGameScreen	screens/scrgame.pas	/^procedure displayGameScreen;$/;"	p
 displayHelpScreen	screens/scrhelp.pas	/^procedure displayHelpScreen;$/;"	p
 displayHuman	screens/scrcharselect.pas	/^procedure displayHuman;$/;"	p
@@ -283,6 +284,7 @@ drawOWMap	backup/camera.pas	/^procedure drawOWMap;$/;"	p
 drawOWMap	camera.pas	/^procedure drawOWMap;$/;"	p
 drawOWPlayer	backup/camera.pas	/^procedure drawOWPlayer;$/;"	p
 drawOWPlayer	camera.pas	/^procedure drawOWPlayer;$/;"	p
+drawOWTile	backup/island.pas	/^procedure drawOWTile(c, r: smallint);$/;"	p
 drawOWTile	island.pas	/^procedure drawOWTile(c, r: smallint);$/;"	p
 drawOutline	screens/backup/scrcharacter.pas	/^procedure drawOutline;$/;"	p
 drawOutline	screens/backup/scrinventory.pas	/^procedure drawOutline;$/;"	p
@@ -430,6 +432,7 @@ increaseDefence	player/backup/player_stats.pas	/^procedure increaseDefence;$/;"	
 increaseDefence	player/player_stats.pas	/^procedure increaseDefence;$/;"	p
 increaseDexterity	player/backup/player_stats.pas	/^procedure increaseDexterity;$/;"	p
 increaseDexterity	player/player_stats.pas	/^procedure increaseDexterity;$/;"	p
+increaseHealth	player/backup/player.pas	/^procedure increaseHealth(amount: smallint);$/;"	p
 increaseHealth	player/player.pas	/^procedure increaseHealth(amount: smallint);$/;"	p
 increaseMaxHealth	player/backup/player_stats.pas	/^procedure increaseMaxHealth;$/;"	p
 increaseMaxHealth	player/player_stats.pas	/^procedure increaseMaxHealth;$/;"	p
@@ -485,6 +488,7 @@ lerp	dungeons/backup/noise.pas	/^  function lerp(t, a, b: float64): float64; inl
 lerp	dungeons/noise.pas	/^  function lerp(t, a, b: float64): float64; inline;$/;"	f
 levelUpDialog	screens/backup/dlginfo.pas	/^procedure levelUpDialog(message: shortstring);$/;"	p
 levelUpDialog	screens/dlginfo.pas	/^procedure levelUpDialog(message: shortstring);$/;"	p
+levelupHealth	player/backup/player.pas	/^procedure levelupHealth(amount: smallint);$/;"	p
 levelupHealth	player/player.pas	/^procedure levelupHealth(amount: smallint);$/;"	p
 litterItems	backup/universe.pas	/^procedure litterItems;$/;"	p
 litterItems	universe.pas	/^procedure litterItems;$/;"	p
@@ -505,7 +509,10 @@ lookupUse	items/item_lookup.pas	/^procedure lookupUse(x: smallint; equipped: boo
 minorScorch	magiceffects.pas	/^procedure minorScorch;$/;"	p
 moveNPC	backup/entities.pas	/^procedure moveNPC(id, newX, newY: smallint);$/;"	p
 moveNPC	entities.pas	/^procedure moveNPC(id, newX, newY: smallint);$/;"	p
+movePlayer	player/backup/player.pas	/^procedure movePlayer(dir: word);$/;"	p
 movePlayer	player/player.pas	/^procedure movePlayer(dir: word);$/;"	p
+movePlayerOW	player/backup/player.pas	/^procedure movePlayerOW(dir: word);$/;"	p
+movePlayerOW	player/player.pas	/^procedure movePlayerOW(dir: word);$/;"	p
 newFloorNPCs	backup/entities.pas	/^procedure newFloorNPCs;$/;"	p
 newFloorNPCs	entities.pas	/^procedure newFloorNPCs;$/;"	p
 newGame	backup/main.pas	/^procedure newGame;$/;"	p
@@ -526,12 +533,18 @@ occupyUpdate	backup/entities.pas	/^procedure occupyUpdate;$/;"	p
 occupyUpdate	entities.pas	/^procedure occupyUpdate;$/;"	p
 outOfView	backup/entities.pas	/^procedure outOfView;$/;"	p
 outOfView	entities.pas	/^procedure outOfView;$/;"	p
+overworldGameLoop	backup/main.pas	/^procedure overworldGameLoop;$/;"	p
+overworldGameLoop	main.pas	/^procedure overworldGameLoop;$/;"	p
+overworldInput	backup/keyboardinput.pas	/^procedure overworldInput(Keypress: TKeyEvent);$/;"	p
+overworldInput	keyboardinput.pas	/^procedure overworldInput(Keypress: TKeyEvent);$/;"	p
 paintOverMsg	screens/backup/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
 paintOverMsg	screens/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
+pickUp	player/backup/player.pas	/^procedure pickUp;$/;"	p
 pickUp	player/player.pas	/^procedure pickUp;$/;"	p
 playerProjectilePath	vision/los.pas	/^procedure playerProjectilePath(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
 processLight	player/backup/player_stats.pas	/^procedure processLight;$/;"	p
 processLight	player/player_stats.pas	/^procedure processLight;$/;"	p
+processStatus	player/backup/player.pas	/^procedure processStatus;$/;"	p
 processStatus	player/player.pas	/^procedure processStatus;$/;"	p
 projectileTarget	screens/backup/scrthrow.pas	/^procedure projectileTarget;$/;"	p
 projectileTarget	screens/scrthrow.pas	/^procedure projectileTarget;$/;"	p
@@ -552,6 +565,7 @@ redrawItems	backup/items.pas	/^procedure redrawItems;$/;"	p
 redrawItems	items.pas	/^procedure redrawItems;$/;"	p
 redrawMapDisplay	backup/entities.pas	/^procedure redrawMapDisplay(id: byte);$/;"	p
 redrawMapDisplay	entities.pas	/^procedure redrawMapDisplay(id: byte);$/;"	p
+regenMagick	player/backup/player.pas	/^procedure regenMagick;$/;"	p
 regenMagick	player/player.pas	/^procedure regenMagick;$/;"	p
 removeArrow	player/backup/player_inventory.pas	/^procedure removeArrow;$/;"	p
 removeArrow	player/player_inventory.pas	/^procedure removeArrow;$/;"	p
@@ -613,6 +627,8 @@ stateInputLoop	backup/main.pas	/^procedure stateInputLoop;$/;"	p
 stateInputLoop	main.pas	/^procedure stateInputLoop;$/;"	p
 storeEllanToll	backup/island.pas	/^procedure storeEllanToll;$/;"	p
 storeEllanToll	island.pas	/^procedure storeEllanToll;$/;"	p
+switchToOverworld	backup/main.pas	/^procedure switchToOverworld;$/;"	p
+switchToOverworld	main.pas	/^procedure switchToOverworld;$/;"	p
 takeTurn	entities/animals/backup/hyena_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/backup/large_blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/backup/small_hyena.pas	/^procedure takeTurn(id: smallint);$/;"	p

@@ -36,6 +36,8 @@ procedure wearWieldInput(Keypress: TKeyEvent);
 procedure RIPInput(Keypress: TKeyEvent);
 (* Input in the LEVEL UP state *)
 procedure LevelUpInput(Keypress: TKeyEvent);
+(* Input in the OVERWORLD state *)
+procedure overworldInput(Keypress: TKeyEvent);
 (* Input in GAME state *)
 procedure gameInput(Keypress: TKeyEvent);
 (* Input in LOSE SAVE state *)
@@ -367,6 +369,33 @@ begin
       ui.displayMessage('You find you can see further.');
       main.gameState := stGame;
       main.returnToGameScreen;
+    end;
+  end;
+end;
+
+procedure overworldInput(Keypress: TKeyEvent);
+begin
+  { Arrow keys }
+  case GetKeyEventCode(Keypress) of
+    kbdLeft:
+    begin
+      player.movePlayerOW(2);
+      main.overworldGameLoop;
+    end;
+    kbdRight:
+    begin
+      player.movePlayerOW(4);
+      main.overworldGameLoop;
+    end;
+    kbdUp:
+    begin
+      player.movePlayerOW(1);
+      main.overworldGameLoop;
+    end;
+    KbdDown:
+    begin
+      player.movePlayerOW(3);
+      main.overworldGameLoop;
     end;
   end;
 end;
@@ -727,7 +756,8 @@ begin
   case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit the first cave }
     begin
-      main.exitApplication;
+      main.gameState := stOverworld;
+      main.switchToOverworld;
     end;
   end;
 end;

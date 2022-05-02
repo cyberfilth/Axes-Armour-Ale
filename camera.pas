@@ -3,6 +3,7 @@
 unit camera;
 
 {$mode objfpc}{$H+}
+{$RANGECHECKS OFF}
 
 interface
 
@@ -70,8 +71,8 @@ var
   (* Tile colour *)
   gCol: shortstring;
 begin
-  pX := entities.entityList[0].posX;
-  pY := entities.entityList[0].posY;
+  pX := entityList[0].posX;
+  pY := entityList[0].posY;
   for r := 1 to camHeight do
   begin
     for c := 1 to camWidth do
@@ -89,10 +90,10 @@ var
   (* Glyph colour *)
   gCol: shortstring;
 begin
-  gCol := entities.entityList[0].glyphColour;
-  entX := entities.entityList[0].posX;
-  entY := entities.entityList[0].posY;
-  TextOut(entX - getX(entX), entY - getY(entY), gCol, entities.entityList[0].glyph);
+  gCol := entityList[0].glyphColour;
+  entX := entityList[0].posX;
+  entY := entityList[0].posY;
+  TextOut(entX - getX(entX), entY - getY(entY), gCol, entityList[0].glyph);
 end;
 
 function getXOW(Xcoord: smallint): smallint;
@@ -136,8 +137,8 @@ var
   (* Tile colour *)
   gCol: shortstring;
 begin
-  pX := entities.entityList[0].posX;
-  pY := entities.entityList[0].posY;
+  pX := entityList[0].posX;
+  pY := entityList[0].posY;
   for r := 1 to camHeight do
   begin
     for c := 1 to camWidth do
@@ -155,9 +156,9 @@ var
   (* Glyph colour *)
   gCol: shortstring;
 begin
-  gCol := entities.entityList[0].glyphColour;
-  entX := entities.entityList[0].posX;
-  entY := entities.entityList[0].posY;
+  gCol := entityList[0].glyphColour;
+  entX := entityList[0].posX;
+  entY := entityList[0].posY;
   TextOut(entX - getXOW(entX), entY - getYOW(entY), gCol, entities.entityList[0].glyph);
 end;
 

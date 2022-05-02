@@ -211,8 +211,6 @@ begin
     begin
       island.overworldMap[y][x].Discovered := True;
       island.drawOWTile(x, y);
-      if (island.overworldMap[y][x].Blocks = True) then
-          exit;
     end;
     if d < 0 then
     begin
@@ -231,11 +229,12 @@ end;
 
 procedure islandFOV(centreX, centreY: smallint);
 var
-  d, x, y: smallint;
+  d, x, y, radius: smallint;
 begin
+  radius := 5;
+  d := 3 - (2 * radius);
   x := 0;
-  y := 5;
-  d := 3 - (2 * y);
+  y := radius;
   while (x <= y) do
   begin
     drawOverLine(centreX, centreY, centreX + X, centreY + Y);

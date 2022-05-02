@@ -69,8 +69,6 @@ begin
       with overworldMap[r][c] do
       begin
         id := id_int;
-        Occupied := False;
-        Discovered := False;
         { Forest }
         if (overworld.terrainArray[r][c] = 'A') then
         begin
@@ -78,6 +76,8 @@ begin
           TerrainType := tForest;
           GlyphColour := 'green';
           Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'B') then
         begin
@@ -85,6 +85,8 @@ begin
           TerrainType := tForest;
           GlyphColour := 'lightGreen';
           Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'C') then
         begin
@@ -92,6 +94,8 @@ begin
           TerrainType := tForest;
           GlyphColour := 'green';
           Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'D') then
         begin
@@ -99,6 +103,8 @@ begin
           TerrainType := tForest;
           GlyphColour := 'green';
           Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'E') then
         begin
@@ -106,6 +112,8 @@ begin
           TerrainType := tForest;
           GlyphColour := 'green';
           Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'F') then
         begin
@@ -113,6 +121,8 @@ begin
           TerrainType := tForest;
           GlyphColour := 'lightGreen';
           Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'G') then
         begin
@@ -120,6 +130,8 @@ begin
           TerrainType := tForest;
           GlyphColour := 'lightGreen';
           Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         { Sea }
         else if (overworld.terrainArray[r][c] = '~') then
@@ -128,6 +140,8 @@ begin
           TerrainType := tSea;
           GlyphColour := 'blue';
           Blocks := True;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = '-') then
         begin
@@ -135,6 +149,8 @@ begin
           TerrainType := tSea;
           GlyphColour := 'lightBlue';
           Blocks := True;
+          Occupied := False;
+          Discovered := False;
         end
         { Plains }
         else if (overworld.terrainArray[r][c] = 'H') then
@@ -142,67 +158,89 @@ begin
           Glyph := '.';
           TerrainType := tPlains;
           GlyphColour := 'brown';
-          Blocks := True;
+          Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'I') then
         begin
           Glyph := ',';
           TerrainType := tPlains;
           GlyphColour := 'brown';
-          Blocks := True;
+          Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'J') then
         begin
           Glyph := '.';
           TerrainType := tPlains;
           GlyphColour := 'yellow';
-          Blocks := True;
+          Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'K') then
         begin
           Glyph := chr(94);
           TerrainType := tPlains;
           GlyphColour := 'brown';
-          Blocks := True;
+          Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'L') then
         begin
           Glyph := ':';
           TerrainType := tPlains;
           GlyphColour := 'brown';
-          Blocks := True;
+          Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'M') then
         begin
           Glyph := ';';
           TerrainType := tPlains;
           GlyphColour := 'brown';
-          Blocks := True;
+          Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end
         else if (overworld.terrainArray[r][c] = 'N') then
         begin
           Glyph := ':';
           TerrainType := tPlains;
           GlyphColour := 'yellow';
-          Blocks := True;
+          Blocks := False;
+          Occupied := False;
+          Discovered := False;
         end;
       end;
+    end;
+  end;
+  (* Setup 'display map' *)
+  for r := 1 to overworld.MAXR do
+  begin
+    for c := 1 to overworld.MAXC do
+    begin
+      overworldDisplay[r][c].Glyph := ' ';
+      overworldDisplay[r][c].GlyphColour := 'black';
     end;
   end;
 end;
 
 procedure drawOWTile(c, r: smallint);
 begin
-  (* Draw black space if tile is not visible *)
-  if (overworldMap[r][c].Discovered = False) then
-  begin
-    overworldDisplay[r][c].Glyph := ' ';
-    overworldDisplay[r][c].GlyphColour := 'black';
-  end
-  else
+  if (overworldMap[r][c].Discovered = True) then
   begin
     overworldDisplay[r][c].Glyph := overworldMap[r][c].Glyph;
     overworldDisplay[r][c].GlyphColour := overworldMap[r][c].GlyphColour;
+  end
+  else
+  begin
+    overworldDisplay[r][c].Glyph := ' ';
+    overworldDisplay[r][c].GlyphColour := 'black';
   end;
 end;
 

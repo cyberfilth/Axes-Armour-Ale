@@ -1,4 +1,4 @@
-(* Player setup and stats *)
+(* Player creation and movement *)
 unit player;
 
 {$mode objfpc}{$H+}
@@ -6,10 +6,12 @@ unit player;
 interface
 
 uses
-  SysUtils, player_inventory, player_stats, plot_gen, combat_resolver, items;
+  SysUtils, player_inventory, player_stats, plot_gen, combat_resolver, items, island;
 
 (* Create player character *)
 procedure createPlayer;
+(* Moves the player on the overworld map *)
+procedure movePlayerOW(dir: word);
 (* Moves the player on the map *)
 procedure movePlayer(dir: word);
 (* Process status effects *)
@@ -109,6 +111,55 @@ begin
   map.occupy(entityList[0].posX, entityList[0].posY);
   (* Draw player and FOV *)
   fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+end;
+
+procedure movePlayerOW(dir: word);
+var
+  (* store original values in case player cannot move *)
+  originalX, originalY: smallint;
+begin
+  (* Repaint visited tiles *)
+  fov.islandFOV(entityList[0].posX, entityList[0].posY);
+  originalX := entityList[0].posX;
+  originalY := entityList[0].posY;
+  case dir of
+    1: Dec(entityList[0].posY); // N
+    2: Dec(entityList[0].posX); // W
+    3: Inc(entityList[0].posY); // S
+    4: Inc(entityList[0].posX); // E
+    5:                      // NE
+    begin
+      Inc(entityList[0].posX);
+      Dec(entityList[0].posY);
+    end;
+    6:                      // SE
+    begin
+      Inc(entityList[0].posX);
+      Inc(entityList[0].posY);
+    end;
+    7:                      // SW
+    begin
+      Dec(entityList[0].posX);
+      Inc(entityList[0].posY);
+    end;
+    8:                      // NW
+    begin
+      Dec(entityList[0].posX);
+      Dec(entityList[0].posY);
+    end;
+  end;
+  (* check if tile is walkable *)
+  if (island.overworldMap[entityList[0].posY][entityList[0].posX].Blocks = True) then
+  begin
+    entityList[0].posX := originalX;
+    entityList[0].posY := originalY;
+    Dec(entityList[0].moveCount);
+  end;
+  fov.islandFOV(entityList[0].posX, entityList[0].posY);
+  //display message on type of terrain or name of village
+  (* Regenerate Magick *)
+  if (player_stats.playerRace <> 'Dwarf') then
+    regenMagick;
 end;
 
 (* Move the player within the confines of the game map *)

@@ -12,7 +12,7 @@ interface
 uses
   SysUtils, Video, keyboard, KeyboardInput, ui, camera, map, scrGame, globalUtils,
   universe, fov, scrRIP, plot_gen, file_handling, smell, scrTitle, scrTargeting, scrWinAlpha,
-  dlgInfo
+  dlgInfo, scrOverworld
   {$IFDEF DEBUG}, logging{$ENDIF};
 
 (* Finite State Machine game states *)
@@ -36,6 +36,8 @@ procedure newGame;
 procedure continue;
 procedure stateInputLoop;
 procedure gameLoop;
+procedure switchToOverworld;
+procedure overworldGameLoop;
 procedure returnToGameScreen;
 procedure gameOver;
 (* Shown when the player first exits the Smugglers Cave *)
@@ -354,6 +356,8 @@ begin
       stCharInfo: CharInfoInput(Keypress);
       { ---------------------------------    Gameplay controls }
       stGame: gameInput(Keypress);
+      { ---------------------------------    Overworld controls }
+      stOverworld: overworldInput(Keypress);
       { ---------------------------------    using Look command }
       stLook: lookInput(Keypress);
       { ---------------------------------    Firing a bow }
@@ -434,6 +438,29 @@ begin
   player_stats.checkLevel;
   (* Process any dialog pop-ups *)
   dlgInfo.checkNotifications;
+end;
+
+procedure switchToOverworld;
+begin
+  { Will eventually store last position on map }
+  entityList[0].posX:=20;
+  entityList[0].posY:=20;
+
+  UnlockScreenUpdate;
+  ui.screenBlank;
+  scrOverworld.drawSidepanel;
+  overworldGameLoop;
+  UnlockScreenUpdate;
+  UpdateScreen(False);
+end;
+
+procedure overworldGameLoop;
+begin
+  UnlockScreenUpdate;
+  fov.islandFOV(entityList[0].posX, entityList[0].posY);
+  camera.drawOWMap;
+  UnlockScreenUpdate;
+  UpdateScreen(False);
 end;
 
 procedure returnToGameScreen;
