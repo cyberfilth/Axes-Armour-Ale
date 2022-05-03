@@ -24,6 +24,8 @@ procedure charIntroInput(Keypress: TKeyEvent);
 procedure introInput(Keypress: TKeyEvent);
 (* Input for QUIT Menu state *)
 procedure quitInput(Keypress: TKeyEvent);
+(* Input for QUIT Menu on the overworld *)
+procedure quitInputOW(Keypress: TKeyEvent);
 (* Input in INVENTORY Menu state *)
 procedure inventoryInput(Keypress: TKeyEvent);
 (* Input in the DROP Menu state *)
@@ -166,6 +168,25 @@ begin
     begin
       gameState := stGame;
       main.returnToGameScreen;
+    end;
+  end;
+end;
+
+procedure quitInputOW(Keypress: TKeyEvent);
+begin
+  case GetKeyEventChar(Keypress) of
+    'q', 'Q': { Save and Quit }
+    begin
+      main.exitApplication;
+    end;
+    'x', 'X': { Exit to main menu }
+    begin
+      main.exitToTitleMenu;
+    end;
+    #27: { Escape key - Cancel }
+    begin
+      gameState := stOverworld;
+      main.returnToOverworldScreen;
     end;
   end;
 end;
@@ -439,6 +460,11 @@ begin
     begin
       player.movePlayerOW(8);
       main.overworldGameLoop;
+    end;
+     #27: { Escape key - Quit }
+    begin
+      gameState := stQuitMenuOW;
+      ui.exitPrompt;
     end;
   end;
 end;
@@ -800,7 +826,7 @@ begin
     'x', 'X': { Exit the first cave }
     begin
       main.gameState := stOverworld;
-      main.switchToOverworld;
+      main.returnToOverworldScreen;
     end;
   end;
 end;

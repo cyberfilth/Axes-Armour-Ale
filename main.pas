@@ -20,7 +20,7 @@ type
   gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
     stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget,
     stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha,
-    stSelectAmmo, stSelectTarget, stFireBow, stCharInfo, stOverworld);
+    stSelectAmmo, stSelectTarget, stFireBow, stCharInfo, stOverworld, stQuitMenuOW);
 
 var
   (* State machine for game menus / controls *)
@@ -36,7 +36,7 @@ procedure newGame;
 procedure continue;
 procedure stateInputLoop;
 procedure gameLoop;
-procedure switchToOverworld;
+procedure returnToOverworldScreen;
 procedure overworldGameLoop;
 procedure returnToGameScreen;
 procedure gameOver;
@@ -194,6 +194,7 @@ var
 begin
   (* Game state = game running *)
   gameState := stGame;
+  globalUtils.womblingFree := 'underground';
   dlgInfo.dialogType := dlgNone;
   killer := 'empty';
   (* Initialise the game world and create 1st cave *)
@@ -336,8 +337,10 @@ begin
       stCharIntro: charIntroInput(Keypress);
       { -----------------------------------  Game Over screen }
       stGameOver: RIPInput(Keypress);
-      { ----------------------------------   Prompt to quit game }
+      { ----------------------------------   Prompt to quit game (below ground) }
       stQuitMenu: quitInput(Keypress);
+      { ----------------------------------   Prompt to quit game (above ground) }
+      stQuitMenuOW: quitInputOW(Keypress);
       { ---------------------------------    In the Inventory menu }
       stInventory: inventoryInput(Keypress);
       { ---------------------------------    In the Drop item menu }
@@ -440,8 +443,9 @@ begin
   dlgInfo.checkNotifications;
 end;
 
-procedure switchToOverworld;
+procedure returnToOverworldScreen;
 begin
+  globalUtils.womblingFree := 'overground';
   { Will eventually store last position on map }
   entityList[0].posX:=20;
   entityList[0].posY:=20;

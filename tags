@@ -556,6 +556,8 @@ quaffSelection	player/backup/player_inventory.pas	/^procedure quaffSelection(sel
 quaffSelection	player/player_inventory.pas	/^procedure quaffSelection(selection: smallint);$/;"	p
 quitInput	backup/keyboardinput.pas	/^procedure quitInput(Keypress: TKeyEvent);$/;"	p
 quitInput	keyboardinput.pas	/^procedure quitInput(Keypress: TKeyEvent);$/;"	p
+quitInputOW	backup/keyboardinput.pas	/^procedure quitInputOW(Keypress: TKeyEvent);$/;"	p
+quitInputOW	keyboardinput.pas	/^procedure quitInputOW(Keypress: TKeyEvent);$/;"	p
 randomRange	backup/globalutils.pas	/^function randomRange(fromNumber, toNumber: smallint): smallint;$/;"	f
 randomRange	globalutils.pas	/^function randomRange(fromNumber, toNumber: smallint): smallint;$/;"	f
 randomTileFill	dungeons/cave.pas	/^procedure randomTileFill;$/;"	p
@@ -581,6 +583,8 @@ restorePlayerGlyph	screens/backup/scrtargeting.pas	/^procedure restorePlayerGlyp
 restorePlayerGlyph	screens/scrtargeting.pas	/^procedure restorePlayerGlyph;$/;"	p
 returnToGameScreen	backup/main.pas	/^procedure returnToGameScreen;$/;"	p
 returnToGameScreen	main.pas	/^procedure returnToGameScreen;$/;"	p
+returnToOverworldScreen	backup/main.pas	/^procedure returnToOverworldScreen;$/;"	p
+returnToOverworldScreen	main.pas	/^procedure returnToOverworldScreen;$/;"	p
 rightHasFloor	dungeons/cave.pas	/^function rightHasFloor(): boolean;$/;"	f
 rollDice	backup/globalutils.pas	/^function rollDice(numberOfDice: byte): smallint;$/;"	f
 rollDice	globalutils.pas	/^function rollDice(numberOfDice: byte): smallint;$/;"	f
@@ -627,8 +631,6 @@ stateInputLoop	backup/main.pas	/^procedure stateInputLoop;$/;"	p
 stateInputLoop	main.pas	/^procedure stateInputLoop;$/;"	p
 storeEllanToll	backup/island.pas	/^procedure storeEllanToll;$/;"	p
 storeEllanToll	island.pas	/^procedure storeEllanToll;$/;"	p
-switchToOverworld	backup/main.pas	/^procedure switchToOverworld;$/;"	p
-switchToOverworld	main.pas	/^procedure switchToOverworld;$/;"	p
 takeTurn	entities/animals/backup/hyena_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/backup/large_blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/backup/small_hyena.pas	/^procedure takeTurn(id: smallint);$/;"	p
