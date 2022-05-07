@@ -591,7 +591,10 @@ begin
     (* Random seed *)
     RandSeed := StrToDWord(UTF8Encode(RootNode.FindNode('RandSeed').TextContent));
     (* Above or below ground *)
-    globalutils.womblingFree := (UTF8Encode(RootNode.FindNode('womble').TextContent));;
+    globalutils.womblingFree := (UTF8Encode(RootNode.FindNode('womble').TextContent));
+    (* Last overworld coordinates *)
+    globalutils.OWx := StrToInt(UTF8Encode(RootNode.FindNode('owx').TextContent));
+    globalutils.OWy := StrToInt(UTF8Encode(RootNode.FindNode('owy').TextContent));
     (* Current dungeon ID *)
     universe.uniqueID := StrToInt(UTF8Encode(RootNode.FindNode('dungeonID').TextContent));
     (* Current depth *)
@@ -742,6 +745,8 @@ begin
     DataNode := AddChild(RootNode, 'GameData');
     AddElement(datanode, 'RandSeed', IntToStr(RandSeed));
     AddElement(datanode, 'womble', globalutils.womblingFree);
+    AddElement(datanode, 'owx', IntToStr(globalutils.OWx));
+    AddElement(datanode, 'owy', IntToStr(globalutils.OWy));
     AddElement(datanode, 'dungeonID', IntToStr(uniqueID));
     AddElement(datanode, 'currentDepth', IntToStr(currentDepth));
     AddElement(datanode, 'levelVisited', BoolToStr(True));
