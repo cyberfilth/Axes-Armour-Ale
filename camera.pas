@@ -96,6 +96,8 @@ begin
   TextOut(entX - getX(entX), entY - getY(entY), gCol, entityList[0].glyph);
 end;
 
+{ Overground camera }
+
 function getXOW(Xcoord: smallint): smallint;
 var
   p, hs, s, m: smallint;
@@ -139,9 +141,9 @@ var
 begin
   pX := entityList[0].posX;
   pY := entityList[0].posY;
-  for r := 1 to camHeight do
+  for c := 1 to camWidth do
   begin
-    for c := 1 to camWidth do
+    for r := 1 to camHeight do
     begin
       gCol := island.overworldDisplay[r + getYOW(pY)][c + getXOW(pX)].GlyphColour;
       TextOut(c, r, gCol, island.overworldDisplay[r + getYOW(pY)][c + getXOW(pX)].Glyph);
@@ -151,15 +153,8 @@ begin
 end;
 
 procedure drawOWPlayer;
-var
-  entX, entY: smallint;
-  (* Glyph colour *)
-  gCol: shortstring;
 begin
-  gCol := entityList[0].glyphColour;
-  entX := entityList[0].posX;
-  entY := entityList[0].posY;
-  TextOut(entX - getXOW(entX), entY - getYOW(entY), gCol, entities.entityList[0].glyph);
+  TextOut(entityList[0].posX - getXOW(entityList[0].posX), entityList[0].posY - getYOW(entityList[0].posY), 'yellow', '@');
 end;
 
 end.
