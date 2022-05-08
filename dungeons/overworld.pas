@@ -9,7 +9,7 @@ unit overworld;
 interface
 
 uses
-  SysUtils, noise;
+  SysUtils, noise, globalUtils;
 
 const
   MAXC = 80;
@@ -88,6 +88,9 @@ var
 procedure generate;
 
 implementation
+
+uses
+  island;
 
 procedure generate;
 begin
@@ -259,6 +262,7 @@ begin
          terrainArray[r][c] := chr(5);
     end;
   end;
-
+ (* Place the first location *)
+ terrainArray[globalUtils.OWy][globalUtils.OWx] := '>';
 end;
 end.

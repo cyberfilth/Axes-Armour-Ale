@@ -10,7 +10,7 @@ uses
   SysUtils, overworld;
 
 type
-  overworldTerrain = (tSea, tForest, tPlains);
+  overworldTerrain = (tSea, tForest, tPlains, tLocation);
 
 type
   (* Tiles that make up the overworld *)
@@ -40,11 +40,22 @@ type
     GlyphColour: shortstring;
   end;
 
+type
+  (* Location on the island *)
+  locationTile = record
+    (* coordinates *)
+    X, Y: smallint;
+    (* Name of location *)
+    name: shortstring;
+  end;
+
 var
   (* The overworld map data *)
   overworldMap: array[1..overworld.MAXR, 1..overworld.MAXC] of overworldTile;
   (* The overworld map that the camera uses *)
   overworldDisplay: array[1..overworld.MAXR, 1..overworld.MAXC] of displayTile;
+  (* List of locations on the island *)
+  locationLookup: array of locationTile;
 
 (* Store the newly generated island in memory *)
 procedure storeEllanToll;
@@ -212,6 +223,15 @@ begin
           Glyph := ':';
           TerrainType := tPlains;
           GlyphColour := 'yellow';
+          Blocks := False;
+          Occupied := False;
+          Discovered := False;
+        end
+        else if (overworld.terrainArray[r][c] = '>') then
+        begin
+          Glyph := '>';
+          TerrainType := tLocation;
+          GlyphColour := 'white';
           Blocks := False;
           Occupied := False;
           Discovered := False;

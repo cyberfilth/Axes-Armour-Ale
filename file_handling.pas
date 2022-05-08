@@ -116,6 +116,8 @@ begin
            Gplaceholder := 'M'
         else if (island.overworldMap[r][c].Glyph = ':') and (island.overworldMap[r][c].GlyphColour = 'yellow') then
            Gplaceholder := 'N'
+        else if (island.overworldMap[r][c].Glyph = '>') then
+           Gplaceholder := '>'
         else
             Gplaceholder := '~';
         AddElement(datanode, 'G', Gplaceholder);
@@ -574,7 +576,7 @@ end;
 
 procedure loadGame;
 var
-  RootNode, ParentNode, InventoryNode, PlayerDataNode: TDOMNode;
+  RootNode, ParentNode, InventoryNode, PlayerDataNode, locationNode: TDOMNode;
   Doc: TXMLDocument;
   i: integer;
   dfileName: shortstring;
@@ -595,12 +597,23 @@ begin
     (* Last overworld coordinates *)
     globalutils.OWx := StrToInt(UTF8Encode(RootNode.FindNode('owx').TextContent));
     globalutils.OWy := StrToInt(UTF8Encode(RootNode.FindNode('owy').TextContent));
+    (* Total number of unique locations *)
+    SetLength(island.locationLookup, StrToInt(UTF8Encode(RootNode.FindNode('locations').TextContent)));
     (* Current dungeon ID *)
     universe.uniqueID := StrToInt(UTF8Encode(RootNode.FindNode('dungeonID').TextContent));
     (* Current depth *)
     universe.currentDepth := StrToInt(UTF8Encode(RootNode.FindNode('currentDepth').TextContent));
     (* Can the player exit the dungeon *)
     player_stats.canExitDungeon := StrToBool(UTF8Encode(RootNode.FindNode('canExitDungeon').TextContent));
+
+    (* Location data *)
+    locationNode := Doc.DocumentElement.FindNode('locData');
+    for i := 0 to High(island.locationLookup) do
+    begin
+      island.locationLookup[i].X := StrToInt(UTF8Encode(locationNode.FindNode('X').TextContent));
+      island.locationLookup[i].Y := StrToInt(UTF8Encode(locationNode.FindNode('Y').TextContent));
+      island.locationLookup[i].name := UTF8Encode(locationNode.FindNode('name').TextContent);
+    end;
 
     (* Player data *)
     SetLength(entities.entityList, 0);
@@ -747,6 +760,7 @@ begin
     AddElement(datanode, 'womble', globalutils.womblingFree);
     AddElement(datanode, 'owx', IntToStr(globalutils.OWx));
     AddElement(datanode, 'owy', IntToStr(globalutils.OWy));
+    AddElement(datanode, 'locations', IntToStr(Length(island.locationLookup)));
     AddElement(datanode, 'dungeonID', IntToStr(uniqueID));
     AddElement(datanode, 'currentDepth', IntToStr(currentDepth));
     AddElement(datanode, 'levelVisited', BoolToStr(True));
@@ -756,6 +770,15 @@ begin
     WriteStr(Value, dungeonType);
     AddElement(datanode, 'mapType', Value);
     AddElement(datanode, 'npcAmount', IntToStr(entities.npcAmount));
+
+    (* Location data *)
+    for i := Low(island.locationLookup) to High(island.locationLookup) do
+    begin
+      DataNode := AddChild(RootNode, 'locData');
+      AddElement(DataNode, 'X', IntToStr(island.locationLookup[i].X));
+      AddElement(DataNode, 'Y', IntToStr(island.locationLookup[i].Y));
+      AddElement(DataNode, 'name', island.locationLookup[i].name);
+    end;
 
     (* Player data *)
     DataNode := AddChild(RootNode, 'PlayerData');

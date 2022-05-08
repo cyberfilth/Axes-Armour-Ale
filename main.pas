@@ -12,7 +12,7 @@ interface
 uses
   SysUtils, Video, keyboard, KeyboardInput, ui, camera, map, scrGame, globalUtils,
   universe, fov, scrRIP, plot_gen, file_handling, smell, scrTitle, scrTargeting, scrWinAlpha,
-  dlgInfo, scrOverworld
+  dlgInfo, scrOverworld, island
   {$IFDEF DEBUG}, logging{$ENDIF};
 
 (* Finite State Machine game states *)
@@ -203,6 +203,14 @@ begin
   universe.dlistLength := 0;
   (* first map type is always a cave *)
   map.mapType := universe.tCave;
+  (* Add the cave to list of locations *)
+  SetLength(island.locationLookup, length(island.locationLookup) + 1);
+  with island.locationLookup[0] do
+  begin
+    X := globalUtils.OWx;
+    Y := globalUtils.OWy;
+    name := 'Smugglers Cave';
+  end;
   (* Create the dungeon *)
   universe.createNewDungeon(map.mapType);
   (* Set smell counter to zero *)
