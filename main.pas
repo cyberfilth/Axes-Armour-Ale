@@ -195,8 +195,8 @@ begin
   (* Game state = game running *)
   gameState := stGame;
   globalUtils.womblingFree := 'underground';
-  globalUtils.OWx := 23;
-  globalUtils.OWy := 57;
+  globalUtils.OWx := 24;
+  globalUtils.OWy := 56;
   dlgInfo.dialogType := dlgNone;
   killer := 'empty';
   (* Initialise the game world and create 1st cave *)
@@ -448,7 +448,6 @@ end;
 procedure returnToOverworldScreen;
 begin
   globalUtils.womblingFree := 'overground';
-  { Will eventually store last position on map }
   entityList[0].posX := globalUtils.OWx;
   entityList[0].posY := globalUtils.OWy;
 
