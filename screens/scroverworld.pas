@@ -11,6 +11,8 @@ uses
 
 (* Draws the panel on side of screen *)
 procedure drawSidepanel;
+(* Erase the previous 'terrain' message *)
+procedure eraseTerrain;
 
 implementation
 
@@ -96,6 +98,17 @@ begin
   ui.updateDexterity;
   ui.updateWeapon;
   ui.updateArmour;
+
+  (* Write name of island *)
+  TextOut(centreX('~ The isle of Ellan Toll ~'), 21, 'cyan', '~ The isle of Ellan Toll ~');
+end;
+
+procedure eraseTerrain;
+var
+  i: smallint;
+begin
+  for i := 1 to displayCol do
+      TextOut(i, 22, 'black', ' ');
 end;
 
 end.

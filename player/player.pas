@@ -6,7 +6,8 @@ unit player;
 interface
 
 uses
-  SysUtils, player_inventory, player_stats, plot_gen, combat_resolver, items, island;
+  SysUtils, player_inventory, player_stats, plot_gen, combat_resolver, items,
+  island, scrOverworld;
 
 (* Create player character *)
 procedure createPlayer;
@@ -117,6 +118,7 @@ procedure movePlayerOW(dir: word);
 var
   (* store original values in case player cannot move *)
   originalX, originalY: smallint;
+  mapFeature: shortstring;
 begin
   (* Repaint visited tiles *)
   fov.islandFOV(entityList[0].posX, entityList[0].posY);
@@ -156,7 +158,20 @@ begin
     Dec(entityList[0].moveCount);
   end;
   fov.islandFOV(entityList[0].posX, entityList[0].posY);
-  //display message on type of terrain or name of village
+  (* display message on type of terrain or name of location *)
+  { Blank out the old message }
+  scrOverworld.eraseTerrain;
+
+  if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType = tForest) then
+     TextOut(centreX('forest'), 22, 'cyan', 'forest')
+  else if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType = tPlains) then
+     TextOut(centreX('plains'), 22, 'cyan', 'plains')
+  else if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType = tLocation) then
+       begin
+         mapFeature := 'entrance to ' + island.getLocationName(entityList[0].posX, entityList[0].posY);
+         TextOut(centreX(mapFeature), 22, 'cyan', mapFeature)
+       end;
+
   (* Regenerate Magick *)
   if (player_stats.playerRace <> 'Dwarf') then
     regenMagick;

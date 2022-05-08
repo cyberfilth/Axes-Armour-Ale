@@ -61,6 +61,8 @@ var
 procedure storeEllanToll;
 (* Draw a tile on the map *)
 procedure drawOWTile(c, r: smallint);
+(* Return the name of the location on the map *)
+function getLocationName(xPOS, yPOS: smallint):shortstring;
 
 
 implementation
@@ -261,6 +263,21 @@ begin
   begin
     overworldDisplay[r][c].Glyph := ' ';
     overworldDisplay[r][c].GlyphColour := 'black';
+  end;
+end;
+
+function getLocationName(xPOS, yPOS: smallint): shortstring;
+var
+  i: smallint;
+begin
+  Result := '';
+    for i := 0 to High(locationLookup) do
+  begin
+    if (locationLookup[i].X = xPOS) and (locationLookup[i].Y = yPOS) then
+    begin
+      Result := locationLookup[i].name;
+      exit;
+    end;
   end;
 end;
 
