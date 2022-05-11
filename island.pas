@@ -61,6 +61,8 @@ var
 procedure storeEllanToll;
 (* Draw a tile on the map *)
 procedure drawOWTile(c, r: smallint);
+(* Display explored sections of island when reloading game *)
+procedure loadDisplayedIsland;
 (* Return the name of the location on the map *)
 function getLocationName(xPOS, yPOS: smallint):shortstring;
 
@@ -263,6 +265,17 @@ begin
   begin
     overworldDisplay[r][c].Glyph := ' ';
     overworldDisplay[r][c].GlyphColour := 'black';
+  end;
+end;
+
+procedure loadDisplayedIsland;
+begin
+  for r := 1 to overworld.MAXR do
+  begin
+    for c := 1 to overworld.MAXC do
+    begin
+      drawOWTile(c, r);
+    end;
   end;
 end;
 

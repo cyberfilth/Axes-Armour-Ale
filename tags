@@ -403,6 +403,8 @@ getItemID	backup/items.pas	/^function getItemID(x, y: smallint): smallint;$/;"	f
 getItemID	items.pas	/^function getItemID(x, y: smallint): smallint;$/;"	f
 getItemName	backup/items.pas	/^function getItemName(x, y: smallint): shortstring;$/;"	f
 getItemName	items.pas	/^function getItemName(x, y: smallint): shortstring;$/;"	f
+getLocationName	backup/island.pas	/^function getLocationName(xPOS, yPOS: smallint): shortstring;$/;"	f
+getLocationName	backup/island.pas	/^function getLocationName(xPOS, yPOS: smallint):shortstring;$/;"	f
 getLocationName	island.pas	/^function getLocationName(xPOS, yPOS: smallint): shortstring;$/;"	f
 getLocationName	island.pas	/^function getLocationName(xPOS, yPOS: smallint):shortstring;$/;"	f
 getSize	screens/backup/resolution.pas	/^procedure getSize;$/;"	p
@@ -496,6 +498,8 @@ levelupHealth	player/backup/player.pas	/^procedure levelupHealth(amount: smallin
 levelupHealth	player/player.pas	/^procedure levelupHealth(amount: smallint);$/;"	p
 litterItems	backup/universe.pas	/^procedure litterItems;$/;"	p
 litterItems	universe.pas	/^procedure litterItems;$/;"	p
+loadDisplayedIsland	backup/island.pas	/^procedure loadDisplayedIsland;$/;"	p
+loadDisplayedIsland	island.pas	/^procedure loadDisplayedIsland;$/;"	p
 loadDisplayedMap	backup/map.pas	/^procedure loadDisplayedMap;$/;"	p
 loadDisplayedMap	map.pas	/^procedure loadDisplayedMap;$/;"	p
 loadDungeonLevel	backup/file_handling.pas	/^procedure loadDungeonLevel(lvl: byte);$/;"	p
@@ -504,6 +508,8 @@ loadEquippedItems	player/backup/player_inventory.pas	/^procedure loadEquippedIte
 loadEquippedItems	player/player_inventory.pas	/^procedure loadEquippedItems;$/;"	p
 loadGame	backup/file_handling.pas	/^procedure loadGame;$/;"	p
 loadGame	file_handling.pas	/^procedure loadGame;$/;"	p
+loadOverworldMap	backup/file_handling.pas	/^procedure loadOverworldMap;$/;"	p
+loadOverworldMap	file_handling.pas	/^procedure loadOverworldMap;$/;"	p
 logAction	logging.pas	/^procedure logAction(textString: string);$/;"	p
 look	screens/scrlook.pas	/^procedure look(dir: word);$/;"	p
 lookInput	backup/keyboardinput.pas	/^procedure lookInput(Keypress: TKeyEvent);$/;"	p

@@ -12,6 +12,8 @@ uses
 
 (* Save the overworld map to disk *)
 procedure saveOverworldMap;
+(* Read overworld map from disk *)
+procedure loadOverworldMap;
 (* Write a newly generate level of a dungeon to disk *)
 procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;
   dtype: dungeonTerrain);
@@ -33,7 +35,7 @@ uses
 
 procedure saveOverworldMap;
 var
-  r, c: smallint;
+  r, c, id_int: smallint;
   Doc: TXMLDocument;
   RootNode, dataNode: TDOMNode;
   dfileName, Value: shortstring;
@@ -64,6 +66,7 @@ var
   end;
 
 begin
+  id_int := 0;
   dfileName := (globalUtils.saveDirectory + PathDelim + 'ellanToll.dat');
   try
     { Create a document }
@@ -73,13 +76,16 @@ begin
     Doc.Appendchild(RootNode);
     RootNode := Doc.DocumentElement;
 
+
     (* map tiles *)
     for r := 1 to overworld.MAXR do
     begin
       for c := 1 to overworld.MAXC do
       begin
+        Inc(id_int);
         DataNode := AddChild(RootNode, 'et');
-        TDOMElement(dataNode).SetAttribute('id', UTF8Decode(IntToStr(island.overworldMap[r][c].id)));
+        TDOMElement(dataNode).SetAttribute('id', UTF8Decode(IntToStr(id_int)));
+
         AddElement(datanode, 'Blk', BoolToStr(island.overworldMap[r][c].Blocks));
         AddElement(datanode, 'Occ', BoolToStr(island.overworldMap[r][c].Occupied));
         AddElement(datanode, 'Dsc', BoolToStr(island.overworldMap[r][c].Discovered));
@@ -100,14 +106,12 @@ begin
            Gplaceholder := 'F'
         else if (island.overworldMap[r][c].Glyph = '''') and (island.overworldMap[r][c].GlyphColour = 'lightGreen') then
            Gplaceholder := 'G'
-        else if (island.overworldMap[r][c].Glyph = '~') then
-           Gplaceholder := '~'
-        else if (island.overworldMap[r][c].Glyph = chr(247)) then
-           Gplaceholder := '+'
         else if (island.overworldMap[r][c].Glyph = '.') and (island.overworldMap[r][c].GlyphColour = 'brown') then
            Gplaceholder := 'H'
         else if (island.overworldMap[r][c].Glyph = ',') and (island.overworldMap[r][c].GlyphColour = 'brown') then
            Gplaceholder := 'I'
+         else if (island.overworldMap[r][c].Glyph = '.') and (island.overworldMap[r][c].GlyphColour = 'yellow') then
+           Gplaceholder := 'J'
         else if (island.overworldMap[r][c].Glyph = chr(94)) then
            Gplaceholder := 'K'
         else if (island.overworldMap[r][c].Glyph = ':') and (island.overworldMap[r][c].GlyphColour = 'brown') then
@@ -116,10 +120,14 @@ begin
            Gplaceholder := 'M'
         else if (island.overworldMap[r][c].Glyph = ':') and (island.overworldMap[r][c].GlyphColour = 'yellow') then
            Gplaceholder := 'N'
+        else if (island.overworldMap[r][c].Glyph = '~') and (island.overworldMap[r][c].GlyphColour = 'lightBlue') then
+           Gplaceholder := '-'
+        else if (island.overworldMap[r][c].Glyph = chr(247)) and (island.overworldMap[r][c].GlyphColour = 'blue') then
+           Gplaceholder := '~'
         else if (island.overworldMap[r][c].Glyph = '>') then
            Gplaceholder := '>'
-        else
-            Gplaceholder := '~';
+           else
+             Gplaceholder := 'X';
         AddElement(datanode, 'G', Gplaceholder);
         AddElement(datanode, 'GC', island.overworldMap[r][c].GlyphColour);
       end;
@@ -129,6 +137,129 @@ begin
   finally
          { free memory }
          Doc.Free;
+  end;
+end;
+
+procedure loadOverworldMap;
+var
+  RootNode, NextNode, Blocks, Occupied, Discovered, TerrainType, Glyph: TDOMNode;
+  Doc: TXMLDocument;
+  dfileName: shortstring;
+  r, c: smallint;
+begin
+  dfileName := (globalUtils.saveDirectory + PathDelim + 'ellanToll.dat');
+  try
+    (* Read in dat file from disk *)
+    ReadXMLFile(Doc, dfileName);
+    (* Retrieve the nodes *)
+    RootNode := Doc.DocumentElement.FindNode('et');
+
+    for r := 1 to overworld.MAXR do
+    begin
+      for c := 1 to overworld.MAXC do
+      begin
+        island.overworldMap[r][c].id := StrToInt(UTF8Encode(RootNode.Attributes.Item[0].NodeValue));
+        Blocks := RootNode.FirstChild;
+        island.overworldMap[r][c].Blocks := StrToBool(UTF8Encode(Blocks.TextContent));
+        Occupied := Blocks.NextSibling;
+        island.overworldMap[r][c].Occupied := StrToBool(UTF8Encode(Occupied.TextContent));
+        Discovered := Occupied.NextSibling;
+        island.overworldMap[r][c].Discovered := StrToBool(UTF8Encode(Discovered.TextContent));
+        TerrainType := Discovered.NextSibling;
+        island.overworldMap[r][c].TerrainType := overworldTerrain(GetEnumValue(Typeinfo(overworldTerrain), UTF8Encode(TerrainType.TextContent)));
+        Glyph := TerrainType.NextSibling;
+        if (UTF8Encode(Glyph.TextContent[1]) = 'A') then
+           begin
+             island.overworldMap[r][c].Glyph := chr(6);
+             island.overworldMap[r][c].GlyphColour := 'green';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'B') then
+           begin
+             island.overworldMap[r][c].Glyph := chr(6);
+             island.overworldMap[r][c].GlyphColour := 'lightGreen';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'C') then
+           begin
+             island.overworldMap[r][c].Glyph := chr(5);
+             island.overworldMap[r][c].GlyphColour := 'green';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'D') then
+           begin
+             island.overworldMap[r][c].Glyph := '"';
+             island.overworldMap[r][c].GlyphColour := 'green';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'E') then
+           begin
+             island.overworldMap[r][c].Glyph := '''';
+             island.overworldMap[r][c].GlyphColour := 'green';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'F') then
+           begin
+             island.overworldMap[r][c].Glyph := '"';
+             island.overworldMap[r][c].GlyphColour := 'lightGreen';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'G') then
+           begin
+             island.overworldMap[r][c].Glyph := '''';
+             island.overworldMap[r][c].GlyphColour := 'lightGreen';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'H') then
+          begin
+             island.overworldMap[r][c].Glyph := '.';
+             island.overworldMap[r][c].GlyphColour := 'brown';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'I') then
+          begin
+             island.overworldMap[r][c].Glyph := ',';
+             island.overworldMap[r][c].GlyphColour := 'brown';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'J') then
+          begin
+             island.overworldMap[r][c].Glyph := '.';
+             island.overworldMap[r][c].GlyphColour := 'yellow';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'K') then
+          begin
+             island.overworldMap[r][c].Glyph := chr(94);
+             island.overworldMap[r][c].GlyphColour := 'brown';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'L') then
+          begin
+             island.overworldMap[r][c].Glyph := ':';
+             island.overworldMap[r][c].GlyphColour := 'brown';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'M') then
+          begin
+             island.overworldMap[r][c].Glyph := ';';
+             island.overworldMap[r][c].GlyphColour := 'brown';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = 'N') then
+          begin
+             island.overworldMap[r][c].Glyph := ':';
+             island.overworldMap[r][c].GlyphColour := 'yellow';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = '>') then
+          begin
+             island.overworldMap[r][c].Glyph := '>';
+             island.overworldMap[r][c].GlyphColour := 'white';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = '~') then
+           begin
+             island.overworldMap[r][c].Glyph := chr(247);
+             island.overworldMap[r][c].GlyphColour := 'blue';
+           end
+        else if (UTF8Encode(Glyph.TextContent[1]) = '-') then
+           begin
+             island.overworldMap[r][c].Glyph := '~';
+             island.overworldMap[r][c].GlyphColour := 'lightBlue';
+           end;
+        NextNode := RootNode.NextSibling;
+        RootNode := NextNode;
+      end;
+    end;
+  finally
+    (* free memory *)
+    Doc.Free;
   end;
 end;
 
@@ -273,7 +404,10 @@ begin
     AddElement(datanode, 'title', UTF8Encode(universe.title));
     AddElement(datanode, 'floor', IntToStr(currentDepth));
     AddElement(datanode, 'levelVisited', BoolToStr(True));
-    AddElement(datanode, 'itemsOnThisFloor', IntToStr(items.countNonEmptyItems));
+    if (womblingFree = 'underground') then
+        AddElement(datanode, 'itemsOnThisFloor', IntToStr(items.countNonEmptyItems))
+    else
+        AddElement(datanode, 'itemsOnThisFloor', '0');
     AddElement(datanode, 'entitiesOnThisFloor', IntToStr(entities.countLivingEntities));
     AddElement(datanode, 'totalDepth', IntToStr(totalDepth));
     WriteStr(Value, dungeonType);
@@ -859,8 +993,6 @@ begin
       AddElement(DataNode, 'adds', IntToStr(inventory[i].adds));
       AddElement(DataNode, 'inInventory', BoolToStr(inventory[i].inInventory));
     end;
-
-    { Plot elements }
 
     (* Save XML *)
     WriteXMLFile(Doc, dfileName);

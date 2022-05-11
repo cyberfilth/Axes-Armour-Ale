@@ -287,44 +287,67 @@ begin
   (* Initialise items list *)
   items.initialiseItems;
   file_handling.loadGame;
-  file_handling.loadDungeonLevel(universe.currentDepth);
-  map.loadDisplayedMap;
-  (* Game state = game running *)
-  gameState := stGame;
   killer := 'empty';
   (* set up inventory *)
   ui.equippedWeapon := 'No weapon equipped';
   ui.equippedArmour := 'No armour worn';
   (* Load player inventory *)
   player_inventory.loadEquippedItems;
-
-  (* Draw player and FOV *)
-  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
-
-  (* Redraw all items *)
-  items.redrawItems;
-
-  (* Redraw all NPC'S *)
-  for i := 1 to entities.npcAmount do
-    entities.redrawMapDisplay(i);
-
-  { prepare changes to the screen }
-  LockScreenUpdate;
-  (* Clear the screen *)
-  ui.screenBlank;
-  (* Draw the game screen *)
-  scrGame.displayGameScreen;
-  (* draw map through the camera *)
-  camera.drawMap;
-  (* Generate the welcome message *)
-  plot_gen.getTrollDate;
-  ui.displayMessage('Good Luck...');
-  ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
-  ui.displayMessage('It is ' + plot_gen.trollDate);
-  { Write those changes to the screen }
-  UnlockScreenUpdate;
-  { only redraws the parts that have been updated }
-  UpdateScreen(False);
+  (* Check to see if player above or below ground *)
+  if (globalUtils.womblingFree = 'underground') then
+  begin
+    file_handling.loadDungeonLevel(universe.currentDepth);
+    map.loadDisplayedMap;
+    (* Game state = game running *)
+    gameState := stGame;
+    (* Draw player and FOV *)
+    fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+    (* Redraw all items *)
+    items.redrawItems;
+    (* Redraw all NPC'S *)
+    for i := 1 to entities.npcAmount do
+        entities.redrawMapDisplay(i);
+    { prepare changes to the screen }
+    LockScreenUpdate;
+    (* Clear the screen *)
+    ui.screenBlank;
+    (* Draw the game screen *)
+    scrGame.displayGameScreen;
+    (* draw map through the camera *)
+    camera.drawMap;
+    (* Generate the welcome message *)
+    plot_gen.getTrollDate;
+    ui.displayMessage('Good Luck...');
+    ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
+    ui.displayMessage('It is ' + plot_gen.trollDate);
+    { Write those changes to the screen }
+    UnlockScreenUpdate;
+    { only redraws the parts that have been updated }
+    UpdateScreen(False);
+  end
+  else if (globalUtils.womblingFree = 'overground') then
+  begin
+    file_handling.loadOverworldMap;
+    island.loadDisplayedIsland;
+    (* Game state = overworld *)
+    gameState := stOverworld;
+    (* Draw player and FOV *)
+    //entityList[0].posX := globalUtils.OWx;
+    //entityList[0].posY := globalUtils.OWy;
+    fov.islandFOV(entityList[0].posX, entityList[0].posY);
+    { prepare changes to the screen }
+    LockScreenUpdate;
+    (* Clear the screen *)
+    ui.screenBlank;
+    (* Draw the game screen *)
+    scrOverworld.drawSidepanel;
+    (* draw map through the camera *)
+    camera.drawOWMap;
+    { Write those changes to the screen }
+    UnlockScreenUpdate;
+    { only redraws the parts that have been updated }
+    UpdateScreen(False);
+  end;
 end;
 
 (* Take input from player for the KeyboardInput unit, based on current game state *)
