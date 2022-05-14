@@ -7,7 +7,7 @@ interface
 
 uses
   SysUtils, player_inventory, player_stats, plot_gen, combat_resolver, items,
-  island, scrOverworld;
+  island, scrOverworld, file_handling, globalUtils, video, scrGame, camera;
 
 (* Create player character *)
 procedure createPlayer;
@@ -31,7 +31,7 @@ procedure regenMagick;
 implementation
 
 uses
-  map, fov, ui, entities;
+  map, fov, ui, entities, main;
 
 procedure createPlayer;
 begin
@@ -117,7 +117,7 @@ end;
 procedure movePlayerOW(dir: word);
 var
   (* store original values in case player cannot move *)
-  originalX, originalY: smallint;
+  originalX, originalY, locationID, i: smallint;
   mapFeature: shortstring;
 begin
   (* Repaint visited tiles *)
@@ -129,25 +129,77 @@ begin
     2: Dec(entityList[0].posX); // W
     3: Inc(entityList[0].posY); // S
     4: Inc(entityList[0].posX); // E
-    5:                      // NE
+    5:                          // NE
     begin
       Inc(entityList[0].posX);
       Dec(entityList[0].posY);
     end;
-    6:                      // SE
+    6:                        // SE
     begin
       Inc(entityList[0].posX);
       Inc(entityList[0].posY);
     end;
-    7:                      // SW
+    7:                        // SW
     begin
       Dec(entityList[0].posX);
       Inc(entityList[0].posY);
     end;
-    8:                      // NW
+    8:                        // NW
     begin
       Dec(entityList[0].posX);
       Dec(entityList[0].posY);
+    end;
+    9:                        // Enter location
+    begin
+      (* Check if the player is standing on a location *)
+      if (island.overworldMap[entityList[0].posY][entityList[0].posX].Glyph = '>') then
+      begin
+        { Write island to disk }
+        file_handling.saveOverworldMap;
+        { get the id number of the location }
+        locationID := island.getLocationID(entityList[0].posX, entityList[0].posY);
+        { Read location from disk if it already exists }
+        if (island.locationExists(entityList[0].posX, entityList[0].posY) = True) then
+        begin
+          (* store overworld coordinates *)
+          globalUtils.OWx := entityList[0].posX;
+          globalUtils.OWy := entityList[0].posY;
+          (* Set underground flag *)
+          globalUtils.womblingFree := 'underground';
+          (* Load the dungeon *)
+          locationID := island.getLocationID(entityList[0].posX, entityList[0].posY);
+          file_handling.loadDungeonLevel(locationID, 1);
+          map.loadDisplayedMap;
+          (* Find the entrance to place the player *)
+          map.placeAtEntrance;
+          (* Draw player and FOV *)
+          fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+          (* Redraw all items *)
+          items.redrawItems;
+          (* Redraw all NPC'S *)
+          for i := 1 to entities.npcAmount do
+              entities.redrawMapDisplay(i);
+          { prepare changes to the screen }
+          LockScreenUpdate;
+          (* Clear the screen *)
+          ui.screenBlank;
+          (* Draw the game screen *)
+          scrGame.displayGameScreen;
+          (* draw map through the camera *)
+          camera.drawMap;
+          UnlockScreenUpdate;
+          UpdateScreen(False);
+          (* Set game state to Game (underground) *)
+          gameState := stGame;
+          main.gameLoop;
+        end
+        else
+        begin
+          { Generate a new location if not already created }
+        end
+      end
+      else
+          TextOut(centreX('Nowhere to enter here'), 22, 'cyan', 'Nowhere to enter here')
     end;
   end;
   (* check if tile is walkable *)

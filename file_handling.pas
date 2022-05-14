@@ -20,7 +20,7 @@ procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;
 (* Write explored dungeon level to disk *)
 procedure saveDungeonLevel;
 (* Read dungeon level from disk *)
-procedure loadDungeonLevel(lvl: byte);
+procedure loadDungeonLevel(dungeonID: smallint; lvl: byte);
 (* Delete saved game files *)
 procedure deleteGameData;
 (* Load a saved game *)
@@ -533,7 +533,7 @@ begin
   end;
 end;
 
-procedure loadDungeonLevel(lvl: byte);
+procedure loadDungeonLevel(dungeonID: smallint; lvl: byte);
 var
   dfileName: shortstring;
   RootNode, Tile, ItemsNode, ParentNode, NPCnode, NextNode, Blocks,
@@ -542,7 +542,7 @@ var
   r, c, itemAmount: integer;
   levelVisited: boolean;
 begin
-  dfileName := globalUtils.saveDirectory + PathDelim + 'd_' + IntToStr(uniqueID) + '_f' + IntToStr(lvl) + '.dat';
+  dfileName := globalUtils.saveDirectory + PathDelim + 'd_' + IntToStr(dungeonID) + '_f' + IntToStr(lvl) + '.dat';
   try
     (* Read in dat file from disk *)
     ReadXMLFile(Doc, dfileName);
@@ -746,7 +746,9 @@ begin
     begin
       island.locationLookup[i].X := StrToInt(UTF8Encode(locationNode.FindNode('X').TextContent));
       island.locationLookup[i].Y := StrToInt(UTF8Encode(locationNode.FindNode('Y').TextContent));
+      island.locationLookup[i].id := StrToInt(UTF8Encode(locationNode.FindNode('id').TextContent));
       island.locationLookup[i].name := UTF8Encode(locationNode.FindNode('name').TextContent);
+      island.locationLookup[i].generated := StrToBool(UTF8Encode(locationNode.FindNode('generated').TextContent));
     end;
 
     (* Player data *)
@@ -911,7 +913,9 @@ begin
       DataNode := AddChild(RootNode, 'locData');
       AddElement(DataNode, 'X', IntToStr(island.locationLookup[i].X));
       AddElement(DataNode, 'Y', IntToStr(island.locationLookup[i].Y));
+      AddElement(DataNode, 'id', IntToStr(island.locationLookup[i].id));
       AddElement(DataNode, 'name', island.locationLookup[i].name);
+      AddElement(DataNode, 'generated', BoolToStr(island.locationLookup[i].generated));
     end;
 
     (* Player data *)

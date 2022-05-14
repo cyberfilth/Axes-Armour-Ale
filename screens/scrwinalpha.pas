@@ -7,7 +7,7 @@ unit scrWinAlpha;
 interface
 
 uses
-  SysUtils, video, ui, universe;
+  SysUtils, video, ui, universe, file_handling;
 
 (* Show the Win screen *)
 procedure displayWinscreen;
@@ -31,10 +31,11 @@ begin
   TextOut(5, 10, 'cyan', 'ahead promises adventure, and more than a little danger.');
   TextOut(5, 11, 'cyan', 'There are ruins to explore and treasure to plunder, you set out...');
 
-  (* Write those changes to the screen *)
   UnlockScreenUpdate;
-  (* only redraws the parts that have been updated *)
   UpdateScreen(False);
+  (* Save current dungeon *)
+  file_handling.saveDungeonLevel;
+  (* Create overworld map *)
   universe.createEllanToll;
   LockScreenUpdate;
   TextOut(centreX('x - to continue'), 24, 'cyan', 'x - to continue');

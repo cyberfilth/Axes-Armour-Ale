@@ -209,7 +209,9 @@ begin
   begin
     X := globalUtils.OWx;
     Y := globalUtils.OWy;
+    id := 1;
     name := 'Smugglers Cave';
+    generated := True;
   end;
   (* Create the dungeon *)
   universe.createNewDungeon(map.mapType);
@@ -296,7 +298,7 @@ begin
   (* Check to see if player above or below ground *)
   if (globalUtils.womblingFree = 'underground') then
   begin
-    file_handling.loadDungeonLevel(universe.currentDepth);
+    file_handling.loadDungeonLevel(universe.uniqueID, universe.currentDepth);
     map.loadDisplayedMap;
     (* Game state = game running *)
     gameState := stGame;
@@ -332,8 +334,6 @@ begin
     (* Game state = overworld *)
     gameState := stOverworld;
     (* Draw player and FOV *)
-    //entityList[0].posX := globalUtils.OWx;
-    //entityList[0].posY := globalUtils.OWy;
     fov.islandFOV(entityList[0].posX, entityList[0].posY);
     { prepare changes to the screen }
     LockScreenUpdate;

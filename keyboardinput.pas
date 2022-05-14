@@ -466,6 +466,11 @@ begin
       gameState := stQuitMenuOW;
       ui.exitPrompt;
     end;
+     '>': { Enter location }
+     begin
+       player.movePlayerOW(9);
+       main.overworldGameLoop;
+     end;
   end;
 end;
 

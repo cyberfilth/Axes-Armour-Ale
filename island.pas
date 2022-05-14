@@ -44,9 +44,11 @@ type
   (* Location on the island *)
   locationTile = record
     (* coordinates *)
-    X, Y: smallint;
+    X, Y, id: smallint;
     (* Name of location *)
     name: shortstring;
+    (* Has location been generated / written to disk *)
+    generated: boolean;
   end;
 
 var
@@ -65,6 +67,10 @@ procedure drawOWTile(c, r: smallint);
 procedure loadDisplayedIsland;
 (* Return the name of the location on the map *)
 function getLocationName(xPOS, yPOS: smallint):shortstring;
+(* Return the ID number of the location on the map *)
+function getLocationID(xPOS, yPOS: smallint):smallint;
+(* Return True if the location already exists on disk *)
+function locationExists(xPOS, yPOS: smallint):boolean;
 
 
 implementation
@@ -289,6 +295,36 @@ begin
     if (locationLookup[i].X = xPOS) and (locationLookup[i].Y = yPOS) then
     begin
       Result := locationLookup[i].name;
+      exit;
+    end;
+  end;
+end;
+
+function getLocationID(xPOS, yPOS: smallint): smallint;
+var
+  i: smallint;
+begin
+  Result := 0;
+    for i := 0 to High(locationLookup) do
+  begin
+    if (locationLookup[i].X = xPOS) and (locationLookup[i].Y = yPOS) then
+    begin
+      Result := locationLookup[i].id;
+      exit;
+    end;
+  end;
+end;
+
+function locationExists(xPOS, yPOS: smallint): boolean;
+var
+  i: smallint;
+begin
+  Result := False;
+    for i := 0 to High(locationLookup) do
+  begin
+    if (locationLookup[i].X = xPOS) and (locationLookup[i].Y = yPOS) then
+    begin
+      Result := True;
       exit;
     end;
   end;

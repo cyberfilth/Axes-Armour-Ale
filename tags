@@ -403,6 +403,10 @@ getItemID	backup/items.pas	/^function getItemID(x, y: smallint): smallint;$/;"	f
 getItemID	items.pas	/^function getItemID(x, y: smallint): smallint;$/;"	f
 getItemName	backup/items.pas	/^function getItemName(x, y: smallint): shortstring;$/;"	f
 getItemName	items.pas	/^function getItemName(x, y: smallint): shortstring;$/;"	f
+getLocationID	backup/island.pas	/^function getLocationID(xPOS, yPOS: smallint): smallint;$/;"	f
+getLocationID	backup/island.pas	/^function getLocationID(xPOS, yPOS: smallint):smallint;$/;"	f
+getLocationID	island.pas	/^function getLocationID(xPOS, yPOS: smallint): smallint;$/;"	f
+getLocationID	island.pas	/^function getLocationID(xPOS, yPOS: smallint):smallint;$/;"	f
 getLocationName	backup/island.pas	/^function getLocationName(xPOS, yPOS: smallint): shortstring;$/;"	f
 getLocationName	backup/island.pas	/^function getLocationName(xPOS, yPOS: smallint):shortstring;$/;"	f
 getLocationName	island.pas	/^function getLocationName(xPOS, yPOS: smallint): shortstring;$/;"	f
@@ -502,14 +506,17 @@ loadDisplayedIsland	backup/island.pas	/^procedure loadDisplayedIsland;$/;"	p
 loadDisplayedIsland	island.pas	/^procedure loadDisplayedIsland;$/;"	p
 loadDisplayedMap	backup/map.pas	/^procedure loadDisplayedMap;$/;"	p
 loadDisplayedMap	map.pas	/^procedure loadDisplayedMap;$/;"	p
-loadDungeonLevel	backup/file_handling.pas	/^procedure loadDungeonLevel(lvl: byte);$/;"	p
-loadDungeonLevel	file_handling.pas	/^procedure loadDungeonLevel(lvl: byte);$/;"	p
+loadDungeonLevel	backup/file_handling.pas	/^procedure loadDungeonLevel(dungeonID: smallint; lvl: byte);$/;"	p
+loadDungeonLevel	file_handling.pas	/^procedure loadDungeonLevel(dungeonID: smallint; lvl: byte);$/;"	p
 loadEquippedItems	player/backup/player_inventory.pas	/^procedure loadEquippedItems;$/;"	p
 loadEquippedItems	player/player_inventory.pas	/^procedure loadEquippedItems;$/;"	p
 loadGame	backup/file_handling.pas	/^procedure loadGame;$/;"	p
 loadGame	file_handling.pas	/^procedure loadGame;$/;"	p
 loadOverworldMap	backup/file_handling.pas	/^procedure loadOverworldMap;$/;"	p
 loadOverworldMap	file_handling.pas	/^procedure loadOverworldMap;$/;"	p
+locationExists	backup/island.pas	/^function locationExists(xPOS, yPOS: smallint):boolean;$/;"	f
+locationExists	island.pas	/^function locationExists(xPOS, yPOS: smallint): boolean;$/;"	f
+locationExists	island.pas	/^function locationExists(xPOS, yPOS: smallint):boolean;$/;"	f
 logAction	logging.pas	/^procedure logAction(textString: string);$/;"	p
 look	screens/scrlook.pas	/^procedure look(dir: word);$/;"	p
 lookInput	backup/keyboardinput.pas	/^procedure lookInput(Keypress: TKeyEvent);$/;"	p
@@ -551,6 +558,8 @@ paintOverMsg	screens/backup/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
 paintOverMsg	screens/scrtargeting.pas	/^procedure paintOverMsg;$/;"	p
 pickUp	player/backup/player.pas	/^procedure pickUp;$/;"	p
 pickUp	player/player.pas	/^procedure pickUp;$/;"	p
+placeAtEntrance	backup/map.pas	/^procedure placeAtEntrance;$/;"	p
+placeAtEntrance	map.pas	/^procedure placeAtEntrance;$/;"	p
 playerProjectilePath	vision/los.pas	/^procedure playerProjectilePath(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
 processLight	player/backup/player_stats.pas	/^procedure processLight;$/;"	p
 processLight	player/player_stats.pas	/^procedure processLight;$/;"	p
