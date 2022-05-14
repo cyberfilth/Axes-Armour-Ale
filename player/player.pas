@@ -166,32 +166,37 @@ begin
           globalUtils.OWy := entityList[0].posY;
           (* Set underground flag *)
           globalUtils.womblingFree := 'underground';
+          (* Set game state to Game (underground) *)
+          gameState := stGame;
           (* Load the dungeon *)
           locationID := island.getLocationID(entityList[0].posX, entityList[0].posY);
           file_handling.loadDungeonLevel(locationID, 1);
-          map.loadDisplayedMap;
-          (* Find the entrance to place the player *)
-          map.placeAtEntrance;
-          (* Draw player and FOV *)
-          fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
-          (* Redraw all items *)
-          items.redrawItems;
-          (* Redraw all NPC'S *)
-          for i := 1 to entities.npcAmount do
-              entities.redrawMapDisplay(i);
           { prepare changes to the screen }
           LockScreenUpdate;
           (* Clear the screen *)
           ui.screenBlank;
           (* Draw the game screen *)
           scrGame.displayGameScreen;
+          map.loadDisplayedMap;
+          (* Find the entrance to place the player *)
+          map.placeAtEntrance;
+          (* Draw player and FOV *)
+          map.occupy(entityList[0].posX, entityList[0].posY);
+          (* draw map through the camera *)
+          camera.drawMap;
+          fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+          (* Redraw all items *)
+          items.redrawItems;
+          (* Redraw all NPC'S *)
+          for i := 1 to entities.npcAmount do
+              entities.redrawMapDisplay(i);
+          (* Draw player and FOV *)
+          fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
           (* draw map through the camera *)
           camera.drawMap;
           UnlockScreenUpdate;
           UpdateScreen(False);
-          (* Set game state to Game (underground) *)
-          gameState := stGame;
-          main.gameLoop;
+          exit;
         end
         else
         begin
@@ -199,7 +204,12 @@ begin
         end
       end
       else
-          TextOut(centreX('Nowhere to enter here'), 22, 'cyan', 'Nowhere to enter here')
+      begin
+        LockScreenUpdate;
+        TextOut(centreX('Nowhere to enter here'), 22, 'cyan', 'Nowhere to enter here');
+        UnlockScreenUpdate;
+        UpdateScreen(False);
+      end;
     end;
   end;
   (* check if tile is walkable *)
@@ -209,6 +219,9 @@ begin
     entityList[0].posY := originalY;
     Dec(entityList[0].moveCount);
   end;
+  (* Break out of procedure when leaving the overworld map *)
+  if (globalUtils.womblingFree = 'overground') then
+  begin
   fov.islandFOV(entityList[0].posX, entityList[0].posY);
   (* display message on type of terrain or name of location *)
   { Blank out the old message }
@@ -227,6 +240,7 @@ begin
   (* Regenerate Magick *)
   if (player_stats.playerRace <> 'Dwarf') then
     regenMagick;
+  end;
 end;
 
 (* Move the player within the confines of the game map *)
