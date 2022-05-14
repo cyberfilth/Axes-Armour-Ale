@@ -7,7 +7,7 @@ interface
 
 uses
   SysUtils, player_inventory, player_stats, plot_gen, combat_resolver, items,
-  island, scrOverworld, file_handling, globalUtils, video, scrGame, camera;
+  island, scrOverworld, file_handling, globalUtils, video, scrGame, camera, universe;
 
 (* Create player character *)
 procedure createPlayer;
@@ -194,6 +194,12 @@ begin
           fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
           (* draw map through the camera *)
           camera.drawMap;
+          (* Message log *)
+          ui.displayMessage('             ');
+          ui.displayMessage('              ');
+          ui.displayMessage('               ');
+          ui.displayMessage('Good Luck...');
+          ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
           UnlockScreenUpdate;
           UpdateScreen(False);
           exit;
