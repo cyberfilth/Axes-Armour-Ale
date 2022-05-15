@@ -731,6 +731,7 @@ begin
     (* Last overworld coordinates *)
     globalutils.OWx := StrToInt(UTF8Encode(RootNode.FindNode('owx').TextContent));
     globalutils.OWy := StrToInt(UTF8Encode(RootNode.FindNode('owy').TextContent));
+    universe.OWgen := StrToBool(UTF8Encode(RootNode.FindNode('OWgen').TextContent));
     (* Total number of unique locations *)
     SetLength(island.locationLookup, StrToInt(UTF8Encode(RootNode.FindNode('locations').TextContent)));
     (* Current dungeon ID *)
@@ -896,6 +897,7 @@ begin
     AddElement(datanode, 'womble', globalutils.womblingFree);
     AddElement(datanode, 'owx', IntToStr(globalutils.OWx));
     AddElement(datanode, 'owy', IntToStr(globalutils.OWy));
+    AddElement(datanode, 'OWgen', BoolToStr(universe.OWgen));
     AddElement(datanode, 'locations', IntToStr(Length(island.locationLookup)));
     AddElement(datanode, 'dungeonID', IntToStr(uniqueID));
     AddElement(datanode, 'currentDepth', IntToStr(currentDepth));

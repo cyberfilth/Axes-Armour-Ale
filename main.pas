@@ -199,6 +199,7 @@ begin
   globalUtils.OWy := 56;
   dlgInfo.dialogType := dlgNone;
   killer := 'empty';
+  OWgen := False;
   (* Initialise the game world and create 1st cave *)
   universe.dlistLength := 0;
   (* first map type is always a cave *)
@@ -482,17 +483,19 @@ begin
   entityList[0].posX := globalUtils.OWx;
   entityList[0].posY := globalUtils.OWy;
 
-  UnlockScreenUpdate;
+  LockScreenUpdate;
   ui.screenBlank;
   scrOverworld.drawSidepanel;
-  overworldGameLoop;
+  island.loadDisplayedIsland;
+  camera.drawOWMap;
+  fov.islandFOV(entityList[0].posX, entityList[0].posY);
   UnlockScreenUpdate;
   UpdateScreen(False);
 end;
 
 procedure overworldGameLoop;
 begin
-  UnlockScreenUpdate;
+  LockScreenUpdate;
   fov.islandFOV(entityList[0].posX, entityList[0].posY);
   camera.drawOWMap;
   UnlockScreenUpdate;
@@ -560,8 +563,17 @@ end;
 
 procedure WinningScreen;
 begin
-  gameState := stWinAlpha;
-  scrWinAlpha.displayWinscreen;
+  (* Check if the world has already been generated *)
+  if (universe.OWgen = False) then
+  begin
+    gameState := stWinAlpha;
+    scrWinAlpha.displayWinscreen;
+  end
+  else
+  begin
+    gameState := stOverworld;
+    returnToOverworldScreen;
+  end;
 end;
 
 end.

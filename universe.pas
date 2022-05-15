@@ -26,6 +26,8 @@ var
   currentDungeon: array[1..MAXROWS, 1..MAXCOLUMNS] of shortstring;
   (* Flag to show if this level has been visited before *)
   levelVisited: boolean;
+  (* Has the the overworld been generated before *)
+  OWgen: boolean;
 
 (* Creates a dungeon of a specified type *)
 procedure createNewDungeon(levelType: dungeonTerrain);
@@ -131,6 +133,7 @@ begin
   island.storeEllanToll;
   (* Save the island to disk *)
   file_handling.saveOverworldMap;
+  OWgen := True;
 end;
 
 end.
