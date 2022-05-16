@@ -1,4 +1,4 @@
-(* Player setup and stats *)
+(* Player creation and movement *)
 unit player;
 
 {$mode objfpc}{$H+}
@@ -6,10 +6,13 @@ unit player;
 interface
 
 uses
-  SysUtils, player_inventory, player_stats, plot_gen, combat_resolver, items;
+  SysUtils, player_inventory, player_stats, plot_gen, combat_resolver, items,
+  island, scrOverworld, file_handling, globalUtils, video, scrGame, camera, universe;
 
 (* Create player character *)
 procedure createPlayer;
+(* Moves the player on the overworld map *)
+procedure movePlayerOW(dir: word);
 (* Moves the player on the map *)
 procedure movePlayer(dir: word);
 (* Process status effects *)
@@ -28,7 +31,7 @@ procedure regenMagick;
 implementation
 
 uses
-  map, fov, ui, entities;
+  map, fov, ui, entities, main;
 
 procedure createPlayer;
 begin
@@ -109,6 +112,141 @@ begin
   map.occupy(entityList[0].posX, entityList[0].posY);
   (* Draw player and FOV *)
   fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+end;
+
+procedure movePlayerOW(dir: word);
+var
+  (* store original values in case player cannot move *)
+  originalX, originalY, locationID, i: smallint;
+  mapFeature: shortstring;
+begin
+  (* Repaint visited tiles *)
+  fov.islandFOV(entityList[0].posX, entityList[0].posY);
+  originalX := entityList[0].posX;
+  originalY := entityList[0].posY;
+  case dir of
+    1: Dec(entityList[0].posY); // N
+    2: Dec(entityList[0].posX); // W
+    3: Inc(entityList[0].posY); // S
+    4: Inc(entityList[0].posX); // E
+    5:                          // NE
+    begin
+      Inc(entityList[0].posX);
+      Dec(entityList[0].posY);
+    end;
+    6:                        // SE
+    begin
+      Inc(entityList[0].posX);
+      Inc(entityList[0].posY);
+    end;
+    7:                        // SW
+    begin
+      Dec(entityList[0].posX);
+      Inc(entityList[0].posY);
+    end;
+    8:                        // NW
+    begin
+      Dec(entityList[0].posX);
+      Dec(entityList[0].posY);
+    end;
+    9:                        // Enter location
+    begin
+      (* Check if the player is standing on a location *)
+      if (island.overworldMap[entityList[0].posY][entityList[0].posX].Glyph = '>') then
+      begin
+        { Write island to disk }
+        file_handling.saveOverworldMap;
+        { get the id number of the location }
+        locationID := island.getLocationID(entityList[0].posX, entityList[0].posY);
+        { Read location from disk if it already exists }
+        if (island.locationExists(entityList[0].posX, entityList[0].posY) = True) then
+        begin
+          (* store overworld coordinates *)
+          globalUtils.OWx := entityList[0].posX;
+          globalUtils.OWy := entityList[0].posY;
+          (* Set underground flag *)
+          globalUtils.womblingFree := 'underground';
+          (* Set game state to Game (underground) *)
+          gameState := stGame;
+          (* Load the dungeon *)
+          locationID := island.getLocationID(entityList[0].posX, entityList[0].posY);
+          file_handling.loadDungeonLevel(locationID, 1);
+          { prepare changes to the screen }
+          LockScreenUpdate;
+          (* Clear the screen *)
+          ui.screenBlank;
+          (* Draw the game screen *)
+          scrGame.displayGameScreen;
+          map.loadDisplayedMap;
+          (* Find the entrance to place the player *)
+          map.placeAtEntrance;
+          (* Draw player and FOV *)
+          map.occupy(entityList[0].posX, entityList[0].posY);
+          (* draw map through the camera *)
+          camera.drawMap;
+          fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+          (* Redraw all items *)
+          items.redrawItems;
+          (* Redraw all NPC'S *)
+          for i := 1 to entities.npcAmount do
+              entities.redrawMapDisplay(i);
+          (* Draw player and FOV *)
+          fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+          (* draw map through the camera *)
+          camera.drawMap;
+          (* Message log *)
+          ui.displayMessage('             ');
+          ui.displayMessage('              ');
+          ui.displayMessage('               ');
+          ui.displayMessage('Good Luck...');
+          ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
+          UnlockScreenUpdate;
+          UpdateScreen(False);
+          exit;
+        end
+        else
+        begin
+          { Generate a new location if not already created }
+        end
+      end
+      else
+      begin
+        LockScreenUpdate;
+        TextOut(centreX('Nowhere to enter here'), 22, 'cyan', 'Nowhere to enter here');
+        UnlockScreenUpdate;
+        UpdateScreen(False);
+      end;
+    end;
+  end;
+  (* check if tile is walkable *)
+  if (island.overworldMap[entityList[0].posY][entityList[0].posX].Blocks = True) then
+  begin
+    entityList[0].posX := originalX;
+    entityList[0].posY := originalY;
+    Dec(entityList[0].moveCount);
+  end;
+  (* Break out of procedure when leaving the overworld map *)
+  if (globalUtils.womblingFree = 'overground') then
+  begin
+  fov.islandFOV(entityList[0].posX, entityList[0].posY);
+  (* display message on type of terrain or name of location *)
+  { Blank out the old message }
+  scrOverworld.eraseTerrain;
+
+  if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType = tForest) then
+     TextOut(centreX('forest'), 22, 'cyan', 'forest')
+  else if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType = tPlains) then
+     TextOut(centreX('plains'), 22, 'cyan', 'plains')
+  else if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType = tLocation) then
+       begin
+         mapFeature := 'entrance to ' + island.getLocationName(entityList[0].posX, entityList[0].posY);
+         TextOut(centreX(mapFeature), 22, 'cyan', mapFeature)
+       end;
+
+  (* Regenerate Magick *)
+  if (player_stats.playerRace <> 'Dwarf') then
+    regenMagick;
+  end;
 end;
 
 (* Move the player within the confines of the game map *)

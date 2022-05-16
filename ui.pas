@@ -87,6 +87,7 @@ var
 begin
   tint := $07;
   case textcol of
+    'lightBlue': tint := video.LightBlue;
     'black': tint := video.Black;
     'blue': tint := video.Blue;
     'green': tint := video.Green;

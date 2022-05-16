@@ -12,18 +12,15 @@ uses
 var
   minX: smallint;
 
-(* Draws the panel on side of screen *)
-procedure drawSidepanel;
 (* Clear screen and load various panels for game *)
 procedure displayGameScreen;
-
 
 implementation
 
 uses
   ui, entities;
 
-procedure drawSidepanel;
+procedure displayGameScreen;
 var
   i: smallint;
 begin
@@ -104,10 +101,4 @@ begin
   ui.updateArmour;
 end;
 
-procedure displayGameScreen;
-begin
-  drawSidepanel;
-end;
-
 end.
-

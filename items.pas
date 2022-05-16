@@ -214,7 +214,10 @@ function countNonEmptyItems: byte;
 var
   i, Count: byte;
 begin
+<<<<<<< HEAD
   Result := 0;
+=======
+>>>>>>> master
   if (Length(itemList) <> 0) then
   begin
   Count := 0;
