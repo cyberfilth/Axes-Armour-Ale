@@ -487,10 +487,11 @@ begin
   ui.screenBlank;
   scrOverworld.drawSidepanel;
   island.loadDisplayedIsland;
-  camera.drawOWMap;
   fov.islandFOV(entityList[0].posX, entityList[0].posY);
+  camera.drawOWMap;
   UnlockScreenUpdate;
   UpdateScreen(False);
+  //player.movePlayerOW(0);
 end;
 
 procedure overworldGameLoop;
@@ -572,6 +573,7 @@ begin
   else
   begin
     gameState := stOverworld;
+    file_handling.saveDungeonLevel;
     returnToOverworldScreen;
   end;
 end;
