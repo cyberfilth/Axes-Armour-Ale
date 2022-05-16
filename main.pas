@@ -491,7 +491,6 @@ begin
   camera.drawOWMap;
   UnlockScreenUpdate;
   UpdateScreen(False);
-  //player.movePlayerOW(0);
 end;
 
 procedure overworldGameLoop;
@@ -572,8 +571,10 @@ begin
   end
   else
   begin
-    gameState := stOverworld;
+    UnlockScreenUpdate;
+    UpdateScreen(False);
     file_handling.saveDungeonLevel;
+    gameState := stOverworld;
     returnToOverworldScreen;
   end;
 end;

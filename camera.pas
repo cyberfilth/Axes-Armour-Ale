@@ -71,17 +71,20 @@ var
   (* Tile colour *)
   gCol: shortstring;
 begin
-  pX := entityList[0].posX;
-  pY := entityList[0].posY;
-  for r := 1 to camHeight do
-  begin
-    for c := 1 to camWidth do
+  if (globalUtils.womblingFree = 'underground') then
     begin
-      gCol := map.mapDisplay[r + getY(pY)][c + getX(pX)].GlyphColour;
-      TextOut(c, r, gCol, map.mapDisplay[r + getY(pY)][c + getX(pX)].Glyph);
+    pX := entityList[0].posX;
+    pY := entityList[0].posY;
+    for r := 1 to camHeight do
+    begin
+      for c := 1 to camWidth do
+      begin
+        gCol := map.mapDisplay[r + getY(pY)][c + getX(pX)].GlyphColour;
+        TextOut(c, r, gCol, map.mapDisplay[r + getY(pY)][c + getX(pX)].Glyph);
+      end;
     end;
+    drawPlayer;
   end;
-  drawPlayer;
 end;
 
 procedure drawPlayer;

@@ -514,6 +514,7 @@ loadGame	backup/file_handling.pas	/^procedure loadGame;$/;"	p
 loadGame	file_handling.pas	/^procedure loadGame;$/;"	p
 loadOverworldMap	backup/file_handling.pas	/^procedure loadOverworldMap;$/;"	p
 loadOverworldMap	file_handling.pas	/^procedure loadOverworldMap;$/;"	p
+locationExists	backup/island.pas	/^function locationExists(xPOS, yPOS: smallint): boolean;$/;"	f
 locationExists	backup/island.pas	/^function locationExists(xPOS, yPOS: smallint):boolean;$/;"	f
 locationExists	island.pas	/^function locationExists(xPOS, yPOS: smallint): boolean;$/;"	f
 locationExists	island.pas	/^function locationExists(xPOS, yPOS: smallint):boolean;$/;"	f
