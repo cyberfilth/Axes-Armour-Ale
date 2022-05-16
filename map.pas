@@ -67,6 +67,8 @@ function hasPlayer(checkX, checkY: smallint): boolean;
 procedure ascendStairs;
 (* Go down stairs *)
 procedure descendStairs;
+(* Place the Player on the entrance stair to a dungeon *)
+procedure placeAtEntrance;
 (* Place a tile on the map *)
 procedure drawTile(c, r: smallint; hiDef: byte);
 (* Display explored sections of map when reloading game *)
@@ -167,7 +169,7 @@ begin
       (* Clear list of NPC's *)
       entities.newFloorNPCs;
       { Read next level from disk }
-      file_handling.loadDungeonLevel(universe.currentDepth - 1);
+      file_handling.loadDungeonLevel(universe.uniqueID, universe.currentDepth - 1);
       { Show already discovered tiles }
       for r := 1 to globalUtils.MAXROWS do
       begin
@@ -201,7 +203,7 @@ begin
     (* Clear list of NPC's *)
     entities.newFloorNPCs;
     { Read next level from disk }
-    file_handling.loadDungeonLevel(universe.currentDepth + 1);
+    file_handling.loadDungeonLevel(universe.uniqueID, universe.currentDepth + 1);
     { Show already discovered tiles }
     for r := 1 to globalUtils.MAXROWS do
     begin
@@ -219,6 +221,21 @@ begin
   else
     (* Cannot descend *)
     ui.displayMessage('There are no stairs going down here ');
+end;
+
+procedure placeAtEntrance;
+begin
+  for r := 1 to globalUtils.MAXROWS do
+  begin
+    for c := 1 to globalUtils.MAXCOLUMNS do
+    begin
+      if (maparea[r][c].Glyph = '<') then
+      begin
+        entityList[0].posX := c;
+        entityList[0].posY := r;
+      end;
+    end;
+  end;
 end;
 
 procedure drawTile(c, r: smallint; hiDef: byte);

@@ -214,17 +214,22 @@ function countNonEmptyItems: byte;
 var
   i, Count: byte;
 begin
+  if (Length(itemList) <> 0) then
+  begin
   Count := 0;
   for i := 0 to High(itemList) do
     if (itemList[i].itemType <> itmEmptySlot) and (itemList[i].itemName <> '') then
       Inc(Count);
   Result := Count;
+  end;
 end;
 
 procedure redrawItems;
 var
   i: byte;
 begin
+  if (Length(itemList) <> 0) then
+  begin
   for i := 0 to High(itemList) do
   begin
     { Don't draw used items on the map }
@@ -246,6 +251,7 @@ begin
         items.itemList[i].inView := False;
         map.drawTile(itemList[i].posX, itemList[i].posY, 0);
       end;
+  end;
   end;
 end;
 

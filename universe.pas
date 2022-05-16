@@ -1,4 +1,4 @@
-(* Generate each dungeon, its levels and related info *)
+(* Generate the game world, caves, dungeons, its levels and related info *)
 
 unit universe;
 
@@ -9,8 +9,7 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar
-  {$IFDEF DEBUG}, logging{$ENDIF};
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, overworld, island;
 
 type
   dungeonTerrain = (tCave, tDungeon);
@@ -27,6 +26,8 @@ var
   currentDungeon: array[1..MAXROWS, 1..MAXCOLUMNS] of shortstring;
   (* Flag to show if this level has been visited before *)
   levelVisited: boolean;
+  (* Has the the overworld been generated before *)
+  OWgen: boolean;
 
 (* Creates a dungeon of a specified type *)
 procedure createNewDungeon(levelType: dungeonTerrain);
@@ -34,12 +35,14 @@ procedure createNewDungeon(levelType: dungeonTerrain);
 procedure spawnDenizens;
 (* Drop items based on dungeon type and player level *)
 procedure litterItems;
+(* Generate the overworld *)
+procedure createEllanToll;
 
 
 implementation
 
 uses
-  map, npc_lookup, entities, items, item_lookup;
+  map, npc_lookup, entities, items, item_lookup, file_handling;
 
 procedure createNewDungeon(levelType: dungeonTerrain);
 begin
@@ -59,10 +62,6 @@ begin
   dungeonType := levelType;
   totalDepth := 3;
   currentDepth := 1;
-
-  {$IFDEF DEBUG}
-  logging.logAction('About to generate cave');
-  {$ENDIF}
 
   (* generate the dungeon *)
   case levelType of
@@ -124,6 +123,17 @@ begin
       pixie_jar.createPixieJar;
     end;
   end;
+end;
+
+procedure createEllanToll;
+begin
+  (* Generate the island *)
+  overworld.generate;
+  (* Store the island *)
+  island.storeEllanToll;
+  (* Save the island to disk *)
+  file_handling.saveOverworldMap;
+  OWgen := True;
 end;
 
 end.

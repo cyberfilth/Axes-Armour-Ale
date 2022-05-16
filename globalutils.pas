@@ -29,6 +29,10 @@ var
   saveDirectory: string;
   (* Name of entity or item that killed the player *)
   killer: shortstring;
+  (* Stores whether the player is underground or overground ;-) *)
+  womblingFree: shortstring;
+  (* Last overworld coordinates the player was at *)
+  OWx, OWy: smallint;
 
 (* Select random number from a range *)
 function randomRange(fromNumber, toNumber: smallint): smallint;

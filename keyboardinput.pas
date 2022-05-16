@@ -24,6 +24,8 @@ procedure charIntroInput(Keypress: TKeyEvent);
 procedure introInput(Keypress: TKeyEvent);
 (* Input for QUIT Menu state *)
 procedure quitInput(Keypress: TKeyEvent);
+(* Input for QUIT Menu on the overworld *)
+procedure quitInputOW(Keypress: TKeyEvent);
 (* Input in INVENTORY Menu state *)
 procedure inventoryInput(Keypress: TKeyEvent);
 (* Input in the DROP Menu state *)
@@ -36,6 +38,8 @@ procedure wearWieldInput(Keypress: TKeyEvent);
 procedure RIPInput(Keypress: TKeyEvent);
 (* Input in the LEVEL UP state *)
 procedure LevelUpInput(Keypress: TKeyEvent);
+(* Input in the OVERWORLD state *)
+procedure overworldInput(Keypress: TKeyEvent);
 (* Input in GAME state *)
 procedure gameInput(Keypress: TKeyEvent);
 (* Input in LOSE SAVE state *)
@@ -164,6 +168,25 @@ begin
     begin
       gameState := stGame;
       main.returnToGameScreen;
+    end;
+  end;
+end;
+
+procedure quitInputOW(Keypress: TKeyEvent);
+begin
+  case GetKeyEventChar(Keypress) of
+    'q', 'Q': { Save and Quit }
+    begin
+      main.exitApplication;
+    end;
+    'x', 'X': { Exit to main menu }
+    begin
+      main.exitToTitleMenu;
+    end;
+    #27: { Escape key - Cancel }
+    begin
+      gameState := stOverworld;
+      main.returnToOverworldScreen;
     end;
   end;
 end;
@@ -368,6 +391,85 @@ begin
       main.gameState := stGame;
       main.returnToGameScreen;
     end;
+  end;
+end;
+
+procedure overworldInput(Keypress: TKeyEvent);
+begin
+  { Arrow keys }
+  case GetKeyEventCode(Keypress) of
+    kbdLeft:
+    begin
+      player.movePlayerOW(2);
+      main.overworldGameLoop;
+    end;
+    kbdRight:
+    begin
+      player.movePlayerOW(4);
+      main.overworldGameLoop;
+    end;
+    kbdUp:
+    begin
+      player.movePlayerOW(1);
+      main.overworldGameLoop;
+    end;
+    KbdDown:
+    begin
+      player.movePlayerOW(3);
+      main.overworldGameLoop;
+    end;
+  end;
+  { Numpad and VI keys }
+  case GetKeyEventChar(Keypress) of
+    '8', 'k', 'K': { N }
+    begin
+      player.movePlayerOW(1);
+      main.overworldGameLoop;
+    end;
+    '9', 'u', 'U': { NE }
+    begin
+      player.movePlayerOW(5);
+      main.overworldGameLoop;
+    end;
+    '6', 'l', 'L': { E }
+    begin
+      player.movePlayerOW(4);
+      main.overworldGameLoop;
+    end;
+    '3', 'n', 'N': { SE }
+    begin
+      player.movePlayerOW(6);
+      main.overworldGameLoop;
+    end;
+    '2', 'j', 'J': { S }
+    begin
+      player.movePlayerOW(3);
+      main.overworldGameLoop;
+    end;
+    '1', 'b', 'B': { SW }
+    begin
+      player.movePlayerOW(7);
+      main.overworldGameLoop;
+    end;
+    '4', 'h', 'H': { W }
+    begin
+      player.movePlayerOW(2);
+      main.overworldGameLoop;
+    end;
+    '7', 'y', 'Y': { NW }
+    begin
+      player.movePlayerOW(8);
+      main.overworldGameLoop;
+    end;
+     #27: { Escape key - Quit }
+    begin
+      gameState := stQuitMenuOW;
+      ui.exitPrompt;
+    end;
+     '>': { Enter location }
+     begin
+       player.movePlayerOW(9);
+     end;
   end;
 end;
 
@@ -725,9 +827,10 @@ end;
 procedure WinAlphaInput(Keypress: TKeyEvent);
 begin
   case GetKeyEventChar(Keypress) of
-    'q', 'Q': { Quit the game }
+    'x', 'X': { Exit the first cave }
     begin
-      main.exitApplication;
+      main.gameState := stOverworld;
+      main.returnToOverworldScreen;
     end;
   end;
 end;

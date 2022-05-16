@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="67">
+    <Units Count="71">
       <Unit0>
         <Filename Value="Axes.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -404,6 +404,23 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="scrCharacter"/>
       </Unit66>
+      <Unit67>
+        <Filename Value="dungeons\noise.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit67>
+      <Unit68>
+        <Filename Value="dungeons\overworld.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit68>
+      <Unit69>
+        <Filename Value="island.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit69>
+      <Unit70>
+        <Filename Value="screens\scroverworld.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="scrOverworld"/>
+      </Unit70>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

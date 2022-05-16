@@ -1,4 +1,4 @@
-(* Axes, Armour & Ale - A low-fantasy roguelike.
+(* Axes, Armour & Ale - A fantasy roguelike.
    @author (Chris Hawkins)
 *)
 
@@ -12,7 +12,7 @@ interface
 uses
   SysUtils, Video, keyboard, KeyboardInput, ui, camera, map, scrGame, globalUtils,
   universe, fov, scrRIP, plot_gen, file_handling, smell, scrTitle, scrTargeting, scrWinAlpha,
-  dlgInfo
+  dlgInfo, scrOverworld, island
   {$IFDEF DEBUG}, logging{$ENDIF};
 
 (* Finite State Machine game states *)
@@ -20,7 +20,7 @@ type
   gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
     stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget,
     stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha,
-    stSelectAmmo, stSelectTarget, stFireBow, stCharInfo);
+    stSelectAmmo, stSelectTarget, stFireBow, stCharInfo, stOverworld, stQuitMenuOW);
 
 var
   (* State machine for game menus / controls *)
@@ -36,8 +36,11 @@ procedure newGame;
 procedure continue;
 procedure stateInputLoop;
 procedure gameLoop;
+procedure returnToOverworldScreen;
+procedure overworldGameLoop;
 procedure returnToGameScreen;
 procedure gameOver;
+(* Shown when the player first exits the Smugglers Cave *)
 procedure WinningScreen;
 
 implementation
@@ -191,12 +194,26 @@ var
 begin
   (* Game state = game running *)
   gameState := stGame;
+  globalUtils.womblingFree := 'underground';
+  globalUtils.OWx := 24;
+  globalUtils.OWy := 56;
   dlgInfo.dialogType := dlgNone;
   killer := 'empty';
+  OWgen := False;
   (* Initialise the game world and create 1st cave *)
   universe.dlistLength := 0;
   (* first map type is always a cave *)
   map.mapType := universe.tCave;
+  (* Add the cave to list of locations *)
+  SetLength(island.locationLookup, length(island.locationLookup) + 1);
+  with island.locationLookup[0] do
+  begin
+    X := globalUtils.OWx;
+    Y := globalUtils.OWy;
+    id := 1;
+    name := 'Smugglers Cave';
+    generated := True;
+  end;
   (* Create the dungeon *)
   universe.createNewDungeon(map.mapType);
   (* Set smell counter to zero *)
@@ -273,44 +290,65 @@ begin
   (* Initialise items list *)
   items.initialiseItems;
   file_handling.loadGame;
-  file_handling.loadDungeonLevel(universe.currentDepth);
-  map.loadDisplayedMap;
-  (* Game state = game running *)
-  gameState := stGame;
   killer := 'empty';
   (* set up inventory *)
   ui.equippedWeapon := 'No weapon equipped';
   ui.equippedArmour := 'No armour worn';
   (* Load player inventory *)
   player_inventory.loadEquippedItems;
-
-  (* Draw player and FOV *)
-  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
-
-  (* Redraw all items *)
-  items.redrawItems;
-
-  (* Redraw all NPC'S *)
-  for i := 1 to entities.npcAmount do
-    entities.redrawMapDisplay(i);
-
-  { prepare changes to the screen }
-  LockScreenUpdate;
-  (* Clear the screen *)
-  ui.screenBlank;
-  (* Draw the game screen *)
-  scrGame.displayGameScreen;
-  (* draw map through the camera *)
-  camera.drawMap;
-  (* Generate the welcome message *)
-  plot_gen.getTrollDate;
-  ui.displayMessage('Good Luck...');
-  ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
-  ui.displayMessage('It is ' + plot_gen.trollDate);
-  { Write those changes to the screen }
-  UnlockScreenUpdate;
-  { only redraws the parts that have been updated }
-  UpdateScreen(False);
+  (* Check to see if player above or below ground *)
+  if (globalUtils.womblingFree = 'underground') then
+  begin
+    file_handling.loadDungeonLevel(universe.uniqueID, universe.currentDepth);
+    map.loadDisplayedMap;
+    (* Game state = game running *)
+    gameState := stGame;
+    (* Draw player and FOV *)
+    fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+    (* Redraw all items *)
+    items.redrawItems;
+    (* Redraw all NPC'S *)
+    for i := 1 to entities.npcAmount do
+        entities.redrawMapDisplay(i);
+    { prepare changes to the screen }
+    LockScreenUpdate;
+    (* Clear the screen *)
+    ui.screenBlank;
+    (* Draw the game screen *)
+    scrGame.displayGameScreen;
+    (* draw map through the camera *)
+    camera.drawMap;
+    (* Generate the welcome message *)
+    plot_gen.getTrollDate;
+    ui.displayMessage('Good Luck...');
+    ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
+    ui.displayMessage('It is ' + plot_gen.trollDate);
+    { Write those changes to the screen }
+    UnlockScreenUpdate;
+    { only redraws the parts that have been updated }
+    UpdateScreen(False);
+  end
+  else if (globalUtils.womblingFree = 'overground') then
+  begin
+    file_handling.loadOverworldMap;
+    island.loadDisplayedIsland;
+    (* Game state = overworld *)
+    gameState := stOverworld;
+    (* Draw player and FOV *)
+    fov.islandFOV(entityList[0].posX, entityList[0].posY);
+    { prepare changes to the screen }
+    LockScreenUpdate;
+    (* Clear the screen *)
+    ui.screenBlank;
+    (* Draw the game screen *)
+    scrOverworld.drawSidepanel;
+    (* draw map through the camera *)
+    camera.drawOWMap;
+    { Write those changes to the screen }
+    UnlockScreenUpdate;
+    { only redraws the parts that have been updated }
+    UpdateScreen(False);
+  end;
 end;
 
 (* Take input from player for the KeyboardInput unit, based on current game state *)
@@ -333,8 +371,10 @@ begin
       stCharIntro: charIntroInput(Keypress);
       { -----------------------------------  Game Over screen }
       stGameOver: RIPInput(Keypress);
-      { ----------------------------------   Prompt to quit game }
+      { ----------------------------------   Prompt to quit game (below ground) }
       stQuitMenu: quitInput(Keypress);
+      { ----------------------------------   Prompt to quit game (above ground) }
+      stQuitMenuOW: quitInputOW(Keypress);
       { ---------------------------------    In the Inventory menu }
       stInventory: inventoryInput(Keypress);
       { ---------------------------------    In the Drop item menu }
@@ -353,6 +393,8 @@ begin
       stCharInfo: CharInfoInput(Keypress);
       { ---------------------------------    Gameplay controls }
       stGame: gameInput(Keypress);
+      { ---------------------------------    Overworld controls }
+      stOverworld: overworldInput(Keypress);
       { ---------------------------------    using Look command }
       stLook: lookInput(Keypress);
       { ---------------------------------    Firing a bow }
@@ -382,7 +424,7 @@ begin
     gameOver;
   end;
 
-  (* ALPHA VERSION ONLY - Check if player has won *)
+  (* Check if player completed the first cave *)
   if (gameState = stWinAlpha) then
     Exit;
 
@@ -433,6 +475,31 @@ begin
   player_stats.checkLevel;
   (* Process any dialog pop-ups *)
   dlgInfo.checkNotifications;
+end;
+
+procedure returnToOverworldScreen;
+begin
+  globalUtils.womblingFree := 'overground';
+  entityList[0].posX := globalUtils.OWx;
+  entityList[0].posY := globalUtils.OWy;
+
+  LockScreenUpdate;
+  ui.screenBlank;
+  scrOverworld.drawSidepanel;
+  island.loadDisplayedIsland;
+  fov.islandFOV(entityList[0].posX, entityList[0].posY);
+  camera.drawOWMap;
+  UnlockScreenUpdate;
+  UpdateScreen(False);
+end;
+
+procedure overworldGameLoop;
+begin
+  LockScreenUpdate;
+  fov.islandFOV(entityList[0].posX, entityList[0].posY);
+  camera.drawOWMap;
+  UnlockScreenUpdate;
+  UpdateScreen(False);
 end;
 
 procedure returnToGameScreen;
@@ -496,8 +563,20 @@ end;
 
 procedure WinningScreen;
 begin
-  gameState := stWinAlpha;
-  scrWinAlpha.displayWinscreen;
+  (* Check if the world has already been generated *)
+  if (universe.OWgen = False) then
+  begin
+    gameState := stWinAlpha;
+    scrWinAlpha.displayWinscreen;
+  end
+  else
+  begin
+    UnlockScreenUpdate;
+    UpdateScreen(False);
+    file_handling.saveDungeonLevel;
+    gameState := stOverworld;
+    returnToOverworldScreen;
+  end;
 end;
 
 end.
