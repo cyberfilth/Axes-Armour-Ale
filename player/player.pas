@@ -243,6 +243,7 @@ begin
          TextOut(centreX(mapFeature), 22, 'cyan', mapFeature)
        end;
 
+  Inc(entities.entityList[0].moveCount);
   (* Regenerate Magick *)
   if (player_stats.playerRace <> 'Dwarf') then
     regenMagick;
