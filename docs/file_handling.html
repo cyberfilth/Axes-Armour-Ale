@@ -17,23 +17,29 @@
 <p>
 Unit responsible for saving and loading data</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>DOM</li><li>XMLWrite</li><li>XMLRead</li><li>TypInfo</li><li><a  href="globalUtils.html">globalutils</a></li><li><a  href="universe.html">universe</a></li><li><a  href="cave.html">cave</a></li><li><a  href="items.html">items</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>DOM</li><li>XMLWrite</li><li>XMLRead</li><li>TypInfo</li><li><a  href="globalUtils.html">globalutils</a></li><li><a  href="universe.html">universe</a></li><li><a  href="island.html">island</a></li><li><a  href="cave.html">cave</a></li><li><a  href="items.html">items</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="file_handling.html#deleteGameData">deleteGameData</a></b>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="file_handling.html#loadDungeonLevel">loadDungeonLevel</a></b>(lvl: byte);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="file_handling.html#loadDungeonLevel">loadDungeonLevel</a></b>(dungeonID: smallint; lvl: byte);</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="file_handling.html#loadGame">loadGame</a></b>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="file_handling.html#saveDungeonLevel">saveDungeonLevel</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="file_handling.html#loadOverworldMap">loadOverworldMap</a></b>;</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="file_handling.html#saveDungeonLevel">saveDungeonLevel</a></b>;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="file_handling.html#saveGame">saveGame</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="file_handling.html#saveOverworldMap">saveOverworldMap</a></b>;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="file_handling.html#writeNewDungeonLevel">writeNewDungeonLevel</a></b>(idNumber, lvlNum, totalDepth, totalRooms: byte; dtype: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
@@ -52,7 +58,7 @@ Delete saved game files</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="loadDungeonLevel"></span><code>procedure <b>loadDungeonLevel</b>(lvl: byte);</code></td>
+<td class="itemcode"><span id="loadDungeonLevel"></span><code>procedure <b>loadDungeonLevel</b>(dungeonID: smallint; lvl: byte);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -66,6 +72,15 @@ Read dungeon level from disk</p>
 <tr><td colspan="1">
 <p>
 Load a saved game</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="loadOverworldMap"></span><code>procedure <b>loadOverworldMap</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Read overworld map from disk</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -84,6 +99,15 @@ Write explored dungeon level to disk</p>
 <tr><td colspan="1">
 <p>
 Save game state to file</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="saveOverworldMap"></span><code>procedure <b>saveOverworldMap</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Save the overworld map to disk</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

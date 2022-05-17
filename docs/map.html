@@ -69,12 +69,15 @@ Organises the current level into an array together with helper functions</p>
 <td class="itemcode"><code>procedure <b><a  href="map.html#occupy">occupy</a></b>(x, y: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="map.html#setupMap">setupMap</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="map.html#placeAtEntrance">placeAtEntrance</a></b>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="map.html#unoccupy">unoccupy</a></b>(x, y: smallint);</code></td>
+<td class="itemcode"><code>procedure <b><a  href="map.html#setupMap">setupMap</a></b>;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="map.html#unoccupy">unoccupy</a></b>(x, y: smallint);</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>function <b><a  href="map.html#withinBounds">withinBounds</a></b>(x, y: smallint): boolean;</code></td>
 </tr>
 </table>
@@ -201,6 +204,15 @@ Set the whole map to invisible</p>
 <tr><td colspan="1">
 <p>
 Occupy tile</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="placeAtEntrance"></span><code>procedure <b>placeAtEntrance</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Place the Player on the entrance stair to a dungeon</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

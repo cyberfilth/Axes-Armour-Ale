@@ -15,9 +15,9 @@
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
-Axes, Armour &amp; Ale - A low-fantasy roguelike. </p>
+Axes, Armour &amp; Ale - A fantasy roguelike. </p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Video</li><li>keyboard</li><li><a  href="KeyboardInput.html">KeyboardInput</a></li><li><a  href="ui.html">ui</a></li><li><a  href="camera.html">camera</a></li><li><a  href="map.html">map</a></li><li><a  href="scrGame.html">scrGame</a></li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="universe.html">universe</a></li><li><a  href="fov.html">fov</a></li><li><a  href="scrRIP.html">scrRIP</a></li><li><a  href="plot_gen.html">plot_gen</a></li><li><a  href="file_handling.html">file_handling</a></li><li><a  href="smell.html">smell</a></li><li><a  href="scrTitle.html">scrTitle</a></li><li><a  href="scrTargeting.html">scrTargeting</a></li><li><a  href="scrWinAlpha.html">scrWinAlpha</a></li><li><a  href="dlgInfo.html">dlgInfo</a></li><li><a  href="logging.html">logging</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Video</li><li>keyboard</li><li><a  href="KeyboardInput.html">KeyboardInput</a></li><li><a  href="ui.html">ui</a></li><li><a  href="camera.html">camera</a></li><li><a  href="map.html">map</a></li><li><a  href="scrGame.html">scrGame</a></li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="universe.html">universe</a></li><li><a  href="fov.html">fov</a></li><li><a  href="scrRIP.html">scrRIP</a></li><li><a  href="plot_gen.html">plot_gen</a></li><li><a  href="file_handling.html">file_handling</a></li><li><a  href="smell.html">smell</a></li><li><a  href="scrTitle.html">scrTitle</a></li><li><a  href="scrTargeting.html">scrTargeting</a></li><li><a  href="scrWinAlpha.html">scrWinAlpha</a></li><li><a  href="dlgInfo.html">dlgInfo</a></li><li>scrOverworld</li><li><a  href="island.html">island</a></li><li><a  href="logging.html">logging</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -42,7 +42,13 @@ Axes, Armour &amp; Ale - A low-fantasy roguelike. </p>
 <td class="itemcode"><code>procedure <b><a  href="main.html#newGame">newGame</a></b>;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="main.html#overworldGameLoop">overworldGameLoop</a></b>;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="main.html#returnToGameScreen">returnToGameScreen</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="main.html#returnToOverworldScreen">returnToOverworldScreen</a></b>;</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="main.html#setSeed">setSeed</a></b>;</code></td>
@@ -122,7 +128,21 @@ Axes, Armour &amp; Ale - A low-fantasy roguelike. </p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="overworldGameLoop"></span><code>procedure <b>overworldGameLoop</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="returnToGameScreen"></span><code>procedure <b>returnToGameScreen</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="returnToOverworldScreen"></span><code>procedure <b>returnToOverworldScreen</b>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -146,7 +166,9 @@ Axes, Armour &amp; Ale - A low-fantasy roguelike. </p>
 <td class="itemcode"><span id="WinningScreen"></span><code>procedure <b>WinningScreen</b>;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Shown when the player first exits the Smugglers Cave</p>
+</td></tr>
 </table>
 <h3 class="detail">Types</h3>
 <table class="detail wide_list">
@@ -202,6 +224,12 @@ Finite State Machine game states</p>
 <span id="stSelectTarget">stSelectTarget</span></li>
 <li>
 <span id="stFireBow">stFireBow</span></li>
+<li>
+<span id="stCharInfo">stCharInfo</span></li>
+<li>
+<span id="stOverworld">stOverworld</span></li>
+<li>
+<span id="stQuitMenuOW">stQuitMenuOW</span></li>
 </ul>
 </td></tr>
 </table>

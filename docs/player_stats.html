@@ -33,57 +33,63 @@ Additional player stats that are not shared with other entities are stored here<
 <td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseDefence">increaseDefence</a></b>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseMaxHealth">increaseMaxHealth</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseDexterity">increaseDexterity</a></b>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_stats.html#processLight">processLight</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="player_stats.html#increaseMaxHealth">increaseMaxHealth</a></b>;</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="player_stats.html#processLight">processLight</a></b>;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="player_stats.html#showLevelUpOptions">showLevelUpOptions</a></b>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
+<td class="itemcode"><code><b><a  href="player_stats.html#armourPoints">armourPoints</a></b>: smallint;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="player_stats.html#canExitDungeon">canExitDungeon</a></b>: boolean;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="player_stats.html#clanName">clanName</a></b>: shortstring;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="player_stats.html#currentMagick">currentMagick</a></b>: smallint;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="player_stats.html#dexterity">dexterity</a></b>: smallint;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="player_stats.html#enchantedWeaponEquipped">enchantedWeaponEquipped</a></b>: boolean;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="player_stats.html#enchWeapType">enchWeapType</a></b>: smallint;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="player_stats.html#lightCounter">lightCounter</a></b>: smallint;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="player_stats.html#lightEquipped">lightEquipped</a></b>: boolean;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="player_stats.html#maxMagick">maxMagick</a></b>: smallint;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="player_stats.html#maxVisionRange">maxVisionRange</a></b>: smallint;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="player_stats.html#numEquippedUses">numEquippedUses</a></b>: smallint;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="player_stats.html#playerLevel">playerLevel</a></b>: smallint;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><b><a  href="player_stats.html#playerRace">playerRace</a></b>: shortstring;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><b><a  href="player_stats.html#projectileWeaponEquipped">projectileWeaponEquipped</a></b>: boolean;</code></td>
 </tr>
 </table>
@@ -127,6 +133,15 @@ Increase defence strength</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="increaseDexterity"></span><code>procedure <b>increaseDexterity</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Increase dexterity</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="increaseMaxHealth"></span><code>procedure <b>increaseMaxHealth</b>;</code></td>
 </tr>
 <tr><td colspan="1">
@@ -153,6 +168,15 @@ Show level up dialog</p>
 </td></tr>
 </table>
 <h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="armourPoints"></span><code><b>armourPoints</b>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Player level, dexterity, maximum vision range, enchanted weapon type and armour points</p>
+</td></tr>
+</table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="canExitDungeon"></span><code><b>canExitDungeon</b>: boolean;</code></td>
@@ -186,7 +210,7 @@ Magical ability</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Player level, dexterity, maximum vision range and enchanted weapon type</p>
+Player level, dexterity, maximum vision range, enchanted weapon type and armour points</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -204,7 +228,7 @@ Is a magical weapon equipped</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Player level, dexterity, maximum vision range and enchanted weapon type</p>
+Player level, dexterity, maximum vision range, enchanted weapon type and armour points</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -240,7 +264,7 @@ Magical ability</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Player level, dexterity, maximum vision range and enchanted weapon type</p>
+Player level, dexterity, maximum vision range, enchanted weapon type and armour points</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -258,7 +282,7 @@ Durability of equipped / magical item</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Player level, dexterity, maximum vision range and enchanted weapon type</p>
+Player level, dexterity, maximum vision range, enchanted weapon type and armour points</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

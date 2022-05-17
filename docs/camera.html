@@ -17,11 +17,17 @@
 <p>
 Camera unit follows the player around and displays the surrounding game map</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="ui.html">ui</a></li><li><a  href="map.html">map</a></li><li><a  href="entities.html">entities</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="ui.html">ui</a></li><li><a  href="map.html">map</a></li><li><a  href="entities.html">entities</a></li><li><a  href="island.html">island</a></li><li><a  href="overworld.html">overworld</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="camera.html#drawMap">drawMap</a></b>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="camera.html#drawOWMap">drawOWMap</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="camera.html#drawOWPlayer">drawOWPlayer</a></b>;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>procedure <b><a  href="camera.html#drawPlayer">drawPlayer</a></b>;</code></td>
@@ -30,7 +36,13 @@ Camera unit follows the player around and displays the surrounding game map</p>
 <td class="itemcode"><code>function <b><a  href="camera.html#getX">getX</a></b>(Xcoord: smallint): smallint;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>function <b><a  href="camera.html#getXOW">getXOW</a></b>(Xcoord: smallint): smallint;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>function <b><a  href="camera.html#getY">getY</a></b>(Ycoord: smallint): smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="camera.html#getYOW">getYOW</a></b>(Ycoord: smallint): smallint;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
@@ -62,6 +74,20 @@ Camera unit follows the player around and displays the surrounding game map</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="drawOWMap"></span><code>procedure <b>drawOWMap</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drawOWPlayer"></span><code>procedure <b>drawOWPlayer</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="drawPlayer"></span><code>procedure <b>drawPlayer</b>;</code></td>
 </tr>
 <tr><td colspan="1">
@@ -72,11 +98,29 @@ Camera unit follows the player around and displays the surrounding game map</p>
 <td class="itemcode"><span id="getX"></span><code>function <b>getX</b>(Xcoord: smallint): smallint;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Underground camera</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getXOW"></span><code>function <b>getXOW</b>(Xcoord: smallint): smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Overground camera</p>
+</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="getY"></span><code>function <b>getY</b>(Ycoord: smallint): smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getYOW"></span><code>function <b>getYOW</b>(Ycoord: smallint): smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>

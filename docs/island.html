@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: island</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.15.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<table class="container"><tr><td class="navigation">
+<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<h1 class="unit">Unit island</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Stores the overworld map and provides helper functions</p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>SysUtils</li><li><a  href="overworld.html">overworld</a></li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">Record&nbsp;<a class="bold" href="island.displayTile.html"><code>displayTile</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list2">
+<td class="itemname">Record&nbsp;<a class="bold" href="island.locationTile.html"><code>locationTile</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+<tr class="list">
+<td class="itemname">Record&nbsp;<a class="bold" href="island.overworldTile.html"><code>overworldTile</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <b><a  href="island.html#drawOWTile">drawOWTile</a></b>(c, r: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <b><a  href="island.html#getLocationID">getLocationID</a></b>(xPOS, yPOS: smallint):smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="island.html#getLocationName">getLocationName</a></b>(xPOS, yPOS: smallint):shortstring;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="island.html#loadDisplayedIsland">loadDisplayedIsland</a></b>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <b><a  href="island.html#locationExists">locationExists</a></b>(xPOS, yPOS: smallint):boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="island.html#storeEllanToll">storeEllanToll</a></b>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="island.html#overworldTerrain">overworldTerrain</a></b> = (...);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><b><a  href="island.html#locationLookup">locationLookup</a></b>: array of <a  href="island.locationTile.html">locationTile</a>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><b><a  href="island.html#overworldDisplay">overworldDisplay</a></b>: array[1..<a  href="overworld.html#MAXR">overworld.MAXR</a>, 1..<a  href="overworld.html#MAXC">overworld.MAXC</a>] of <a  href="island.displayTile.html">displayTile</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><b><a  href="island.html#overworldMap">overworldMap</a></b>: array[1..<a  href="overworld.html#MAXR">overworld.MAXR</a>, 1..<a  href="overworld.html#MAXC">overworld.MAXC</a>] of <a  href="island.overworldTile.html">overworldTile</a>;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drawOWTile"></span><code>procedure <b>drawOWTile</b>(c, r: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Draw a tile on the map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getLocationID"></span><code>function <b>getLocationID</b>(xPOS, yPOS: smallint):smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Return the ID number of the location on the map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getLocationName"></span><code>function <b>getLocationName</b>(xPOS, yPOS: smallint):shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Return the name of the location on the map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="loadDisplayedIsland"></span><code>procedure <b>loadDisplayedIsland</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display explored sections of island when reloading game</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="locationExists"></span><code>function <b>locationExists</b>(xPOS, yPOS: smallint):boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Return True if the location already exists on disk</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="storeEllanToll"></span><code>procedure <b>storeEllanToll</b>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Store the newly generated island in memory</p>
+</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="overworldTerrain"></span><code><b>overworldTerrain</b> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;<h6 class="description_section">Values</h6>
+<ul>
+<li>
+<span id="tSea">tSea</span></li>
+<li>
+<span id="tForest">tForest</span></li>
+<li>
+<span id="tPlains">tPlains</span></li>
+<li>
+<span id="tLocation">tLocation</span></li>
+</ul>
+</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="locationLookup"></span><code><b>locationLookup</b>: array of <a  href="island.locationTile.html">locationTile</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+List of locations on the island</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="overworldDisplay"></span><code><b>overworldDisplay</b>: array[1..<a  href="overworld.html#MAXR">overworld.MAXR</a>, 1..<a  href="overworld.html#MAXC">overworld.MAXC</a>] of <a  href="island.displayTile.html">displayTile</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+The overworld map that the camera uses</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="overworldMap"></span><code><b>overworldMap</b>: array[1..<a  href="overworld.html#MAXR">overworld.MAXR</a>, 1..<a  href="overworld.html#MAXC">overworld.MAXC</a>] of <a  href="island.overworldTile.html">overworldTile</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+The overworld map data</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+</span>
+</td></tr></table></body></html>

@@ -15,9 +15,9 @@
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
-Player setup and stats</p>
+Player creation and movement</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li><a  href="player_inventory.html">player_inventory</a></li><li><a  href="player_stats.html">player_stats</a></li><li><a  href="plot_gen.html">plot_gen</a></li><li><a  href="combat_resolver.html">combat_resolver</a></li><li><a  href="items.html">items</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li><a  href="player_inventory.html">player_inventory</a></li><li><a  href="player_stats.html">player_stats</a></li><li><a  href="plot_gen.html">plot_gen</a></li><li><a  href="combat_resolver.html">combat_resolver</a></li><li><a  href="items.html">items</a></li><li><a  href="island.html">island</a></li><li>scrOverworld</li><li><a  href="file_handling.html">file_handling</a></li><li><a  href="globalUtils.html">globalUtils</a></li><li>video</li><li><a  href="scrGame.html">scrGame</a></li><li><a  href="camera.html">camera</a></li><li><a  href="universe.html">universe</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -36,12 +36,15 @@ Player setup and stats</p>
 <td class="itemcode"><code>procedure <b><a  href="player.html#movePlayer">movePlayer</a></b>(dir: word);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player.html#pickUp">pickUp</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="player.html#movePlayerOW">movePlayerOW</a></b>(dir: word);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player.html#processStatus">processStatus</a></b>;</code></td>
+<td class="itemcode"><code>procedure <b><a  href="player.html#pickUp">pickUp</a></b>;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>procedure <b><a  href="player.html#processStatus">processStatus</a></b>;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <b><a  href="player.html#regenMagick">regenMagick</a></b>;</code></td>
 </tr>
 </table>
@@ -90,6 +93,15 @@ Increase health without messages</p>
 <tr><td colspan="1">
 <p>
 Moves the player on the map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="movePlayerOW"></span><code>procedure <b>movePlayerOW</b>(dir: word);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Moves the player on the overworld map</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
