@@ -213,6 +213,7 @@ begin
     id := 1;
     name := 'Smugglers Cave';
     generated := True;
+    theme := tCave;
   end;
   (* Create the dungeon *)
   universe.createNewDungeon(map.mapType);
