@@ -7,7 +7,7 @@ unit island;
 interface
 
 uses
-  SysUtils, overworld;
+  SysUtils, overworld, universe;
 
 type
   overworldTerrain = (tSea, tForest, tPlains, tLocation);
@@ -49,6 +49,8 @@ type
     name: shortstring;
     (* Has location been generated / written to disk *)
     generated: boolean;
+    (* Type of location *)
+    theme: dungeonTerrain;
   end;
 
 var

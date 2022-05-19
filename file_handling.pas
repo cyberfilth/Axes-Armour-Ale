@@ -270,7 +270,7 @@ var
   r, c, id_int: smallint;
   Doc: TXMLDocument;
   RootNode, dataNode: TDOMNode;
-  dfileName, Value: shortstring;
+  dfileName: shortstring;
 
   procedure AddElement(Node: TDOMNode; Name, Value: UnicodeString);
   var
@@ -317,8 +317,6 @@ begin
     AddElement(datanode, 'itemsOnThisFloor', UTF8Decode(IntToStr(0)));
     AddElement(datanode, 'entitiesOnThisFloor', UTF8Decode(IntToStr(0)));
     AddElement(datanode, 'totalDepth', UTF8Decode(IntToStr(totalDepth)));
-    WriteStr(Value, dungeonType);
-    AddElement(datanode, 'mapType', UTF8Decode(Value));
     AddElement(datanode, 'totalRooms', UTF8Decode(IntToStr(totalRooms)));
 
     (* map tiles *)
@@ -410,8 +408,6 @@ begin
         AddElement(datanode, 'itemsOnThisFloor', '0');
     AddElement(datanode, 'entitiesOnThisFloor', IntToStr(entities.countLivingEntities));
     AddElement(datanode, 'totalDepth', IntToStr(totalDepth));
-    WriteStr(Value, dungeonType);
-    AddElement(datanode, 'mapType', Value);
     AddElement(datanode, 'totalRooms', IntToStr(totalRooms));
 
     (* map tiles *)
@@ -740,6 +736,8 @@ begin
     universe.currentDepth := StrToInt(UTF8Encode(RootNode.FindNode('currentDepth').TextContent));
     (* Can the player exit the dungeon *)
     player_stats.canExitDungeon := StrToBool(UTF8Encode(RootNode.FindNode('canExitDungeon').TextContent));
+    (* Type of map *)
+    map.mapType := dungeonTerrain(GetEnumValue(Typeinfo(dungeonTerrain), UTF8Encode(RootNode.FindNode('mapType').TextContent)));
 
     (* Location data *)
     locationNode := Doc.DocumentElement.FindNode('locData');
@@ -750,6 +748,7 @@ begin
       island.locationLookup[i].id := StrToInt(UTF8Encode(locationNode.FindNode('id').TextContent));
       island.locationLookup[i].name := UTF8Encode(locationNode.FindNode('name').TextContent);
       island.locationLookup[i].generated := StrToBool(UTF8Encode(locationNode.FindNode('generated').TextContent));
+      island.locationLookup[i].theme := dungeonTerrain(GetEnumValue(Typeinfo(dungeonTerrain), (UTF8Encode(locationNode.FindNode('theme').TextContent))));
     end;
 
     (* Player data *)
@@ -851,7 +850,7 @@ procedure saveGame;
 var
   Doc: TXMLDocument;
   RootNode, dataNode: TDOMNode;
-  dfileName, Value: shortstring;
+  dfileName, Value, TypeValue: shortstring;
 
   procedure AddElement(Node: TDOMNode; Name, Value: shortstring);
   var
@@ -907,7 +906,6 @@ begin
     AddElement(datanode, 'canExitDungeon', UTF8Encode(BoolToStr(player_stats.canExitDungeon)));
     WriteStr(Value, dungeonType);
     AddElement(datanode, 'mapType', Value);
-    AddElement(datanode, 'npcAmount', IntToStr(entities.npcAmount));
 
     (* Location data *)
     for i := Low(island.locationLookup) to High(island.locationLookup) do
@@ -918,6 +916,8 @@ begin
       AddElement(DataNode, 'id', IntToStr(island.locationLookup[i].id));
       AddElement(DataNode, 'name', island.locationLookup[i].name);
       AddElement(DataNode, 'generated', BoolToStr(island.locationLookup[i].generated));
+      WriteStr(TypeValue, island.locationLookup[i].theme);
+      AddElement(datanode, 'theme', TypeValue);
     end;
 
     (* Player data *)

@@ -9,7 +9,7 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, overworld, island;
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, overworld;
 
 type
   dungeonTerrain = (tCave, tDungeon);
@@ -42,7 +42,7 @@ procedure createEllanToll;
 implementation
 
 uses
-  map, npc_lookup, entities, items, item_lookup, file_handling;
+  map, npc_lookup, entities, items, item_lookup, file_handling, island;
 
 procedure createNewDungeon(levelType: dungeonTerrain);
 begin
@@ -57,7 +57,7 @@ begin
     player_stats.canExitDungeon := True;
   (* Dungeons unique ID number becomes the highest dungeon amount number *)
   uniqueID := dlistLength;
-  // hardcoded values for testing
+  { First cave }
   title := 'Smugglers cave';
   dungeonType := levelType;
   totalDepth := 3;
