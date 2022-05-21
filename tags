@@ -358,6 +358,8 @@ fireMissile	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure fireMissil
 fireMissile	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure fireMissile(id: smallint);$/;"	p
 fireMissile	entities/hobs/redcap_lesser_lobber.pas	/^procedure fireMissile(id: smallint);$/;"	p
 firingLine	vision/los.pas	/^procedure firingLine(id, x1, y1, x2, y2: smallint);$/;"	p
+firstRow	dungeons/architect.pas	/^procedure firstRow;$/;"	p
+firstRow	dungeons/backup/architect.pas	/^procedure firstRow;$/;"	p
 followScent	entities/hobs/backup/redcap_fungus.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/hobs/backup/redcap_lesser.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure followScent(id: smallint);$/;"	p
@@ -617,6 +619,8 @@ saveOverworldMap	file_handling.pas	/^procedure saveOverworldMap;$/;"	p
 scentDirection	vision/smell.pas	/^function scentDirection(y, x: smallint): char;$/;"	f
 screenBlank	backup/ui.pas	/^procedure screenBlank;$/;"	p
 screenBlank	ui.pas	/^procedure screenBlank;$/;"	p
+seedLocations	dungeons/architect.pas	/^procedure seedLocations;$/;"	p
+seedLocations	dungeons/backup/architect.pas	/^procedure seedLocations;$/;"	p
 setSeed	backup/main.pas	/^procedure setSeed;$/;"	p
 setSeed	main.pas	/^procedure setSeed;$/;"	p
 setTheScene	screens/scrcharintro.pas	/^procedure setTheScene;$/;"	p

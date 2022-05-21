@@ -11,8 +11,9 @@ interface
 uses
   SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, overworld;
 
+(* Types of locations that can be explored. See 'architect' unit for explanation *)
 type
-  dungeonTerrain = (tCave, tDungeon);
+  dungeonTerrain = (tCave, tCavern, tDungeon, tCrypt, tVillage);
 
 var
   (* Number of dungeons *)
