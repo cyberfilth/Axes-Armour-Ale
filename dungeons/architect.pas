@@ -12,7 +12,8 @@
 
 unit architect;
 
-{$mode fpc}{$H+}
+{$mode objfpc}{$H+}
+{$RANGECHECKS OFF}
 
 interface
 
@@ -23,12 +24,24 @@ var
   (* Unique location ID for the locationLookup table *)
   locationBuilderID: smallint;
 
+(* Check surrounding tiles to make sure 2 locations aren't placed next to each other *)
+function validLocation(x, y: smallint):boolean;
 (* Bottom row of the island *)
 procedure firstRow;
 (* Sprinkle locations over the island *)
 procedure seedLocations;
 
 implementation
+
+function validLocation(x, y: smallint): boolean;
+begin
+  Result := False;
+  if (overworldMap[x][y].Glyph <> '>') and (overworldMap[x][y].Glyph <> '~') and
+  (overworldMap[x][y].Glyph <> chr(247)) and (overworldMap[x + 1][y].Glyph <> '>')
+  and (overworldMap[x - 1][y].Glyph <> '>') and (overworldMap[x][y + 1].Glyph <> '>')
+  and (overworldMap[x][y - 1].Glyph <> '>') then
+      Result := True;
+end;
 
 procedure firstRow;
 var
@@ -45,40 +58,66 @@ var
   villSelected: boolean;
   placeType: dungeonTerrain;
   placeName: shortstring;
+  placeX, placeY: smallint;
 begin
-   villSelected := False
+   placeX := 0;
+   placeY := 0;
+   villSelected := False;
    locationBuilderID := 2;
    total := globalUtils.randomRange(3, 4);
-   i := 0 to total do
+   for i := 0 to total do
    begin
      { Choose a location type }
      choice := Random(2);
      if (villSelected = False) then
-       placeType := locations1(choice)
+       placeType := locations1[choice]
      else
-       placeType := locations2(choice);
+       placeType := locations2[choice];
 
      if (placeType = tVillage) then
        villSelected := True;
      { Generate a name }
-     if (selection = tVillage) then
+     if (placeType = tVillage) then
        begin
+         repeat
          choice := Random(3);
-         placeName := villageNames(choice);
+         until villageNames[choice] <> 'used';
+         placeName := villageNames[choice];
+         villageNames[choice] := 'used';
        end
-     else if (selection = tDungeon) then
+     else if (placeType = tDungeon) then
      begin
+         repeat
          choice := Random(Length(dungeonNames));
-         placeName := dungeonNames(choice);
-         Delete(dungeonNames, choice, 1);
+         until dungeonNames[choice] <> 'used';
+         placeName := dungeonNames[choice];
+         dungeonNames[choice] := 'used';
      end
-     else if (selection = tCavern) then
+     else if (placeType = tCavern) then
      begin
+         repeat
          choice := Random(Length(cavernNames));
-         placeName := cavernNames(choice);
-         Delete(cavernNames, choice, 1);
+         until cavernNames[choice] <> 'used';
+         placeName := cavernNames[choice];
+         cavernNames[choice] := 'used';
      end;
      { Place the location }
+     repeat
+       placeX := globalUtils.randomRange(11, 74);
+       placeY := globalUtils.randomRange(50, 57);
+     until validLocation(placeX, placeY) = True;
+     { Store location in locationLookup table }
+     with island.locationLookup[locationBuilderID - 1] do
+      begin
+        X := placeX;
+        Y := placeY;
+        id := locationBuilderID;
+        name := placeName;
+        generated := False;
+        theme := placeType;
+      end;
+     Inc(locationBuilderID);
+     overworldMap[placeX][placeY].Glyph := '>';
    end;
 end;
 

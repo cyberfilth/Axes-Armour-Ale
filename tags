@@ -737,6 +737,10 @@ useItem	items/weapons/pointy_stick.pas	/^procedure useItem(equipped: boolean);$/
 useItem	items/weapons/short_bow.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/staff_minor_scorch.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/wine_flask.pas	/^procedure useItem;$/;"	p
+validLocation	dungeons/architect.pas	/^function validLocation(x, y: smallint): boolean;$/;"	f
+validLocation	dungeons/architect.pas	/^function validLocation(x, y: smallint):boolean;$/;"	f
+validLocation	dungeons/backup/architect.pas	/^function validLocation(x, y: smallint): boolean;$/;"	f
+validLocation	dungeons/backup/architect.pas	/^function validLocation(x, y: smallint):boolean;$/;"	f
 validProjectile	screens/backup/scrthrow.pas	/^function validProjectile(selection: char): boolean;$/;"	f
 validProjectile	screens/scrthrow.pas	/^function validProjectile(selection: char): boolean;$/;"	f
 wander	entities/ai_animal.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
