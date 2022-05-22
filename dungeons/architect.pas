@@ -34,15 +34,15 @@ procedure seedLocations;
 implementation
 
 uses
-  universe, island;
+  universe, island, overworld;
 
 function validLocation(x, y: smallint): boolean;
 begin
   Result := False;
-  if (overworldMap[x][y].Glyph <> '>') and (overworldMap[x][y].Glyph <> '~') and
-  (overworldMap[x][y].Glyph <> chr(247)) and (overworldMap[x + 1][y].Glyph <> '>')
-  and (overworldMap[x - 1][y].Glyph <> '>') and (overworldMap[x][y + 1].Glyph <> '>')
-  and (overworldMap[x][y - 1].Glyph <> '>') then
+  if (terrainArray[y][x] <> '>') and (terrainArray[y][x] <> '~') and
+  (terrainArray[y][x] <> '-') and (terrainArray[y + 1][x] <> '>')
+  and (terrainArray[y - 1][x] <> '>') and (terrainArray[y][x + 1] <> '>')
+  and (terrainArray[y][x - 1] <> '>') then
       Result := True;
 end;
 
@@ -121,6 +121,7 @@ begin
         theme := placeType;
       end;
      Inc(locationBuilderID);
+     terrainArray[placeY][placeX] := '>';
    end;
 end;
 

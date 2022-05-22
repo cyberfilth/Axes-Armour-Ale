@@ -43,7 +43,7 @@ procedure createEllanToll;
 implementation
 
 uses
-  map, npc_lookup, entities, items, item_lookup, file_handling, overworld, architect;
+  map, npc_lookup, entities, items, item_lookup, file_handling, overworld;
 
 procedure createNewDungeon(levelType: dungeonTerrain);
 begin
@@ -133,8 +133,6 @@ begin
   (* Save the island to disk *)
   file_handling.saveOverworldMap;
   OWgen := True;
-  (* Create rest of locations *)
-  architect.seedLocations;
 end;
 
 end.
