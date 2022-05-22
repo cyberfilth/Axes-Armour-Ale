@@ -749,6 +749,8 @@ begin
       island.locationLookup[i].name := UTF8Encode(locationNode.FindNode('name').TextContent);
       island.locationLookup[i].generated := StrToBool(UTF8Encode(locationNode.FindNode('generated').TextContent));
       island.locationLookup[i].theme := dungeonTerrain(GetEnumValue(Typeinfo(dungeonTerrain), (UTF8Encode(locationNode.FindNode('theme').TextContent))));
+      ParentNode := locationNode.NextSibling;
+      locationNode := ParentNode;
     end;
 
     (* Player data *)

@@ -93,6 +93,8 @@ uses
   island;
 
 procedure generate;
+var
+  i: smallint;
 begin
   { fill map with walls }
   for r := 1 to MAXR do
@@ -262,7 +264,10 @@ begin
          terrainArray[r][c] := chr(5);
     end;
   end;
- (* Place the first location *)
- terrainArray[globalUtils.OWy][globalUtils.OWx] := '>';
+ (* Place the locations *)
+ for i := Low(locationLookup) to High(locationLookup) do
+   terrainArray[locationLookup[i].Y][locationLookup[i].X] := '>';
+ (* Store the island *)
+ island.storeEllanToll;
 end;
 end.

@@ -12,7 +12,7 @@ interface
 uses
   SysUtils, Video, keyboard, KeyboardInput, ui, camera, map, scrGame, globalUtils,
   universe, fov, scrRIP, plot_gen, file_handling, smell, scrTitle, scrTargeting, scrWinAlpha,
-  dlgInfo, scrOverworld, island, architect
+  dlgInfo, scrOverworld, island
   {$IFDEF DEBUG}, logging{$ENDIF};
 
 (* Finite State Machine game states *)
@@ -215,8 +215,6 @@ begin
     generated := True;
     theme := tCave;
   end;
-  (* Create rest of locations *)
-  architect.seedLocations;
   (* Create the dungeon *)
   universe.createNewDungeon(map.mapType);
   (* Set smell counter to zero *)

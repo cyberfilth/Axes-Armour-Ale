@@ -18,7 +18,7 @@ unit architect;
 interface
 
 uses
-  SysUtils, universe, island, globalUtils;
+  SysUtils, globalUtils;
 
 var
   (* Unique location ID for the locationLookup table *)
@@ -32,6 +32,9 @@ procedure firstRow;
 procedure seedLocations;
 
 implementation
+
+uses
+  universe, island;
 
 function validLocation(x, y: smallint): boolean;
 begin
@@ -107,6 +110,7 @@ begin
        placeY := globalUtils.randomRange(50, 57);
      until validLocation(placeX, placeY) = True;
      { Store location in locationLookup table }
+     SetLength(island.locationLookup, length(island.locationLookup) + 1);
      with island.locationLookup[locationBuilderID - 1] do
       begin
         X := placeX;
@@ -117,7 +121,6 @@ begin
         theme := placeType;
       end;
      Inc(locationBuilderID);
-     overworldMap[placeX][placeY].Glyph := '>';
    end;
 end;
 
