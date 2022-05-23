@@ -9,10 +9,11 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, overworld;
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar;
 
+(* Types of locations that can be explored. See 'architect' unit for explanation *)
 type
-  dungeonTerrain = (tCave, tDungeon);
+  dungeonTerrain = (tCave, tCavern, tDungeon, tCrypt, tVillage);
 
 var
   (* Number of dungeons *)
@@ -42,7 +43,7 @@ procedure createEllanToll;
 implementation
 
 uses
-  map, npc_lookup, entities, items, item_lookup, file_handling, island;
+  map, npc_lookup, entities, items, item_lookup, file_handling, overworld;
 
 procedure createNewDungeon(levelType: dungeonTerrain);
 begin
@@ -129,8 +130,6 @@ procedure createEllanToll;
 begin
   (* Generate the island *)
   overworld.generate;
-  (* Store the island *)
-  island.storeEllanToll;
   (* Save the island to disk *)
   file_handling.saveOverworldMap;
   OWgen := True;
