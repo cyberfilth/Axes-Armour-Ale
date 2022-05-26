@@ -878,10 +878,17 @@ var
   end;
 
 begin
-  (* Set this floor to Visited *)
-  levelVisited := True;
-  (* First save the current level data *)
-  saveDungeonLevel;
+  if (womblingFree = 'underground') then
+  begin
+    (* Set this floor to Visited *)
+    levelVisited := True;
+    (* First save the current level data *)
+    saveDungeonLevel;
+  end
+  else
+  begin
+    saveOverworldMap;
+  end;
   (* Save game stats *)
   dfileName := (globalUtils.saveDirectory + PathDelim + globalutils.saveFile);
   try

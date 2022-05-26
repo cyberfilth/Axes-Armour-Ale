@@ -483,7 +483,7 @@ begin
   globalUtils.womblingFree := 'overground';
   entityList[0].posX := globalUtils.OWx;
   entityList[0].posY := globalUtils.OWy;
-
+  file_handling.loadOverworldMap;
   LockScreenUpdate;
   ui.screenBlank;
   scrOverworld.drawSidepanel;
@@ -567,6 +567,7 @@ begin
   (* Check if the world has already been generated *)
   if (universe.OWgen = False) then
   begin
+    file_handling.saveDungeonLevel;
     gameState := stWinAlpha;
     scrWinAlpha.displayWinscreen;
   end
