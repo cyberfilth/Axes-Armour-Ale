@@ -119,6 +119,7 @@ var
   (* store original values in case player cannot move *)
   originalX, originalY, locationID, i: smallint;
   mapFeature: shortstring;
+  Dtype: dungeonTerrain;
 begin
   (* Repaint visited tiles *)
   fov.islandFOV(entityList[0].posX, entityList[0].posY);
@@ -158,69 +159,60 @@ begin
         file_handling.saveOverworldMap;
         { get the id number of the location }
         locationID := island.getLocationID(entityList[0].posX, entityList[0].posY);
-        { Read location from disk if it already exists }
-        if (island.locationExists(entityList[0].posX, entityList[0].posY) = True) then
+        { Dungeon type }
+        Dtype := island.getDungeonType(entityList[0].posX, entityList[0].posY);
+        { Generate a new location if it doesn't already exist }
+        if (island.locationExists(entityList[0].posX, entityList[0].posY) = False) then
         begin
-          (* store overworld coordinates *)
-          globalUtils.OWx := entityList[0].posX;
-          globalUtils.OWy := entityList[0].posY;
-          (* Set underground flag *)
-          globalUtils.womblingFree := 'underground';
-          (* Set game state to Game (underground) *)
-          gameState := stGame;
-          (* Load the dungeon *)
-          locationID := island.getLocationID(entityList[0].posX, entityList[0].posY);
-          file_handling.loadDungeonLevel(locationID, 1);
-          { prepare changes to the screen }
-          LockScreenUpdate;
-          (* Clear the screen *)
-          ui.screenBlank;
-          (* Draw the game screen *)
-          scrGame.displayGameScreen;
-          map.loadDisplayedMap;
-          (* Find the entrance to place the player *)
-          map.placeAtEntrance;
-          (* Draw player and FOV *)
-          map.occupy(entityList[0].posX, entityList[0].posY);
-          (* draw map through the camera *)
-          camera.drawMap;
-          fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
-          (* Redraw all items *)
-          items.redrawItems;
-          (* Redraw all NPC'S *)
-          for i := 1 to entities.npcAmount do
-              entities.redrawMapDisplay(i);
-          (* Draw player and FOV *)
-          fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
-          (* draw map through the camera *)
-          camera.drawMap;
-          (* Message log *)
-          ui.displayMessage('             ');
-          ui.displayMessage('              ');
-          ui.displayMessage('               ');
-          ui.displayMessage('Good Luck...');
-          ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
-          UnlockScreenUpdate;
-          UpdateScreen(False);
-          exit;
-        end
-        { Create location if it doesn't exist }
-        else if (island.locationExists(entityList[0].posX, entityList[0].posY) = False) then
-        begin
-          locationID := island.getLocationID(entityList[0].posX, entityList[0].posY);
-          { Generate a new location if not already created }
-          if (island.getDungeonType(entityList[0].posX, entityList[0].posY) = tDungeon) then
-             universe.createNewDungeon(tDungeon, locationID);
-          (* store overworld coordinates *)
-          globalUtils.OWx := entityList[0].posX;
-          globalUtils.OWy := entityList[0].posY;
-          (* Set underground flag *)
-          globalUtils.womblingFree := 'underground';
-          (* Set game state to Game (underground) *)
-          gameState := stGame;
-
-
-        end
+          if (Dtype = tDungeon) then
+            universe.createNewDungeon(tDungeon, locationID);
+        end;
+        (* store overworld coordinates *)
+        globalUtils.OWx := entityList[0].posX;
+        globalUtils.OWy := entityList[0].posY;
+        (* Set underground flag *)
+        globalUtils.womblingFree := 'underground';
+        (* Set game state to Game (underground) *)
+        gameState := stGame;
+        (* Get dungeon name *)
+        universe.title := UTF8Decode(island.getLocationName(entityList[0].posX, entityList[0].posY));
+        (* Load the dungeon *)
+        file_handling.loadDungeonLevel(locationID, 1);
+        { prepare changes to the screen }
+        LockScreenUpdate;
+        (* Clear the screen *)
+        ui.screenBlank;
+        (* Draw the game screen *)
+        scrGame.displayGameScreen;
+        map.mapType := Dtype;
+        map.loadDisplayedMap;
+        (* Find the entrance to place the player *)
+        map.placeAtEntrance;
+        (* Draw player and FOV *)
+        map.occupy(entityList[0].posX, entityList[0].posY);
+        (* draw map through the camera *)
+        camera.drawMap;
+        fov.fieldOfView(entityList[0].posX, entityList[0].posY,
+          entityList[0].visionRange, 1);
+        (* Redraw all items *)
+        items.redrawItems;
+        (* Redraw all NPC'S *)
+        for i := 1 to entities.npcAmount do
+          entities.redrawMapDisplay(i);
+        (* Draw player and FOV *)
+        fov.fieldOfView(entityList[0].posX, entityList[0].posY,
+          entityList[0].visionRange, 1);
+        (* draw map through the camera *)
+        camera.drawMap;
+        (* Message log *)
+        ui.displayMessage('             ');
+        ui.displayMessage('              ');
+        ui.displayMessage('               ');
+        ui.displayMessage('Good Luck...');
+        ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
+        UnlockScreenUpdate;
+        UpdateScreen(False);
+        exit;
       end
       else
       begin
@@ -241,25 +233,29 @@ begin
   (* Break out of procedure when leaving the overworld map *)
   if (globalUtils.womblingFree = 'overground') then
   begin
-  fov.islandFOV(entityList[0].posX, entityList[0].posY);
-  (* display message on type of terrain or name of location *)
-  { Blank out the old message }
-  scrOverworld.eraseTerrain;
+    fov.islandFOV(entityList[0].posX, entityList[0].posY);
+    (* display message on type of terrain or name of location *)
+    { Blank out the old message }
+    scrOverworld.eraseTerrain;
 
-  if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType = tForest) then
-     TextOut(centreX('forest'), 22, 'cyan', 'forest')
-  else if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType = tPlains) then
-     TextOut(centreX('plains'), 22, 'cyan', 'plains')
-  else if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType = tLocation) then
-       begin
-         mapFeature := 'entrance to ' + island.getLocationName(entityList[0].posX, entityList[0].posY);
-         TextOut(centreX(mapFeature), 22, 'cyan', mapFeature)
-       end;
+    if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType =
+      tForest) then
+      TextOut(centreX('forest'), 22, 'cyan', 'forest')
+    else if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType =
+      tPlains) then
+      TextOut(centreX('plains'), 22, 'cyan', 'plains')
+    else if (island.overworldMap[entityList[0].posY][entityList[0].posX].TerrainType =
+      tLocation) then
+    begin
+      mapFeature := 'entrance to ' + island.getLocationName(
+        entityList[0].posX, entityList[0].posY);
+      TextOut(centreX(mapFeature), 22, 'cyan', mapFeature);
+    end;
 
-  Inc(entities.entityList[0].moveCount);
-  (* Regenerate Magick *)
-  if (player_stats.playerRace <> 'Dwarf') then
-    regenMagick;
+    Inc(entities.entityList[0].moveCount);
+    (* Regenerate Magick *)
+    if (player_stats.playerRace <> 'Dwarf') then
+      regenMagick;
   end;
 end;
 
@@ -302,9 +298,11 @@ begin
     end;
   end;
   (* check if tile is occupied *)
-  if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
+  if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) =
+    True) then
     (* check if tile is occupied by hostile NPC *)
-    if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
+    if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) =
+      True) then
     begin
       entities.entityList[0].posX := originalX;
       entities.entityList[0].posY := originalY;
@@ -322,7 +320,8 @@ begin
   end;
   (* Occupy tile *)
   map.occupy(entityList[0].posX, entityList[0].posY);
-  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY, entities.entityList[0].visionRange, 1);
+  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
+    entities.entityList[0].visionRange, 1);
   ui.writeBufferedMessages;
 
   (* Regenerate Magick *)

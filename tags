@@ -282,6 +282,10 @@ displayWieldMenu	screens/scrinventory.pas	/^procedure displayWieldMenu;$/;"	p
 displayWinscreen	screens/backup/scrwinalpha.pas	/^procedure displayWinscreen;$/;"	p
 displayWinscreen	screens/scrwinalpha.pas	/^procedure displayWinscreen;$/;"	p
 drawBat	screens/scrrip.pas	/^procedure drawBat;$/;"	p
+drawCaveTiles	backup/map.pas	/^procedure drawCaveTiles(c, r: smallint; hiDef: byte);$/;"	p
+drawCaveTiles	map.pas	/^procedure drawCaveTiles(c, r: smallint; hiDef: byte);$/;"	p
+drawDungeonTiles	backup/map.pas	/^procedure drawDungeonTiles(c, r: smallint; hiDef: byte);$/;"	p
+drawDungeonTiles	map.pas	/^procedure drawDungeonTiles(c, r: smallint; hiDef: byte);$/;"	p
 drawGrave	screens/scrrip.pas	/^procedure drawGrave;$/;"	p
 drawItemsOnMap	backup/items.pas	/^procedure drawItemsOnMap(id: byte);$/;"	p
 drawItemsOnMap	items.pas	/^procedure drawItemsOnMap(id: byte);$/;"	p
@@ -421,7 +425,7 @@ getItemName	items.pas	/^function getItemName(x, y: smallint): shortstring;$/;"	f
 getLocationID	backup/island.pas	/^function getLocationID(xPOS, yPOS: smallint): smallint;$/;"	f
 getLocationID	island.pas	/^function getLocationID(xPOS, yPOS: smallint): smallint;$/;"	f
 getLocationName	backup/island.pas	/^function getLocationName(xPOS, yPOS: smallint): shortstring;$/;"	f
-getLocationName	island.pas	/^function getLocationName(xPOS, yPOS: smallint): shortstring;$/;"	f
+getLocationName	island.pas	/^function getLocationName(xPOS, yPOS: smallint):string;$/;"	f
 getSize	screens/backup/resolution.pas	/^procedure getSize;$/;"	p
 getSize	screens/resolution.pas	/^procedure getSize;$/;"	p
 getThrowDamage	backup/items.pas	/^function getThrowDamage(x, y: smallint): smallint;$/;"	f

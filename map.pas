@@ -69,6 +69,10 @@ procedure ascendStairs;
 procedure descendStairs;
 (* Place the Player on the entrance stair to a dungeon *)
 procedure placeAtEntrance;
+(* Draw cave tiles *)
+procedure drawCaveTiles(c, r: smallint; hiDef: byte);
+(* Draw dungeon tiles *)
+procedure drawDungeonTiles(c, r: smallint; hiDef: byte);
 (* Place a tile on the map *)
 procedure drawTile(c, r: smallint; hiDef: byte);
 (* Display explored sections of map when reloading game *)
@@ -238,6 +242,621 @@ begin
   end;
 end;
 
+procedure drawCaveTiles(c, r: smallint; hiDef: byte);
+begin
+  case maparea[r][c].glyph of
+    '.': { Cave Floor }
+    begin
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+          mapDisplay[r][c].GlyphColour := 'darkGrey'
+        else
+          mapDisplay[r][c].GlyphColour := 'lightGrey';
+        mapDisplay[r][c].Glyph := '.';
+      end
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+          mapDisplay[r][c].GlyphColour := 'darkGrey'
+        else
+          mapDisplay[r][c].GlyphColour := 'black';
+        mapDisplay[r][c].Glyph := '.';
+      end;
+    end;
+    '<': { Upstairs }
+    begin
+      if (hiDef = 1) then
+      begin
+        mapDisplay[r][c].GlyphColour := 'white';
+        mapDisplay[r][c].Glyph := '<';
+      end
+      else
+      begin
+        mapDisplay[r][c].GlyphColour := 'grey';
+        mapDisplay[r][c].Glyph := '<';
+      end;
+    end;
+    '>': { Downstairs }
+    begin
+      if (hiDef = 1) then
+      begin
+        mapDisplay[r][c].GlyphColour := 'white';
+        mapDisplay[r][c].Glyph := '>';
+      end
+      else
+      begin
+        mapDisplay[r][c].GlyphColour := 'grey';
+        mapDisplay[r][c].Glyph := '>';
+      end;
+    end;
+    '*': { Cave Wall }
+    begin
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+          begin
+            mapDisplay[r][c].GlyphColour := 'grey';
+            mapDisplay[r][c].Glyph := Chr(177);
+          end
+          else
+          begin
+            mapDisplay[r][c].GlyphColour := 'brown';
+            mapDisplay[r][c].Glyph := Chr(177);
+          end;
+        end;
+      end
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+            begin
+              mapDisplay[r][c].GlyphColour := 'darkGrey';
+              mapDisplay[r][c].Glyph := Chr(176);
+            end
+            else
+            begin
+              mapDisplay[r][c].GlyphColour := 'brown';
+              mapDisplay[r][c].Glyph := Chr(176);
+            end;
+          end;
+        end
+        else
+        begin
+          mapDisplay[r][c].GlyphColour := 'darkGrey';
+          mapDisplay[r][c].Glyph := Chr(176);
+        end;
+      end;
+    end;
+  end;
+end;
+
+procedure drawDungeonTiles(c, r: smallint; hiDef: byte);
+const
+  lit = 'lightCyan';
+  unlit = 'cyan';
+  dark = 'cyan';
+  darkest = 'blue';
+begin
+  case maparea[r][c].glyph of
+    '.': { Floor }
+    begin
+      mapDisplay[r][c].Glyph := '.';
+      if (hiDef = 1) then { In view }
+      begin
+        if (player_stats.lightEquipped = True) then
+          mapDisplay[r][c].GlyphColour := dark
+        else
+          mapDisplay[r][c].GlyphColour := dark;
+      end
+      else { Not in view }
+      begin
+        if (player_stats.lightEquipped = True) then
+          mapDisplay[r][c].GlyphColour := 'darkGrey'
+        else
+          mapDisplay[r][c].GlyphColour := 'black';
+      end;
+    end;
+    '<': { Upstairs }
+    begin
+      mapDisplay[r][c].Glyph := '<';
+      if (hiDef = 1) then
+        mapDisplay[r][c].GlyphColour := 'white'
+      else
+        mapDisplay[r][c].GlyphColour := unlit;
+    end;
+    '>': { Downstairs }
+    begin
+      mapDisplay[r][c].Glyph := '>';
+      if (hiDef = 1) then
+        mapDisplay[r][c].GlyphColour := 'white'
+      else
+        mapDisplay[r][c].GlyphColour := unlit;
+    end;
+    'A': { 0}
+    begin
+      mapDisplay[r][c].Glyph := Chr(254);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'B': { 1 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(193);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+     'C': { 2 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(180);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'D': { 3 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(217);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'E': { 4 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(195);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'F': { 5 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(192);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'G': { 6 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(196);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'H': { 7 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(196);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'I': { 8 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(194);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'J': { 9 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(179);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'K': { 10 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(191);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'L': { 11 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(179);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'M': { 12 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(218);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'N': { 13 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(179);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'O': { 14 }
+    begin
+      mapDisplay[r][c].Glyph := Chr(196);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+    'P': { 15 }
+    begin
+      mapDisplay[r][c].Glyph := '.';
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end
+      (* Default block glyph *)
+    else
+    begin
+      mapDisplay[r][c].Glyph := Chr(219);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
+    end;
+  end;
+end;
+
 procedure drawTile(c, r: smallint; hiDef: byte);
 begin
   (* Draw black space if tile is not visible *)
@@ -247,99 +866,11 @@ begin
     mapDisplay[r][c].GlyphColour := 'black';
   end
   else
-  (* Draw cave tiles *)
+  (* Select dungeon type *)
   if (mapType = tCave) then
-  begin
-    case maparea[r][c].glyph of
-      '.': { Cave Floor }
-      begin
-        if (hiDef = 1) then
-        begin
-           if (player_stats.lightEquipped = True) then
-             mapDisplay[r][c].GlyphColour := 'darkGrey'
-          else
-              mapDisplay[r][c].GlyphColour := 'lightGrey';
-          mapDisplay[r][c].Glyph := '.';
-        end
-        else
-        begin
-          if (player_stats.lightEquipped = True) then
-             mapDisplay[r][c].GlyphColour := 'darkGrey'
-          else
-             mapDisplay[r][c].GlyphColour := 'black';
-          mapDisplay[r][c].Glyph := '.';
-        end;
-      end;
-      '<': { Upstairs }
-      begin
-        if (hiDef = 1) then
-        begin
-          mapDisplay[r][c].GlyphColour := 'white';
-          mapDisplay[r][c].Glyph := '<';
-        end
-        else
-        begin
-          mapDisplay[r][c].GlyphColour := 'grey';
-          mapDisplay[r][c].Glyph := '<';
-        end;
-      end;
-      '>': { Downstairs }
-      begin
-        if (hiDef = 1) then
-        begin
-          mapDisplay[r][c].GlyphColour := 'white';
-          mapDisplay[r][c].Glyph := '>';
-        end
-        else
-        begin
-          mapDisplay[r][c].GlyphColour := 'grey';
-          mapDisplay[r][c].Glyph := '>';
-        end;
-      end;
-      '*': { Cave Wall }
-      begin
-        if (hiDef = 1) then
-        begin
-          if (player_stats.lightEquipped = True) then
-           begin
-             if (player_stats.lightCounter <= 20) then
-              begin
-                mapDisplay[r][c].GlyphColour := 'grey';
-                mapDisplay[r][c].Glyph := Chr(177);
-              end
-              else
-              begin
-                  mapDisplay[r][c].GlyphColour := 'brown';
-                  mapDisplay[r][c].Glyph := Chr(177);
-              end;
-           end
-        end
-        else
-        begin
-           if (player_stats.lightEquipped = True) then
-           begin
-              begin
-              if (player_stats.lightCounter <= 20) then
-              begin
-                   mapDisplay[r][c].GlyphColour := 'darkGrey';
-                   mapDisplay[r][c].Glyph := Chr(176);
-              end
-              else
-              begin
-                   mapDisplay[r][c].GlyphColour := 'brown';
-                   mapDisplay[r][c].Glyph := Chr(176);
-              end;
-           end;
-           end
-           else
-             begin
-                  mapDisplay[r][c].GlyphColour := 'darkGrey';
-                  mapDisplay[r][c].Glyph := Chr(176);
-             end;
-        end;
-      end;
-    end;
-  end;
+    drawCaveTiles(c, r, hiDef)
+  else if (mapType = tDungeon) then
+    drawDungeonTiles(c, r, hiDef);
 end;
 
 procedure loadDisplayedMap;

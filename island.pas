@@ -46,7 +46,7 @@ type
     (* coordinates *)
     X, Y, id: smallint;
     (* Name of location *)
-    Name: shortstring;
+    Name: string;
     (* Has location been generated / written to disk *)
     generated: boolean;
     (* Type of location *)
@@ -68,7 +68,7 @@ procedure drawOWTile(c, r: smallint);
 (* Display explored sections of island when reloading game *)
 procedure loadDisplayedIsland;
 (* Return the name of the location on the map *)
-function getLocationName(xPOS, yPOS: smallint): shortstring;
+function getLocationName(xPOS, yPOS: smallint):string;
 (* Return the ID number of the location on the map *)
 function getLocationID(xPOS, yPOS: smallint): smallint;
 (* Return the dungeon type of the location on the map *)
@@ -289,7 +289,7 @@ begin
   end;
 end;
 
-function getLocationName(xPOS, yPOS: smallint): shortstring;
+function getLocationName(xPOS, yPOS: smallint):string;
 var
   i: smallint;
 begin

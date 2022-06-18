@@ -217,7 +217,15 @@ begin
       end;
   end;
 
-  // put the stairs back in
+  (* put the stairs back in *)
+  for r := 1 to globalutils.MAXROWS do
+  begin
+    for c := 1 to globalutils.MAXCOLUMNS do
+      if (dungeonArray[r][c] = '>') then
+        processed_dungeon[r][c] := '>'
+      else if (dungeonArray[r][c] = '<') then
+        processed_dungeon[r][c] := '<';
+  end;
 end;
 
 
