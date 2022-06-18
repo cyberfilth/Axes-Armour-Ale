@@ -24,10 +24,21 @@ uses
 const
   (* Array of items found in a cave, ordered by cave level *)
   caveItems1: array[1..8] of string =
-    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'pointyStick', 'arrow', 'arrow');
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
+    'pointyStick', 'arrow', 'arrow');
   caveItems2: array[1..7] of string =
-    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'rock', 'arrow', 'shortBow');
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
+    'rock', 'arrow', 'shortBow');
   caveItems3: array[1..6] of string =
+    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
+  (* Array of items found in a dungeon, ordered by dungeon level *)
+  dgnItems1: array[1..8] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
+    'pointyStick', 'arrow', 'arrow');
+  dgnItems2: array[1..7] of string =
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
+    'rock', 'arrow', 'shortBow');
+  dgnItems3: array[1..6] of string =
     ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
 
 (* Choose an item and call the generate code directly *)
@@ -78,7 +89,21 @@ begin
     end;
     tDungeon:
     begin
-      { Placeholder }
+      if (universe.currentDepth = 1) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(dgnItems1));
+        thing := dgnItems1[randSelect];
+      end { Level 2 }
+      else if (universe.currentDepth = 2) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(dgnItems2));
+        thing := dgnItems2[randSelect];
+      end { Level 3 }
+      else if (universe.currentDepth = 3) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(dgnItems3));
+        thing := dgnItems3[randSelect];
+      end;
     end;
   end;
 
@@ -125,7 +150,7 @@ begin
   repeat
     r := globalutils.randomRange(3, (MAXROWS - 3));
     c := globalutils.randomRange(3, (MAXCOLUMNS - 3));
-  (* choose a location that is not a wall or occupied *)
+    (* choose a location that is not a wall or occupied *)
   until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
   SetLength(itemList, High(itemList) + 1);
   (* Drop the quest object *)

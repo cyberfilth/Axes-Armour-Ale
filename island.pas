@@ -7,7 +7,7 @@ unit island;
 interface
 
 uses
-  SysUtils, overworld, universe;
+  SysUtils, overworld, globalUtils;
 
 type
   overworldTerrain = (tSea, tForest, tPlains, tLocation);

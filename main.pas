@@ -203,7 +203,7 @@ begin
   (* Initialise the game world and create 1st cave *)
   universe.dlistLength := 0;
   (* first map type is always a cave *)
-  map.mapType := universe.tCave;
+  map.mapType := globalUtils.tCave;
   (* Add the cave to list of locations *)
   SetLength(island.locationLookup, length(island.locationLookup) + 1);
   with island.locationLookup[0] do

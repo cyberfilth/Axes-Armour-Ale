@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="72">
+    <Units Count="73">
       <Unit0>
         <Filename Value="Axes.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -425,6 +425,11 @@
         <Filename Value="dungeons\architect.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit71>
+      <Unit72>
+        <Filename Value="dungeons\smallgrid.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="smallGrid"/>
+      </Unit72>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
