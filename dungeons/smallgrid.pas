@@ -1,7 +1,9 @@
 (* Generates a grid based dungeon with wide spaces between rooms, this is then processed to apply bitmasked walls *)
+
 unit smallGrid;
 
 {$mode objfpc}{$H+}
+{$RANGECHECKS OFF}
 
 interface
 

@@ -27,7 +27,7 @@ var
   OWgen: boolean;
 
 (* Creates a dungeon of a specified type *)
-procedure createNewDungeon(levelType: dungeonTerrain);
+procedure createNewDungeon(levelType: dungeonTerrain; dID: smallint);
 (* Spawn creatures based on dungeon type and player level *)
 procedure spawnDenizens;
 (* Drop items based on dungeon type and player level *)
@@ -41,29 +41,26 @@ implementation
 uses
   map, npc_lookup, entities, items, item_lookup, file_handling, overworld;
 
-procedure createNewDungeon(levelType: dungeonTerrain);
+procedure createNewDungeon(levelType: dungeonTerrain; dID: smallint);
 begin
   r := 1;
   c := 1;
-  (* Increment the number of dungeons *)
-  Inc(dlistLength);
   (* First dungeon is locked when you enter *)
-  if (dlistLength = 1) then
+  if (dID = 1) then
     player_stats.canExitDungeon := False
   else
     player_stats.canExitDungeon := True;
   (* Dungeons unique ID number becomes the highest dungeon amount number *)
-  uniqueID := dlistLength;
+  uniqueID := dID;
   { First cave }
-  title := 'Smugglers cave';
   dungeonType := levelType;
   totalDepth := 3;
   currentDepth := 1;
 
   (* generate the dungeon *)
   case levelType of
-    tCave: cave.generate(dlistLength, totalDepth);
-    tDungeon: smallGrid.generate(dlistLength, totalDepth);
+    tCave: cave.generate(dID, totalDepth);
+    tDungeon: smallGrid.generate(dID, totalDepth);
   end;
 
   (* Copy the 1st floor of the current dungeon to the game map *)

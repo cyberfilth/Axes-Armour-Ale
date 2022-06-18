@@ -46,7 +46,7 @@ type
     (* coordinates *)
     X, Y, id: smallint;
     (* Name of location *)
-    name: shortstring;
+    Name: shortstring;
     (* Has location been generated / written to disk *)
     generated: boolean;
     (* Type of location *)
@@ -68,11 +68,13 @@ procedure drawOWTile(c, r: smallint);
 (* Display explored sections of island when reloading game *)
 procedure loadDisplayedIsland;
 (* Return the name of the location on the map *)
-function getLocationName(xPOS, yPOS: smallint):shortstring;
+function getLocationName(xPOS, yPOS: smallint): shortstring;
 (* Return the ID number of the location on the map *)
-function getLocationID(xPOS, yPOS: smallint):smallint;
+function getLocationID(xPOS, yPOS: smallint): smallint;
+(* Return the dungeon type of the location on the map *)
+function getDungeonType(xPOS, yPOS: smallint): dungeonTerrain;
 (* Return True if the location already exists on disk *)
-function locationExists(xPOS, yPOS: smallint):boolean;
+function locationExists(xPOS, yPOS: smallint): boolean;
 
 
 implementation
@@ -292,11 +294,11 @@ var
   i: smallint;
 begin
   Result := '';
-    for i := 0 to High(locationLookup) do
+  for i := 0 to High(locationLookup) do
   begin
     if (locationLookup[i].X = xPOS) and (locationLookup[i].Y = yPOS) then
     begin
-      Result := locationLookup[i].name;
+      Result := locationLookup[i].Name;
       exit;
     end;
   end;
@@ -307,11 +309,25 @@ var
   i: smallint;
 begin
   Result := 0;
-    for i := 0 to High(locationLookup) do
+  for i := 0 to High(locationLookup) do
   begin
     if (locationLookup[i].X = xPOS) and (locationLookup[i].Y = yPOS) then
     begin
       Result := locationLookup[i].id;
+      exit;
+    end;
+  end;
+end;
+
+function getDungeonType(xPOS, yPOS: smallint): dungeonTerrain;
+var
+  i: smallint;
+begin
+  for i := 0 to High(locationLookup) do
+  begin
+    if (locationLookup[i].X = xPOS) and (locationLookup[i].Y = yPOS) then
+    begin
+      Result := locationLookup[i].theme;
       exit;
     end;
   end;
@@ -322,11 +338,14 @@ var
   i: smallint;
 begin
   Result := False;
-    for i := 0 to High(locationLookup) do
+  for i := 0 to High(locationLookup) do
   begin
     if (locationLookup[i].X = xPOS) and (locationLookup[i].Y = yPOS) then
     begin
-      Result := True;
+      if (locationLookup[i].generated = True) then
+        Result := True
+      else
+        Result := False;
       exit;
     end;
   end;

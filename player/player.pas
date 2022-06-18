@@ -204,9 +204,22 @@ begin
           UpdateScreen(False);
           exit;
         end
-        else
+        { Create location if it doesn't exist }
+        else if (island.locationExists(entityList[0].posX, entityList[0].posY) = False) then
         begin
+          locationID := island.getLocationID(entityList[0].posX, entityList[0].posY);
           { Generate a new location if not already created }
+          if (island.getDungeonType(entityList[0].posX, entityList[0].posY) = tDungeon) then
+             universe.createNewDungeon(tDungeon, locationID);
+          (* store overworld coordinates *)
+          globalUtils.OWx := entityList[0].posX;
+          globalUtils.OWy := entityList[0].posY;
+          (* Set underground flag *)
+          globalUtils.womblingFree := 'underground';
+          (* Set game state to Game (underground) *)
+          gameState := stGame;
+
+
         end
       end
       else

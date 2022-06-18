@@ -8,7 +8,7 @@ interface
 
 uses
   SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe, island,
-  cave, items;
+  cave, smallGrid, items;
 
 (* Save the overworld map to disk *)
 procedure saveOverworldMap;
@@ -334,6 +334,14 @@ begin
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)))
           else
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)));
+        end
+        { if dungeon type is a dungeon }
+        else if (dType = tDungeon) then
+        begin
+          if (smallGrid.processed_dungeon[r][c] = '.') or (smallGrid.processed_dungeon[r][c] = '>') or (smallGrid.processed_dungeon[r][c] = '<')then
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
+          else
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
         end;
         AddElement(datanode, 'Visible', UTF8Decode(BoolToStr(False)));
         AddElement(datanode, 'Occupied', UTF8Decode(BoolToStr(False)));
@@ -342,6 +350,11 @@ begin
         if (dType = tCave) then
         begin
           AddElement(datanode, 'Glyph', UTF8Decode(cave.terrainArray[r][c]));
+        end
+        { if dungeon type is a dungeon }
+        else if (dType = tDungeon) then
+        begin
+          AddElement(datanode, 'Glyph', UTF8Decode(smallGrid.processed_dungeon[r][c]));
         end;
       end;
     end;
