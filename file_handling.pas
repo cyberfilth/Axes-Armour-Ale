@@ -926,7 +926,7 @@ begin
     AddElement(datanode, 'indexID', IntToStr(items.indexID));
     AddElement(datanode, 'totalDepth', IntToStr(totalDepth));
     AddElement(datanode, 'canExitDungeon', UTF8Encode(BoolToStr(player_stats.canExitDungeon)));
-    WriteStr(Value, dungeonType);
+    WriteStr(Value, map.mapType);
     AddElement(datanode, 'mapType', Value);
 
     (* Location data *)
