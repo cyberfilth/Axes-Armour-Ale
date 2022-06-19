@@ -43,7 +43,7 @@ procedure carveVertically(y1, y2, x: smallint);
 (* Create a room *)
 procedure createRoom(gridNumber: smallint);
 (* Generate a dungeon *)
-procedure generate(idNumber: smallint; totalDepth: byte);
+procedure generate(title: string; idNumber: smallint; totalDepth: byte);
 (* sort room list in order from left to right *)
 procedure leftToRight;
 
@@ -561,7 +561,7 @@ change starting point of each room so they don't all start drawing from the top 
   end;
 end;
 
-procedure generate(idNumber: smallint; totalDepth: byte);
+procedure generate(title: string; idNumber: smallint; totalDepth: byte);
 var
   i: byte;
 begin
@@ -598,7 +598,7 @@ begin
         end;
       end;
       universe.totalRooms := totalRooms;
-      file_handling.writeNewDungeonLevel(idNumber, i, totalDepth, totalRooms, tDungeon);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tDungeon);
     end
     { If the floor number is an odd number }
     else if (Odd(i)) and (i <> totalDepth) then
@@ -620,7 +620,7 @@ begin
       stairY := r;
       (* Improve the walls of the dungeon *)
       prettify;
-      file_handling.writeNewDungeonLevel(idNumber, i, totalDepth, totalRooms, tDungeon);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tDungeon);
     end
     else if not (Odd(i)) and (i <> totalDepth) then
       { If the floor number is an even number }
@@ -642,7 +642,7 @@ begin
       stairY := r;
       (* Improve the walls of the dungeon *)
       prettify;
-      file_handling.writeNewDungeonLevel(idNumber, i, totalDepth, totalRooms, tDungeon);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tDungeon);
     end
     else
       (* Last floor *)
@@ -654,7 +654,7 @@ begin
       dungeonArray[stairY][stairX] := '<';
       (* Improve the walls of the dungeon *)
       prettify;
-      file_handling.writeNewDungeonLevel(idNumber, i, totalDepth, totalRooms, tDungeon);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tDungeon);
     end;
 
     /////////////////////////////

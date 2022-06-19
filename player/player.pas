@@ -120,6 +120,7 @@ var
   originalX, originalY, locationID, i: smallint;
   mapFeature: shortstring;
   Dtype: dungeonTerrain;
+  title: string;
 begin
   (* Repaint visited tiles *)
   fov.islandFOV(entityList[0].posX, entityList[0].posY);
@@ -159,13 +160,15 @@ begin
         file_handling.saveOverworldMap;
         { get the id number of the location }
         locationID := island.getLocationID(entityList[0].posX, entityList[0].posY);
+        { Get the name of the dungeon }
+        title := island.getLocationName(entityList[0].posX, entityList[0].posY);
         { Dungeon type }
         Dtype := island.getDungeonType(entityList[0].posX, entityList[0].posY);
         { Generate a new location if it doesn't already exist }
         if (island.locationExists(entityList[0].posX, entityList[0].posY) = False) then
         begin
           if (Dtype = tDungeon) then
-            universe.createNewDungeon(tDungeon, locationID);
+            universe.createNewDungeon(UTF8Decode(title), tDungeon, locationID);
         end;
         (* store overworld coordinates *)
         globalUtils.OWx := entityList[0].posX;
@@ -174,8 +177,8 @@ begin
         globalUtils.womblingFree := 'underground';
         (* Set game state to Game (underground) *)
         gameState := stGame;
-        (* Get dungeon name *)
-        universe.title := UTF8Decode(island.getLocationName(entityList[0].posX, entityList[0].posY));
+        (* Set dungeon name *)
+        universe.title := UTF8Decode(title);
         (* Load the dungeon *)
         file_handling.loadDungeonLevel(locationID, 1);
         { prepare changes to the screen }

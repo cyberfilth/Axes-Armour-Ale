@@ -39,7 +39,7 @@ procedure randomTileFill;
 (* Dig out the cave *)
 procedure digCave(floorNumber: byte);
 (* Generate a caves and place the stairs *)
-procedure generate(idNumber: smallint; totalDepth: byte);
+procedure generate(title: string; idNumber: smallint; totalDepth: byte);
 (* Determines if a tile is a wall or not *)
 function blockORnot(x, y: integer): Tbkinds;
 (* Floodfill cave to find unreachable areas *)
@@ -273,7 +273,7 @@ begin
 
 end;
 
-procedure generate(idNumber: smallint; totalDepth: byte);
+procedure generate(title: string; idNumber: smallint; totalDepth: byte);
 var
   i: byte;
 begin
@@ -306,7 +306,7 @@ begin
         end;
       end;
       universe.totalRooms := totalRooms;
-      file_handling.writeNewDungeonLevel(idNumber, i, totalDepth, totalRooms, tCave);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCave);
     end
     { If the floor number is an odd number }
     else if (Odd(i)) and (i <> totalDepth) then
@@ -326,7 +326,7 @@ begin
       (* Save location of stairs *)
       stairX := c;
       stairY := r;
-      file_handling.writeNewDungeonLevel(idNumber, i, totalDepth, totalRooms, tCave);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCave);
     end
     else if not (Odd(i)) and (i <> totalDepth) then
       { If the floor number is an even number }
@@ -346,7 +346,7 @@ begin
       (* Save location of stairs *)
       stairX := c;
       stairY := r;
-      file_handling.writeNewDungeonLevel(idNumber, i, totalDepth, totalRooms, tCave);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCave);
     end
     else
       (* Last floor *)
@@ -356,7 +356,7 @@ begin
         digCave(i);
       until terrainArray[stairY][stairX] = '.';
       terrainArray[stairY][stairX] := '<';
-      file_handling.writeNewDungeonLevel(idNumber, i, totalDepth, totalRooms, tCave);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCave);
     end;
 
 

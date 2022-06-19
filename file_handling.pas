@@ -15,7 +15,7 @@ procedure saveOverworldMap;
 (* Read overworld map from disk *)
 procedure loadOverworldMap;
 (* Write a newly generate level of a dungeon to disk *)
-procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;
+procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte;
   dtype: dungeonTerrain);
 (* Write explored dungeon level to disk *)
 procedure saveDungeonLevel;
@@ -263,7 +263,7 @@ begin
   end;
 end;
 
-procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;
+procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte;
   dtype: dungeonTerrain);
 
 var
@@ -311,7 +311,7 @@ begin
     DataNode := AddChild(RootNode, 'levelData');
     AddElement(datanode, 'dungeonID', UTF8Decode(IntToStr(idNumber)));
     AddElement(datanode, 'canExitDungeon', UTF8Decode(BoolToStr(False)));
-    AddElement(datanode, 'title', universe.title);
+    AddElement(datanode, 'title', UTF8Decode(title));
     AddElement(datanode, 'floor', UTF8Decode(IntToStr(lvlNum)));
     AddElement(datanode, 'levelVisited', UTF8Decode(BoolToStr(False)));
     AddElement(datanode, 'itemsOnThisFloor', UTF8Decode(IntToStr(0)));

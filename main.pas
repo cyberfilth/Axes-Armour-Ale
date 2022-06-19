@@ -216,7 +216,7 @@ begin
     theme := tCave;
   end;
   (* Create the dungeon *)
-  universe.createNewDungeon(map.mapType, 1);
+  universe.createNewDungeon('Smugglers Cave', map.mapType, 1);
   (* Set smell counter to zero *)
   smell.smellCounter := 0;
   (* Create the Player *)

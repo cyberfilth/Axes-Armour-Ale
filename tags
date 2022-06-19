@@ -55,12 +55,14 @@ arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	backup/map.pas	/^procedure ascendStairs;$/;"	p
 ascendStairs	map.pas	/^procedure ascendStairs;$/;"	p
 beginLogging	logging.pas	/^procedure beginLogging;$/;"	p
+blockORnot	dungeons/backup/cave.pas	/^function blockORnot(x, y: integer): Tbkinds;$/;"	f
 blockORnot	dungeons/cave.pas	/^function blockORnot(x, y: integer): Tbkinds;$/;"	f
 blockORnot	vision/smell.pas	/^function blockORnot(x, y: integer): Tbkinds;$/;"	f
 bufferMessage	backup/ui.pas	/^procedure bufferMessage(message: shortstring);$/;"	p
 bufferMessage	ui.pas	/^procedure bufferMessage(message: shortstring);$/;"	p
 buildLevel	dungeons/backup/smallgrid.pas	/^procedure buildLevel(floorNumber: byte);$/;"	p
 buildLevel	dungeons/smallgrid.pas	/^procedure buildLevel(floorNumber: byte);$/;"	p
+calcDistances	dungeons/backup/cave.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
 calcDistances	dungeons/cave.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
 calcDistances	vision/smell.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
 canMove	backup/map.pas	/^function canMove(checkX, checkY: smallint): boolean;$/;"	f
@@ -165,8 +167,8 @@ createInfectedHyena	entities/animals/hyena_fungus.pas	/^procedure createInfected
 createLeatherArmour	items/armour/backup/leather_armour1.pas	/^procedure createLeatherArmour(itmx, itmy: smallint);$/;"	p
 createLeatherArmour	items/armour/leather_armour1.pas	/^procedure createLeatherArmour(itmx, itmy: smallint);$/;"	p
 createMushroomPerson	entities/fungus/mushroom_person.pas	/^procedure createMushroomPerson(uniqueid, npcx, npcy: smallint);$/;"	p
-createNewDungeon	backup/universe.pas	/^procedure createNewDungeon(levelType: dungeonTerrain; dID: smallint);$/;"	p
-createNewDungeon	universe.pas	/^procedure createNewDungeon(levelType: dungeonTerrain; dID: smallint);$/;"	p
+createNewDungeon	backup/universe.pas	/^procedure createNewDungeon(title: string; levelType: dungeonTerrain; dID: smallint);$/;"	p
+createNewDungeon	universe.pas	/^procedure createNewDungeon(title: string; levelType: dungeonTerrain; dID: smallint);$/;"	p
 createPixieJar	items/backup/pixie_jar.pas	/^procedure createPixieJar;$/;"	p
 createPixieJar	items/pixie_jar.pas	/^procedure createPixieJar;$/;"	p
 createPlayer	player/backup/player.pas	/^procedure createPlayer;$/;"	p
@@ -251,6 +253,7 @@ destroyWeapon	player/backup/player_inventory.pas	/^procedure destroyWeapon;$/;"	
 destroyWeapon	player/player_inventory.pas	/^procedure destroyWeapon;$/;"	p
 dialogBoxInput	backup/keyboardinput.pas	/^procedure dialogBoxInput(Keypress: TKeyEvent);$/;"	p
 dialogBoxInput	keyboardinput.pas	/^procedure dialogBoxInput(Keypress: TKeyEvent);$/;"	p
+digCave	dungeons/backup/cave.pas	/^procedure digCave(floorNumber: byte);$/;"	p
 digCave	dungeons/cave.pas	/^procedure digCave(floorNumber: byte);$/;"	p
 dispenseItem	items/backup/item_lookup.pas	/^procedure dispenseItem(dungeon: dungeonTerrain);$/;"	p
 dispenseItem	items/item_lookup.pas	/^procedure dispenseItem(dungeon: dungeonTerrain);$/;"	p
@@ -362,6 +365,7 @@ fade	dungeons/backup/noise.pas	/^  function fade(t: float64): float64; inline;$/
 fade	dungeons/noise.pas	/^  function fade(t: float64): float64; inline;$/;"	f
 fieldOfView	vision/backup/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
 fieldOfView	vision/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
+fillWithWalls	dungeons/backup/cave.pas	/^procedure fillWithWalls;$/;"	p
 fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
 fireBow	screens/backup/scrtargeting.pas	/^procedure fireBow;$/;"	p
 fireBow	screens/scrtargeting.pas	/^procedure fireBow;$/;"	p
@@ -388,11 +392,12 @@ gameLoop	backup/main.pas	/^procedure gameLoop;$/;"	p
 gameLoop	main.pas	/^procedure gameLoop;$/;"	p
 gameOver	backup/main.pas	/^procedure gameOver;$/;"	p
 gameOver	main.pas	/^procedure gameOver;$/;"	p
+generate	dungeons/backup/cave.pas	/^procedure generate(title: string; idNumber: smallint; totalDepth: byte);$/;"	p
 generate	dungeons/backup/overworld.pas	/^procedure generate;$/;"	p
-generate	dungeons/backup/smallgrid.pas	/^procedure generate(idNumber: smallint; totalDepth: byte);$/;"	p
-generate	dungeons/cave.pas	/^procedure generate(idNumber: smallint; totalDepth: byte);$/;"	p
+generate	dungeons/backup/smallgrid.pas	/^procedure generate(title: string; idNumber: smallint; totalDepth: byte);$/;"	p
+generate	dungeons/cave.pas	/^procedure generate(title: string; idNumber: smallint; totalDepth: byte);$/;"	p
 generate	dungeons/overworld.pas	/^procedure generate;$/;"	p
-generate	dungeons/smallgrid.pas	/^procedure generate(idNumber: smallint; totalDepth: byte);$/;"	p
+generate	dungeons/smallgrid.pas	/^procedure generate(title: string; idNumber: smallint; totalDepth: byte);$/;"	p
 generateClanName	plot_gen.pas	/^procedure generateClanName;$/;"	p
 generateDwarfName	plot_gen.pas	/^procedure generateDwarfName;$/;"	p
 generateElfName	plot_gen.pas	/^procedure generateElfName;$/;"	p
@@ -508,6 +513,7 @@ islandFOV	vision/backup/fov.pas	/^procedure islandFOV(centreX, centreY: smallint
 islandFOV	vision/fov.pas	/^procedure islandFOV(centreX, centreY: smallint);$/;"	p
 killEntity	backup/entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 killEntity	entities.pas	/^procedure killEntity(id: smallint);$/;"	p
+leftHasFloor	dungeons/backup/cave.pas	/^function leftHasFloor(): boolean;$/;"	f
 leftHasFloor	dungeons/cave.pas	/^function leftHasFloor(): boolean;$/;"	f
 leftToRight	dungeons/backup/smallgrid.pas	/^procedure leftToRight;$/;"	p
 leftToRight	dungeons/smallgrid.pas	/^procedure leftToRight;$/;"	p
@@ -597,7 +603,9 @@ quitInputOW	backup/keyboardinput.pas	/^procedure quitInputOW(Keypress: TKeyEvent
 quitInputOW	keyboardinput.pas	/^procedure quitInputOW(Keypress: TKeyEvent);$/;"	p
 randomRange	backup/globalutils.pas	/^function randomRange(fromNumber, toNumber: smallint): smallint;$/;"	f
 randomRange	globalutils.pas	/^function randomRange(fromNumber, toNumber: smallint): smallint;$/;"	f
+randomTileFill	dungeons/backup/cave.pas	/^procedure randomTileFill;$/;"	p
 randomTileFill	dungeons/cave.pas	/^procedure randomTileFill;$/;"	p
+rangeok	dungeons/backup/cave.pas	/^  function rangeok(x, y: smallint): boolean;$/;"	f
 rangeok	dungeons/cave.pas	/^  function rangeok(x, y: smallint): boolean;$/;"	f
 rangeok	vision/smell.pas	/^  function rangeok(x, y: smallint): boolean;$/;"	f
 redrawItems	backup/items.pas	/^procedure redrawItems;$/;"	p
@@ -622,6 +630,7 @@ returnToGameScreen	backup/main.pas	/^procedure returnToGameScreen;$/;"	p
 returnToGameScreen	main.pas	/^procedure returnToGameScreen;$/;"	p
 returnToOverworldScreen	backup/main.pas	/^procedure returnToOverworldScreen;$/;"	p
 returnToOverworldScreen	main.pas	/^procedure returnToOverworldScreen;$/;"	p
+rightHasFloor	dungeons/backup/cave.pas	/^function rightHasFloor(): boolean;$/;"	f
 rightHasFloor	dungeons/cave.pas	/^function rightHasFloor(): boolean;$/;"	f
 rollDice	backup/globalutils.pas	/^function rollDice(numberOfDice: byte): smallint;$/;"	f
 rollDice	globalutils.pas	/^function rollDice(numberOfDice: byte): smallint;$/;"	f
@@ -639,6 +648,7 @@ seedLocations	dungeons/backup/architect.pas	/^procedure seedLocations;$/;"	p
 setSeed	backup/main.pas	/^procedure setSeed;$/;"	p
 setSeed	main.pas	/^procedure setSeed;$/;"	p
 setTheScene	screens/scrcharintro.pas	/^procedure setTheScene;$/;"	p
+setaround	dungeons/backup/cave.pas	/^  procedure setaround(x, y: smallint; d: smallint);$/;"	p
 setaround	dungeons/cave.pas	/^  procedure setaround(x, y: smallint; d: smallint);$/;"	p
 setaround	vision/smell.pas	/^  procedure setaround(x, y: smallint; d: smallint);$/;"	p
 setupKeyboard	backup/keyboardinput.pas	/^procedure setupKeyboard;$/;"	p
@@ -787,5 +797,5 @@ withinBounds	backup/map.pas	/^function withinBounds(x, y: smallint): boolean;$/;
 withinBounds	map.pas	/^function withinBounds(x, y: smallint): boolean;$/;"	f
 writeBufferedMessages	backup/ui.pas	/^procedure writeBufferedMessages;$/;"	p
 writeBufferedMessages	ui.pas	/^procedure writeBufferedMessages;$/;"	p
-writeNewDungeonLevel	backup/file_handling.pas	/^procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;$/;"	p
-writeNewDungeonLevel	file_handling.pas	/^procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;$/;"	p
+writeNewDungeonLevel	backup/file_handling.pas	/^procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte;$/;"	p
+writeNewDungeonLevel	file_handling.pas	/^procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte;$/;"	p
