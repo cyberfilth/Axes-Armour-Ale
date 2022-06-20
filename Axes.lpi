@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="73">
+    <Units Count="74">
       <Unit0>
         <Filename Value="Axes.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -430,6 +430,10 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="smallGrid"/>
       </Unit72>
+      <Unit73>
+        <Filename Value="entities\animals\small_hornet.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit73>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

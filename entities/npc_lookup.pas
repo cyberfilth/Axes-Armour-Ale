@@ -11,7 +11,7 @@ uses
   { List of creatures }
   cave_rat, giant_cave_rat, blood_bat, large_blood_bat, green_fungus, mushroom_person,
   redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
-  hyena_fungus;
+  hyena_fungus, small_hornet;
 
 const
   (* Array of creatures found in a cave, ordered by cave level *)
@@ -25,7 +25,7 @@ const
     'redcapLsrLbr', 'matango', 'hyenaFungus');
   (* Array of creatures found in a dungeon, ordered by dungeon level *)
   dgnNPC1: array[1..5] of string =
-    ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
+    ('smallHornet', 'smallHyena', 'smallHornet', 'bloodBat', 'greenFungus');
   dgnNPC2: array[1..7] of string =
     ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
     'greenFungus', 'hobFungus');
@@ -107,6 +107,7 @@ begin
     'hobFungus': redcap_fungus.createRedcapFungus(i, c, r);
     'smallHyena': small_hyena.createSmallHyena(i, c, r);
     'hyenaFungus': hyena_fungus.createInfectedHyena(i, c, r);
+    'smallHornet': small_hornet.createSmallHornet(i, c, r);
   end;
 end;
 

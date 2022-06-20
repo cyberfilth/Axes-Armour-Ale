@@ -54,8 +54,7 @@ begin
 
   if ((damageAmount - entities.entityList[0].tmrDrunk) > 0) then
   begin
-    entities.entityList[npcID].currentHP :=
-      (entities.entityList[npcID].currentHP - damageAmount);
+    entities.entityList[npcID].currentHP := (entities.entityList[npcID].currentHP - damageAmount);
     (* If it was a killing blow *)
     if (entities.entityList[npcID].currentHP < 1) then
     begin
@@ -72,7 +71,21 @@ begin
       ui.displayMessage('Parrying, you slightly injure ' + opponent)
     else
       ui.displayMessage('You hit ' + opponent + ' for ' + IntToStr(damageAmount) + ' points of damage');
-  end;
+  end
+  (* If the player's attack misses *)
+  else
+      begin
+        if (entityList[npcID].defence > 0) and (entityList[npcID].defence <= 3) then
+           ui.displayMessage('You miss')
+        else if (entityList[npcID].defence > 3) and (entityList[npcID].defence <= 5) then
+           ui.displayMessage('Your attack misses')
+        else if (entityList[npcID].defence > 5) and (entityList[npcID].defence <= 8) then
+           ui.displayMessage('Your blow causes no damage')
+        else if (entityList[npcID].defence > 8) and (entityList[npcID].defence <= 15) then
+           ui.displayMessage('Your attack does no damage')
+        else
+           ui.displayMessage(opponent + ' is unharmed')
+      end;
 end;
 
 procedure spiteDMG(npc: smallint);
