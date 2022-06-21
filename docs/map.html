@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: map</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit map</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -17,7 +17,7 @@
 <p>
 Organises the current level into an array together with helper functions</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="universe.html">universe</a></li><li><a  href="ui.html">ui</a></li><li><a  href="file_handling.html">file_handling</a></li><li><a  href="player_stats.html">player_stats</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="universe.html">universe</a></li><li><a href="ui.html">ui</a></li><li><a href="file_handling.html">file_handling</a></li><li><a href="player_stats.html">player_stats</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -25,181 +25,97 @@ Organises the current level into an array together with helper functions</p>
 <th class="itemdesc">Description</th>
 </tr>
 <tr class="list">
-<td class="itemname">Record&nbsp;<a class="bold" href="map.displayTile.html"><code>displayTile</code></a></td>
+<td class="itemname">Record&nbsp;<a class="bold" href="map.tile.html"><code>tile</code></a></td>
 <td class="itemdesc">&nbsp;</td>
 </tr>
 <tr class="list2">
-<td class="itemname">Record&nbsp;<a class="bold" href="map.tile.html"><code>tile</code></a></td>
+<td class="itemname">Record&nbsp;<a class="bold" href="map.displayTile.html"><code>displayTile</code></a></td>
 <td class="itemdesc">&nbsp;</td>
 </tr>
 </table>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="map.html#ascendStairs">ascendStairs</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="map.html#occupy">occupy</a></strong>(x, y: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="map.html#canMove">canMove</a></b>(checkX, checkY: smallint): boolean;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="map.html#unoccupy">unoccupy</a></strong>(x, y: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="map.html#canSee">canSee</a></b>(checkX, checkY: smallint): boolean;</code></td>
+<td class="itemcode"><code>function <strong><a href="map.html#isOccupied">isOccupied</a></strong>(checkX, checkY: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="map.html#descendStairs">descendStairs</a></b>;</code></td>
+<td class="itemcode"><code>function <strong><a href="map.html#withinBounds">withinBounds</a></strong>(x, y: smallint): boolean;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="map.html#drawTile">drawTile</a></b>(c, r: smallint; hiDef: byte);</code></td>
+<td class="itemcode"><code>function <strong><a href="map.html#isWall">isWall</a></strong>(x, y: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="map.html#hasPlayer">hasPlayer</a></b>(checkX, checkY: smallint): boolean;</code></td>
+<td class="itemcode"><code>function <strong><a href="map.html#canMove">canMove</a></strong>(checkX, checkY: smallint): boolean;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="map.html#isOccupied">isOccupied</a></b>(checkX, checkY: smallint): boolean;</code></td>
+<td class="itemcode"><code>function <strong><a href="map.html#canSee">canSee</a></strong>(checkX, checkY: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="map.html#isWall">isWall</a></b>(x, y: smallint): boolean;</code></td>
+<td class="itemcode"><code>function <strong><a href="map.html#hasPlayer">hasPlayer</a></strong>(checkX, checkY: smallint): boolean;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="map.html#loadDisplayedMap">loadDisplayedMap</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="map.html#ascendStairs">ascendStairs</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="map.html#notInView">notInView</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="map.html#descendStairs">descendStairs</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="map.html#occupy">occupy</a></b>(x, y: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="map.html#placeAtEntrance">placeAtEntrance</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="map.html#placeAtEntrance">placeAtEntrance</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="map.html#drawCaveTiles">drawCaveTiles</a></strong>(c, r: smallint; hiDef: byte);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="map.html#setupMap">setupMap</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="map.html#drawDungeonTiles">drawDungeonTiles</a></strong>(c, r: smallint; hiDef: byte);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="map.html#unoccupy">unoccupy</a></b>(x, y: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="map.html#drawTile">drawTile</a></strong>(c, r: smallint; hiDef: byte);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="map.html#withinBounds">withinBounds</a></b>(x, y: smallint): boolean;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="map.html#loadDisplayedMap">loadDisplayedMap</a></strong>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="map.html#notInView">notInView</a></strong>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="map.html#setupMap">setupMap</a></strong>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="map.html#c">c</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="map.html#c">c</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="map.html#maparea">maparea</a></b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of <a  href="map.tile.html">tile</a>;</code></td>
+<td class="itemcode"><code><strong><a href="map.html#maparea">maparea</a></strong>: array[1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of <a href="map.tile.html">tile</a>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="map.html#mapDisplay">mapDisplay</a></b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of <a  href="map.displayTile.html">displayTile</a>;</code></td>
+<td class="itemcode"><code><strong><a href="map.html#mapDisplay">mapDisplay</a></strong>: array[1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of <a href="map.displayTile.html">displayTile</a>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="map.html#mapType">mapType</a></b>: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>;</code></td>
+<td class="itemcode"><code><strong><a href="map.html#mapType">mapType</a></strong>: <a href="globalUtils.html#dungeonTerrain">dungeonTerrain</a>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="map.html#r">r</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="map.html#r">r</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="map.html#startX">startX</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="map.html#startX">startX</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="map.html#startY">startY</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="map.html#startY">startY</a></strong>: smallint;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="ascendStairs"></span><code>procedure <b>ascendStairs</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Go up stairs</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="canMove"></span><code>function <b>canMove</b>(checkX, checkY: smallint): boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Check if the direction to move to is valid</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="canSee"></span><code>function <b>canSee</b>(checkX, checkY: smallint): boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Check if an object is in players FoV</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="descendStairs"></span><code>procedure <b>descendStairs</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Go down stairs</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="drawTile"></span><code>procedure <b>drawTile</b>(c, r: smallint; hiDef: byte);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Place a tile on the map</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="hasPlayer"></span><code>function <b>hasPlayer</b>(checkX, checkY: smallint): boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Check if player is on a tile</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="isOccupied"></span><code>function <b>isOccupied</b>(checkX, checkY: smallint): boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Check if a map tile is occupied</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="isWall"></span><code>function <b>isWall</b>(x, y: smallint): boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Check if a tile contains a wall</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="loadDisplayedMap"></span><code>procedure <b>loadDisplayedMap</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Display explored sections of map when reloading game</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="notInView"></span><code>procedure <b>notInView</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Set the whole map to invisible</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="occupy"></span><code>procedure <b>occupy</b>(x, y: smallint);</code></td>
+<td class="itemcode"><span id="occupy"></span><code>procedure <strong>occupy</strong>(x, y: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -208,25 +124,7 @@ Occupy tile</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="placeAtEntrance"></span><code>procedure <b>placeAtEntrance</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Place the Player on the entrance stair to a dungeon</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="setupMap"></span><code>procedure <b>setupMap</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Setup the current level</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="unoccupy"></span><code>procedure <b>unoccupy</b>(x, y: smallint);</code></td>
+<td class="itemcode"><span id="unoccupy"></span><code>procedure <strong>unoccupy</strong>(x, y: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -235,17 +133,143 @@ Unoccupy tile</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="withinBounds"></span><code>function <b>withinBounds</b>(x, y: smallint): boolean;</code></td>
+<td class="itemcode"><span id="isOccupied"></span><code>function <strong>isOccupied</strong>(checkX, checkY: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if a map tile is occupied</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="withinBounds"></span><code>function <strong>withinBounds</strong>(x, y: smallint): boolean;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Check if the coordinates are within the bounds of the gamemap</p>
 </td></tr>
 </table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="isWall"></span><code>function <strong>isWall</strong>(x, y: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if a tile contains a wall</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="canMove"></span><code>function <strong>canMove</strong>(checkX, checkY: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if the direction to move to is valid</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="canSee"></span><code>function <strong>canSee</strong>(checkX, checkY: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if an object is in players FoV</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="hasPlayer"></span><code>function <strong>hasPlayer</strong>(checkX, checkY: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if player is on a tile</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ascendStairs"></span><code>procedure <strong>ascendStairs</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Go up stairs</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="descendStairs"></span><code>procedure <strong>descendStairs</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Go down stairs</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="placeAtEntrance"></span><code>procedure <strong>placeAtEntrance</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Place the Player on the entrance stair to a dungeon</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drawCaveTiles"></span><code>procedure <strong>drawCaveTiles</strong>(c, r: smallint; hiDef: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Draw cave tiles</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drawDungeonTiles"></span><code>procedure <strong>drawDungeonTiles</strong>(c, r: smallint; hiDef: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Draw dungeon tiles</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drawTile"></span><code>procedure <strong>drawTile</strong>(c, r: smallint; hiDef: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Place a tile on the map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="loadDisplayedMap"></span><code>procedure <strong>loadDisplayedMap</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display explored sections of map when reloading game</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="notInView"></span><code>procedure <strong>notInView</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Set the whole map to invisible</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="setupMap"></span><code>procedure <strong>setupMap</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Setup the current level</p>
+</td></tr>
+</table>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="c"></span><code><b>c</b>: smallint;</code></td>
+<td class="itemcode"><span id="c"></span><code><strong>c</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -254,7 +278,7 @@ ROWS and COLUMNS used in loops</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="maparea"></span><code><b>maparea</b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of <a  href="map.tile.html">tile</a>;</code></td>
+<td class="itemcode"><span id="maparea"></span><code><strong>maparea</strong>: array[1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of <a href="map.tile.html">tile</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -263,7 +287,7 @@ Game map array</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="mapDisplay"></span><code><b>mapDisplay</b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of <a  href="map.displayTile.html">displayTile</a>;</code></td>
+<td class="itemcode"><span id="mapDisplay"></span><code><strong>mapDisplay</strong>: array[1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of <a href="map.displayTile.html">displayTile</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -272,14 +296,14 @@ The map that the camera uses</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="mapType"></span><code><b>mapType</b>: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>;</code></td>
+<td class="itemcode"><span id="mapType"></span><code><strong>mapType</strong>: <a href="globalUtils.html#dungeonTerrain">dungeonTerrain</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="r"></span><code><b>r</b>: smallint;</code></td>
+<td class="itemcode"><span id="r"></span><code><strong>r</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -288,7 +312,7 @@ ROWS and COLUMNS used in loops</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="startX"></span><code><b>startX</b>: smallint;</code></td>
+<td class="itemcode"><span id="startX"></span><code><strong>startX</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -297,13 +321,13 @@ Player starting position</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="startY"></span><code><b>startY</b>: smallint;</code></td>
+<td class="itemcode"><span id="startY"></span><code><strong>startY</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Player starting position</p>
 </td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

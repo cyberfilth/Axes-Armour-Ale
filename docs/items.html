@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: items</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit items</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -17,7 +17,7 @@
 <p>
 Items and objects in the game world</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li><a  href="ui.html">ui</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li><a href="ui.html">ui</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -32,149 +32,68 @@ Items and objects in the game world</p>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="items.html#containsItem">containsItem</a></b>(x, y: smallint): boolean;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="items.html#initialiseItems">initialiseItems</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="items.html#countNonEmptyItems">countNonEmptyItems</a></b>: byte;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="items.html#drawItemsOnMap">drawItemsOnMap</a></strong>(id: byte);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="items.html#drawItemsOnMap">drawItemsOnMap</a></b>(id: byte);</code></td>
+<td class="itemcode"><code>function <strong><a href="items.html#containsItem">containsItem</a></strong>(x, y: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="items.html#getItemColour">getItemColour</a></b>(x, y: smallint): shortstring;</code></td>
+<td class="itemcode"><code>function <strong><a href="items.html#getItemName">getItemName</a></strong>(x, y: smallint): shortstring;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="items.html#getItemDescription">getItemDescription</a></b>(x, y: smallint): shortstring;</code></td>
+<td class="itemcode"><code>function <strong><a href="items.html#getItemDescription">getItemDescription</a></strong>(x, y: smallint): shortstring;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="items.html#getItemGlyph">getItemGlyph</a></b>(x, y: smallint): shortstring;</code></td>
+<td class="itemcode"><code>function <strong><a href="items.html#getItemID">getItemID</a></strong>(x, y: smallint): smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="items.html#getItemID">getItemID</a></b>(x, y: smallint): smallint;</code></td>
+<td class="itemcode"><code>function <strong><a href="items.html#getItemGlyph">getItemGlyph</a></strong>(x, y: smallint): shortstring;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="items.html#getItemName">getItemName</a></b>(x, y: smallint): shortstring;</code></td>
+<td class="itemcode"><code>function <strong><a href="items.html#getItemColour">getItemColour</a></strong>(x, y: smallint): shortstring;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="items.html#getThrowDamage">getThrowDamage</a></b>(x, y: smallint): smallint;</code></td>
+<td class="itemcode"><code>function <strong><a href="items.html#isItemThrowable">isItemThrowable</a></strong>(x, y: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="items.html#initialiseItems">initialiseItems</a></b>;</code></td>
+<td class="itemcode"><code>function <strong><a href="items.html#getThrowDamage">getThrowDamage</a></strong>(x, y: smallint): smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="items.html#isItemThrowable">isItemThrowable</a></b>(x, y: smallint): boolean;</code></td>
+<td class="itemcode"><code>function <strong><a href="items.html#countNonEmptyItems">countNonEmptyItems</a></strong>: byte;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="items.html#redrawItems">redrawItems</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="items.html#redrawItems">redrawItems</a></strong>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="items.html#tItem">tItem</a></b> = (...);</code></td>
+<td class="itemcode"><code><strong><a href="items.html#tItem">tItem</a></strong> = (...);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="items.html#TitemList">TitemList</a></b> = array of <a  href="items.Item.html">Item</a>;</code></td>
+<td class="itemcode"><code><strong><a href="items.html#TitemList">TitemList</a></strong> = array of <a href="items.Item.html">Item</a>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="items.html#tMaterial">tMaterial</a></b> = (...);</code></td>
+<td class="itemcode"><code><strong><a href="items.html#tMaterial">tMaterial</a></strong> = (...);</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="items.html#indexID">indexID</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="items.html#indexID">indexID</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="items.html#itemList">itemList</a></b>: <a  href="items.html#TitemList">TitemList</a>;</code></td>
+<td class="itemcode"><code><strong><a href="items.html#itemList">itemList</a></strong>: <a href="items.html#TitemList">TitemList</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="containsItem"></span><code>function <b>containsItem</b>(x, y: smallint): boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Is there an item at coordinates</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="countNonEmptyItems"></span><code>function <b>countNonEmptyItems</b>: byte;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Count non-empty items in array</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="drawItemsOnMap"></span><code>procedure <b>drawItemsOnMap</b>(id: byte);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Update the map display to show all items</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="getItemColour"></span><code>function <b>getItemColour</b>(x, y: smallint): shortstring;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Get the glyph colour at coordinates</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="getItemDescription"></span><code>function <b>getItemDescription</b>(x, y: smallint): shortstring;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Get description of item at coordinates</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="getItemGlyph"></span><code>function <b>getItemGlyph</b>(x, y: smallint): shortstring;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Get the item glyph at coordinates</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="getItemID"></span><code>function <b>getItemID</b>(x, y: smallint): smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Get item ID at coordinates</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="getItemName"></span><code>function <b>getItemName</b>(x, y: smallint): shortstring;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Get name of item at coordinates</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="getThrowDamage"></span><code>function <b>getThrowDamage</b>(x, y: smallint): smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Get the Throw Damage at coordinates</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="initialiseItems"></span><code>procedure <b>initialiseItems</b>;</code></td>
+<td class="itemcode"><span id="initialiseItems"></span><code>procedure <strong>initialiseItems</strong>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -183,7 +102,70 @@ Generate list of items on the map</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="isItemThrowable"></span><code>function <b>isItemThrowable</b>(x, y: smallint): boolean;</code></td>
+<td class="itemcode"><span id="drawItemsOnMap"></span><code>procedure <strong>drawItemsOnMap</strong>(id: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Update the map display to show all items</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="containsItem"></span><code>function <strong>containsItem</strong>(x, y: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Is there an item at coordinates</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getItemName"></span><code>function <strong>getItemName</strong>(x, y: smallint): shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get name of item at coordinates</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getItemDescription"></span><code>function <strong>getItemDescription</strong>(x, y: smallint): shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get description of item at coordinates</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getItemID"></span><code>function <strong>getItemID</strong>(x, y: smallint): smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get item ID at coordinates</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getItemGlyph"></span><code>function <strong>getItemGlyph</strong>(x, y: smallint): shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get the item glyph at coordinates</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getItemColour"></span><code>function <strong>getItemColour</strong>(x, y: smallint): shortstring;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get the glyph colour at coordinates</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="isItemThrowable"></span><code>function <strong>isItemThrowable</strong>(x, y: smallint): boolean;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -192,7 +174,25 @@ Is item on floor throwable</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="redrawItems"></span><code>procedure <b>redrawItems</b>;</code></td>
+<td class="itemcode"><span id="getThrowDamage"></span><code>function <strong>getThrowDamage</strong>(x, y: smallint): smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get the Throw Damage at coordinates</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="countNonEmptyItems"></span><code>function <strong>countNonEmptyItems</strong>: byte;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Count non-empty items in array</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="redrawItems"></span><code>procedure <strong>redrawItems</strong>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -202,7 +202,7 @@ Redraw all items</p>
 <h3 class="detail">Types</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="tItem"></span><code><b>tItem</b> = (...);</code></td>
+<td class="itemcode"><span id="tItem"></span><code><strong>tItem</strong> = (...);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;<h6 class="description_section">Values</h6>
@@ -230,14 +230,14 @@ Redraw all items</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="TitemList"></span><code><b>TitemList</b> = array of <a  href="items.Item.html">Item</a>;</code></td>
+<td class="itemcode"><span id="TitemList"></span><code><strong>TitemList</strong> = array of <a href="items.Item.html">Item</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="tMaterial"></span><code><b>tMaterial</b> = (...);</code></td>
+<td class="itemcode"><span id="tMaterial"></span><code><strong>tMaterial</strong> = (...);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;<h6 class="description_section">Values</h6>
@@ -268,18 +268,18 @@ Redraw all items</p>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="indexID"></span><code><b>indexID</b>: smallint;</code></td>
+<td class="itemcode"><span id="indexID"></span><code><strong>indexID</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="itemList"></span><code><b>itemList</b>: <a  href="items.html#TitemList">TitemList</a>;</code></td>
+<td class="itemcode"><span id="itemList"></span><code><strong>itemList</strong>: <a href="items.html#TitemList">TitemList</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

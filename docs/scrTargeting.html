@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: scrTargeting</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit scrTargeting</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -17,7 +17,7 @@
 <p>
 Screen used for Firing a bow</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Classes</li><li>Math</li><li><a  href="map.html">map</a></li><li><a  href="entities.html">entities</a></li><li>video</li><li><a  href="ui.html">ui</a></li><li><a  href="camera.html">camera</a></li><li><a  href="fov.html">fov</a></li><li><a  href="items.html">items</a></li><li><a  href="los.html">los</a></li><li><a  href="scrGame.html">scrGame</a></li><li><a  href="player_stats.html">player_stats</a></li><li><a  href="animation.html">animation</a></li><li><a  href="globalUtils.html">globalUtils</a></li><li>arrow</li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Classes</li><li>Math</li><li><a href="map.html">map</a></li><li><a href="entities.html">entities</a></li><li>video</li><li><a href="ui.html">ui</a></li><li><a href="camera.html">camera</a></li><li><a href="fov.html">fov</a></li><li><a href="items.html">items</a></li><li><a href="los.html">los</a></li><li><a href="scrGame.html">scrGame</a></li><li><a href="player_stats.html">player_stats</a></li><li><a href="animation.html">animation</a></li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="arrow.html">arrow</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -32,110 +32,74 @@ Screen used for Firing a bow</p>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#aimBow">aimBow</a></b>(dir: word);</code></td>
+<td class="itemcode"><code>function <strong><a href="scrTargeting.html#glyphAngle">glyphAngle</a></strong>(targetX, targetY: smallint): shortstring;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#arrowHit">arrowHit</a></b>(x, y: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="scrTargeting.html#aimBow">aimBow</a></strong>(dir: word);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#drawTrajectory">drawTrajectory</a></b>(x1, y1, x2, y2: smallint; g, col: shortstring);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="scrTargeting.html#fireBow">fireBow</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#fireBow">fireBow</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="scrTargeting.html#drawTrajectory">drawTrajectory</a></strong>(x1, y1, x2, y2: smallint; g, col: shortstring);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="scrTargeting.html#glyphAngle">glyphAngle</a></b>(targetX, targetY: smallint): shortstring;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="scrTargeting.html#arrowHit">arrowHit</a></strong>(x, y: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#paintOverMsg">paintOverMsg</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="scrTargeting.html#restorePlayerGlyph">restorePlayerGlyph</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="scrTargeting.html#restorePlayerGlyph">restorePlayerGlyph</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="scrTargeting.html#paintOverMsg">paintOverMsg</a></strong>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#empty">empty</a></b> = 'Empty';</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#empty">empty</a></strong> = 'Empty';</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#arrowFlightArray">arrowFlightArray</a></b>: array[1..<a  href="los.html#plyrTargetRange">plyrTargetRange</a>] of TPoint;</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#arrowFlightArray">arrowFlightArray</a></strong>: array[1..<a href="los.html#plyrTargetRange">plyrTargetRange</a>] of TPoint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#arrowGlyph">arrowGlyph</a></b>: shortstring;</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#arrowGlyph">arrowGlyph</a></strong>: shortstring;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#landingX">landingX</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#landingX">landingX</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#landingY">landingY</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#landingY">landingY</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#safeX">safeX</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#safeX">safeX</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#safeY">safeY</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#safeY">safeY</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#selectedTarget">selectedTarget</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#selectedTarget">selectedTarget</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#targetX">targetX</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#targetX">targetX</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#targetY">targetY</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#targetY">targetY</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#tgtAmount">tgtAmount</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#tgtAmount">tgtAmount</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="scrTargeting.html#weaponAmount">weaponAmount</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="scrTargeting.html#weaponAmount">weaponAmount</a></strong>: smallint;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="aimBow"></span><code>procedure <b>aimBow</b>(dir: word);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Aim bow and arrow</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="arrowHit"></span><code>procedure <b>arrowHit</b>(x, y: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Arrow hits an entity</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="drawTrajectory"></span><code>procedure <b>drawTrajectory</b>(x1, y1, x2, y2: smallint; g, col: shortstring);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Draw trajectory of arrow</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="fireBow"></span><code>procedure <b>fireBow</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Fire bow and arrow</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="glyphAngle"></span><code>function <b>glyphAngle</b>(targetX, targetY: smallint): shortstring;</code></td>
+<td class="itemcode"><span id="glyphAngle"></span><code>function <strong>glyphAngle</strong>(targetX, targetY: smallint): shortstring;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -144,26 +108,62 @@ Calculate what angle of arrow to use</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="paintOverMsg"></span><code>procedure <b>paintOverMsg</b>;</code></td>
+<td class="itemcode"><span id="aimBow"></span><code>procedure <strong>aimBow</strong>(dir: word);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Paint over the message log</p>
+Aim bow and arrow</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="restorePlayerGlyph"></span><code>procedure <b>restorePlayerGlyph</b>;</code></td>
+<td class="itemcode"><span id="fireBow"></span><code>procedure <strong>fireBow</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Fire bow and arrow</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drawTrajectory"></span><code>procedure <strong>drawTrajectory</strong>(x1, y1, x2, y2: smallint; g, col: shortstring);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Draw trajectory of arrow</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="arrowHit"></span><code>procedure <strong>arrowHit</strong>(x, y: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Arrow hits an entity</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="restorePlayerGlyph"></span><code>procedure <strong>restorePlayerGlyph</strong>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Repaint the player when exiting look/target screen</p>
 </td></tr>
 </table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="paintOverMsg"></span><code>procedure <strong>paintOverMsg</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Paint over the message log</p>
+</td></tr>
+</table>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="empty"></span><code><b>empty</b> = 'Empty';</code></td>
+<td class="itemcode"><span id="empty"></span><code><strong>empty</strong> = 'Empty';</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -171,7 +171,7 @@ Repaint the player when exiting look/target screen</p>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="arrowFlightArray"></span><code><b>arrowFlightArray</b>: array[1..<a  href="los.html#plyrTargetRange">plyrTargetRange</a>] of TPoint;</code></td>
+<td class="itemcode"><span id="arrowFlightArray"></span><code><strong>arrowFlightArray</strong>: array[1..<a href="los.html#plyrTargetRange">plyrTargetRange</a>] of TPoint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -180,7 +180,7 @@ Path of arrows</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="arrowGlyph"></span><code><b>arrowGlyph</b>: shortstring;</code></td>
+<td class="itemcode"><span id="arrowGlyph"></span><code><strong>arrowGlyph</strong>: shortstring;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -189,7 +189,7 @@ Arrow Glyph to use in animation</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="landingX"></span><code><b>landingX</b>: smallint;</code></td>
+<td class="itemcode"><span id="landingX"></span><code><strong>landingX</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -198,7 +198,7 @@ Coordinates where the projectile lands</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="landingY"></span><code><b>landingY</b>: smallint;</code></td>
+<td class="itemcode"><span id="landingY"></span><code><strong>landingY</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -207,7 +207,7 @@ Coordinates where the projectile lands</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="safeX"></span><code><b>safeX</b>: smallint;</code></td>
+<td class="itemcode"><span id="safeX"></span><code><strong>safeX</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -216,7 +216,7 @@ The last safe coordinates</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="safeY"></span><code><b>safeY</b>: smallint;</code></td>
+<td class="itemcode"><span id="safeY"></span><code><strong>safeY</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -225,14 +225,14 @@ The last safe coordinates</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="selectedTarget"></span><code><b>selectedTarget</b>: smallint;</code></td>
+<td class="itemcode"><span id="selectedTarget"></span><code><strong>selectedTarget</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="targetX"></span><code><b>targetX</b>: smallint;</code></td>
+<td class="itemcode"><span id="targetX"></span><code><strong>targetX</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -241,7 +241,7 @@ Target coordinates</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="targetY"></span><code><b>targetY</b>: smallint;</code></td>
+<td class="itemcode"><span id="targetY"></span><code><strong>targetY</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -250,18 +250,18 @@ Target coordinates</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="tgtAmount"></span><code><b>tgtAmount</b>: smallint;</code></td>
+<td class="itemcode"><span id="tgtAmount"></span><code><strong>tgtAmount</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="weaponAmount"></span><code><b>weaponAmount</b>: smallint;</code></td>
+<td class="itemcode"><span id="weaponAmount"></span><code><strong>weaponAmount</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

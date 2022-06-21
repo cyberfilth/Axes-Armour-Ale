@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: npc_lookup</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit npc_lookup</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section">Variables</div></div>
@@ -17,32 +17,49 @@
 <p>
 Lookup table for NPC's, based on the environment</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="universe.html">universe</a></li><li><a  href="map.html">map</a></li><li><a  href="smell.html">smell</a></li><li><a  href="cave_rat.html">cave_rat</a></li><li><a  href="giant_cave_rat.html">giant_cave_rat</a></li><li><a  href="blood_bat.html">blood_bat</a></li><li><a  href="large_blood_bat.html">large_blood_bat</a></li><li><a  href="green_fungus.html">green_fungus</a></li><li><a  href="mushroom_person.html">mushroom_person</a></li><li><a  href="redcap_lesser.html">redcap_lesser</a></li><li><a  href="redcap_lesser_lobber.html">redcap_lesser_lobber</a></li><li><a  href="small_green_fungus.html">small_green_fungus</a></li><li><a  href="small_hyena.html">small_hyena</a></li><li><a  href="redcap_fungus.html">redcap_fungus</a></li><li><a  href="hyena_fungus.html">hyena_fungus</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li><a href="globalUtils.html">globalUtils</a></li><li><a href="universe.html">universe</a></li><li><a href="map.html">map</a></li><li><a href="smell.html">smell</a></li><li><a href="cave_rat.html">cave_rat</a></li><li><a href="giant_cave_rat.html">giant_cave_rat</a></li><li><a href="blood_bat.html">blood_bat</a></li><li><a href="large_blood_bat.html">large_blood_bat</a></li><li><a href="green_fungus.html">green_fungus</a></li><li><a href="mushroom_person.html">mushroom_person</a></li><li><a href="redcap_lesser.html">redcap_lesser</a></li><li><a href="redcap_lesser_lobber.html">redcap_lesser_lobber</a></li><li><a href="small_green_fungus.html">small_green_fungus</a></li><li><a href="small_hyena.html">small_hyena</a></li><li><a href="redcap_fungus.html">redcap_fungus</a></li><li><a href="hyena_fungus.html">hyena_fungus</a></li><li><a href="small_hornet.html">small_hornet</a></li><li><a href="small_corpse_spider.html">small_corpse_spider</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="npc_lookup.html#NPCpicker">NPCpicker</a></b>(i: byte; dungeon: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="npc_lookup.html#NPCpicker">NPCpicker</a></strong>(i: byte; dungeon: <a href="globalUtils.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="npc_lookup.html#caveNPC1">caveNPC1</a></b>: array[1..5] of string = ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');</code></td>
+<td class="itemcode"><code><strong><a href="npc_lookup.html#caveNPC1">caveNPC1</a></strong>: array[1..5] of string =
+    ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="npc_lookup.html#caveNPC2">caveNPC2</a></b>: array[1..7] of string =
-    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');</code></td>
+<td class="itemcode"><code><strong><a href="npc_lookup.html#caveNPC2">caveNPC2</a></strong>: array[1..7] of string =
+    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
+    'greenFungus', 'hobFungus');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="npc_lookup.html#caveNPC3">caveNPC3</a></b>: array[1..7] of string =
-    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'redcapLsrLbr', 'matango', 'hyenaFungus');</code></td>
+<td class="itemcode"><code><strong><a href="npc_lookup.html#caveNPC3">caveNPC3</a></strong>: array[1..7] of string =
+    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
+    'redcapLsrLbr', 'matango', 'hyenaFungus');</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="npc_lookup.html#dgnNPC1">dgnNPC1</a></strong>: array[1..5] of string =
+    ('smallHornet', 'smlCorpseSpider', 'smallHornet', 'bloodBat', 'smlCorpseSpider');</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="npc_lookup.html#dgnNPC2">dgnNPC2</a></strong>: array[1..7] of string =
+    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
+    'greenFungus', 'hobFungus');</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="npc_lookup.html#dgnNPC3">dgnNPC3</a></strong>: array[1..7] of string =
+    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
+    'redcapLsrLbr', 'matango', 'hyenaFungus');</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="NPCpicker"></span><code>procedure <b>NPCpicker</b>(i: byte; dungeon: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
+<td class="itemcode"><span id="NPCpicker"></span><code>procedure <strong>NPCpicker</strong>(i: byte; dungeon: <a href="globalUtils.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -52,7 +69,8 @@ randomly choose a creature and call the generate code directly</p>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="caveNPC1"></span><code><b>caveNPC1</b>: array[1..5] of string = ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');</code></td>
+<td class="itemcode"><span id="caveNPC1"></span><code><strong>caveNPC1</strong>: array[1..5] of string =
+    ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -61,20 +79,50 @@ Array of creatures found in a cave, ordered by cave level</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="caveNPC2"></span><code><b>caveNPC2</b>: array[1..7] of string =
-    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');</code></td>
+<td class="itemcode"><span id="caveNPC2"></span><code><strong>caveNPC2</strong>: array[1..7] of string =
+    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
+    'greenFungus', 'hobFungus');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="caveNPC3"></span><code><b>caveNPC3</b>: array[1..7] of string =
-    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'redcapLsrLbr', 'matango', 'hyenaFungus');</code></td>
+<td class="itemcode"><span id="caveNPC3"></span><code><strong>caveNPC3</strong>: array[1..7] of string =
+    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
+    'redcapLsrLbr', 'matango', 'hyenaFungus');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dgnNPC1"></span><code><strong>dgnNPC1</strong>: array[1..5] of string =
+    ('smallHornet', 'smlCorpseSpider', 'smallHornet', 'bloodBat', 'smlCorpseSpider');</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Array of creatures found in a dungeon, ordered by dungeon level</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dgnNPC2"></span><code><strong>dgnNPC2</strong>: array[1..7] of string =
+    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
+    'greenFungus', 'hobFungus');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dgnNPC3"></span><code><strong>dgnNPC3</strong>: array[1..7] of string =
+    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
+    'redcapLsrLbr', 'matango', 'hyenaFungus');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

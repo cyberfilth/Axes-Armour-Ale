@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: camera</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit camera</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -17,85 +17,57 @@
 <p>
 Camera unit follows the player around and displays the surrounding game map</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="ui.html">ui</a></li><li><a  href="map.html">map</a></li><li><a  href="entities.html">entities</a></li><li><a  href="island.html">island</a></li><li><a  href="overworld.html">overworld</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="ui.html">ui</a></li><li><a href="map.html">map</a></li><li><a href="entities.html">entities</a></li><li><a href="island.html">island</a></li><li><a href="overworld.html">overworld</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="camera.html#drawMap">drawMap</a></b>;</code></td>
+<td class="itemcode"><code>function <strong><a href="camera.html#getX">getX</a></strong>(Xcoord: smallint): smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="camera.html#drawOWMap">drawOWMap</a></b>;</code></td>
+<td class="itemcode"><code>function <strong><a href="camera.html#getY">getY</a></strong>(Ycoord: smallint): smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="camera.html#drawOWPlayer">drawOWPlayer</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="camera.html#drawMap">drawMap</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="camera.html#drawPlayer">drawPlayer</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="camera.html#drawPlayer">drawPlayer</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="camera.html#getX">getX</a></b>(Xcoord: smallint): smallint;</code></td>
+<td class="itemcode"><code>function <strong><a href="camera.html#getXOW">getXOW</a></strong>(Xcoord: smallint): smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="camera.html#getXOW">getXOW</a></b>(Xcoord: smallint): smallint;</code></td>
+<td class="itemcode"><code>function <strong><a href="camera.html#getYOW">getYOW</a></strong>(Ycoord: smallint): smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="camera.html#getY">getY</a></b>(Ycoord: smallint): smallint;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="camera.html#drawOWMap">drawOWMap</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="camera.html#getYOW">getYOW</a></b>(Ycoord: smallint): smallint;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="camera.html#drawOWPlayer">drawOWPlayer</a></strong>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="camera.html#camHeight">camHeight</a></b> = 19;</code></td>
+<td class="itemcode"><code><strong><a href="camera.html#camHeight">camHeight</a></strong> = 19;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="camera.html#c">c</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="camera.html#c">c</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="camera.html#camWidth">camWidth</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="camera.html#camWidth">camWidth</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="camera.html#r">r</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="camera.html#r">r</a></strong>: smallint;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="drawMap"></span><code>procedure <b>drawMap</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="drawOWMap"></span><code>procedure <b>drawOWMap</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="drawOWPlayer"></span><code>procedure <b>drawOWPlayer</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="drawPlayer"></span><code>procedure <b>drawPlayer</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="getX"></span><code>function <b>getX</b>(Xcoord: smallint): smallint;</code></td>
+<td class="itemcode"><span id="getX"></span><code>function <strong>getX</strong>(Xcoord: smallint): smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -104,7 +76,28 @@ Underground camera</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="getXOW"></span><code>function <b>getXOW</b>(Xcoord: smallint): smallint;</code></td>
+<td class="itemcode"><span id="getY"></span><code>function <strong>getY</strong>(Ycoord: smallint): smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drawMap"></span><code>procedure <strong>drawMap</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drawPlayer"></span><code>procedure <strong>drawPlayer</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getXOW"></span><code>function <strong>getXOW</strong>(Xcoord: smallint): smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -113,14 +106,21 @@ Overground camera</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="getY"></span><code>function <b>getY</b>(Ycoord: smallint): smallint;</code></td>
+<td class="itemcode"><span id="getYOW"></span><code>function <strong>getYOW</strong>(Ycoord: smallint): smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="getYOW"></span><code>function <b>getYOW</b>(Ycoord: smallint): smallint;</code></td>
+<td class="itemcode"><span id="drawOWMap"></span><code>procedure <strong>drawOWMap</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drawOWPlayer"></span><code>procedure <strong>drawOWPlayer</strong>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -128,7 +128,7 @@ Overground camera</p>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="camHeight"></span><code><b>camHeight</b> = 19;</code></td>
+<td class="itemcode"><span id="camHeight"></span><code><strong>camHeight</strong> = 19;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -136,25 +136,25 @@ Overground camera</p>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="c"></span><code><b>c</b>: smallint;</code></td>
+<td class="itemcode"><span id="c"></span><code><strong>c</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="camWidth"></span><code><b>camWidth</b>: smallint;</code></td>
+<td class="itemcode"><span id="camWidth"></span><code><strong>camWidth</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="r"></span><code><b>r</b>: smallint;</code></td>
+<td class="itemcode"><span id="r"></span><code><strong>r</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

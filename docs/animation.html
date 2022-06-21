@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: animation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit animation</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
@@ -17,36 +17,45 @@
 <p>
 Unit responsible for projectile and magic animations</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Classes</li><li>video</li><li><a  href="ui.html">ui</a></li><li><a  href="entities.html">entities</a></li><li><a  href="fov.html">fov</a></li><li><a  href="map.html">map</a></li><li><a  href="camera.html">camera</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Classes</li><li>video</li><li><a href="ui.html">ui</a></li><li><a href="entities.html">entities</a></li><li><a href="fov.html">fov</a></li><li><a href="map.html">map</a></li><li><a href="camera.html">camera</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="animation.html#areaBurnEffect">areaBurnEffect</a></b>(getEm: array of smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="animation.html#throwRock">throwRock</a></strong>(id: smallint; var flightPath: <a href="animation.html#a">a</a>);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="animation.html#arrowAnimation">arrowAnimation</a></b>(var flightPath: <a  href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="animation.html#areaBurnEffect">areaBurnEffect</a></strong>(getEm: array of smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="animation.html#thrownObjectAnim">thrownObjectAnim</a></b>(var flightPath: <a  href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="animation.html#thrownObjectAnim">thrownObjectAnim</a></strong>(var flightPath: <a href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="animation.html#throwRock">throwRock</a></b>(id: smallint; var flightPath: <a  href="animation.html#a">a</a>);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="animation.html#arrowAnimation">arrowAnimation</a></strong>(var flightPath: <a href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
 </tr>
 </table>
 <span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="animation.html#a">a</a></b> = array[1..10] of TPoint;</code></td>
+<td class="itemcode"><code><strong><a href="animation.html#a">a</a></strong> = array[1..10] of TPoint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="animation.html#b">b</a></b> = array[1..30] of TPoint;</code></td>
+<td class="itemcode"><code><strong><a href="animation.html#b">b</a></strong> = array[1..30] of TPoint;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="areaBurnEffect"></span><code>procedure <b>areaBurnEffect</b>(getEm: array of smallint);</code></td>
+<td class="itemcode"><span id="throwRock"></span><code>procedure <strong>throwRock</strong>(id: smallint; var flightPath: <a href="animation.html#a">a</a>);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Animate a rock being thrown</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="areaBurnEffect"></span><code>procedure <strong>areaBurnEffect</strong>(getEm: array of smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -55,16 +64,7 @@ Animate nearby enemies burning</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="arrowAnimation"></span><code>procedure <b>arrowAnimation</b>(var flightPath: <a  href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Animate an arrow</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="thrownObjectAnim"></span><code>procedure <b>thrownObjectAnim</b>(var flightPath: <a  href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
+<td class="itemcode"><span id="thrownObjectAnim"></span><code>procedure <strong>thrownObjectAnim</strong>(var flightPath: <a href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -73,28 +73,28 @@ Animate the player throwing a projectile</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="throwRock"></span><code>procedure <b>throwRock</b>(id: smallint; var flightPath: <a  href="animation.html#a">a</a>);</code></td>
+<td class="itemcode"><span id="arrowAnimation"></span><code>procedure <strong>arrowAnimation</strong>(var flightPath: <a href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Animate a rock being thrown</p>
+Animate an arrow</p>
 </td></tr>
 </table>
 <h3 class="detail">Types</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="a"></span><code><b>a</b> = array[1..10] of TPoint;</code></td>
+<td class="itemcode"><span id="a"></span><code><strong>a</strong> = array[1..10] of TPoint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="b"></span><code><b>b</b> = array[1..30] of TPoint;</code></td>
+<td class="itemcode"><span id="b"></span><code><strong>b</strong> = array[1..30] of TPoint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

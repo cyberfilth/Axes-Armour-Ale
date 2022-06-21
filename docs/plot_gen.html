@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: plot_gen</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit plot_gen</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -17,42 +17,42 @@
 <p>
 Generate names and plot elements</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>dos</li><li><a  href="player_stats.html">player_stats</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>dos</li><li><a href="player_stats.html">player_stats</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="plot_gen.html#elvenTown">elvenTown</a></b>: string;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="plot_gen.html#generateHumanName">generateHumanName</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateClanName">generateClanName</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="plot_gen.html#generateElfName">generateElfName</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateDwarfName">generateDwarfName</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="plot_gen.html#generateDwarfName">generateDwarfName</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateElfName">generateElfName</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="plot_gen.html#generateClanName">generateClanName</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateHumanName">generateHumanName</a></b>;</code></td>
+<td class="itemcode"><code>function <strong><a href="plot_gen.html#elvenTown">elvenTown</a></strong>: string;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#generateTitle">generateTitle</a></b>;</code></td>
+<td class="itemcode"><code>function <strong><a href="plot_gen.html#smallVillage">smallVillage</a></strong>: string;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="plot_gen.html#getTrollDate">getTrollDate</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="plot_gen.html#generateTitle">generateTitle</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="plot_gen.html#smallVillage">smallVillage</a></b>: string;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="plot_gen.html#getTrollDate">getTrollDate</a></strong>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#DayStr">DayStr</a></b>: array[0..6] of string =
+<td class="itemcode"><code><strong><a href="plot_gen.html#DayStr">DayStr</a></strong>: array[0..6] of string =
     ('Fastday', 'Onesday', 'Twosday', 'Frogday', 'Hawksday', 'Feastday', 'Marketday');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#MonthStr">MonthStr</a></b>: array[1..12] of string =
+<td class="itemcode"><code><strong><a href="plot_gen.html#MonthStr">MonthStr</a></strong>: array[1..12] of string =
     ('Mistmon', 'Brittleice', 'Windmon', 'Gunther', 'Sweetbriar', 'Greenling',
     'Frogsong', 'Sunmon', 'Southflight',
     'Harvestmoon', 'Ghostmoon', 'Stormlight');</code></td>
@@ -61,7 +61,7 @@ Generate names and plot elements</p>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianFemaleFirst">aquilonianFemaleFirst</a></b>: array[0..97] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianFemaleFirst">aquilonianFemaleFirst</a></strong>: array[0..97] of
   string = ('Adam', 'Aeg', 'Al', 'Alb', 'Albion', 'Alc', 'Alcim',
     'Anger', 'Arac', 'Arac', 'Aracel', 'Arian', 'Ariann', 'Balb',
     'Bith', 'Bolb', 'Cair', 'Cairist', 'Call', 'Card', 'Carm', 'Cat',
@@ -76,7 +76,7 @@ Generate names and plot elements</p>
     'Suad', 'Teth', 'Tim', 'Tryph', 'Val', 'Vern', 'Vig', 'Vimand', 'Vir', 'Zel');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianFemaleLast">aquilonianFemaleLast</a></b>: array[0..99] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianFemaleLast">aquilonianFemaleLast</a></strong>: array[0..99] of
   string = ('a', 'e', 'ea', 'ia', 'ia', 'ya', 'ys', 'ana', 'ana',
     'are', 'are', 'ata', 'ata', 'ede', 'ede', 'eia', 'eia', 'eis',
     'eis', 'ele', 'ele', 'ena', 'ena', 'ene', 'ene', 'era', 'era',
@@ -91,7 +91,7 @@ Generate names and plot elements</p>
     'andra', 'antia', 'autia', 'imede', 'inome', 'ithea');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianMaleFirst">aquilonianMaleFirst</a></b>: array[0..187] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianMaleFirst">aquilonianMaleFirst</a></strong>: array[0..187] of
   string = ('Abant', 'Abantiad', 'Ac', 'Acris', 'Act', 'Alc', 'Alcid',
     'Am', 'Andr', 'Andr', 'Arct', 'Arct', 'Arp', 'Asclep', 'Atab',
     'Atab', 'Attal', 'Auf', 'Aufid', 'Bal', 'Balend', 'Barr', 'Barr',
@@ -118,7 +118,7 @@ Generate names and plot elements</p>
     'Vil', 'Volm', 'Volm', 'Volman', 'Zet');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#aquilonianMaleLast">aquilonianMaleLast</a></b>: array[0..99] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianMaleLast">aquilonianMaleLast</a></strong>: array[0..99] of
   string = ('a', 'i', 'o', 'as', 'el', 'er', 'es', 'ic', 'in', 'io',
     'is', 'on', 'os', 'us', 'yc', 'ago', 'ald', 'ana', 'ana', 'eas',
     'ell', 'ell', 'eri', 'eus', 'eus', 'ian', 'ias', 'ias', 'ion',
@@ -134,21 +134,21 @@ Generate names and plot elements</p>
     'onicus', 'antides');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#clanFirst">clanFirst</a></b>: array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
+<td class="itemcode"><code><strong><a href="plot_gen.html#clanFirst">clanFirst</a></strong>: array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
     'Grim', 'Rune', 'Storm', 'Frost', 'Thunder', 'Bright', 'Blood',
     'Grey', 'Stone', 'Bronze', 'Silver', 'Bone', 'Mist', 'Ice');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#clanSecond">clanSecond</a></b>: array[0..19] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#clanSecond">clanSecond</a></strong>: array[0..19] of
   string = ('Axe', 'Hammer', 'Anvil', 'Smith', 'Forge', 'Beard',
     'Shield', 'Biter', 'Bane', 'Weaver', 'Mage', 'Spear', 'Seeker',
     'Sword', 'Crafter', 'Breaker', 'Born', 'Helm', 'Hold', 'Fist');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#Day">Day</a></b>: word;</code></td>
+<td class="itemcode"><code><strong><a href="plot_gen.html#Day">Day</a></strong>: word;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#dwarvenName">dwarvenName</a></b>: array[0..109] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#dwarvenName">dwarvenName</a></strong>: array[0..109] of
   string = ('Ailgor', 'Ainion', 'Alon', 'Alvion', 'Amur', 'Andol',
     'Argli', 'Arol', 'Artil', 'Artor', 'Avli', 'Balan', 'Balor',
     'Bamon', 'Bandiol', 'Baril', 'Baron', 'Baviol', 'Bavor', 'Bodol',
@@ -168,7 +168,7 @@ Generate names and plot elements</p>
     'Rurir', 'Ruvil', 'Ruvli', 'Thogin', 'Thogrur', 'Thondir');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#elvenHomea">elvenHomea</a></b>: array[0..13] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#elvenHomea">elvenHomea</a></strong>: array[0..13] of
   string = ('the Vale of', 'the Whispering Forest of', 'the forest of',
     'the white peaks of', 'the woods of', 'the Cinderlands of',
     'the Frostspike of', 'the snow pass of', 'the green fortress of',
@@ -176,7 +176,7 @@ Generate names and plot elements</p>
     'the Hidden Spires of', 'the Shimmering of');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#elvenHomeb">elvenHomeb</a></b>: array[0..42] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#elvenHomeb">elvenHomeb</a></strong>: array[0..42] of
   string = ('Felamae', 'Lorrom', 'Anorel', 'Weneres', 'Rathel',
     'Lasbreg-Dwyr', 'Renamar', 'Sarriel', 'Vius', 'Viusand', 'Ethgal',
     'Renfin', 'Syldar', 'Thrantor', 'Paceledrel', 'Borntae', 'Mai-Ionla',
@@ -186,7 +186,7 @@ Generate names and plot elements</p>
     'Glanduil', 'Iliphar', 'Ilrune', 'Saleh', 'Urijyre', 'Inamys', 'Caiwraek');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#elvenName">elvenName</a></b>: array[0..885] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#elvenName">elvenName</a></strong>: array[0..885] of
   string = ('Aarall', 'Abiala', 'Acanos', 'Acarnar', 'Adali', 'Adari',
     'Adarore', 'Addin', 'Aderiel', 'Adius', 'Agrae', 'Aitese', 'Alane',
     'Alar', 'Alaril', 'Alasar', 'Aldas', 'Aler', 'Alerin', 'Alesan',
@@ -317,7 +317,7 @@ Generate names and plot elements</p>
     'Lunella', 'Seron', 'Tharene', 'Nellino', 'Dushani', 'Raliar', 'Valaras', 'Liaro');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#firstSyllable">firstSyllable</a></b>: array[0..73] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#firstSyllable">firstSyllable</a></strong>: array[0..73] of
   string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
     'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con', 'Cor', 'Dag', 'Doo',
     'Elen', 'El', 'En', 'Eo', 'Faf', 'Fan', 'Fara', 'Fre', 'Fro',
@@ -328,16 +328,16 @@ Generate names and plot elements</p>
     'Tho', 'Tris', 'U', 'Uh', 'Ul', 'Vap', 'Vish', 'Vor', 'Ya', 'Yo', 'Yyr');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#Month">Month</a></b>: word;</code></td>
+<td class="itemcode"><code><strong><a href="plot_gen.html#Month">Month</a></strong>: word;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#playerName">playerName</a></b>: string;</code></td>
+<td class="itemcode"><code><strong><a href="plot_gen.html#playerName">playerName</a></strong>: string;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#playerTitle">playerTitle</a></b>: string;</code></td>
+<td class="itemcode"><code><strong><a href="plot_gen.html#playerTitle">playerTitle</a></strong>: string;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#secondSyllable">secondSyllable</a></b>: array[0..62] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#secondSyllable">secondSyllable</a></strong>: array[0..62] of
   string = ('ba', 'bis', 'bo', 'bus', 'da', 'dal', 'dagz', 'den',
     'di', 'dil', 'dinn', 'do', 'dor', 'dra', 'dur', 'gi', 'gauble',
     'gen', 'glum', 'go', 'gorn', 'goth', 'had', 'hard', 'is', 'karrl',
@@ -347,7 +347,7 @@ Generate names and plot elements</p>
     'tu', 'tur', 'tred', 'varl', 'wain', 'wan', 'win', 'wise', 'ya');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#titles">titles</a></b>: array[0..108] of string = ('Abominable', 'Amorous',
+<td class="itemcode"><code><strong><a href="plot_gen.html#titles">titles</a></strong>: array[0..108] of string = ('Abominable', 'Amorous',
     'Afflicted', 'Ailing', 'Breathless', 'Broken', 'Bullish', 'Craggy',
     'Bearded', 'Bony', 'Beastly', 'Drunken', 'Bitter', 'Fetid', 'Fierce',
     'Fiery', 'Bold', 'Filthy', 'Craven', 'Fishy', 'Crooked', 'Flexible',
@@ -367,62 +367,26 @@ Generate names and plot elements</p>
     'Oily', 'Rascal', 'Remorseless', 'Squinty', 'Silvery', 'Thirsty');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#trollDate">trollDate</a></b>: string;</code></td>
+<td class="itemcode"><code><strong><a href="plot_gen.html#trollDate">trollDate</a></strong>: string;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#villageName">villageName</a></b>: array[0..11] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#villageName">villageName</a></strong>: array[0..11] of
   string = ('PigSpit', 'FootRot', 'MudLands', 'SquelchBottom',
     'DungMould', 'Belchford', 'Goatstone', 'Kloggington', 'Ordure Field',
     'Clagstone', 'Dogmire', 'Klart');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="plot_gen.html#WDay">WDay</a></b>: word;</code></td>
+<td class="itemcode"><code><strong><a href="plot_gen.html#WDay">WDay</a></strong>: word;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="plot_gen.html#Year">Year</a></b>: word;</code></td>
+<td class="itemcode"><code><strong><a href="plot_gen.html#Year">Year</a></strong>: word;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="elvenTown"></span><code>function <b>elvenTown</b>: string;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Generate name of an Elven home</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="generateClanName"></span><code>procedure <b>generateClanName</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Generate Dwarven clan name</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="generateDwarfName"></span><code>procedure <b>generateDwarfName</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Generate a Dwarven name for the player</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="generateElfName"></span><code>procedure <b>generateElfName</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Generate an Elven name for the player</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="generateHumanName"></span><code>procedure <b>generateHumanName</b>;</code></td>
+<td class="itemcode"><span id="generateHumanName"></span><code>procedure <strong>generateHumanName</strong>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -431,7 +395,52 @@ Generate a human name for the player</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="generateTitle"></span><code>procedure <b>generateTitle</b>;</code></td>
+<td class="itemcode"><span id="generateElfName"></span><code>procedure <strong>generateElfName</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate an Elven name for the player</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generateDwarfName"></span><code>procedure <strong>generateDwarfName</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate a Dwarven name for the player</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generateClanName"></span><code>procedure <strong>generateClanName</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate Dwarven clan name</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="elvenTown"></span><code>function <strong>elvenTown</strong>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate name of an Elven home</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="smallVillage"></span><code>function <strong>smallVillage</strong>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate name of small village</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generateTitle"></span><code>procedure <strong>generateTitle</strong>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -440,26 +449,17 @@ Generate a title or honorfic for the player</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="getTrollDate"></span><code>procedure <b>getTrollDate</b>;</code></td>
+<td class="itemcode"><span id="getTrollDate"></span><code>procedure <strong>getTrollDate</strong>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Get the current date and display it in the in-game calendar</p>
 </td></tr>
 </table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="smallVillage"></span><code>function <b>smallVillage</b>: string;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Generate name of small village</p>
-</td></tr>
-</table>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="DayStr"></span><code><b>DayStr</b>: array[0..6] of string =
+<td class="itemcode"><span id="DayStr"></span><code><strong>DayStr</strong>: array[0..6] of string =
     ('Fastday', 'Onesday', 'Twosday', 'Frogday', 'Hawksday', 'Feastday', 'Marketday');</code></td>
 </tr>
 <tr><td colspan="1">
@@ -467,7 +467,7 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="MonthStr"></span><code><b>MonthStr</b>: array[1..12] of string =
+<td class="itemcode"><span id="MonthStr"></span><code><strong>MonthStr</strong>: array[1..12] of string =
     ('Mistmon', 'Brittleice', 'Windmon', 'Gunther', 'Sweetbriar', 'Greenling',
     'Frogsong', 'Sunmon', 'Southflight',
     'Harvestmoon', 'Ghostmoon', 'Stormlight');</code></td>
@@ -478,7 +478,7 @@ Generate name of small village</p>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="aquilonianFemaleFirst"></span><code><b>aquilonianFemaleFirst</b>: array[0..97] of
+<td class="itemcode"><span id="aquilonianFemaleFirst"></span><code><strong>aquilonianFemaleFirst</strong>: array[0..97] of
   string = ('Adam', 'Aeg', 'Al', 'Alb', 'Albion', 'Alc', 'Alcim',
     'Anger', 'Arac', 'Arac', 'Aracel', 'Arian', 'Ariann', 'Balb',
     'Bith', 'Bolb', 'Cair', 'Cairist', 'Call', 'Card', 'Carm', 'Cat',
@@ -497,7 +497,7 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="aquilonianFemaleLast"></span><code><b>aquilonianFemaleLast</b>: array[0..99] of
+<td class="itemcode"><span id="aquilonianFemaleLast"></span><code><strong>aquilonianFemaleLast</strong>: array[0..99] of
   string = ('a', 'e', 'ea', 'ia', 'ia', 'ya', 'ys', 'ana', 'ana',
     'are', 'are', 'ata', 'ata', 'ede', 'ede', 'eia', 'eia', 'eis',
     'eis', 'ele', 'ele', 'ena', 'ena', 'ene', 'ene', 'era', 'era',
@@ -516,7 +516,7 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="aquilonianMaleFirst"></span><code><b>aquilonianMaleFirst</b>: array[0..187] of
+<td class="itemcode"><span id="aquilonianMaleFirst"></span><code><strong>aquilonianMaleFirst</strong>: array[0..187] of
   string = ('Abant', 'Abantiad', 'Ac', 'Acris', 'Act', 'Alc', 'Alcid',
     'Am', 'Andr', 'Andr', 'Arct', 'Arct', 'Arp', 'Asclep', 'Atab',
     'Atab', 'Attal', 'Auf', 'Aufid', 'Bal', 'Balend', 'Barr', 'Barr',
@@ -547,7 +547,7 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="aquilonianMaleLast"></span><code><b>aquilonianMaleLast</b>: array[0..99] of
+<td class="itemcode"><span id="aquilonianMaleLast"></span><code><strong>aquilonianMaleLast</strong>: array[0..99] of
   string = ('a', 'i', 'o', 'as', 'el', 'er', 'es', 'ic', 'in', 'io',
     'is', 'on', 'os', 'us', 'yc', 'ago', 'ald', 'ana', 'ana', 'eas',
     'ell', 'ell', 'eri', 'eus', 'eus', 'ian', 'ias', 'ias', 'ion',
@@ -567,7 +567,7 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="clanFirst"></span><code><b>clanFirst</b>: array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
+<td class="itemcode"><span id="clanFirst"></span><code><strong>clanFirst</strong>: array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
     'Grim', 'Rune', 'Storm', 'Frost', 'Thunder', 'Bright', 'Blood',
     'Grey', 'Stone', 'Bronze', 'Silver', 'Bone', 'Mist', 'Ice');</code></td>
 </tr>
@@ -576,7 +576,7 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="clanSecond"></span><code><b>clanSecond</b>: array[0..19] of
+<td class="itemcode"><span id="clanSecond"></span><code><strong>clanSecond</strong>: array[0..19] of
   string = ('Axe', 'Hammer', 'Anvil', 'Smith', 'Forge', 'Beard',
     'Shield', 'Biter', 'Bane', 'Weaver', 'Mage', 'Spear', 'Seeker',
     'Sword', 'Crafter', 'Breaker', 'Born', 'Helm', 'Hold', 'Fist');</code></td>
@@ -586,14 +586,14 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="Day"></span><code><b>Day</b>: word;</code></td>
+<td class="itemcode"><span id="Day"></span><code><strong>Day</strong>: word;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="dwarvenName"></span><code><b>dwarvenName</b>: array[0..109] of
+<td class="itemcode"><span id="dwarvenName"></span><code><strong>dwarvenName</strong>: array[0..109] of
   string = ('Ailgor', 'Ainion', 'Alon', 'Alvion', 'Amur', 'Andol',
     'Argli', 'Arol', 'Artil', 'Artor', 'Avli', 'Balan', 'Balor',
     'Bamon', 'Bandiol', 'Baril', 'Baron', 'Baviol', 'Bavor', 'Bodol',
@@ -617,7 +617,7 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="elvenHomea"></span><code><b>elvenHomea</b>: array[0..13] of
+<td class="itemcode"><span id="elvenHomea"></span><code><strong>elvenHomea</strong>: array[0..13] of
   string = ('the Vale of', 'the Whispering Forest of', 'the forest of',
     'the white peaks of', 'the woods of', 'the Cinderlands of',
     'the Frostspike of', 'the snow pass of', 'the green fortress of',
@@ -629,7 +629,7 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="elvenHomeb"></span><code><b>elvenHomeb</b>: array[0..42] of
+<td class="itemcode"><span id="elvenHomeb"></span><code><strong>elvenHomeb</strong>: array[0..42] of
   string = ('Felamae', 'Lorrom', 'Anorel', 'Weneres', 'Rathel',
     'Lasbreg-Dwyr', 'Renamar', 'Sarriel', 'Vius', 'Viusand', 'Ethgal',
     'Renfin', 'Syldar', 'Thrantor', 'Paceledrel', 'Borntae', 'Mai-Ionla',
@@ -643,7 +643,7 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="elvenName"></span><code><b>elvenName</b>: array[0..885] of
+<td class="itemcode"><span id="elvenName"></span><code><strong>elvenName</strong>: array[0..885] of
   string = ('Aarall', 'Abiala', 'Acanos', 'Acarnar', 'Adali', 'Adari',
     'Adarore', 'Addin', 'Aderiel', 'Adius', 'Agrae', 'Aitese', 'Alane',
     'Alar', 'Alaril', 'Alasar', 'Aldas', 'Aler', 'Alerin', 'Alesan',
@@ -778,7 +778,7 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="firstSyllable"></span><code><b>firstSyllable</b>: array[0..73] of
+<td class="itemcode"><span id="firstSyllable"></span><code><strong>firstSyllable</strong>: array[0..73] of
   string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
     'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con', 'Cor', 'Dag', 'Doo',
     'Elen', 'El', 'En', 'Eo', 'Faf', 'Fan', 'Fara', 'Fre', 'Fro',
@@ -793,28 +793,28 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="Month"></span><code><b>Month</b>: word;</code></td>
+<td class="itemcode"><span id="Month"></span><code><strong>Month</strong>: word;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="playerName"></span><code><b>playerName</b>: string;</code></td>
+<td class="itemcode"><span id="playerName"></span><code><strong>playerName</strong>: string;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="playerTitle"></span><code><b>playerTitle</b>: string;</code></td>
+<td class="itemcode"><span id="playerTitle"></span><code><strong>playerTitle</strong>: string;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="secondSyllable"></span><code><b>secondSyllable</b>: array[0..62] of
+<td class="itemcode"><span id="secondSyllable"></span><code><strong>secondSyllable</strong>: array[0..62] of
   string = ('ba', 'bis', 'bo', 'bus', 'da', 'dal', 'dagz', 'den',
     'di', 'dil', 'dinn', 'do', 'dor', 'dra', 'dur', 'gi', 'gauble',
     'gen', 'glum', 'go', 'gorn', 'goth', 'had', 'hard', 'is', 'karrl',
@@ -828,7 +828,7 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="titles"></span><code><b>titles</b>: array[0..108] of string = ('Abominable', 'Amorous',
+<td class="itemcode"><span id="titles"></span><code><strong>titles</strong>: array[0..108] of string = ('Abominable', 'Amorous',
     'Afflicted', 'Ailing', 'Breathless', 'Broken', 'Bullish', 'Craggy',
     'Bearded', 'Bony', 'Beastly', 'Drunken', 'Bitter', 'Fetid', 'Fierce',
     'Fiery', 'Bold', 'Filthy', 'Craven', 'Fishy', 'Crooked', 'Flexible',
@@ -852,14 +852,14 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="trollDate"></span><code><b>trollDate</b>: string;</code></td>
+<td class="itemcode"><span id="trollDate"></span><code><strong>trollDate</strong>: string;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="villageName"></span><code><b>villageName</b>: array[0..11] of
+<td class="itemcode"><span id="villageName"></span><code><strong>villageName</strong>: array[0..11] of
   string = ('PigSpit', 'FootRot', 'MudLands', 'SquelchBottom',
     'DungMould', 'Belchford', 'Goatstone', 'Kloggington', 'Ordure Field',
     'Clagstone', 'Dogmire', 'Klart');</code></td>
@@ -869,18 +869,18 @@ Generate name of small village</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="WDay"></span><code><b>WDay</b>: word;</code></td>
+<td class="itemcode"><span id="WDay"></span><code><strong>WDay</strong>: word;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="Year"></span><code><b>Year</b>: word;</code></td>
+<td class="itemcode"><span id="Year"></span><code><strong>Year</strong>: word;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

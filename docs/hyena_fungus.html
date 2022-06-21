@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: hyena_fungus</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit hyena_fungus</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
@@ -17,60 +17,42 @@
 <p>
 Hyena, infected by fungus</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Math</li><li><a  href="universe.html">universe</a></li><li><a  href="combat_resolver.html">combat_resolver</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Math</li><li><a href="universe.html">universe</a></li><li><a href="combat_resolver.html">combat_resolver</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="hyena_fungus.html#chasePlayer">chasePlayer</a></b>(id, spx, spy: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="hyena_fungus.html#createInfectedHyena">createInfectedHyena</a></strong>(uniqueid, npcx, npcy: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="hyena_fungus.html#combat">combat</a></b>(npcID, enemyID: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="hyena_fungus.html#takeTurn">takeTurn</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="hyena_fungus.html#createInfectedHyena">createInfectedHyena</a></b>(uniqueid, npcx, npcy: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="hyena_fungus.html#decisionNeutral">decisionNeutral</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="hyena_fungus.html#decisionHostile">decisionHostile</a></b>(id: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="hyena_fungus.html#decisionHostile">decisionHostile</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="hyena_fungus.html#decisionNeutral">decisionNeutral</a></b>(id: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="hyena_fungus.html#wander">wander</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="hyena_fungus.html#escapePlayer">escapePlayer</a></b>(id, spx, spy: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="hyena_fungus.html#chasePlayer">chasePlayer</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="hyena_fungus.html#isNextToPlayer">isNextToPlayer</a></b>(spx, spy: smallint): boolean;</code></td>
+<td class="itemcode"><code>function <strong><a href="hyena_fungus.html#isNextToPlayer">isNextToPlayer</a></strong>(spx, spy: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="hyena_fungus.html#takeTurn">takeTurn</a></b>(id: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="hyena_fungus.html#escapePlayer">escapePlayer</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="hyena_fungus.html#wander">wander</a></b>(id, spx, spy: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="hyena_fungus.html#combat">combat</a></strong>(npcID, enemyID: smallint);</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="chasePlayer"></span><code>procedure <b>chasePlayer</b>(id, spx, spy: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Chase the player</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="combat"></span><code>procedure <b>combat</b>(npcID, enemyID: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-NPC attacks another entity</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="createInfectedHyena"></span><code>procedure <b>createInfectedHyena</b>(uniqueid, npcx, npcy: smallint);</code></td>
+<td class="itemcode"><span id="createInfectedHyena"></span><code>procedure <strong>createInfectedHyena</strong>(uniqueid, npcx, npcy: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -79,43 +61,7 @@ Create a hyena</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="decisionHostile"></span><code>procedure <b>decisionHostile</b>(id: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Decision tree for Hostile state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="decisionNeutral"></span><code>procedure <b>decisionNeutral</b>(id: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Decision tree for Neutral state</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="escapePlayer"></span><code>procedure <b>escapePlayer</b>(id, spx, spy: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Run from player</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="isNextToPlayer"></span><code>function <b>isNextToPlayer</b>(spx, spy: smallint): boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Check if player is next to NPC</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="takeTurn"></span><code>procedure <b>takeTurn</b>(id: smallint);</code></td>
+<td class="itemcode"><span id="takeTurn"></span><code>procedure <strong>takeTurn</strong>(id: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -124,13 +70,67 @@ Take a turn</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="wander"></span><code>procedure <b>wander</b>(id, spx, spy: smallint);</code></td>
+<td class="itemcode"><span id="decisionNeutral"></span><code>procedure <strong>decisionNeutral</strong>(id: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Decision tree for Neutral state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="decisionHostile"></span><code>procedure <strong>decisionHostile</strong>(id: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Decision tree for Hostile state</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="wander"></span><code>procedure <strong>wander</strong>(id, spx, spy: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Move in a random direction</p>
 </td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="chasePlayer"></span><code>procedure <strong>chasePlayer</strong>(id, spx, spy: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Chase the player</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="isNextToPlayer"></span><code>function <strong>isNextToPlayer</strong>(spx, spy: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if player is next to NPC</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="escapePlayer"></span><code>procedure <strong>escapePlayer</strong>(id, spx, spy: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Run from player</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="combat"></span><code>procedure <strong>combat</strong>(npcID, enemyID: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+NPC attacks another entity</p>
+</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

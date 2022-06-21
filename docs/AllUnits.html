@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: All Units</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="allitems">All Units</h1>
 <table class="unitstable wide_list">
 <tr class="listheader">
@@ -27,6 +27,16 @@
 <tr class="list">
 <td class="itemname"><a class="bold" href="animation.html">animation</a></td>
 <td class="itemdesc"><p>Unit responsible for projectile and magic animations</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="architect.html">architect</a></td>
+<td class="itemdesc"><p>Unit responsible for selecting themed dungeons and caves. The types of locations are: tCave - underground cave with no obstacles tCavern - underground cave with rubble tDungeon - rooms connected by corridors tCrypt - dungeon populated by undead tVillage - small settlement
+
+<p>Arrays containing location types for certain areas of the island. The further north the player goes, the more difficult the locations become</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="arrow.html">arrow</a></td>
+<td class="itemdesc"><p>Arrow</p></td>
 </tr>
 <tr class="list2">
 <td class="itemname"><a class="bold" href="basic_club.html">basic_club</a></td>
@@ -177,48 +187,64 @@
 <td class="itemdesc"><p>Generate names and plot elements</p></td>
 </tr>
 <tr class="list2">
+<td class="itemname"><a class="bold" href="pointy_stick.html">pointy_stick</a></td>
+<td class="itemdesc"><p>A pointy stick</p></td>
+</tr>
+<tr class="list">
 <td class="itemname"><a class="bold" href="redcap_fungus.html">redcap_fungus</a></td>
 <td class="itemdesc"><p>Redcap infected by fungus</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="redcap_lesser.html">redcap_lesser</a></td>
 <td class="itemdesc"><p>Intelligent enemy with scent tracking</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="redcap_lesser_lobber.html">redcap_lesser_lobber</a></td>
 <td class="itemdesc"><p>Hunter enemy, fires projectiles</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="resolution.html">resolution</a></td>
 <td class="itemdesc"><p>Determines the terminal size when the game is first opened and resizes the user interface accordingly. For a typical 80x24 terminal size, the camera size will be 57x19 For a terminal size of 102x24 and greater, the camera size will be 80x19 This is kept to 19 rather than the full 20 to allow for screenshake to be added in future versions.</p></td>
 </tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="rock.html">rock</a></td>
+<td class="itemdesc"><p>A rock, causes base damage of 4 points</p></td>
+</tr>
 <tr class="list2">
+<td class="itemname"><a class="bold" href="scrCharacter.html">scrCharacter</a></td>
+<td class="itemdesc"><p>Character sheet - Shows player stats</p></td>
+</tr>
+<tr class="list">
 <td class="itemname"><a class="bold" href="scrCharIntro.html">scrCharIntro</a></td>
 <td class="itemdesc"><p>Character introduction and scene setting</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="scrCharSelect.html">scrCharSelect</a></td>
 <td class="itemdesc"><p>Choose your characters race</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="scrGame.html">scrGame</a></td>
 <td class="itemdesc"><p>Main game user interface</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="scrHelp.html">scrHelp</a></td>
 <td class="itemdesc"><p>Help screen - accessed from main game screen</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="scrIntro.html">scrIntro</a></td>
 <td class="itemdesc"><p>Introduction screen</p></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemname"><a class="bold" href="scrInventory.html">scrInventory</a></td>
 <td class="itemdesc"><p>Inventory screen</p></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemname"><a class="bold" href="scrLook.html">scrLook</a></td>
 <td class="itemdesc"><p>Screen used for the Look command</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="scrOverworld.html">scrOverworld</a></td>
+<td class="itemdesc"><p>Overworld screen user interface</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="scrRIP.html">scrRIP</a></td>
@@ -241,8 +267,24 @@
 <td class="itemdesc"><p>Shown when exiting the Smugglers cave and starting the larger adventure</p></td>
 </tr>
 <tr class="list2">
+<td class="itemname"><a class="bold" href="short_bow.html">short_bow</a></td>
+<td class="itemdesc"><p>A short bow</p></td>
+</tr>
+<tr class="list">
+<td class="itemname"><a class="bold" href="smallGrid.html">smallGrid</a></td>
+<td class="itemdesc"><p>Generates a grid based dungeon with wide spaces between rooms, this is then processed to apply bitmasked walls</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="small_corpse_spider.html">small_corpse_spider</a></td>
+<td class="itemdesc"><p>Spider that can inflict poison damage</p></td>
+</tr>
+<tr class="list">
 <td class="itemname"><a class="bold" href="small_green_fungus.html">small_green_fungus</a></td>
 <td class="itemdesc"><p>Stationary hazard, deals poison damage in combat</p></td>
+</tr>
+<tr class="list2">
+<td class="itemname"><a class="bold" href="small_hornet.html">small_hornet</a></td>
+<td class="itemdesc"><p>Simple enemy with no AI, moves in a pattern to act as a barrier It's called a 'small' hornet, but only in relation to Giant insects</p></td>
 </tr>
 <tr class="list">
 <td class="itemname"><a class="bold" href="small_hyena.html">small_hyena</a></td>
@@ -275,6 +317,6 @@
 <td class="itemdesc"><p>Flask of wine - cures poison</p></td>
 </tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

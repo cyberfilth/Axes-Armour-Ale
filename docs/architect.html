@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Axes, Armour &amp; Ale: scrGame</title>
+<title>Axes, Armour &amp; Ale: architect</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -10,44 +10,72 @@
 <body>
 <div class="container"><div class="navigation">
 <h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
-<h1 class="unit">Unit scrGame</h1>
+<h1 class="unit">Unit architect</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
-Main game user interface</p>
+Unit responsible for selecting themed dungeons and caves. The types of locations are: tCave - underground cave with no obstacles tCavern - underground cave with rubble tDungeon - rooms connected by corridors tCrypt - dungeon populated by undead tVillage - small settlement
+
+<p>Arrays containing location types for certain areas of the island. The further north the player goes, the more difficult the locations become</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li><a href="player_stats.html">player_stats</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li><a href="globalUtils.html">globalUtils</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <strong><a href="scrGame.html#displayGameScreen">displayGameScreen</a></strong>;</code></td>
+<td class="itemcode"><code>function <strong><a href="architect.html#validLocation">validLocation</a></strong>(x, y: smallint):boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="architect.html#firstRow">firstRow</a></strong>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="architect.html#seedLocations">seedLocations</a></strong>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><strong><a href="scrGame.html#minX">minX</a></strong>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="architect.html#locationBuilderID">locationBuilderID</a></strong>: smallint;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="displayGameScreen"></span><code>procedure <strong>displayGameScreen</strong>;</code></td>
+<td class="itemcode"><span id="validLocation"></span><code>function <strong>validLocation</strong>(x, y: smallint):boolean;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Clear screen and load various panels for game</p>
+Check surrounding tiles to make sure 2 locations aren't placed next to each other</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="firstRow"></span><code>procedure <strong>firstRow</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Bottom row of the island</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="seedLocations"></span><code>procedure <strong>seedLocations</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Sprinkle locations over the island</p>
 </td></tr>
 </table>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="minX"></span><code><strong>minX</strong>: smallint;</code></td>
+<td class="itemcode"><span id="locationBuilderID"></span><code><strong>locationBuilderID</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
-&nbsp;</td></tr>
+<p>
+Unique location ID for the locationLookup table</p>
+</td></tr>
 </table>
 <hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
