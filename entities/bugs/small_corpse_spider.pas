@@ -1,6 +1,6 @@
-(* Weak enemy with simple AI, no pathfinding *)
+(* Spider that can inflict poison damage *)
 
-unit cave_rat;
+unit small_corpse_spider;
 
 {$mode objfpc}{$H+}
 
@@ -9,8 +9,8 @@ interface
 uses
   SysUtils, Math, ai_animal;
 
-(* Create a cave rat *)
-procedure createCaveRat(uniqueid, npcx, npcy: smallint);
+(* Create a Corpse Spider *)
+procedure createCorpseSpider(uniqueid, npcx, npcy: smallint);
 (* The NPC takes their turn in the game loop *)
 procedure takeTurn(id: smallint);
 (* Decision tree for Neutral state *)
@@ -25,9 +25,9 @@ function isNextToPlayer(spx, spy: smallint): boolean;
 implementation
 
 uses
-  entities, globalutils, los, map;
+  entities, globalutils, los, map, player_stats;
 
-procedure createCaveRat(uniqueid, npcx, npcy: smallint);
+procedure createCorpseSpider (uniqueid, npcx, npcy: smallint);
 var
   mood: byte;
 begin
@@ -39,16 +39,16 @@ begin
   with entities.entityList[entities.listLength] do
   begin
     npcID := uniqueid;
-    race := 'Cave Rat';
-    intName := 'CaveRat';
+    race := 'Corpse Spider';
+    intName := 'smlCorpseSpider';
     article := True;
-    description := 'a large rat';
-    glyph := 'r';
-    glyphColour := 'brown';
-    maxHP := randomRange(3, 5);
+    description := 'a giant, putrid spider';
+    glyph := 's';
+    glyphColour := 'green';
+    maxHP := randomRange(4, 6) + player_stats.playerLevel;
     currentHP := maxHP;
-    attack := randomRange(entityList[0].attack -1, entityList[0].attack + 2);
-    defence := randomRange(entityList[0].defence, entityList[0].defence + 1);
+    attack := randomRange(7, 9);
+    defence := randomRange(4, 6) + player_stats.playerLevel;
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;
@@ -58,7 +58,7 @@ begin
     targetY := 0;
     inView := False;
     blocks := False;
-    faction := animalFaction;
+    faction := bugFaction;
     if (mood = 1) then
       state := stateHostile
     else
@@ -103,7 +103,7 @@ end;
 
 procedure decisionHostile(id: smallint);
 begin
-  { If health is below 50%, escape }
+  { If health is low, escape }
   if (entityList[id].currentHP < (entityList[id].maxHP div 2)) then
   begin
     entityList[id].state := stateEscape;

@@ -202,11 +202,11 @@ begin
         (* Redraw all NPC'S *)
         for i := 1 to entities.npcAmount do
           entities.redrawMapDisplay(i);
+        (* draw map through the camera *)
+        camera.drawMap;
         (* Draw player and FOV *)
         fov.fieldOfView(entityList[0].posX, entityList[0].posY,
           entityList[0].visionRange, 1);
-        (* draw map through the camera *)
-        camera.drawMap;
         (* Message log *)
         ui.displayMessage('             ');
         ui.displayMessage('              ');
