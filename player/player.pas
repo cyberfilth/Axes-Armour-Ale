@@ -7,7 +7,7 @@ interface
 
 uses
   SysUtils, player_inventory, player_stats, plot_gen, combat_resolver, items,
-  island, scrOverworld, file_handling, globalUtils, video, scrGame, universe;
+  island, scrOverworld, file_handling, globalUtils, video, universe;
 
 (* Create player character *)
 procedure createPlayer;
@@ -208,6 +208,7 @@ begin
         ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
         (* Redraw map and the contents *)
         main.returnToGameScreen;
+        main.gameLoop;
         exit;
       end
       else
@@ -298,11 +299,9 @@ begin
     end;
   end;
   (* check if tile is occupied *)
-  if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) =
-    True) then
+  if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
     (* check if tile is occupied by hostile NPC *)
-    if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) =
-      True) then
+    if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) =  True) then
     begin
       entities.entityList[0].posX := originalX;
       entities.entityList[0].posY := originalY;
@@ -374,7 +373,6 @@ end;
 
 
 function combatCheck(x, y: smallint): boolean;
-  { TODO : Replace this with a check to see if the tile is occupied }
 var
   i: smallint;
 begin
