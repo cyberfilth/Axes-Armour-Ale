@@ -16,13 +16,13 @@ const
 var
   r, c, camWidth: smallint;
 
-                  { Underground camera }
+{ Underground camera }
 function getX(Xcoord: smallint): smallint;
 function getY(Ycoord: smallint): smallint;
 procedure drawMap;
 procedure drawPlayer;
 
-                  { Overground camera }
+{ Overground camera }
 function getXOW(Xcoord: smallint): smallint;
 function getYOW(Ycoord: smallint): smallint;
 procedure drawOWMap;
@@ -72,7 +72,7 @@ var
   gCol: shortstring;
 begin
   if (globalUtils.womblingFree = 'underground') then
-    begin
+  begin
     pX := entityList[0].posX;
     pY := entityList[0].posY;
     for r := 1 to camHeight do
@@ -142,17 +142,20 @@ var
   (* Tile colour *)
   gCol: shortstring;
 begin
-  pX := entityList[0].posX;
-  pY := entityList[0].posY;
-  for c := 1 to camWidth do
+  if (globalUtils.womblingFree = 'overground') then
   begin
-    for r := 1 to camHeight do
+    pX := entityList[0].posX;
+    pY := entityList[0].posY;
+    for c := 1 to camWidth do
     begin
-      gCol := island.overworldDisplay[r + getYOW(pY)][c + getXOW(pX)].GlyphColour;
-      TextOut(c, r, gCol, island.overworldDisplay[r + getYOW(pY)][c + getXOW(pX)].Glyph);
+      for r := 1 to camHeight do
+      begin
+        gCol := island.overworldDisplay[r + getYOW(pY)][c + getXOW(pX)].GlyphColour;
+        TextOut(c, r, gCol, island.overworldDisplay[r + getYOW(pY)][c + getXOW(pX)].Glyph);
+      end;
     end;
+    drawOWPlayer;
   end;
-  drawOWPlayer;
 end;
 
 procedure drawOWPlayer;

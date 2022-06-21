@@ -496,11 +496,14 @@ end;
 
 procedure overworldGameLoop;
 begin
-  LockScreenUpdate;
-  fov.islandFOV(entityList[0].posX, entityList[0].posY);
-  camera.drawOWMap;
-  UnlockScreenUpdate;
-  UpdateScreen(False);
+  if (gameState = stOverworld) then
+  begin
+    LockScreenUpdate;
+    fov.islandFOV(entityList[0].posX, entityList[0].posY);
+    camera.drawOWMap;
+    UnlockScreenUpdate;
+    UpdateScreen(False);
+  end;
 end;
 
 procedure returnToGameScreen;
