@@ -7,7 +7,7 @@ unit scrWinAlpha;
 interface
 
 uses
-  SysUtils, video, ui, universe, file_handling;
+  SysUtils, video, ui, universe;
 
 (* Show the Win screen *)
 procedure displayWinscreen;
@@ -33,8 +33,6 @@ begin
 
   UnlockScreenUpdate;
   UpdateScreen(False);
-  (* Save current dungeon *)
-  file_handling.saveDungeonLevel;
   (* Create overworld map *)
   universe.createEllanToll;
   LockScreenUpdate;

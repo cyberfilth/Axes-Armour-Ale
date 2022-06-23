@@ -3,205 +3,25 @@
 <head>
 <title>Axes, Armour &amp; Ale: player_inventory: Record Equipment</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <span id="Equipment"></span><h1 class="cio">Record Equipment</h1>
 <div class="sections">
-<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Hierarchy</div><div class="one_section"><a class="section" href="#PasDoc-Fields">Fields</a></div><div class="one_section">Methods</div><div class="one_section">Properties</div></div>
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Hierarchy</div><div class="one_section">Fields</div><div class="one_section">Methods</div><div class="one_section">Properties</div></div>
 <span id="PasDoc-Description"></span><h2 class="unit">Unit</h2>
 <p class="unitlink">
-<a  href="player_inventory.html">player_inventory</a></p>
+<a href="player_inventory.html">player_inventory</a></p>
 <h2 class="declaration">Declaration</h2>
 <p class="declaration">
 <code>type Equipment = record</code></p>
 <h2 class="description">Description</h2>
 <p>
 Items in inventory</p>
-<h2 class="overview">Overview</h2>
-<span id="PasDoc-Fields"></span><h3 class="summary">Fields</h3>
-<table class="summary wide_list">
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#id">id</a></b>: smallint;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#useID">useID</a></b>: smallint;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#sortIndex">sortIndex</a></b>: smallint;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#numUses">numUses</a></b>: smallint;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#throwDamage">throwDamage</a></b>: smallint;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#dice">dice</a></b>: smallint;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#adds">adds</a></b>: smallint;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#Name">Name</a></b>: shortstring;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#description">description</a></b>: shortstring;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#article">article</a></b>: shortstring;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#glyph">glyph</a></b>: shortstring;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#glyphColour">glyphColour</a></b>: shortstring;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#itemType">itemType</a></b>: <a  href="items.html#tItem">tItem</a>;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#itemMaterial">itemMaterial</a></b>: <a  href="items.html#tMaterial">tMaterial</a>;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#throwable">throwable</a></b>: boolean;</code></td>
-</tr>
-<tr class="list2">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#inInventory">inInventory</a></b>: boolean;</code></td>
-</tr>
-<tr class="list">
-<td class="itemcode"><code><b><a  href="player_inventory.Equipment.html#equipped">equipped</a></b>: boolean;</code></td>
-</tr>
-</table>
-<h2 class="description">Description</h2>
-<h3 class="detail">Fields</h3>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="id"></span><code><b>id</b>: smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="useID"></span><code><b>useID</b>: smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="sortIndex"></span><code><b>sortIndex</b>: smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="numUses"></span><code><b>numUses</b>: smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="throwDamage"></span><code><b>throwDamage</b>: smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="dice"></span><code><b>dice</b>: smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="adds"></span><code><b>adds</b>: smallint;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="Name"></span><code><b>Name</b>: shortstring;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="description"></span><code><b>description</b>: shortstring;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="article"></span><code><b>article</b>: shortstring;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="glyph"></span><code><b>glyph</b>: shortstring;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="glyphColour"></span><code><b>glyphColour</b>: shortstring;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="itemType"></span><code><b>itemType</b>: <a  href="items.html#tItem">tItem</a>;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="itemMaterial"></span><code><b>itemMaterial</b>: <a  href="items.html#tMaterial">tMaterial</a>;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="throwable"></span><code><b>throwable</b>: boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-&nbsp;</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="inInventory"></span><code><b>inInventory</b>: boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Is the item still in the inventory</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="equipped"></span><code><b>equipped</b>: boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Is the item being worn or wielded</p>
-</td></tr>
-</table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: item_lookup</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit item_lookup</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section">Variables</div></div>
@@ -17,31 +17,47 @@
 <p>
 Lookup table for items, based on the environment</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li><a  href="universe.html">universe</a></li><li><a  href="globalUtils.html">globalUtils</a></li><li><a  href="ale_tankard.html">ale_tankard</a></li><li><a  href="wine_flask.html">wine_flask</a></li><li><a  href="crude_dagger.html">crude_dagger</a></li><li><a  href="basic_club.html">basic_club</a></li><li>rock</li><li>short_bow</li><li>pointy_stick</li><li><a  href="leather_armour1.html">leather_armour1</a></li><li><a  href="cloth_armour1.html">cloth_armour1</a></li><li><a  href="smugglersMap.html">smugglersMap</a></li><li><a  href="pixie_jar.html">pixie_jar</a></li><li><a  href="staff_minor_scorch.html">staff_minor_scorch</a></li><li>arrow</li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li><a href="universe.html">universe</a></li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="ale_tankard.html">ale_tankard</a></li><li><a href="wine_flask.html">wine_flask</a></li><li><a href="crude_dagger.html">crude_dagger</a></li><li><a href="basic_club.html">basic_club</a></li><li><a href="rock.html">rock</a></li><li><a href="short_bow.html">short_bow</a></li><li><a href="pointy_stick.html">pointy_stick</a></li><li><a href="leather_armour1.html">leather_armour1</a></li><li><a href="cloth_armour1.html">cloth_armour1</a></li><li><a href="smugglersMap.html">smugglersMap</a></li><li><a href="pixie_jar.html">pixie_jar</a></li><li><a href="staff_minor_scorch.html">staff_minor_scorch</a></li><li><a href="arrow.html">arrow</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="item_lookup.html#dispenseItem">dispenseItem</a></b>(dungeon: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="item_lookup.html#dispenseItem">dispenseItem</a></strong>(dungeon: <a href="globalUtils.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="item_lookup.html#dropFirstItem">dropFirstItem</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="item_lookup.html#lookupUse">lookupUse</a></strong>(x: smallint; equipped: boolean; id: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="item_lookup.html#lookupUse">lookupUse</a></b>(x: smallint; equipped: boolean; id: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="item_lookup.html#dropFirstItem">dropFirstItem</a></strong>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="item_lookup.html#caveItems1">caveItems1</a></b>: array[1..8] of string =
-    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'pointyStick', 'arrow', 'arrow');</code></td>
+<td class="itemcode"><code><strong><a href="item_lookup.html#caveItems1">caveItems1</a></strong>: array[1..8] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
+    'pointyStick', 'arrow', 'arrow');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="item_lookup.html#caveItems2">caveItems2</a></b>: array[1..7] of string =
-    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'rock', 'arrow', 'shortBow');</code></td>
+<td class="itemcode"><code><strong><a href="item_lookup.html#caveItems2">caveItems2</a></strong>: array[1..7] of string =
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
+    'rock', 'arrow', 'shortBow');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="item_lookup.html#caveItems3">caveItems3</a></b>: array[1..6] of string =
+<td class="itemcode"><code><strong><a href="item_lookup.html#caveItems3">caveItems3</a></strong>: array[1..6] of string =
+    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="item_lookup.html#dgnItems1">dgnItems1</a></strong>: array[1..8] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
+    'pointyStick', 'arrow', 'arrow');</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="item_lookup.html#dgnItems2">dgnItems2</a></strong>: array[1..7] of string =
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
+    'rock', 'arrow', 'shortBow');</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="item_lookup.html#dgnItems3">dgnItems3</a></strong>: array[1..6] of string =
     ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');</code></td>
 </tr>
 </table>
@@ -49,7 +65,7 @@ Lookup table for items, based on the environment</p>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="dispenseItem"></span><code>procedure <b>dispenseItem</b>(dungeon: <a  href="universe.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
+<td class="itemcode"><span id="dispenseItem"></span><code>procedure <strong>dispenseItem</strong>(dungeon: <a href="globalUtils.html#dungeonTerrain">dungeonTerrain</a>);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -58,27 +74,28 @@ Choose an item and call the generate code directly</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="dropFirstItem"></span><code>procedure <b>dropFirstItem</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Used to drop a specific special item on each level</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="lookupUse"></span><code>procedure <b>lookupUse</b>(x: smallint; equipped: boolean; id: smallint);</code></td>
+<td class="itemcode"><span id="lookupUse"></span><code>procedure <strong>lookupUse</strong>(x: smallint; equipped: boolean; id: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Execute useItem procedure</p>
 </td></tr>
 </table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dropFirstItem"></span><code>procedure <strong>dropFirstItem</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Used to drop a specific special item on each level</p>
+</td></tr>
+</table>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="caveItems1"></span><code><b>caveItems1</b>: array[1..8] of string =
-    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'pointyStick', 'arrow', 'arrow');</code></td>
+<td class="itemcode"><span id="caveItems1"></span><code><strong>caveItems1</strong>: array[1..8] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
+    'pointyStick', 'arrow', 'arrow');</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -87,20 +104,49 @@ Array of items found in a cave, ordered by cave level</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="caveItems2"></span><code><b>caveItems2</b>: array[1..7] of string =
-    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'rock', 'arrow', 'shortBow');</code></td>
+<td class="itemcode"><span id="caveItems2"></span><code><strong>caveItems2</strong>: array[1..7] of string =
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
+    'rock', 'arrow', 'shortBow');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="caveItems3"></span><code><b>caveItems3</b>: array[1..6] of string =
+<td class="itemcode"><span id="caveItems3"></span><code><strong>caveItems3</strong>: array[1..6] of string =
     ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dgnItems1"></span><code><strong>dgnItems1</strong>: array[1..8] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
+    'pointyStick', 'arrow', 'arrow');</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Array of items found in a dungeon, ordered by dungeon level</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dgnItems2"></span><code><strong>dgnItems2</strong>: array[1..7] of string =
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
+    'rock', 'arrow', 'shortBow');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dgnItems3"></span><code><strong>dgnItems3</strong>: array[1..6] of string =
+    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

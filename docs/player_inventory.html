@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: player_inventory</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit player_inventory</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -17,7 +17,7 @@
 <p>
 Handles player inventory and associated functions</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>StrUtils</li><li>video</li><li><a  href="entities.html">entities</a></li><li><a  href="items.html">items</a></li><li><a  href="item_lookup.html">item_lookup</a></li><li><a  href="player_stats.html">player_stats</a></li><li><a  href="staff_minor_scorch.html">staff_minor_scorch</a></li><li><a  href="pixie_jar.html">pixie_jar</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>StrUtils</li><li>video</li><li><a href="entities.html">entities</a></li><li><a href="items.html">items</a></li><li><a href="item_lookup.html">item_lookup</a></li><li><a href="player_stats.html">player_stats</a></li><li><a href="staff_minor_scorch.html">staff_minor_scorch</a></li><li><a href="pixie_jar.html">pixie_jar</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -32,137 +32,74 @@ Handles player inventory and associated functions</p>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="player_inventory.html#addToInventory">addToInventory</a></b>(itemNumber: smallint): boolean;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#initialiseInventory">initialiseInventory</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="player_inventory.html#addToInventory_emptySlot">addToInventory_emptySlot</a></b>(itemNumber: smallint; skip: boolean): boolean;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#loadEquippedItems">loadEquippedItems</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="player_inventory.html#carryingArrows">carryingArrows</a></b>: boolean;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#startingInventory">startingInventory</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#destroyWeapon">destroyWeapon</a></b>;</code></td>
+<td class="itemcode"><code>function <strong><a href="player_inventory.html#addToInventory">addToInventory</a></strong>(itemNumber: smallint): boolean;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#drop">drop</a></b>;</code></td>
+<td class="itemcode"><code>function <strong><a href="player_inventory.html#addToInventory_emptySlot">addToInventory_emptySlot</a></strong>(itemNumber: smallint; skip: boolean): boolean;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#dropSelection">dropSelection</a></b>(selection: smallint);</code></td>
+<td class="itemcode"><code>function <strong><a href="player_inventory.html#removeFromInventory">removeFromInventory</a></strong>(itemNumber: smallint): boolean;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#examineInventory">examineInventory</a></b>(selection: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#sortInventory">sortInventory</a></strong>(iLo, iHi: integer);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#initialiseInventory">initialiseInventory</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#showInventory">showInventory</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#loadEquippedItems">loadEquippedItems</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#examineInventory">examineInventory</a></strong>(selection: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#quaff">quaff</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#drop">drop</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#quaffSelection">quaffSelection</a></b>(selection: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#dropSelection">dropSelection</a></strong>(selection: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#removeArrow">removeArrow</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#quaff">quaff</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="player_inventory.html#removeFromInventory">removeFromInventory</a></b>(itemNumber: smallint): boolean;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#quaffSelection">quaffSelection</a></strong>(selection: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#showInventory">showInventory</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#wield">wield</a></strong>(message: char);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#sortInventory">sortInventory</a></b>(iLo, iHi: integer);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#wearWieldSelection">wearWieldSelection</a></strong>(selection: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#startingInventory">startingInventory</a></b>;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#Zzap">Zzap</a></strong>(item: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#wearWieldSelection">wearWieldSelection</a></b>(selection: smallint);</code></td>
+<td class="itemcode"><code>function <strong><a href="player_inventory.html#carryingArrows">carryingArrows</a></strong>: boolean;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#wield">wield</a></b>(message: char);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#removeArrow">removeArrow</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="player_inventory.html#Zzap">Zzap</a></b>(item: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player_inventory.html#destroyWeapon">destroyWeapon</a></strong>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="player_inventory.html#inventory">inventory</a></b>: array[0..9] of <a  href="player_inventory.Equipment.html">Equipment</a>;</code></td>
+<td class="itemcode"><code><strong><a href="player_inventory.html#inventory">inventory</a></strong>: array[0..9] of <a href="player_inventory.Equipment.html">Equipment</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="addToInventory"></span><code>function <b>addToInventory</b>(itemNumber: smallint): boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Add to inventory</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="addToInventory_emptySlot"></span><code>function <b>addToInventory_emptySlot</b>(itemNumber: smallint; skip: boolean): boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Add to an empty slot in inventory</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="carryingArrows"></span><code>function <b>carryingArrows</b>: boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Check if arrows are in inventory</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="destroyWeapon"></span><code>procedure <b>destroyWeapon</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Equipped weapon is destroyed</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="drop"></span><code>procedure <b>drop</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Drop menu</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="dropSelection"></span><code>procedure <b>dropSelection</b>(selection: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Drop selected item</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="examineInventory"></span><code>procedure <b>examineInventory</b>(selection: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Display more information about an item</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="initialiseInventory"></span><code>procedure <b>initialiseInventory</b>;</code></td>
+<td class="itemcode"><span id="initialiseInventory"></span><code>procedure <strong>initialiseInventory</strong>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -171,7 +108,7 @@ Initialise empty player inventory</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="loadEquippedItems"></span><code>procedure <b>loadEquippedItems</b>;</code></td>
+<td class="itemcode"><span id="loadEquippedItems"></span><code>procedure <strong>loadEquippedItems</strong>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -180,61 +117,7 @@ Setup equipped items when loading a saved game</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="quaff"></span><code>procedure <b>quaff</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Quaff menu</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="quaffSelection"></span><code>procedure <b>quaffSelection</b>(selection: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Quaff selected item</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="removeArrow"></span><code>procedure <b>removeArrow</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Remove an arrow from inventory</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="removeFromInventory"></span><code>function <b>removeFromInventory</b>(itemNumber: smallint): boolean;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Remove from inventory</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="showInventory"></span><code>procedure <b>showInventory</b>;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Display the inventory screen</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="sortInventory"></span><code>procedure <b>sortInventory</b>(iLo, iHi: integer);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Sort inventory</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="startingInventory"></span><code>procedure <b>startingInventory</b>;</code></td>
+<td class="itemcode"><span id="startingInventory"></span><code>procedure <strong>startingInventory</strong>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -243,16 +126,97 @@ Add items to an inventory when new game starts</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="wearWieldSelection"></span><code>procedure <b>wearWieldSelection</b>(selection: smallint);</code></td>
+<td class="itemcode"><span id="addToInventory"></span><code>function <strong>addToInventory</strong>(itemNumber: smallint): boolean;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
-Wear / Wield selected item</p>
+Add to inventory</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="wield"></span><code>procedure <b>wield</b>(message: char);</code></td>
+<td class="itemcode"><span id="addToInventory_emptySlot"></span><code>function <strong>addToInventory_emptySlot</strong>(itemNumber: smallint; skip: boolean): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Add to an empty slot in inventory</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="removeFromInventory"></span><code>function <strong>removeFromInventory</strong>(itemNumber: smallint): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Remove from inventory</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="sortInventory"></span><code>procedure <strong>sortInventory</strong>(iLo, iHi: integer);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Sort inventory</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="showInventory"></span><code>procedure <strong>showInventory</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display the inventory screen</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="examineInventory"></span><code>procedure <strong>examineInventory</strong>(selection: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Display more information about an item</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="drop"></span><code>procedure <strong>drop</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Drop menu</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dropSelection"></span><code>procedure <strong>dropSelection</strong>(selection: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Drop selected item</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="quaff"></span><code>procedure <strong>quaff</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Quaff menu</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="quaffSelection"></span><code>procedure <strong>quaffSelection</strong>(selection: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Quaff selected item</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="wield"></span><code>procedure <strong>wield</strong>(message: char);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -261,21 +225,57 @@ Wear / Wield menu</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="Zzap"></span><code>procedure <b>Zzap</b>(item: smallint);</code></td>
+<td class="itemcode"><span id="wearWieldSelection"></span><code>procedure <strong>wearWieldSelection</strong>(selection: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Wear / Wield selected item</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="Zzap"></span><code>procedure <strong>Zzap</strong>(item: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Zap equipped item</p>
 </td></tr>
 </table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="carryingArrows"></span><code>function <strong>carryingArrows</strong>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if arrows are in inventory</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="removeArrow"></span><code>procedure <strong>removeArrow</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Remove an arrow from inventory</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="destroyWeapon"></span><code>procedure <strong>destroyWeapon</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Equipped weapon is destroyed</p>
+</td></tr>
+</table>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="inventory"></span><code><b>inventory</b>: array[0..9] of <a  href="player_inventory.Equipment.html">Equipment</a>;</code></td>
+<td class="itemcode"><span id="inventory"></span><code><strong>inventory</strong>: array[0..9] of <a href="player_inventory.Equipment.html">Equipment</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

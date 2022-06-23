@@ -103,7 +103,7 @@ end;
 
 procedure decisionHostile(id: smallint);
 begin
-  { If health is below 25%, escape }
+  { If health is below 50%, escape }
   if (entityList[id].currentHP < (entityList[id].maxHP div 2)) then
   begin
     entityList[id].state := stateEscape;

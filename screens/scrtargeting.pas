@@ -243,7 +243,7 @@ begin
      for p := 1 to entities.npcAmount do
          entities.redrawMapDisplay(p);
      scrTargeting.restorePlayerGlyph;
-     ui.clearPopup;;
+     ui.clearPopup;
      UnlockScreenUpdate;
      UpdateScreen(False);
   end
@@ -407,7 +407,7 @@ begin
   for p := 1 to entities.npcAmount do
       entities.redrawMapDisplay(p);
   scrTargeting.restorePlayerGlyph;
-  ui.clearPopup;;
+  ui.clearPopup;
   UnlockScreenUpdate;
   UpdateScreen(False);
   (* Increase turn counter for this action *)

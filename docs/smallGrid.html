@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: smallGrid</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.16.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
+<h1 class="unit">Unit smallGrid</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Generates a grid based dungeon with wide spaces between rooms, this is then processed to apply bitmasked walls</p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>SysUtils</li><li><a href="globalUtils.html">globalutils</a></li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">Record&nbsp;<a class="bold" href="smallGrid.coordinates.html"><code>coordinates</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="smallGrid.html#prettify">prettify</a></strong>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="smallGrid.html#buildLevel">buildLevel</a></strong>(floorNumber: byte);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="smallGrid.html#createCorridor">createCorridor</a></strong>(fromX, fromY, toX, toY: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="smallGrid.html#carveHorizontally">carveHorizontally</a></strong>(x1, x2, y: smallint);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="smallGrid.html#carveVertically">carveVertically</a></strong>(y1, y2, x: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="smallGrid.html#createRoom">createRoom</a></strong>(gridNumber: smallint);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="smallGrid.html#generate">generate</a></strong>(title: string; idNumber: smallint; totalDepth: byte);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="smallGrid.html#leftToRight">leftToRight</a></strong>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><strong><a href="smallGrid.html#c">c</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="smallGrid.html#centreList">centreList</a></strong>: array of <a href="smallGrid.coordinates.html">coordinates</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="smallGrid.html#dungeonArray">dungeonArray</a></strong>: array[1..<a href="globalUtils.html#MAXROWS">globalutils.MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">globalutils.MAXCOLUMNS</a>] of char;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="smallGrid.html#filename">filename</a></strong>: ShortString;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="smallGrid.html#firstHalf">firstHalf</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="smallGrid.html#i">i</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="smallGrid.html#lastHalf">lastHalf</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="smallGrid.html#listLength">listLength</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="smallGrid.html#myfile">myfile</a></strong>: Text;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="smallGrid.html#p">p</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="smallGrid.html#processed_dungeon">processed_dungeon</a></strong>: array[1..<a href="globalUtils.html#MAXROWS">globalutils.MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">globalutils.MAXCOLUMNS</a>] of char;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="smallGrid.html#r">r</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="smallGrid.html#roomCounter">roomCounter</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="smallGrid.html#roomSquare">roomSquare</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="smallGrid.html#stairX">stairX</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="smallGrid.html#stairY">stairY</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="smallGrid.html#startX">startX</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="smallGrid.html#startY">startY</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="smallGrid.html#t">t</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="smallGrid.html#totalRooms">totalRooms</a></strong>: smallint;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="prettify"></span><code>procedure <strong>prettify</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Process generated dungeon to add shaped walls</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="buildLevel"></span><code>procedure <strong>buildLevel</strong>(floorNumber: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Build a level in the dungeon</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="createCorridor"></span><code>procedure <strong>createCorridor</strong>(fromX, fromY, toX, toY: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Create corridors linking the rooms</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="carveHorizontally"></span><code>procedure <strong>carveHorizontally</strong>(x1, x2, y: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Carve a horizontal tunnel</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="carveVertically"></span><code>procedure <strong>carveVertically</strong>(y1, y2, x: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Carve a vertical tunnel</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="createRoom"></span><code>procedure <strong>createRoom</strong>(gridNumber: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Create a room</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generate"></span><code>procedure <strong>generate</strong>(title: string; idNumber: smallint; totalDepth: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate a dungeon</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="leftToRight"></span><code>procedure <strong>leftToRight</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+sort room list in order from left to right</p>
+</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="c"></span><code><strong>c</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="centreList"></span><code><strong>centreList</strong>: array of <a href="smallGrid.coordinates.html">coordinates</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+list of coordinates of centre of each room</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dungeonArray"></span><code><strong>dungeonArray</strong>: array[1..<a href="globalUtils.html#MAXROWS">globalutils.MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">globalutils.MAXCOLUMNS</a>] of char;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="filename"></span><code><strong>filename</strong>: ShortString;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+TESTING - Write dungeon to text file</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="firstHalf"></span><code><strong>firstHalf</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="i"></span><code><strong>i</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="lastHalf"></span><code><strong>lastHalf</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="listLength"></span><code><strong>listLength</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="myfile"></span><code><strong>myfile</strong>: Text;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="p"></span><code><strong>p</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="processed_dungeon"></span><code><strong>processed_dungeon</strong>: array[1..<a href="globalUtils.html#MAXROWS">globalutils.MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">globalutils.MAXCOLUMNS</a>] of char;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="r"></span><code><strong>r</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="roomCounter"></span><code><strong>roomCounter</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+start creating corridors once this rises above 1</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="roomSquare"></span><code><strong>roomSquare</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stairX"></span><code><strong>stairX</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stairY"></span><code><strong>stairY</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="startX"></span><code><strong>startX</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Player starting position</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="startY"></span><code><strong>startY</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Player starting position</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="t"></span><code><strong>t</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="totalRooms"></span><code><strong>totalRooms</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
+</span>
+</div></div></body></html>

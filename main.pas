@@ -203,7 +203,7 @@ begin
   (* Initialise the game world and create 1st cave *)
   universe.dlistLength := 0;
   (* first map type is always a cave *)
-  map.mapType := universe.tCave;
+  map.mapType := globalUtils.tCave;
   (* Add the cave to list of locations *)
   SetLength(island.locationLookup, length(island.locationLookup) + 1);
   with island.locationLookup[0] do
@@ -216,7 +216,7 @@ begin
     theme := tCave;
   end;
   (* Create the dungeon *)
-  universe.createNewDungeon(map.mapType);
+  universe.createNewDungeon('Smugglers Cave', map.mapType, 1);
   (* Set smell counter to zero *)
   smell.smellCounter := 0;
   (* Create the Player *)
@@ -483,7 +483,7 @@ begin
   globalUtils.womblingFree := 'overground';
   entityList[0].posX := globalUtils.OWx;
   entityList[0].posY := globalUtils.OWy;
-
+  file_handling.loadOverworldMap;
   LockScreenUpdate;
   ui.screenBlank;
   scrOverworld.drawSidepanel;
@@ -496,11 +496,14 @@ end;
 
 procedure overworldGameLoop;
 begin
-  LockScreenUpdate;
-  fov.islandFOV(entityList[0].posX, entityList[0].posY);
-  camera.drawOWMap;
-  UnlockScreenUpdate;
-  UpdateScreen(False);
+  if (gameState = stOverworld) then
+  begin
+    LockScreenUpdate;
+    fov.islandFOV(entityList[0].posX, entityList[0].posY);
+    camera.drawOWMap;
+    UnlockScreenUpdate;
+    UpdateScreen(False);
+  end;
 end;
 
 procedure returnToGameScreen;
@@ -567,6 +570,7 @@ begin
   (* Check if the world has already been generated *)
   if (universe.OWgen = False) then
   begin
+    file_handling.saveDungeonLevel;
     gameState := stWinAlpha;
     scrWinAlpha.displayWinscreen;
   end

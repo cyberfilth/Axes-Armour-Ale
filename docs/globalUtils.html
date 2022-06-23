@@ -3,16 +3,16 @@
 <head>
 <title>Axes, Armour &amp; Ale: globalUtils</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit globalUtils</h1>
 <div class="sections">
-<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Uses</div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section">Uses</div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
 Common functions / utilities</p>
@@ -31,56 +31,62 @@ Common functions / utilities</p>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="globalUtils.html#randomRange">randomRange</a></b>(fromNumber, toNumber: smallint): smallint;</code></td>
+<td class="itemcode"><code>function <strong><a href="globalUtils.html#randomRange">randomRange</a></strong>(fromNumber, toNumber: smallint): smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="globalUtils.html#rollDice">rollDice</a></b>(numberOfDice: byte): smallint;</code></td>
+<td class="itemcode"><code>function <strong><a href="globalUtils.html#rollDice">rollDice</a></strong>(numberOfDice: byte): smallint;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><strong><a href="globalUtils.html#dungeonTerrain">dungeonTerrain</a></strong> = (...);</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a></b> = 80;</code></td>
+<td class="itemcode"><code><strong><a href="globalUtils.html#VERSION">VERSION</a></strong> = '54a';</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="globalUtils.html#MAXROWS">MAXROWS</a></b> = 20;</code></td>
+<td class="itemcode"><code><strong><a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a></strong> = 80;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="globalUtils.html#saveFile">saveFile</a></b> = 'saveGame.dat';</code></td>
+<td class="itemcode"><code><strong><a href="globalUtils.html#MAXROWS">MAXROWS</a></strong> = 20;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="globalUtils.html#VERSION">VERSION</a></b> = '54a';</code></td>
+<td class="itemcode"><code><strong><a href="globalUtils.html#saveFile">saveFile</a></strong> = 'saveGame.dat';</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="globalUtils.html#currentDgnTotalRooms">currentDgnTotalRooms</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="globalUtils.html#currentDgnTotalRooms">currentDgnTotalRooms</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="globalUtils.html#dungeonArray">dungeonArray</a></b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
+<td class="itemcode"><code><strong><a href="globalUtils.html#dungeonArray">dungeonArray</a></strong>: array[1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="globalUtils.html#killer">killer</a></b>: shortstring;</code></td>
+<td class="itemcode"><code><strong><a href="globalUtils.html#killer">killer</a></strong>: shortstring;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="globalUtils.html#OWx">OWx</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="globalUtils.html#OWx">OWx</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="globalUtils.html#OWy">OWy</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="globalUtils.html#OWy">OWy</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="globalUtils.html#saveDirectory">saveDirectory</a></b>: string;</code></td>
+<td class="itemcode"><code><strong><a href="globalUtils.html#saveDirectory">saveDirectory</a></strong>: string;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="globalUtils.html#womblingFree">womblingFree</a></b>: shortstring;</code></td>
+<td class="itemcode"><code><strong><a href="globalUtils.html#womblingFree">womblingFree</a></strong>: shortstring;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="randomRange"></span><code>function <b>randomRange</b>(fromNumber, toNumber: smallint): smallint;</code></td>
+<td class="itemcode"><span id="randomRange"></span><code>function <strong>randomRange</strong>(fromNumber, toNumber: smallint): smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -89,17 +95,49 @@ Select random number from a range</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="rollDice"></span><code>function <b>rollDice</b>(numberOfDice: byte): smallint;</code></td>
+<td class="itemcode"><span id="rollDice"></span><code>function <strong>rollDice</strong>(numberOfDice: byte): smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Simulate dice rolls</p>
 </td></tr>
 </table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dungeonTerrain"></span><code><strong>dungeonTerrain</strong> = (...);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Types of locations that can be explored. See 'architect' unit for explanation</p>
+<h6 class="description_section">Values</h6>
+<ul>
+<li>
+<span id="tCave">tCave</span></li>
+<li>
+<span id="tCavern">tCavern</span></li>
+<li>
+<span id="tDungeon">tDungeon</span></li>
+<li>
+<span id="tCrypt">tCrypt</span></li>
+<li>
+<span id="tVillage">tVillage</span></li>
+</ul>
+</td></tr>
+</table>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="MAXCOLUMNS"></span><code><b>MAXCOLUMNS</b> = 80;</code></td>
+<td class="itemcode"><span id="VERSION"></span><code><strong>VERSION</strong> = '54a';</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Version info - a = Alpha, d = Debug, r = Release</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="MAXCOLUMNS"></span><code><strong>MAXCOLUMNS</strong> = 80;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -108,7 +146,7 @@ Columns of the game map</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="MAXROWS"></span><code><b>MAXROWS</b> = 20;</code></td>
+<td class="itemcode"><span id="MAXROWS"></span><code><strong>MAXROWS</strong> = 20;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -117,26 +155,17 @@ Rows of the game map</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="saveFile"></span><code><b>saveFile</b> = 'saveGame.dat';</code></td>
+<td class="itemcode"><span id="saveFile"></span><code><strong>saveFile</strong> = 'saveGame.dat';</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Save game file</p>
 </td></tr>
 </table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="VERSION"></span><code><b>VERSION</b> = '54a';</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Version info - a = Alpha, d = Debug, r = Release</p>
-</td></tr>
-</table>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="currentDgnTotalRooms"></span><code><b>currentDgnTotalRooms</b>: smallint;</code></td>
+<td class="itemcode"><span id="currentDgnTotalRooms"></span><code><strong>currentDgnTotalRooms</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -145,14 +174,14 @@ Number of rooms in the current dungeon</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="dungeonArray"></span><code><b>dungeonArray</b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
+<td class="itemcode"><span id="dungeonArray"></span><code><strong>dungeonArray</strong>: array[1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of shortstring;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="killer"></span><code><b>killer</b>: shortstring;</code></td>
+<td class="itemcode"><span id="killer"></span><code><strong>killer</strong>: shortstring;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -161,7 +190,7 @@ Name of entity or item that killed the player</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="OWx"></span><code><b>OWx</b>: smallint;</code></td>
+<td class="itemcode"><span id="OWx"></span><code><strong>OWx</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -170,7 +199,7 @@ Last overworld coordinates the player was at</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="OWy"></span><code><b>OWy</b>: smallint;</code></td>
+<td class="itemcode"><span id="OWy"></span><code><strong>OWy</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -179,7 +208,7 @@ Last overworld coordinates the player was at</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="saveDirectory"></span><code><b>saveDirectory</b>: string;</code></td>
+<td class="itemcode"><span id="saveDirectory"></span><code><strong>saveDirectory</strong>: string;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -188,13 +217,13 @@ Save game directory</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="womblingFree"></span><code><b>womblingFree</b>: shortstring;</code></td>
+<td class="itemcode"><span id="womblingFree"></span><code><strong>womblingFree</strong>: shortstring;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Stores whether the player is underground or overground ;-)</p>
 </td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

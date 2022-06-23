@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: smell</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit smell</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -19,54 +19,54 @@ Smell map, a copy of the map is floodfilled with integers. Each integer incremen
 
 <p>The below routine is based on code from Stephen Peter (AKA speter)</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Classes</li><li>Math</li><li><a  href="globalUtils.html">globalutils</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Classes</li><li>Math</li><li><a href="globalUtils.html">globalutils</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="smell.html#blockORnot">blockORnot</a></b>(x, y: integer): <a  href="smell.html#Tbkinds">Tbkinds</a>;</code></td>
+<td class="itemcode"><code>function <strong><a href="smell.html#blockORnot">blockORnot</a></strong>(x, y: integer): <a href="smell.html#Tbkinds">Tbkinds</a>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="smell.html#calcDistances">calcDistances</a></b>(x, y: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="smell.html#calcDistances">calcDistances</a></strong>(x, y: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <b><a  href="smell.html#scentDirection">scentDirection</a></b>(y, x: smallint): char;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="smell.html#sniff">sniff</a></strong>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <b><a  href="smell.html#sniff">sniff</a></b>;</code></td>
+<td class="itemcode"><code>function <strong><a href="smell.html#scentDirection">scentDirection</a></strong>(y, x: smallint): char;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="smell.html#Tbkinds">Tbkinds</a></b> = (...);</code></td>
+<td class="itemcode"><code><strong><a href="smell.html#Tbkinds">Tbkinds</a></strong> = (...);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="smell.html#TDist">TDist</a></b> = array [1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of smallint;</code></td>
+<td class="itemcode"><code><strong><a href="smell.html#TDist">TDist</a></strong> = array [1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of smallint;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="smell.html#BLOCKVALUE">BLOCKVALUE</a></b> = 500;</code></td>
+<td class="itemcode"><code><strong><a href="smell.html#BLOCKVALUE">BLOCKVALUE</a></strong> = 500;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="smell.html#distances">distances</a></b>: <a  href="smell.html#TDist">TDist</a>;</code></td>
+<td class="itemcode"><code><strong><a href="smell.html#distances">distances</a></strong>: <a href="smell.html#TDist">TDist</a>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><b><a  href="smell.html#smellCounter">smellCounter</a></b>: byte;</code></td>
+<td class="itemcode"><code><strong><a href="smell.html#smellCounter">smellCounter</a></strong>: byte;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><b><a  href="smell.html#smellmap">smellmap</a></b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of smallint;</code></td>
+<td class="itemcode"><code><strong><a href="smell.html#smellmap">smellmap</a></strong>: array[1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of smallint;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="blockORnot"></span><code>function <b>blockORnot</b>(x, y: integer): <a  href="smell.html#Tbkinds">Tbkinds</a>;</code></td>
+<td class="itemcode"><span id="blockORnot"></span><code>function <strong>blockORnot</strong>(x, y: integer): <a href="smell.html#Tbkinds">Tbkinds</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -75,7 +75,7 @@ filename: ShortString; myfile: Text;</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="calcDistances"></span><code>procedure <b>calcDistances</b>(x, y: smallint);</code></td>
+<td class="itemcode"><span id="calcDistances"></span><code>procedure <strong>calcDistances</strong>(x, y: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -84,26 +84,26 @@ Calculate distance from player</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="scentDirection"></span><code>function <b>scentDirection</b>(y, x: smallint): char;</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Find the tile with the highest scent value</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="sniff"></span><code>procedure <b>sniff</b>;</code></td>
+<td class="itemcode"><span id="sniff"></span><code>procedure <strong>sniff</strong>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
 Generate smell map</p>
 </td></tr>
 </table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="scentDirection"></span><code>function <strong>scentDirection</strong>(y, x: smallint): char;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Find the tile with the highest scent value</p>
+</td></tr>
+</table>
 <h3 class="detail">Types</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="Tbkinds"></span><code><b>Tbkinds</b> = (...);</code></td>
+<td class="itemcode"><span id="Tbkinds"></span><code><strong>Tbkinds</strong> = (...);</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;<h6 class="description_section">Values</h6>
@@ -119,7 +119,7 @@ Generate smell map</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="TDist"></span><code><b>TDist</b> = array [1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of smallint;</code></td>
+<td class="itemcode"><span id="TDist"></span><code><strong>TDist</strong> = array [1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -127,7 +127,7 @@ Generate smell map</p>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="BLOCKVALUE"></span><code><b>BLOCKVALUE</b> = 500;</code></td>
+<td class="itemcode"><span id="BLOCKVALUE"></span><code><strong>BLOCKVALUE</strong> = 500;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -137,14 +137,14 @@ used on the smell map to denote a wall</p>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="distances"></span><code><b>distances</b>: <a  href="smell.html#TDist">TDist</a>;</code></td>
+<td class="itemcode"><span id="distances"></span><code><strong>distances</strong>: <a href="smell.html#TDist">TDist</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="smellCounter"></span><code><b>smellCounter</b>: byte;</code></td>
+<td class="itemcode"><span id="smellCounter"></span><code><strong>smellCounter</strong>: byte;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -153,11 +153,11 @@ Tracks the scent decaying over time</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="smellmap"></span><code><b>smellmap</b>: array[1..<a  href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a  href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of smallint;</code></td>
+<td class="itemcode"><span id="smellmap"></span><code><strong>smellmap</strong>: array[1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

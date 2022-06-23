@@ -3,13 +3,13 @@
 <head>
 <title>Axes, Armour &amp; Ale: los</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="PasDoc 0.15.0">
+<meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <link rel="StyleSheet" type="text/css" href="pasdoc.css">
 </head>
 <body>
-<table class="container"><tr><td class="navigation">
-<h2>Axes, Armour &amp; Ale</h2><p><a href="intro.html" class="navigation">Introduction</a></p><p><a href="AllUnits.html" class="navigation">Units</a></p><p><a href="ClassHierarchy.html" class="navigation">Class Hierarchy</a></p><p><a href="AllClasses.html" class="navigation">Classes, Interfaces, Objects and Records</a></p><p><a href="AllTypes.html" class="navigation">Types</a></p><p><a href="AllVariables.html" class="navigation">Variables</a></p><p><a href="AllConstants.html" class="navigation">Constants</a></p><p><a href="AllFunctions.html" class="navigation">Functions and Procedures</a></p><p><a href="AllIdentifiers.html" class="navigation">Identifiers</a></p><p><a href="GVUses.png" class="navigation">Unit dependency graph</a></p></td><td class="content">
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
 <h1 class="unit">Unit los</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -17,45 +17,36 @@
 <p>
 Line of sight &amp; targeting functions</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>Classes</li><li><a  href="map.html">map</a></li><li><a  href="animation.html">animation</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>Classes</li><li><a href="map.html">map</a></li><li><a href="animation.html">animation</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="los.html#firingLine">firingLine</a></b>(id, x1, y1, x2, y2: smallint);</code></td>
+<td class="itemcode"><code>function <strong><a href="los.html#inView">inView</a></strong>(x1, y1, x2, y2, visRange: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>function <b><a  href="los.html#inView">inView</a></b>(x1, y1, x2, y2, visRange: smallint): boolean;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="los.html#firingLine">firingLine</a></strong>(id, x1, y1, x2, y2: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <b><a  href="los.html#playerProjectilePath">playerProjectilePath</a></b>(x1, y1, x2, y2: smallint; g, col: shortstring);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="los.html#playerProjectilePath">playerProjectilePath</a></strong>(x1, y1, x2, y2: smallint; g, col: shortstring);</code></td>
 </tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="los.html#plyrTargetRange">plyrTargetRange</a></b> = 30;</code></td>
+<td class="itemcode"><code><strong><a href="los.html#plyrTargetRange">plyrTargetRange</a></strong> = 30;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><b><a  href="los.html#totalSpaces">totalSpaces</a></b>: smallint;</code></td>
+<td class="itemcode"><code><strong><a href="los.html#totalSpaces">totalSpaces</a></strong>: smallint;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="firingLine"></span><code>procedure <b>firingLine</b>(id, x1, y1, x2, y2: smallint);</code></td>
-</tr>
-<tr><td colspan="1">
-<p>
-Line of sight for projectiles</p>
-</td></tr>
-</table>
-<table class="detail wide_list">
-<tr class="list">
-<td class="itemcode"><span id="inView"></span><code>function <b>inView</b>(x1, y1, x2, y2, visRange: smallint): boolean;</code></td>
+<td class="itemcode"><span id="inView"></span><code>function <strong>inView</strong>(x1, y1, x2, y2, visRange: smallint): boolean;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -64,7 +55,16 @@ Checks that the distance to the target is within vision range</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="playerProjectilePath"></span><code>procedure <b>playerProjectilePath</b>(x1, y1, x2, y2: smallint; g, col: shortstring);</code></td>
+<td class="itemcode"><span id="firingLine"></span><code>procedure <strong>firingLine</strong>(id, x1, y1, x2, y2: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Line of sight for projectiles</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="playerProjectilePath"></span><code>procedure <strong>playerProjectilePath</strong>(x1, y1, x2, y2: smallint; g, col: shortstring);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -74,7 +74,7 @@ Player throws projectiles</p>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="plyrTargetRange"></span><code><b>plyrTargetRange</b> = 30;</code></td>
+<td class="itemcode"><span id="plyrTargetRange"></span><code><strong>plyrTargetRange</strong> = 30;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -82,11 +82,11 @@ Player throws projectiles</p>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="totalSpaces"></span><code><b>totalSpaces</b>: smallint;</code></td>
+<td class="itemcode"><span id="totalSpaces"></span><code><strong>totalSpaces</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
-<hr><span class="appinfo"><em>Generated by <a  href="https://github.com/pasdoc/pasdoc/wiki">PasDoc 0.15.0</a>. </em>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
 </span>
-</td></tr></table></body></html>
+</div></div></body></html>

@@ -11,16 +11,27 @@ uses
   { List of creatures }
   cave_rat, giant_cave_rat, blood_bat, large_blood_bat, green_fungus, mushroom_person,
   redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
-  hyena_fungus;
+  hyena_fungus, small_hornet, small_corpse_spider;
 
 const
   (* Array of creatures found in a cave, ordered by cave level *)
-  caveNPC1: array[1..5] of string = ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
+  caveNPC1: array[1..5] of string =
+    ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
   caveNPC2: array[1..7] of string =
-    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
+    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
+    'greenFungus', 'hobFungus');
   caveNPC3: array[1..7] of string =
-    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'redcapLsrLbr', 'matango', 'hyenaFungus');
-
+    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
+    'redcapLsrLbr', 'matango', 'hyenaFungus');
+  (* Array of creatures found in a dungeon, ordered by dungeon level *)
+  dgnNPC1: array[1..5] of string =
+    ('smallHornet', 'smlCorpseSpider', 'smallHornet', 'bloodBat', 'smlCorpseSpider');
+  dgnNPC2: array[1..7] of string =
+    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
+    'greenFungus', 'hobFungus');
+  dgnNPC3: array[1..7] of string =
+    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
+    'redcapLsrLbr', 'matango', 'hyenaFungus');
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; dungeon: dungeonTerrain);
@@ -38,7 +49,7 @@ begin
   repeat
     r := globalutils.randomRange(2, (MAXROWS - 1));
     c := globalutils.randomRange(2, (MAXCOLUMNS - 1));
-  (* choose a location that is not a wall, occupied or stair, also not next to the player *)
+    (* choose a location that is not a wall, occupied or stair, also not next to the player *)
   until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False) and
     (smellmap[r][c] > 4) and (maparea[r][c].Glyph = '.');
 
@@ -64,7 +75,21 @@ begin
     end;
     tDungeon:
     begin
-      { Placeholder }
+      if (universe.currentDepth = 1) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(dgnNPC1));
+        monster := dgnNPC1[randSelect];
+      end { Level 2 }
+      else if (universe.currentDepth = 2) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(dgnNPC2));
+        monster := dgnNPC2[randSelect];
+      end { Level 3 }
+      else if (universe.currentDepth = 3) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(dgnNPC3));
+        monster := dgnNPC3[randSelect];
+      end;
     end;
   end;
 
@@ -82,6 +107,8 @@ begin
     'hobFungus': redcap_fungus.createRedcapFungus(i, c, r);
     'smallHyena': small_hyena.createSmallHyena(i, c, r);
     'hyenaFungus': hyena_fungus.createInfectedHyena(i, c, r);
+    'smlCorpseSpider': small_corpse_spider.createCorpseSpider(i, c, r);
+    'smallHornet': small_hornet.createSmallHornet(i, c, r);
   end;
 end;
 

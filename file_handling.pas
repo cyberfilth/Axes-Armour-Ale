@@ -8,14 +8,14 @@ interface
 
 uses
   SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe, island,
-  cave, items;
+  cave, smallGrid, items;
 
 (* Save the overworld map to disk *)
 procedure saveOverworldMap;
 (* Read overworld map from disk *)
 procedure loadOverworldMap;
 (* Write a newly generate level of a dungeon to disk *)
-procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;
+procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte;
   dtype: dungeonTerrain);
 (* Write explored dungeon level to disk *)
 procedure saveDungeonLevel;
@@ -263,7 +263,7 @@ begin
   end;
 end;
 
-procedure writeNewDungeonLevel(idNumber, lvlNum, totalDepth, totalRooms: byte;
+procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte;
   dtype: dungeonTerrain);
 
 var
@@ -311,7 +311,7 @@ begin
     DataNode := AddChild(RootNode, 'levelData');
     AddElement(datanode, 'dungeonID', UTF8Decode(IntToStr(idNumber)));
     AddElement(datanode, 'canExitDungeon', UTF8Decode(BoolToStr(False)));
-    AddElement(datanode, 'title', universe.title);
+    AddElement(datanode, 'title', UTF8Decode(title));
     AddElement(datanode, 'floor', UTF8Decode(IntToStr(lvlNum)));
     AddElement(datanode, 'levelVisited', UTF8Decode(BoolToStr(False)));
     AddElement(datanode, 'itemsOnThisFloor', UTF8Decode(IntToStr(0)));
@@ -334,6 +334,14 @@ begin
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)))
           else
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)));
+        end
+        { if dungeon type is a dungeon }
+        else if (dType = tDungeon) then
+        begin
+          if (smallGrid.processed_dungeon[r][c] = '.') or (smallGrid.processed_dungeon[r][c] = '>') or (smallGrid.processed_dungeon[r][c] = '<')then
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
+          else
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
         end;
         AddElement(datanode, 'Visible', UTF8Decode(BoolToStr(False)));
         AddElement(datanode, 'Occupied', UTF8Decode(BoolToStr(False)));
@@ -342,6 +350,11 @@ begin
         if (dType = tCave) then
         begin
           AddElement(datanode, 'Glyph', UTF8Decode(cave.terrainArray[r][c]));
+        end
+        { if dungeon type is a dungeon }
+        else if (dType = tDungeon) then
+        begin
+          AddElement(datanode, 'Glyph', UTF8Decode(smallGrid.processed_dungeon[r][c]));
         end;
       end;
     end;
@@ -488,6 +501,8 @@ begin
            { Convert extended ASCII to plain text }
           if (entities.entityList[i].glyph = chr(1)) then
             AddElement(DataNode, 'glyph', '=') { Hob }
+          else if (entities.entityList[i].glyph = chr(157)) then
+            AddElement(DataNode, 'glyph', '!') { Hornet }
           else
             AddElement(DataNode, 'glyph', entities.entityList[i].glyph);
 
@@ -648,6 +663,8 @@ begin
         { Convert plain text to extended ASCII }
         if (NPCnode.FindNode('glyph').TextContent[1] = '=') then
           entities.entityList[i].glyph := chr(1)
+        else if (NPCnode.FindNode('glyph').TextContent[1] = '!') then
+          entities.entityList[i].glyph := chr(157)
         else
           entities.entityList[i].glyph := UTF8Encode(char(widechar(NPCnode.FindNode('glyph').TextContent[1])));
 
@@ -878,10 +895,17 @@ var
   end;
 
 begin
-  (* Set this floor to Visited *)
-  levelVisited := True;
-  (* First save the current level data *)
-  saveDungeonLevel;
+  if (womblingFree = 'underground') then
+  begin
+    (* Set this floor to Visited *)
+    levelVisited := True;
+    (* First save the current level data *)
+    saveDungeonLevel;
+  end
+  else
+  begin
+    saveOverworldMap;
+  end;
   (* Save game stats *)
   dfileName := (globalUtils.saveDirectory + PathDelim + globalutils.saveFile);
   try
@@ -906,7 +930,7 @@ begin
     AddElement(datanode, 'indexID', IntToStr(items.indexID));
     AddElement(datanode, 'totalDepth', IntToStr(totalDepth));
     AddElement(datanode, 'canExitDungeon', UTF8Encode(BoolToStr(player_stats.canExitDungeon)));
-    WriteStr(Value, dungeonType);
+    WriteStr(Value, map.mapType);
     AddElement(datanode, 'mapType', Value);
 
     (* Location data *)

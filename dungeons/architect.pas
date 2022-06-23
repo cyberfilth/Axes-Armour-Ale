@@ -34,7 +34,7 @@ procedure seedLocations;
 implementation
 
 uses
-  universe, island, overworld;
+  island, overworld;
 
 function validLocation(x, y: smallint): boolean;
 begin

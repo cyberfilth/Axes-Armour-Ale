@@ -13,13 +13,13 @@ uses
   { List of creatures }
   cave_rat, giant_cave_rat, blood_bat, green_fungus, redcap_lesser,
   redcap_lesser_lobber, small_green_fungus, large_blood_bat, small_hyena,
-  redcap_fungus, mushroom_person, hyena_fungus;
+  redcap_fungus, mushroom_person, hyena_fungus, small_hornet, small_corpse_spider;
 
 type { NPC attitudes }
   Tattitudes = (stateNeutral, stateHostile, stateEscape);
 
 type {NPC factions / groups }
-  Tfactions = (redcapFaction, bluecapFaction, animalFaction, fungusFaction);
+  Tfactions = (redcapFaction, bugFaction, animalFaction, fungusFaction);
 
 type
   (* Store information about NPC's *)
@@ -316,6 +316,8 @@ begin
     'smallHyena': small_hyena.takeTurn(i);
     'hyenaFungus': hyena_fungus.takeTurn(i);
     'HobFungus': redcap_fungus.takeTurn(i);
+    'smallHornet': small_hornet.takeTurn(i);
+    'smlCorpseSpider': small_corpse_spider.takeTurn(i);
   end;
   (* Occupy their current tile *)
   occupyUpdate;

@@ -550,6 +550,11 @@ begin
       map.descendStairs;
       main.gameLoop;
     end;
+    '.': { Wait in place }
+    begin
+      player.movePlayer(9);
+      main.gameLoop;
+    end;
     'z', 'Z': {Zap magic }
     begin
       player_inventory.Zzap(player_stats.enchWeapType);

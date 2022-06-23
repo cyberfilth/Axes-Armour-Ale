@@ -9,11 +9,7 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar;
-
-(* Types of locations that can be explored. See 'architect' unit for explanation *)
-type
-  dungeonTerrain = (tCave, tCavern, tDungeon, tCrypt, tVillage);
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, smallGrid;
 
 var
   (* Number of dungeons *)
@@ -31,7 +27,7 @@ var
   OWgen: boolean;
 
 (* Creates a dungeon of a specified type *)
-procedure createNewDungeon(levelType: dungeonTerrain);
+procedure createNewDungeon(title: string; levelType: dungeonTerrain; dID: smallint);
 (* Spawn creatures based on dungeon type and player level *)
 procedure spawnDenizens;
 (* Drop items based on dungeon type and player level *)
@@ -45,29 +41,27 @@ implementation
 uses
   map, npc_lookup, entities, items, item_lookup, file_handling, overworld;
 
-procedure createNewDungeon(levelType: dungeonTerrain);
+procedure createNewDungeon(title: string; levelType: dungeonTerrain; dID: smallint);
 begin
   r := 1;
   c := 1;
-  (* Increment the number of dungeons *)
-  Inc(dlistLength);
   (* First dungeon is locked when you enter *)
-  if (dlistLength = 1) then
+  if (dID = 1) then
     player_stats.canExitDungeon := False
   else
     player_stats.canExitDungeon := True;
   (* Dungeons unique ID number becomes the highest dungeon amount number *)
-  uniqueID := dlistLength;
+  uniqueID := dID;
+  universe.title := title;
   { First cave }
-  title := 'Smugglers cave';
   dungeonType := levelType;
   totalDepth := 3;
   currentDepth := 1;
 
   (* generate the dungeon *)
   case levelType of
-    tCave: cave.generate(dlistLength, totalDepth);
-    tDungeon: ;
+    tCave: cave.generate(title, dID, totalDepth);
+    tDungeon: smallGrid.generate(title, dID, totalDepth);
   end;
 
   (* Copy the 1st floor of the current dungeon to the game map *)
@@ -87,7 +81,16 @@ begin
   entities.npcAmount := NPCnumber;
 
   case dungeonType of
-    tDungeon: ;
+    tDungeon: { Dungeon }
+     begin
+      (* Create the NPC's *);
+      for i := 1 to NPCnumber do
+      begin
+        { create an encounter table: Monster type: Dungeon type: floor number }
+        { NPC generation will take the Player level into account when creating stats }
+        npc_lookup.NPCpicker(i, tDungeon);
+      end;
+    end;
     tCave: { Cave }
     begin
       (* Create the NPC's *);
@@ -112,7 +115,16 @@ begin
   ItemNumber := (totalRooms div 3) + currentDepth;
 
   case dungeonType of
-    tDungeon: ;
+    tDungeon: { Dungeon }
+        begin
+      (* Create the items *);
+      for i := 0 to (ItemNumber - 1) do
+      begin
+        item_lookup.dispenseItem(tCave);
+      end;
+      (* Drop a single light source on each floor *)
+      pixie_jar.createPixieJar;
+    end;
     tCave: { Cave }
     begin
       (* Create the items *);

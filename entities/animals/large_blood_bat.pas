@@ -47,7 +47,7 @@ begin
     description := 'a large red bat';
     glyph := 'B';
     glyphColour := 'red';
-    maxHP := randomRange(3, 5) + universe.currentDepth;;
+    maxHP := randomRange(3, 5) + universe.currentDepth;
     currentHP := maxHP;
     attack := randomRange(entityList[0].attack - 2, entityList[0].attack + 2);
     defence := randomRange(entityList[0].defence - 2, entityList[0].defence + 1);
