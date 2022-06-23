@@ -40,7 +40,7 @@ begin
     intName := 'smallHornet';
     article := True;
     description := 'a buzzing hornet';
-    glyph := 'b';
+    glyph := chr(157);
     glyphColour := 'yellow';
     maxHP := randomRange(3, 5) + player_stats.playerLevel;
     currentHP := maxHP;

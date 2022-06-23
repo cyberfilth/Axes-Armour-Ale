@@ -501,6 +501,8 @@ begin
            { Convert extended ASCII to plain text }
           if (entities.entityList[i].glyph = chr(1)) then
             AddElement(DataNode, 'glyph', '=') { Hob }
+          else if (entities.entityList[i].glyph = chr(157)) then
+            AddElement(DataNode, 'glyph', '!') { Hornet }
           else
             AddElement(DataNode, 'glyph', entities.entityList[i].glyph);
 
@@ -661,6 +663,8 @@ begin
         { Convert plain text to extended ASCII }
         if (NPCnode.FindNode('glyph').TextContent[1] = '=') then
           entities.entityList[i].glyph := chr(1)
+        else if (NPCnode.FindNode('glyph').TextContent[1] = '!') then
+          entities.entityList[i].glyph := chr(157)
         else
           entities.entityList[i].glyph := UTF8Encode(char(widechar(NPCnode.FindNode('glyph').TextContent[1])));
 
