@@ -325,10 +325,9 @@ begin
     else
     begin
       if (damageAmount = 1) then
-        ui.displayMessage('The hob slightly wounds you')
+        ui.displayMessage('The Hob slightly wounds you')
       else
-        ui.displayMessage('The hob claws you, dealing ' +
-          IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The Hob claws you, dealing ' + IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
@@ -337,9 +336,9 @@ begin
   begin
     chance := randomRange(1, 4);
     if (chance = 1) then
-      ui.displayMessage('The hob attacks wildly but misses')
+      ui.displayMessage('The Hob attacks wildly but misses')
     else if (chance = 2) then
-      ui.displayMessage('The hob flails at you');
+      ui.displayMessage('The Hob flails at you');
     combat_resolver.spiteDMG(id);
   end;
 end;

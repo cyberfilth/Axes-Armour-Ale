@@ -12,8 +12,10 @@ Alpha version, most features aren't implemented yet and what there is may change
  - Can be run without needing to be installed
 
 The latest release can be downloaded from the [Releases page](https://github.com/cyberfilth/Axes-Armour-Ale/releases/tag/Alpha54)
+![Ubuntu screenshot1](GITscreenshots/Linux_dungeon.png)
 
-![Ubuntu screenshot](GITscreenshots/LinuxAAA.gif)
+
+![Ubuntu animated GIF](GITscreenshots/LinuxAAA.gif)
 
 
 

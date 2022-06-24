@@ -35,7 +35,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="screens;dungeons;player;vision;items;items\weapons;items\armour;items\macguffins;entities;entities\fungus;entities\hobs;entities\animals;entities\bugs"/>
+            <OtherUnitFiles Value="screens;dungeons;player;vision;items;items\weapons;items\armour;items\macguffins;entities;entities\fungus;entities\hobs;entities\animals;entities\bugs;entities\gnomes"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -77,7 +77,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="screens;dungeons;player;vision;items;items\weapons;items\armour;items\macguffins;entities;entities\fungus;entities\hobs;entities\animals;entities\bugs"/>
+            <OtherUnitFiles Value="screens;dungeons;player;vision;items;items\weapons;items\armour;items\macguffins;entities;entities\fungus;entities\hobs;entities\animals;entities\bugs;entities\gnomes"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -114,7 +114,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="75">
+    <Units Count="76">
       <Unit0>
         <Filename Value="Axes.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -438,6 +438,10 @@
         <Filename Value="entities\bugs\small_corpse_spider.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit74>
+      <Unit75>
+        <Filename Value="entities\gnomes\gnome_warrior.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit75>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -448,7 +452,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="screens;dungeons;player;vision;items;items\weapons;items\armour;items\macguffins;entities;entities\fungus;entities\hobs;entities\animals;entities\bugs"/>
+      <OtherUnitFiles Value="screens;dungeons;player;vision;items;items\weapons;items\armour;items\macguffins;entities;entities\fungus;entities\hobs;entities\animals;entities\bugs;entities\gnomes"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
     <Parsing>
