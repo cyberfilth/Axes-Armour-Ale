@@ -65,6 +65,7 @@ var
 begin
    placeX := 0;
    placeY := 0;
+   placeName := '';
    villSelected := False;
    locationBuilderID := 2;
    total := globalUtils.randomRange(3, 4);

@@ -60,8 +60,8 @@ begin
 
   (* generate the dungeon *)
   case levelType of
-    tCave: cave.generate(title, dID, totalDepth);
-    tDungeon: smallGrid.generate(title, dID, totalDepth);
+    tCave: cave.generate(UTF8Encode(title), dID, totalDepth);
+    tDungeon: smallGrid.generate(UTF8Encode(title), dID, totalDepth);
   end;
 
   (* Copy the 1st floor of the current dungeon to the game map *)

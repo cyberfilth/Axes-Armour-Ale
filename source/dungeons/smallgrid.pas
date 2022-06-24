@@ -342,6 +342,10 @@ begin
 change starting point of each room so they don't all start drawing from the top left corner *)
   nudgeDown := 0;
   nudgeAcross := 0;
+  topLeftX := 0;
+  topLeftY := 0;
+  roomHeight := 0;
+  roomWidth := 0;
   case gridNumber of
     1:
     begin
