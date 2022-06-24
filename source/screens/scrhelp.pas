@@ -45,22 +45,25 @@ begin
   TextOut(ui.centreX(header), 2, 'cyan', header);
   (* This was intended to centre text on screen, no matter the terminal size.
      It doesn't seem to work as intended though *)
-  TextOut(ui.centreX('Movement'), 4, 'cyan', 'Movement');
+
   TextOut(ui.centreX(' Your character is controlled using either the numberpad or Vi keys.'),
-    5, 'cyan', ' Your character is controlled using either the numberpad or Vi keys.');
+    4, 'cyan', ' Your character is controlled using either the numberpad or Vi keys.');
   TextOut(ui.centreX('  y  k  u      7  8  9                                              '),
-    7, 'cyan', '  y  k  u      7  8  9                                              ');
+    6, 'cyan', '  y  k  u      7  8  9                                              ');
   TextOut(ui.centreX('   \ | /        \ | /                You can also move up, down,    '),
-    8, 'cyan', '   \ | /        \ | /                You can also move up, down,    ');
-  TextOut(ui.centreX('  h-   -l      4- 5 -6               left and right using the       '),
-    9, 'cyan', '  h-   -l      4- 5 -6               left and right using the       ');
+    7, 'cyan', '   \ | /        \ | /                You can also move up, down,    ');
+  TextOut(ui.centreX('  h- . -l      4- 5 -6               left and right using the       '),
+    8, 'cyan', '  h- . -l      4- 5 -6               left and right using the       ');
   TextOut(ui.centreX('   / | \        / | \                arrow keys                     '),
-    10, 'cyan', '   / | \        / | \                arrow keys                     ');
+    9, 'cyan', '   / | \        / | \                arrow keys                     ');
   TextOut(ui.centreX('  b  j  n      1  2  3                                              '),
-    11, 'cyan', '  b  j  n      1  2  3                                              ');
+    10, 'cyan', '  b  j  n      1  2  3                                              ');
   TextOut(ui.centreX('  vi-keys      numpad                                               '),
-    12, 'cyan', '  vi-keys      numpad                                               ');
-  TextOut(ui.centreX('Actions'), 14, 'cyan', 'Actions');
+    11, 'cyan', '  vi-keys      numpad                                               ');
+  TextOut(ui.centreX('  [<] go Upstairs, [>] go Downstairs                                '),
+    13, 'cyan', '  [<] go Upstairs, [>] go Downstairs                                ');
+  TextOut(ui.centreX('  [5] or [.] Wait a turn                                            '),
+    14, 'cyan', '  [5] or [.] wait a turn                                            ');
   TextOut(ui.centreX('  [g] or [,] to Get an item from the ground                         '),
     15, 'cyan', '  [g] or [,] to Get an item from the ground                         ');
   TextOut(ui.centreX('  [i] examine items in your Inventory                               '),
