@@ -550,7 +550,7 @@ begin
       map.descendStairs;
       main.gameLoop;
     end;
-    '.': { Wait in place }
+    '5', '.': { Wait in place }
     begin
       player.movePlayer(9);
       main.gameLoop;
