@@ -1,0 +1,1 @@
+fpc Axes.lpr -Twin64 -Px86_64 -Mfpc -Schi -CX -Os3 -Xs -XX -vewnhibq -Filib\x86_64-win64 -Fuscreens -Fudungeons -Fuplayer -Fuvision -Fuitems -Fuitems\weapons -Fuitems\armour -Fuitems\macguffins -Fuentities -Fuentities\fungus -Fuentities\hobs -Fuentities\animals -Fuentities\bugs -Fuentities\gnomes -Fu. -FUlib\x86_64-win64 -FE. -oAxes.exe
