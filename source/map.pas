@@ -123,9 +123,9 @@ end;
 
 function canMove(checkX, checkY: smallint): boolean;
 begin
-  if (withinBounds(checkX, checkY) = True) and
-    (maparea[checkY][checkX].Blocks = False) then
-    Result := True
+  if (withinBounds(checkX, checkY) = True) then
+     if (maparea[checkY][checkX].Blocks = False) then
+        Result := True
   else
     Result := False;
 end;
