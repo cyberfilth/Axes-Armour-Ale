@@ -204,15 +204,14 @@ begin
     except
       on E: ERangeError do
       begin
+        logAction('green_fungus.death');
         logAction('Error: valid range exceeded');
         logAction(E.Message);
       end;
       on E: Exception do  { generic handler }
       begin
+        logAction('green_fungus.death');
         logAction('Caught ' + E.ClassName + ': ' + E.Message);
-        logAction(IntToStr(r));
-        logAction(IntToStr(c));
-        logAction('> ');
       end;
     end;
 end;
