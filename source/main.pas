@@ -5,15 +5,13 @@
 unit main;
 
 {$mode objfpc}{$H+}
-{$IFOPT D+} {$DEFINE DEBUG} {$ENDIF}
 
 interface
 
 uses
   SysUtils, Video, keyboard, KeyboardInput, ui, camera, map, scrGame, globalUtils,
   universe, fov, scrRIP, plot_gen, file_handling, smell, scrTitle, scrTargeting, scrWinAlpha,
-  dlgInfo, scrOverworld, island
-  {$IFDEF DEBUG}, logging{$ENDIF};
+  dlgInfo, scrOverworld, island, logging;
 
 (* Finite State Machine game states *)
 type
@@ -88,9 +86,8 @@ begin
   end
   else
     setSeed;
-  {$IFDEF DEBUG}
+  { Start error logging }
   logging.beginLogging;
-  {$ENDIF}
 
   (* Check for previous save file *)
   if (FileExists(globalUtils.saveDirectory + DirectorySeparator +

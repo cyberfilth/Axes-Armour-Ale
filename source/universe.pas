@@ -4,7 +4,6 @@ unit universe;
 
 {$mode objfpc}{$H+}
 {$modeswitch UnicodeStrings}
-{$IFOPT D+} {$DEFINE DEBUG} {$ENDIF}
 
 interface
 

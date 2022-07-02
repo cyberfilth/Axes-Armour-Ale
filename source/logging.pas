@@ -7,15 +7,13 @@ unit logging;
 interface
 
 uses
-  SysUtils;
-
-const
-  (* Log file name *)
-  C_FNAME = 'LOGFILE.txt';
+  SysUtils, globalUtils;
 
 var
   (* Text file used for logging *)
   tfOut: TextFile;
+  (* Log file name *)
+  C_FNAME : ShortString;
 
 procedure beginLogging;
 procedure logAction(textString: string);
@@ -24,6 +22,7 @@ implementation
 
 procedure beginLogging;
 begin
+  C_FNAME := (globalUtils.saveDirectory + PathDelim + 'LOGFILE.txt');
   AssignFile(tfOut, C_FNAME);
   rewrite(tfOut);
   writeln(tfOut, 'Initialised. Random seed is ' + IntToStr(RandSeed));

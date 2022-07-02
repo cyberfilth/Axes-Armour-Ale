@@ -3,12 +3,11 @@
 unit green_fungus;
 
 {$mode objfpc}{$H+}
-{$RANGECHECKS OFF}
 
 interface
 
 uses
-  SysUtils, small_green_fungus;
+  SysUtils, small_green_fungus, logging;
 
 (* Create fungus *)
 procedure createGreenFungus(uniqueid, npcx, npcy: smallint);
@@ -179,27 +178,43 @@ begin
   (* Set a random number of spores *)
   amount := randomRange(1, 3);
   for i := 1 to amount do
-  begin
-    (* Limit the number of attempts to find a space *)
-    if (fungusSpawnAttempts < 3) then
-    begin
-      (* Choose a space to place the fungus *)
-      r := globalutils.randomRange(entityList[id].posY - 4, entityList[id].posY + 4);
-      c := globalutils.randomRange(entityList[id].posX - 4, entityList[id].posX + 4);
-      (* choose a location that is not a wall or occupied *)
-      if (maparea[r][c].Blocks <> True) and (maparea[r][c].Occupied <> True) and
-        (withinBounds(c, r) = True) then
+    try
       begin
-        Inc(npcAmount);
-        small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
-        ui.writeBufferedMessages;
-        ui.displayMessage('The fungus releases spores into the air');
-        Dec(fungusSpawnAttempts);
+        (* Limit the number of attempts to find a space *)
+        if (fungusSpawnAttempts < 3) then
+        begin
+          (* Choose a space to place the fungus *)
+          r := globalutils.randomRange(entityList[id].posY - 4, entityList[id].posY + 4);
+          c := globalutils.randomRange(entityList[id].posX - 4, entityList[id].posX + 4);
+          (* choose a location that is not a wall or occupied *)
+          if (withinBounds(c, r) = True) then
+          begin
+            if (maparea[r][c].Blocks <> True) and (maparea[r][c].Occupied <> True) then
+            begin
+              Inc(npcAmount);
+              small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
+              ui.writeBufferedMessages;
+              ui.displayMessage('The fungus releases spores into the air');
+              Dec(fungusSpawnAttempts);
+            end;
+          end;
+          Inc(fungusSpawnAttempts);
+        end;
       end;
-      Inc(fungusSpawnAttempts);
+    except
+      on E: ERangeError do
+      begin
+        logAction('Error: valid range exceeded');
+        logAction(E.Message);
+      end;
+      on E: Exception do  { generic handler }
+      begin
+        logAction('Caught ' + E.ClassName + ': ' + E.Message);
+        logAction(IntToStr(r));
+        logAction(IntToStr(c));
+        logAction('> ');
+      end;
     end;
-  end;
-
 end;
 
 end.
