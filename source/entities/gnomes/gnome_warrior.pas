@@ -61,7 +61,7 @@ begin
     else
        description := 'a beserker Gnome';
     glyph := 'n';
-    glyphColour := 'lightBlue';
+    glyphColour := 'lightMagenta';
     maxHP := randomRange(5, 7) + universe.currentDepth;
     currentHP := maxHP;
     attack := randomRange(7, 9) + player_stats.playerLevel;

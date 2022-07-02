@@ -128,7 +128,7 @@ begin
   map.unoccupy(entityList[id].posX, entityList[id].posY);
 
   { Green Fungus }
-  if (entityList[id].race = 'Green Fungus') then
+  if (entityList[id].intName = 'GreenFungus') then
     green_fungus.death(id);
 end;
 

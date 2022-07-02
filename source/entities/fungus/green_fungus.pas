@@ -151,7 +151,8 @@ begin
       begin
         if (idTarget = 0) then { if target is the player }
         begin
-          ui.displayMessage('The fungus lashes you with its stinger, inflicting ' + IntToStr(damageAmount) + ' damage');
+          ui.displayMessage('The fungus lashes you with its stinger, inflicting ' +
+            IntToStr(damageAmount) + ' damage');
           (* Fungus does poison damage *)
           entityList[0].stsPoison := True;
           entityList[0].tmrPoison := damageAmount + 2;
@@ -173,36 +174,32 @@ var
   fungusSpawnAttempts: byte;
   i, amount, r, c: smallint;
 begin
+  (* Counter for how many times game will attempt to place a fungus *)
   fungusSpawnAttempts := 0;
-  (* Limit the number of attempts to find a space *)
-  if (fungusSpawnAttempts < 3) then
+  (* Set a random number of spores *)
+  amount := randomRange(1, 3);
+  for i := 1 to amount do
   begin
+    (* Limit the number of attempts to find a space *)
+    if (fungusSpawnAttempts < 3) then
     begin
-      (* Set a random number of spores *)
-      amount := randomRange(0, 3);
-      if (amount > 0) then
+      (* Choose a space to place the fungus *)
+      r := globalutils.randomRange(entityList[id].posY - 4, entityList[id].posY + 4);
+      c := globalutils.randomRange(entityList[id].posX - 4, entityList[id].posX + 4);
+      (* choose a location that is not a wall or occupied *)
+      if (maparea[r][c].Blocks <> True) and (maparea[r][c].Occupied <> True) and
+        (withinBounds(c, r) = True) then
       begin
-        for i := 1 to amount do
-        begin
-          (* Choose a space to place the fungus *)
-          r := globalutils.randomRange(entityList[id].posY - 4, entityList[id].posY + 4);
-          c := globalutils.randomRange(entityList[id].posX - 4, entityList[id].posX + 4);
-          (* choose a location that is not a wall or occupied *)
-          if (maparea[r][c].Blocks <> True) and (maparea[r][c].Occupied <> True) and (withinBounds(c, r) = True) then
-          begin
-            Inc(npcAmount);
-            small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
-            ui.writeBufferedMessages;
-            ui.displayMessage('The fungus releases spores into the air');
-          end
-          else
-          (* If no suitable tile is found *)
-            exit;
-        end;
+        Inc(npcAmount);
+        small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
+        ui.writeBufferedMessages;
+        ui.displayMessage('The fungus releases spores into the air');
+        Dec(fungusSpawnAttempts);
       end;
       Inc(fungusSpawnAttempts);
     end;
   end;
+
 end;
 
 end.
