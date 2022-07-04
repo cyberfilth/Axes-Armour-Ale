@@ -45,13 +45,23 @@ var
   monster: string;
 begin
   monster := '';
-  (* Choose random location on the map *)
-  repeat
-    r := globalutils.randomRange(2, (MAXROWS - 1));
-    c := globalutils.randomRange(2, (MAXCOLUMNS - 1));
+  (* In a cave, choose random location on the map *)
+  if (dungeon = tCave) then
+  begin
+     repeat
+          r := globalutils.randomRange(2, (MAXROWS - 1));
+          c := globalutils.randomRange(2, (MAXCOLUMNS - 1));
     (* choose a location that is not a wall, occupied or stair, also not next to the player *)
-  until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False) and
-    (smellmap[r][c] > 4) and (maparea[r][c].Glyph = '.');
+    until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False) and (smellmap[r][c] > 4) and (maparea[r][c].Glyph = '.');
+  end
+  else if (dungeon = tDungeon) then
+  begin
+     repeat
+          r := globalutils.randomRange(2, (MAXROWS - 1));
+          c := globalutils.randomRange(2, (MAXCOLUMNS - 1));
+    (* choose a room that is not occupied *)
+    until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False) and (smellmap[r][c] > 4) and (maparea[r][c].Glyph = 'X');
+  end;
 
   (* Randomly choose an NPC based on dungeon depth *)
   case dungeon of

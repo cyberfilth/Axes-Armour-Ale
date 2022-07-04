@@ -74,8 +74,12 @@ var
 begin
   { Generate a smell map so NPC's aren't initially placed next to the player }
   sniff;
-  { Based on number of rooms in current level, dungeon type & dungeon level }
-  NPCnumber := totalRooms + currentDepth;
+  { Based on number of rooms in current level, dungeon type & dungeon level
+     Caves have more lower level enemies, dungeons have fewer but stronger }
+  if (dungeonType = tCave) then
+     NPCnumber := totalRooms + currentDepth
+  else if (dungeonType = tDungeon) then
+     NPCnumber := (totalRooms DIV 2) + currentDepth;
   { player level is considered when generating the NPCs }
   entities.npcAmount := NPCnumber;
 

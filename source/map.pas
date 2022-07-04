@@ -343,7 +343,7 @@ const
   darkest = 'blue';
 begin
   case maparea[r][c].glyph of
-    '.': { Floor }
+    '.', 'X': { Floor }
     begin
       mapDisplay[r][c].Glyph := '.';
       if (hiDef = 1) then { In view }
@@ -919,6 +919,7 @@ begin
         Glyph := universe.currentDungeon[r][c];
       end;
       if (universe.currentDungeon[r][c] = '.') or { floor tile }
+        (universe.currentDungeon[r][c] = 'X') or { Room centre marker }
         (universe.currentDungeon[r][c] = '<') or { Upstairs tile }
         (universe.currentDungeon[r][c] = '>') then { Downstairs tile }
         maparea[r][c].Blocks := False;

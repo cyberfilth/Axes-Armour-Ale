@@ -338,7 +338,7 @@ begin
         { if dungeon type is a dungeon }
         else if (dType = tDungeon) then
         begin
-          if (smallGrid.processed_dungeon[r][c] = '.') or (smallGrid.processed_dungeon[r][c] = '>') or (smallGrid.processed_dungeon[r][c] = '<')then
+          if (smallGrid.processed_dungeon[r][c] = '.') or (smallGrid.processed_dungeon[r][c] = 'X') or (smallGrid.processed_dungeon[r][c] = '>') or (smallGrid.processed_dungeon[r][c] = '<') then
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
           else
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));

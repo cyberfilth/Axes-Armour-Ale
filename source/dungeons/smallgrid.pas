@@ -107,7 +107,7 @@ begin
         end;
       end
       else
-        processed_dungeon[r][c] := '.';
+        processed_dungeon[r][c] := '.';        { ADD AN X AS AN OPTION }
   end;
 
   (* Top left corner *)
@@ -116,7 +116,7 @@ begin
     for c := 1 to globalutils.MAXCOLUMNS do
       if (dungeonArray[r][c] = '#') then
       begin
-        if (dungeonArray[r - 1][c] = '#') and (dungeonArray[r - 1][c + 1] = '#') and
+        if (dungeonArray[r - 1][c] = '#') and (dungeonArray[r - 1][c + 1] = '#') and    { INCLUDE AN X WITH THE SAME COORDINATES AS THE . }
           (dungeonArray[r][c + 1] = '#') and (dungeonArray[r + 1][c + 1] = '.') and
           (dungeonArray[r + 1][c] = '#') and (dungeonArray[r + 1][c - 1] = '#') and
           (dungeonArray[r][c - 1] = '#') and (dungeonArray[r - 1][c - 1] = '#') then
@@ -317,15 +317,15 @@ procedure createCorridor(fromX, fromY, toX, toY: smallint);
 var
   direction: byte;
 begin
-  // flip a coin to decide whether to first go horizontally or vertically
+  { flip a coin to decide whether to first go horizontally or vertically }
   direction := Random(2);
-  // horizontally first
+  { horizontally first }
   if direction = 1 then
   begin
     carveHorizontally(fromX, toX, fromY);
     carveVertically(fromY, toY, toX);
   end
-  // vertically first
+  { vertically first }
   else
   begin
     carveVertically(fromY, toY, toX);
@@ -567,7 +567,7 @@ end;
 
 procedure generate(title: string; idNumber: smallint; totalDepth: byte);
 var
-  i: byte;
+  i, i2: byte;
 begin
   for i := 1 to totalDepth do
   begin
@@ -575,6 +575,13 @@ begin
     { First floor only }
     if (i = 1) then
     begin
+
+      (* Place a marker in the centre of each room *)
+      for i2 := 1 to (totalRooms - 1) do
+      begin
+          dungeonArray[centreList[i2].y][centreList[i2].x] := 'X';
+      end;
+
       (* Upper stairs, placed on players starting location *)
       dungeonArray[map.startY][map.startX] := '<';
 
@@ -617,6 +624,13 @@ begin
         r := globalutils.randomRange(3, MAXROWS);
         c := globalutils.randomRange((MAXCOLUMNS div 2), MAXCOLUMNS);
       until (dungeonArray[r][c] = '.');
+
+      (* Place a marker in the centre of each room *)
+      for i2 := 1 to (totalRooms - 1) do
+      begin
+          dungeonArray[centreList[i2].y][centreList[i2].x] := 'X';
+      end;
+
       (* Place the stairs *)
       dungeonArray[r][c] := '>';
       (* Save location of stairs *)
@@ -639,11 +653,19 @@ begin
         r := globalutils.randomRange(1, MAXROWS);
         c := globalutils.randomRange(1, (MAXCOLUMNS div 2));
       until (dungeonArray[r][c] = '.');
+
+      (* Place a marker in the centre of each room *)
+      for i2 := 1 to (totalRooms - 1) do
+      begin
+          dungeonArray[centreList[i2].y][centreList[i2].x] := 'X';
+      end;
+
       (* Place the stairs *)
       dungeonArray[r][c] := '>';
       (* Save location of stairs *)
       stairX := c;
       stairY := r;
+
       (* Improve the walls of the dungeon *)
       prettify;
       file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tDungeon);
@@ -658,39 +680,44 @@ begin
       dungeonArray[stairY][stairX] := '<';
       (* Improve the walls of the dungeon *)
       prettify;
+      (* Place a marker in the centre of each room *)
+      for i2 := 1 to (totalRooms - 1) do
+      begin
+          dungeonArray[centreList[i2].y][centreList[i2].x] := 'X';
+      end;
       file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tDungeon);
     end;
 
     /////////////////////////////
     // Write map to text file for testing
-    //filename := 'dungeon_level_' + IntToStr(i) + '.txt';
-    //AssignFile(myfile, filename);
-    //rewrite(myfile);
-    //for r := 1 to MAXROWS do
-    //begin
-    //  for c := 1 to MAXCOLUMNS do
-    //  begin
-    //    Write(myfile, dungeonArray[r][c]);
-    //  end;
-    //  Write(myfile, sLineBreak);
-    //end;
-    //closeFile(myfile);
+    filename := 'dungeon_level_' + IntToStr(i) + '.txt';
+    AssignFile(myfile, filename);
+    rewrite(myfile);
+    for r := 1 to MAXROWS do
+    begin
+      for c := 1 to MAXCOLUMNS do
+      begin
+        Write(myfile, dungeonArray[r][c]);
+      end;
+      Write(myfile, sLineBreak);
+    end;
+    closeFile(myfile);
     //////////////////////////////
 
     /////////////////////////////
     // Write map to text file for testing
-    //filename := 'dungeon_processed_level_' + IntToStr(i) + '.txt';
-    //AssignFile(myfile, filename);
-    //rewrite(myfile);
-    //for r := 1 to MAXROWS do
-    //begin
-    //  for c := 1 to MAXCOLUMNS do
-    //  begin
-    //    Write(myfile, processed_dungeon[r][c]);
-    //  end;
-    //  Write(myfile, sLineBreak);
-    //end;
-    //closeFile(myfile);
+    filename := 'dungeon_processed_level_' + IntToStr(i) + '.txt';
+    AssignFile(myfile, filename);
+    rewrite(myfile);
+    for r := 1 to MAXROWS do
+    begin
+      for c := 1 to MAXCOLUMNS do
+      begin
+        Write(myfile, processed_dungeon[r][c]);
+      end;
+      Write(myfile, sLineBreak);
+    end;
+    closeFile(myfile);
     //////////////////////////////
   end;
 end;
