@@ -8,4 +8,5 @@ The Free Pascal textmode IDE is used to develop this game. Place the *fp.cfg* & 
   * *tidyUp.sh* - BASH script to call DELP (FP tool to clean up files after compilation) and update tags file
   * *findInFiles.sh* - BASH script to grep for a string in .pas files
   * *fp.cfg* - Free Pascal IDE config file, sets the different build modes
-  * *fp.ini* - Free Pascal IDE user settings, includes custom theme
+  * *fp.ini* - Free Pascal IDE user settings, includes custom theme and some tools
+  * *formatCode.sh* drop this in the source directory, along with *ptop.cfg* and you can beautify your code from FP IDE tools menu
