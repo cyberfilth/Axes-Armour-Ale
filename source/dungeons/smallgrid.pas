@@ -1,3 +1,5 @@
+
+
 (* Generates a grid based dungeon with wide spaces between rooms, this is then processed to apply bitmasked walls *)
 
 unit smallGrid;
@@ -107,8 +109,10 @@ begin
                 processed_dungeon[r][c] := 'A';
             end;
           end
+        else if (dungeonArray[r][c] = 'X') then
+               processed_dungeon[r][c] := 'X'
         else
-          processed_dungeon[r][c] := '.';        { ADD AN X AS AN OPTION }
+          processed_dungeon[r][c] := '.';
     end;
 
   (* Top left corner *)
@@ -118,7 +122,6 @@ begin
         if (dungeonArray[r][c] = '#') then
           begin
             if (dungeonArray[r - 1][c] = '#') and (dungeonArray[r - 1][c + 1] = '#') and
-               { INCLUDE AN X WITH THE SAME COORDINATES AS THE . }
                (dungeonArray[r][c + 1] = '#') and (dungeonArray[r + 1][c + 1] = '.') and
                (dungeonArray[r + 1][c] = '#') and (dungeonArray[r + 1][c - 1] = '#') and
                (dungeonArray[r][c - 1] = '#') and (dungeonArray[r - 1][c - 1] = '#') then
@@ -345,6 +348,8 @@ var
   topLeftX, topLeftY, roomHeight, roomWidth, drawHeight, drawWidth,
   nudgeDown, nudgeAcross: smallint;
 begin
+
+
 
 
 (* Grids are unevenly spaced, so exact coordinates are used. 'Nudge' is used to
@@ -689,47 +694,50 @@ begin
           repeat
             buildLevel(i);
           until dungeonArray[stairY][stairX] = '.';
-          dungeonArray[stairY][stairX] := '<';
-      (* Improve the walls of the dungeon *)
-          prettify;
-      (* Place a marker in the centre of each room *)
+
+          (* Place a marker in the centre of each room *)
           for i2 := 1 to (totalRooms - 1) do
             begin
               dungeonArray[centreList[i2].y][centreList[i2].x] := 'X';
             end;
+
+          dungeonArray[stairY][stairX] := '<';
+      (* Improve the walls of the dungeon *)
+          prettify;
+
           file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tDungeon);
         end;
 
-      /////////////////////////////
-      // Write map to text file for testing
-      filename := 'dungeon_level_' + IntToStr(i) + '.txt';
-      AssignFile(myfile, filename);
-      rewrite(myfile);
-      for r := 1 to MAXROWS do
-        begin
-          for c := 1 to MAXCOLUMNS do
-            begin
-              write(myfile, dungeonArray[r][c]);
-            end;
-          write(myfile, sLineBreak);
-        end;
-      closeFile(myfile);
-      //////////////////////////////
+     /////////////////////////////
+     // Write map to text file for testing
+     // filename := 'dungeon_level_' + IntToStr(i) + '.txt';
+     // AssignFile(myfile, filename);
+     // rewrite(myfile);
+     // for r := 1 to MAXROWS do
+     //   begin
+     //     for c := 1 to MAXCOLUMNS do
+     //       begin
+     //         write(myfile, dungeonArray[r][c]);
+     //       end;
+     //     write(myfile, sLineBreak);
+     //   end;
+     // closeFile(myfile);
+     ////////////////////////////////
 
       /////////////////////////////
       // Write map to text file for testing
-      filename := 'dungeon_processed_level_' + IntToStr(i) + '.txt';
-      AssignFile(myfile, filename);
-      rewrite(myfile);
-      for r := 1 to MAXROWS do
-        begin
-          for c := 1 to MAXCOLUMNS do
-            begin
-              write(myfile, processed_dungeon[r][c]);
-            end;
-          write(myfile, sLineBreak);
-        end;
-      closeFile(myfile);
+      //filename := 'dungeon_processed_level_' + IntToStr(i) + '.txt';
+      //AssignFile(myfile, filename);
+      //rewrite(myfile);
+      //for r := 1 to MAXROWS do
+      //  begin
+      //    for c := 1 to MAXCOLUMNS do
+      //      begin
+      //        write(myfile, processed_dungeon[r][c]);
+      //      end;
+      //    write(myfile, sLineBreak);
+      //  end;
+      //closeFile(myfile);
       //////////////////////////////
     end;
 end;
