@@ -7,14 +7,14 @@ unit items;
 interface
 
 uses
-  ui;
+  ui, web_trap;
 
 type
   tItem = (itmDrink, itmWeapon, itmArmour, itmQuest, itmProjectile, itmEmptySlot,
-          itmProjectileWeapon, itmAmmo, itmLightSource);
+          itmProjectileWeapon, itmAmmo, itmLightSource, itmTrap);
 
 type
-  tMaterial = (matSteel, matIron, matWood, matLeather, matWool, matPaper, matAlcohol,
+  tMaterial = (matSteel, matIron, matWood, matLeather, matWool, matPaper, matFlammable,
               matStone, matGlass, matEmpty);
 
 (* Store information about items *)
@@ -79,6 +79,8 @@ function getItemColour(x, y: smallint): shortstring;
 function isItemThrowable(x, y: smallint): boolean;
 (* Get the Throw Damage at coordinates *)
 function getThrowDamage(x, y: smallint): smallint;
+(* Check to see if a trap has been triggered *)
+procedure checkForTraps;
 (* Count non-empty items in array *)
 function countNonEmptyItems: byte;
 (* Redraw all items *)
@@ -207,6 +209,20 @@ begin
         Result := itemList[i].throwDamage;
       exit;
     end;
+  end;
+end;
+
+procedure checkForTraps;
+var
+  i: byte;
+begin
+  if (Length(itemList) <> 0) then
+  begin
+  for i := 0 to High(itemList) do
+  begin
+    if (itemList[i].itemType = itmTrap) then
+       web_trap.triggered(i);
+  end;
   end;
 end;
 

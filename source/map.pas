@@ -123,8 +123,9 @@ end;
 
 function canMove(checkX, checkY: smallint): boolean;
 begin
+  Result := False;
   if (withinBounds(checkX, checkY) = True) then
-     if (maparea[checkY][checkX].Blocks = False) then
+     if (maparea[checkY][checkX].Blocks = False) and (isOccupied(checkX, checkY) = False) then
         Result := True
   else
     Result := False;
@@ -825,7 +826,7 @@ begin
         end;
       end;
     end
-      (* Default block glyph *)
+    (* Default block glyph *)
     else
     begin
       mapDisplay[r][c].Glyph := Chr(219);

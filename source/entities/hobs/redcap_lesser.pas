@@ -117,6 +117,7 @@ begin
   if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
     entityList[0].posY, entityList[id].visionRange) = True) then
   begin
+    entityList[id].moveCount := 5;
     {------------------------------- If next to the player }
     if (isNextToPlayer(entityList[id].posX, entityList[id].posY) = True) then
       {------------------------------- Attack the Player }

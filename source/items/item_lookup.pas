@@ -11,7 +11,7 @@ uses
   { List of drinks }
   ale_tankard, wine_flask,
   { List of weapons }
-  crude_dagger, basic_club, rock, short_bow, pointy_stick,
+  crude_dagger, basic_club, rock, short_bow, pointy_stick, gnomish_dagger,
   { List of armour }
   leather_armour1, cloth_armour1,
   { Quest items }
@@ -19,7 +19,9 @@ uses
   { Magical items }
   staff_minor_scorch,
   { Ammunition }
-  arrow;
+  arrow,
+  { Traps }
+  web_trap;
 
 const
   (* Array of items found in a cave, ordered by cave level *)
@@ -33,7 +35,7 @@ const
     ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
   (* Array of items found in a dungeon, ordered by dungeon level *)
   dgnItems1: array[1..8] of string =
-    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
+    ('aleTankard', 'stickyWeb', 'wineFlask', 'stickyWeb', 'rock',
     'pointyStick', 'arrow', 'arrow');
   dgnItems2: array[1..7] of string =
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
@@ -120,6 +122,7 @@ begin
     'shortBow': short_bow.createShortBow(c, r);
     'pointyStick': pointy_stick.createPointyStick(c, r);
     'arrow': arrow.createArrow(c, r);
+    'stickyWeb': web_trap.createWebTrap(c, r);
   end;
 end;
 
@@ -139,6 +142,7 @@ begin
     11: pointy_stick.useItem(equipped);
     12: arrow.useItem;
     13: pixie_jar.useItem;
+    14: gnomish_dagger.useItem(equipped, id);
   end;
 end;
 

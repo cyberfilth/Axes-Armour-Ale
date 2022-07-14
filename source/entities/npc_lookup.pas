@@ -11,7 +11,7 @@ uses
   { List of creatures }
   cave_rat, giant_cave_rat, blood_bat, large_blood_bat, green_fungus, mushroom_person,
   redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
-  hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior;
+  hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin;
 
 const
   (* Array of creatures found in a cave, ordered by cave level *)
@@ -23,6 +23,7 @@ const
   caveNPC3: array[1..7] of string =
     ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
     'redcapLsrLbr', 'matango', 'hyenaFungus');
+
   (* Array of creatures found in a dungeon, ordered by dungeon level *)
   dgnNPC1: array[1..5] of string =
     ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr', 'smlCorpseSpider');
@@ -32,6 +33,12 @@ const
   dgnNPC3: array[1..7] of string =
     ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
     'redcapLsrLbr', 'matango', 'hyenaFungus');
+  dgnUnique1: array[1..2] of string =
+    ('smallHornet', 'GnmAss');
+  dgnUnique2: array[1..2] of string =
+    ('giantRat', 'caveRat');
+  dgnUnique3: array[1..2] of string =
+    ('giantRat', 'caveRat');
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; dungeon: dungeonTerrain);
@@ -44,6 +51,8 @@ var
   randSelect: byte;
   monster: string;
 begin
+  r := 0;
+  c := 0;
   monster := '';
   (* In a cave, choose random location on the map *)
   if (dungeon = tCave) then
@@ -120,6 +129,7 @@ begin
     'smlCorpseSpider': small_corpse_spider.createCorpseSpider(i, c, r);
     'smallHornet': small_hornet.createSmallHornet(i, c, r);
     'GnmWarr': gnome_warrior.createGnomeWarrior(i, c, r);
+    'GnmAss': gnome_assassin.createGnomeAssassin(i, c, r);
   end;
 end;
 

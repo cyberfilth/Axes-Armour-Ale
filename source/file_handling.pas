@@ -8,7 +8,7 @@ interface
 
 uses
   SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe, island,
-  cave, smallGrid, items;
+  cave, smallGrid;
 
 (* Save the overworld map to disk *)
 procedure saveOverworldMap;
@@ -31,7 +31,7 @@ procedure saveGame;
 implementation
 
 uses
-  map, main, entities, player_stats, player_inventory, overworld;
+  map, main, entities, player_stats, player_inventory, overworld, items;
 
 procedure saveOverworldMap;
 var
@@ -481,7 +481,6 @@ begin
           AddElement(DataNode, 'dice', IntToStr(itemList[i].dice));
           AddElement(DataNode, 'adds', IntToStr(itemList[i].adds));
           AddElement(DataNode, 'discovered', BoolToStr(itemList[i].discovered));
-
         end;
       end;
 

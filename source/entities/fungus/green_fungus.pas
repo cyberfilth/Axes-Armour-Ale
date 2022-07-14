@@ -17,7 +17,7 @@ procedure takeTurn(id: smallint);
 function isNextToPlayer(spx, spy: smallint): boolean;
 (* Fungus attacks *)
 procedure combat(idOwner, idTarget: smallint);
-(* NPC Death *)
+(* NPC Death - Fungus releases spores into the air *)
 procedure death(id: smallint);
 
 implementation

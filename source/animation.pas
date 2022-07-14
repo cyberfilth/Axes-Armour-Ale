@@ -7,7 +7,7 @@ unit animation;
 interface
 
 uses
-  SysUtils, Classes, video, ui, entities, fov, map, camera;
+  SysUtils, Classes, video, ui, fov, map, camera, web;
 
 type
   a = array[1..10] of TPoint;
@@ -21,11 +21,13 @@ procedure areaBurnEffect(getEm: array of smallint);
 procedure thrownObjectAnim(var flightPath: b; prjGlyph, prjColour: shortstring);
 (* Animate an arrow *)
 procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);
+(* Animate a web trap *)
+procedure spinWebs;
 
 implementation
 
 uses
-  main, scrTargeting;
+  main, scrTargeting, entities;
 
 procedure throwRock(id: smallint; var flightPath: a);
 var
@@ -39,7 +41,7 @@ begin
   for p := 1 to entities.npcAmount do
     entities.redrawMapDisplay(p);
   camera.drawMap;
-  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+ // fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
   UnlockScreenUpdate;
   UpdateScreen(False);
   ui.displayMessage(entityList[id].race + ' throws a rock at you');
@@ -51,7 +53,8 @@ begin
       (* Paint over previous rock *)
       if (i > 2) then
       begin
-        map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].GlyphColour := 'lightGrey';
+        map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].GlyphColour :=
+          'lightGrey';
         map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].Glyph := '.';
       end;
       (* Draw rock *)
@@ -59,12 +62,13 @@ begin
       map.mapDisplay[flightPath[i].Y, flightPath[i].X].Glyph := chr(7);
       (* Redraw all NPC'S *)
       for p := 1 to entities.npcAmount do
-          entities.redrawMapDisplay(p);
+        entities.redrawMapDisplay(p);
       sleep(100);
     end;
     (* Repaint map *)
     camera.drawMap;
-    fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+    fov.fieldOfView(entityList[0].posX, entityList[0].posY,
+      entityList[0].visionRange, 1);
 
     UnlockScreenUpdate;
     UpdateScreen(False);
@@ -114,8 +118,10 @@ begin
     (* Loop through array and draw each NPC *)
     for i := Low(getEm) to High(getEm) do
     begin
-      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].GlyphColour := boom;
-      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].Glyph := entityList[getEm[i]].glyph;
+      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].GlyphColour :=
+        boom;
+      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].Glyph :=
+        entityList[getEm[i]].glyph;
     end;
 
     (* Repaint map *)
@@ -155,7 +161,8 @@ begin
       (* Paint over previous projectile *)
       if (i > 2) then
       begin
-        map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].GlyphColour := 'lightGrey';
+        map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].GlyphColour :=
+          'lightGrey';
         map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].Glyph := '.';
       end;
       (* Draw projectile *)
@@ -165,15 +172,16 @@ begin
       scrTargeting.landingX := flightPath[i].X;
       (* Redraw all NPC'S *)
       for p := 1 to entities.npcAmount do
-          entities.redrawMapDisplay(p);
+        entities.redrawMapDisplay(p);
       sleep(100);
     end;
     (* Repaint map *)
     camera.drawMap;
-    fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+    fov.fieldOfView(entityList[0].posX, entityList[0].posY,
+      entityList[0].visionRange, 1);
     (* Redraw all NPC'S *)
     for p := 1 to entities.npcAmount do
-        entities.redrawMapDisplay(p);
+      entities.redrawMapDisplay(p);
     UnlockScreenUpdate;
     UpdateScreen(False);
   end;
@@ -213,7 +221,8 @@ begin
       (* Paint over previous projectile *)
       if (i > 2) then
       begin
-        map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].GlyphColour := 'lightGrey';
+        map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].GlyphColour :=
+          'lightGrey';
         map.mapDisplay[flightPath[i - 1].Y, flightPath[i - 1].X].Glyph := '.';
       end;
       (* Draw projectile *)
@@ -223,7 +232,7 @@ begin
       scrTargeting.landingX := flightPath[i].X;
       (* Redraw all NPC'S *)
       for p := 1 to entities.npcAmount do
-          entities.redrawMapDisplay(p);
+        entities.redrawMapDisplay(p);
       sleep(100);
       (* Check for a hit *)
       if (entities.isCreatureVisible(flightPath[i].X, flightPath[i].Y) = True) then
@@ -234,10 +243,11 @@ begin
     end;
     (* Repaint map *)
     camera.drawMap;
-    fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
+    fov.fieldOfView(entityList[0].posX, entityList[0].posY,
+      entityList[0].visionRange, 1);
     (* Redraw all NPC'S *)
     for p := 1 to entities.npcAmount do
-        entities.redrawMapDisplay(p);
+      entities.redrawMapDisplay(p);
     UnlockScreenUpdate;
     UpdateScreen(False);
   end;
@@ -251,6 +261,134 @@ begin
   UnlockScreenUpdate;
   UpdateScreen(False);
   gameState := stFireBow;
+end;
+
+procedure spinWebs;
+var
+  p: byte;
+  pX, pY: smallint;
+begin
+  (* Change game state to stop receiving inputs *)
+  main.gameState := stAnim;
+  UnlockScreenUpdate;
+  UpdateScreen(False);
+  (* Get player coordinates *)
+  pX := entityList[0].posX;
+  pY := entityList[0].posY;
+  (* Draw player, FOV & NPC's *)
+  LockScreenUpdate;
+  (* Redraw all NPC'S *)
+  for p := 1 to entities.npcAmount do
+    entities.redrawMapDisplay(p);
+  camera.drawMap;
+  UnlockScreenUpdate;
+  UpdateScreen(False);
+  (* Place first webs *)
+  if (map.canMove(pX, pY - 1) = True) and (map.maparea[pY - 1, pX].Glyph <> '>') and
+    (map.maparea[pY - 1, pX].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { N }
+    web.createWeb(npcAmount, pX, pY - 1);
+  end;
+  if (map.canMove(pX + 1, pY - 1) = True) and
+    (map.maparea[pY - 1, pX + 1].Glyph <> '>') and
+    (map.maparea[pY - 1, pX + 1].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { NE }
+    web.createWeb(npcAmount, pX + 1, pY - 1);
+  end;
+  if (map.canMove(pX + 1, pY) = True) and (map.maparea[pY, pX + 1].Glyph <> '>') and
+    (map.maparea[pY, pX + 1].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { E }
+    web.createWeb(npcAmount, pX + 1, pY);
+  end;
+  if (map.canMove(pX + 1, pY + 1) = True) and
+    (map.maparea[pY + 1, pX + 1].Glyph <> '>') and
+    (map.maparea[pY + 1, pX + 1].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { SE }
+    web.createWeb(npcAmount, pX + 1, pY + 1);
+  end;
+  if (map.canMove(pX, pY + 1) = True) and (map.maparea[pY + 1, pX].Glyph <> '>') and
+    (map.maparea[pY + 1, pX].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { S }
+    web.createWeb(npcAmount, pX, pY + 1);
+  end;
+  if (map.canMove(pX - 1, pY + 1) = True) and
+    (map.maparea[pY + 1, pX - 1].Glyph <> '>') and
+    (map.maparea[pY + 1, pX - 1].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { SW }
+    web.createWeb(npcAmount, pX - 1, pY + 1);
+  end;
+  if (map.canMove(pX - 1, pY) = True) and (map.maparea[pY, pX - 1].Glyph <> '>') and
+    (map.maparea[pY, pX - 1].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { W }
+    web.createWeb(npcAmount, pX - 1, pY);
+  end;
+  if (map.canMove(pX - 1, pY - 1) = True) and
+    (map.maparea[pY - 1, pX - 1].Glyph <> '>') and
+    (map.maparea[pY - 1, pX - 1].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { NW }
+    web.createWeb(npcAmount, pX - 1, pY - 1);
+  end;
+  (* Draw player and FOV *)
+  LockScreenUpdate;
+  (* Redraw all NPC'S *)
+  for p := 1 to entities.npcAmount do
+    entities.redrawMapDisplay(p);
+  camera.drawMap;
+  ui.writeBufferedMessages;
+  ui.displayMessage('Spider webs spring up all around you');
+  UnlockScreenUpdate;
+  UpdateScreen(False);
+
+  sleep(150);
+
+  (* Place webs further away *)
+  if (map.canMove(pX + 2, pY - 2) = True) and
+    (map.maparea[pY - 2, pX + 2].Glyph <> '>') and
+    (map.maparea[pY - 2, pX + 2].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { NE }
+    web.createWeb(npcAmount, pX + 2, pY - 2);
+  end;
+  if (map.canMove(pX + 2, pY + 2) = True) and
+    (map.maparea[pY + 2, pX + 2].Glyph <> '>') and
+    (map.maparea[pY + 2, pX + 2].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { SE }
+    web.createWeb(npcAmount, pX + 2, pY + 2);
+  end;
+  if (map.canMove(pX - 2, pY - 2) = True) and
+    (map.maparea[pY - 2, pX - 2].Glyph <> '>') and
+    (map.maparea[pY - 2, pX - 2].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { NW }
+    web.createWeb(npcAmount, pX - 2, pY - 2);
+  end;
+  if (map.canMove(pX - 2, pY + 2) = True) and
+    (map.maparea[pY + 2, pX - 2].Glyph <> '>') and
+    (map.maparea[pY + 2, pX - 2].Glyph <> '<') then
+  begin
+    Inc(npcAmount); { SW }
+    web.createWeb(npcAmount, pX - 2, pY + 2);
+  end;
+
+  (* Restore game state *)
+  main.gameState := stGame;
+  (* Draw player and FOV *)
+  LockScreenUpdate;
+  (* Redraw all NPC'S *)
+  for p := 1 to entities.npcAmount do
+    entities.redrawMapDisplay(p);
+  camera.drawMap;
+  UnlockScreenUpdate;
+  UpdateScreen(False);
 end;
 
 end.

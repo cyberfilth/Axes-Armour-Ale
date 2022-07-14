@@ -440,6 +440,8 @@ begin
   (* Redraw all NPC'S *)
   for i := 1 to entities.npcAmount do
     entities.redrawMapDisplay(i);
+  (* Check if a trap has been triggered *)
+  items.checkForTraps;
   { prepare changes to the screen }
   LockScreenUpdate;
 

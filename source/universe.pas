@@ -72,6 +72,7 @@ var
   { Number of NPC's to create }
   NPCnumber, i: byte;
 begin
+  NPCnumber := 0;
   { Generate a smell map so NPC's aren't initially placed next to the player }
   sniff;
   { Based on number of rooms in current level, dungeon type & dungeon level
@@ -82,6 +83,9 @@ begin
      NPCnumber := (totalRooms DIV 2) + currentDepth;
   { player level is considered when generating the NPCs }
   entities.npcAmount := NPCnumber;
+
+  { First npcAmount-1 number of enemies are scattered
+    then an additional unique enemy is added          }
 
   case dungeonType of
     tDungeon: { Dungeon }
@@ -105,6 +109,9 @@ begin
       end;
     end;
   end;
+
+  { Unique enemy is added }
+
 end;
 
 procedure litterItems;

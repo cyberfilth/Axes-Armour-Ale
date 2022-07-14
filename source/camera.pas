@@ -8,7 +8,7 @@ unit camera;
 interface
 
 uses
-  SysUtils, globalUtils, ui, map, entities, island, overworld;
+  SysUtils, globalUtils, ui, map, island, overworld;
 
 const
   camHeight = 19;
@@ -29,6 +29,9 @@ procedure drawOWMap;
 procedure drawOWPlayer;
 
 implementation
+
+uses
+  entities;
 
 function getX(Xcoord: smallint): smallint;
 var

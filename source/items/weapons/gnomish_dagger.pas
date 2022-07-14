@@ -1,6 +1,6 @@
-(* A crude, iron dagger. Easily broken if thrown *)
+(* An iron dagger of Gnomish design *)
 
-unit crude_dagger;
+unit gnomish_dagger;
 
 {$mode fpc}{$H+}
 
@@ -10,7 +10,7 @@ uses
   SysUtils;
 
 (* Create a dagger *)
-procedure createDagger(itmx, itmy: smallint);
+procedure createGnomishDagger(itmx, itmy: smallint);
 (* Equip weapon *)
 procedure useItem(equipped: boolean; ident: smallint);
 (* Remove weapon from inventory when thrown *)
@@ -23,29 +23,29 @@ implementation
 uses
   items, entities, ui, player_inventory;
 
-procedure createDagger(itmx, itmy: smallint);
+procedure createGnomishDagger(itmx, itmy: smallint);
 begin
   SetLength(itemList, length(itemList) + 1);
   with itemList[High(itemList)] do
   begin
     itemID := indexID;
-    itemName := 'crude dagger';
-    itemDescription := 'adds 1D6+2 to attack';
+    itemName := 'Gnomish dagger';
+    itemDescription := 'adds 1D6+6 to attack';
     itemArticle := 'a';
     itemType := itmWeapon;
     itemMaterial := matIron;
-    useID := 2;
+    useID := 14;
     glyph := chr(24);
-    glyphColour := 'lightGrey';
+    glyphColour := 'lightMagenta';
     inView := False;
     posX := itmx;
     posY := itmy;
-    NumberOfUses := 3;
+    NumberOfUses := 6;
     onMap := True;
     throwable := True;
-    throwDamage := 5;
+    throwDamage := 7;
     dice := 1;
-    adds := 2;
+    adds := 6;
     discovered := False;
     Inc(indexID);
   end;
@@ -55,11 +55,11 @@ procedure useItem(equipped: boolean; ident: smallint);
 var
   info: shortstring;
 begin
-  info := 'You unequip the crude dagger.';
+  info := 'You unequip the Gnomish dagger.';
   if (equipped = False) then
     (* To equip the weapon *)
   begin
-    info := 'You equip the crude dagger.';
+    info := 'You equip the Gnomish dagger.';
     if (player_inventory.inventory[ident].adds > 0) then
        info := info + ' The dagger adds 1D6+' + IntToStr(player_inventory.inventory[ident].adds) + ' to your attack'
     else
@@ -68,7 +68,7 @@ begin
     Inc(entityList[0].weaponDice);
     Inc(entityList[0].weaponAdds, player_inventory.inventory[ident].adds);
     ui.displayMessage(info);
-    ui.equippedWeapon := 'Crude dagger';
+    ui.equippedWeapon := 'Gnomish dagger';
     ui.writeBufferedMessages;
   end
   else
@@ -95,15 +95,24 @@ procedure thrownDamaged(itmID: smallint; inventory: boolean);
 begin
   if (inventory = True) then
   begin
-    if (player_inventory.inventory[itmID].numUses = 3) then
+    if (player_inventory.inventory[itmID].numUses = 6) then
     begin
-      player_inventory.inventory[itmID].numUses := 2;
+      player_inventory.inventory[itmID].numUses := 5;
+      player_inventory.inventory[itmID].throwDamage := 6;
+    end
+    else if (player_inventory.inventory[itmID].numUses = 5) then
+    begin
+      player_inventory.inventory[itmID].numUses := 4;
+      player_inventory.inventory[itmID].throwDamage := 5;
+    end
+    else if (player_inventory.inventory[itmID].numUses = 4) then
+      player_inventory.inventory[itmID].numUses := 3;
       player_inventory.inventory[itmID].throwDamage := 4;
     end
-    else if (player_inventory.inventory[itmID].numUses = 2) then
+    else if (player_inventory.inventory[itmID].numUses = 3) then
     begin
-      player_inventory.inventory[itmID].numUses := 1;
-      player_inventory.inventory[itmID].throwDamage := 2;
+      player_inventory.inventory[itmID].numUses := 2;
+      player_inventory.inventory[itmID].throwDamage := 3;
       player_inventory.inventory[itmID].adds := 1;
       player_inventory.inventory[itmID].description := 'adds 1D+1 to attack';
     end
@@ -113,28 +122,6 @@ begin
       player_inventory.inventory[itmID].adds := 0;
       player_inventory.inventory[itmID].description := '[blunt] adds 1D to attack';
     end;
-  end
-  else
-  begin
-     if (itemList[itmID].NumberOfUses = 3) then
-    begin
-      itemList[itmID].NumberOfUses := 2;
-      itemList[itmID].throwDamage := 4;
-    end
-    else if (itemList[itmID].NumberOfUses = 2) then
-    begin
-      itemList[itmID].NumberOfUses := 1;
-      itemList[itmID].throwDamage := 2;
-      itemList[itmID].adds := 1;
-      itemList[itmID].itemDescription := 'adds 1D+1 to attack';
-    end
-    else
-    begin
-      itemList[itmID].throwDamage := 1;
-      itemList[itmID].adds := 0;
-      itemList[itmID].itemDescription := '[blunt] adds 1D to attack';
-    end;
-  end;
 end;
 
 end.

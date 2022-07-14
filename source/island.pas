@@ -323,6 +323,7 @@ function getDungeonType(xPOS, yPOS: smallint): dungeonTerrain;
 var
   i: smallint;
 begin
+  Result := tCave;
   for i := 0 to High(locationLookup) do
   begin
     if (locationLookup[i].X = xPOS) and (locationLookup[i].Y = yPOS) then

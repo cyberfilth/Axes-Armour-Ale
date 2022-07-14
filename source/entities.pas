@@ -14,13 +14,13 @@ uses
   cave_rat, giant_cave_rat, blood_bat, green_fungus, redcap_lesser,
   redcap_lesser_lobber, small_green_fungus, large_blood_bat, small_hyena,
   redcap_fungus, mushroom_person, hyena_fungus, small_hornet, small_corpse_spider,
-  gnome_warrior;
+  gnome_warrior, gnome_assassin, web;
 
 type { NPC attitudes }
   Tattitudes = (stateNeutral, stateHostile, stateEscape);
 
 type {NPC factions / groups }
-  Tfactions = (redcapFaction, bugFaction, animalFaction, fungusFaction);
+  Tfactions = (redcapFaction, bugFaction, animalFaction, fungusFaction, trapFaction);
 
 type
   (* Store information about NPC's *)
@@ -129,9 +129,11 @@ begin
 
   { Green Fungus }
   if (entityList[id].intName = 'GreenFungus') then
-    green_fungus.death(id);
+     green_fungus.death(id)
+  { Gnome Assassin }
+  else if (entityList[id].intName = 'GnmAss') then
+     gnome_assassin.death(id);
 end;
-
 
 procedure moveNPC(id, newX, newY: smallint);
 begin
@@ -320,6 +322,8 @@ begin
     'smallHornet': small_hornet.takeTurn(i);
     'smlCorpseSpider': small_corpse_spider.takeTurn(i);
     'GnmWarr': gnome_warrior.takeTurn(i);
+    'GnmAss': gnome_assassin.takeTurn(i);
+    'stickyWeb': web.takeTurn(i);
   end;
   (* Occupy their current tile *)
   occupyUpdate;

@@ -1,16 +1,16 @@
 (* Intelligent enemy with scent tracking *)
 
-unit gnome_warrior;
+unit gnome_assassin;
 
 {$mode objfpc}{$H+}
 
 interface
 
 uses
-  SysUtils, Math, smell, universe, combat_resolver, player_stats;
+  SysUtils, Math, smell, combat_resolver, player_stats, items, gnomish_dagger;
 
-(* Create a Gnome Warrior *)
-procedure createGnomeWarrior(uniqueid, npcx, npcy: smallint);
+(* Create a Gnome Assassin *)
+procedure createGnomeAssassin(uniqueid, npcx, npcy: smallint);
 (* Take a turn *)
 procedure takeTurn(id: smallint);
 (* Decision tree for Neutral state *)
@@ -31,18 +31,18 @@ procedure escapePlayer(id, spx, spy: smallint);
 procedure combat(id: smallint);
 (* Sniff out the player *)
 procedure followScent(id: smallint);
+(* NPC Death - Character drops something when they die *)
+procedure death(id: smallint);
 
 implementation
 
 uses
   entities, globalutils, ui, los, map;
 
-procedure createGnomeWarrior(uniqueid, npcx, npcy: smallint);
+procedure createGnomeAssassin(uniqueid, npcx, npcy: smallint);
 var
-  mood, desc: byte;
+  desc: byte;
 begin
-  (* Determine hostility *)
-  mood := randomRange(1, 2);
   (* Determine description *)
   desc := RandomRange(1, 3);
   (* Add a gnome to the list of creatures *)
@@ -51,18 +51,18 @@ begin
   with entities.entityList[entities.listLength] do
   begin
     npcID := uniqueid;
-    race := 'Gnome warrior';
-    intName := 'GnmWarr';
+    race := 'Gnome assassin';
+    intName := 'GnmAss';
     article := True;
     if (desc = 1) then
-       description := 'a battle-scarred Gnome'
+       description := 'a stealthy Gnome'
     else if (desc = 2) then
-       description := 'a fierce looking Gnome'
+       description := 'a murderous Gnome'
     else
-       description := 'a beserker Gnome';
+       description := 'a deadly Gnome';
     glyph := 'n';
     glyphColour := 'lightMagenta';
-    maxHP := randomRange(5, 7) + universe.currentDepth;
+    maxHP := randomRange(5, 7);
     currentHP := maxHP;
     attack := randomRange(7, 9) + player_stats.playerLevel;
     defence := randomRange(5, 7) + player_stats.playerLevel;
@@ -77,10 +77,7 @@ begin
     inView := False;
     blocks := False;
     faction := redcapFaction;
-    if (mood = 1) then
-      state := stateHostile
-    else
-      state := stateNeutral;
+    state := stateHostile;
     discovered := False;
     weaponEquipped := False;
     armourEquipped := False;
@@ -106,16 +103,8 @@ begin
 end;
 
 procedure decisionNeutral(id: smallint);
-var
-  stopAndSmellFlowers: byte;
 begin
-  stopAndSmellFlowers := globalutils.randomRange(1, 2);
-  if (stopAndSmellFlowers = 1) then
-    { Either wander randomly }
     wander(id, entityList[id].posX, entityList[id].posY)
-  else
-    { or stay in place }
-    entities.moveNPC(id, entityList[id].posX, entityList[id].posY);
 end;
 
 procedure decisionHostile(id: smallint);
@@ -124,7 +113,7 @@ begin
   if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
     entityList[0].posY, entityList[id].visionRange) = True) then
   begin
-    entityList[id].moveCount := 5;
+    entityList[id].moveCount := 10;
     {------------------------------- If next to the player }
     if (isNextToPlayer(entityList[id].posX, entityList[id].posY) = True) then
       {------------------------------- Attack the Player }
@@ -143,8 +132,8 @@ begin
     followScent(id);
   end
 
-  {------------------------------- If health is below 25%, escape }
-  else if (entityList[id].currentHP < (entityList[id].maxHP div 4)) then
+  {------------------------------- If health is below 50%, escape }
+  else if (entityList[id].currentHP < (entityList[id].maxHP div 2)) then
   begin
     entityList[id].state := stateEscape;
     escapePlayer(id, entityList[id].posX, entityList[id].posY);
@@ -400,5 +389,16 @@ procedure followScent(id: smallint);
    end;
 end;
 
-end.
+procedure death(id: smallint);
+begin
+    (* Check if there is already an item on the floor here *)
+    if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) then
+    begin
+       { Place item on the game map }
+       SetLength(itemList, Length(itemList) + 1);
+       gnomish_dagger.createGnomishDagger(entityList[id].posX, entityList[id].posY);
+       ui.displayMessage('The Gnome drops a dagger');
+    end;
+end;
 
+end.
