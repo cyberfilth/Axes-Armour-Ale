@@ -58,8 +58,12 @@ begin
     (* If it was a killing blow *)
     if (entities.entityList[npcID].currentHP < 1) then
     begin
+      (* If the target was a web *)
+      if (entities.entityList[npcID].intName = 'stickyWeb') then
+         ui.displayMessage('You break ' + opponent)
+      else
       (* If the target was an NPC *)
-      ui.displayMessage('You kill ' + opponent);
+         ui.displayMessage('You kill ' + opponent);
       entities.killEntity(npcID);
       entities.entityList[0].xpReward :=
         entities.entityList[0].xpReward + entities.entityList[npcID].xpReward;
@@ -68,7 +72,13 @@ begin
     end
     else
     if (damageAmount = 1) then
-      ui.displayMessage('Parrying, you slightly injure ' + opponent)
+    begin
+      (* If the target was a web *)
+      if (entities.entityList[npcID].intName = 'stickyWeb') then
+         ui.displayMessage('You break some strands of the web')
+      else
+         ui.displayMessage('Parrying, you slightly injure ' + opponent)
+    end
     else
       ui.displayMessage('You hit ' + opponent + ' for ' + IntToStr(damageAmount) + ' points of damage');
   end
