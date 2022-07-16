@@ -41,7 +41,6 @@ begin
   for p := 1 to entities.npcAmount do
     entities.redrawMapDisplay(p);
   camera.drawMap;
- // fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
   UnlockScreenUpdate;
   UpdateScreen(False);
   ui.displayMessage(entityList[id].race + ' throws a rock at you');

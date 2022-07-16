@@ -23,13 +23,16 @@ type
   TDist = array [1..MAXROWS, 1..MAXCOLUMNS] of smallint;
   Tbkinds = (bNone, bWall, bClear);
 
+type
+  path = array[1..30] of TPoint;
+
 var
   smellmap: array[1..MAXROWS, 1..MAXCOLUMNS] of smallint;
   distances: TDist;
   (* Tracks the scent decaying over time *)
   smellCounter: byte;
 
-  (* TESTING - Write smell map to text file *)
+(* TESTING - Write smell map to text file *)
   { filename: ShortString;
   myfile: Text; }
 
@@ -40,6 +43,10 @@ procedure calcDistances(x, y: smallint);
 procedure sniff;
 (* Find the tile with the highest scent value *)
 function scentDirection(y, x: smallint): char;
+(* Get Coordinates of the tile with highest scent value *)
+function scentDirectionCoords(y, x: smallint): TPoint;
+(* Generate a path to the player *)
+function pathFinding(startX, startY: smallint): path;
 
 implementation
 
@@ -117,7 +124,6 @@ begin
   (* Set smell counter *)
   smellCounter := 5;
 
-
   // Write map to text file for testing
   (* filename := 'smellmap.txt';
   AssignFile(myfile, filename);
@@ -131,8 +137,6 @@ begin
     Write(myfile, sLineBreak);
   end;
   closeFile(myfile);  *)
-
-
 end;
 
 function scentDirection(y, x: smallint): char;
@@ -164,6 +168,106 @@ begin
     Result := 'e'
   else if (surroundingArea[3] = MinValue(surroundingArea)) then
     Result := 'w';
+end;
+
+function scentDirectionCoords(y, x: smallint): TPoint;
+var
+  surroundingArea: array[0..7] of integer;
+  choice: TPoint;
+begin
+  (* Find the tile with the strongest scent *)
+  (* North *)
+  surroundingArea[0] := smellmap[y - 1][x];
+  (* North East *)
+  surroundingArea[1] := smellmap[y - 1][x + 1];
+  (* East *)
+  surroundingArea[2] := smellmap[y][x + 1];
+  (* South East *)
+  surroundingArea[3] := smellmap[y + 1][x + 1];
+  (* South *)
+  surroundingArea[4] := smellmap[y + 1][x];
+  (* South West *)
+  surroundingArea[5] := smellmap[y + 1][x - 1];
+  (* West *)
+  surroundingArea[6] := smellmap[y][x - 1];
+  (* West *)
+  surroundingArea[7] := smellmap[y - 1][x - 1];
+
+  (* Return direction with strongest scent *)
+  (* North *)
+  if (surroundingArea[0] = MinValue(surroundingArea)) then
+  begin
+    choice.X := x;
+    choice.Y := y;
+  end
+  (* North East *)
+  else if (surroundingArea[1] = MinValue(surroundingArea)) then
+  begin
+    choice.X := x + 1;
+    choice.Y := y - 1;
+  end
+  (* East *)
+  else if (surroundingArea[2] = MinValue(surroundingArea)) then
+  begin
+    choice.X := x + 1;
+    choice.Y := y;
+  end
+  (* South East *)
+  else if (surroundingArea[3] = MinValue(surroundingArea)) then
+  begin
+    choice.X := x + 1;
+    choice.Y := y + 1;
+  end
+  (* South *)
+  else if (surroundingArea[4] = MinValue(surroundingArea)) then
+  begin
+    choice.X := x;
+    choice.Y := y + 1;
+  end
+  (* South West *)
+  else if (surroundingArea[5] = MinValue(surroundingArea)) then
+  begin
+    choice.X := x - 1;
+    choice.Y := y + 1;
+  end
+  (* West *)
+  else if (surroundingArea[6] = MinValue(surroundingArea)) then
+  begin
+    choice.X := x - 1;
+    choice.Y := y;
+  end
+  (* North West *)
+  else if (surroundingArea[7] = MinValue(surroundingArea)) then
+  begin
+    choice.X := x - 1;
+    choice.Y := y - 1;
+  end;
+  (* Output the coordinates *)
+  Result := choice;
+end;
+
+function pathFinding(startX, startY: smallint): path;
+var
+  i: byte;
+  pathCoords: path;
+begin
+  (* Initialise the array *)
+  for i := 1 to 30 do
+  begin
+    pathCoords[i].X := 0;
+    pathCoords[i].Y := 0;
+  end;
+  sniff;
+  (* Generate the path *)
+  for i := 1 to 30 do
+  begin
+    (* Check that path hasn't already reached target *)
+    if (pathCoords[i].X <> entityList[0].posX) and (pathCoords[i].Y <> entityList[0].posY) then
+    begin
+         pathCoords[i] := scentDirectionCoords(pathCoords[i].X, pathCoords[i].Y);
+    end;
+  end;
+  Result := pathCoords;
 end;
 
 end.
