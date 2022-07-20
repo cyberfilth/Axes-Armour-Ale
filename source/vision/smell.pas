@@ -259,10 +259,16 @@ begin
   (* Generate the path *)
   for i := 1 to 30 do
   begin
-    (* Check that path hasn't already reached target *)
-    if (pathCoords[i].X <> entityList[0].posX) and (pathCoords[i].Y <> entityList[0].posY) then
+    (* Starting tile *)
+    if (i = 1) then
+       pathCoords[i] := scentDirectionCoords(startX, startY)
+    else
     begin
-         pathCoords[i] := scentDirectionCoords(pathCoords[i].X, pathCoords[i].Y);
+    (* Check that path hasn't already reached target *)
+    if (pathCoords[i - 1].X <> entityList[0].posX) and (pathCoords[i - 1].Y <> entityList[0].posY) then
+    begin
+         pathCoords[i] := scentDirectionCoords(pathCoords[i - 1].X, pathCoords[i - 1].Y);
+    end;
     end;
   end;
   Result := pathCoords;

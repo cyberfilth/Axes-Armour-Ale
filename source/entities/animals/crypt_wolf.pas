@@ -108,6 +108,9 @@ end;
 
 procedure chasePlayer(id, spx, spy: smallint);
 begin
+  (* Check if the player is in sight *)
+
+
 
 end;
 
