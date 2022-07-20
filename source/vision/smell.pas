@@ -23,9 +23,6 @@ type
   TDist = array [1..MAXROWS, 1..MAXCOLUMNS] of smallint;
   Tbkinds = (bNone, bWall, bClear);
 
-type
-  path = array[1..30] of TPoint;
-
 var
   smellmap: array[1..MAXROWS, 1..MAXCOLUMNS] of smallint;
   distances: TDist;
@@ -257,7 +254,8 @@ begin
     pathCoords[i].X := 0;
     pathCoords[i].Y := 0;
   end;
-  sniff;
+  if (smellCounter <> 5) then
+     sniff;
   (* Generate the path *)
   for i := 1 to 30 do
   begin

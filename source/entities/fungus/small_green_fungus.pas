@@ -60,6 +60,9 @@ begin
     stsPoison := False;
     tmrDrunk := 0;
     tmrPoison := 0;
+    hasPath := False;
+    destinationReached := False;
+    entities.initPath(uniqueid);
     posX := npcx;
     posY := npcy;
   end;

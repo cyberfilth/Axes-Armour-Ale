@@ -369,7 +369,7 @@ end;
 
 procedure saveDungeonLevel;
 var
-  r, c, id_int: smallint;
+  r, c, id_int, i, coords: smallint;
   Doc: TXMLDocument;
   RootNode, dataNode: TDOMNode;
   dfileName, Value: shortstring;
@@ -530,6 +530,26 @@ begin
           AddElement(DataNode, 'stsPoison', BoolToStr(entities.entityList[i].stsPoison));
           AddElement(DataNode, 'tmrDrunk', IntToStr(entities.entityList[i].tmrDrunk));
           AddElement(DataNode, 'tmrPoison', IntToStr(entities.entityList[i].tmrPoison));
+          AddElement(DataNode, 'hasPath', BoolToStr(entities.entityList[i].hasPath));
+          AddElement(DataNode, 'destReach', BoolToStr(entities.entityList[i].destinationReached));
+          (* If the NPC has no path, generate a dummy one *)
+          if (entities.entityList[i].hasPath = False) then
+          begin
+            for coords := 1 to 30 do
+            begin
+              AddElement(DataNode, 'coordX' + IntToStr(coords), IntToStr(0));
+              AddElement(DataNode, 'coordY' + IntToStr(coords), IntToStr(0));
+            end;
+          end
+          (* If the NPC has a path, save the coordinates *)
+          else
+          begin
+            for coords := 1 to 30 do
+            begin
+              AddElement(DataNode, 'coordX' + IntToStr(coords), IntToStr(entities.entityList[i].smellPath[coords].X));
+              AddElement(DataNode, 'coordY' + IntToStr(coords), IntToStr(entities.entityList[i].smellPath[coords].Y));
+            end;
+          end;
           AddElement(DataNode, 'posX', IntToStr(entities.entityList[i].posX));
           AddElement(DataNode, 'posY', IntToStr(entities.entityList[i].posY));
         end;
@@ -549,7 +569,7 @@ var
   RootNode, Tile, ItemsNode, ParentNode, NPCnode, NextNode, Blocks,
   Visible, Occupied, Discovered, GlyphNode: TDOMNode;
   Doc: TXMLDocument;
-  r, c, itemAmount: integer;
+  r, c, itemAmount, i, coords: integer;
   levelVisited: boolean;
 begin
   dfileName := globalUtils.saveDirectory + PathDelim + 'd_' + IntToStr(dungeonID) + '_f' + IntToStr(lvl) + '.dat';
@@ -691,6 +711,13 @@ begin
         entities.entityList[i].stsPoison := StrToBool(UTF8Encode(NPCnode.FindNode('stsPoison').TextContent));
         entities.entityList[i].tmrDrunk := StrToInt(UTF8Encode(NPCnode.FindNode('tmrDrunk').TextContent));
         entities.entityList[i].tmrPoison := StrToInt(UTF8Encode(NPCnode.FindNode('tmrPoison').TextContent));
+        entities.entityList[i].hasPath := StrToBool(UTF8Encode(NPCnode.FindNode('hasPath').TextContent));
+        entities.entityList[i].destinationReached := StrToBool(UTF8Encode(NPCnode.FindNode('destReach').TextContent));
+        for coords := 1 to 30 do
+            begin
+              entities.entityList[i].smellPath[coords].X := StrToInt(UTF8Encode(NPCnode.FindNode('coordX' + IntToStr(coords)).TextContent));
+              entities.entityList[i].smellPath[coords].Y := StrToInt(UTF8Encode(NPCnode.FindNode('coordY' + IntToStr(coords)).TextContent));
+            end;
         entities.entityList[i].posX := StrToInt(UTF8Encode(NPCnode.FindNode('posX').TextContent));
         entities.entityList[i].posY := StrToInt(UTF8Encode(NPCnode.FindNode('posY').TextContent));
         ParentNode := NPCnode.NextSibling;

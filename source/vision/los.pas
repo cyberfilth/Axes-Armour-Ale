@@ -16,8 +16,6 @@ const
 var
   totalSpaces: smallint;
 
-{ TODO -cRefactoring : Refactor all projectile code to make one reusable procedure }
-
 (* Checks that the distance to the target is within vision range *)
 function inView(x1, y1, x2, y2, visRange: smallint): boolean;
 (* Line of sight for projectiles *)

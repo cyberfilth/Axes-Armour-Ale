@@ -9,7 +9,7 @@ unit entities;
 interface
 
 uses
-  SysUtils, globalUtils, player_stats,
+  SysUtils, Classes, globalUtils, player_stats,
   { List of creatures }
   cave_rat, giant_cave_rat, blood_bat, green_fungus, redcap_lesser,
   redcap_lesser_lobber, small_green_fungus, large_blood_bat, small_hyena,
@@ -67,6 +67,9 @@ type
     stsDrunk, stsPoison: boolean;
     (* status timers *)
     tmrDrunk, tmrPoison: smallint;
+    (* Pathfinding variables *)
+    hasPath, destinationReached: boolean;
+    smellPath: array[1..30] of TPoint;
     (* The procedure that allows each NPC to take a turn *)
     procedure entityTakeTurn(i: smallint);
   end;
@@ -103,6 +106,8 @@ procedure newFloorNPCs;
 function countLivingEntities: byte;
 (* When the light source goes out *)
 procedure outOfView;
+(* Initialise pathfinding array *)
+procedure initPath(id: smallint);
 (* Call Creatures.takeTurn procedure *)
 procedure NPCgameLoop;
 
@@ -287,6 +292,17 @@ var
 begin
   for i := 1 to npcAmount do
     entityList[i].inView := False;
+end;
+
+procedure initPath(id: smallint);
+var
+  i: byte;
+begin
+  for i := 1 to 30 do
+  begin
+    entityList[id].smellPath[i].X := 0;
+    entityList[id].smellPath[i].Y := 0;
+  end;
 end;
 
 procedure NPCgameLoop;

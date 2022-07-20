@@ -6,6 +6,9 @@ unit globalUtils;
 
 interface
 
+uses
+    Classes;
+
 type
   coordinates = record
     x, y: smallint;
@@ -14,6 +17,9 @@ type
 (* Types of locations that can be explored. See 'architect' unit for explanation *)
 type
   dungeonTerrain = (tCave, tCavern, tDungeon, tCrypt, tVillage);
+
+type (* Pathfinding - Path to player *)
+  path = array[1..30] of TPoint;
 
 const
   (* Version info - a = Alpha, d = Debug, r = Release *)
