@@ -532,24 +532,12 @@ begin
           AddElement(DataNode, 'tmrPoison', IntToStr(entities.entityList[i].tmrPoison));
           AddElement(DataNode, 'hasPath', BoolToStr(entities.entityList[i].hasPath));
           AddElement(DataNode, 'destReach', BoolToStr(entities.entityList[i].destinationReached));
-          (* If the NPC has no path, generate a dummy one *)
-          if (entities.entityList[i].hasPath = False) then
-          begin
-            for coords := 1 to 30 do
-            begin
-              AddElement(DataNode, 'coordX' + IntToStr(coords), IntToStr(0));
-              AddElement(DataNode, 'coordY' + IntToStr(coords), IntToStr(0));
-            end;
-          end
-          (* If the NPC has a path, save the coordinates *)
-          else
-          begin
+          (* Save path coordinates *)
             for coords := 1 to 30 do
             begin
               AddElement(DataNode, 'coordX' + IntToStr(coords), IntToStr(entities.entityList[i].smellPath[coords].X));
               AddElement(DataNode, 'coordY' + IntToStr(coords), IntToStr(entities.entityList[i].smellPath[coords].Y));
             end;
-          end;
           AddElement(DataNode, 'posX', IntToStr(entities.entityList[i].posX));
           AddElement(DataNode, 'posY', IntToStr(entities.entityList[i].posY));
         end;

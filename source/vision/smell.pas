@@ -43,7 +43,7 @@ function scentDirection(y, x: smallint): char;
 (* Get Coordinates of the tile with highest scent value *)
 function scentDirectionCoords(y, x: smallint): TPoint;
 (* Generate a path to the player *)
-function pathFinding(startX, startY: smallint): path;
+function pathFinding(id: smallint): path;
 
 implementation
 
@@ -243,7 +243,7 @@ begin
   Result := choice;
 end;
 
-function pathFinding(startX, startY: smallint): path;
+function pathFinding(id: smallint): path;
 var
   i: byte;
   pathCoords: path;
@@ -261,7 +261,7 @@ begin
   begin
     (* Starting tile *)
     if (i = 1) then
-       pathCoords[i] := scentDirectionCoords(startX, startY)
+       pathCoords[i] := scentDirectionCoords(entityList[id].posX, entityList[id].posY)
     else
     begin
     (* Check that path hasn't already reached target *)
