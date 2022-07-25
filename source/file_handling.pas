@@ -703,8 +703,8 @@ begin
         entities.entityList[i].destinationReached := StrToBool(UTF8Encode(NPCnode.FindNode('destReach').TextContent));
         for coords := 1 to 30 do
             begin
-              entities.entityList[i].smellPath[coords].X := StrToInt(UTF8Encode(NPCnode.FindNode('coordX' + IntToStr(coords)).TextContent));
-              entities.entityList[i].smellPath[coords].Y := StrToInt(UTF8Encode(NPCnode.FindNode('coordY' + IntToStr(coords)).TextContent));
+              entities.entityList[i].smellPath[coords].X := StrToInt(UTF8Encode(NPCnode.FindNode(UTF8Decode('coordX' + IntToStr(coords))).TextContent));
+              entities.entityList[i].smellPath[coords].Y := StrToInt(UTF8Encode(NPCnode.FindNode(UTF8Decode('coordY' + IntToStr(coords))).TextContent));
             end;
         entities.entityList[i].posX := StrToInt(UTF8Encode(NPCnode.FindNode('posX').TextContent));
         entities.entityList[i].posY := StrToInt(UTF8Encode(NPCnode.FindNode('posY').TextContent));
