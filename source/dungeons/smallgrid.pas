@@ -29,7 +29,7 @@ var
   (* Player starting position *)
   startX, startY: smallint;
   (* TESTING - Write dungeon to text file *)
-  filename: ShortString;
+  filename: shortstring;
   myfile: Text;
 
 (* Process generated dungeon to add shaped walls *)

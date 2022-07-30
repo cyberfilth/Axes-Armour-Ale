@@ -13,7 +13,7 @@ var
   (* Text file used for logging *)
   tfOut: TextFile;
   (* Log file name *)
-  C_FNAME : ShortString;
+  C_FNAME : shortstring;
 
 procedure beginLogging;
 procedure logAction(textString: string);

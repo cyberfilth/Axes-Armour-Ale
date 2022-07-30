@@ -30,7 +30,7 @@ var
   smellCounter: byte;
 
 (* TESTING - Write smell map to text file *)
-  { filename: ShortString;
+  { filename: shortstring;
   myfile: Text; }
 
 function blockORnot(x, y: integer): Tbkinds;
