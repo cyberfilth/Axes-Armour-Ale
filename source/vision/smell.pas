@@ -9,11 +9,10 @@ unit smell;
 
 {$mode objfpc}{$H+}
 {$RANGECHECKS OFF}
-{$WARN 6058 off : Call to subroutine "$1" marked as inline is not inlined}
 interface
 
 uses
-  SysUtils, Classes, Math, globalutils;
+  SysUtils, Classes, globalutils;
 
 const
   (* used on the smell map to denote a wall *)
@@ -139,6 +138,7 @@ end;
 function scentDirection(y, x: smallint): char;
 var
   surroundingArea: array[0..3] of integer;
+  location, locationCompare, i: smallint;
 begin
   { Initialise Result }
   Result := 'n';
@@ -146,7 +146,7 @@ begin
     (* Smell the surrounding area *)
     sniff;
 
-  (* Find the tile with the strongest scent *)
+  (* Search around origin point and get tile values *)
   (* North *)
   surroundingArea[0] := smellmap[y - 1][x];
   (* South *)
@@ -156,23 +156,38 @@ begin
   (* West *)
   surroundingArea[3] := smellmap[y][x - 1];
 
+  (* Find the lowest value *)
+  locationCompare := 100;
+  for i := low(surroundingArea) to high(surroundingArea) do
+  begin
+    if surroundingArea[i] < locationCompare then
+    begin
+      location := i;
+      locationCompare := surroundingArea[i];
+    end;
+  end;
+
   (* Return direction with strongest scent *)
-  if (surroundingArea[0] = MinValue(surroundingArea)) then
-    Result := 'n'
-  else if (surroundingArea[1] = MinValue(surroundingArea)) then
-    Result := 's'
-  else if (surroundingArea[2] = MinValue(surroundingArea)) then
-    Result := 'e'
-  else if (surroundingArea[3] = MinValue(surroundingArea)) then
-    Result := 'w';
+  case location of
+    0: (* North *)
+      Result := 'n';
+    1: (* South *)
+      Result := 's';
+    2: (* East *)
+      Result := 'e';
+    3: (* West *)
+      Result := 'w';
+  end;
 end;
 
 function scentDirectionCoords(y, x: smallint): TPoint;
 var
   surroundingArea: array[0..7] of integer;
   choice: TPoint;
+  location, locationCompare, i: smallint;
 begin
-  (* Find the tile with the strongest scent *)
+  locationCompare := 100;
+  (* Search around origin point and get tile values *)
   (* North *)
   surroundingArea[0] := smellmap[y - 1][x];
   (* North East *)
@@ -190,55 +205,60 @@ begin
   (* West *)
   surroundingArea[7] := smellmap[y - 1][x - 1];
 
-  (* Return direction with strongest scent *)
-  (* North *)
-  if (surroundingArea[0] = MinValue(surroundingArea)) then
+  (* Find the lowest value *)
+  for i := low(surroundingArea) to high(surroundingArea) do
   begin
-    choice.X := x;
-    choice.Y := y;
-  end
-  (* North East *)
-  else if (surroundingArea[1] = MinValue(surroundingArea)) then
-  begin
-    choice.X := x + 1;
-    choice.Y := y - 1;
-  end
-  (* East *)
-  else if (surroundingArea[2] = MinValue(surroundingArea)) then
-  begin
-    choice.X := x + 1;
-    choice.Y := y;
-  end
-  (* South East *)
-  else if (surroundingArea[3] = MinValue(surroundingArea)) then
-  begin
-    choice.X := x + 1;
-    choice.Y := y + 1;
-  end
-  (* South *)
-  else if (surroundingArea[4] = MinValue(surroundingArea)) then
-  begin
-    choice.X := x;
-    choice.Y := y + 1;
-  end
-  (* South West *)
-  else if (surroundingArea[5] = MinValue(surroundingArea)) then
-  begin
-    choice.X := x - 1;
-    choice.Y := y + 1;
-  end
-  (* West *)
-  else if (surroundingArea[6] = MinValue(surroundingArea)) then
-  begin
-    choice.X := x - 1;
-    choice.Y := y;
-  end
-  (* North West *)
-  else if (surroundingArea[7] = MinValue(surroundingArea)) then
-  begin
-    choice.X := x - 1;
-    choice.Y := y - 1;
+    if surroundingArea[i] < locationCompare then
+    begin
+      location := i;
+      locationCompare := surroundingArea[i];
+    end;
   end;
+
+  (* Return direction with strongest scent *)
+  case location of
+    0: (* North *)
+    begin
+      choice.X := x;
+      choice.Y := y - 1;
+    end;
+    1: (* North East *)
+    begin
+      choice.X := x + 1;
+      choice.Y := y - 1;
+    end;
+    2: (* East *)
+    begin
+      choice.X := x + 1;
+      choice.Y := y;
+    end;
+    3: (* South East *)
+    begin
+      choice.X := x + 1;
+      choice.Y := y + 1;
+    end;
+    4: (* South *)
+    begin
+      choice.X := x;
+      choice.Y := y + 1;
+    end;
+    5: (* South West *)
+    begin
+      choice.X := x - 1;
+      choice.Y := y + 1;
+    end;
+    6: (* West *)
+    begin
+      choice.X := x - 1;
+      choice.Y := y;
+    end;
+    7: (* North West *)
+    begin
+      choice.X := x - 1;
+      choice.Y := y - 1;
+    end;
+  end;
+
   (* Output the coordinates *)
   Result := choice;
 end;
@@ -255,22 +275,17 @@ begin
     pathCoords[i].Y := 0;
   end;
   if (smellCounter <> 5) then
-     sniff;
+    sniff;
   (* Generate the path *)
   for i := 1 to 30 do
   begin
     (* Starting tile *)
     if (i = 1) then
-       pathCoords[i] := scentDirectionCoords(entityList[id].posX, entityList[id].posY)
+      pathCoords[i] := scentDirectionCoords(entityList[id].posY, entityList[id].posX)
     else
-    begin
-    (* Check that path hasn't already reached target *)
-    if (pathCoords[i - 1].X <> entityList[0].posX) and (pathCoords[i - 1].Y <> entityList[0].posY) then
-    begin
-         pathCoords[i] := scentDirectionCoords(pathCoords[i - 1].X, pathCoords[i - 1].Y);
-    end;
-    end;
+      pathCoords[i] := scentDirectionCoords(pathCoords[i - 1].Y, pathCoords[i - 1].X);
   end;
+
   Result := pathCoords;
 end;
 
