@@ -11,7 +11,8 @@ uses
   { List of creatures }
   cave_rat, giant_cave_rat, blood_bat, large_blood_bat, green_fungus, mushroom_person,
   redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
-  hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin;
+  hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
+  crypt_wolf;
 
 const
   (* Array of creatures found in a cave, ordered by cave level *)
@@ -26,7 +27,7 @@ const
 
   (* Array of creatures found in a dungeon, ordered by dungeon level *)
   dgnNPC1: array[1..5] of string =
-    ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr', 'smlCorpseSpider');
+    ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr', 'cryptWolf');
   dgnNPC2: array[1..7] of string =
     ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
     'greenFungus', 'hobFungus');
@@ -130,6 +131,7 @@ begin
     'smallHornet': small_hornet.createSmallHornet(i, c, r);
     'GnmWarr': gnome_warrior.createGnomeWarrior(i, c, r);
     'GnmAss': gnome_assassin.createGnomeAssassin(i, c, r);
+    'cryptWolf': crypt_wolf.createCryptWolf(i, c, r);
   end;
 end;
 

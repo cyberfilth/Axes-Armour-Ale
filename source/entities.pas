@@ -14,7 +14,7 @@ uses
   cave_rat, giant_cave_rat, blood_bat, green_fungus, redcap_lesser,
   redcap_lesser_lobber, small_green_fungus, large_blood_bat, small_hyena,
   redcap_fungus, mushroom_person, hyena_fungus, small_hornet, small_corpse_spider,
-  gnome_warrior, gnome_assassin, web;
+  gnome_warrior, gnome_assassin, web, crypt_wolf;
 
 type { NPC attitudes }
   Tattitudes = (stateNeutral, stateHostile, stateEscape);
@@ -340,6 +340,7 @@ begin
     'GnmWarr': gnome_warrior.takeTurn(i);
     'GnmAss': gnome_assassin.takeTurn(i);
     'stickyWeb': web.takeTurn(i);
+    'crptWolf': crypt_wolf.takeTurn(i);
   end;
   (* Occupy their current tile *)
   occupyUpdate;
