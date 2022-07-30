@@ -3,6 +3,7 @@
 unit crypt_wolf;
 
 {$mode objfpc}{$H+}
+{$RANGECHECKS OFF}
 
 interface
 
@@ -111,7 +112,7 @@ end;
 
 procedure chasePlayer(id, spx, spy: smallint);
 var
-  newX, newY, dx, dy, i: smallint;
+  newX, newY, dx, dy, i, x: smallint;
   distance: double;
 begin
   newX := 0;
@@ -171,15 +172,17 @@ begin
     end;
     (* Follow scent to player. Pathfinding is essentially stateless so we have
        to search for NPC's current position in the path first *)
-     repeat
-       Inc(i);
-     until (entityList[id].smellPath[i].X = entityList[0].posX) and (entityList[id].smellPath[i].Y = entityList[0].posY);
-     (* Check if the next step on the path is valid *)
-     if (map.canMove(entityList[id].smellPath[i + 1].X, entityList[id].smellPath[i + 1].Y) = True) then
-        entities.moveNPC(id, entityList[id].smellPath[i + 1].X, entityList[id].smellPath[i + 1].Y)
-     else
-     (* If the path is blocked, generate a new one *)
-     begin
+    for i := 1 to 30 do
+    begin
+      if (entityList[id].smellPath[i].X = entityList[0].posX) and (entityList[id].smellPath[i].Y = entityList[0].posY) then
+        exit;
+    end;
+    (* Check if the next step on the path is valid *)
+    if (map.canMove(entityList[id].smellPath[i + 1].X, entityList[id].smellPath[i + 1].Y) = True) then
+      entities.moveNPC(id, entityList[id].smellPath[i + 1].X, entityList[id].smellPath[i + 1].Y)
+    else
+      (* If the path is blocked, generate a new one *)
+    begin
       (* Get path to player *)
       entityList[id].smellPath := smell.pathFinding(id);
       (* Set flags *)
@@ -187,7 +190,7 @@ begin
       entityList[id].destinationReached := False;
       if (map.canMove(entityList[id].smellPath[2].X, entityList[id].smellPath[2].Y) = True) then
         entities.moveNPC(id, entityList[id].smellPath[2].X, entityList[id].smellPath[2].Y);
-     end;
+    end;
   end;
 end;
 
@@ -210,7 +213,8 @@ procedure combat(npcID, enemyID: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entityList[npcID].attack) - entityList[enemyID].defence;
+  damageAmount := globalutils.randomRange(1, entityList[npcID].attack) -
+    entityList[enemyID].defence;
   (* If damage is done *)
   if (damageAmount > 0) then
   begin
@@ -237,7 +241,8 @@ begin
           ui.displayMessage('The Crypt Wolf slightly wounds you')
         else
           (* If an NPC is slightly wounded *)
-          ui.displayMessage('The Crypt Wolf slightly wounds the ' + entityList[enemyID].race);
+          ui.displayMessage('The Crypt Wolf slightly wounds the ' +
+            entityList[enemyID].race);
       end
       else
         (* If significant damage is done *)
@@ -245,7 +250,8 @@ begin
         if (enemyID = 0) then
           (* To the player *)
         begin
-          ui.displayMessage('The Crypt Wolf bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+          ui.displayMessage('The Crypt Wolf bites you, inflicting ' +
+            IntToStr(damageAmount) + ' damage');
           (* Update health display to show damage *)
           ui.updateHealth;
         end
@@ -264,7 +270,8 @@ begin
       combat_resolver.spiteDMG(npcID);
     end
     else
-      ui.displayMessage('The Crypt Wolf nips at the ' + entityList[enemyID].race + ', but misses');
+      ui.displayMessage('The Crypt Wolf nips at the ' + entityList[enemyID].race +
+        ', but misses');
   end;
 end;
 
