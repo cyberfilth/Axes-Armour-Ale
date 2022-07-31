@@ -18,12 +18,14 @@ procedure takeTurn(id: smallint);
 procedure decisionNeutral(id: smallint);
 (* Decision tree for Hostile state *)
 procedure decisionHostile(id: smallint);
-(* Chase the player *)
-procedure chasePlayer(id, spx, spy: smallint);
+(* Chase enemy *)
+procedure chaseTarget(id, spx, spy: smallint);
 (* Check if player is next to NPC *)
-function isNextToPlayer(id, spx, spy: smallint): boolean;
-(* NPC attacks another entity *)
-procedure combat(npcID, enemyID: smallint);
+function isNextToPlayer(spx, spy: smallint): boolean;
+(* Combat *)
+procedure combat(id: smallint);
+(* Sniff out the player *)
+procedure followScent(id: smallint);
 
 implementation
 
@@ -96,182 +98,182 @@ end;
 
 procedure decisionHostile(id: smallint);
 begin
-  (* Wake up *)
-  if (entityList[id].description = 'a sleeping wolf') then
+  {------------------------------- If NPC can see the player }
+  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
+    entityList[0].posY, entityList[id].visionRange) = True) then
   begin
-    entityList[id].description := 'a fierce Crypt Wolf';
-    ui.displayMessage('the Crypt Wolf angrily wakes up');
-  end;
-  { If next to the player }
-  if (isNextToPlayer(id, entityList[id].posX, entityList[id].posY) = True) then
-    { Attack the Player }
-    combat(id, 0)
+    entityList[id].moveCount := 5;
+    {------------------------------- If next to the player }
+    if (isNextToPlayer(entityList[id].posX, entityList[id].posY) = True) then
+      {------------------------------- Attack the Player }
+    begin
+      combat(id);
+    end
+    else
+      {------------------------------- Chase the player }
+    begin
+      chaseTarget(id, entityList[id].posX, entityList[id].posY);
+    end;
+  end
+
+  { If player not in sight, smell them out }
   else
-    chasePlayer(id, entityList[id].posX, entityList[id].posY);
+  begin
+    (* Randomly display a message that you are being chased *)
+    if (randomRange(1, 5) = 3) then
+      ui.displayMessage('You hear sounds of pursuit');
+    followScent(id);
+  end;
 end;
 
-procedure chasePlayer(id, spx, spy: smallint);
+procedure chaseTarget(id, spx, spy: smallint);
 var
-  newX, newY, dx, dy, i, x: smallint;
+  newX, newY, dx, dy: smallint;
   distance: double;
 begin
   newX := 0;
   newY := 0;
-  i := 0;
-  (* Check if the player is in sight *)
-  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
-    entityList[0].posY, entityList[id].visionRange) = True) then
+  (* Get new coordinates to chase the player *)
+  dx := entityList[0].posX - spx;
+  dy := entityList[0].posY - spy;
+  if (dx = 0) and (dy = 0) then
   begin
-    (* Get new coordinates to chase the player *)
-    dx := entityList[0].posX - spx;
-    dy := entityList[0].posY - spy;
-    if (dx = 0) and (dy = 0) then
-    begin
-      newX := spx;
-      newy := spy;
-    end
-    else
-    begin
-      distance := sqrt(dx ** 2 + dy ** 2);
-      dx := round(dx / distance);
-      dy := round(dy / distance);
-      newX := spx + dx;
-      newY := spy + dy;
-    end;
-    (* New coordinates set. Check if they are walkable *)
-    if (map.canMove(newX, newY) = True) then
-    begin
-      (* Do they contain the player *)
-      if (map.hasPlayer(newX, newY) = True) then
-      begin
-        (* Remain on original tile and attack *)
-        entities.moveNPC(id, spx, spy);
-        combat(id, 0);
-      end
-      (* Else if tile does not contain player, check for another entity *)
-      else if (map.isOccupied(newX, newY) = True) then
-      begin
-        combat(id, getCreatureID(newX, newY));
-        entities.moveNPC(id, spx, spy);
-      end
-      (* if map is unoccupied, move to that tile *)
-      else if (map.isOccupied(newX, newY) = False) then
-        entities.moveNPC(id, newX, newY);
-    end;
+    newX := spx;
+    newy := spy;
   end
   else
   begin
-    (* Player is not in sight, sniff them out *)
-    if (entityList[id].hasPath = False) then
+    distance := sqrt(dx ** 2 + dy ** 2);
+    dx := round(dx / distance);
+    dy := round(dy / distance);
+    newX := spx + dx;
+    newY := spy + dy;
+  end;
+  (* New coordinates set. Check if they are walkable *)
+  if (map.canMove(newX, newY) = True) then
+  begin
+    (* Do they contain the player *)
+    if (map.hasPlayer(newX, newY) = True) then
     begin
-      (* Get path to player *)
-      entityList[id].smellPath := smell.pathFinding(id);
-      (* Set flags *)
-      entityList[id].hasPath := True;
-      entityList[id].destinationReached := False;
-    end;
-    (* Follow scent to player. Pathfinding is essentially stateless so we have
-       to search for NPC's current position in the path first *)
-    for i := 1 to 30 do
+      (* Remain on original tile and attack *)
+      entities.moveNPC(id, spx, spy);
+      combat(id);
+    end
+    (* Else if tile does not contain player, check for another entity *)
+    else if (map.isOccupied(newX, newY) = True) then
     begin
-      if (entityList[id].smellPath[i].X = entityList[0].posX) and (entityList[id].smellPath[i].Y = entityList[0].posY) then
-        exit;
-    end;
-    (* Check if the next step on the path is valid *)
-    if (map.canMove(entityList[id].smellPath[i + 1].X, entityList[id].smellPath[i + 1].Y) = True) then
-      entities.moveNPC(id, entityList[id].smellPath[i + 1].X, entityList[id].smellPath[i + 1].Y)
-    else
-      (* If the path is blocked, generate a new one *)
-    begin
-      (* Get path to player *)
-      entityList[id].smellPath := smell.pathFinding(id);
-      (* Set flags *)
-      entityList[id].hasPath := True;
-      entityList[id].destinationReached := False;
-      if (map.canMove(entityList[id].smellPath[2].X, entityList[id].smellPath[2].Y) = True) then
-        entities.moveNPC(id, entityList[id].smellPath[2].X, entityList[id].smellPath[2].Y);
-    end;
+      ui.bufferMessage('The hob bumps into ' + getCreatureName(newX, newY));
+      entities.moveNPC(id, spx, spy);
+    end
+    (* if map is unoccupied, move to that tile *)
+    else if (map.isOccupied(newX, newY) = False) then
+      entities.moveNPC(id, newX, newY);
   end;
 end;
 
-function isNextToPlayer(id, spx, spy: smallint): boolean;
-var
-  dx, dy: smallint;
-  distance: double;
+function isNextToPlayer(spx, spy: smallint): boolean;
 begin
   Result := False;
-  entityList[id].destinationReached := True;
-  entityList[id].hasPath := False;
-  dx := entityList[0].posX - spx;
-  dy := entityList[0].posY - spy;
-  distance := sqrt(dx ** 2 + dy ** 2);
-  if (round(distance) = 0) then
+  { N }
+  if (spx = entityList[0].posX) and ((spy - 1) = entityList[0].posY) then
+    Result := True;
+  { NE }
+  if ((spx + 1) = entityList[0].posX) and ((spy - 1) = entityList[0].posY) then
+    Result := True;
+  { E }
+  if ((spx + 1) = entityList[0].posX) and (spy = entityList[0].posY) then
+    Result := True;
+  { SE }
+  if ((spx + 1) = entityList[0].posX) and ((spy + 1) = entityList[0].posY) then
+    Result := True;
+  { S }
+  if (spx = entityList[0].posX) and ((spy + 1) = entityList[0].posY) then
+    Result := True;
+  { SW }
+  if ((spx - 1) = entityList[0].posX) and ((spy + 1) = entityList[0].posY) then
+    Result := True;
+  { W }
+  if ((spx - 1) = entityList[0].posX) and (spy = entityList[0].posY) then
+    Result := True;
+  { NW }
+  if ((spx - 1) = entityList[0].posX) and ((spy - 1) = entityList[0].posY) then
     Result := True;
 end;
 
-procedure combat(npcID, enemyID: smallint);
+procedure combat(id: smallint);
 var
-  damageAmount: smallint;
+  damageAmount, chance: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entityList[npcID].attack) -
-    entityList[enemyID].defence;
-  (* If damage is done *)
+  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) -
+    entities.entityList[0].defence;
   if (damageAmount > 0) then
   begin
-    entityList[enemyID].currentHP := (entityList[enemyID].currentHP - damageAmount);
-    (* If the enemy is killed *)
-    if (entityList[enemyID].currentHP < 1) then
+    entities.entityList[0].currentHP :=
+      (entities.entityList[0].currentHP - damageAmount);
+    if (entities.entityList[0].currentHP < 1) then
     begin
-      if (enemyID = 0) then
-        (* If the enemy is the player *)
-      begin
-        killer := 'a ' + entityList[npcID].race;
-        exit;
-      end
-      else
-        (* If the enemy is an NPC *)
-        killEntity(enemyID);
+      killer := 'a ' + entityList[id].race;
+      exit;
     end
     else
     begin
       if (damageAmount = 1) then
-      begin
-        if (enemyID = 0) then
-          (* If the player is slightly wounded *)
-          ui.displayMessage('The Crypt Wolf slightly wounds you')
-        else
-          (* If an NPC is slightly wounded *)
-          ui.displayMessage('The Crypt Wolf slightly wounds the ' +
-            entityList[enemyID].race);
-      end
+        ui.displayMessage('The Crypt Wolf slightly wounds you')
       else
-        (* If significant damage is done *)
-      begin
-        if (enemyID = 0) then
-          (* To the player *)
-        begin
-          ui.displayMessage('The Crypt Wolf bites you, inflicting ' +
-            IntToStr(damageAmount) + ' damage');
-          (* Update health display to show damage *)
-          ui.updateHealth;
-        end
-        else
-          (* To an NPC *)
-          ui.displayMessage('The Crypt Wolf bites the ' + entityList[enemyID].race);
-      end;
+        ui.displayMessage('The Crypt Wolf claws you, dealing ' +
+          IntToStr(damageAmount) + ' damage');
+      (* Update health display to show damage *)
+      ui.updateHealth;
     end;
   end
   else
-    (* If no damage is done *)
   begin
-    if (enemyID = 0) then
-    begin
-      ui.displayMessage('The Crypt Wolf snaps but misses');
-      combat_resolver.spiteDMG(npcID);
-    end
-    else
-      ui.displayMessage('The Crypt Wolf nips at the ' + entityList[enemyID].race +
-        ', but misses');
+    chance := randomRange(1, 4);
+    if (chance = 1) then
+      ui.displayMessage('The Crypt Wolf snaps but misses')
+    else if (chance = 2) then
+      ui.displayMessage('The Crypt Wolf pounces at you');
+    combat_resolver.spiteDMG(id);
+  end;
+end;
+
+procedure followScent(id: smallint);
+var
+  i: smallint;
+begin
+  if (entityList[id].hasPath = False) then
+  begin
+    (* Get path to player *)
+    entityList[id].smellPath := smell.pathFinding(id);
+    (* Set flags *)
+    entityList[id].hasPath := True;
+    entityList[id].destinationReached := False;
+  end;
+  (* Follow scent to player. Pathfinding is essentially stateless so we have
+       to search for NPC's current position in the path first *)
+  for i := 1 to 30 do
+  begin
+    if (entityList[id].smellPath[i].X = entityList[0].posX) and
+      (entityList[id].smellPath[i].Y = entityList[0].posY) then
+      exit;
+  end;
+  (* Check if the next step on the path is valid *)
+  if (map.canMove(entityList[id].smellPath[i + 1].X,
+    entityList[id].smellPath[i + 1].Y) = True) then
+    entities.moveNPC(id, entityList[id].smellPath[i + 1].X,
+      entityList[id].smellPath[i + 1].Y)
+  else
+    (* If the path is blocked, generate a new one *)
+  begin
+    (* Get path to player *)
+    entityList[id].smellPath := smell.pathFinding(id);
+    (* Set flags *)
+    entityList[id].hasPath := True;
+    entityList[id].destinationReached := False;
+    if (map.canMove(entityList[id].smellPath[2].X, entityList[id].smellPath[2].Y) =
+      True) then
+      entities.moveNPC(id, entityList[id].smellPath[2].X,
+        entityList[id].smellPath[2].Y);
   end;
 end;
 

@@ -82,6 +82,7 @@ begin
     entities.initPath(uniqueid);
     posX := npcx;
     posY := npcy;
+    entities.initPath(uniqueid);
   end;
   (* Occupy tile *)
   map.occupy(npcx, npcy);

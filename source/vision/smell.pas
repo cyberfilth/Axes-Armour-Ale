@@ -140,8 +140,9 @@ var
   surroundingArea: array[0..3] of integer;
   location, locationCompare, i: smallint;
 begin
-  { Initialise Result }
+  { Initialise }
   Result := 'n';
+  location := 0;
   if (smellCounter < 1) then
     (* Smell the surrounding area *)
     sniff;
@@ -187,6 +188,9 @@ var
   location, locationCompare, i: smallint;
 begin
   locationCompare := 100;
+  location := 0;
+  choice.X := 0;
+  choice.Y := 0;
   (* Search around origin point and get tile values *)
   (* North *)
   surroundingArea[0] := smellmap[y - 1][x];
