@@ -8,7 +8,7 @@ interface
 
 uses
   Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelp, scrTargeting,
-  scrLook, scrThrow, scrCharacter;
+  scrLook, scrThrow, scrCharacter, globalUtils;
 
 (* Initialise keyboard unit *)
 procedure setupKeyboard;
@@ -463,6 +463,9 @@ begin
     end;
      #27: { Escape key - Quit }
     begin
+      { Store player location }
+      globalUtils.OWx := entityList[0].posX;
+      globalUtils.OWy := entityList[0].posY;
       gameState := stQuitMenuOW;
       ui.exitPrompt;
     end;
