@@ -91,27 +91,29 @@ begin
     tDungeon: { Dungeon }
      begin
       (* Create the NPC's *);
-      for i := 1 to NPCnumber do
+      for i := 1 to (NPCnumber - 1) do
       begin
         { create an encounter table: Monster type: Dungeon type: floor number }
         { NPC generation will take the Player level into account when creating stats }
-        npc_lookup.NPCpicker(i, tDungeon);
+        npc_lookup.NPCpicker(i, False, tDungeon);
       end;
     end;
     tCave: { Cave }
     begin
-      (* Create the NPC's *);
       for i := 1 to NPCnumber do
       begin
-        { create an encounter table: Monster type: Dungeon type: floor number }
-        { NPC generation will take the Player level into account when creating stats }
-        npc_lookup.NPCpicker(i, tCave);
+        npc_lookup.NPCpicker(i, False, tCave);
       end;
     end;
   end;
 
-  { Unique enemy is added }
-
+  { Unique enemy is added to each floor }
+  case dungeonType of
+    tDungeon: { Dungeon }
+     npc_lookup.NPCpicker(NPCnumber, True, tDungeon);
+    tCave: { Cave }
+     npc_lookup.NPCpicker(NPCnumber, True, tCave);
+  end;
 end;
 
 procedure litterItems;

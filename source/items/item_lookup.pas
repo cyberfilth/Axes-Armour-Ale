@@ -33,6 +33,7 @@ const
     'rock', 'arrow', 'shortBow');
   caveItems3: array[1..6] of string =
     ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
+
   (* Array of items found in a dungeon, ordered by dungeon level *)
   dgnItems1: array[1..8] of string =
     ('aleTankard', 'stickyWeb', 'wineFlask', 'stickyWeb', 'rock',

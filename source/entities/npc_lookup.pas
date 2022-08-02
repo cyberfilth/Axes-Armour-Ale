@@ -14,6 +14,12 @@ uses
   hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
   crypt_wolf;
 
+(* randomly choose a creature and call the generate code directly *)
+procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
+
+implementation
+
+procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
 const
   (* Array of creatures found in a cave, ordered by cave level *)
   caveNPC1: array[1..5] of string =
@@ -23,7 +29,13 @@ const
     'greenFungus', 'hobFungus');
   caveNPC3: array[1..7] of string =
     ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
-    'redcapLsrLbr', 'matango', 'hyenaFungus');
+    'greenFungus', 'matango', 'hyenaFungus');
+  caveUnique1: array[1..2] of string =
+    ('largeBat', 'bloodBat');
+  caveUnique2: array[1..2] of string =
+    ('redcapLsrLbr', 'largeBat');
+  caveUnique3: array[1..2] of string =
+    ('redcapLsrLbr', 'redcapLsrLbr');
 
   (* Array of creatures found in a dungeon, ordered by dungeon level *)
   dgnNPC1: array[1..5] of string =
@@ -35,18 +47,11 @@ const
     ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
     'redcapLsrLbr', 'matango', 'hyenaFungus');
   dgnUnique1: array[1..2] of string =
-    ('smallHornet', 'GnmAss');
+    ('cryptWolf', 'GnmAss');
   dgnUnique2: array[1..2] of string =
-    ('giantRat', 'caveRat');
+    ('giantRat', 'cryptWolf');
   dgnUnique3: array[1..2] of string =
-    ('giantRat', 'caveRat');
-
-(* randomly choose a creature and call the generate code directly *)
-procedure NPCpicker(i: byte; dungeon: dungeonTerrain);
-
-implementation
-
-procedure NPCpicker(i: byte; dungeon: dungeonTerrain);
+    ('cryptWolf', 'caveRat');
 var
   r, c: smallint;
   randSelect: byte;
@@ -55,6 +60,7 @@ begin
   r := 0;
   c := 0;
   monster := '';
+
   (* In a cave, choose random location on the map *)
   if (dungeon = tCave) then
   begin
@@ -74,6 +80,8 @@ begin
   end;
 
   (* Randomly choose an NPC based on dungeon depth *)
+  if (unique = False) then
+  begin
   case dungeon of
     tCave:
     begin { Level 1}
@@ -111,6 +119,49 @@ begin
         monster := dgnNPC3[randSelect];
       end;
     end;
+  end;
+  end
+  else
+  (* Select a unique NPC *)
+  begin
+    case dungeon of
+    tCave:
+    begin { Level 1}
+      if (universe.currentDepth = 1) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(caveUnique1));
+        monster := caveUnique1[randSelect];
+      end { Level 2 }
+      else if (universe.currentDepth = 2) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(caveUnique2));
+        monster := caveUnique2[randSelect];
+      end { Level 3 }
+      else if (universe.currentDepth = 3) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(caveUnique3));
+        monster := caveUnique3[randSelect];
+      end;
+    end;
+    tDungeon:
+    begin
+      if (universe.currentDepth = 1) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(dgnUnique1));
+        monster := dgnUnique1[randSelect];
+      end { Level 2 }
+      else if (universe.currentDepth = 2) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(dgnUnique2));
+        monster := dgnUnique2[randSelect];
+      end { Level 3 }
+      else if (universe.currentDepth = 3) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(dgnUnique3));
+        monster := dgnUnique3[randSelect];
+      end;
+    end;
+  end;
   end;
 
   (* Create NPC *)
