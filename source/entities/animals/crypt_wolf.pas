@@ -181,29 +181,21 @@ end;
 function isNextToPlayer(spx, spy: smallint): boolean;
 begin
   Result := False;
-  { N }
-  if (spx = entityList[0].posX) and ((spy - 1) = entityList[0].posY) then
+  if (map.hasPlayer(spx, spy - 1) = True) then { NORTH }
     Result := True;
-  { NE }
-  if ((spx + 1) = entityList[0].posX) and ((spy - 1) = entityList[0].posY) then
+  if (map.hasPlayer(spx + 1, spy - 1) = True) then { NORTH EAST }
     Result := True;
-  { E }
-  if ((spx + 1) = entityList[0].posX) and (spy = entityList[0].posY) then
+  if (map.hasPlayer(spx + 1, spy) = True) then { EAST }
     Result := True;
-  { SE }
-  if ((spx + 1) = entityList[0].posX) and ((spy + 1) = entityList[0].posY) then
+  if (map.hasPlayer(spx + 1, spy + 1) = True) then { SOUTH EAST }
     Result := True;
-  { S }
-  if (spx = entityList[0].posX) and ((spy + 1) = entityList[0].posY) then
+  if (map.hasPlayer(spx, spy + 1) = True) then { SOUTH }
     Result := True;
-  { SW }
-  if ((spx - 1) = entityList[0].posX) and ((spy + 1) = entityList[0].posY) then
+  if (map.hasPlayer(spx - 1, spy + 1) = True) then { SOUTH WEST }
     Result := True;
-  { W }
-  if ((spx - 1) = entityList[0].posX) and (spy = entityList[0].posY) then
+  if (map.hasPlayer(spx - 1, spy) = True) then { WEST }
     Result := True;
-  { NW }
-  if ((spx - 1) = entityList[0].posX) and ((spy - 1) = entityList[0].posY) then
+  if (map.hasPlayer(spx - 1, spy - 1) = True) then { NORTH WEST }
     Result := True;
 end;
 

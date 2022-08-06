@@ -226,15 +226,23 @@ begin
 end;
 
 function isNextToPlayer(spx, spy: smallint): boolean;
-var
-  dx, dy: smallint;
-  distance: double;
 begin
   Result := False;
-  dx := entityList[0].posX - spx;
-  dy := entityList[0].posY - spy;
-  distance := sqrt(dx ** 2 + dy ** 2);
-  if (round(distance) = 0) then
+  if (map.hasPlayer(spx, spy - 1) = True) then { NORTH }
+    Result := True;
+  if (map.hasPlayer(spx + 1, spy - 1) = True) then { NORTH EAST }
+    Result := True;
+  if (map.hasPlayer(spx + 1, spy) = True) then { EAST }
+    Result := True;
+  if (map.hasPlayer(spx + 1, spy + 1) = True) then { SOUTH EAST }
+    Result := True;
+  if (map.hasPlayer(spx, spy + 1) = True) then { SOUTH }
+    Result := True;
+  if (map.hasPlayer(spx - 1, spy + 1) = True) then { SOUTH WEST }
+    Result := True;
+  if (map.hasPlayer(spx - 1, spy) = True) then { WEST }
+    Result := True;
+  if (map.hasPlayer(spx - 1, spy - 1) = True) then { NORTH WEST }
     Result := True;
 end;
 
