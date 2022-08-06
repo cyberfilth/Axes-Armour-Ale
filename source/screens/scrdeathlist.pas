@@ -90,6 +90,9 @@ begin
     epitaph := entityList[0].race + ' the ' + entityList[0].description + A + B + C;
     deathMessage := messageText[Random(8)];
   end;
+  if (toteKills = 1) then
+     deathNumber := '1 enemy in total'
+  else
   deathNumber := IntToStr(toteKills) + ' enemies in total';
   exitMessage := 'q - Quit game   |    x - Exit to menu';
   (* Line wrap the death message so that it fits the screen *)
