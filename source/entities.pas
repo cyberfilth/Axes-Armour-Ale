@@ -72,6 +72,8 @@ type
     smellPath: array[1..30] of TPoint;
     (* The procedure that allows each NPC to take a turn *)
     procedure entityTakeTurn(i: smallint);
+    (* Actions taken when creature dies *)
+    procedure entityDeath(i: smallint);
   end;
 
 var
@@ -127,6 +129,7 @@ end;
 
 procedure killEntity(id: smallint);
 begin
+  entityList[id].entityDeath(id);
   entityList[id].isDead := True;
   entityList[id].glyph := '%';
   entityList[id].blocks := False;
@@ -309,7 +312,7 @@ procedure NPCgameLoop;
 var
   i: smallint;
 begin
-  for i := 1 to npcAmount do
+  for i := 1 to High(entityList) do
     if (entityList[i].glyph <> '%') then
       entityList[i].entityTakeTurn(i);
 end;
@@ -344,6 +347,29 @@ begin
   end;
   (* Occupy their current tile *)
   occupyUpdate;
+end;
+
+procedure Creature.entityDeath(i: smallint);
+begin
+  case (entityList[i].intName) of
+    'CaveRat': cave_rat.death;
+    'GiantRat': giant_cave_rat.death;
+    'BloodBat': blood_bat.death;
+    'LargeBloodBat': large_blood_bat.death;
+    'GreenFungus': green_fungus.death(i);
+    'SmallGreenFungus': small_green_fungus.death;
+    'Matango': mushroom_person.death;
+    'Hob': redcap_lesser.death;
+    'HobLobber': redcap_lesser_lobber.death;
+    'smallHyena': small_hyena.death;
+    'hyenaFungus': hyena_fungus.death;
+    'HobFungus': redcap_fungus.death;
+    'smallHornet': small_hornet.death;
+    'smlCorpseSpider': small_corpse_spider.death;
+    'GnmWarr': gnome_warrior.death;
+    'GnmAss': gnome_assassin.death(i);
+    'crptWolf': crypt_wolf.death;
+  end;
 end;
 
 end.

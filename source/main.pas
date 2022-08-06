@@ -11,7 +11,7 @@ interface
 uses
   SysUtils, Video, keyboard, KeyboardInput, ui, camera, map, scrGame, globalUtils,
   universe, fov, scrRIP, plot_gen, file_handling, smell, scrTitle, scrTargeting, scrWinAlpha,
-  dlgInfo, scrOverworld, island, logging;
+  dlgInfo, scrOverworld, island, combat_resolver, logging;
 
 (* Finite State Machine game states *)
 type
@@ -229,6 +229,9 @@ begin
   scrTargeting.targetY := 0;
   scrTargeting.safeX := 0;
   scrTargeting.safeY := 0;
+  (* Initialise list of NPC's killed *)
+  for i := Low(combat_resolver.deathList) to High(combat_resolver.deathList) do
+    combat_resolver.deathList[i] := 0;
   (* Set starting inventory *)
   player_inventory.startingInventory;
   (* Spawn game entities *)

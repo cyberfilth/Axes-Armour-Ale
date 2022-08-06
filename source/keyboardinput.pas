@@ -8,7 +8,7 @@ interface
 
 uses
   Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelp, scrTargeting,
-  scrLook, scrThrow, scrCharacter, globalUtils;
+  scrLook, scrThrow, scrCharacter, globalUtils, scrDeathList;
 
 (* Initialise keyboard unit *)
 procedure setupKeyboard;
@@ -345,6 +345,10 @@ begin
     'x', 'X': { Exit to menu }
     begin
       main.exitToTitleMenu;
+    end;
+    's', 'S': { See enemies killed }
+    begin
+      scrDeathList.displayKillScreen;
     end;
     'q', 'Q': { Quit game }
     begin

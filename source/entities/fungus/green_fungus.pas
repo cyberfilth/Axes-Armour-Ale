@@ -7,7 +7,7 @@ unit green_fungus;
 interface
 
 uses
-  SysUtils, small_green_fungus, logging;
+  SysUtils, small_green_fungus, combat_resolver, logging;
 
 (* Create fungus *)
 procedure createGreenFungus(uniqueid, npcx, npcy: smallint);
@@ -176,6 +176,7 @@ var
   fungusSpawnAttempts: byte;
   i, amount, r, c: smallint;
 begin
+  Inc(deathList[4]);
   (* Counter for how many times game will attempt to place a fungus *)
   fungusSpawnAttempts := 0;
   (* Set a random number of spores *)

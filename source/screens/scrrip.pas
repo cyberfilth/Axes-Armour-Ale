@@ -33,7 +33,7 @@ begin
   epitaph := entityList[0].race + ' the ' + entityList[0].description;
   raceLevel := 'Level ' + IntToStr(player_stats.playerLevel) + ' ' +
     player_stats.playerRace;
-  exitMessage := 'q - Quit game   |    x - Exit to menu';
+  exitMessage := 'q - Quit game | s - See kills | x - Exit to menu';
   prefix := randomRange(1, 3);
   if (prefix = 1) then
     epitaph := 'Fare thee well, ' + epitaph

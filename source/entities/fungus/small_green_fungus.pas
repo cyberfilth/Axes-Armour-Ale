@@ -7,12 +7,14 @@ unit small_green_fungus;
 interface
 
 uses
-  SysUtils;
+  SysUtils, combat_resolver;
 
 (* Create fungus *)
 procedure createSmallGreenFungus(uniqueid, npcx, npcy: smallint);
 (* Take a turn *)
 procedure takeTurn(id: smallint);
+(* Creature death *)
+procedure death;
 (* Check if player is next to NPC *)
 function isNextToPlayer(spx, spy: smallint): boolean;
 (* Fungus attacks *)
@@ -81,6 +83,11 @@ begin
       combat(id, 0);
   end;
   entities.moveNPC(id, entityList[id].posX, entityList[id].posY);
+end;
+
+procedure death;
+begin
+  Inc(deathList[5]);
 end;
 
 function isNextToPlayer(spx, spy: smallint): boolean;

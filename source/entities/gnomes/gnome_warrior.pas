@@ -13,6 +13,8 @@ uses
 procedure createGnomeWarrior(uniqueid, npcx, npcy: smallint);
 (* Take a turn *)
 procedure takeTurn(id: smallint);
+(* Creature death *)
+procedure death;
 (* Decision tree for Neutral state *)
 procedure decisionNeutral(id: smallint);
 (* Decision tree for Hostile state *)
@@ -106,6 +108,11 @@ begin
     stateHostile: decisionHostile(id);
     stateEscape: decisionEscape(id);
   end;
+end;
+
+procedure death;
+begin
+  Inc(deathList[14]);
 end;
 
 procedure decisionNeutral(id: smallint);

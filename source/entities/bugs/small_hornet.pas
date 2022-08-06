@@ -14,6 +14,8 @@ uses
 procedure createSmallHornet(uniqueid, npcx, npcy: smallint);
 (* Take a turn *)
 procedure takeTurn(id: smallint);
+(* Creature death *)
+procedure death;
 (* Move in a random direction *)
 procedure wander(id, spx, spy: smallint);
 (* Check if player is next to NPC *)
@@ -86,6 +88,11 @@ begin
   else
     { or stay in place }
     entities.moveNPC(id, entityList[id].posX, entityList[id].posY);
+end;
+
+procedure death;
+begin
+  Inc(deathList[12]);
 end;
 
 procedure wander(id, spx, spy: smallint);

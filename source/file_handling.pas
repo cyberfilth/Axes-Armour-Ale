@@ -8,7 +8,7 @@ interface
 
 uses
   SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe, island,
-  cave, smallGrid;
+  cave, smallGrid, combat_resolver;
 
 (* Save the overworld map to disk *)
 procedure saveOverworldMap;
@@ -737,7 +737,7 @@ end;
 
 procedure loadGame;
 var
-  RootNode, ParentNode, InventoryNode, PlayerDataNode, locationNode: TDOMNode;
+  RootNode, ParentNode, InventoryNode, PlayerDataNode, locationNode, deathNode: TDOMNode;
   Doc: TXMLDocument;
   i: integer;
   dfileName: shortstring;
@@ -769,6 +769,13 @@ begin
     player_stats.canExitDungeon := StrToBool(UTF8Encode(RootNode.FindNode('canExitDungeon').TextContent));
     (* Type of map *)
     map.mapType := dungeonTerrain(GetEnumValue(Typeinfo(dungeonTerrain), UTF8Encode(RootNode.FindNode('mapType').TextContent)));
+
+    (* List of enemies killed *)
+    deathNode := Doc.DocumentElement.FindNode('DL');
+    for i := 0 to 16 do
+    begin
+      combat_resolver.deathList[i] := StrToInt(UTF8Encode(deathNode.FindNode(UTF8Decode('kill_' + IntToStr(i))).TextContent));
+    end;
 
     (* Location data *)
     locationNode := Doc.DocumentElement.FindNode('locData');
@@ -946,6 +953,13 @@ begin
     AddElement(datanode, 'canExitDungeon', UTF8Encode(BoolToStr(player_stats.canExitDungeon)));
     WriteStr(Value, map.mapType);
     AddElement(datanode, 'mapType', Value);
+
+    (* List of enemies killed *)
+    DataNode := AddChild(RootNode, 'DL');
+    for i := Low(combat_resolver.deathList) to High(combat_resolver.deathList) do
+    begin
+       AddElement(DataNode, 'kill_' + IntToStr(i), IntToStr(combat_resolver.deathList[i]));
+    end;
 
     (* Location data *)
     for i := Low(island.locationLookup) to High(island.locationLookup) do

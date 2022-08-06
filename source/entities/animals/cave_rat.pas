@@ -7,12 +7,14 @@ unit cave_rat;
 interface
 
 uses
-  SysUtils, Math, ai_animal;
+  SysUtils, Math, ai_animal, combat_resolver;
 
 (* Create a cave rat *)
 procedure createCaveRat(uniqueid, npcx, npcy: smallint);
 (* The NPC takes their turn in the game loop *)
 procedure takeTurn(id: smallint);
+(* Creature death *)
+procedure death;
 (* Decision tree for Neutral state *)
 procedure decisionNeutral(id: smallint);
 (* Decision tree for Hostile state *)
@@ -89,6 +91,11 @@ begin
     stateHostile: decisionHostile(id);
     stateEscape: decisionEscape(id);
   end;
+end;
+
+procedure death;
+begin
+  Inc(deathList[0]);
 end;
 
 procedure decisionNeutral(id: smallint);

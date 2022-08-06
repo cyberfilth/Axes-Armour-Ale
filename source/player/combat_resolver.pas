@@ -21,6 +21,29 @@ interface
 uses
   SysUtils, globalUtils, ui;
 
+var
+  (* List of creatures killed *)
+  deathList: array[0..16] of smallint;
+  {
+   0: CaveRat
+   1: GiantRat
+   2: BloodBat
+   3: LargeBloodBat
+   4: GreenFungus
+   5: SmallGreenFungus
+   6: Matango
+   7: Hob
+   8: HobLobber
+   9: smallHyena
+   10: hyenaFungus
+   11: HobFungus
+   12: smallHornet
+   13: smlCorpseSpider
+   14: GnmWarr
+   15: GnmAss
+   16: crptWolf
+  }
+
 (* Attack NPC's *)
 procedure combat(npcID: smallint);
 (* Spite damage - damage dealt by the loser of a combat round 'in spite' of losing *)

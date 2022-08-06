@@ -89,7 +89,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="3">
+    <Units Count="4">
       <Unit0>
         <Filename Value="Axes.pas"/>
         <IsPartOfProject Value="True"/>
@@ -102,6 +102,11 @@
         <Filename Value="entities/animals/crypt_wolf.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="screens/scrdeathlist.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="scrDeathList"/>
+      </Unit3>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
