@@ -134,13 +134,6 @@ begin
   entityList[id].glyph := '%';
   entityList[id].blocks := False;
   map.unoccupy(entityList[id].posX, entityList[id].posY);
-
-  { Green Fungus }
-  if (entityList[id].intName = 'GreenFungus') then
-     green_fungus.death(id)
-  { Gnome Assassin }
-  else if (entityList[id].intName = 'GnmAss') then
-     gnome_assassin.death(id);
 end;
 
 procedure moveNPC(id, newX, newY: smallint);
@@ -356,7 +349,7 @@ begin
     'GiantRat': giant_cave_rat.death;
     'BloodBat': blood_bat.death;
     'LargeBloodBat': large_blood_bat.death;
-    'GreenFungus': green_fungus.death(i);
+    'GreenFungus': green_fungus.death;
     'SmallGreenFungus': small_green_fungus.death;
     'Matango': mushroom_person.death;
     'Hob': redcap_lesser.death;

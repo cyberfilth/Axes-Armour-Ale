@@ -48,7 +48,8 @@ var
     'But their life was ended too soon. Their ale-brothers will briefly raise a toast to their name. Before it is forgotten in time, by all...');
   separateLines: array[1..6] of shortstring = (' ', ' ', ' ', ' ', ' ', ' ');
   epitaph, A, B, C, exitMessage, deathMessage, deathNumber, killType: shortstring;
-  maxStrLength, iStart, iEnd, prevEnd, arrayNumber, toteKills, i, lineNo, totalUnique: smallint;
+  maxStrLength, iStart, iEnd, prevEnd, arrayNumber, toteKills, i,
+  lineNo, totalUnique: smallint;
 begin
   A := killA[Random(15)];
   B := killB[Random(15)];
@@ -91,9 +92,9 @@ begin
     deathMessage := messageText[Random(8)];
   end;
   if (toteKills = 1) then
-     deathNumber := '1 enemy in total'
+    deathNumber := '1 enemy in total'
   else
-  deathNumber := IntToStr(toteKills) + ' enemies in total';
+    deathNumber := IntToStr(toteKills) + ' enemies in total';
   exitMessage := 'q - Quit game   |    x - Exit to menu';
   (* Line wrap the death message so that it fits the screen *)
   (* Loop until the end of the string *)
@@ -141,40 +142,26 @@ begin
       if (deathList[i] <> 0) then
       begin
         { Get entity name }
-        if (i = 0) then
-          killType := 'Cave rat'
-        else if (i = 1) then
-          killType := 'Giant rat'
-        else if (i = 2) then
-          killType := 'Blood bat'
-        else if (i = 3) then
-          killType := 'Large Blood bat'
-        else if (i = 4) then
-          killType := 'Green fungus'
-        else if (i = 5) then
-          killType := 'Small green fungus'
-        else if (i = 6) then
-          killType := 'Fungus person'
-        else if (i = 7) then
-          killType := 'Hob'
-        else if (i = 8) then
-          killType := 'Hob rock thrower'
-        else if (i = 9) then
-          killType := 'Small hyena'
-        else if (i = 10) then
-          killType := 'Infected hyena'
-        else if (i = 11) then
-          killType := 'Infected Hob'
-        else if (i = 12) then
-          killType := 'Small hornet'
-        else if (i = 13) then
-          killType := 'Small corpse spider'
-        else if (i = 14) then
-          killType := 'Gnome warrior'
-        else if (i = 15) then
-          killType := 'Gnome assassin'
-        else
-          killType := 'unknown';
+        case i of
+          0: killType := 'Cave rat';
+          1: killType := 'Giant rat';
+          2: killType := 'Blood bat';
+          3: killType := 'Large Blood bat';
+          4: killType := 'Green fungus';
+          5: killType := 'Small green fungus';
+          6: killType := 'Fungus person';
+          7: killType := 'Hob';
+          8: killType := 'Hob rock thrower';
+          9: killType := 'Small hyena';
+          10: killType := 'Infected hyena';
+          11: killType := 'Infected Hob';
+          12: killType := 'Small hornet';
+          13: killType := 'Small corpse spider';
+          14: killType := 'Gnome warrior';
+          15: killType := 'Gnome assassin';
+          else
+            killType := 'unknown';
+        end;
         TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
         Inc(lineNo);
       end;

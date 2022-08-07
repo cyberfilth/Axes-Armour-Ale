@@ -332,6 +332,12 @@ begin
           mapDisplay[r][c].Glyph := Chr(176);
         end;
       end;
+    end
+    { Default tile to show in case I missed something }
+    else
+    begin
+      mapDisplay[r][c].GlyphColour := 'white';
+      mapDisplay[r][c].Glyph := 'X';
     end;
   end;
 end;
