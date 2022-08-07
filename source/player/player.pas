@@ -154,7 +154,11 @@ begin
     9:                        // Enter location
     begin
       (* Check if the player is standing on a location *)
-      if (island.overworldMap[entityList[0].posY][entityList[0].posX].Glyph = '>') then
+      // replaced this line for Alpha 55 release so that player cannot enter a location
+      // type that hasn't been generated yet
+      //if (island.overworldMap[entityList[0].posY][entityList[0].posX].Glyph = '>') then
+      if (island.overworldMap[entityList[0].posY][entityList[0].posX].Glyph = '>') and
+       (island.getDungeonType(entityList[0].posX, entityList[0].posY) = tDungeon) then
       begin
         { Write island to disk }
         file_handling.saveOverworldMap;

@@ -199,7 +199,6 @@ begin
               small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
               ui.writeBufferedMessages;
               ui.displayMessage('The fungus releases spores into the air');
-              Dec(fungusSpawnAttempts);
             end;
           end;
           Inc(fungusSpawnAttempts);
