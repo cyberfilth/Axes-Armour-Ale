@@ -17,7 +17,7 @@
 <p>
 Items and objects in the game world</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li><a href="ui.html">ui</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li><a href="ui.html">ui</a></li><li><a href="web_trap.html">web_trap</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -62,9 +62,12 @@ Items and objects in the game world</p>
 <td class="itemcode"><code>function <strong><a href="items.html#getThrowDamage">getThrowDamage</a></strong>(x, y: smallint): smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <strong><a href="items.html#countNonEmptyItems">countNonEmptyItems</a></strong>: byte;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="items.html#checkForTraps">checkForTraps</a></strong>;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>function <strong><a href="items.html#countNonEmptyItems">countNonEmptyItems</a></strong>: byte;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="items.html#redrawItems">redrawItems</a></strong>;</code></td>
 </tr>
 </table>
@@ -183,6 +186,15 @@ Get the Throw Damage at coordinates</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="checkForTraps"></span><code>procedure <strong>checkForTraps</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check to see if a trap has been triggered</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="countNonEmptyItems"></span><code>function <strong>countNonEmptyItems</strong>: byte;</code></td>
 </tr>
 <tr><td colspan="1">
@@ -225,6 +237,8 @@ Redraw all items</p>
 <span id="itmAmmo">itmAmmo</span></li>
 <li>
 <span id="itmLightSource">itmLightSource</span></li>
+<li>
+<span id="itmTrap">itmTrap</span></li>
 </ul>
 </td></tr>
 </table>
@@ -255,7 +269,7 @@ Redraw all items</p>
 <li>
 <span id="matPaper">matPaper</span></li>
 <li>
-<span id="matAlcohol">matAlcohol</span></li>
+<span id="matFlammable">matFlammable</span></li>
 <li>
 <span id="matStone">matStone</span></li>
 <li>

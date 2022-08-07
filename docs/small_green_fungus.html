@@ -17,7 +17,7 @@
 <p>
 Stationary hazard, deals poison damage in combat</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li><a href="combat_resolver.html">combat_resolver</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -27,9 +27,12 @@ Stationary hazard, deals poison damage in combat</p>
 <td class="itemcode"><code>procedure <strong><a href="small_green_fungus.html#takeTurn">takeTurn</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <strong><a href="small_green_fungus.html#isNextToPlayer">isNextToPlayer</a></strong>(spx, spy: smallint): boolean;</code></td>
+<td class="itemcode"><code>procedure <strong><a href="small_green_fungus.html#death">death</a></strong>;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>function <strong><a href="small_green_fungus.html#isNextToPlayer">isNextToPlayer</a></strong>(spx, spy: smallint): boolean;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="small_green_fungus.html#combat">combat</a></strong>(idOwner, idTarget: smallint);</code></td>
 </tr>
 </table>
@@ -51,6 +54,15 @@ Create fungus</p>
 <tr><td colspan="1">
 <p>
 Take a turn</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="death"></span><code>procedure <strong>death</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Creature death</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

@@ -27,30 +27,33 @@ Intelligent enemy with scent tracking</p>
 <td class="itemcode"><code>procedure <strong><a href="gnome_warrior.html#takeTurn">takeTurn</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="gnome_warrior.html#death">death</a></strong>;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="gnome_warrior.html#decisionNeutral">decisionNeutral</a></strong>(id: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="gnome_warrior.html#decisionHostile">decisionHostile</a></strong>(id: smallint);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="gnome_warrior.html#decisionEscape">decisionEscape</a></strong>(id: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="gnome_warrior.html#wander">wander</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="gnome_warrior.html#chaseTarget">chaseTarget</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>function <strong><a href="gnome_warrior.html#isNextToPlayer">isNextToPlayer</a></strong>(spx, spy: smallint): boolean;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="gnome_warrior.html#escapePlayer">escapePlayer</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="gnome_warrior.html#combat">combat</a></strong>(id: smallint);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="gnome_warrior.html#followScent">followScent</a></strong>(id: smallint);</code></td>
 </tr>
 </table>
@@ -72,6 +75,15 @@ Create a Gnome Warrior</p>
 <tr><td colspan="1">
 <p>
 Take a turn</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="death"></span><code>procedure <strong>death</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Creature death</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

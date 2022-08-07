@@ -17,7 +17,7 @@
 <p>
 Mushroom person - slow but can poison the player</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Math</li><li><a href="ai_animal.html">ai_animal</a></li><li><a href="globalUtils.html">globalUtils</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li><a href="ai_animal.html">ai_animal</a></li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="combat_resolver.html">combat_resolver</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -27,15 +27,18 @@ Mushroom person - slow but can poison the player</p>
 <td class="itemcode"><code>procedure <strong><a href="mushroom_person.html#takeTurn">takeTurn</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="mushroom_person.html#death">death</a></strong>;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="mushroom_person.html#decisionNeutral">decisionNeutral</a></strong>(id: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="mushroom_person.html#decisionHostile">decisionHostile</a></strong>(id: smallint);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="mushroom_person.html#decisionEscape">decisionEscape</a></strong>(id: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>function <strong><a href="mushroom_person.html#isNextToPlayer">isNextToPlayer</a></strong>(spx, spy: smallint): boolean;</code></td>
 </tr>
 </table>
@@ -57,6 +60,15 @@ Create a mushroom person</p>
 <tr><td colspan="1">
 <p>
 The NPC takes their turn in the game loop</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="death"></span><code>procedure <strong>death</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Creature death</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

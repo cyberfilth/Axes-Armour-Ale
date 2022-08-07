@@ -19,7 +19,7 @@ Smell map, a copy of the map is floodfilled with integers. Each integer incremen
 
 <p>The below routine is based on code from Stephen Peter (AKA speter)</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Classes</li><li>Math</li><li><a href="globalUtils.html">globalutils</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Classes</li><li><a href="globalUtils.html">globalutils</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -33,6 +33,12 @@ Smell map, a copy of the map is floodfilled with integers. Each integer incremen
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>function <strong><a href="smell.html#scentDirection">scentDirection</a></strong>(y, x: smallint): char;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <strong><a href="smell.html#scentDirectionCoords">scentDirectionCoords</a></strong>(y, x: smallint): TPoint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <strong><a href="smell.html#pathFinding">pathFinding</a></strong>(id: smallint): <a href="globalUtils.html#path">path</a>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
@@ -70,7 +76,7 @@ Smell map, a copy of the map is floodfilled with integers. Each integer incremen
 </tr>
 <tr><td colspan="1">
 <p>
-filename: ShortString; myfile: Text;</p>
+filename: shortstring; myfile: Text;</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -98,6 +104,24 @@ Generate smell map</p>
 <tr><td colspan="1">
 <p>
 Find the tile with the highest scent value</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="scentDirectionCoords"></span><code>function <strong>scentDirectionCoords</strong>(y, x: smallint): TPoint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get Coordinates of the tile with highest scent value</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="pathFinding"></span><code>function <strong>pathFinding</strong>(id: smallint): <a href="globalUtils.html#path">path</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate a path to the player</p>
 </td></tr>
 </table>
 <h3 class="detail">Types</h3>

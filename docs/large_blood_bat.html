@@ -27,24 +27,27 @@ Weak enemy with simple AI, no pathfinding</p>
 <td class="itemcode"><code>procedure <strong><a href="large_blood_bat.html#takeTurn">takeTurn</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="large_blood_bat.html#death">death</a></strong>;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="large_blood_bat.html#decisionNeutral">decisionNeutral</a></strong>(id: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="large_blood_bat.html#decisionHostile">decisionHostile</a></strong>(id: smallint);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="large_blood_bat.html#wander">wander</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="large_blood_bat.html#chasePlayer">chasePlayer</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>function <strong><a href="large_blood_bat.html#isNextToPlayer">isNextToPlayer</a></strong>(spx, spy: smallint): boolean;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="large_blood_bat.html#escapePlayer">escapePlayer</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="large_blood_bat.html#combat">combat</a></strong>(id: smallint);</code></td>
 </tr>
 </table>
@@ -66,6 +69,15 @@ Create a blood bat</p>
 <tr><td colspan="1">
 <p>
 Take a turn</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="death"></span><code>procedure <strong>death</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Creature death</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
