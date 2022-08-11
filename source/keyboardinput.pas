@@ -3,12 +3,13 @@
 unit KeyboardInput;
 
 {$mode fpc}{$H+}
+{$IFOPT D+} {$DEFINE DEBUG} {$ENDIF}
 
 interface
 
 uses
   Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelp, scrTargeting,
-  scrLook, scrThrow, scrCharacter, globalUtils, scrDeathList;
+  scrLook, scrThrow, scrCharacter, globalUtils, scrDeathList{$IFDEF DEBUG}, debuggingFunctions{$ENDIF};
 
 (* Initialise keyboard unit *)
 procedure setupKeyboard;
@@ -628,6 +629,13 @@ begin
       gameState := stQuitMenu;
       ui.exitPrompt;
     end;
+    {$IFDEF DEBUG}
+    '/':
+    begin
+      debuggingFunctions.topUpStats;
+      main.gameLoop;
+    end;
+    {$ENDIF}
   end;
 end;
 

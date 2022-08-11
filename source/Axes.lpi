@@ -89,7 +89,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="4">
+    <Units Count="5">
       <Unit0>
         <Filename Value="Axes.pas"/>
         <IsPartOfProject Value="True"/>
@@ -107,6 +107,11 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="scrDeathList"/>
       </Unit3>
+      <Unit4>
+        <Filename Value="debuggingfunctions.pas"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="debuggingFunctions"/>
+      </Unit4>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
