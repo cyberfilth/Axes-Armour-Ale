@@ -7,7 +7,7 @@ unit green_fungus;
 interface
 
 uses
-  SysUtils, combat_resolver;
+  SysUtils, combat_resolver{, small_green_fungus, logging};
 
 (* Create fungus *)
 procedure createGreenFungus(uniqueid, npcx, npcy: smallint);
@@ -173,13 +173,21 @@ end;
 procedure death;
 //var
 //  fungusSpawnAttempts: byte;
-//  i, amount, r, c: smallint;
+//  i, amount, r, c, pX, pY: smallint;
+//  spawnedYN: boolean;
 begin
   Inc(deathList[4]);
+  //pX := 0;
+  //pY := 0;
+  //spawnedYN := False;
+  //(* Get Player coordinates *)
+  //pX := entityList[0].posX;
+  //pY := entityList[0].posY;
   //(* Counter for how many times game will attempt to place a fungus *)
   //fungusSpawnAttempts := 0;
   //(* Set a random number of spores *)
   //amount := randomRange(1, 3);
+  //(* Place the spores *)
   //for i := 1 to amount do
   //  try
   //    begin
@@ -187,20 +195,20 @@ begin
   //      if (fungusSpawnAttempts < 3) then
   //      begin
   //        (* Choose a space to place the fungus *)
-  //        r := globalutils.randomRange(entityList[id].posY - 4, entityList[id].posY + 4);
-  //        c := globalutils.randomRange(entityList[id].posX - 4, entityList[id].posX + 4);
+  //        r := globalutils.randomRange(pY - 2, pY + 2);
+  //        c := globalutils.randomRange(pX - 2, pX + 2);
   //        (* choose a location that is not a wall or occupied *)
   //        if (withinBounds(c, r) = True) then
   //        begin
-  //          if (maparea[r][c].Blocks <> True) and (maparea[r][c].Occupied <> True) then
+  //          if (map.canMove(pX, pY - 1) = True) and
+  //            (map.maparea[pY - 1, pX].Glyph <> '>') and
+  //            (map.maparea[pY - 1, pX].Glyph <> '<') then
   //          begin
   //            Inc(npcAmount);
   //            small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
-  //            ui.writeBufferedMessages;
-  //            ui.displayMessage('The fungus releases spores into the air');
+  //            spawnedYN := True;
   //          end;
   //        end;
-  //        Inc(fungusSpawnAttempts);
   //      end;
   //    end;
   //  except
@@ -216,6 +224,8 @@ begin
   //      logAction('Caught ' + E.ClassName + ': ' + E.Message);
   //    end;
   //  end;
+  //if (spawnedYN = True) then
+  //  ui.displayMessage('The fungus releases spores into the air');
 end;
 
 end.
