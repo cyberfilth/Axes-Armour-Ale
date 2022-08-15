@@ -635,6 +635,11 @@ begin
       debuggingFunctions.topUpStats;
       main.gameLoop;
     end;
+    '@':
+    begin
+      debuggingFunctions.showEntitiesItems;
+      main.gameLoop;
+    end;
     {$ENDIF}
   end;
 end;

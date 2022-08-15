@@ -7,7 +7,7 @@ unit green_fungus;
 interface
 
 uses
-  SysUtils, combat_resolver{, small_green_fungus, logging};
+  SysUtils, combat_resolver, small_green_fungus, logging;
 
 (* Create fungus *)
 procedure createGreenFungus(uniqueid, npcx, npcy: smallint);
@@ -171,61 +171,56 @@ begin
 end;
 
 procedure death;
-//var
-//  fungusSpawnAttempts: byte;
-//  i, amount, r, c, pX, pY: smallint;
-//  spawnedYN: boolean;
+var
+  fungusSpawnAttempts: byte;
+  i, amount, r, c, pX, pY: smallint;
+  spawnedYN: boolean;
 begin
   Inc(deathList[4]);
-  //pX := 0;
-  //pY := 0;
-  //spawnedYN := False;
-  //(* Get Player coordinates *)
-  //pX := entityList[0].posX;
-  //pY := entityList[0].posY;
-  //(* Counter for how many times game will attempt to place a fungus *)
-  //fungusSpawnAttempts := 0;
-  //(* Set a random number of spores *)
-  //amount := randomRange(1, 3);
-  //(* Place the spores *)
-  //for i := 1 to amount do
-  //  try
-  //    begin
-  //      (* Limit the number of attempts to find a space *)
-  //      if (fungusSpawnAttempts < 3) then
-  //      begin
-  //        (* Choose a space to place the fungus *)
-  //        r := globalutils.randomRange(pY - 2, pY + 2);
-  //        c := globalutils.randomRange(pX - 2, pX + 2);
-  //        (* choose a location that is not a wall or occupied *)
-  //        if (withinBounds(c, r) = True) then
-  //        begin
-  //          if (map.canMove(pX, pY - 1) = True) and
-  //            (map.maparea[pY - 1, pX].Glyph <> '>') and
-  //            (map.maparea[pY - 1, pX].Glyph <> '<') then
-  //          begin
-  //            Inc(npcAmount);
-  //            small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
-  //            spawnedYN := True;
-  //          end;
-  //        end;
-  //      end;
-  //    end;
-  //  except
-  //    on E: ERangeError do
-  //    begin
-  //      logAction('green_fungus.death');
-  //      logAction('Error: valid range exceeded');
-  //      logAction(E.Message);
-  //    end;
-  //    on E: Exception do  { generic handler }
-  //    begin
-  //      logAction('green_fungus.death');
-  //      logAction('Caught ' + E.ClassName + ': ' + E.Message);
-  //    end;
-  //  end;
-  //if (spawnedYN = True) then
-  //  ui.displayMessage('The fungus releases spores into the air');
+  pX := 0;
+  pY := 0;
+  spawnedYN := False;
+  (* Get Player coordinates *)
+  pX := entityList[0].posX;
+  pY := entityList[0].posY;
+  (* Counter for how many times game will attempt to place a fungus *)
+  fungusSpawnAttempts := 0;
+  (* Set a random number of spores *)
+  amount := randomRange(1, 3);
+  (* Place the spores *)
+  for i := 1 to amount do
+    try
+      begin
+        (* Limit the number of attempts to find a space *)
+        if (fungusSpawnAttempts < 3) then
+        begin
+          (* Choose a space to place the fungus *)
+          r := globalutils.randomRange(pY - 2, pY + 2);
+          c := globalutils.randomRange(pX - 2, pX + 2);
+          (* choose a location that is not a wall or occupied *)
+          if (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False) and (maparea[r][c].Glyph = '.') then
+          begin
+            Inc(npcAmount);
+            small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
+            spawnedYN := True;
+          end;
+        end;
+      end;
+    except
+      on E: ERangeError do
+      begin
+        logAction('green_fungus.death');
+        logAction('Error: valid range exceeded');
+        logAction(E.Message);
+      end;
+      on E: Exception do  { generic handler }
+      begin
+        logAction('green_fungus.death');
+        logAction('Caught ' + E.ClassName + ': ' + E.Message);
+      end;
+    end;
+  if (spawnedYN = True) then
+    ui.displayMessage('The fungus releases spores into the air');
 end;
 
 end.

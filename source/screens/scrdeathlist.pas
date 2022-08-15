@@ -137,7 +137,7 @@ begin
   (* Display list of entities killed *)
   if (totalUnique < 16) then
   begin
-    for i := Low(deathList) to High(deathList) do
+    for i := High(deathList) downto Low(deathList) do
     begin
       if (deathList[i] <> 0) then
       begin

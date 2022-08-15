@@ -7,7 +7,7 @@ unit magicEffects;
 interface
 
 uses
-  SysUtils, video, los, entities, items, ui, player_stats, animation;
+  SysUtils, video, los, items, ui, player_stats, animation;
 
 type
   TSmallintArray = array of smallint;
@@ -16,6 +16,9 @@ type
 procedure minorScorch;
 
 implementation
+
+uses
+  entities;
 
 procedure minorScorch;
 var

@@ -29,8 +29,8 @@ var
   totalRooms: byte;
   distances: TDist;
   (* TESTING - Write cavern to text file *)
-  filename: shortstring;
-  myfile: Text;
+  //filename: shortstring;
+  //myfile: Text;
 
 (* Fill array with walls *)
 procedure fillWithWalls;

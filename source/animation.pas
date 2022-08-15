@@ -117,10 +117,8 @@ begin
     (* Loop through array and draw each NPC *)
     for i := Low(getEm) to High(getEm) do
     begin
-      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].GlyphColour :=
-        boom;
-      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].Glyph :=
-        entityList[getEm[i]].glyph;
+      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].GlyphColour := boom;
+      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].Glyph := entityList[getEm[i]].glyph;
     end;
 
     (* Repaint map *)

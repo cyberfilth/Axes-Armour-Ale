@@ -7,19 +7,77 @@ unit debuggingFunctions;
 interface
 
 uses
-  SysUtils, entities, player_stats;
+  SysUtils, entities, player_stats, map, items, globalUtils, logging;
 
 (* Increases HP and light timer, to aid exploration *)
 procedure topUpStats;
+(* Show all entities on the screen *)
+procedure showEntitiesItems;
+(* Prints the map to a text file *)
+procedure dumpMap;
 
 implementation
 
 procedure topUpStats;
 begin
   Inc(entityList[0].maxHP, 100);
-  entityList[0].currentHP:= entityList[0].maxHP;
+  entityList[0].currentHP := entityList[0].maxHP;
   Inc(player_stats.lightCounter, 500);
 end;
 
-end.
+procedure showEntitiesItems;
+var
+  i: smallint;
+begin
+  logAction('');
+  logAction('-- showEntitiesItems --');
+  (* Highlight entities *)
+  for i := 1 to High(entityList) do
+  begin
+    logAction(IntToStr(i) + ': ' + entityList[i].race + ' is at ' +
+      IntToStr(entityList[i].posX) + ', ' + IntToStr(entityList[i].posY));
+    map.mapDisplay[entityList[i].posY, entityList[i].posX].GlyphColour := 'white';
+    map.mapDisplay[entityList[i].posY, entityList[i].posX].Glyph := entityList[i].glyph;
+  end;
+  (* Highlight items *)
+  for i := 0 to High(itemList) do
+  begin
+    logAction(IntToStr(i) + ': ' + itemList[i].itemName + ' is at ' +
+      IntToStr(itemList[i].posX) + ', ' + IntToStr(itemList[i].posY));
+    map.mapDisplay[itemList[i].posY, itemList[i].posX].GlyphColour := 'yellow';
+    map.mapDisplay[itemList[i].posY, itemList[i].posX].Glyph := 'X';
+  end;
+  logAction('');
+  dumpMap;
+end;
 
+procedure dumpMap;
+var
+  i: smallint;
+  filename: shortstring;
+  myfile: Text;
+begin
+  filename := globalUtils.saveDirectory + PathDelim + 'map.txt';
+  AssignFile(myfile, filename);
+  rewrite(myfile);
+  for r := 1 to MAXROWS do
+  begin
+    for c := 1 to MAXCOLUMNS do
+    begin
+      { Draw entity }
+      for i := 0 to High(entityList) do
+      begin
+        if (entityList[i].posX = c) and (entityList[i].posY = r) then
+          Write(myfile, entityList[i].glyph);
+      end;
+      { Draw item }
+
+      { Draw map tile }
+      Write(myfile, map.maparea[r][c].Glyph);
+    end;
+    Write(myfile, sLineBreak);
+  end;
+  closeFile(myfile);
+end;
+
+end.

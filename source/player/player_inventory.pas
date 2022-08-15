@@ -7,7 +7,7 @@ unit player_inventory;
 interface
 
 uses
-  SysUtils, StrUtils, video, entities, items, item_lookup, player_stats,
+  SysUtils, StrUtils, video, items, item_lookup, player_stats,
   staff_minor_scorch, pixie_jar;
 
 type
@@ -69,7 +69,7 @@ procedure destroyWeapon;
 implementation
 
 uses
-  scrInventory, ui;
+  scrInventory, ui, entities;
 
 procedure initialiseInventory;
 
