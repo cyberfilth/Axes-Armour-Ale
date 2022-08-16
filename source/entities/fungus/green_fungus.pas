@@ -7,7 +7,7 @@ unit green_fungus;
 interface
 
 uses
-  SysUtils, combat_resolver, small_green_fungus, logging;
+  SysUtils, combat_resolver, items, poison_spore, logging;
 
 (* Create fungus *)
 procedure createGreenFungus(uniqueid, npcx, npcy: smallint);
@@ -159,7 +159,7 @@ begin
           entityList[0].stsPoison := True;
           entityList[0].tmrPoison := damageAmount + 2;
           if (killer = 'empty') then
-            killer := 'poisoned fungus spore';
+            killer := 'poisonous fungus';
         end
         else
           ui.bufferMessage('The fungus stings the ' + entityList[idTarget].race);
@@ -198,10 +198,11 @@ begin
           r := globalutils.randomRange(pY - 2, pY + 2);
           c := globalutils.randomRange(pX - 2, pX + 2);
           (* choose a location that is not a wall or occupied *)
-          if (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False) and (maparea[r][c].Glyph = '.') then
+          if (map.isWall(c,r) = False) and (map.isOccupied(c,r) = False) then
           begin
-            Inc(npcAmount);
-            small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
+            //Inc(npcAmount);
+            //small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
+            poison_spore.createSpore(c,r);
             spawnedYN := True;
           end;
         end;

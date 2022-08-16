@@ -238,8 +238,11 @@ begin
   stacked := False;
   { Don't add to a new slot if item is stacked }
   skip := False;
+  (* Player cannot pick up traps *)
+  if (itemList[itemNumber].itemType <> itmTrap) then
+  begin
   (* If this is not a quest item *)
-  if (itemList[itemNumber].itemType <> itmQuest) and (itemList[itemNumber].itemType <> itmLightSource) then
+  if (itemList[itemNumber].itemType <> itmQuest) and (itemList[itemNumber].itemType <> itmLightSource)  then
   begin
     Result := False;
     (* Check for adding an arrow to existing arrow slot *)
@@ -347,6 +350,7 @@ begin
       discovered := False;
     end;
     Result := True;
+  end;
   end;
 end;
 

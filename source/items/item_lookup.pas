@@ -21,7 +21,7 @@ uses
   { Ammunition }
   arrow,
   { Traps }
-  web_trap;
+  web_trap, poison_spore;
 
 const
   (* Array of items found in a cave, ordered by cave level *)
@@ -144,6 +144,8 @@ begin
     12: arrow.useItem;
     13: pixie_jar.useItem;
     14: gnomish_dagger.useItem(equipped, id);
+    15: web_trap.useItem;
+    16: poison_spore.useItem;
   end;
 end;
 

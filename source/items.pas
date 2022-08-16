@@ -7,7 +7,7 @@ unit items;
 interface
 
 uses
-  ui, web_trap;
+  ui, web_trap, poison_spore;
 
 type
   tItem = (itmDrink, itmWeapon, itmArmour, itmQuest, itmProjectile, itmEmptySlot,
@@ -221,7 +221,12 @@ begin
   for i := 0 to High(itemList) do
   begin
     if (itemList[i].itemType = itmTrap) then
-       web_trap.triggered(i);
+    begin
+       if (itemList[i].itemName = 'web') then
+          web_trap.triggered(i)
+       else if (itemList[i].itemName = 'spore') then
+          poison_spore.triggered(i);
+    end;
   end;
   end;
 end;
