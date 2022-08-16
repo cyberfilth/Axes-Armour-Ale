@@ -100,7 +100,7 @@ begin
     end;
     tCave: { Cave }
     begin
-      for i := 1 to NPCnumber do
+      for i := 1 to (NPCnumber - 1) do
       begin
         npc_lookup.NPCpicker(i, False, tCave);
       end;
