@@ -270,6 +270,12 @@ begin
   fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 0);
   originalX := entities.entityList[0].posX;
   originalY := entities.entityList[0].posY;
+  (* If the player is bewildered, move in a random direction *)
+  if (entityList[0].stsBewild = True) then
+  begin
+    dir := randomRange(1,8);
+  end;
+  (* Else choose a direction *)
   case dir of
     1: Dec(entities.entityList[0].posY); // N
     2: Dec(entities.entityList[0].posX); // W
@@ -373,7 +379,27 @@ begin
   end;
 
   (* Bewildered *)
-
+  if (entities.entityList[0].stsBewild = True) then
+  begin
+    if (ui.bewilderedStatusSet = False) then
+    begin
+      (* Update UI *)
+      ui.displayStatusEffect(1, 'bewildered');
+      ui.bewilderedStatusSet := True;
+      //entityList[0].glyphColour := 'green';
+    end;
+   if (entities.entityList[0].tmrBewild <= 0) then
+    begin
+      entities.entityList[0].tmrBewild := 0;
+      entities.entityList[0].stsBewild := False;
+      (* Update UI *)
+      ui.displayStatusEffect(0, 'bewildered');
+      ui.bewilderedStatusSet := False;
+      //entityList[0].glyphColour := 'yellow';
+    end
+   else
+       Dec(entityList[0].tmrBewild);
+  end;
 end;
 
 

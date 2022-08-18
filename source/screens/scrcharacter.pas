@@ -110,6 +110,8 @@ begin
            statusFX := statusFX + '  [ drunk ]  ';
          if (entityList[0].stsPoison = True) then
            statusFX := statusFX + '  [ poisoned ]  ';
+         if (entityList[0].stsBewild = True) then
+           statusFX := statusFX + '  [ bewildered ]  ';
          TextOut(10, y, 'cyan', 'Current status:');
          Inc(y);
          TextOut(centreX(statusFX), y, 'cyan', statusFX);

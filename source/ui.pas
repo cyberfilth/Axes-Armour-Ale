@@ -22,7 +22,7 @@ var
   buffer: shortstring;
   equippedWeapon, equippedArmour: shortstring;
   (* Status effects *)
-  poisonStatusSet: boolean;
+  poisonStatusSet, bewilderedStatusSet: boolean;
 
 (* Write to the screen *)
 procedure TextOut(X, Y: word; textcol: shortstring; const S: string);
@@ -34,6 +34,8 @@ procedure setupScreen(yn: byte);
 procedure shutdownScreen;
 (* Display status effects *)
 procedure displayStatusEffect(onoff: byte; effectType: shortstring);
+(* Redraw status effects when reloading screen *)
+procedure redrawStatusEffects;
 (* Write text to the message log *)
 procedure displayMessage(message: shortstring);
 (* Store all messages from players turn *)
@@ -173,6 +175,22 @@ begin
     else if (onoff = 0) then
       TextOut(5, 20, 'black', '          ');
   end;
+  { BEWILDERED }
+   if (effectType = 'bewildered') then
+  begin
+    if (onoff = 1) then
+      TextOut(18, 20, 'blue', '[Bewildered]')
+    else if (onoff = 0) then
+      TextOut(18, 20, 'black', '            ');
+  end;
+end;
+
+procedure redrawStatusEffects;
+begin
+  if (poisonStatusSet = True) then
+     TextOut(5, 20, 'green', '[Poisoned]');
+  if (bewilderedStatusSet = True) then
+     TextOut(18, 20, 'blue', '[Bewildered]');
 end;
 
 procedure displayMessage(message: shortstring);

@@ -7,7 +7,7 @@ unit green_fungus;
 interface
 
 uses
-  SysUtils, combat_resolver, items, poison_spore, logging;
+  SysUtils, combat_resolver, items, poison_spore, universe, logging;
 
 (* Create fungus *)
 procedure createGreenFungus(uniqueid, npcx, npcy: smallint);
@@ -188,7 +188,7 @@ begin
   (* Counter for how many times game will attempt to place a fungus *)
   fungusSpawnAttempts := 0;
   (* Set a random number of spores *)
-  amount := randomRange(2, 3);
+  amount := randomRange(2, 3) + currentDepth;
   (* Place the spores *)
   for i := 1 to amount do
     try

@@ -548,6 +548,7 @@ begin
   entities.occupyUpdate;
   (* Update health display to show damage *)
   ui.updateHealth;
+  ui.redrawStatusEffects;
   (* draw map through the camera *)
   camera.drawMap;
   (* Redraw message log *)
