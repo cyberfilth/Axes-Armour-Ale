@@ -97,8 +97,10 @@ begin
     isDead := False;
     stsDrunk := False;
     stsPoison := False;
+    stsBewild := False;
     tmrDrunk := 0;
     tmrPoison := 0;
+    tmrBewild := 0;
     posX := map.startX;
     posY := map.startY;
   end;
@@ -369,6 +371,9 @@ begin
       updateHealth;
     end;
   end;
+
+  (* Bewildered *)
+
 end;
 
 

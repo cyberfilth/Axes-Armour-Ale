@@ -60,8 +60,10 @@ begin
     isDead := False;
     stsDrunk := False;
     stsPoison := False;
+    stsBewild := False;
     tmrDrunk := 0;
     tmrPoison := 0;
+    tmrBewild := 0;
     hasPath := False;
     destinationReached := False;
     entities.initPath(uniqueid);
@@ -186,7 +188,7 @@ begin
   (* Counter for how many times game will attempt to place a fungus *)
   fungusSpawnAttempts := 0;
   (* Set a random number of spores *)
-  amount := randomRange(1, 3);
+  amount := randomRange(2, 3);
   (* Place the spores *)
   for i := 1 to amount do
     try
@@ -200,8 +202,6 @@ begin
           (* choose a location that is not a wall or occupied *)
           if (map.isWall(c,r) = False) and (map.isOccupied(c,r) = False) then
           begin
-            //Inc(npcAmount);
-            //small_green_fungus.createSmallGreenFungus(npcAmount, c, r);
             poison_spore.createSpore(c,r);
             spawnedYN := True;
           end;

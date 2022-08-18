@@ -77,8 +77,10 @@ begin
     isDead := False;
     stsDrunk := False;
     stsPoison := False;
+    stsBewild := False;
     tmrDrunk := 0;
     tmrPoison := 0;
+    tmrBewild := 0;
     hasPath := False;
     destinationReached := False;
     entities.initPath(uniqueid);

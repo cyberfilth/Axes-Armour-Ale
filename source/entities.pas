@@ -64,9 +64,9 @@ type
     (* Has the NPC been killed, to be removed at end of game loop *)
     isDead: boolean;
     (* status effects *)
-    stsDrunk, stsPoison: boolean;
+    stsDrunk, stsPoison, stsBewild: boolean;
     (* status timers *)
-    tmrDrunk, tmrPoison: smallint;
+    tmrDrunk, tmrPoison, tmrBewild: smallint;
     (* Pathfinding variables *)
     hasPath, destinationReached: boolean;
     smellPath: array[1..30] of TPoint;
@@ -131,7 +131,7 @@ procedure killEntity(id: smallint);
 begin
   entityList[id].entityDeath(id);
   entityList[id].isDead := True;
-  entityList[id].glyph := '%';
+  entityList[id].glyph := '.';
   entityList[id].blocks := False;
   map.unoccupy(entityList[id].posX, entityList[id].posY);
 end;
@@ -239,7 +239,7 @@ begin
   Result := False;
   for i := 0 to npcAmount do
     if (entityList[i].posX = x) and (entityList[i].posY = y) then
-      if (entityList[i].inView = True) and (entityList[i].glyph <> '%') and (player_stats.lightEquipped = True) then
+      if (entityList[i].inView = True) and (entityList[i].glyph <> '.') and (player_stats.lightEquipped = True) then
         Result := True;
 end;
 
@@ -306,7 +306,7 @@ var
   i: smallint;
 begin
   for i := 1 to High(entityList) do
-    if (entityList[i].glyph <> '%') then
+    if (entityList[i].glyph <> '.') then
       entityList[i].entityTakeTurn(i);
 end;
 

@@ -528,8 +528,10 @@ begin
           AddElement(DataNode, 'armourEquipped', BoolToStr(entities.entityList[i].armourEquipped));
           AddElement(DataNode, 'stsDrunk', BoolToStr(entities.entityList[i].stsDrunk));
           AddElement(DataNode, 'stsPoison', BoolToStr(entities.entityList[i].stsPoison));
+          AddElement(DataNode, 'stsBewild', BoolToStr(entities.entityList[i].stsBewild));
           AddElement(DataNode, 'tmrDrunk', IntToStr(entities.entityList[i].tmrDrunk));
           AddElement(DataNode, 'tmrPoison', IntToStr(entities.entityList[i].tmrPoison));
+          AddElement(DataNode, 'tmrBewild', IntToStr(entities.entityList[i].tmrBewild));
           AddElement(DataNode, 'hasPath', BoolToStr(entities.entityList[i].hasPath));
           AddElement(DataNode, 'destReach', BoolToStr(entities.entityList[i].destinationReached));
           (* Save path coordinates *)
@@ -697,8 +699,10 @@ begin
         entities.entityList[i].isDead := False;
         entities.entityList[i].stsDrunk := StrToBool(UTF8Encode(NPCnode.FindNode('stsDrunk').TextContent));
         entities.entityList[i].stsPoison := StrToBool(UTF8Encode(NPCnode.FindNode('stsPoison').TextContent));
+        entities.entityList[i].stsBewild := StrToBool(UTF8Encode(NPCnode.FindNode('stsBewild').TextContent));
         entities.entityList[i].tmrDrunk := StrToInt(UTF8Encode(NPCnode.FindNode('tmrDrunk').TextContent));
         entities.entityList[i].tmrPoison := StrToInt(UTF8Encode(NPCnode.FindNode('tmrPoison').TextContent));
+        entities.entityList[i].tmrBewild := StrToInt(UTF8Encode(NPCnode.FindNode('tmrBewild').TextContent));
         entities.entityList[i].hasPath := StrToBool(UTF8Encode(NPCnode.FindNode('hasPath').TextContent));
         entities.entityList[i].destinationReached := StrToBool(UTF8Encode(NPCnode.FindNode('destReach').TextContent));
         for coords := 1 to 30 do
@@ -820,8 +824,10 @@ begin
     entities.entityList[0].isDead := False;
     entities.entityList[0].stsDrunk := StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsDrunk').TextContent));
     entities.entityList[0].stsPoison := StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsPoison').TextContent));
+    entities.entityList[0].stsBewild := StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsBewild').TextContent));
     entities.entityList[0].tmrDrunk := StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrDrunk').TextContent));
     entities.entityList[0].tmrPoison := StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrPoison').TextContent));
+    entities.entityList[0].tmrBewild := StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrBewild').TextContent));
     entities.entityList[0].posX := StrToInt(UTF8Encode(PlayerDataNode.FindNode('posX').TextContent));
     entities.entityList[0].posY := StrToInt(UTF8Encode(PlayerDataNode.FindNode('posY').TextContent));
 
@@ -995,8 +1001,10 @@ begin
     AddElement(DataNode, 'armourEquipped', BoolToStr(entities.entityList[0].armourEquipped));
     AddElement(DataNode, 'stsDrunk', BoolToStr(entities.entityList[0].stsDrunk));
     AddElement(DataNode, 'stsPoison', BoolToStr(entities.entityList[0].stsPoison));
+    AddElement(DataNode, 'stsBewild', BoolToStr(entities.entityList[0].stsBewild));
     AddElement(DataNode, 'tmrDrunk', IntToStr(entities.entityList[0].tmrDrunk));
     AddElement(DataNode, 'tmrPoison', IntToStr(entities.entityList[0].tmrPoison));
+    AddElement(DataNode, 'tmrBewild', IntToStr(entities.entityList[0].tmrBewild));
     AddElement(DataNode, 'posX', IntToStr(entities.entityList[0].posX));
     AddElement(DataNode, 'posY', IntToStr(entities.entityList[0].posY));
 
