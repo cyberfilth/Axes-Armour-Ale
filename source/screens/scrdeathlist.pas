@@ -160,6 +160,7 @@ begin
           14: killType := 'Gnome warrior';
           15: killType := 'Gnome assassin';
           17: killType := 'Blue Fungus';
+          18: killType := 'Embalming Spider';
           else
             killType := 'unknown';
         end;

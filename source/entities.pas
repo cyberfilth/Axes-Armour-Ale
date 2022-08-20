@@ -14,7 +14,7 @@ uses
   cave_rat, giant_cave_rat, blood_bat, green_fungus, redcap_lesser,
   redcap_lesser_lobber, small_green_fungus, large_blood_bat, small_hyena,
   redcap_fungus, mushroom_person, hyena_fungus, small_hornet, small_corpse_spider,
-  gnome_warrior, gnome_assassin, web, crypt_wolf, blue_fungus;
+  gnome_warrior, gnome_assassin, web, crypt_wolf, blue_fungus, embalming_spider;
 
 type { NPC attitudes }
   Tattitudes = (stateNeutral, stateHostile, stateEscape);
@@ -338,6 +338,7 @@ begin
     'stickyWeb': web.takeTurn(i);
     'crptWolf': crypt_wolf.takeTurn(i);
     'BlueFungus': blue_fungus.takeTurn(i);
+    'embalmSpider': embalming_spider.takeTurn(i);
   end;
   (* Occupy their current tile *)
   occupyUpdate;
@@ -364,6 +365,7 @@ begin
     'GnmAss': gnome_assassin.death(i);
     'crptWolf': crypt_wolf.death;
     'BlueFungus': blue_fungus.death;
+    'embalmSpider': embalming_spider.death;
   end;
 end;
 

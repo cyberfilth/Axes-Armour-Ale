@@ -156,7 +156,7 @@ begin
           ui.displayMessage('The fungus lashes you with its tendrils, inflicting ' + IntToStr(damageAmount) + ' damage');
           (* Fungus does bewildered damage *)
           entityList[0].stsBewild := True;
-          entityList[0].tmrBewild := damageAmount + 2;
+          entityList[0].tmrBewild := damageAmount + 4;
           if (killer = 'empty') then
             killer := 'blue fungus';
         end

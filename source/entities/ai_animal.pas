@@ -191,11 +191,19 @@ begin
              end
              else if (entityList[id].intName = 'smlCorpseSpider') then
              begin
-               (* Fungus does poison damage *)
+               (* Spider does poison damage *)
                entityList[0].stsPoison := True;
                entityList[0].tmrPoison := damageAmount + 2;
                if (killer = 'empty') then
                   killer := 'a small Corpse Spider';
+             end
+             else if (entityList[id].intName = 'embalmSpider') then
+             begin
+               (* Spider does poison damage *)
+               entityList[0].stsPoison := True;
+               entityList[0].tmrPoison := damageAmount + 3;
+               if (killer = 'empty') then
+                  killer := 'an Embalming Spider';
              end;
         end;
       (* Update health display to show damage *)
