@@ -44,7 +44,7 @@ begin
     throwDamage := 3;
     dice := 0;
     adds := 0;
-    discovered := False;
+    discovered := True;
     Inc(indexID);
   end;
 end;

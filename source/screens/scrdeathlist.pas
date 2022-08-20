@@ -159,6 +159,7 @@ begin
           13: killType := 'Small corpse spider';
           14: killType := 'Gnome warrior';
           15: killType := 'Gnome assassin';
+          17: killType := 'Blue Fungus';
           else
             killType := 'unknown';
         end;

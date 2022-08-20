@@ -1,23 +1,23 @@
-(* Stationary hazard, when attacked will either poison the player or release spores *)
+(* Stationary hazard, when attacked there's a chance of bewildering the player *)
 
-unit green_fungus;
+unit blue_fungus;
 
 {$mode objfpc}{$H+}
 
 interface
 
 uses
-  SysUtils, combat_resolver, items, poison_spore, universe, logging;
+  SysUtils, combat_resolver;
 
 (* Create fungus *)
-procedure createGreenFungus(uniqueid, npcx, npcy: smallint);
+procedure createBlueFungus(uniqueid, npcx, npcy: smallint);
 (* Take a turn *)
 procedure takeTurn(id: smallint);
 (* Check if player is next to NPC *)
 function isNextToPlayer(spx, spy: smallint): boolean;
 (* Fungus attacks *)
 procedure combat(idOwner, idTarget: smallint);
-(* NPC Death - Fungus releases spores into the air *)
+(* NPC Death *)
 procedure death;
 
 implementation
@@ -25,7 +25,7 @@ implementation
 uses
   entities, globalutils, ui, map, los;
 
-procedure createGreenFungus(uniqueid, npcx, npcy: smallint);
+procedure createBlueFungus(uniqueid, npcx, npcy: smallint);
 begin
   (* Add a green fungus to the list of creatures *)
   entities.listLength := length(entities.entityList);
@@ -33,16 +33,16 @@ begin
   with entities.entityList[entities.listLength] do
   begin
     npcID := uniqueid;
-    race := 'Green Fungus';
-    intName := 'GreenFungus';
+    race := 'Blue Fungus';
+    intName := 'BlueFungus';
     article := True;
-    description := 'a green fungus';
+    description := 'a blue fungus';
     glyph := 'f';
-    glyphColour := 'green';
-    maxHP := randomRange(2, 5);
+    glyphColour := 'cyan';
+    maxHP := randomRange(3, 5);
     currentHP := maxHP;
-    attack := randomRange(2, 4);
-    defence := randomRange(2, 3);
+    attack := randomRange(6, 8);
+    defence := randomRange(5, 7);
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;
@@ -115,7 +115,7 @@ begin
   damageAmount := globalutils.randomRange(2, entities.entityList[idOwner].attack) - entities.entityList[idTarget].defence;
   if (damageAmount > 0) then
   begin
-    entities.entityList[idTarget].currentHP := (entities.entityList[idTarget].currentHP - damageAmount);
+   entities.entityList[idTarget].currentHP := (entities.entityList[idTarget].currentHP - damageAmount);
     if (entities.entityList[idTarget].currentHP < 1) then
     begin
       if (idTarget = 0) then
@@ -153,13 +153,12 @@ begin
       begin
         if (idTarget = 0) then { if target is the player }
         begin
-          ui.displayMessage('The fungus lashes you with its stinger, inflicting ' +
-            IntToStr(damageAmount) + ' damage');
-          (* Fungus does poison damage *)
-          entityList[0].stsPoison := True;
-          entityList[0].tmrPoison := damageAmount + 2;
+          ui.displayMessage('The fungus lashes you with its tendrils, inflicting ' + IntToStr(damageAmount) + ' damage');
+          (* Fungus does bewildered damage *)
+          entityList[0].stsBewild := True;
+          entityList[0].tmrBewild := damageAmount + 2;
           if (killer = 'empty') then
-            killer := 'poisonous fungus';
+            killer := 'blue fungus';
         end
         else
           ui.bufferMessage('The fungus stings the ' + entityList[idTarget].race);
@@ -171,55 +170,9 @@ begin
 end;
 
 procedure death;
-var
-  fungusSpawnAttempts: byte;
-  i, amount, r, c, pX, pY: smallint;
-  spawnedYN: boolean;
 begin
-  Inc(deathList[4]);
-  pX := 0;
-  pY := 0;
-  spawnedYN := False;
-  (* Get Player coordinates *)
-  pX := entityList[0].posX;
-  pY := entityList[0].posY;
-  (* Counter for how many times game will attempt to place a fungus *)
-  fungusSpawnAttempts := 0;
-  (* Set a random number of spores *)
-  amount := randomRange(2, 3) + currentDepth;
-  (* Place the spores *)
-  for i := 1 to amount do
-    try
-      begin
-        (* Limit the number of attempts to find a space *)
-        if (fungusSpawnAttempts < 3) then
-        begin
-          (* Choose a space to place the fungus *)
-          r := globalutils.randomRange(pY - 2, pY + 2);
-          c := globalutils.randomRange(pX - 2, pX + 2);
-          (* choose a location that is not a wall or occupied *)
-          if (map.isWall(c,r) = False) and (map.isOccupied(c,r) = False) then
-          begin
-            poison_spore.createSpore(c,r);
-            spawnedYN := True;
-          end;
-        end;
-      end;
-    except
-      on E: ERangeError do
-      begin
-        logAction('green_fungus.death');
-        logAction('Error: valid range exceeded');
-        logAction(E.Message);
-      end;
-      on E: Exception do  { generic handler }
-      begin
-        logAction('green_fungus.death');
-        logAction('Caught ' + E.ClassName + ': ' + E.Message);
-      end;
-    end;
-  if (spawnedYN = True) then
-    ui.displayMessage('The fungus releases spores into the air');
+  Inc(deathList[17]);
 end;
 
 end.
+
