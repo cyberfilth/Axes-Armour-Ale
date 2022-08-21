@@ -831,6 +831,34 @@ begin
           end;
         end;
       end;
+    end;
+    'Q':
+    begin
+      mapDisplay[r][c].Glyph := Chr(197);
+      { Inside FoV }
+      if (hiDef = 1) then
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          if (player_stats.lightCounter <= 20) then
+            mapDisplay[r][c].GlyphColour := unlit
+          else
+            mapDisplay[r][c].GlyphColour := lit;
+        end;
+      end
+      { Outside FoV }
+      else
+      begin
+        if (player_stats.lightEquipped = True) then
+        begin
+          begin
+            if (player_stats.lightCounter <= 20) then
+              mapDisplay[r][c].GlyphColour := darkest
+            else
+              mapDisplay[r][c].GlyphColour := dark;
+          end;
+        end;
+      end;
     end
     (* Default block glyph *)
     else

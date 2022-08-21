@@ -222,6 +222,63 @@ begin
       end;
   end;
 
+  (* Edge cases *)
+  for r := 1 to globalutils.MAXROWS do
+  begin
+    for c := 1 to globalutils.MAXCOLUMNS do
+      if (processed_dungeon[r][c] = 'F') then
+      begin
+        if (processed_dungeon[r + 1][c] = 'L') then
+          processed_dungeon[r][c] := 'E';
+      end;
+  end;
+  for r := 1 to globalutils.MAXROWS do
+  begin
+    for c := 1 to globalutils.MAXCOLUMNS do
+      if (processed_dungeon[r][c] = 'D') then
+      begin
+        if (processed_dungeon[r][c + 1] = 'H') and (processed_dungeon[r + 1][c] = '.') then
+          processed_dungeon[r][c] := 'B';
+      end;
+  end;
+  for r := 1 to globalutils.MAXROWS do
+  begin
+    for c := 1 to globalutils.MAXCOLUMNS do
+      if (processed_dungeon[r][c] = 'P') then
+      begin
+        if (processed_dungeon[r - 1][c] = 'J') and (processed_dungeon[r - 1][c + 1] = '.')
+        and (processed_dungeon[r][c + 1] = 'O') and (processed_dungeon[r + 1][c + 1] = 'P')
+        and (processed_dungeon[r + 1][c] = 'P') and (processed_dungeon[r + 1][c - 1] = 'P')
+        and (processed_dungeon[r][c - 1] = 'O') and (processed_dungeon[r - 1][c - 1] = '.') then
+          processed_dungeon[r][c] := 'B';
+      end;
+  end;
+  for r := 1 to globalutils.MAXROWS do
+  begin
+    for c := 1 to globalutils.MAXCOLUMNS do
+      if (processed_dungeon[r][c] = 'F') then
+      begin
+        if (processed_dungeon[r - 1][c] = 'L') and (processed_dungeon[r - 1][c + 1] = '.')
+        and (processed_dungeon[r][c + 1] = 'G') and (processed_dungeon[r + 1][c + 1] = '.')
+        and (processed_dungeon[r + 1][c] = 'J') and (processed_dungeon[r + 1][c - 1] = '.')
+        and (processed_dungeon[r][c - 1] = 'H') and (processed_dungeon[r - 1][c - 1] = 'P') then
+          processed_dungeon[r][c] := 'Q';
+      end;
+  end;
+  for r := 1 to globalutils.MAXROWS do
+  begin
+    for c := 1 to globalutils.MAXCOLUMNS do
+      if (processed_dungeon[r][c] = 'D') then
+      begin
+        if (processed_dungeon[r - 1][c] = 'N') and (processed_dungeon[r - 1][c + 1] = 'P')
+        and (processed_dungeon[r][c + 1] = 'K') and (processed_dungeon[r + 1][c + 1] = 'N')
+        and (processed_dungeon[r + 1][c] = '.') and (processed_dungeon[r + 1][c - 1] = '.')
+        and (processed_dungeon[r][c - 1] = 'G') and (processed_dungeon[r - 1][c - 1] = '.') then
+          processed_dungeon[r][c] := 'B';
+      end;
+  end;
+
+
   (* put the stairs back in *)
   for r := 1 to globalutils.MAXROWS do
   begin
