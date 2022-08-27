@@ -38,8 +38,8 @@ const
     ('redcapLsrLbr', 'redcapLsrLbr');
 
   (* Array of creatures found in a dungeon, ordered by dungeon level *)
-  dgnNPC1: array[1..5] of string =
-    ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr', 'cryptWolf');
+  dgnNPC1: array[1..4] of string =
+    ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr');
   dgnNPC2: array[1..7] of string =
     ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
     'greenFungus', 'hobFungus');

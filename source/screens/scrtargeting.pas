@@ -374,8 +374,6 @@ begin
           ui.writeBufferedMessages;
           ui.bufferMessage('You kill ' + opponent);
           entities.killEntity(opponentID);
-          entityList[0].xpReward := entities.entityList[0].xpReward + entityList[opponentID].xpReward;
-          ui.updateXP;
        end
        else
            begin

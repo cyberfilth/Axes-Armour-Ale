@@ -53,7 +53,6 @@ end;
 
 procedure dumpMap;
 var
- // i: smallint;
   filename: shortstring;
   myfile: Text;
 begin
@@ -64,15 +63,6 @@ begin
   begin
     for c := 1 to MAXCOLUMNS do
     begin
-      { Draw entity }
-      //for i := 0 to High(entityList) do
-      //begin
-      //  if (entityList[i].posX = c) and (entityList[i].posY = r) then
-      //    Write(myfile, entityList[i].glyph);
-      //end;
-      { Draw item }
-
-      { Draw map tile }
       Write(myfile, map.maparea[r][c].Glyph);
     end;
     Write(myfile, sLineBreak);

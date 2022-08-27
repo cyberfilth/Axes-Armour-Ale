@@ -76,11 +76,7 @@ begin
         entityList[i].currentHP := (entityList[i].currentHP - damageAmount);
         (* Check if NPC killed *)
         if (entityList[i].currentHP < 1) then
-        begin
           entities.killEntity(i);
-          entityList[0].xpReward := entityList[0].xpReward + entityList[i].xpReward;
-          ui.updateXP;
-        end;
       end;
     end;
   end;

@@ -117,7 +117,16 @@ end;
 function isWall(x, y: smallint): boolean;
 begin
   Result := False;
+  { Cave }
   if (mapDisplay[y][x].Glyph = Chr(177)) or (mapDisplay[y][x].Glyph = Chr(176)) then
+    Result := True;
+  { Dungeon }
+  if (maparea[y][x].Glyph = 'A') or (maparea[y][x].Glyph = 'B') or (maparea[y][x].Glyph = 'C')
+  or (maparea[y][x].Glyph = 'D') or (maparea[y][x].Glyph = 'E') or (maparea[y][x].Glyph = 'F')
+  or (maparea[y][x].Glyph = 'G') or (maparea[y][x].Glyph = 'H') or (maparea[y][x].Glyph = 'I')
+  or (maparea[y][x].Glyph = 'J') or (maparea[y][x].Glyph = 'K') or (maparea[y][x].Glyph = 'L')
+  or (maparea[y][x].Glyph = 'M') or (maparea[y][x].Glyph = 'N') or (maparea[y][x].Glyph = 'O')
+  or (maparea[y][x].Glyph = 'P') or (maparea[y][x].Glyph = 'Q') then
     Result := True;
 end;
 

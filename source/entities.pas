@@ -129,6 +129,8 @@ end;
 
 procedure killEntity(id: smallint);
 begin
+  Inc(entityList[0].xpReward, entityList[id].xpReward);
+  ui.updateXP;
   entityList[id].entityDeath(id);
   entityList[id].isDead := True;
   entityList[id].glyph := '.';

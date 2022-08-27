@@ -44,11 +44,11 @@ begin
     moveCount := 0;
     targetX := 0;
     targetY := 0;
-    inView := True;
+    inView := False;
     blocks := False;
     faction := trapFaction;
     state := stateHostile;
-    discovered := True;
+    discovered := False;
     weaponEquipped := False;
     armourEquipped := False;
     isDead := False;

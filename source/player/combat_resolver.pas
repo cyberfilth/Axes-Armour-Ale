@@ -90,9 +90,6 @@ begin
       (* If the target was an NPC *)
          ui.displayMessage('You kill ' + opponent);
       entities.killEntity(npcID);
-      entities.entityList[0].xpReward :=
-        entities.entityList[0].xpReward + entities.entityList[npcID].xpReward;
-      ui.updateXP;
       exit;
     end
     else
@@ -156,9 +153,6 @@ begin
     begin
       ui.displayMessage('You kill ' + opponent);
       entities.killEntity(npc);
-      entities.entityList[0].xpReward :=
-        entities.entityList[0].xpReward + entities.entityList[npc].xpReward;
-      ui.updateXP;
       exit;
     end
     else

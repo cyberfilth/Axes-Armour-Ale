@@ -430,8 +430,6 @@ begin
           ui.writeBufferedMessages;
           ui.bufferMessage('You kill ' + opponent);
           entities.killEntity(tgtList[selTarget].id);
-          entityList[0].xpReward := entities.entityList[0].xpReward + entityList[tgtList[selTarget].id].xpReward;
-          ui.updateXP;
           LockScreenUpdate;
           (* Restore the game map *)
           main.returnToGameScreen;
