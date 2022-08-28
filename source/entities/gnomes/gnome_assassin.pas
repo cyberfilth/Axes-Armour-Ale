@@ -335,9 +335,9 @@ begin
     else
     begin
       if (damageAmount = 1) then
-        ui.displayMessage('The Gnome slightly wounds you')
+        ui.displayMessage('The Gnome assassin slightly wounds you')
       else
-        ui.displayMessage('The Gnome stabs you, dealing ' +
+        ui.displayMessage('The Gnome assassin stabs you, dealing ' +
           IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
@@ -347,9 +347,9 @@ begin
   begin
     chance := randomRange(1, 4);
     if (chance = 1) then
-      ui.displayMessage('The Gnome attacks wildly but misses')
+      ui.displayMessage('The Gnome assassin attacks wildly but misses')
     else if (chance = 2) then
-      ui.displayMessage('The Gnome flails at you');
+      ui.displayMessage('The Gnome assassin flails at you');
     combat_resolver.spiteDMG(id);
   end;
 end;
@@ -413,7 +413,7 @@ begin
     { Place item on the game map }
     SetLength(itemList, Length(itemList) + 1);
     gnomish_dagger.createGnomishDagger(entityList[id].posX, entityList[id].posY);
-    ui.displayMessage('The Gnome drops a dagger');
+    ui.displayMessage('The assassin drops a dagger');
   end;
 end;
 

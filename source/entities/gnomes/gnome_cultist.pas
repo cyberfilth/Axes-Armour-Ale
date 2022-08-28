@@ -1,20 +1,20 @@
 (* Intelligent enemy with scent tracking *)
 
-unit gnome_warrior;
+unit gnome_cultist;
 
 {$mode objfpc}{$H+}
 
 interface
 
 uses
-  SysUtils, Math, smell, universe, combat_resolver, player_stats;
+  SysUtils, Math, smell, universe, combat_resolver, player_stats, items, gnomish_mace;
 
-(* Create a Gnome Warrior *)
-procedure createGnomeWarrior(uniqueid, npcx, npcy: smallint);
+(* Create a Gnome Cultist *)
+procedure createGnomeCultist(uniqueid, npcx, npcy: smallint);
 (* Take a turn *)
 procedure takeTurn(id: smallint);
 (* Creature death *)
-procedure death;
+procedure death(id: smallint);
 (* Decision tree for Neutral state *)
 procedure decisionNeutral(id: smallint);
 (* Decision tree for Hostile state *)
@@ -39,7 +39,7 @@ implementation
 uses
   entities, globalutils, ui, los, map;
 
-procedure createGnomeWarrior(uniqueid, npcx, npcy: smallint);
+procedure createGnomeCultist(uniqueid, npcx, npcy: smallint);
 var
   mood, desc: byte;
 begin
@@ -53,20 +53,20 @@ begin
   with entities.entityList[entities.listLength] do
   begin
     npcID := uniqueid;
-    race := 'Gnome warrior';
-    intName := 'GnmWarr';
+    race := 'Gnome cultist';
+    intName := 'GnmCult';
     article := True;
     if (desc = 1) then
-      description := 'a battle-scarred Gnome'
+      description := 'a fanatical Gnome'
     else if (desc = 2) then
-      description := 'a fierce looking Gnome'
+      description := 'a Gnome dark priest'
     else
-      description := 'a beserker Gnome';
+      description := 'a Gnome in priest robes';
     glyph := 'n';
-    glyphColour := 'lightMagenta';
+    glyphColour := 'cyan';
     maxHP := randomRange(5, 7) + universe.currentDepth;
     currentHP := maxHP;
-    attack := randomRange(7, 9) + player_stats.playerLevel;
+    attack := randomRange(6, 8) + player_stats.playerLevel;
     defence := randomRange(5, 7) + player_stats.playerLevel;
     weaponDice := 0;
     weaponAdds := 0;
@@ -112,9 +112,25 @@ begin
   end;
 end;
 
-procedure death;
+procedure death(id: smallint);
+var
+  (* Chance of dropping an item *)
+  chance: smallint;
 begin
-  Inc(deathList[14]);
+  chance := 0;
+  Inc(deathList[19]);
+  chance := randomRange(0, 3);
+  if (chance = 2) then
+  begin
+    (* Check if there is already an item on the floor here *)
+    if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) then
+    begin
+      { Place item on the game map }
+      SetLength(itemList, Length(itemList) + 1);
+      gnomish_mace.createGnomishMace(entityList[id].posX, entityList[id].posY);
+      ui.displayMessage('The cultist drops a mace');
+    end;
+  end;
 end;
 
 procedure decisionNeutral(id: smallint);
@@ -353,9 +369,9 @@ begin
     else
     begin
       if (damageAmount = 1) then
-        ui.displayMessage('The Gnome warrior slightly wounds you')
+        ui.displayMessage('The Gnome cultist slightly wounds you')
       else
-        ui.displayMessage('The Gnome warrior stabs you, dealing ' +
+        ui.displayMessage('The Gnome cultist stabs you, dealing ' +
           IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
@@ -365,9 +381,9 @@ begin
   begin
     chance := randomRange(1, 4);
     if (chance = 1) then
-      ui.displayMessage('The Gnome warrior attacks wildly but misses')
+      ui.displayMessage('The Gnome cultist attacks wildly but misses')
     else if (chance = 2) then
-      ui.displayMessage('The Gnome warrior flails at you');
+      ui.displayMessage('The Gnome cultist flails at you');
     combat_resolver.spiteDMG(id);
   end;
 end;
@@ -412,6 +428,8 @@ begin
       if (map.canMove((entities.entityList[id].posX - 1),
         entities.entityList[id].posY) and (map.isOccupied(
         (entities.entityList[id].posX - 1), entities.entityList[id].posY) = False)) then
+
+
 
 
         entities.moveNPC(id, (entities.entityList[id].posX - 1),

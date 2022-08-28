@@ -162,6 +162,7 @@ begin
           16: killType := 'Crypt wolf';
           17: killType := 'Blue Fungus';
           18: killType := 'Embalming Spider';
+          19: killType := 'Gnome cultist';
           else
             killType := 'unknown';
         end;

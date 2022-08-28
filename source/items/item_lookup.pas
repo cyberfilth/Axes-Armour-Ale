@@ -11,7 +11,7 @@ uses
   { List of drinks }
   ale_tankard, wine_flask,
   { List of weapons }
-  crude_dagger, basic_club, rock, short_bow, pointy_stick, gnomish_dagger,
+  crude_dagger, basic_club, rock, short_bow, pointy_stick, gnomish_dagger, gnomish_mace,
   { List of armour }
   leather_armour1, cloth_armour1,
   { Quest items }
@@ -35,9 +35,8 @@ const
     ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
 
   (* Array of items found in a dungeon, ordered by dungeon level *)
-  dgnItems1: array[1..8] of string =
-    ('aleTankard', 'stickyWeb', 'wineFlask', 'stickyWeb', 'rock',
-    'pointyStick', 'arrow', 'arrow');
+  dgnItems1: array[1..7] of string =
+    ('aleTankard', 'stickyWeb', 'wineFlask', 'stickyWeb', 'pointyStick', 'arrow', 'arrow');
   dgnItems2: array[1..7] of string =
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
     'rock', 'arrow', 'shortBow');
@@ -146,6 +145,7 @@ begin
     14: gnomish_dagger.useItem(equipped, id);
     15: web_trap.useItem;
     16: poison_spore.useItem;
+    17: gnomish_mace.useItem(equipped, id);
   end;
 end;
 

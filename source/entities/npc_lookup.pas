@@ -12,7 +12,7 @@ uses
   cave_rat, giant_cave_rat, blood_bat, large_blood_bat, green_fungus, mushroom_person,
   redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
   hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
-  crypt_wolf, blue_fungus, embalming_spider;
+  crypt_wolf, blue_fungus, embalming_spider, gnome_cultist;
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
@@ -25,11 +25,9 @@ const
   caveNPC1: array[1..5] of string =
     ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
   caveNPC2: array[1..7] of string =
-    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
-    'greenFungus', 'hobFungus');
+    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
   caveNPC3: array[1..7] of string =
-    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
-    'greenFungus', 'matango', 'hyenaFungus');
+    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'greenFungus', 'matango', 'hyenaFungus');
   caveUnique1: array[1..2] of string =
     ('largeBat', 'bloodBat');
   caveUnique2: array[1..2] of string =
@@ -40,12 +38,10 @@ const
   (* Array of creatures found in a dungeon, ordered by dungeon level *)
   dgnNPC1: array[1..4] of string =
     ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr');
-  dgnNPC2: array[1..7] of string =
-    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
-    'greenFungus', 'hobFungus');
+  dgnNPC2: array[1..5] of string =
+    ('smlCorpseSpider', 'GnmCult', 'GnmWarr', 'GnmWarr', 'blueFungus');
   dgnNPC3: array[1..7] of string =
-    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
-    'redcapLsrLbr', 'matango', 'hyenaFungus');
+    ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'redcapLsrLbr', 'matango', 'hyenaFungus');
   dgnUnique1: array[1..2] of string =
     ('blueFungus', 'GnmAss');
   dgnUnique2: array[1..2] of string =
@@ -185,6 +181,7 @@ begin
     'cryptWolf': crypt_wolf.createCryptWolf(i, c, r);
     'blueFungus': blue_fungus.createBlueFungus(i, c, r);
     'embalmSpider': embalming_spider.createEmbalmSpider(i, c, r);
+    'GnmCult': gnome_cultist.createGnomeCultist(i, c, r);
   end;
 end;
 
