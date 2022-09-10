@@ -40,8 +40,8 @@ const
     ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr');
   dgnNPC2: array[1..5] of string =
     ('smlCorpseSpider', 'GnmCult', 'GnmWarr', 'GnmWarr', 'blueFungus');
-  dgnNPC3: array[1..7] of string =
-    ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'redcapLsrLbr', 'matango', 'hyenaFungus');
+  dgnNPC3: array[1..5] of string =
+    ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'smlCorpseSpider');
   dgnUnique1: array[1..2] of string =
     ('blueFungus', 'GnmAss');
   dgnUnique2: array[1..2] of string =

@@ -36,7 +36,8 @@ const
 
   (* Array of items found in a dungeon, ordered by dungeon level *)
   dgnItems1: array[1..7] of string =
-    ('aleTankard', 'stickyWeb', 'wineFlask', 'stickyWeb', 'pointyStick', 'arrow', 'arrow');
+    ('aleTankard', 'stickyWeb', 'wineFlask', 'stickyWeb', 'pointyStick',
+    'arrow', 'arrow');
   dgnItems2: array[1..7] of string =
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
     'rock', 'arrow', 'shortBow');
@@ -153,20 +154,40 @@ procedure dropFirstItem;
 var
   r, c: smallint;
 begin
-  (* Choose random location on the map *)
-  repeat
-    r := globalutils.randomRange(3, (MAXROWS - 3));
-    c := globalutils.randomRange(3, (MAXCOLUMNS - 3));
-    (* choose a location that is not a wall or occupied *)
-  until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
-  SetLength(itemList, High(itemList) + 1);
-  (* Drop the quest object *)
-  if (universe.currentDepth = 3) then
-    smugglersMap.createSmugglersMap(c, r)
-  else if (universe.currentDepth = 2) then
-    staff_minor_scorch.createStaff(c, r)
-  else
-    rock.createRock(c, r);
+  if (dungeonType = tCave) then
+  begin
+    (* Choose random location on the map *)
+    repeat
+      r := globalutils.randomRange(3, (MAXROWS - 3));
+      c := globalutils.randomRange(3, (MAXCOLUMNS - 3));
+      (* choose a location that is not a wall or occupied *)
+    until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
+    SetLength(itemList, High(itemList) + 1);
+    (* Drop the quest object *)
+    if (universe.currentDepth = 3) then
+      smugglersMap.createSmugglersMap(c, r)
+    else if (universe.currentDepth = 2) then
+      staff_minor_scorch.createStaff(c, r)
+    else
+      rock.createRock(c, r);
+  end
+  else if (dungeonType = tDungeon) then
+  begin
+    (* Choose random location on the map *)
+    repeat
+      r := globalutils.randomRange(3, (MAXROWS - 3));
+      c := globalutils.randomRange(3, (MAXCOLUMNS - 3));
+      (* choose a location that is not a wall or occupied *)
+    until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
+    SetLength(itemList, High(itemList) + 1);
+    (* Drop the quest object *)
+    if (universe.currentDepth = 3) then
+      arrow.createArrow(c, r)
+    else if (universe.currentDepth = 2) then
+      staff_minor_scorch.createStaff(c, r)
+    else
+      wine_flask.createWineFlask(c, r);
+  end;
 end;
 
 end.
