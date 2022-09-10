@@ -1,3 +1,5 @@
+(* Steel mace *)
+
 unit gnomish_mace;
 
 {$mode fpc}{$H+}

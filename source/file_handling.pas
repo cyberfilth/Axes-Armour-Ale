@@ -467,6 +467,8 @@ begin
             AddElement(DataNode, 'glyph', 'i')
           else if (itemList[i].glyph = chr(232)) then
             AddElement(DataNode, 'glyph', '0')
+          else if (itemList[i].glyph = chr(194)) then
+            AddElement(DataNode, 'glyph', 'A')
           else
             AddElement(DataNode, 'glyph', itemList[i].glyph);
 
@@ -632,6 +634,8 @@ begin
           items.itemList[i].glyph := chr(173)
         else if (ItemsNode.FindNode('glyph').TextContent[1] = '0') then { Pixie in a jar }
           items.itemList[i].glyph := chr(232)
+        else if (ItemsNode.FindNode('glyph').TextContent[1] = 'A') then { axe }
+          items.itemList[i].glyph := chr(194)
         else
           items.itemList[i].glyph := char(widechar(ItemsNode.FindNode('glyph').TextContent[1]));
 
@@ -873,6 +877,8 @@ begin
         player_inventory.inventory[i].glyph := chr(173)
       else if (InventoryNode.FindNode('glyph').TextContent[1] = '0') then
         player_inventory.inventory[i].glyph := chr(232)
+      else if (InventoryNode.FindNode('glyph').TextContent[1] = 'A') then
+        player_inventory.inventory[i].glyph := chr(194)
       else
         player_inventory.inventory[i].glyph := char(widechar(InventoryNode.FindNode('glyph').TextContent[1]));
 
@@ -1050,6 +1056,8 @@ begin
         AddElement(DataNode, 'glyph', 'i')
       else if (inventory[i].glyph = chr(232)) then
         AddElement(DataNode, 'glyph', '0')
+      else if (inventory[i].glyph = chr(194)) then
+        AddElement(DataNode, 'glyph', 'A')
       else
         AddElement(DataNode, 'glyph', inventory[i].glyph);
 

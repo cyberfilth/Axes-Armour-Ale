@@ -12,6 +12,7 @@ uses
   ale_tankard, wine_flask,
   { List of weapons }
   crude_dagger, basic_club, rock, short_bow, pointy_stick, gnomish_dagger, gnomish_mace,
+  gnomish_axe,
   { List of armour }
   leather_armour1, cloth_armour1,
   { Quest items }
@@ -182,7 +183,7 @@ begin
     SetLength(itemList, High(itemList) + 1);
     (* Drop the quest object *)
     if (universe.currentDepth = 3) then
-      arrow.createArrow(c, r)
+      gnomish_axe.createGnomishAxe(c, r)
     else if (universe.currentDepth = 2) then
       staff_minor_scorch.createStaff(c, r)
     else
