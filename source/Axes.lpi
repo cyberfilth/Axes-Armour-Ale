@@ -90,7 +90,7 @@
       <FormatVersion Value="2"/>
       <Modes Count="0"/>
     </RunParams>
-    <Units Count="11">
+    <Units Count="12">
       <Unit0>
         <Filename Value="Axes.pas"/>
         <IsPartOfProject Value="True"/>
@@ -137,6 +137,10 @@
         <Filename Value="items/weapons/gnomish_axe.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit10>
+      <Unit11>
+        <Filename Value="items/pixie_jar_dim.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit11>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

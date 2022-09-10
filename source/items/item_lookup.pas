@@ -16,7 +16,7 @@ uses
   { List of armour }
   leather_armour1, cloth_armour1,
   { Quest items }
-  smugglersMap, pixie_jar,
+  smugglersMap, pixie_jar, pixie_jar_dim,
   { Magical items }
   staff_minor_scorch,
   { Ammunition }
@@ -37,11 +37,11 @@ const
 
   (* Array of items found in a dungeon, ordered by dungeon level *)
   dgnItems1: array[1..7] of string =
-    ('aleTankard', 'stickyWeb', 'wineFlask', 'stickyWeb', 'pointyStick',
+    ('aleTankard', 'stickyWeb', 'wineFlask', 'stickyWeb', 'dimPixieJar',
     'arrow', 'arrow');
   dgnItems2: array[1..7] of string =
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
-    'rock', 'arrow', 'shortBow');
+    'dimPixieJar', 'arrow', 'shortBow');
   dgnItems3: array[1..6] of string =
     ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
 
@@ -125,6 +125,7 @@ begin
     'pointyStick': pointy_stick.createPointyStick(c, r);
     'arrow': arrow.createArrow(c, r);
     'stickyWeb': web_trap.createWebTrap(c, r);
+    'dimPixieJar': pixie_jar_dim.createPixieJarDim(c, r);
   end;
 end;
 
