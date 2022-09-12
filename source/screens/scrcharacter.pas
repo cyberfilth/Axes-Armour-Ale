@@ -82,25 +82,25 @@ begin
   (* XP points to the next level *)
   Inc(y, 2);
   if (player_stats.playerLevel = 1) then
-    TextOut(10, y, 'cyan', 'You need ' + IntToStr(100 - entityList[0].xpReward) + ' experience points to advance to level 2')
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(100 - entityList[0].xpReward) + ' experience point(s) to advance to level 2')
   else if (player_stats.playerLevel = 2) then
-    TextOut(10, y, 'cyan', 'You need ' + IntToStr(250 - entityList[0].xpReward) + ' experience points to advance to level 3')
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(250 - entityList[0].xpReward) + ' experience point(s) to advance to level 3')
   else if (player_stats.playerLevel = 3) then
-    TextOut(10, y, 'cyan', 'You need ' + IntToStr(450 - entityList[0].xpReward) + ' experience points to advance to level 4')
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(450 - entityList[0].xpReward) + ' experience point(s) to advance to level 4')
   else if (player_stats.playerLevel = 4) then
-    TextOut(10, y, 'cyan', 'You need ' + IntToStr(700 - entityList[0].xpReward) + ' experience points to advance to level 5')
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(700 - entityList[0].xpReward) + ' experience point(s) to advance to level 5')
   else if (player_stats.playerLevel = 5) then
-    TextOut(10, y, 'cyan', 'You need ' + IntToStr(1000 - entityList[0].xpReward) + ' experience points to advance to level 6')
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(1000 - entityList[0].xpReward) + ' experience point(s) to advance to level 6')
   else if (player_stats.playerLevel = 6) then
-    TextOut(10, y, 'cyan', 'You need ' + IntToStr(1350 - entityList[0].xpReward) + ' experience points to advance to level 7')
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(1350 - entityList[0].xpReward) + ' experience point(s) to advance to level 7')
   else if (player_stats.playerLevel = 7) then
-    TextOut(10, y, 'cyan', 'You need ' + IntToStr(1750 - entityList[0].xpReward) + ' experience points to advance to level 8')
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(1750 - entityList[0].xpReward) + ' experience point(s) to advance to level 8')
   else if (player_stats.playerLevel = 8) then
-    TextOut(10, y, 'cyan', 'You need ' + IntToStr(2200 - entityList[0].xpReward) + ' experience points to advance to level 9')
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(2200 - entityList[0].xpReward) + ' experience point(s) to advance to level 9')
   else if (player_stats.playerLevel = 9) then
-    TextOut(10, y, 'cyan', 'You need ' + IntToStr(2700 - entityList[0].xpReward) + ' experience points to advance to level 10')
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(2700 - entityList[0].xpReward) + ' experience point(s) to advance to level 10')
   else if (player_stats.playerLevel = 10) then
-    TextOut(10, y, 'cyan', 'You need ' + IntToStr(3250 - entityList[0].xpReward) + ' experience points to advance to level 11');
+    TextOut(10, y, 'cyan', 'You need ' + IntToStr(3250 - entityList[0].xpReward) + ' experience point(s) to advance to level 11');
 
   (* Status effects *)
   if (entityList[0].stsDrunk = True) or (entityList[0].stsPoison = True) then
