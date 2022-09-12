@@ -9,7 +9,7 @@ interface
 
 uses
   SysUtils, Classes, Math, map, entities, video, ui, camera, fov, items, los,
-  scrGame, player_stats, animation, globalUtils, arrow;
+  player_stats, animation, globalUtils, arrow;
 
 type
   (* Weapons *)
@@ -440,7 +440,7 @@ var
 begin
   for y := 21 to 25 do
   begin
-    for x := 1 to scrGame.minX do
+    for x := 1 to ui.displayCol do
     begin
       TextOut(x, y, 'black', ' ');
     end;
