@@ -163,6 +163,7 @@ begin
           17: killType := 'Blue Fungus';
           18: killType := 'Embalming Spider';
           19: killType := 'Gnome cultist';
+          20: killType := 'Bogle';
           else
             killType := 'unknown';
         end;

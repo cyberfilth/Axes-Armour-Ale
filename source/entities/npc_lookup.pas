@@ -12,7 +12,7 @@ uses
   cave_rat, giant_cave_rat, blood_bat, large_blood_bat, green_fungus, mushroom_person,
   redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
   hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
-  crypt_wolf, blue_fungus, embalming_spider, gnome_cultist;
+  crypt_wolf, blue_fungus, embalming_spider, gnome_cultist, bogle_drunk;
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
@@ -47,7 +47,7 @@ const
   dgnUnique2: array[1..2] of string =
     ('embalmSpider', 'GnmAss');
   dgnUnique3: array[1..2] of string =
-    ('cryptWolf', 'embalmSpider');
+    ('drunkBogle', 'drunkBogle');
 var
   r, c: smallint;
   randSelect: byte;
@@ -182,6 +182,7 @@ begin
     'blueFungus': blue_fungus.createBlueFungus(i, c, r);
     'embalmSpider': embalming_spider.createEmbalmSpider(i, c, r);
     'GnmCult': gnome_cultist.createGnomeCultist(i, c, r);
+    'drunkBogle': bogle_drunk.createDrunkBogle(i, c, r);
   end;
 end;
 
