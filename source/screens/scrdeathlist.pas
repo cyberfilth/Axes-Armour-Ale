@@ -160,14 +160,32 @@ begin
           14: killType := 'Gnome warrior';
           15: killType := 'Gnome assassin';
           16: killType := 'Crypt wolf';
-          17: killType := 'Blue Fungus';
+          17: killType := 'Blue fungus';
           18: killType := 'Embalming Spider';
           19: killType := 'Gnome cultist';
           20: killType := 'Bogle';
           else
             killType := 'unknown';
         end;
-        TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
+        if (deathList[i] > 1) and (RightStr(killType, 6) = 'fungus') then
+        begin
+          killType := StringReplace(killtype, 'fungus', 'fungi', [rfReplaceAll, rfIgnoreCase]);
+          TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
+        end
+        else if (deathList[i] > 1) and (RightStr(killType, 6) = 'person') then
+        begin
+          killType := StringReplace(killtype, 'person', 'people', [rfReplaceAll, rfIgnoreCase]);
+          TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
+        end
+        else if (deathList[i] > 1) and (RightStr(killType, 4) = 'wolf') then
+        begin
+          killType := StringReplace(killtype, 'wolf', 'wolves', [rfReplaceAll, rfIgnoreCase]);
+          TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
+        end
+        else if (deathList[i] > 1) and (RightStr(killType, 1) <> 's') then
+          TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType + 's')
+        else
+          TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
         Inc(lineNo);
       end;
     end;
