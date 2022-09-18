@@ -149,6 +149,7 @@ begin
     15: web_trap.useItem;
     16: poison_spore.useItem;
     17: gnomish_mace.useItem(equipped, id);
+    18: gnomish_axe.useItem(equipped, id);
   end;
 end;
 

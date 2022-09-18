@@ -55,15 +55,15 @@ procedure useItem(equipped: boolean; ident: smallint);
 var
   info: shortstring;
 begin
-  info := 'You unequip the Gnomish mace.';
+  info := 'You unequip the Gnomish axe.';
   if (equipped = False) then
     (* To equip the weapon *)
   begin
-    info := 'You equip the Gnomish mace. The mace adds 2D6 to your attack';
+    info := 'You equip the Gnomish axe. The axe adds 2D6 to your attack';
     entityList[0].weaponEquipped := True;
     Inc(entityList[0].weaponDice, 2);
     ui.displayMessage(info);
-    ui.equippedWeapon := 'Gnomish mace';
+    ui.equippedWeapon := 'Gnomish axe';
     ui.writeBufferedMessages;
   end
   else
