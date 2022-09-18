@@ -58,8 +58,8 @@ begin
     glyphColour := 'lightGreen';
     maxHP := randomRange(3, 5) + universe.currentDepth;
     currentHP := maxHP;
-    attack := randomRange(entityList[0].attack - 1, entityList[0].attack);
-    defence := randomRange(entityList[0].defence - 1, entityList[0].defence + 1);
+    attack := randomRange(entityList[0].attack + 2, entityList[0].attack + 4);
+    defence := randomRange(entityList[0].defence + 3, entityList[0].defence + 6);
     weaponDice := 0;
     (* Weapon Adds are used in place of ammo *)
     weaponAdds := 3;
@@ -355,7 +355,7 @@ var
   DwarfInsults: array[1..5] of string = ('Ya smelly dwarf!', 'Short-arse!', 'Go back to yer mine!', 'Bloody dirt-digger!', 'Ha! Half-pint!');
 begin
   damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) - entities.entityList[0].defence;
-  insultChance := randomRange(1, 10);
+  insultChance := randomRange(1, 7);
   if (damageAmount > 0) then
   begin
     entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
@@ -374,11 +374,11 @@ begin
         if (insultChance < 6) then
         begin
           if (player_stats.playerRace = 'Human') then
-             ui.displayMessage(humanInsults[insultChance])
+             ui.displayMessage('The Bogle yells "' + humanInsults[insultChance] + '"')
           else if (player_stats.playerRace = 'Dwarf') then
-             ui.displayMessage(dwarfInsults[insultChance])
+             ui.displayMessage('The Bogle yells "' + dwarfInsults[insultChance] + '"')
           else if (player_stats.playerRace = 'Elf') then
-             ui.displayMessage(elfInsults[insultChance])
+             ui.displayMessage('The Bogle yells "' + elfInsults[insultChance] + '"')
         end;
       end;
       (* Update health display to show damage *)
