@@ -39,7 +39,7 @@ begin
     defence := randomRange(5, 12);
     weaponDice := 0;
     weaponAdds := 0;
-    xpReward := 2;
+    xpReward := 0;
     visionRange := 4;
     moveCount := 0;
     targetX := 0;
