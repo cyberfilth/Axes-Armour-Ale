@@ -132,7 +132,7 @@ begin
       (* Create the items *);
       for i := 0 to (ItemNumber - 1) do
       begin
-        item_lookup.dispenseItem(tCave);
+        item_lookup.dispenseItem(tDungeon);
       end;
       (* Drop a single light source on each floor *)
       pixie_jar.createPixieJar;
