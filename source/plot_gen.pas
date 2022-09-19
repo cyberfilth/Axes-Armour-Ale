@@ -10,9 +10,9 @@ uses
   SysUtils, dos, player_stats;
 
 const
-  DayStr: array[0..6] of string =
+  DayStr: packed array[0..6] of string =
     ('Fastday', 'Onesday', 'Twosday', 'Frogday', 'Hawksday', 'Feastday', 'Marketday');
-  MonthStr: array[1..12] of string =
+  MonthStr: packed array[1..12] of string =
     ('Mistmon', 'Brittleice', 'Windmon', 'Gunther', 'Sweetbriar', 'Greenling',
     'Frogsong', 'Sunmon', 'Southflight',
     'Harvestmoon', 'Ghostmoon', 'Stormlight');
@@ -20,7 +20,7 @@ const
 var
   playerName, playerTitle, trollDate: string;
   Year, Month, Day, WDay: word;
-  titles: array[0..108] of string = ('Abominable', 'Amorous',
+  titles: packed array[0..108] of string = ('Abominable', 'Amorous',
     'Afflicted', 'Ailing', 'Breathless', 'Broken', 'Bullish', 'Craggy',
     'Bearded', 'Bony', 'Beastly', 'Drunken', 'Bitter', 'Fetid', 'Fierce',
     'Fiery', 'Bold', 'Filthy', 'Craven', 'Fishy', 'Crooked', 'Flexible',
@@ -39,7 +39,7 @@ var
     'Insatiable', 'Destructive', 'Dreadful', 'Musical', 'Frightful',
     'Oily', 'Rascal', 'Remorseless', 'Squinty', 'Silvery', 'Thirsty');
 
-  firstSyllable: array[0..73] of
+  firstSyllable: packed array[0..73] of
   string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
     'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con', 'Cor', 'Dag', 'Doo',
     'Elen', 'El', 'En', 'Eo', 'Faf', 'Fan', 'Fara', 'Fre', 'Fro',
@@ -49,7 +49,7 @@ var
     'Rud', 'Sam', 'She', 'Sheel', 'Shin', 'Shog', 'Son', 'Sur', 'Theo',
     'Tho', 'Tris', 'U', 'Uh', 'Ul', 'Vap', 'Vish', 'Vor', 'Ya', 'Yo', 'Yyr');
 
-  secondSyllable: array[0..62] of
+  secondSyllable: packed array[0..62] of
   string = ('ba', 'bis', 'bo', 'bus', 'da', 'dal', 'dagz', 'den',
     'di', 'dil', 'dinn', 'do', 'dor', 'dra', 'dur', 'gi', 'gauble',
     'gen', 'glum', 'go', 'gorn', 'goth', 'had', 'hard', 'is', 'karrl',
@@ -58,7 +58,7 @@ var
     'rin', 'rum', 'rus', 'rut', 'sekh', 'sha', 'thos', 'thur', 'toa',
     'tu', 'tur', 'tred', 'varl', 'wain', 'wan', 'win', 'wise', 'ya');
 
-  elvenName: array[0..885] of
+  elvenName: packed array[0..885] of
   string = ('Aarall', 'Abiala', 'Acanos', 'Acarnar', 'Adali', 'Adari',
     'Adarore', 'Addin', 'Aderiel', 'Adius', 'Agrae', 'Aitese', 'Alane',
     'Alar', 'Alaril', 'Alasar', 'Aldas', 'Aler', 'Alerin', 'Alesan',
@@ -188,7 +188,7 @@ var
     'Yogor', 'Zaal', 'Zarena', 'Ziali', 'Zira', 'Terix', 'Razal',
     'Lunella', 'Seron', 'Tharene', 'Nellino', 'Dushani', 'Raliar', 'Valaras', 'Liaro');
 
-  dwarvenName: array[0..109] of
+  dwarvenName: packed array[0..109] of
   string = ('Ailgor', 'Ainion', 'Alon', 'Alvion', 'Amur', 'Andol',
     'Argli', 'Arol', 'Artil', 'Artor', 'Avli', 'Balan', 'Balor',
     'Bamon', 'Bandiol', 'Baril', 'Baron', 'Baviol', 'Bavor', 'Bodol',
@@ -207,23 +207,23 @@ var
     'Rarli', 'Rarol', 'Rartil', 'Rundin', 'Runin', 'Rurgir', 'Ruril',
     'Rurir', 'Ruvil', 'Ruvli', 'Thogin', 'Thogrur', 'Thondir');
 
-  clanFirst: array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
+  clanFirst: packed array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
     'Grim', 'Rune', 'Storm', 'Frost', 'Thunder', 'Bright', 'Blood',
     'Grey', 'Stone', 'Bronze', 'Silver', 'Bone', 'Mist', 'Ice');
 
-  clanSecond: array[0..19] of
+  clanSecond: packed array[0..19] of
   string = ('Axe', 'Hammer', 'Anvil', 'Smith', 'Forge', 'Beard',
     'Shield', 'Biter', 'Bane', 'Weaver', 'Mage', 'Spear', 'Seeker',
     'Sword', 'Crafter', 'Breaker', 'Born', 'Helm', 'Hold', 'Fist');
 
-  elvenHomea: array[0..13] of
+  elvenHomea: packed array[0..13] of
   string = ('the Vale of', 'the Whispering Forest of', 'the forest of',
     'the white peaks of', 'the woods of', 'the Cinderlands of',
     'the Frostspike of', 'the snow pass of', 'the green fortress of',
     'the Waterways of', 'the sorrowful streams of', 'the Whispering Glade of',
     'the Hidden Spires of', 'the Shimmering of');
 
-  elvenHomeb: array[0..42] of
+  elvenHomeb: packed array[0..42] of
   string = ('Felamae', 'Lorrom', 'Anorel', 'Weneres', 'Rathel',
     'Lasbreg-Dwyr', 'Renamar', 'Sarriel', 'Vius', 'Viusand', 'Ethgal',
     'Renfin', 'Syldar', 'Thrantor', 'Paceledrel', 'Borntae', 'Mai-Ionla',
@@ -232,12 +232,12 @@ var
     'Saand-Riel', 'Mardír', 'Dorril', 'Thallor', 'Wingdal', 'Duil',
     'Glanduil', 'Iliphar', 'Ilrune', 'Saleh', 'Urijyre', 'Inamys', 'Caiwraek');
 
-  villageName: array[0..11] of
+  villageName: packed array[0..11] of
   string = ('PigSpit', 'FootRot', 'MudLands', 'SquelchBottom',
     'DungMould', 'Belchford', 'Goatstone', 'Kloggington', 'Ordure Field',
     'Clagstone', 'Dogmire', 'Klart');
 
-  aquilonianMaleFirst: array[0..187] of
+  aquilonianMaleFirst: packed array[0..187] of
   string = ('Abant', 'Abantiad', 'Ac', 'Acris', 'Act', 'Alc', 'Alcid',
     'Am', 'Andr', 'Andr', 'Arct', 'Arct', 'Arp', 'Asclep', 'Atab',
     'Atab', 'Attal', 'Auf', 'Aufid', 'Bal', 'Balend', 'Barr', 'Barr',
@@ -263,7 +263,7 @@ var
     'Serv', 'Sur', 'Thesp', 'Troc', 'Troc', 'Tul', 'Valann', 'Valer',
     'Vil', 'Volm', 'Volm', 'Volman', 'Zet');
 
-  aquilonianMaleLast: array[0..99] of
+  aquilonianMaleLast: packed array[0..99] of
   string = ('a', 'i', 'o', 'as', 'el', 'er', 'es', 'ic', 'in', 'io',
     'is', 'on', 'os', 'us', 'yc', 'ago', 'ald', 'ana', 'ana', 'eas',
     'ell', 'ell', 'eri', 'eus', 'eus', 'ian', 'ias', 'ias', 'ion',
@@ -278,7 +278,7 @@ var
     'ostas', 'arioin', 'audius', 'edides', 'ervius', 'espius', 'itheus',
     'onicus', 'antides');
 
-  aquilonianFemaleFirst: array[0..97] of
+  aquilonianFemaleFirst: packed array[0..97] of
   string = ('Adam', 'Aeg', 'Al', 'Alb', 'Albion', 'Alc', 'Alcim',
     'Anger', 'Arac', 'Arac', 'Aracel', 'Arian', 'Ariann', 'Balb',
     'Bith', 'Bolb', 'Cair', 'Cairist', 'Call', 'Card', 'Carm', 'Cat',
@@ -292,7 +292,7 @@ var
     'Pell', 'Ph', 'Ren', 'Rh', 'Ros', 'Ros', 'Sal', 'Salv', 'Sec',
     'Suad', 'Teth', 'Tim', 'Tryph', 'Val', 'Vern', 'Vig', 'Vimand', 'Vir', 'Zel');
 
-  aquilonianFemaleLast: array[0..99] of
+  aquilonianFemaleLast: packed array[0..99] of
   string = ('a', 'e', 'ea', 'ia', 'ia', 'ya', 'ys', 'ana', 'ana',
     'are', 'are', 'ata', 'ata', 'ede', 'ede', 'eia', 'eia', 'eis',
     'eis', 'ele', 'ele', 'ena', 'ena', 'ene', 'ene', 'era', 'era',
