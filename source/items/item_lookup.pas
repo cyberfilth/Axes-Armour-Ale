@@ -16,7 +16,7 @@ uses
   { List of armour }
   leather_armour1, cloth_armour1,
   { Quest items }
-  smugglersMap, pixie_jar, pixie_jar_dim,
+  smugglersMap, pixie_jar, pixie_jar_dim, parchment,
   { Magical items }
   staff_minor_scorch,
   { Ammunition }
@@ -125,6 +125,7 @@ begin
     'arrow': arrow.createArrow(c, r);
     'stickyWeb': web_trap.createWebTrap(c, r);
     'dimPixieJar': pixie_jar_dim.createPixieJarDim(c, r);
+    'parchment': parchment.createParchment(c, r);
   end;
 end;
 
@@ -149,6 +150,7 @@ begin
     16: poison_spore.useItem;
     17: gnomish_mace.useItem(equipped, id);
     18: gnomish_axe.useItem(equipped, id);
+    19: parchment.collectParchment;
   end;
 end;
 
@@ -186,7 +188,7 @@ begin
     if (universe.currentDepth = 3) then
       gnomish_axe.createGnomishAxe(c, r)
     else if (universe.currentDepth = 2) then
-      staff_minor_scorch.createStaff(c, r)
+      parchment.createParchment(c, r)
     else
       wine_flask.createWineFlask(c, r);
   end;

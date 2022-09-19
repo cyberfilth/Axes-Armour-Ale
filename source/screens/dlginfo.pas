@@ -11,11 +11,13 @@ uses
 
 (* Types of pop-up dialog box *)
 type
-  dialogFlag = (dlgNone, dlgFoundSMap);
+  dialogFlag = (dlgNone, dlgFoundSMap, dlgParchment);
 
-(* Notifies the game loop whether to display a pop-up or not *)
 var
+  (* Notifies the game loop whether to display a pop-up or not *)
   dialogType: dialogFlag;
+  (* Type of parchment scroll found *)
+  parchmentType: string;
 
 (* Display Info dialog box *)
 procedure infoDialog(message: shortstring);
@@ -29,6 +31,8 @@ procedure newWarning;
 procedure checkNotifications;
 (* 1st cave, found the Smugglers Map *)
 procedure foundMap;
+(* Read a parchment scroll *)
+procedure readScroll;
 
 implementation
 
@@ -169,6 +173,7 @@ begin
   case dialogType of
     dlgNone: exit;
     dlgFoundSMap: foundMap;
+    dlgParchment: readScroll;
   end;
 end;
 
@@ -203,6 +208,45 @@ begin
   TextOut(5, 11, 'LgreyBGblack', 'Well done....');
   TextOut(8, 13, 'LgreyBGblack', ' press [x] to continue');
 
+  UnlockScreenUpdate;
+  UpdateScreen(False);
+  dialogType := dlgNone;
+end;
+
+procedure readScroll;
+var
+  x, y: smallint;
+begin
+  main.gameState := stDialogBox;
+  x := 3;
+  y := 5;
+  LockScreenUpdate;
+  (* Top border *)
+  TextOut(x, y, 'LgreyBGblack', chr(201));
+  for x := 4 to 53 do
+    TextOut(x, 5, 'LgreyBGblack', chr(205));
+  TextOut(54, y, 'LgreyBGblack', chr(187));
+  (* Vertical sides *)
+  for y := 6 to 12 do
+    TextOut(3, y, 'LgreyBGblack', chr(186) +
+      '                                                  ' + chr(186));
+  (* Bottom border *)
+  TextOut(3, 13, 'LgreyBGblack', chr(200)); // bottom left corner
+  for x := 4 to 53 do
+    TextOut(x, 13, 'LgreyBGblack', chr(205));
+  TextOut(54, 13, 'LgreyBGblack', chr(188)); // bottom right corner
+  (* Write the title *)
+  TextOut(5, 5, 'LgreyBGblack', ' Item Found ');
+  (* Write the message *)
+  TextOut(5, 7, 'LgreyBGblack', 'You have found an enchanted scroll!');
+  TextOut(5, 8, 'LgreyBGblack', 'You try to decipher the runes...');
+  TextOut(5, 9, 'LgreyBGblack', '"' + plot_gen.writeScroll(parchmentType) + '"');
+  case parchmentType of
+    'DEX': TextOut(5, 11, 'LgreyBGblack', 'You feel your Dexterity improve');
+    'ATT': TextOut(5, 11, 'LgreyBGblack', 'You feel your Attack improve');
+    'DEF': TextOut(5, 11, 'LgreyBGblack', 'You feel your Defence improve');
+  end;
+  TextOut(8, 13, 'LgreyBGblack', ' press [x] to continue');
   UnlockScreenUpdate;
   UpdateScreen(False);
   dialogType := dlgNone;

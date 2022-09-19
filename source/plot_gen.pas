@@ -7,7 +7,7 @@ unit plot_gen;
 interface
 
 uses
-  SysUtils, dos, player_stats;
+  SysUtils, dos, player_stats, globalUtils;
 
 const
   DayStr: packed array[0..6] of string =
@@ -18,26 +18,28 @@ const
     'Harvestmoon', 'Ghostmoon', 'Stormlight');
 
 var
-  playerName, playerTitle, trollDate: string;
+  playerName, playerTitle, trollDate, scrollMessage: string;
+  i, N: smallint;
   Year, Month, Day, WDay: word;
-  titles: packed array[0..108] of string = ('Abominable', 'Amorous',
-    'Afflicted', 'Ailing', 'Breathless', 'Broken', 'Bullish', 'Craggy',
-    'Bearded', 'Bony', 'Beastly', 'Drunken', 'Bitter', 'Fetid', 'Fierce',
-    'Fiery', 'Bold', 'Filthy', 'Craven', 'Fishy', 'Crooked', 'Flexible',
-    'Crusty', 'Forgetful', 'Brutal', 'Foul', 'Disturbed', 'Forgettable',
-    'Burly', 'Fragrant', 'Dramatic', 'Frisky', 'Gallant', 'Green',
-    'Delectable', 'Cold', 'Grey', 'Cursed', 'Grumpy', 'Grubby', 'Dark',
-    'Hairless', 'Hairy', 'Heathen', 'Defiant', 'Jaded', 'Knobbly',
-    'Indecent', 'Detestable', 'Dreaded', 'Jumpy', 'Aromatic', 'Wrinkled',
-    'Wild', 'Unsmiling', 'Warty', 'Towering', 'Valiant', 'Sweaty',
-    'Sour', 'Vain', 'Unseemly', 'Swarthy', 'Tragic', 'Strange', 'Stout',
-    'Stony', 'Stormy', 'Shameless', 'Stalwart', 'Quiet', 'Sleepy',
-    'Pure', 'Prickly', 'Scarred', 'Pimply', 'Pale', 'Savage', 'Ornate',
-    'Simple', 'Silly', 'Salty', 'Rotund', 'Miserable', 'Scrappy',
-    'Ragged', 'Lanky', 'Scowly', 'Hardy', 'Harsh', 'Gruesome', 'Gross',
-    'Grisly', 'Goodly', 'Gloomy', 'Nocturnal', 'Fair', 'Chiseled',
-    'Insatiable', 'Destructive', 'Dreadful', 'Musical', 'Frightful',
-    'Oily', 'Rascal', 'Remorseless', 'Squinty', 'Silvery', 'Thirsty');
+  titles: packed array[0..108] of
+  string = ('Abominable', 'Amorous', 'Afflicted', 'Ailing', 'Breathless',
+    'Broken', 'Bullish', 'Craggy', 'Bearded', 'Bony', 'Beastly',
+    'Drunken', 'Bitter', 'Fetid', 'Fierce', 'Fiery', 'Bold', 'Filthy',
+    'Craven', 'Fishy', 'Crooked', 'Flexible', 'Crusty', 'Forgetful',
+    'Brutal', 'Foul', 'Disturbed', 'Forgettable', 'Burly', 'Fragrant',
+    'Dramatic', 'Frisky', 'Gallant', 'Green', 'Delectable', 'Cold',
+    'Grey', 'Cursed', 'Grumpy', 'Grubby', 'Dark', 'Hairless', 'Hairy',
+    'Heathen', 'Defiant', 'Jaded', 'Knobbly', 'Indecent', 'Detestable',
+    'Dreaded', 'Jumpy', 'Aromatic', 'Wrinkled', 'Wild', 'Unsmiling',
+    'Warty', 'Towering', 'Valiant', 'Sweaty', 'Sour', 'Vain', 'Unseemly',
+    'Swarthy', 'Tragic', 'Strange', 'Stout', 'Stony', 'Stormy',
+    'Shameless', 'Stalwart', 'Quiet', 'Sleepy', 'Pure', 'Prickly',
+    'Scarred', 'Pimply', 'Pale', 'Savage', 'Ornate', 'Simple', 'Silly',
+    'Salty', 'Rotund', 'Miserable', 'Scrappy', 'Ragged', 'Lanky',
+    'Scowly', 'Hardy', 'Harsh', 'Gruesome', 'Gross', 'Grisly', 'Goodly',
+    'Gloomy', 'Nocturnal', 'Fair', 'Chiseled', 'Insatiable', 'Destructive',
+    'Dreadful', 'Musical', 'Frightful', 'Oily', 'Rascal', 'Remorseless',
+    'Squinty', 'Silvery', 'Thirsty');
 
   firstSyllable: packed array[0..73] of
   string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
@@ -207,9 +209,10 @@ var
     'Rarli', 'Rarol', 'Rartil', 'Rundin', 'Runin', 'Rurgir', 'Ruril',
     'Rurir', 'Ruvil', 'Ruvli', 'Thogin', 'Thogrur', 'Thondir');
 
-  clanFirst: packed array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
-    'Grim', 'Rune', 'Storm', 'Frost', 'Thunder', 'Bright', 'Blood',
-    'Grey', 'Stone', 'Bronze', 'Silver', 'Bone', 'Mist', 'Ice');
+  clanFirst: packed array[0..17] of
+  string = ('Iron', 'Rock', 'Dark', 'War', 'Grim', 'Rune', 'Storm',
+    'Frost', 'Thunder', 'Bright', 'Blood', 'Grey', 'Stone', 'Bronze',
+    'Silver', 'Bone', 'Mist', 'Ice');
 
   clanSecond: packed array[0..19] of
   string = ('Axe', 'Hammer', 'Anvil', 'Smith', 'Forge', 'Beard',
@@ -322,6 +325,14 @@ function smallVillage: string;
 procedure generateTitle;
 (* Get the current date and display it in the in-game calendar *)
 procedure getTrollDate;
+(* Return TRUE if character is a vowel *)
+function isVowel(character: string): boolean;
+(* Replace one vowel with another *)
+function vowels(character: string): char;
+(* Replace one consonant with another *)
+function consonants(character: string): char;
+(* Generate a scrambled text string *)
+function writeScroll(attr: string): string;
 
 implementation
 
@@ -399,6 +410,130 @@ begin
   else
     trollDate := trollDate + 'th';
   trollDate := trollDate + ' day of ' + MonthStr[Month];
+end;
+
+function isVowel(character: string): boolean;
+begin
+  Result := False;
+  if (character = 'a') or (character = 'e') or (character = 'i') or
+    (character = 'o') or (character = 'u') then
+    Result := True;
+end;
+
+function vowels(character: string): char;
+var
+  new: char;
+  choice, upper: smallint;
+begin
+  new := 'U';
+  repeat
+    choice := randomRange(1, 5);
+    case choice of
+      1: new := chr(132);
+      2: new := chr(136);
+      3: new := chr(141);
+      4: new := chr(147);
+      5: new := chr(151);
+    end;
+  until new <> character;
+  upper := randomRange(1, 5);
+  if (upper = 3) then
+    Result := UpCase(new)
+  else
+    Result := new;
+end;
+
+function consonants(character: string): char;
+var
+  new: char;
+  choice, upper: smallint;
+begin
+  new := 'Z';
+  repeat
+    choice := randomRange(1, 21);
+    case choice of
+      1: new := 'b';
+      2: new := chr(135);
+      3: new := chr(158);
+      4: new := 'f';
+      5: new := 'g';
+      6: new := 'h';
+      7: new := 'j';
+      8: new := 'k';
+      9: new := 'l';
+      10: new := 'm';
+      11: new := chr(164);
+      12: new := 'p';
+      13: new := 'q';
+      14: new := chr(232);
+      15: new := 's';
+      16: new := 't';
+      17: new := 'v';
+      18: new := 'w';
+      19: new := 'x';
+      20: new := chr(152);
+      21: new := 'z';
+    end;
+  until new <> character;
+  upper := randomRange(1, 5);
+  if (upper = 3) then
+    Result := UpCase(new)
+  else
+    Result := new;
+end;
+
+function writeScroll(attr: string): string;
+var
+  choice: smallint;
+  textString: string;
+  dexterity: packed array[0..2] of string = ('Your reflexes sharpen, your eye focusses.',
+  'Eagle eyed, you are as a tiger ready to pounce', 'Behold these words and feel your thews spring');
+  attack: packed array[0..2] of string = ('Thews of steel, heart of iron. You are a lion',
+  'These runes shall transform you into a fighter', 'Da warrior spirit shall fill your very frame');
+  defence: packed array[0..2] of string = ('Skin of rock, reflexes like a coiled serpent',
+  'None but the quickest blades shall harm thee', 'An impregnable fortress you are become now');
+begin
+  textString := '';
+  choice := 0;
+  (* Select the text to use, based on the attribute *)
+  choice := randomRange(0, 2);
+  if (attr = 'DEX') then
+    textString := dexterity[choice]
+  else if (attr = 'ATT') then
+    textString := attack[choice]
+  else if (attr = 'DEF') then
+    textString := defence[choice];
+  i := 0;
+  N := 0;
+  { First half of sentence }
+  for i := 1 to Length(textString) div 6 do
+  begin
+    N := randomRange(1, Length(textString) div 2);
+    if (textString[N] <> ' ') then
+    begin
+      if (isVowel(textString[N]) = True) then
+        textString[N] := vowels(textString[N])
+      else
+        textString[N] := consonants(textString[N]);
+    end;
+  end;
+  { Second half of sentence }
+  for i := 1 to Length(textString) div 5 do
+  begin
+    N := randomRange(Length(textString) div 2, Length(textString));
+    if (textString[N] <> ' ') then
+    begin
+      if (isVowel(textString[N]) = True) then
+        textString[N] := vowels(textString[N])
+      else
+        textString[N] := consonants(textString[N]);
+    end;
+  end;
+  if (textString[1] = 'D') then
+     textString[1] := chr(209)
+  else if (textString[1] = 'A') then
+     textString[1] := chr(142);
+  Result := textString;
 end;
 
 end.

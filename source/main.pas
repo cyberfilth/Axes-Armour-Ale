@@ -197,6 +197,7 @@ begin
   dlgInfo.dialogType := dlgNone;
   killer := 'empty';
   OWgen := False;
+  parchmentType := 'DEX';
   (* Initialise the game world and create 1st cave *)
   universe.dlistLength := 0;
   (* first map type is always a cave *)
@@ -292,6 +293,7 @@ begin
   items.initialiseItems;
   file_handling.loadGame;
   killer := 'empty';
+  parchmentType := 'DEX';
   (* set up inventory *)
   ui.equippedWeapon := 'No weapon equipped';
   ui.equippedArmour := 'No armour worn';
