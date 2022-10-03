@@ -50,6 +50,21 @@ const
     ('embalmSpider', 'GnmAss');
   dgnUnique3: array[1..2] of string =
     ('drunkBogle', 'drunkBogle');
+
+  (* Array of creatures found in a crypt, ordered by dungeon level *)
+    cptNPC1: array[1..4] of string =
+      ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr');
+    cptNPC2: array[1..5] of string =
+      ('smlCorpseSpider', 'GnmCult', 'GnmWarr', 'GnmWarr', 'blueFungus');
+    cptNPC3: array[1..5] of string =
+      ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'smlCorpseSpider');
+    cptUnique1: array[1..2] of string =
+      ('blueFungus', 'GnmAss');
+    cptUnique2: array[1..2] of string =
+      ('embalmSpider', 'GnmAss');
+    cptUnique3: array[1..2] of string =
+      ('drunkBogle', 'drunkBogle');
+
 var
   r, c: smallint;
   randSelect: byte;

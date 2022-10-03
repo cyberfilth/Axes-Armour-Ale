@@ -55,6 +55,8 @@ blockORnot	dungeons/cave.pas	/^function blockORnot(x, y: integer): Tbkinds;$/;"	
 blockORnot	vision/smell.pas	/^function blockORnot(x, y: integer): Tbkinds;$/;"	f
 bufferMessage	backup/ui.pas	/^procedure bufferMessage(message: shortstring);$/;"	p
 bufferMessage	ui.pas	/^procedure bufferMessage(message: shortstring);$/;"	p
+buildLevel	dungeons/backup/crypt.pas	/^procedure buildLevel(floorNumber: byte);$/;"	p
+buildLevel	dungeons/crypt.pas	/^procedure buildLevel(floorNumber: byte);$/;"	p
 buildLevel	dungeons/smallgrid.pas	/^procedure buildLevel(floorNumber: byte);$/;"	p
 calcDistances	dungeons/cave.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
 calcDistances	vision/smell.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
@@ -64,7 +66,11 @@ canSee	backup/map.pas	/^function canSee(checkX, checkY: smallint): boolean;$/;"	
 canSee	map.pas	/^function canSee(checkX, checkY: smallint): boolean;$/;"	f
 canThrow	screens/scrthrow.pas	/^function canThrow: boolean;$/;"	f
 carryingArrows	player/player_inventory.pas	/^function carryingArrows: boolean;$/;"	f
+carveHorizontally	dungeons/backup/crypt.pas	/^procedure carveHorizontally(x1, x2, y: smallint);$/;"	p
+carveHorizontally	dungeons/crypt.pas	/^procedure carveHorizontally(x1, x2, y: smallint);$/;"	p
 carveHorizontally	dungeons/smallgrid.pas	/^procedure carveHorizontally(x1, x2, y: smallint);$/;"	p
+carveVertically	dungeons/backup/crypt.pas	/^procedure carveVertically(y1, y2, x: smallint);$/;"	p
+carveVertically	dungeons/crypt.pas	/^procedure carveVertically(y1, y2, x: smallint);$/;"	p
 carveVertically	dungeons/smallgrid.pas	/^procedure carveVertically(y1, y2, x: smallint);$/;"	p
 centreX	backup/ui.pas	/^function centreX(textstring: shortstring): byte;$/;"	f
 centreX	ui.pas	/^function centreX(textstring: shortstring): byte;$/;"	f
@@ -171,6 +177,8 @@ createCorpseSpider	entities/bugs/backup/small_corpse_spider.pas	/^procedure crea
 createCorpseSpider	entities/bugs/backup/small_corpse_spider.pas	/^procedure createCorpseSpider(uniqueid, npcx, npcy: smallint);$/;"	p
 createCorpseSpider	entities/bugs/small_corpse_spider.pas	/^procedure createCorpseSpider (uniqueid, npcx, npcy: smallint);$/;"	p
 createCorpseSpider	entities/bugs/small_corpse_spider.pas	/^procedure createCorpseSpider(uniqueid, npcx, npcy: smallint);$/;"	p
+createCorridor	dungeons/backup/crypt.pas	/^procedure createCorridor(fromX, fromY, toX, toY: smallint);$/;"	p
+createCorridor	dungeons/crypt.pas	/^procedure createCorridor(fromX, fromY, toX, toY: smallint);$/;"	p
 createCorridor	dungeons/smallgrid.pas	/^procedure createCorridor(fromX, fromY, toX, toY: smallint);$/;"	p
 createCryptWolf	entities/animals/backup/crypt_wolf.pas	/^procedure createCryptWolf(uniqueid, npcx, npcy: smallint);$/;"	p
 createCryptWolf	entities/animals/crypt_wolf.pas	/^procedure createCryptWolf(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -217,6 +225,8 @@ createRedcap	entities/hobs/redcap_lesser_lobber.pas	/^procedure createRedcap(uni
 createRedcapFungus	entities/hobs/backup/redcap_fungus.pas	/^procedure createRedcapFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createRedcapFungus	entities/hobs/redcap_fungus.pas	/^procedure createRedcapFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createRock	items/rock.pas	/^procedure createRock(itmx, itmy: smallint);$/;"	p
+createRoom	dungeons/backup/crypt.pas	/^procedure createRoom(gridNumber: smallint);$/;"	p
+createRoom	dungeons/crypt.pas	/^procedure createRoom(gridNumber: smallint);$/;"	p
 createRoom	dungeons/smallgrid.pas	/^procedure createRoom(gridNumber: smallint);$/;"	p
 createShortBow	items/weapons/backup/short_bow.pas	/^procedure createShortBow(itmx, itmy: smallint);$/;"	p
 createShortBow	items/weapons/short_bow.pas	/^procedure createShortBow(itmx, itmy: smallint);$/;"	p
@@ -377,6 +387,7 @@ displayWinscreen	screens/scrwinalpha.pas	/^procedure displayWinscreen;$/;"	p
 drawBat	screens/scrrip.pas	/^procedure drawBat;$/;"	p
 drawCaveTiles	backup/map.pas	/^procedure drawCaveTiles(c, r: smallint; hiDef: byte);$/;"	p
 drawCaveTiles	map.pas	/^procedure drawCaveTiles(c, r: smallint; hiDef: byte);$/;"	p
+drawCryptTiles	map.pas	/^procedure drawCryptTiles(c, r: smallint; hiDef: byte);$/;"	p
 drawDungeonTiles	backup/map.pas	/^procedure drawDungeonTiles(c, r: smallint; hiDef: byte);$/;"	p
 drawDungeonTiles	map.pas	/^procedure drawDungeonTiles(c, r: smallint; hiDef: byte);$/;"	p
 drawGrave	screens/scrrip.pas	/^procedure drawGrave;$/;"	p
@@ -485,7 +496,9 @@ gameLoop	backup/main.pas	/^procedure gameLoop;$/;"	p
 gameLoop	main.pas	/^procedure gameLoop;$/;"	p
 gameOver	backup/main.pas	/^procedure gameOver;$/;"	p
 gameOver	main.pas	/^procedure gameOver;$/;"	p
+generate	dungeons/backup/crypt.pas	/^procedure generate(title: string; idNumber: smallint; totalDepth: byte);$/;"	p
 generate	dungeons/cave.pas	/^procedure generate(title: string; idNumber: smallint; totalDepth: byte);$/;"	p
+generate	dungeons/crypt.pas	/^procedure generate(title: string; idNumber: smallint; totalDepth: byte);$/;"	p
 generate	dungeons/overworld.pas	/^procedure generate;$/;"	p
 generate	dungeons/smallgrid.pas	/^procedure generate(title: string; idNumber: smallint; totalDepth: byte);$/;"	p
 generateClanName	backup/plot_gen.pas	/^procedure generateClanName;$/;"	p
@@ -618,6 +631,8 @@ islandFOV	vision/fov.pas	/^procedure islandFOV(centreX, centreY: smallint);$/;"	
 killEntity	backup/entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 killEntity	entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 leftHasFloor	dungeons/cave.pas	/^function leftHasFloor(): boolean;$/;"	f
+leftToRight	dungeons/backup/crypt.pas	/^procedure leftToRight;$/;"	p
+leftToRight	dungeons/crypt.pas	/^procedure leftToRight;$/;"	p
 leftToRight	dungeons/smallgrid.pas	/^procedure leftToRight;$/;"	p
 lerp	dungeons/noise.pas	/^  function lerp(t, a, b: float64): float64; inline;$/;"	f
 levelUpDialog	screens/dlginfo.pas	/^procedure levelUpDialog(message: shortstring);$/;"	p

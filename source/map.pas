@@ -73,6 +73,8 @@ procedure placeAtEntrance;
 procedure drawCaveTiles(c, r: smallint; hiDef: byte);
 (* Draw dungeon tiles *)
 procedure drawDungeonTiles(c, r: smallint; hiDef: byte);
+(* Draw crypt tile *)
+procedure drawCryptTiles(c, r: smallint; hiDef: byte);
 (* Place a tile on the map *)
 procedure drawTile(c, r: smallint; hiDef: byte);
 (* Display explored sections of map when reloading game *)
@@ -119,6 +121,9 @@ begin
   Result := False;
   { Cave }
   if (mapDisplay[y][x].Glyph = Chr(177)) or (mapDisplay[y][x].Glyph = Chr(176)) then
+    Result := True;
+  { Crypt }
+  if (maparea[y][x].Glyph = '#') then
     Result := True;
   { Dungeon }
   if (maparea[y][x].Glyph = 'A') or (maparea[y][x].Glyph = 'B') or (maparea[y][x].Glyph = 'C')
@@ -899,6 +904,11 @@ begin
       end;
     end;
   end;
+end;
+
+procedure drawCryptTiles(c, r: smallint; hiDef: byte);
+begin
+
 end;
 
 procedure drawTile(c, r: smallint; hiDef: byte);

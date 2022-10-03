@@ -8,7 +8,7 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, smallGrid;
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, smallGrid, crypt;
 
 var
   (* Number of dungeons *)
@@ -61,6 +61,7 @@ begin
   case levelType of
     tCave: cave.generate(UTF8Encode(title), dID, totalDepth);
     tDungeon: smallGrid.generate(UTF8Encode(title), dID, totalDepth);
+    tCrypt: crypt.generate(UTF8Encode(title), dID, totalDepth);
   end;
 
   (* Copy the 1st floor of the current dungeon to the game map *)
@@ -78,9 +79,11 @@ begin
   { Based on number of rooms in current level, dungeon type & dungeon level
      Caves have more lower level enemies, dungeons have fewer but stronger }
   if (dungeonType = tCave) then
-     NPCnumber := totalRooms + currentDepth
+    NPCnumber := totalRooms + currentDepth
   else if (dungeonType = tDungeon) then
-     NPCnumber := (totalRooms DIV 2) + currentDepth;
+    NPCnumber := (totalRooms div 2) + currentDepth
+  else if (dungeonType = tCrypt) then
+    NPCnumber := (totalRooms div 2) + currentDepth;
   { player level is considered when generating the NPCs }
   entities.npcAmount := NPCnumber;
 
@@ -89,13 +92,20 @@ begin
 
   case dungeonType of
     tDungeon: { Dungeon }
-     begin
-      (* Create the NPC's *);
+    begin
+      (* Create the NPC's *)
       for i := 1 to (NPCnumber - 1) do
       begin
         { create an encounter table: Monster type: Dungeon type: floor number }
         { NPC generation will take the Player level into account when creating stats }
         npc_lookup.NPCpicker(i, False, tDungeon);
+      end;
+    end;
+    tCrypt: { Crypt }
+    begin
+      for i := 1 to (NPCnumber - 1) do
+      begin
+        npc_lookup.NPCpicker(i, False, tCrypt);
       end;
     end;
     tCave: { Cave }
@@ -110,9 +120,11 @@ begin
   { Unique enemy is added to each floor }
   case dungeonType of
     tDungeon: { Dungeon }
-     npc_lookup.NPCpicker(NPCnumber, True, tDungeon);
+      npc_lookup.NPCpicker(NPCnumber, True, tDungeon);
+    tCrypt: { Crypt }
+      npc_lookup.NPCpicker(NPCnumber, True, tCrypt);
     tCave: { Cave }
-     npc_lookup.NPCpicker(NPCnumber, True, tCave);
+      npc_lookup.NPCpicker(NPCnumber, True, tCave);
   end;
 end;
 
@@ -128,11 +140,21 @@ begin
 
   case dungeonType of
     tDungeon: { Dungeon }
-        begin
+    begin
       (* Create the items *);
       for i := 0 to (ItemNumber - 1) do
       begin
         item_lookup.dispenseItem(tDungeon);
+      end;
+      (* Drop a single light source on each floor *)
+      pixie_jar.createPixieJar;
+    end;
+    tCrypt: { Crypt }
+    begin
+      (* Create the items *);
+      for i := 0 to (ItemNumber - 1) do
+      begin
+        item_lookup.dispenseItem(tCrypt);
       end;
       (* Drop a single light source on each floor *)
       pixie_jar.createPixieJar;

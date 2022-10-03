@@ -1,19 +1,72 @@
-(* Generates a grid based dungeon with wide spaces between rooms, this is then processed to apply bitmasked walls *)
+(* Builds a map of randomly placed rooms with prefab rooms *)
 
-unit smallGrid;
+unit crypt;
 
-{$mode objfpc}{$H+}
+{$mode fpc}{$H+}
 {$RANGECHECKS OFF}
 
 interface
 
 uses
-  SysUtils, globalutils;
+  SysUtils, globalUtils;
 
 type
   coordinates = record
     x, y: smallint;
   end;
+
+const
+  PREFAB_4X4a: array [1..4, 1..4] of char = (
+    ('#', '.', '.', '#'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('#', '.', '.', '#'));
+  PREFAB_5x4a: array [1..4, 1..5] of char = (
+    ('#', '#', '.', '#', '#'),
+    ('#', '.', '.', '.', '#'),
+    ('#', '.', '.', '.', '#'),
+    ('#', '#', '.', '#', '#'));
+  PREFAB_5x4b: array [1..4, 1..5] of char = (
+    ('#', '.', '.', '.', '#'),
+    ('.', '#', '.', '#', '.'),
+    ('.', '.', '.', '.', '.'),
+    ('#', '.', '.', '.', '#'));
+  PREFAB_5x5a: array [1..5, 1..5] of char = (
+    ('#', '.', '.', '.', '#'),
+    ('.', '#', '.', '#', '.'),
+    ('.', '.', '.', '.', '.'),
+    ('.', '#', '.', '#', '.'),
+    ('#', '.', '.', '.', '#'));
+  PREFAB_6x6a: array [1..6, 1..6] of char = (
+    ('#', '#', '.', '.', '#', '#'),
+    ('#', '.', '.', '.', '.', '#'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('#', '.', '.', '.', '.', '#'),
+    ('#', '#', '.', '.', '#', '#'));
+  PREFAB_6x6b: array [1..6, 1..6] of char = (
+    ('.', '.', '#', '#', '.', '.'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('#', '.', '#', '#', '.', '#'),
+    ('#', '.', '#', '#', '.', '#'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('.', '.', '#', '#', '.', '.'));
+  PREFAB_7x7a: array [1..7, 1..7] of char = (
+    ('#', '#', '.', '.', '.', '#', '#'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('.', '.', '#', '.', '#', '.', '.'),
+    ('.', '.', '.', '.', '.', '.', '.'),
+    ('.', '.', '#', '.', '#', '.', '.'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('#', '#', '.', '.', '.', '#', '#'));
+  PREFAB_7x7b: array [1..7, 1..7] of char = (
+    ('#', '#', '#', '.', '#', '#', '#'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('.', '.', '.', '.', '.', '.', '.'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '#', '#', '.', '#', '#', '#'));
 
 var
   r, c, i, p, t, listLength, firstHalf, lastHalf: smallint;
@@ -30,8 +83,6 @@ var
   filename: shortstring;
   myfile: Text;
 
-(* Process generated dungeon to add shaped walls *)
-procedure prettify;
 (* Build a level in the dungeon *)
 procedure buildLevel(floorNumber: byte);
 (* Create corridors linking the rooms *)
@@ -51,243 +102,6 @@ implementation
 
 uses
   universe, file_handling, map;
-
-procedure prettify;
-
-var
-  tileCounter: smallint;
-  i2: byte;
-begin
-  { Redraw border around the map }
-  for i2 := 1 to MAXCOLUMNS do
-  begin
-    dungeonArray[1][i2] := '#';
-    dungeonArray[MAXROWS][i2] := '#';
-  end;
-  { draw left and right border }
-  for i2 := 1 to MAXROWS do
-  begin
-    dungeonArray[i2][1] := '#';
-    dungeonArray[i2][MAXCOLUMNS] := '#';
-  end;
-
-  (* First pass for adding the walls *)
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (dungeonArray[r][c] = '#') then
-      begin
-        tileCounter := 0;
-        if (dungeonArray[r - 1][c] = '#') then // NORTH
-          tileCounter := tileCounter + 1;
-        if (dungeonArray[r][c + 1] = '#') then // EAST
-          tileCounter := tileCounter + 4;
-        if (dungeonArray[r + 1][c] = '#') then // SOUTH
-          tileCounter := tileCounter + 8;
-        if (dungeonArray[r][c - 1] = '#') then // WEST
-          tileCounter := tileCounter + 2;
-        case tileCounter of
-          0: processed_dungeon[r][c] := 'A';
-          1: processed_dungeon[r][c] := 'B';
-          2: processed_dungeon[r][c] := 'C';
-          3: processed_dungeon[r][c] := 'D';
-          4: processed_dungeon[r][c] := 'E';
-          5: processed_dungeon[r][c] := 'F';
-          6: processed_dungeon[r][c] := 'G';
-          7: processed_dungeon[r][c] := 'H';
-          8: processed_dungeon[r][c] := 'I';
-          9: processed_dungeon[r][c] := 'J';
-          10: processed_dungeon[r][c] := 'K';
-          11: processed_dungeon[r][c] := 'L';
-          12: processed_dungeon[r][c] := 'M';
-          13: processed_dungeon[r][c] := 'N';
-          14: processed_dungeon[r][c] := 'O';
-          15: processed_dungeon[r][c] := 'P';
-          else
-            processed_dungeon[r][c] := 'A';
-        end;
-      end
-      else if (dungeonArray[r][c] = 'X') then
-        processed_dungeon[r][c] := 'X'
-      else
-        processed_dungeon[r][c] := '.';
-  end;
-
-  (* Top left corner *)
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (dungeonArray[r][c] = '#') then
-      begin
-        if (dungeonArray[r - 1][c] = '#') and (dungeonArray[r - 1][c + 1] = '#') and
-          (dungeonArray[r][c + 1] = '#') and (dungeonArray[r + 1][c + 1] = '.') and
-          (dungeonArray[r + 1][c] = '#') and (dungeonArray[r + 1][c - 1] = '#') and
-          (dungeonArray[r][c - 1] = '#') and (dungeonArray[r - 1][c - 1] = '#') then
-          processed_dungeon[r][c] := 'M';
-      end;
-  end;
-  (* Top right corner *)
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (dungeonArray[r][c] = '#') then
-      begin
-        if (dungeonArray[r - 1][c] = '#') and (dungeonArray[r - 1][c + 1] = '#') and
-          (dungeonArray[r][c + 1] = '#') and (dungeonArray[r + 1][c + 1] = '#') and
-          (dungeonArray[r + 1][c] = '#') and (dungeonArray[r + 1][c - 1] = '.') and
-          (dungeonArray[r][c - 1] = '#') and (dungeonArray[r - 1][c - 1] = '#') then
-          processed_dungeon[r][c] := 'K';
-      end;
-  end;
-  (* Bottom left corner *)
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (dungeonArray[r][c] = '#') then
-      begin
-        if (dungeonArray[r - 1][c] = '#') and (dungeonArray[r - 1][c + 1] = '.') and
-          (dungeonArray[r][c + 1] = '#') and (dungeonArray[r + 1][c + 1] = '#') and
-          (dungeonArray[r + 1][c] = '#') and (dungeonArray[r + 1][c - 1] = '#') and
-          (dungeonArray[r][c - 1] = '#') and (dungeonArray[r - 1][c - 1] = '#') then
-          processed_dungeon[r][c] := 'F';
-      end;
-  end;
-  (* Bottom right corner *)
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (dungeonArray[r][c] = '#') then
-      begin
-        if (dungeonArray[r - 1][c] = '#') and (dungeonArray[r - 1][c + 1] = '#') and
-          (dungeonArray[r][c + 1] = '#') and (dungeonArray[r + 1][c + 1] = '#') and
-          (dungeonArray[r + 1][c] = '#') and (dungeonArray[r + 1][c - 1] = '#') and
-          (dungeonArray[r][c - 1] = '#') and (dungeonArray[r - 1][c - 1] = '.') then
-          processed_dungeon[r][c] := 'D';
-      end;
-  end;
-
-  { Top row corners }
-
-  (* Top left corner *)
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (dungeonArray[r][c] = '#') then
-      begin
-        if (dungeonArray[r][c + 1] = '#') and (dungeonArray[r + 1][c + 1] = '.') and
-          (dungeonArray[r + 1][c] = '#') and (dungeonArray[r + 1][c - 1] = '#') and
-          (dungeonArray[r][c - 1] = '#') then
-          processed_dungeon[r][c] := 'M';
-      end;
-  end;
-  (* Top right corner *)
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (dungeonArray[r][c] = '#') then
-      begin
-        if (dungeonArray[r][c + 1] = '#') and (dungeonArray[r + 1][c + 1] = '#') and
-          (dungeonArray[r + 1][c] = '#') and (dungeonArray[r + 1][c - 1] = '.') and
-          (dungeonArray[r][c - 1] = '#') then
-          processed_dungeon[r][c] := 'K';
-      end;
-  end;
-
-  { Bottom row corners }
-
-  (* Bottom left corner *)
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (dungeonArray[r][c] = '#') then
-      begin
-        if (dungeonArray[r - 1][c] = '#') and (dungeonArray[r - 1][c + 1] = '.') and
-          (dungeonArray[r][c + 1] = '#') and (dungeonArray[r][c - 1] = '#') and
-          (dungeonArray[r - 1][c - 1] = '#') then
-          processed_dungeon[r][c] := 'F';
-      end;
-  end;
-  (* Bottom right corner *)
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (dungeonArray[r][c] = '#') then
-      begin
-        if (dungeonArray[r - 1][c] = '#') and (dungeonArray[r - 1][c + 1] = '#') and
-          (dungeonArray[r][c + 1] = '#') and (dungeonArray[r][c - 1] = '#') and
-          (dungeonArray[r - 1][c - 1] = '.') then
-          processed_dungeon[r][c] := 'D';
-      end;
-  end;
-
-  (* Edge cases *)
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (processed_dungeon[r][c] = 'F') then
-      begin
-        if (processed_dungeon[r + 1][c] = 'L') then
-          processed_dungeon[r][c] := 'E';
-      end;
-  end;
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (processed_dungeon[r][c] = 'D') then
-      begin
-        if (processed_dungeon[r][c + 1] = 'H') and (processed_dungeon[r + 1][c] = '.') then
-          processed_dungeon[r][c] := 'B';
-      end;
-  end;
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (processed_dungeon[r][c] = 'P') then
-      begin
-        if (processed_dungeon[r - 1][c] = 'J') and (processed_dungeon[r - 1][c + 1] = '.')
-        and (processed_dungeon[r][c + 1] = 'O') and (processed_dungeon[r + 1][c + 1] = 'P')
-        and (processed_dungeon[r + 1][c] = 'P') and (processed_dungeon[r + 1][c - 1] = 'P')
-        and (processed_dungeon[r][c - 1] = 'O') and (processed_dungeon[r - 1][c - 1] = '.') then
-          processed_dungeon[r][c] := 'B';
-      end;
-  end;
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (processed_dungeon[r][c] = 'F') then
-      begin
-        if (processed_dungeon[r - 1][c] = 'L') and (processed_dungeon[r - 1][c + 1] = '.')
-        and (processed_dungeon[r][c + 1] = 'G') and (processed_dungeon[r + 1][c + 1] = '.')
-        and (processed_dungeon[r + 1][c] = 'J') and (processed_dungeon[r + 1][c - 1] = '.')
-        and (processed_dungeon[r][c - 1] = 'H') and (processed_dungeon[r - 1][c - 1] = 'P') then
-          processed_dungeon[r][c] := 'Q';
-      end;
-  end;
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (processed_dungeon[r][c] = 'D') then
-      begin
-        if (processed_dungeon[r - 1][c] = 'N') and (processed_dungeon[r - 1][c + 1] = 'P')
-        and (processed_dungeon[r][c + 1] = 'K') and (processed_dungeon[r + 1][c + 1] = 'N')
-        and (processed_dungeon[r + 1][c] = '.') and (processed_dungeon[r + 1][c - 1] = '.')
-        and (processed_dungeon[r][c - 1] = 'G') and (processed_dungeon[r - 1][c - 1] = '.') then
-          processed_dungeon[r][c] := 'B';
-      end;
-  end;
-
-
-  (* put the stairs back in *)
-  for r := 1 to globalutils.MAXROWS do
-  begin
-    for c := 1 to globalutils.MAXCOLUMNS do
-      if (dungeonArray[r][c] = '>') then
-        processed_dungeon[r][c] := '>'
-      else if (dungeonArray[r][c] = '<') then
-        processed_dungeon[r][c] := '<';
-  end;
-end;
-
 
 procedure buildLevel(floorNumber: byte);
 var
@@ -341,42 +155,7 @@ begin
   end;
 end;
 
-procedure carveHorizontally(x1, x2, y: smallint);
-
-var
-  x: byte;
-begin
-  if x1 < x2 then
-  begin
-    for x := x1 to x2 do
-      dungeonArray[y][x] := '.';
-  end;
-  if x1 > x2 then
-  begin
-    for x := x2 to x1 do
-      dungeonArray[y][x] := '.';
-  end;
-end;
-
-procedure carveVertically(y1, y2, x: smallint);
-
-var
-  y: byte;
-begin
-  if y1 < y2 then
-  begin
-    for y := y1 to y2 do
-      dungeonArray[y][x] := '.';
-  end;
-  if y1 > y2 then
-  begin
-    for y := y2 to y1 do
-      dungeonArray[y][x] := '.';
-  end;
-end;
-
 procedure createCorridor(fromX, fromY, toX, toY: smallint);
-
 var
   direction: byte;
 begin
@@ -396,8 +175,39 @@ begin
   end;
 end;
 
-procedure createRoom(gridNumber: smallint);
+procedure carveHorizontally(x1, x2, y: smallint);
+var
+  x: byte;
+begin
+  if x1 < x2 then
+  begin
+    for x := x1 to x2 do
+      dungeonArray[y][x] := '.';
+  end;
+  if x1 > x2 then
+  begin
+    for x := x2 to x1 do
+      dungeonArray[y][x] := '.';
+  end;
+end;
 
+procedure carveVertically(y1, y2, x: smallint);
+var
+  y: byte;
+begin
+  if y1 < y2 then
+  begin
+    for y := y1 to y2 do
+      dungeonArray[y][x] := '.';
+  end;
+  if y1 > y2 then
+  begin
+    for y := y2 to y1 do
+      dungeonArray[y][x] := '.';
+  end;
+end;
+
+procedure createRoom(gridNumber: smallint);
 var
   topLeftX, topLeftY, roomHeight, roomWidth, drawHeight, drawWidth,
   nudgeDown, nudgeAcross: smallint;
@@ -618,6 +428,7 @@ change starting point of each room so they don't all start drawing from the top 
   centreList[listLength].x := (topLeftX + nudgeAcross) + (roomWidth div 2);
   centreList[listLength].y := (topLeftY + nudgeDown) + (roomHeight div 2);
   (* Draw room within the grid square *)
+  /// add prefabs here
   for drawHeight := 0 to roomHeight do
   begin
     for drawWidth := 0 to roomWidth do
@@ -629,7 +440,6 @@ change starting point of each room so they don't all start drawing from the top 
 end;
 
 procedure generate(title: string; idNumber: smallint; totalDepth: byte);
-
 var
   i, i2: byte;
 begin
@@ -660,9 +470,6 @@ begin
       (* Save location of stairs *)
       stairX := c;
       stairY := r;
-
-      (* Improve the walls of the dungeon *)
-      prettify;
 
       (* write the first level to universe.currentDungeon *)
       for r := 1 to globalUtils.MAXROWS do
@@ -701,8 +508,7 @@ begin
       (* Save location of stairs *)
       stairX := c;
       stairY := r;
-      (* Improve the walls of the dungeon *)
-      prettify;
+
       file_handling.writeNewDungeonLevel(title, idNumber,
         i, totalDepth, totalRooms,
         tDungeon);
@@ -733,8 +539,6 @@ begin
       stairX := c;
       stairY := r;
 
-      (* Improve the walls of the dungeon *)
-      prettify;
       file_handling.writeNewDungeonLevel(title, idNumber,
         i, totalDepth, totalRooms,
         tDungeon);
@@ -754,8 +558,6 @@ begin
       end;
 
       dungeonArray[stairY][stairX] := '<';
-      (* Improve the walls of the dungeon *)
-      prettify;
 
       file_handling.writeNewDungeonLevel(title, idNumber, i,
         totalDepth, totalRooms, tDungeon);
@@ -763,40 +565,23 @@ begin
 
     /////////////////////////////
     // Write map to text file for testing
-    // filename := 'dungeon_level_' + IntToStr(i) + '.txt';
-    // AssignFile(myfile, filename);
-    // rewrite(myfile);
-    // for r := 1 to MAXROWS do
-    //   begin
-    //     for c := 1 to MAXCOLUMNS do
-    //       begin
-    //         write(myfile, dungeonArray[r][c]);
-    //       end;
-    //     write(myfile, sLineBreak);
-    //   end;
-    // closeFile(myfile);
-    ////////////////////////////////
-
-    /////////////////////////////
-    // Write map to text file for testing
-    //filename := 'dungeon_processed_level_' + IntToStr(i) + '.txt';
+    //filename := 'dungeon_level_' + IntToStr(i) + '.txt';
     //AssignFile(myfile, filename);
     //rewrite(myfile);
     //for r := 1 to MAXROWS do
+    //begin
+    //  for c := 1 to MAXCOLUMNS do
     //  begin
-    //    for c := 1 to MAXCOLUMNS do
-    //      begin
-    //        write(myfile, processed_dungeon[r][c]);
-    //      end;
-    //    write(myfile, sLineBreak);
+    //    Write(myfile, dungeonArray[r][c]);
     //  end;
+    //  Write(myfile, sLineBreak);
+    //end;
     //closeFile(myfile);
-    //////////////////////////////
+    ////////////////////////////////
   end;
 end;
 
 procedure leftToRight;
-
 var
   i, j, n, tempX, tempY: smallint;
 begin

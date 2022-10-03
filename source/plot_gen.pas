@@ -455,7 +455,7 @@ begin
       1: new := 'b';
       2: new := chr(135);
       3: new := chr(158);
-      4: new := 'f';
+      4: new := chr(159);
       5: new := 'g';
       6: new := 'h';
       7: new := 'j';
@@ -463,9 +463,9 @@ begin
       9: new := 'l';
       10: new := 'm';
       11: new := chr(164);
-      12: new := 'p';
+      12: new := chr(158);
       13: new := 'q';
-      14: new := chr(232);
+      14: new := 'r';
       15: new := 's';
       16: new := 't';
       17: new := 'v';
