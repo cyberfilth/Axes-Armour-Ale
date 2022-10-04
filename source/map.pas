@@ -907,8 +907,56 @@ begin
 end;
 
 procedure drawCryptTiles(c, r: smallint; hiDef: byte);
+const
+  lit = 'lightGrey';
+  unlit = 'grey';
+  dark = 'grey';
+  darkest = 'darkGrey';
 begin
-
+  case maparea[r][c].glyph of
+    '.', 'X': { Floor }
+    begin
+      mapDisplay[r][c].Glyph := '.';
+      if (hiDef = 1) then { In view }
+      begin
+        if (player_stats.lightEquipped = True) then
+          mapDisplay[r][c].GlyphColour := dark
+        else
+          mapDisplay[r][c].GlyphColour := dark;
+      end
+      else { Not in view }
+      begin
+        if (player_stats.lightEquipped = True) then
+          mapDisplay[r][c].GlyphColour := 'darkGrey'
+        else
+          mapDisplay[r][c].GlyphColour := 'black';
+      end;
+    end;
+     '<': { Upstairs }
+    begin
+      mapDisplay[r][c].Glyph := '<';
+      if (hiDef = 1) then
+        mapDisplay[r][c].GlyphColour := 'white'
+      else
+        mapDisplay[r][c].GlyphColour := unlit;
+    end;
+    '>': { Downstairs }
+    begin
+      mapDisplay[r][c].Glyph := '>';
+      if (hiDef = 1) then
+        mapDisplay[r][c].GlyphColour := 'white'
+      else
+        mapDisplay[r][c].GlyphColour := unlit;
+    end;
+    '#': { Wall }
+    begin
+      mapDisplay[r][c].Glyph := chr(219);
+      if (hiDef = 1) then
+        mapDisplay[r][c].GlyphColour := lit
+      else
+        mapDisplay[r][c].GlyphColour := unlit;
+    end;
+  end;
 end;
 
 procedure drawTile(c, r: smallint; hiDef: byte);
@@ -923,6 +971,8 @@ begin
   (* Select dungeon type *)
   if (mapType = tCave) then
     drawCaveTiles(c, r, hiDef)
+  else if (mapType = tCrypt) then
+    drawCryptTiles(c, r, hiDef)
   else if (mapType = tDungeon) then
     drawDungeonTiles(c, r, hiDef);
 end;
