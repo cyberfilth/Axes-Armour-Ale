@@ -22,7 +22,7 @@ implementation
 
 procedure beginLogging;
 begin
-  C_FNAME := (globalUtils.saveDirectory + PathDelim + 'LOGFILE.txt');
+  C_FNAME := (globalUtils.saveDirectory + PathDelim + 'LOGFILE.dat');
   AssignFile(tfOut, C_FNAME);
   rewrite(tfOut);
   writeln(tfOut, 'Initialised. Random seed is ' + IntToStr(RandSeed));

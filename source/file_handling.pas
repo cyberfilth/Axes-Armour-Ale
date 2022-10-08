@@ -732,15 +732,23 @@ end;
 
 procedure deleteGameData;
 var
-  dfileName: shortstring;
+  D, currentDir: shortstring;
+  Info : TSearchRec;
 begin
-  (* Set the save game file name *)
-  dfileName := (globalUtils.saveDirectory + PathDelim + globalutils.saveFile);
-  if (FileExists(dfileName)) then
-  begin
-    DeleteFile(dfileName);
+  currentDir := GetCurrentDir;
+  (* Set the save game directory *)
+  D := globalUtils.saveDirectory;
+    ChDir(D);
+    if FindFirst('*.dat', faAnyFile, Info) = 0 then
+    begin
+    repeat
+      with Info do
+        DeleteFile(Name);
+    until FindNext(info) <> 0;
+    FindClose(Info);
     main.saveExists := False;
-  end;
+    Chdir(currentDir);
+    end;
 end;
 
 procedure loadGame;
