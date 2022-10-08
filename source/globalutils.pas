@@ -7,7 +7,7 @@ unit globalUtils;
 interface
 
 uses
-    Classes;
+  Classes;
 
 type
   coordinates = record

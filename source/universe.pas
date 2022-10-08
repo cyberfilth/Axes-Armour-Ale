@@ -174,6 +174,7 @@ end;
 
 procedure createEllanToll;
 begin
+  file_handling.saveGame;
   (* Generate the island *)
   overworld.generate;
   (* Save the island to disk *)

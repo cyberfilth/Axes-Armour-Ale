@@ -103,6 +103,24 @@ begin
           monster := caveNPC3[randSelect];
         end;
       end;
+      tCrypt:
+      begin
+        if (universe.currentDepth = 1) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(cptNPC1));
+          monster := cptNPC1[randSelect];
+        end { Level 2 }
+        else if (universe.currentDepth = 2) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(cptNPC2));
+          monster := cptNPC2[randSelect];
+        end { Level 3 }
+        else if (universe.currentDepth = 3) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(cptNPC3));
+          monster := cptNPC3[randSelect];
+        end;
+      end;
       tDungeon:
       begin
         if (universe.currentDepth = 1) then
@@ -143,6 +161,24 @@ begin
         begin
           randSelect := globalUtils.randomRange(1, Length(caveUnique3));
           monster := caveUnique3[randSelect];
+        end;
+      end;
+      tCrypt:
+      begin
+        if (universe.currentDepth = 1) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(cptUnique1));
+          monster := cptUnique1[randSelect];
+        end { Level 2 }
+        else if (universe.currentDepth = 2) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(cptUnique2));
+          monster := cptUnique2[randSelect];
+        end { Level 3 }
+        else if (universe.currentDepth = 3) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(cptUnique3));
+          monster := cptUnique3[randSelect];
         end;
       end;
       tDungeon:

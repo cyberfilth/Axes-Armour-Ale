@@ -48,8 +48,10 @@ end;
 
 procedure firstRow;
 var
-  locations1: array[0..2] of dungeonTerrain = (tDungeon, tVillage, tCavern);
+  locations1: array[0..2] of dungeonTerrain = (tDungeon, tVillage, tCrypt);
   locations2: array[0..2] of dungeonTerrain = (tDungeon, tCavern, tDungeon);
+  cryptNames: array[0..3] of shortstring =
+  ('Abandoned crypt', 'Spooky tomb', 'Haunted mausoleum', 'Cursed sepulchre');
   villageNames: array[0..3] of shortstring =
     ('village of Barterville', 'village of Flatgrove', 'village of Little Wolding', 'village of Swineford');
   dungeonNames: array[0..5] of shortstring =
@@ -97,6 +99,14 @@ begin
          placeName := dungeonNames[choice];
          dungeonNames[choice] := 'used';
      end
+      else if (placeType = tCrypt) then
+     begin
+         repeat
+         choice := Random(Length(cryptNames));
+         until cryptNames[choice] <> 'used';
+         placeName := cryptNames[choice];
+         cryptNames[choice] := 'used';
+     end
      else if (placeType = tCavern) then
      begin
          repeat
@@ -132,4 +142,3 @@ begin
 end;
 
 end.
-

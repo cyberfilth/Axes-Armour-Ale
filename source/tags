@@ -387,6 +387,7 @@ displayWinscreen	screens/scrwinalpha.pas	/^procedure displayWinscreen;$/;"	p
 drawBat	screens/scrrip.pas	/^procedure drawBat;$/;"	p
 drawCaveTiles	backup/map.pas	/^procedure drawCaveTiles(c, r: smallint; hiDef: byte);$/;"	p
 drawCaveTiles	map.pas	/^procedure drawCaveTiles(c, r: smallint; hiDef: byte);$/;"	p
+drawCryptTiles	backup/map.pas	/^procedure drawCryptTiles(c, r: smallint; hiDef: byte);$/;"	p
 drawCryptTiles	map.pas	/^procedure drawCryptTiles(c, r: smallint; hiDef: byte);$/;"	p
 drawDungeonTiles	backup/map.pas	/^procedure drawDungeonTiles(c, r: smallint; hiDef: byte);$/;"	p
 drawDungeonTiles	map.pas	/^procedure drawDungeonTiles(c, r: smallint; hiDef: byte);$/;"	p

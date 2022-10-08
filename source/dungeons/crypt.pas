@@ -480,8 +480,7 @@ begin
         end;
       end;
       universe.totalRooms := totalRooms;
-      file_handling.writeNewDungeonLevel(title, idNumber, i,
-        totalDepth, totalRooms, tDungeon);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tDungeon);
     end
     { If the floor number is an odd number }
     else if (Odd(i)) and (i <> totalDepth) then
