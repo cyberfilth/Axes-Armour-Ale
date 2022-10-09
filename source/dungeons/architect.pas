@@ -48,10 +48,12 @@ end;
 
 procedure firstRow;
 var
-  locations1: array[0..2] of dungeonTerrain = (tDungeon, tVillage, tCrypt);
-  locations2: array[0..2] of dungeonTerrain = (tDungeon, tCavern, tDungeon);
+ // locations1: array[0..2] of dungeonTerrain = (tDungeon, tVillage, tCrypt);
+  locations1: array[0..2] of dungeonTerrain = (tCrypt, tVillage, tCrypt);
+  //locations2: array[0..2] of dungeonTerrain = (tDungeon, tCavern, tDungeon);
+  locations2: array[0..2] of dungeonTerrain = (tCrypt, tCrypt, tCrypt);
   cryptNames: array[0..3] of shortstring =
-  ('Abandoned crypt', 'Spooky tomb', 'Haunted mausoleum', 'Cursed sepulchre');
+  ('abandoned crypt', 'spooky tomb', 'haunted mausoleum', 'Cursed Sepulchre');
   villageNames: array[0..3] of shortstring =
     ('village of Barterville', 'village of Flatgrove', 'village of Little Wolding', 'village of Swineford');
   dungeonNames: array[0..5] of shortstring =

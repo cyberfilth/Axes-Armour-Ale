@@ -170,7 +170,9 @@ begin
         if (island.locationExists(entityList[0].posX, entityList[0].posY) = False) then
         begin
           if (Dtype = tDungeon) then
-            universe.createNewDungeon(UTF8Decode(title), tDungeon, locationID);
+            universe.createNewDungeon(UTF8Decode(title), tDungeon, locationID)
+          else if (Dtype = tCrypt) then
+            universe.createNewDungeon(UTF8Decode(title), tCrypt, locationID);
         end;
         (* store overworld coordinates *)
         globalUtils.OWx := entityList[0].posX;

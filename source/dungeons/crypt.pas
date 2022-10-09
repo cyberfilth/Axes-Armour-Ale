@@ -2,7 +2,7 @@
 
 unit crypt;
 
-{$mode fpc}{$H+}
+{$mode objfpc}{$H+}
 {$RANGECHECKS OFF}
 
 interface
@@ -71,7 +71,6 @@ const
 var
   r, c, i, p, t, listLength, firstHalf, lastHalf: smallint;
   dungeonArray: array[1..globalutils.MAXROWS, 1..globalutils.MAXCOLUMNS] of char;
-  processed_dungeon: array[1..globalutils.MAXROWS, 1..globalutils.MAXCOLUMNS] of char;
   totalRooms, roomSquare, stairX, stairY: smallint;
   (* start creating corridors once this rises above 1 *)
   roomCounter: smallint;
@@ -152,6 +151,18 @@ begin
   begin
     map.startX := centreList[1].x;
     map.startY := centreList[1].y;
+  end;
+    { Redraw border around the map }
+  for i2 := 1 to MAXCOLUMNS do
+  begin
+    dungeonArray[1][i2] := '#';
+    dungeonArray[MAXROWS][i2] := '#';
+  end;
+  { draw left and right border }
+  for i2 := 1 to MAXROWS do
+  begin
+    dungeonArray[i2][1] := '#';
+    dungeonArray[i2][MAXCOLUMNS] := '#';
   end;
 end;
 
@@ -446,6 +457,7 @@ begin
   for i := 1 to totalDepth do
   begin
     buildLevel(i);
+
     { First floor only }
     if (i = 1) then
     begin
@@ -476,11 +488,11 @@ begin
       begin
         for c := 1 to globalUtils.MAXCOLUMNS do
         begin
-          universe.currentDungeon[r][c] := processed_dungeon[r][c];
+          universe.currentDungeon[r][c] := dungeonArray[r][c];
         end;
       end;
       universe.totalRooms := totalRooms;
-      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tDungeon);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCrypt);
     end
     { If the floor number is an odd number }
     else if (Odd(i)) and (i <> totalDepth) then
@@ -508,9 +520,7 @@ begin
       stairX := c;
       stairY := r;
 
-      file_handling.writeNewDungeonLevel(title, idNumber,
-        i, totalDepth, totalRooms,
-        tDungeon);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCrypt);
     end
     else if not (Odd(i)) and (i <> totalDepth) then
       { If the floor number is an even number }
@@ -538,9 +548,7 @@ begin
       stairX := c;
       stairY := r;
 
-      file_handling.writeNewDungeonLevel(title, idNumber,
-        i, totalDepth, totalRooms,
-        tDungeon);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCrypt);
     end
     else
       (* Last floor *)
@@ -558,24 +566,23 @@ begin
 
       dungeonArray[stairY][stairX] := '<';
 
-      file_handling.writeNewDungeonLevel(title, idNumber, i,
-        totalDepth, totalRooms, tDungeon);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCrypt);
     end;
 
     /////////////////////////////
     // Write map to text file for testing
-    //filename := 'dungeon_level_' + IntToStr(i) + '.txt';
-    //AssignFile(myfile, filename);
-    //rewrite(myfile);
-    //for r := 1 to MAXROWS do
-    //begin
-    //  for c := 1 to MAXCOLUMNS do
-    //  begin
-    //    Write(myfile, dungeonArray[r][c]);
-    //  end;
-    //  Write(myfile, sLineBreak);
-    //end;
-    //closeFile(myfile);
+    filename := 'dungeon_level_' + IntToStr(i) + '.txt';
+    AssignFile(myfile, filename);
+    rewrite(myfile);
+    for r := 1 to MAXROWS do
+    begin
+      for c := 1 to MAXCOLUMNS do
+      begin
+        Write(myfile, dungeonArray[r][c]);
+      end;
+      Write(myfile, sLineBreak);
+    end;
+    closeFile(myfile);
     ////////////////////////////////
   end;
 end;

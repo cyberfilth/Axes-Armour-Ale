@@ -8,7 +8,7 @@ interface
 
 uses
   SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe, island,
-  cave, smallGrid, combat_resolver;
+  cave, smallGrid, crypt, combat_resolver;
 
 (* Save the overworld map to disk *)
 procedure saveOverworldMap;
@@ -378,6 +378,11 @@ begin
         else if (dType = tDungeon) then
         begin
           AddElement(datanode, 'Glyph', UTF8Decode(smallGrid.processed_dungeon[r][c]));
+        end
+        { if dungeon type is a crypt }
+        else if (dType = tCrypt) then
+        begin
+          AddElement(datanode, 'Glyph', UTF8Decode(crypt.dungeonArray[r][c]));
         end;
       end;
     end;
