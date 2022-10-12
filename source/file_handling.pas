@@ -282,9 +282,7 @@ begin
   end;
 end;
 
-procedure writeNewDungeonLevel(title: string;
-  idNumber, lvlNum, totalDepth, totalRooms: byte; dtype: dungeonTerrain);
-
+procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte; dtype: dungeonTerrain);
 var
   r, c, id_int: smallint;
   Doc: TXMLDocument;
@@ -306,7 +304,6 @@ var
   end;
 
   function AddChild(Node: TDOMNode; ChildName: shortstring): TDomNode;
-
   var
     ChildNode: TDomNode;
   begin
@@ -317,8 +314,7 @@ var
 
 begin
   id_int := 0;
-  dfileName := globalUtils.saveDirectory + PathDelim + 'd_' +
-    IntToStr(idNumber) + '_f' + IntToStr(lvlNum) + '.dat';
+  dfileName := globalUtils.saveDirectory + PathDelim + 'd_' + IntToStr(idNumber) + '_f' + IntToStr(lvlNum) + '.dat';
   try
     { Create a document }
     Doc := TXMLDocument.Create;
@@ -362,6 +358,17 @@ begin
             (smallGrid.processed_dungeon[r][c] = 'X') or
             (smallGrid.processed_dungeon[r][c] = '>') or
             (smallGrid.processed_dungeon[r][c] = '<') then
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
+          else
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
+        end
+        { if dungeon type is a crypt }
+        else if (dType = tCrypt) then
+        begin
+          if (crypt.dungeonArray[r][c] = '.') or
+            (crypt.dungeonArray[r][c] = 'X') or
+            (crypt.dungeonArray[r][c] = '>') or
+            (crypt.dungeonArray[r][c] = '<') then
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
           else
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));

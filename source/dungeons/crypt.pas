@@ -152,7 +152,7 @@ begin
     map.startX := centreList[1].x;
     map.startY := centreList[1].y;
   end;
-    { Redraw border around the map }
+  { Redraw border around the map }
   for i2 := 1 to MAXCOLUMNS do
   begin
     dungeonArray[1][i2] := '#';
@@ -220,14 +220,8 @@ end;
 
 procedure createRoom(gridNumber: smallint);
 var
-  topLeftX, topLeftY, roomHeight, roomWidth, drawHeight, drawWidth,
-  nudgeDown, nudgeAcross: smallint;
+  topLeftX, topLeftY, roomHeight, roomWidth, drawHeight, drawWidth: smallint;
 begin
-
-(* Grids are unevenly spaced, so exact coordinates are used. 'Nudge' is used to
-change starting point of each room so they don't all start drawing from the top left corner *)
-  nudgeDown := 0;
-  nudgeAcross := 0;
   topLeftX := 0;
   topLeftY := 0;
   roomHeight := 0;
@@ -424,28 +418,55 @@ change starting point of each room so they don't all start drawing from the top 
     end;
   end;
 
-  if (roomHeight = 2) then
-    nudgeDown := randomRange(0, 2)
-  else if (roomHeight = 3) then
-    nudgeDown := randomRange(0, 1);
-  if (roomWidth = 2) then
-    nudgeAcross := randomRange(0, 2)
-  else if (roomWidth = 3) then
-    nudgeAcross := randomRange(0, 1);
-
   (* Save coordinates of the centre of the room *)
   listLength := Length(centreList);
   SetLength(centreList, listLength + 1);
-  centreList[listLength].x := (topLeftX + nudgeAcross) + (roomWidth div 2);
-  centreList[listLength].y := (topLeftY + nudgeDown) + (roomHeight div 2);
-  (* Draw room within the grid square *)
-  /// add prefabs here
-  for drawHeight := 0 to roomHeight do
+  centreList[listLength].x := topLeftX + (roomWidth div 2);
+  centreList[listLength].y := topLeftY + (roomHeight div 2);
+  (* Add prefabs to map if they fit *)
+  { 4x4 room }
+  if (roomHeight = 4) and (roomWidth = 4) then
   begin
-    for drawWidth := 0 to roomWidth do
+    for drawHeight := 1 to roomHeight do
     begin
-      dungeonArray[(topLeftY + nudgeDown) + drawHeight][
-        (topLeftX + nudgeAcross) + drawWidth] := '.';
+      for drawWidth := 1 to roomWidth do
+      begin
+        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_4X4a[drawHeight][drawWidth];
+      end;
+    end;
+  end
+  { 5x5 room }
+  else if (roomHeight = 5) and (roomWidth = 5) then
+  begin
+    for drawHeight := 1 to roomHeight do
+    begin
+      for drawWidth := 1 to roomWidth do
+      begin
+        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_5X5a[drawHeight][drawWidth];
+      end;
+    end;
+  end
+  { 7x7 room }
+  else if (roomHeight = 7) and (roomWidth = 7) then
+  begin
+    for drawHeight := 1 to roomHeight do
+    begin
+      for drawWidth := 1 to roomWidth do
+      begin
+        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_7X7a[drawHeight][drawWidth];
+      end;
+    end;
+  end
+
+  (* Else draw room within the grid square *)
+  else
+  begin
+    for drawHeight := 1 to roomHeight do
+    begin
+      for drawWidth := 1 to roomWidth do
+      begin
+        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := '.';
+      end;
     end;
   end;
 end;
@@ -548,7 +569,8 @@ begin
       stairX := c;
       stairY := r;
 
-      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCrypt);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth,
+        totalRooms, tCrypt);
     end
     else
       (* Last floor *)
@@ -566,7 +588,8 @@ begin
 
       dungeonArray[stairY][stairX] := '<';
 
-      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCrypt);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth,
+        totalRooms, tCrypt);
     end;
 
     /////////////////////////////
