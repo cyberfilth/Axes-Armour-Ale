@@ -908,10 +908,10 @@ end;
 
 procedure drawCryptTiles(c, r: smallint; hiDef: byte);
 const
-  lit = 'lightGrey';
-  unlit = 'grey';
-  dark = 'grey';
-  darkest = 'darkGrey';
+  lit = 'grey';
+  unlit = 'darkGrey';
+  dark = 'blue';
+  darkest = 'black';
 begin
   case maparea[r][c].glyph of
     '.', 'X': { Floor }
@@ -920,23 +920,23 @@ begin
       if (hiDef = 1) then { In view }
       begin
         if (player_stats.lightEquipped = True) then
-          mapDisplay[r][c].GlyphColour := dark
+          mapDisplay[r][c].GlyphColour := unlit
         else
           mapDisplay[r][c].GlyphColour := dark;
       end
       else { Not in view }
       begin
         if (player_stats.lightEquipped = True) then
-          mapDisplay[r][c].GlyphColour := 'darkGrey'
+          mapDisplay[r][c].GlyphColour := dark
         else
-          mapDisplay[r][c].GlyphColour := 'black';
+          mapDisplay[r][c].GlyphColour := darkest;
       end;
     end;
      '<': { Upstairs }
     begin
       mapDisplay[r][c].Glyph := '<';
       if (hiDef = 1) then
-        mapDisplay[r][c].GlyphColour := 'white'
+        mapDisplay[r][c].GlyphColour := lit
       else
         mapDisplay[r][c].GlyphColour := unlit;
     end;
@@ -944,7 +944,7 @@ begin
     begin
       mapDisplay[r][c].Glyph := '>';
       if (hiDef = 1) then
-        mapDisplay[r][c].GlyphColour := 'white'
+        mapDisplay[r][c].GlyphColour := lit
       else
         mapDisplay[r][c].GlyphColour := unlit;
     end;

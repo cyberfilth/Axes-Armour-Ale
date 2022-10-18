@@ -15,6 +15,9 @@ type
     x, y: smallint;
   end;
 
+type
+  TarraySmallint = array of smallint;
+
 const
   PREFAB_4X4a: array [0..3, 0..3] of char = (
     ('#', '.', '.', '#'),
@@ -88,8 +91,14 @@ uses
 procedure buildLevel(floorNumber: byte);
 var
   i2: byte;
+  a: TarraySmallint;
+  i, j: integer;
+  t: cardinal;
 begin
+  a := TarraySmallint.Create(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+    13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29);
   roomCounter := 0;
+  i := length(a);
   { initialise the array }
   SetLength(centreList, 1);
   { fill map with walls }
@@ -100,20 +109,27 @@ begin
       dungeonArray[r][c] := '#';
     end;
   end;
-  { between 15 - 20 rooms }
+  { Choose between 15 - 20 rooms }
   totalRooms := randomRange(15, 20);
+  { Put room list in random order using Sattolo cycle}
+  while i > 0 do
+  begin
+    Dec(i);
+    j := randomrange(Low(a), i);
+    t := a[i];
+    a[i] := a[j];
+    a[j] := t;
+  end;
+  { Create rooms }
   for i2 := 1 to totalRooms do
   begin
-    { randomly choose grid location from 1 to 29 }
-    roomSquare := randomRange(1, 29);
-    createRoom(roomSquare);
+    createRoom(a[i2]);
     Inc(roomCounter);
   end;
   leftToRight;
   for i2 := 1 to (totalRooms - 1) do
   begin
-    createCorridor(centreList[i2].x, centreList[i2].y, centreList[i2 + 1].x,
-      centreList[i2 + 1].y);
+    createCorridor(centreList[i2].x, centreList[i2].y, centreList[i2 + 1].x, centreList[i2 + 1].y);
   end;
   { connect random rooms so the map isn't totally linear
     from the first half of the room list }
@@ -176,18 +192,18 @@ begin
   if x1 < x2 then
   begin
     for x := x1 to x2 do
-     begin
-        if (dungeonArray[y][x] = '#') then
-          dungeonArray[y][x] := '.';
-      end;
+    begin
+      if (dungeonArray[y][x] = '#') then
+        dungeonArray[y][x] := '.';
+    end;
   end;
   if x1 > x2 then
   begin
     for x := x2 to x1 do
-      begin
-        if (dungeonArray[y][x] = '#') then
-          dungeonArray[y][x] := '.';
-      end;
+    begin
+      if (dungeonArray[y][x] = '#') then
+        dungeonArray[y][x] := '.';
+    end;
   end;
 end;
 
@@ -198,18 +214,18 @@ begin
   if y1 < y2 then
   begin
     for y := y1 to y2 do
-      begin
-        if (dungeonArray[y][x] = '#') then
-          dungeonArray[y][x] := '.';
-      end;
+    begin
+      if (dungeonArray[y][x] = '#') then
+        dungeonArray[y][x] := '.';
+    end;
   end;
   if y1 > y2 then
   begin
     for y := y2 to y1 do
-      begin
-        if (dungeonArray[y][x] = '#') then
-          dungeonArray[y][x] := '.';
-      end;
+    begin
+      if (dungeonArray[y][x] = '#') then
+        dungeonArray[y][x] := '.';
+    end;
   end;
 end;
 
@@ -440,7 +456,8 @@ begin
     for drawHeight := 0 to roomHeight - 1 do
     begin
       for drawWidth := 0 to roomWidth - 1 do
-        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_4X4a[drawHeight, drawWidth];
+        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] :=
+          PREFAB_4X4a[drawHeight, drawWidth];
     end;
   end
 
@@ -450,7 +467,8 @@ begin
     for drawHeight := 0 to roomHeight - 1 do
     begin
       for drawWidth := 0 to roomWidth - 1 do
-        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_5X5a[drawHeight, drawWidth];
+        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] :=
+          PREFAB_5X5a[drawHeight, drawWidth];
     end;
   end
   { 7x7 room }
@@ -459,9 +477,10 @@ begin
     for drawHeight := 0 to roomHeight - 1 do
     begin
       for drawWidth := 0 to roomWidth - 1 do
-        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_7X7a[drawHeight, drawWidth];
+        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] :=
+          PREFAB_7X7a[drawHeight, drawWidth];
     end;
-  end
+  end;
 
 end;
 
@@ -507,7 +526,8 @@ begin
         end;
       end;
       universe.totalRooms := totalRooms;
-      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCrypt);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth,
+        totalRooms, tCrypt);
     end
     { If the floor number is an odd number }
     else if (Odd(i)) and (i <> totalDepth) then
@@ -535,7 +555,8 @@ begin
       stairX := c;
       stairY := r;
 
-      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tCrypt);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth,
+        totalRooms, tCrypt);
     end
     else if not (Odd(i)) and (i <> totalDepth) then
       { If the floor number is an even number }
