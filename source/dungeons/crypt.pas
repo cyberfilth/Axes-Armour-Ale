@@ -16,42 +16,25 @@ type
   end;
 
 const
-  PREFAB_4X4a: array [1..4, 1..4] of char = (
+  PREFAB_4X4a: array [0..3, 0..3] of char = (
     ('#', '.', '.', '#'),
     ('.', '.', '.', '.'),
     ('.', '.', '.', '.'),
     ('#', '.', '.', '#'));
-  PREFAB_5x4a: array [1..4, 1..5] of char = (
-    ('#', '#', '.', '#', '#'),
-    ('#', '.', '.', '.', '#'),
-    ('#', '.', '.', '.', '#'),
-    ('#', '#', '.', '#', '#'));
-  PREFAB_5x4b: array [1..4, 1..5] of char = (
-    ('#', '.', '.', '.', '#'),
-    ('.', '#', '.', '#', '.'),
-    ('.', '.', '.', '.', '.'),
-    ('#', '.', '.', '.', '#'));
-  PREFAB_5x5a: array [1..5, 1..5] of char = (
+  PREFAB_5x5a: array [0..4, 0..4] of char = (
     ('#', '.', '.', '.', '#'),
     ('.', '#', '.', '#', '.'),
     ('.', '.', '.', '.', '.'),
     ('.', '#', '.', '#', '.'),
     ('#', '.', '.', '.', '#'));
-  PREFAB_6x6a: array [1..6, 1..6] of char = (
+  PREFAB_6x6a: array [0..5, 0..5] of char = (
     ('#', '#', '.', '.', '#', '#'),
     ('#', '.', '.', '.', '.', '#'),
     ('.', '.', '.', '.', '.', '.'),
     ('.', '.', '.', '.', '.', '.'),
     ('#', '.', '.', '.', '.', '#'),
     ('#', '#', '.', '.', '#', '#'));
-  PREFAB_6x6b: array [1..6, 1..6] of char = (
-    ('.', '.', '#', '#', '.', '.'),
-    ('.', '.', '.', '.', '.', '.'),
-    ('#', '.', '#', '#', '.', '#'),
-    ('#', '.', '#', '#', '.', '#'),
-    ('.', '.', '.', '.', '.', '.'),
-    ('.', '.', '#', '#', '.', '.'));
-  PREFAB_7x7a: array [1..7, 1..7] of char = (
+  PREFAB_7x7a: array [0..6, 0..6] of char = (
     ('#', '#', '.', '.', '.', '#', '#'),
     ('#', '.', '.', '.', '.', '.', '#'),
     ('.', '.', '#', '.', '#', '.', '.'),
@@ -59,7 +42,7 @@ const
     ('.', '.', '#', '.', '#', '.', '.'),
     ('#', '.', '.', '.', '.', '.', '#'),
     ('#', '#', '.', '.', '.', '#', '#'));
-  PREFAB_7x7b: array [1..7, 1..7] of char = (
+  PREFAB_7x7b: array [0..6, 0..6] of char = (
     ('#', '#', '#', '.', '#', '#', '#'),
     ('#', '.', '#', '.', '#', '.', '#'),
     ('#', '.', '#', '.', '#', '.', '#'),
@@ -121,8 +104,8 @@ begin
   totalRooms := randomRange(15, 20);
   for i2 := 1 to totalRooms do
   begin
-    { randomly choose grid location from 1 to 27 }
-    roomSquare := randomRange(1, 27);
+    { randomly choose grid location from 1 to 29 }
+    roomSquare := randomRange(1, 29);
     createRoom(roomSquare);
     Inc(roomCounter);
   end;
@@ -193,12 +176,18 @@ begin
   if x1 < x2 then
   begin
     for x := x1 to x2 do
-      dungeonArray[y][x] := '.';
+     begin
+        if (dungeonArray[y][x] = '#') then
+          dungeonArray[y][x] := '.';
+      end;
   end;
   if x1 > x2 then
   begin
     for x := x2 to x1 do
-      dungeonArray[y][x] := '.';
+      begin
+        if (dungeonArray[y][x] = '#') then
+          dungeonArray[y][x] := '.';
+      end;
   end;
 end;
 
@@ -209,12 +198,18 @@ begin
   if y1 < y2 then
   begin
     for y := y1 to y2 do
-      dungeonArray[y][x] := '.';
+      begin
+        if (dungeonArray[y][x] = '#') then
+          dungeonArray[y][x] := '.';
+      end;
   end;
   if y1 > y2 then
   begin
     for y := y2 to y1 do
-      dungeonArray[y][x] := '.';
+      begin
+        if (dungeonArray[y][x] = '#') then
+          dungeonArray[y][x] := '.';
+      end;
   end;
 end;
 
@@ -229,192 +224,206 @@ begin
   case gridNumber of
     1:
     begin
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(2, 6);
+      roomHeight := 4;
+      roomWidth := 4;
       topLeftX := 2;
       topLeftY := 2;
     end;
     2:
     begin
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(2, 8);
-      topLeftX := 10;
+      roomHeight := 6;
+      roomWidth := 6;
+      topLeftX := 8;
       topLeftY := 2;
     end;
     3:
     begin
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(2, 7);
-      topLeftX := 20;
-      topLeftY := 2;
+      roomHeight := 4;
+      roomWidth := 4;
+      topLeftX := 16;
+      topLeftY := 3;
     end;
     4:
     begin
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(2, 7);
-      topLeftX := 29;
+      roomHeight := 4;
+      roomWidth := 4;
+      topLeftX := 22;
       topLeftY := 2;
     end;
     5:
     begin
-      topLeftX := 38;
+      topLeftX := 29;
       topLeftY := 2;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(2, 7);
+      roomHeight := 5;
+      roomWidth := 5;
     end;
     6:
     begin
-      topLeftX := 47;
+      topLeftX := 41;
       topLeftY := 2;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(2, 7);
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     7:
     begin
-      topLeftX := 56;
+      topLeftX := 47;
       topLeftY := 2;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(2, 7);
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     8:
     begin
-      topLeftX := 65;
+      topLeftX := 53;
       topLeftY := 2;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(2, 6);
+      roomHeight := 6;
+      roomWidth := 6;
     end;
     9:
     begin
-      topLeftX := 73;
-      topLeftY := 2;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(2, 7);
+      topLeftX := 61;
+      topLeftY := 3;
+      roomHeight := 7;
+      roomWidth := 7;
     end;
     10:
     begin
-      topLeftX := 2;
-      topLeftY := 8;
-      roomHeight := randomRange(4, 6);
-      roomWidth := randomRange(4, 6);
+      topLeftX := 70;
+      topLeftY := 2;
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     11:
     begin
-      topLeftX := 10;
-      topLeftY := 8;
-      roomHeight := randomRange(4, 6);
-      roomWidth := randomRange(4, 8);
+      topLeftX := 76;
+      topLeftY := 2;
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     12:
     begin
-      topLeftX := 20;
-      topLeftY := 8;
-      roomHeight := randomRange(4, 6);
-      roomWidth := randomRange(4, 7);
+      topLeftX := 2;
+      topLeftY := 9;
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     13:
     begin
-      topLeftX := 29;
-      topLeftY := 8;
-      roomHeight := randomRange(4, 6);
-      roomWidth := randomRange(4, 7);
+      topLeftX := 9;
+      topLeftY := 9;
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     14:
     begin
-      topLeftX := 38;
-      topLeftY := 8;
-      roomHeight := randomRange(4, 6);
-      roomWidth := randomRange(4, 7);
+      topLeftX := 15;
+      topLeftY := 9;
+      roomHeight := 7;
+      roomWidth := 7;
     end;
     15:
     begin
-      topLeftX := 47;
+      topLeftX := 23;
       topLeftY := 8;
-      roomHeight := randomRange(4, 6);
-      roomWidth := randomRange(4, 7);
+      roomHeight := 5;
+      roomWidth := 5;
     end;
     16:
     begin
-      topLeftX := 56;
-      topLeftY := 8;
-      roomHeight := randomRange(4, 6);
-      roomWidth := randomRange(4, 7);
+      topLeftX := 31;
+      topLeftY := 10;
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     17:
     begin
-      topLeftX := 65;
+      topLeftX := 40;
       topLeftY := 8;
-      roomHeight := randomRange(4, 6);
-      roomWidth := randomRange(4, 6);
+      roomHeight := 6;
+      roomWidth := 6;
     end;
     18:
     begin
-      topLeftX := 73;
-      topLeftY := 8;
-      roomHeight := randomRange(4, 6);
-      roomWidth := randomRange(4, 7);
+      topLeftX := 53;
+      topLeftY := 9;
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     19:
     begin
-      topLeftX := 2;
-      topLeftY := 16;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(3, 6);
+      topLeftX := 70;
+      topLeftY := 8;
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     20:
     begin
-      topLeftX := 10;
-      topLeftY := 16;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(3, 8);
+      topLeftX := 76;
+      topLeftY := 9;
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     21:
     begin
-      topLeftX := 20;
+      topLeftX := 2;
       topLeftY := 16;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(3, 7);
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     22:
     begin
-      topLeftX := 29;
-      topLeftY := 16;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(3, 7);
+      topLeftX := 8;
+      topLeftY := 15;
+      roomHeight := 5;
+      roomWidth := 5;
     end;
     23:
     begin
-      topLeftX := 38;
+      topLeftX := 23;
       topLeftY := 16;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(3, 7);
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     24:
     begin
-      topLeftX := 47;
+      topLeftX := 34;
       topLeftY := 16;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(3, 7);
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     25:
     begin
-      topLeftX := 56;
+      topLeftX := 41;
       topLeftY := 16;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(3, 7);
+      roomHeight := 4;
+      roomWidth := 4;
     end;
     26:
     begin
-      topLeftX := 65;
-      topLeftY := 16;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(3, 6);
+      topLeftX := 52;
+      topLeftY := 15;
+      roomHeight := 5;
+      roomWidth := 5;
     end;
     27:
     begin
-      topLeftX := 73;
-      topLeftY := 16;
-      roomHeight := randomRange(2, 4);
-      roomWidth := randomRange(3, 7);
+      topLeftX := 59;
+      topLeftY := 13;
+      roomHeight := 7;
+      roomWidth := 7;
+    end;
+    28:
+    begin
+      topLeftX := 68;
+      topLeftY := 14;
+      roomHeight := 5;
+      roomWidth := 5;
+    end;
+    29:
+    begin
+      topLeftX := 74;
+      topLeftY := 15;
+      roomHeight := 5;
+      roomWidth := 5;
     end;
   end;
 
@@ -423,52 +432,37 @@ begin
   SetLength(centreList, listLength + 1);
   centreList[listLength].x := topLeftX + (roomWidth div 2);
   centreList[listLength].y := topLeftY + (roomHeight div 2);
-  (* Add prefabs to map if they fit *)
+  (* Add prefabs to map *)
+
   { 4x4 room }
   if (roomHeight = 4) and (roomWidth = 4) then
   begin
-    for drawHeight := 1 to roomHeight do
+    for drawHeight := 0 to roomHeight - 1 do
     begin
-      for drawWidth := 1 to roomWidth do
-      begin
-        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_4X4a[drawHeight][drawWidth];
-      end;
+      for drawWidth := 0 to roomWidth - 1 do
+        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_4X4a[drawHeight, drawWidth];
     end;
   end
+
   { 5x5 room }
   else if (roomHeight = 5) and (roomWidth = 5) then
   begin
-    for drawHeight := 1 to roomHeight do
+    for drawHeight := 0 to roomHeight - 1 do
     begin
-      for drawWidth := 1 to roomWidth do
-      begin
-        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_5X5a[drawHeight][drawWidth];
-      end;
+      for drawWidth := 0 to roomWidth - 1 do
+        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_5X5a[drawHeight, drawWidth];
     end;
   end
   { 7x7 room }
   else if (roomHeight = 7) and (roomWidth = 7) then
   begin
-    for drawHeight := 1 to roomHeight do
+    for drawHeight := 0 to roomHeight - 1 do
     begin
-      for drawWidth := 1 to roomWidth do
-      begin
-        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_7X7a[drawHeight][drawWidth];
-      end;
+      for drawWidth := 0 to roomWidth - 1 do
+        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_7X7a[drawHeight, drawWidth];
     end;
   end
 
-  (* Else draw room within the grid square *)
-  else
-  begin
-    for drawHeight := 1 to roomHeight do
-    begin
-      for drawWidth := 1 to roomWidth do
-      begin
-        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := '.';
-      end;
-    end;
-  end;
 end;
 
 procedure generate(title: string; idNumber: smallint; totalDepth: byte);
