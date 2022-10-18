@@ -24,12 +24,46 @@ const
     ('.', '.', '.', '.'),
     ('.', '.', '.', '.'),
     ('#', '.', '.', '#'));
+  PREFAB_4X4b: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '#', '#', '.'),
+    ('.', '#', '#', '.'),
+    ('.', '.', '.', '.'));
+  PREFAB_4X4c: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'));
+  PREFAB_4X4d: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '#', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'));
+  PREFAB_4X4e: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '#', '.'),
+    ('.', '.', '.', '.'));
+
   PREFAB_5x5a: array [0..4, 0..4] of char = (
     ('#', '.', '.', '.', '#'),
     ('.', '#', '.', '#', '.'),
     ('.', '.', '.', '.', '.'),
     ('.', '#', '.', '#', '.'),
     ('#', '.', '.', '.', '#'));
+  PREFAB_5x5b: array [0..4, 0..4] of char = (
+    ('#', '.', '.', '.', '#'),
+    ('.', '.', '.', '.', '.'),
+    ('.', '.', '#', '.', '.'),
+    ('.', '.', '.', '.', '.'),
+    ('#', '.', '.', '.', '#'));
+  PREFAB_5x5c: array [0..4, 0..4] of char = (
+    ('#', '#', '.', '#', '#'),
+    ('#', '.', '.', '.', '#'),
+    ('.', '.', '.', '.', '.'),
+    ('#', '.', '.', '.', '#'),
+    ('#', '#', '.', '#', '#'));
+
   PREFAB_6x6a: array [0..5, 0..5] of char = (
     ('#', '#', '.', '.', '#', '#'),
     ('#', '.', '.', '.', '.', '#'),
@@ -37,6 +71,22 @@ const
     ('.', '.', '.', '.', '.', '.'),
     ('#', '.', '.', '.', '.', '#'),
     ('#', '#', '.', '.', '#', '#'));
+  PREFAB_6x6b: array [0..5, 0..5] of char = (
+    ('#', '.', '.', '.', '.', '#'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('.', '#', '#', '#', '#', '.'),
+    ('.', '#', '#', '#', '#', '.'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('#', '.', '.', '.', '.', '#'));
+  PREFAB_6x6c: array [0..5, 0..5] of char = (
+    ('#', '#', '.', '.', '#', '#'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('#', '#', '.', '.', '#', '#'));
+
+
   PREFAB_7x7a: array [0..6, 0..6] of char = (
     ('#', '#', '.', '.', '.', '#', '#'),
     ('#', '.', '.', '.', '.', '.', '#'),
@@ -53,6 +103,14 @@ const
     ('#', '.', '#', '.', '#', '.', '#'),
     ('#', '.', '#', '.', '#', '.', '#'),
     ('#', '#', '#', '.', '#', '#', '#'));
+  PREFAB_7x7c: array [0..6, 0..6] of char = (
+    ('#', '#', '#', '.', '#', '#', '#'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('#', '.', '#', '#', '#', '.', '#'),
+    ('.', '.', '#', '.', '#', '.', '.'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('#', '#', '#', '.', '#', '#', '#'));
 
 var
   r, c, i, p, t, listLength, firstHalf, lastHalf: smallint;
@@ -65,8 +123,8 @@ var
   (* Player starting position *)
   startX, startY: smallint;
   (* TESTING - Write dungeon to text file *)
-  filename: shortstring;
-  myfile: Text;
+  //filename: shortstring;
+  //myfile: Text;
 
 (* Build a level in the dungeon *)
 procedure buildLevel(floorNumber: byte);
@@ -129,7 +187,8 @@ begin
   leftToRight;
   for i2 := 1 to (totalRooms - 1) do
   begin
-    createCorridor(centreList[i2].x, centreList[i2].y, centreList[i2 + 1].x, centreList[i2 + 1].y);
+    createCorridor(centreList[i2].x, centreList[i2].y, centreList[i2 + 1].x,
+      centreList[i2 + 1].y);
   end;
   { connect random rooms so the map isn't totally linear
     from the first half of the room list }
@@ -231,12 +290,13 @@ end;
 
 procedure createRoom(gridNumber: smallint);
 var
-  topLeftX, topLeftY, roomHeight, roomWidth, drawHeight, drawWidth: smallint;
+  topLeftX, topLeftY, roomHeight, roomWidth, drawHeight, drawWidth, p: smallint;
 begin
   topLeftX := 0;
   topLeftY := 0;
   roomHeight := 0;
   roomWidth := 0;
+  p := 0;
   case gridNumber of
     1:
     begin
@@ -453,35 +513,69 @@ begin
   { 4x4 room }
   if (roomHeight = 4) and (roomWidth = 4) then
   begin
+    p := randomRange(1, 5);
     for drawHeight := 0 to roomHeight - 1 do
     begin
       for drawWidth := 0 to roomWidth - 1 do
-        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] :=
-          PREFAB_4X4a[drawHeight, drawWidth];
+          case p of
+             1: dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_4X4a[drawHeight, drawWidth];
+             2: dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_4X4b[drawHeight, drawWidth];
+             3: dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_4X4d[drawHeight, drawWidth];
+             4: dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_4X4e[drawHeight, drawWidth];
+             else
+                 dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_4X4c[drawHeight, drawWidth];
+          end;
+
     end;
   end
 
   { 5x5 room }
   else if (roomHeight = 5) and (roomWidth = 5) then
   begin
+    p := randomRange(1, 3);
     for drawHeight := 0 to roomHeight - 1 do
     begin
       for drawWidth := 0 to roomWidth - 1 do
-        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] :=
-          PREFAB_5X5a[drawHeight, drawWidth];
+      case p of
+         1: dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_5X5a[drawHeight, drawWidth];
+         2: dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_5X5b[drawHeight, drawWidth];
+         else
+             dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_5X5c[drawHeight, drawWidth];
+      end;
     end;
   end
+
+  { 6x6 room }
+  else if (roomHeight = 6) and (roomWidth = 6) then
+  begin
+    p := randomRange(1, 3);
+    for drawHeight := 0 to roomHeight - 1 do
+    begin
+      for drawWidth := 0 to roomWidth - 1 do
+      case p of
+         1: dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_6X6a[drawHeight, drawWidth];
+         2: dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_6X6b[drawHeight, drawWidth];
+         else
+             dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_6X6c[drawHeight, drawWidth];
+      end;
+    end;
+  end
+
   { 7x7 room }
   else if (roomHeight = 7) and (roomWidth = 7) then
   begin
+    p := randomRange(1, 3);
     for drawHeight := 0 to roomHeight - 1 do
     begin
       for drawWidth := 0 to roomWidth - 1 do
-        dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] :=
-          PREFAB_7X7a[drawHeight, drawWidth];
+        case p of
+         1: dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_7X7a[drawHeight, drawWidth];
+         2: dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_7X7b[drawHeight, drawWidth];
+         else
+             dungeonArray[topLeftY + drawHeight][topLeftX + drawWidth] := PREFAB_7X7c[drawHeight, drawWidth];
+      end;
     end;
   end;
-
 end;
 
 procedure generate(title: string; idNumber: smallint; totalDepth: byte);
@@ -609,18 +703,18 @@ begin
 
     /////////////////////////////
     // Write map to text file for testing
-    filename := 'dungeon_level_' + IntToStr(i) + '.txt';
-    AssignFile(myfile, filename);
-    rewrite(myfile);
-    for r := 1 to MAXROWS do
-    begin
-      for c := 1 to MAXCOLUMNS do
-      begin
-        Write(myfile, dungeonArray[r][c]);
-      end;
-      Write(myfile, sLineBreak);
-    end;
-    closeFile(myfile);
+    //filename := 'dungeon_level_' + IntToStr(i) + '.txt';
+    //AssignFile(myfile, filename);
+    //rewrite(myfile);
+    //for r := 1 to MAXROWS do
+    //begin
+    //  for c := 1 to MAXCOLUMNS do
+    //  begin
+    //    Write(myfile, dungeonArray[r][c]);
+    //  end;
+    //  Write(myfile, sLineBreak);
+    //end;
+    //closeFile(myfile);
     ////////////////////////////////
   end;
 end;
