@@ -167,8 +167,8 @@ begin
       dungeonArray[r][c] := '#';
     end;
   end;
-  { Choose between 15 - 20 rooms }
-  totalRooms := randomRange(15, 20);
+  { Choose between 10 - 15 rooms }
+  totalRooms := randomRange(10, 15);
   { Put room list in random order using Sattolo cycle}
   while i > 0 do
   begin
@@ -703,7 +703,7 @@ begin
 
     /////////////////////////////
     // Write map to text file for testing
-    //filename := 'dungeon_level_' + IntToStr(i) + '.txt';
+    //filename := 'crypt_level_' + IntToStr(i) + '.txt';
     //AssignFile(myfile, filename);
     //rewrite(myfile);
     //for r := 1 to MAXROWS do
