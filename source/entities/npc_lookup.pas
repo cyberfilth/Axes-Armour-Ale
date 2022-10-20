@@ -12,7 +12,8 @@ uses
   cave_rat, giant_cave_rat, blood_bat, large_blood_bat, green_fungus, mushroom_person,
   redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
   hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
-  crypt_wolf, blue_fungus, embalming_spider, gnome_cultist, bogle_drunk, ghoul_lvl1;
+  crypt_wolf, blue_fungus, embalming_spider, gnome_cultist, bogle_drunk, ghoul_lvl1,
+  skeleton_lvl1;
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
@@ -53,15 +54,15 @@ const
 
   (* Array of creatures found in a crypt, ordered by dungeon level *)
     cptNPC1: array[1..4] of string =
-      ('bloodBat', 'smlCorpseSpider', 'ghoulLVL1', 'GnmWarr');
+      ('bloodBat', 'smlCorpseSpider', 'ghoulLVL1', 'skeletonLVL1');
     cptNPC2: array[1..5] of string =
-      ('smlCorpseSpider', 'ghoulLVL1', 'GnmWarr', 'GnmWarr', 'blueFungus');
+      ('smlCorpseSpider', 'ghoulLVL1', 'skeletonLVL1', 'skeletonLVL1', 'blueFungus');
     cptNPC3: array[1..5] of string =
       ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'smlCorpseSpider');
     cptUnique1: array[1..2] of string =
-      ('blueFungus', 'GnmAss');
+      ('blueFungus', 'skeletonLVL1');
     cptUnique2: array[1..2] of string =
-      ('embalmSpider', 'GnmAss');
+      ('embalmSpider', 'skeletonLVL1');
     cptUnique3: array[1..2] of string =
       ('drunkBogle', 'drunkBogle');
 
@@ -226,6 +227,7 @@ begin
     'GnmCult': gnome_cultist.createGnomeCultist(i, c, r);
     'drunkBogle': bogle_drunk.createDrunkBogle(i, c, r);
     'ghoulLVL1': ghoul_lvl1.createGhoul(i, c, r);
+    'skeletonLVL1': skeleton_lvl1.createSkeleton(i, c, r);
   end;
 end;
 

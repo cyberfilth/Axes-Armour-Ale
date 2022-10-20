@@ -165,6 +165,7 @@ begin
           19: killType := 'Gnome cultist';
           20: killType := 'Bogle';
           21: killType := 'Ghoul';
+          22: killType := 'Skeleton';
           else
             killType := 'unknown';
         end;

@@ -39,10 +39,10 @@ const
   cptItems1: array[1..5] of string =
     ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar');
   cptItems2: array[1..7] of string =
-    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
+    ('rock', 'aleTankard', 'crudeDagger', 'leatherArmour1',
     'dimPixieJar', 'arrow', 'shortBow');
   cptItems3: array[1..6] of string =
-    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
+    ('aleTankard', 'crudeDagger', 'aleTankard', 'rock', 'wineFlask', 'arrow');
 
   (* Array of items found in a dungeon, ordered by dungeon level *)
   dgnItems1: array[1..5] of string =

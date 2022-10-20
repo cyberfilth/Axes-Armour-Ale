@@ -15,7 +15,7 @@ type
 
 type
   tMaterial = (matSteel, matIron, matWood, matLeather, matWool, matPaper, matFlammable,
-              matStone, matGlass, matEmpty);
+              matStone, matGlass, matEmpty, matBone);
 
 (* Store information about items *)
 type

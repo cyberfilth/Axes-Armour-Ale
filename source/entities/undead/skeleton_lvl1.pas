@@ -1,20 +1,20 @@
-(* Poisonous enemy with scent tracking *)
+(* High defence, low attack *)
 
-unit ghoul_lvl1;
+unit skeleton_lvl1;
 
 {$mode objfpc}{$H+}
 
 interface
 
 uses
-  SysUtils, Math, smell, universe, combat_resolver, player_stats;
+  SysUtils, Math, smell, universe, combat_resolver, player_stats, items, bone_dagger;
 
-(* Create a Ghoul *)
-procedure createGhoul(uniqueid, npcx, npcy: smallint);
+(* Create a Skeleton *)
+procedure createSkeleton(uniqueid, npcx, npcy: smallint);
 (* Take a turn *)
 procedure takeTurn(id: smallint);
 (* Creature death *)
-procedure death;
+procedure death(id: smallint);
 (* Decision tree for Neutral state *)
 procedure decisionNeutral(id: smallint);
 (* Decision tree for Hostile state *)
@@ -39,28 +39,24 @@ implementation
 uses
   entities, globalutils, ui, los, map;
 
-procedure createGhoul(uniqueid, npcx, npcy: smallint);
-var
-  mood: byte;
+procedure createSkeleton(uniqueid, npcx, npcy: smallint);
 begin
-  (* Determine hostility *)
-  mood := randomRange(1, 2);
-  (* Add a ghoul to the list of creatures *)
+  (* Add a skeleton to the list of creatures *)
   entities.listLength := length(entities.entityList);
   SetLength(entities.entityList, entities.listLength + 1);
   with entities.entityList[entities.listLength] do
   begin
     npcID := uniqueid;
-    race := 'Ghoul';
-    intName := 'ghoulLVL1';
+    race := 'Skeleton';
+    intName := 'skeletonLVL1';
     article := True;
-    description := 'a filthy, tattered ghoul';
-    glyph := 'g';
-    glyphColour := 'lightBlue';
+    description := 'an animated skeleton';
+    glyph := 's';
+    glyphColour := 'white';
     maxHP := randomRange(5, 7) + universe.currentDepth;
     currentHP := maxHP;
-    attack := randomRange(7, 9) + player_stats.playerLevel;
-    defence := randomRange(5, 7) + player_stats.playerLevel;
+    attack := randomRange(5, 7) + player_stats.playerLevel;
+    defence := randomRange(7, 9) + player_stats.playerLevel;
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;
@@ -72,10 +68,7 @@ begin
     inView := False;
     blocks := False;
     faction := undeadFaction;
-    if (mood = 1) then
-      state := stateHostile
-    else
-      state := stateNeutral;
+    state := stateHostile;
     discovered := False;
     weaponEquipped := False;
     armourEquipped := False;
@@ -105,9 +98,25 @@ begin
   end;
 end;
 
-procedure death;
+procedure death(id: smallint);
+var
+  (* Chance of dropping an item *)
+  chance: smallint;
 begin
-  Inc(deathList[21]);
+  chance := 0;
+  Inc(deathList[22]);
+  chance := randomRange(0, 2);
+  if (chance = 2) then
+  begin
+    (* Check if there is already an item on the floor here *)
+    if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) then
+    begin
+      { Place item on the game map }
+      SetLength(itemList, Length(itemList) + 1);
+      bone_dagger.createBoneDagger(entityList[id].posX, entityList[id].posY);
+      ui.displayMessage('The skeleton drops a dagger');
+    end;
+  end;
 end;
 
 procedure decisionNeutral(id: smallint);
@@ -144,15 +153,8 @@ begin
   begin
     (* Randomly display a message that you are being chased *)
     if (randomRange(1, 5) = 3) then
-      ui.displayMessage('You hear sounds of scratching');
+      ui.displayMessage('You hear clicking sounds');
     followScent(id);
-  end
-
-  {------------------------------- If health is below 25%, escape }
-  else if (entityList[id].currentHP < (entityList[id].maxHP div 4)) then
-  begin
-    entityList[id].state := stateEscape;
-    escapePlayer(id, entityList[id].posX, entityList[id].posY);
   end
 
   else
@@ -250,7 +252,7 @@ begin
     (* Else if tile does not contain player, check for another entity *)
     else if (map.isOccupied(newX, newY) = True) then
     begin
-      ui.bufferMessage('The ghoul bumps into ' + getCreatureName(newX, newY));
+      ui.bufferMessage('The skeleton bumps into ' + getCreatureName(newX, newY));
       entities.moveNPC(id, spx, spy);
     end
     (* if map is unoccupied, move to that tile *)
@@ -344,14 +346,9 @@ begin
     else
     begin
       if (damageAmount = 1) then
-        ui.displayMessage('The ghoul slightly wounds you')
+        ui.displayMessage('The skeleton slightly wounds you')
       else
-      begin
-        ui.displayMessage('The ghoul claws you, dealing ' + IntToStr(damageAmount) + ' damage');
-        (* Ghoul does poison damage *)
-        entityList[0].stsPoison := True;
-        entityList[0].tmrPoison := damageAmount + 4;
-      end;
+        ui.displayMessage('The skeleton stabs you, dealing ' + IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
@@ -360,9 +357,9 @@ begin
   begin
     chance := randomRange(1, 4);
     if (chance = 1) then
-      ui.displayMessage('The ghoul attacks wildly but misses')
+      ui.displayMessage('The skeleton lunges but misses')
     else if (chance = 2) then
-      ui.displayMessage('The ghoul flails at you');
+      ui.displayMessage('The skeleton slashes the air');
     combat_resolver.spiteDMG(id);
   end;
 end;
@@ -373,7 +370,6 @@ var
 begin
   Dec(entityList[id].moveCount);
   smellDir := scentDirection(entities.entityList[id].posY, entities.entityList[id].posX);
-
   case smellDir of
     'n':
     begin
@@ -406,8 +402,6 @@ begin
       if (map.canMove((entities.entityList[id].posX - 1),
         entities.entityList[id].posY) and (map.isOccupied(
         (entities.entityList[id].posX - 1), entities.entityList[id].posY) = False)) then
-
-
         entities.moveNPC(id, (entities.entityList[id].posX - 1),
           entities.entityList[id].posY);
     end
