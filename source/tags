@@ -6,10 +6,10 @@
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 AddChild	backup/file_handling.pas	/^  function AddChild(Node: TDOMNode; ChildName: shortstring): TDomNode;$/;"	f
 AddChild	file_handling.pas	/^  function AddChild(Node: TDOMNode; ChildName: shortstring): TDomNode;$/;"	f
-AddElement	backup/file_handling.pas	/^  procedure AddElement(Node: TDOMNode; Name, Value: UnicodeString);$/;"	p
 AddElement	backup/file_handling.pas	/^  procedure AddElement(Node: TDOMNode; Name, Value: shortstring);$/;"	p
-AddElement	file_handling.pas	/^  procedure AddElement(Node: TDOMNode; Name, Value: UnicodeString);$/;"	p
+AddElement	backup/file_handling.pas	/^  procedure AddElement(Node: TDOMNode; Name, Value: unicodestring);$/;"	p
 AddElement	file_handling.pas	/^  procedure AddElement(Node: TDOMNode; Name, Value: shortstring);$/;"	p
+AddElement	file_handling.pas	/^  procedure AddElement(Node: TDOMNode; Name, Value: unicodestring);$/;"	p
 CharInfoInput	backup/keyboardinput.pas	/^procedure CharInfoInput(Keypress: TKeyEvent);$/;"	p
 CharInfoInput	keyboardinput.pas	/^procedure CharInfoInput(Keypress: TKeyEvent);$/;"	p
 Creature.entityDeath	backup/entities.pas	/^procedure Creature.entityDeath(i: smallint);$/;"	p
@@ -943,7 +943,9 @@ withinBounds	backup/map.pas	/^function withinBounds(x, y: smallint): boolean;$/;
 withinBounds	map.pas	/^function withinBounds(x, y: smallint): boolean;$/;"	f
 writeBufferedMessages	backup/ui.pas	/^procedure writeBufferedMessages;$/;"	p
 writeBufferedMessages	ui.pas	/^procedure writeBufferedMessages;$/;"	p
-writeNewDungeonLevel	backup/file_handling.pas	/^procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte;$/;"	p
-writeNewDungeonLevel	file_handling.pas	/^procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte;$/;"	p
+writeNewDungeonLevel	backup/file_handling.pas	/^procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte; dtype: dungeonTerrain);$/;"	p
+writeNewDungeonLevel	backup/file_handling.pas	/^procedure writeNewDungeonLevel(title: string;$/;"	p
+writeNewDungeonLevel	file_handling.pas	/^procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte; dtype: dungeonTerrain);$/;"	p
+writeNewDungeonLevel	file_handling.pas	/^procedure writeNewDungeonLevel(title: string;$/;"	p
 writeScroll	backup/plot_gen.pas	/^function writeScroll(attr: string): string;$/;"	f
 writeScroll	plot_gen.pas	/^function writeScroll(attr: string): string;$/;"	f

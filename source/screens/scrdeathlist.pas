@@ -164,6 +164,7 @@ begin
           18: killType := 'Embalming Spider';
           19: killType := 'Gnome cultist';
           20: killType := 'Bogle';
+          21: killType := 'Ghoul';
           else
             killType := 'unknown';
         end;
