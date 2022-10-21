@@ -34,7 +34,7 @@ begin
     itemArticle := 'a';
     itemType := itmWeapon;
     itemMaterial := matBone;
-    useID := 14;
+    useID := 20;
     glyph := chr(24);
     glyphColour := 'lightGrey';
     inView := False;

@@ -12,7 +12,7 @@ uses
   ale_tankard, wine_flask,
   { List of weapons }
   crude_dagger, basic_club, rock, short_bow, pointy_stick, gnomish_dagger, gnomish_mace,
-  gnomish_axe,
+  gnomish_axe, bone_dagger,
   { List of armour }
   leather_armour1, cloth_armour1,
   { Quest items }
@@ -178,6 +178,7 @@ begin
     17: gnomish_mace.useItem(equipped, id);
     18: gnomish_axe.useItem(equipped, id);
     19: parchment.collectParchment;
+    20: bone_dagger.useItem(equipped, id);
   end;
 end;
 
