@@ -166,6 +166,7 @@ begin
           20: killType := 'Bogle';
           21: killType := 'Ghoul';
           22: killType := 'Skeleton';
+          23: killType := 'Zombie';
           else
             killType := 'unknown';
         end;

@@ -104,8 +104,10 @@ chaseTarget	entities/hobs/redcap_lesser.pas	/^procedure chaseTarget(id, spx, spy
 chaseTarget	entities/hobs/redcap_lesser_lobber.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/undead/backup/ghoul_lvl1.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/undead/backup/skeleton_lvl1.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
+chaseTarget	entities/undead/backup/zombie_weak.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/undead/ghoul_lvl1.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/undead/skeleton_lvl1.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
+chaseTarget	entities/undead/zombie_weak.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 checkForTraps	backup/items.pas	/^procedure checkForTraps;$/;"	p
 checkForTraps	items.pas	/^procedure checkForTraps;$/;"	p
 checkLevel	player/player_stats.pas	/^procedure checkLevel;$/;"	p
@@ -150,8 +152,10 @@ combat	entities/hobs/redcap_lesser.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/hobs/redcap_lesser_lobber.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/undead/backup/ghoul_lvl1.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/undead/backup/skeleton_lvl1.pas	/^procedure combat(id: smallint);$/;"	p
+combat	entities/undead/backup/zombie_weak.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/undead/ghoul_lvl1.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/undead/skeleton_lvl1.pas	/^procedure combat(id: smallint);$/;"	p
+combat	entities/undead/zombie_weak.pas	/^procedure combat(id: smallint);$/;"	p
 combat	player/combat_resolver.pas	/^procedure combat(npcID: smallint);$/;"	p
 combatCheck	player/player.pas	/^function combatCheck(x, y: smallint): boolean;$/;"	f
 consonants	backup/plot_gen.pas	/^function consonants(character: string): char;$/;"	f
@@ -259,6 +263,8 @@ createWeb	entities/bugs/backup/web.pas	/^procedure createWeb(uniqueid, npcx, npc
 createWeb	entities/bugs/web.pas	/^procedure createWeb(uniqueid, npcx, npcy: smallint);$/;"	p
 createWebTrap	items/traps/web_trap.pas	/^procedure createWebTrap(itmx, itmy: smallint);$/;"	p
 createWineFlask	items/wine_flask.pas	/^procedure createWineFlask(itmx, itmy: smallint);$/;"	p
+createZombie	entities/undead/backup/zombie_weak.pas	/^procedure createZombie(uniqueid, npcx, npcy: smallint);$/;"	p
+createZombie	entities/undead/zombie_weak.pas	/^procedure createZombie(uniqueid, npcx, npcy: smallint);$/;"	p
 cycleTargets	screens/scrthrow.pas	/^procedure cycleTargets(selection: smallint);$/;"	p
 death	entities/animals/backup/crypt_wolf.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/animals/blood_bat.pas	/^procedure death;$/;"	p
@@ -288,8 +294,10 @@ death	entities/hobs/redcap_lesser.pas	/^procedure death;$/;"	p
 death	entities/hobs/redcap_lesser_lobber.pas	/^procedure death;$/;"	p
 death	entities/undead/backup/ghoul_lvl1.pas	/^procedure death;$/;"	p
 death	entities/undead/backup/skeleton_lvl1.pas	/^procedure death(id: smallint);$/;"	p
+death	entities/undead/backup/zombie_weak.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/undead/ghoul_lvl1.pas	/^procedure death;$/;"	p
 death	entities/undead/skeleton_lvl1.pas	/^procedure death(id: smallint);$/;"	p
+death	entities/undead/zombie_weak.pas	/^procedure death(id: smallint);$/;"	p
 decisionEscape	entities/animals/cave_rat.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/animals/giant_cave_rat.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/bogles/backup/bogle_drunk.pas	/^procedure decisionEscape(id: smallint);$/;"	p
@@ -313,8 +321,10 @@ decisionEscape	entities/hobs/redcap_lesser.pas	/^procedure decisionEscape(id: sm
 decisionEscape	entities/hobs/redcap_lesser_lobber.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/undead/backup/ghoul_lvl1.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/undead/backup/skeleton_lvl1.pas	/^procedure decisionEscape(id: smallint);$/;"	p
+decisionEscape	entities/undead/backup/zombie_weak.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/undead/ghoul_lvl1.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/undead/skeleton_lvl1.pas	/^procedure decisionEscape(id: smallint);$/;"	p
+decisionEscape	entities/undead/zombie_weak.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionHostile	entities/animals/backup/crypt_wolf.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/backup/hyena_fungus.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/backup/large_blood_bat.pas	/^procedure decisionHostile(id: smallint);$/;"	p
@@ -347,8 +357,10 @@ decisionHostile	entities/hobs/redcap_lesser.pas	/^procedure decisionHostile(id: 
 decisionHostile	entities/hobs/redcap_lesser_lobber.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/undead/backup/ghoul_lvl1.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/undead/backup/skeleton_lvl1.pas	/^procedure decisionHostile(id: smallint);$/;"	p
+decisionHostile	entities/undead/backup/zombie_weak.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/undead/ghoul_lvl1.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/undead/skeleton_lvl1.pas	/^procedure decisionHostile(id: smallint);$/;"	p
+decisionHostile	entities/undead/zombie_weak.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionNeutral	entities/animals/backup/crypt_wolf.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/backup/hyena_fungus.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/backup/large_blood_bat.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
@@ -381,8 +393,10 @@ decisionNeutral	entities/hobs/redcap_lesser.pas	/^procedure decisionNeutral(id: 
 decisionNeutral	entities/hobs/redcap_lesser_lobber.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/undead/backup/ghoul_lvl1.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/undead/backup/skeleton_lvl1.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
+decisionNeutral	entities/undead/backup/zombie_weak.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/undead/ghoul_lvl1.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/undead/skeleton_lvl1.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
+decisionNeutral	entities/undead/zombie_weak.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 deleteGameData	backup/file_handling.pas	/^procedure deleteGameData;$/;"	p
 deleteGameData	file_handling.pas	/^procedure deleteGameData;$/;"	p
 descendStairs	backup/map.pas	/^procedure descendStairs;$/;"	p
@@ -484,8 +498,10 @@ escapePlayer	entities/hobs/redcap_lesser.pas	/^procedure escapePlayer(id, spx, s
 escapePlayer	entities/hobs/redcap_lesser_lobber.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/undead/backup/ghoul_lvl1.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/undead/backup/skeleton_lvl1.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
+escapePlayer	entities/undead/backup/zombie_weak.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/undead/ghoul_lvl1.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/undead/skeleton_lvl1.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
+escapePlayer	entities/undead/zombie_weak.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 examineInventory	player/player_inventory.pas	/^procedure examineInventory(selection: smallint);$/;"	p
 exitApplication	backup/main.pas	/^procedure exitApplication;$/;"	p
 exitApplication	main.pas	/^procedure exitApplication;$/;"	p
@@ -526,8 +542,10 @@ followScent	entities/hobs/redcap_lesser.pas	/^procedure followScent(id: smallint
 followScent	entities/hobs/redcap_lesser_lobber.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/undead/backup/ghoul_lvl1.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/undead/backup/skeleton_lvl1.pas	/^procedure followScent(id: smallint);$/;"	p
+followScent	entities/undead/backup/zombie_weak.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/undead/ghoul_lvl1.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/undead/skeleton_lvl1.pas	/^procedure followScent(id: smallint);$/;"	p
+followScent	entities/undead/zombie_weak.pas	/^procedure followScent(id: smallint);$/;"	p
 foundMap	screens/dlginfo.pas	/^procedure foundMap;$/;"	p
 gameInput	backup/keyboardinput.pas	/^procedure gameInput(Keypress: TKeyEvent);$/;"	p
 gameInput	keyboardinput.pas	/^procedure gameInput(Keypress: TKeyEvent);$/;"	p
@@ -662,8 +680,10 @@ isNextToPlayer	entities/hobs/redcap_lesser.pas	/^function isNextToPlayer(spx, sp
 isNextToPlayer	entities/hobs/redcap_lesser_lobber.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/undead/backup/ghoul_lvl1.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/undead/backup/skeleton_lvl1.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
+isNextToPlayer	entities/undead/backup/zombie_weak.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/undead/ghoul_lvl1.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/undead/skeleton_lvl1.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
+isNextToPlayer	entities/undead/zombie_weak.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isOccupied	backup/map.pas	/^function isOccupied(checkX, checkY: smallint): boolean;$/;"	f
 isOccupied	map.pas	/^function isOccupied(checkX, checkY: smallint): boolean;$/;"	f
 isVowel	backup/plot_gen.pas	/^function isVowel(character: string): boolean;$/;"	f
@@ -860,8 +880,10 @@ takeTurn	entities/hobs/redcap_lesser.pas	/^procedure takeTurn(id: smallint);$/;"
 takeTurn	entities/hobs/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/undead/backup/ghoul_lvl1.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/undead/backup/skeleton_lvl1.pas	/^procedure takeTurn(id: smallint);$/;"	p
+takeTurn	entities/undead/backup/zombie_weak.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/undead/ghoul_lvl1.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/undead/skeleton_lvl1.pas	/^procedure takeTurn(id: smallint);$/;"	p
+takeTurn	entities/undead/zombie_weak.pas	/^procedure takeTurn(id: smallint);$/;"	p
 target	screens/scrthrow.pas	/^procedure target;$/;"	p
 targetInput	backup/keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
 targetInput	keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
@@ -987,8 +1009,10 @@ wander	entities/hobs/redcap_lesser.pas	/^procedure wander(id, spx, spy: smallint
 wander	entities/hobs/redcap_lesser_lobber.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/undead/backup/ghoul_lvl1.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/undead/backup/skeleton_lvl1.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
+wander	entities/undead/backup/zombie_weak.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/undead/ghoul_lvl1.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/undead/skeleton_lvl1.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
+wander	entities/undead/zombie_weak.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wearWieldInput	backup/keyboardinput.pas	/^procedure wearWieldInput(Keypress: TKeyEvent);$/;"	p
 wearWieldInput	keyboardinput.pas	/^procedure wearWieldInput(Keypress: TKeyEvent);$/;"	p
 wearWieldSelection	player/player_inventory.pas	/^procedure wearWieldSelection(selection: smallint);$/;"	p
