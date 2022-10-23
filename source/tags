@@ -180,6 +180,8 @@ createBloodbat	entities/animals/blood_bat.pas	/^procedure createBloodbat(uniquei
 createBloodbat	entities/animals/large_blood_bat.pas	/^procedure createBloodbat(uniqueid, npcx, npcy: smallint);$/;"	p
 createBlueFungus	entities/fungus/backup/blue_fungus.pas	/^procedure createBlueFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createBlueFungus	entities/fungus/blue_fungus.pas	/^procedure createBlueFungus(uniqueid, npcx, npcy: smallint);$/;"	p
+createBoneArmour	items/armour/backup/lesser_bone_armour.pas	/^procedure createBoneArmour(itmx, itmy: smallint);$/;"	p
+createBoneArmour	items/armour/lesser_bone_armour.pas	/^procedure createBoneArmour(itmx, itmy: smallint);$/;"	p
 createBoneDagger	items/weapons/backup/bone_dagger.pas	/^procedure createBoneDagger(itmx, itmy: smallint);$/;"	p
 createBoneDagger	items/weapons/bone_dagger.pas	/^procedure createBoneDagger(itmx, itmy: smallint);$/;"	p
 createCaveRat	entities/animals/cave_rat.pas	/^procedure createCaveRat(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -950,8 +952,10 @@ updateXP	ui.pas	/^procedure updateXP;$/;"	p
 useItem	items/ale_tankard.pas	/^procedure useItem;$/;"	p
 useItem	items/armour/backup/cloth_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/armour/backup/leather_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
+useItem	items/armour/backup/lesser_bone_armour.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/armour/cloth_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/armour/leather_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
+useItem	items/armour/lesser_bone_armour.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/arrow.pas	/^procedure useItem;$/;"	p
 useItem	items/backup/pixie_jar_dim.pas	/^procedure useItem;$/;"	p
 useItem	items/pixie_jar.pas	/^procedure useItem;$/;"	p

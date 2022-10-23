@@ -56,7 +56,7 @@ const
     cptNPC1: array[1..4] of string =
       ('bloodBat', 'smlCorpseSpider', 'ghoulLVL1', 'skeletonLVL1');
     cptNPC2: array[1..5] of string =
-      ('smlCorpseSpider', 'ghoulLVL1', 'zombieWeak', 'skeletonLVL1', 'blueFungus');
+      ('zombieWeak', 'ghoulLVL1', 'zombieWeak', 'skeletonLVL1', 'blueFungus');
     cptNPC3: array[1..5] of string =
       ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'smlCorpseSpider');
     cptUnique1: array[1..2] of string =

@@ -7,7 +7,8 @@ unit skeleton_lvl1;
 interface
 
 uses
-  SysUtils, Math, smell, universe, combat_resolver, player_stats, items, bone_dagger;
+  SysUtils, Math, smell, universe, combat_resolver, player_stats,
+  items, bone_dagger, lesser_bone_armour;
 
 (* Create a Skeleton *)
 procedure createSkeleton(uniqueid, npcx, npcy: smallint);
@@ -113,8 +114,17 @@ begin
     begin
       { Place item on the game map }
       SetLength(itemList, Length(itemList) + 1);
-      bone_dagger.createBoneDagger(entityList[id].posX, entityList[id].posY);
-      ui.displayMessage('The skeleton drops a dagger');
+      chance := randomRange(1, 2);
+      if (chance = 1) then
+      begin
+        bone_dagger.createBoneDagger(entityList[id].posX, entityList[id].posY);
+        ui.displayMessage('The skeleton drops a dagger');
+      end
+      else
+      begin
+        lesser_bone_armour.createBoneArmour(entityList[id].posX, entityList[id].posY);
+        ui.displayMessage('The skeleton drops an armoured ribcage');
+      end;
     end;
   end;
 end;
@@ -334,10 +344,12 @@ procedure combat(id: smallint);
 var
   damageAmount, chance: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) - entities.entityList[0].defence;
+  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) -
+    entities.entityList[0].defence;
   if (damageAmount > 0) then
   begin
-    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
+    entities.entityList[0].currentHP :=
+      (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin
       killer := 'a ' + entityList[id].race;
@@ -348,7 +360,8 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The skeleton slightly wounds you')
       else
-        ui.displayMessage('The skeleton stabs you, dealing ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The skeleton stabs you, dealing ' +
+          IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
@@ -383,8 +396,9 @@ begin
     'e':
     begin
       if (map.canMove((entities.entityList[id].posX + 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX + 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX + 1),
+        entities.entityList[id].posY) = False)) then
         entities.moveNPC(id, (entities.entityList[id].posX + 1),
           entities.entityList[id].posY);
     end;
@@ -400,8 +414,9 @@ begin
     'w':
     begin
       if (map.canMove((entities.entityList[id].posX - 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX - 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX - 1),
+        entities.entityList[id].posY) = False)) then
         entities.moveNPC(id, (entities.entityList[id].posX - 1),
           entities.entityList[id].posY);
     end
