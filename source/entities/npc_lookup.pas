@@ -60,7 +60,7 @@ const
     cptNPC3: array[1..5] of string =
       ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'smlCorpseSpider');
     cptUnique1: array[1..2] of string =
-      ('blueFungus', 'zombieWeak');
+      ('greenFungus', 'zombieWeak');
     cptUnique2: array[1..2] of string =
       ('embalmSpider', 'skeletonLVL1');
     cptUnique3: array[1..2] of string =
