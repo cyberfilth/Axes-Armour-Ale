@@ -28,6 +28,8 @@ var
   maxMagick, currentMagick: smallint;
   (* Durability of equipped / magical item *)
   numEquippedUses: smallint;
+  (* Amount of treasure *)
+  treasure: smallint;
 
 (* Check if the player has levelled up *)
 procedure checkLevel;

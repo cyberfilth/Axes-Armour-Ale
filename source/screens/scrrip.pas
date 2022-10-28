@@ -26,7 +26,7 @@ uses
 procedure displayRIPscreen;
 
 var
-  epitaph, deathMessage, raceLevel, exitMessage: shortstring;
+  epitaph, deathMessage, raceLevel, exitMessage, treasureMessage: shortstring;
   prefix, img: smallint;
 begin
   (* Create a farewell message *)
@@ -45,6 +45,15 @@ begin
   (* Show which creature killed the player *)
   deathMessage := 'Killed by ' + globalUtils.killer + ', after ' +
     IntToStr(entityList[0].moveCount) + ' moves.';
+
+  (* Show total amount of treasure *)
+  if (player_stats.treasure = 0) then
+    treasureMessage := 'You were penniless!'
+  else if (player_stats.treasure = 1) then
+    treasureMessage := 'You were carrying a single gold piece'
+  else
+    treasureMessage := 'You were carrying ' + IntToStr(player_stats.treasure) + ' Gold pieces';
+
 
   { Closing screen update as it is currently in the main game loop }
   UnlockScreenUpdate;
@@ -78,6 +87,7 @@ begin
     drawGrave;
 
   TextOut(centreX(deathMessage), 18, 'cyan', deathMessage);
+  TextOut(centreX(treasureMessage), 20, 'cyan', treasureMessage);
   TextOut(centreX(exitMessage), 24, 'cyan', exitMessage);
   UnlockScreenUpdate;
   UpdateScreen(False);

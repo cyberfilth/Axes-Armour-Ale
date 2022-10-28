@@ -16,7 +16,7 @@ uses
   { List of armour }
   leather_armour1, cloth_armour1,
   { Quest items }
-  smugglersMap, pixie_jar, pixie_jar_dim, parchment,
+  smugglersMap, pixie_jar, pixie_jar_dim, parchment, gold_pieces,
   { Magical items }
   staff_minor_scorch,
   { Ammunition }
@@ -28,30 +28,30 @@ const
   (* Array of items found in a cave, ordered by cave level *)
   caveItems1: array[1..8] of string =
     ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
-    'pointyStick', 'arrow', 'arrow');
+    'pointyStick', 'arrow', 'gold');
   caveItems2: array[1..7] of string =
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
     'rock', 'arrow', 'shortBow');
   caveItems3: array[1..6] of string =
-    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
+    ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
 
   (* Array of items found in a crypt, ordered by dungeon level *)
-  cptItems1: array[1..5] of string =
-    ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar');
-  cptItems2: array[1..7] of string =
-    ('rock', 'aleTankard', 'crudeDagger', 'leatherArmour1',
+  cptItems1: array[1..6] of string =
+    ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar', 'gold');
+  cptItems2: array[1..8] of string =
+    ('rock', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'gold',
     'dimPixieJar', 'arrow', 'shortBow');
-  cptItems3: array[1..6] of string =
-    ('aleTankard', 'crudeDagger', 'aleTankard', 'rock', 'wineFlask', 'arrow');
+  cptItems3: array[1..7] of string =
+    ('aleTankard', 'crudeDagger', 'aleTankard', 'rock', 'wineFlask', 'arrow', 'gold');
 
   (* Array of items found in a dungeon, ordered by dungeon level *)
   dgnItems1: array[1..5] of string =
     ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar');
-  dgnItems2: array[1..7] of string =
+  dgnItems2: array[1..8] of string =
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
-    'dimPixieJar', 'arrow', 'shortBow');
-  dgnItems3: array[1..6] of string =
-    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
+    'dimPixieJar', 'arrow', 'shortBow', 'gold');
+  dgnItems3: array[1..7] of string =
+    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow', 'gold');
 
 (* Choose an item and call the generate code directly *)
 procedure dispenseItem(dungeon: dungeonTerrain);
@@ -153,6 +153,7 @@ begin
     'stickyWeb': web_trap.createWebTrap(c, r);
     'dimPixieJar': pixie_jar_dim.createPixieJarDim(c, r);
     'parchment': parchment.createParchment(c, r);
+    'gold': gold_pieces.createGP(c, r);
   end;
 end;
 
@@ -179,6 +180,7 @@ begin
     18: gnomish_axe.useItem(equipped, id);
     19: parchment.collectParchment;
     20: bone_dagger.useItem(equipped, id);
+    22: gold_pieces.useItem;
   end;
 end;
 

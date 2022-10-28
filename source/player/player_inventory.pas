@@ -8,7 +8,7 @@ interface
 
 uses
   SysUtils, StrUtils, video, items, item_lookup, player_stats,
-  staff_minor_scorch, pixie_jar;
+  staff_minor_scorch, pixie_jar, gold_pieces;
 
 type
   (* Items in inventory *)
@@ -242,7 +242,7 @@ begin
   if (itemList[itemNumber].itemType <> itmTrap) then
   begin
   (* If this is not a quest item *)
-  if (itemList[itemNumber].itemType <> itmQuest) and (itemList[itemNumber].itemType <> itmLightSource)  then
+  if (itemList[itemNumber].itemType <> itmQuest) and (itemList[itemNumber].itemType <> itmLightSource) and (itemList[itemNumber].itemType <> itmTreasure) then
   begin
     Result := False;
     (* Check for adding an arrow to existing arrow slot *)
@@ -265,7 +265,7 @@ begin
     (* Check for an empty inventory slot *)
     if (addToInventory_emptySlot(itemNumber, skip) = True) or (stacked = True) then
     begin
-(* Set an empty flag for the item on the map, this gets deleted when saving the map *)
+    (* Set an empty flag for the item on the map, this gets deleted when saving the map *)
         with itemList[itemNumber] do
         begin
           itemID := itemNumber;
@@ -322,6 +322,35 @@ begin
     end;
     Result := True;
     pixie_jar.useItem;
+  end
+  else if (itemList[itemNumber].itemType = itmTreasure) then
+  begin { Treasure }
+        Inc(player_stats.treasure, itemList[itemNumber].NumberOfUses);
+    (* Set an empty flag for the item on the map, this gets deleted when saving the map *)
+    with itemList[itemNumber] do
+    begin
+      itemID := itemNumber;
+      itemName := 'empty';
+      itemDescription := '';
+      itemArticle := '';
+      itemType := itmEmptySlot;
+      itemMaterial := matEmpty;
+      useID := 1;
+      glyph := 'x';
+      glyphColour := 'lightCyan';
+      inView := False;
+      posX := 1;
+      posY := 1;
+      NumberOfUses := 0;
+      onMap := False;
+      throwable := False;
+      throwDamage := 0;
+      dice := 0;
+      adds := 0;
+      discovered := False;
+    end;
+    Result := True;
+    gold_pieces.useItem;
   end
   else  { Quest item }
   begin

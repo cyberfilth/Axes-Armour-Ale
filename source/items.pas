@@ -11,11 +11,11 @@ uses
 
 type
   tItem = (itmDrink, itmWeapon, itmArmour, itmQuest, itmProjectile, itmEmptySlot,
-          itmProjectileWeapon, itmAmmo, itmLightSource, itmTrap);
+          itmProjectileWeapon, itmAmmo, itmLightSource, itmTrap, itmTreasure);
 
 type
   tMaterial = (matSteel, matIron, matWood, matLeather, matWool, matPaper, matFlammable,
-              matStone, matGlass, matEmpty, matBone);
+              matStone, matGlass, matEmpty, matBone, matGold);
 
 (* Store information about items *)
 type

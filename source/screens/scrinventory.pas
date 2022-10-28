@@ -85,6 +85,13 @@ begin
          TextOut(55, 8, 'cyan', IntToStr(player_stats.lightCounter) + ' turns remaining');
     end;
 
+  (* Display treasure *)
+  TextOut(55, 11, 'cyan', 'Total treasure:');
+  if (player_stats.treasure = 0) then
+    TextOut(55, 12, 'darkGrey', '0')
+  else
+    TextOut(55, 12, 'cyan', IntToStr(player_stats.treasure) + ' Gold');
+
   (* Display current health *)
   TextOut(55, 14, 'cyan', 'Current health:');
   TextOut(55, 15, 'cyan', IntToStr(entityList[0].currentHP) + '/' + IntToStr(entityList[0].maxHP));

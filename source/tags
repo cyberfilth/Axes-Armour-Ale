@@ -206,6 +206,8 @@ createEllanToll	backup/universe.pas	/^procedure createEllanToll;$/;"	p
 createEllanToll	universe.pas	/^procedure createEllanToll;$/;"	p
 createEmbalmSpider	entities/bugs/backup/embalming_spider.pas	/^procedure createEmbalmSpider(uniqueid, npcx, npcy: smallint);$/;"	p
 createEmbalmSpider	entities/bugs/embalming_spider.pas	/^procedure createEmbalmSpider(uniqueid, npcx, npcy: smallint);$/;"	p
+createGP	items/backup/gold_pieces.pas	/^procedure createGP(itmx, itmy: smallint);$/;"	p
+createGP	items/gold_pieces.pas	/^procedure createGP(itmx, itmy: smallint);$/;"	p
 createGhoul	entities/undead/backup/ghoul_lvl1.pas	/^procedure createGhoul(uniqueid, npcx, npcy: smallint);$/;"	p
 createGhoul	entities/undead/ghoul_lvl1.pas	/^procedure createGhoul(uniqueid, npcx, npcy: smallint);$/;"	p
 createGiantCaveRat	entities/animals/giant_cave_rat.pas	/^procedure createGiantCaveRat(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -957,7 +959,9 @@ useItem	items/armour/cloth_armour1.pas	/^procedure useItem(equipped: boolean);$/
 useItem	items/armour/leather_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/armour/lesser_bone_armour.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/arrow.pas	/^procedure useItem;$/;"	p
+useItem	items/backup/gold_pieces.pas	/^procedure useItem;$/;"	p
 useItem	items/backup/pixie_jar_dim.pas	/^procedure useItem;$/;"	p
+useItem	items/gold_pieces.pas	/^procedure useItem;$/;"	p
 useItem	items/pixie_jar.pas	/^procedure useItem;$/;"	p
 useItem	items/pixie_jar_dim.pas	/^procedure useItem;$/;"	p
 useItem	items/rock.pas	/^procedure useItem;$/;"	p

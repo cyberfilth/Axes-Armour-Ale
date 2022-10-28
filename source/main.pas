@@ -226,6 +226,7 @@ begin
   player_stats.lightEquipped := True;
   player_stats.lightCounter := 250;
   player_stats.armourPoints := 0;
+  player_stats.treasure := 0;
   scrTargeting.targetX := 0;
   scrTargeting.targetY := 0;
   scrTargeting.safeX := 0;
