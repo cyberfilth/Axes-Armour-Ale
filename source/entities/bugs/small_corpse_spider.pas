@@ -7,7 +7,7 @@ unit small_corpse_spider;
 interface
 
 uses
-  SysUtils, ai_animal, combat_resolver;
+  SysUtils, ai_animal, combat_resolver, ui;
 
 (* Create a Corpse Spider *)
 procedure createCorpseSpider(uniqueid, npcx, npcy: smallint);
@@ -29,7 +29,7 @@ implementation
 uses
   entities, globalutils, los, map, player_stats;
 
-procedure createCorpseSpider (uniqueid, npcx, npcy: smallint);
+procedure createCorpseSpider(uniqueid, npcx, npcy: smallint);
 var
   mood: byte;
 begin
@@ -88,10 +88,26 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-  case entityList[id].state of
-    stateNeutral: decisionNeutral(id);
-    stateHostile: decisionHostile(id);
-    stateEscape: decisionEscape(id);
+  (* Check for status effects *)
+
+  { Bewildered }
+  if (entityList[id].stsBewild = True) then
+  begin
+    Dec(entityList[id].tmrBewild);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' behaves erratically');
+    ai_animal.wander(id, entityList[id].posX, entityList[id].posY);
+    if (entityList[id].tmrBewild <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+
+  if (entityList[id].stsBewild <> True) then
+  begin
+    case entityList[id].state of
+      stateNeutral: decisionNeutral(id);
+      stateHostile: decisionHostile(id);
+      stateEscape: decisionEscape(id);
+    end;
   end;
 end;
 

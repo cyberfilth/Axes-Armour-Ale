@@ -96,11 +96,36 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-  case entityList[id].state of
-    stateNeutral: decisionNeutral(id);
-    stateHostile: decisionHostile(id);
-    else
-      decisionNeutral(id);
+  (* Check for status effects *)
+
+  { Poison }
+  if (entityList[id].stsPoison = True) then
+  begin
+    Dec(entityList[id].currentHP);
+    Dec(entityList[id].tmrPoison);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks sick');
+    if (entityList[id].tmrPoison <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+  { Bewildered }
+  if (entityList[id].stsBewild = True) then
+  begin
+    Dec(entityList[id].tmrBewild);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks bewildered');
+    if (entityList[id].tmrBewild <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+
+  if (entityList[id].stsBewild <> True) then
+  begin
+    case entityList[id].state of
+      stateNeutral: decisionNeutral(id);
+      stateHostile: decisionHostile(id);
+      else
+        decisionNeutral(id);
+    end;
   end;
 end;
 
@@ -218,7 +243,8 @@ begin
     (* Else if tile does not contain player, check for another entity *)
     else if (map.isOccupied(newX, newY) = True) then
     begin
-      if (entityList[entities.getCreatureID(newX, newY)].race <> entityList[id].race) then
+      if (entityList[entities.getCreatureID(newX, newY)].race <>
+        entityList[id].race) then
       begin
         infighting(id, getCreatureID(newX, newY));
         entities.moveNPC(id, spx, spy);
@@ -309,7 +335,8 @@ procedure combat(id: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entityList[id].attack) - entityList[0].defence;
+  damageAmount := globalutils.randomRange(1, entityList[id].attack) -
+    entityList[0].defence;
   if (damageAmount > 0) then
   begin
     entityList[0].currentHP := (entityList[0].currentHP - damageAmount);
@@ -323,7 +350,8 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The bat slightly wounds you')
       else
-        ui.displayMessage('The bat bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The bat bites you, inflicting ' +
+          IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
@@ -339,18 +367,19 @@ procedure infighting(npcID, enemyID: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entityList[npcID].attack) - entityList[enemyID].defence;
-   if (damageAmount > 0) then
-   begin
-     entityList[enemyID].currentHP := (entityList[enemyID].currentHP - damageAmount);
-     if (entities.entityList[enemyID].currentHP < 1) then
-     begin
-          killEntity(enemyID);
-          ui.displayMessage('The bat kills the ' + entityList[enemyID].race);
-     end
-     else
-         ui.displayMessage('The bat attacks the ' + entityList[enemyID].race);
-   end;
+  damageAmount := globalutils.randomRange(1, entityList[npcID].attack) -
+    entityList[enemyID].defence;
+  if (damageAmount > 0) then
+  begin
+    entityList[enemyID].currentHP := (entityList[enemyID].currentHP - damageAmount);
+    if (entities.entityList[enemyID].currentHP < 1) then
+    begin
+      killEntity(enemyID);
+      ui.displayMessage('The bat kills the ' + entityList[enemyID].race);
+    end
+    else
+      ui.displayMessage('The bat attacks the ' + entityList[enemyID].race);
+  end;
 end;
 
 end.

@@ -112,10 +112,12 @@ procedure combat(idOwner, idTarget: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(2, entities.entityList[idOwner].attack) - entities.entityList[idTarget].defence;
+  damageAmount := globalutils.randomRange(2, entities.entityList[idOwner].attack) -
+    entities.entityList[idTarget].defence;
   if (damageAmount > 0) then
   begin
-    entities.entityList[idTarget].currentHP := (entities.entityList[idTarget].currentHP - damageAmount);
+    entities.entityList[idTarget].currentHP :=
+      (entities.entityList[idTarget].currentHP - damageAmount);
     if (entities.entityList[idTarget].currentHP < 1) then
     begin
       if (idTarget = 0) then
@@ -153,7 +155,8 @@ begin
       begin
         if (idTarget = 0) then { if target is the player }
         begin
-          ui.displayMessage('The fungus lashes you with its stinger, inflicting ' +  IntToStr(damageAmount) + ' damage');
+          ui.displayMessage('The fungus lashes you with its stinger, inflicting ' +
+            IntToStr(damageAmount) + ' damage');
           (* Fungus does poison damage *)
           entityList[0].stsPoison := True;
           entityList[0].tmrPoison := damageAmount + 2;
@@ -161,7 +164,11 @@ begin
             killer := 'poisonous fungus';
         end
         else
+        begin
           ui.bufferMessage('The fungus stings the ' + entityList[idTarget].race);
+          entityList[idTarget].stsPoison := True;
+          entityList[idTarget].tmrPoison := 2;
+        end;
       end;
     end;
   end
@@ -197,9 +204,9 @@ begin
           r := globalutils.randomRange(pY - 2, pY + 2);
           c := globalutils.randomRange(pX - 2, pX + 2);
           (* choose a location that is not a wall or occupied *)
-          if (map.isWall(c,r) = False) and (map.isOccupied(c,r) = False) then
+          if (map.isWall(c, r) = False) and (map.isOccupied(c, r) = False) then
           begin
-            poison_spore.createSpore(c,r);
+            poison_spore.createSpore(c, r);
             spawnedYN := True;
           end;
         end;

@@ -70,7 +70,7 @@ begin
       entityList[0].tmrPoison := 2;
       if (killer = 'empty') then
         killer := 'poisoned fungus spore';
-       LockScreenUpdate;
+      LockScreenUpdate;
       ui.displayMessage('You step on a poisoned spore');
       (* Update UI *)
       ui.displayStatusEffect(1, 'poison');
@@ -78,9 +78,14 @@ begin
       entityList[0].glyphColour := 'green';
       UnlockScreenUpdate;
       UpdateScreen(False);
+    end
+    (* If an NPC steps on the spore *)
+    else
+    begin
+      entityList[id].stsPoison := True;
+      entityList[id].tmrPoison := 2;
     end;
   end;
 end;
 
 end.
-

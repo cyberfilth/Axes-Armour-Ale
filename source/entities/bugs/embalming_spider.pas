@@ -7,7 +7,7 @@ unit embalming_spider;
 interface
 
 uses
-  SysUtils, ai_animal, combat_resolver, items, web;
+  SysUtils, ai_animal, combat_resolver, items, web, ui;
 
 (* Create an Embalming Spider *)
 procedure createEmbalmSpider(uniqueid, npcx, npcy: smallint);
@@ -82,10 +82,26 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-  case entityList[id].state of
-    stateNeutral: decisionNeutral(id);
-    stateHostile: decisionHostile(id);
-    stateEscape: decisionEscape(id);
+  (* Check for status effects *)
+
+  { Bewildered }
+  if (entityList[id].stsBewild = True) then
+  begin
+    Dec(entityList[id].tmrBewild);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' behaves erratically');
+    ai_animal.wander(id, entityList[id].posX, entityList[id].posY);
+    if (entityList[id].tmrBewild <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+
+  if (entityList[id].stsBewild <> True) then
+  begin
+    case entityList[id].state of
+      stateNeutral: decisionNeutral(id);
+      stateHostile: decisionHostile(id);
+      stateEscape: decisionEscape(id);
+    end;
   end;
 end;
 
@@ -103,7 +119,7 @@ begin
     { Either wander randomly }
     ai_animal.wander(id, entityList[id].posX, entityList[id].posY)
   else
-    if (stopAndSmellFlowers = 2) then
+  if (stopAndSmellFlowers = 2) then
     { spin a web }
     spinWeb(id)
   else
@@ -183,12 +199,12 @@ procedure spinWeb(id: smallint);
 begin
   (* Don't spin webs on items or stairs *)
   if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) and
-     (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '>') and
-     (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '<') then
-     begin
-       Inc(npcAmount);
-       web.createWeb(npcAmount, entityList[id].posX, entityList[id].posY);
-     end;
+    (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '>') and
+    (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '<') then
+  begin
+    Inc(npcAmount);
+    web.createWeb(npcAmount, entityList[id].posX, entityList[id].posY);
+  end;
 end;
 
 end.

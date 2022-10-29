@@ -81,6 +81,19 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
+    (* Check for status effects *)
+
+  { Poison }
+  if (entityList[id].stsPoison = True) then
+  begin
+    Dec(entityList[id].currentHP);
+    Dec(entityList[id].tmrPoison);
+    if (entityList[id].inView = True) and (entityList[0].moveCount DIV 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks sick');
+    if (entityList[id].tmrPoison <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+
   if (isNextToPlayer(entityList[id].posX, entityList[id].posY) = True) then
     { Attack the Player }
     combat(id)

@@ -7,7 +7,7 @@ unit cave_rat;
 interface
 
 uses
-  SysUtils, ai_animal, combat_resolver;
+  SysUtils, ai_animal, combat_resolver, ui;
 
 (* Create a cave rat *)
 procedure createCaveRat(uniqueid, npcx, npcy: smallint);
@@ -47,9 +47,9 @@ begin
     description := 'a large rat';
     glyph := 'r';
     glyphColour := 'brown';
-    maxHP := randomRange(3, 5);
+    maxHP := randomRange(4, 5);
     currentHP := maxHP;
-    attack := randomRange(entityList[0].attack -1, entityList[0].attack + 2);
+    attack := randomRange(entityList[0].attack - 1, entityList[0].attack + 2);
     defence := randomRange(entityList[0].defence, entityList[0].defence + 1);
     weaponDice := 0;
     weaponAdds := 0;
@@ -88,10 +88,36 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-  case entityList[id].state of
-    stateNeutral: decisionNeutral(id);
-    stateHostile: decisionHostile(id);
-    stateEscape: decisionEscape(id);
+  (* Check for status effects *)
+
+  { Poison }
+  if (entityList[id].stsPoison = True) then
+  begin
+    Dec(entityList[id].currentHP);
+    Dec(entityList[id].tmrPoison);
+    if (entityList[id].inView = True) and (entityList[0].moveCount DIV 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks sick');
+    if (entityList[id].tmrPoison <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+  { Bewildered }
+  if (entityList[id].stsBewild = True) then
+  begin
+    Dec(entityList[id].tmrBewild);
+    if (entityList[id].inView = True) and (entityList[0].moveCount DIV 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks bewildered');
+    ai_animal.wander(id, entityList[id].posX, entityList[id].posY);
+    if (entityList[id].tmrBewild <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+
+  if (entityList[id].stsBewild <> True) then
+  begin
+    case entityList[id].state of
+      stateNeutral: decisionNeutral(id);
+      stateHostile: decisionHostile(id);
+      stateEscape: decisionEscape(id);
+    end;
   end;
 end;
 

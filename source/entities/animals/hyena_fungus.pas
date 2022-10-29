@@ -94,11 +94,37 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-  case entityList[id].state of
-    stateNeutral: decisionNeutral(id);
-    stateHostile: decisionHostile(id);
-    else
-      decisionNeutral(id);
+  (* Check for status effects *)
+
+  { Poison }
+  if (entityList[id].stsPoison = True) then
+  begin
+    Dec(entityList[id].currentHP);
+    Dec(entityList[id].tmrPoison);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks sick');
+    if (entityList[id].tmrPoison <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+  { Bewildered }
+  if (entityList[id].stsBewild = True) then
+  begin
+    Dec(entityList[id].tmrBewild);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks bewildered');
+    wander(id, entityList[id].posX, entityList[id].posY);
+    if (entityList[id].tmrBewild <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+
+  if (entityList[id].stsBewild <> True) then
+  begin
+    case entityList[id].state of
+      stateNeutral: decisionNeutral(id);
+      stateHostile: decisionHostile(id);
+      else
+        decisionNeutral(id);
+    end;
   end;
 end;
 
@@ -130,7 +156,8 @@ begin
     wander(id, entityList[id].posX, entityList[id].posY)
 
   { If NPC can see the player }
-  else if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
+  else if (los.inView(entityList[id].posX, entityList[id].posY,
+    entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
   begin
     entityList[id].moveCount := 3;
     { If next to the player }
@@ -297,7 +324,8 @@ procedure combat(npcID, enemyID: smallint);
 var
   damageAmount, chanceToPoison: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entityList[npcID].attack) - entityList[enemyID].defence;
+  damageAmount := globalutils.randomRange(1, entityList[npcID].attack) -
+    entityList[enemyID].defence;
   (* If damage is done *)
   if (damageAmount > 0) then
   begin
@@ -324,7 +352,8 @@ begin
           ui.displayMessage('The infected hyena slightly wounds you')
         else
           (* If an NPC is slightly wounded *)
-          ui.displayMessage('The infected hyena slightly wounds the ' + entityList[enemyID].race);
+          ui.displayMessage('The infected hyena slightly wounds the ' +
+            entityList[enemyID].race);
       end
       else
         (* If significant damage is done *)
@@ -334,7 +363,8 @@ begin
         begin
           (* Decide if the hyena poisons the player *)
           chanceToPoison := randomRange(1, 3);
-          ui.displayMessage('The infected hyena bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
+          ui.displayMessage('The infected hyena bites you, inflicting ' +
+            IntToStr(damageAmount) + ' damage');
           if (chanceToPoison = 2) then
           begin
             entityList[0].stsPoison := True;
@@ -358,7 +388,8 @@ begin
       combat_resolver.spiteDMG(npcID);
     end
     else
-      ui.displayMessage('The infected hyena nips at the ' + entityList[enemyID].race + ', but misses');
+      ui.displayMessage('The infected hyena nips at the ' +
+        entityList[enemyID].race + ', but misses');
   end;
 end;
 

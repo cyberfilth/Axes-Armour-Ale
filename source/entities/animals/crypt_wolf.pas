@@ -28,6 +28,8 @@ function isNextToPlayer(spx, spy: smallint): boolean;
 procedure combat(id: smallint);
 (* Sniff out the player *)
 procedure followScent(id: smallint);
+(* Wander, when Bewildered *)
+procedure wander(id, spx, spy: smallint);
 
 implementation
 
@@ -86,11 +88,37 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-  case entityList[id].state of
-    stateNeutral: decisionNeutral(id);
-    stateHostile: decisionHostile(id);
-    else
-      decisionNeutral(id);
+  (* Check for status effects *)
+
+  { Poison }
+  if (entityList[id].stsPoison = True) then
+  begin
+    Dec(entityList[id].currentHP);
+    Dec(entityList[id].tmrPoison);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks sick');
+    if (entityList[id].tmrPoison <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+  { Bewildered }
+  if (entityList[id].stsBewild = True) then
+  begin
+    Dec(entityList[id].tmrBewild);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks bewildered');
+    wander(id, entityList[id].posX, entityList[id].posY);
+    if (entityList[id].tmrBewild <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+
+  if (entityList[id].stsBewild <> True) then
+  begin
+    case entityList[id].state of
+      stateNeutral: decisionNeutral(id);
+      stateHostile: decisionHostile(id);
+      else
+        decisionNeutral(id);
+    end;
   end;
 end;
 
@@ -276,6 +304,38 @@ begin
       entities.moveNPC(id, entityList[id].smellPath[2].X,
         entityList[id].smellPath[2].Y);
   end;
+end;
+
+procedure wander(id, spx, spy: smallint);
+var
+  direction, attempts, testx, testy: smallint;
+begin
+  attempts := 0;
+  testx := 0;
+  testy := 0;
+  direction := 0;
+  repeat
+    (* Reset values after each failed loop so they don't keep dec/incrementing *)
+    testx := spx;
+    testy := spy;
+    direction := random(6);
+    (* limit the number of attempts to move so the game doesn't hang if NPC is stuck *)
+    Inc(attempts);
+    if attempts > 10 then
+    begin
+      entities.moveNPC(id, spx, spy);
+      exit;
+    end;
+    case direction of
+      0: Dec(testy);
+      1: Inc(testy);
+      2: Dec(testx);
+      3: Inc(testx);
+      4: testx := spx;
+      5: testy := spy;
+    end
+  until (map.canMove(testx, testy) = True) and (map.isOccupied(testx, testy) = False);
+  entities.moveNPC(id, testx, testy);
 end;
 
 end.

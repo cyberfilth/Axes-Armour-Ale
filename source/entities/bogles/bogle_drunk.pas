@@ -95,10 +95,36 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-  case entityList[id].state of
-    stateNeutral: decisionNeutral(id);
-    stateHostile: decisionHostile(id);
-    stateEscape: decisionEscape(id);
+  (* Check for status effects *)
+
+  { Poison }
+  if (entityList[id].stsPoison = True) then
+  begin
+    Dec(entityList[id].currentHP);
+    Dec(entityList[id].tmrPoison);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks ill');
+    if (entityList[id].tmrPoison <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+  { Bewildered }
+  if (entityList[id].stsBewild = True) then
+  begin
+    Dec(entityList[id].tmrBewild);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks bewildered');
+    wander(id, entityList[id].posX, entityList[id].posY);
+    if (entityList[id].tmrBewild <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+
+  if (entityList[id].stsBewild <> True) then
+  begin
+    case entityList[id].state of
+      stateNeutral: decisionNeutral(id);
+      stateHostile: decisionHostile(id);
+      stateEscape: decisionEscape(id);
+    end;
   end;
 end;
 
@@ -106,13 +132,13 @@ procedure death(id: smallint);
 begin
   Inc(deathList[20]);
   (* Check if there is already an item on the floor here *)
-    if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) then
-    begin
-      { Place item on the game map }
-      SetLength(itemList, Length(itemList) + 1);
-      ale_tankard.createAleTankard(entityList[id].posX, entityList[id].posY);
-      ui.displayMessage('The Bogle drops a tankard of ale');
-    end;
+  if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) then
+  begin
+    { Place item on the game map }
+    SetLength(itemList, Length(itemList) + 1);
+    ale_tankard.createAleTankard(entityList[id].posX, entityList[id].posY);
+    ui.displayMessage('The Bogle drops a tankard of ale');
+  end;
 end;
 
 procedure decisionNeutral(id: smallint);
@@ -350,15 +376,22 @@ end;
 procedure combat(id: smallint);
 var
   damageAmount, chance, insultChance: smallint;
-  humanInsults: array[1..5] of string = ('Ya lanky git!', 'Human scum!', 'I''ll ''ave you Longshanks!', 'Oi, short-timer!', 'C''mon then!!!');
-  ElfInsults: array[1..5] of string = ('Yer pointy eared ponce!', 'Bloody elf!', 'C''mon then Sir Prancelot!', 'Tree hugger!', 'Leaf licker!');
-  DwarfInsults: array[1..5] of string = ('Ya smelly dwarf!', 'Short-arse!', 'Go back to yer mine!', 'Bloody dirt-digger!', 'Ha! Half-pint!');
+  humanInsults: array[1..5] of
+  string = ('Ya lanky git!', 'Human scum!', 'I''ll ''ave you Longshanks!',
+    'Oi, short-timer!', 'C''mon then!!!');
+  ElfInsults: array[1..5] of string = ('Yer pointy eared ponce!',
+    'Bloody elf!', 'C''mon then Sir Prancelot!', 'Tree hugger!', 'Leaf licker!');
+  DwarfInsults: array[1..5] of
+  string = ('Ya smelly dwarf!', 'Short-arse!', 'Go back to yer mine!',
+    'Bloody dirt-digger!', 'Ha! Half-pint!');
 begin
-  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) - entities.entityList[0].defence;
+  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) -
+    entities.entityList[0].defence;
   insultChance := randomRange(1, 7);
   if (damageAmount > 0) then
   begin
-    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
+    entities.entityList[0].currentHP :=
+      (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin
       killer := 'a ' + entityList[id].race;
@@ -370,15 +403,16 @@ begin
         ui.displayMessage('The Bogle slightly wounds you')
       else
       begin
-        ui.displayMessage('The Bogle claws you, dealing ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The Bogle claws you, dealing ' +
+          IntToStr(damageAmount) + ' damage');
         if (insultChance < 6) then
         begin
           if (player_stats.playerRace = 'Human') then
-             ui.displayMessage('The Bogle yells "' + humanInsults[insultChance] + '"')
+            ui.displayMessage('The Bogle yells "' + humanInsults[insultChance] + '"')
           else if (player_stats.playerRace = 'Dwarf') then
-             ui.displayMessage('The Bogle yells "' + dwarfInsults[insultChance] + '"')
+            ui.displayMessage('The Bogle yells "' + dwarfInsults[insultChance] + '"')
           else if (player_stats.playerRace = 'Elf') then
-             ui.displayMessage('The Bogle yells "' + elfInsults[insultChance] + '"')
+            ui.displayMessage('The Bogle yells "' + elfInsults[insultChance] + '"');
         end;
       end;
       (* Update health display to show damage *)
@@ -416,8 +450,9 @@ begin
     'e':
     begin
       if (map.canMove((entities.entityList[id].posX + 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX + 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX + 1),
+        entities.entityList[id].posY) = False)) then
         entities.moveNPC(id, (entities.entityList[id].posX + 1),
           entities.entityList[id].posY);
     end;
@@ -433,8 +468,9 @@ begin
     'w':
     begin
       if (map.canMove((entities.entityList[id].posX - 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX - 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX - 1),
+        entities.entityList[id].posY) = False)) then
 
 
         entities.moveNPC(id, (entities.entityList[id].posX - 1),
@@ -449,12 +485,15 @@ procedure fireMissile(id: smallint);
 var
   damageAmount: smallint;
 begin
-  los.firingLine(id, entityList[id].posX, entityList[id].posY, entityList[0].posX, entityList[0].posY);
+  los.firingLine(id, entityList[id].posX, entityList[id].posY,
+    entityList[0].posX, entityList[0].posY);
   (* Check if rock has hit the player *)
-  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack + 3) - entities.entityList[0].defence;
+  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack + 3) -
+    entities.entityList[0].defence;
   if (damageAmount > 0) then
   begin
-    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
+    entities.entityList[0].currentHP :=
+      (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin
       killer := 'a ' + entityList[id].race;
@@ -464,7 +503,8 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The rock slightly wounds you')
       else
-        ui.displayMessage('The rock hits you, dealing ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The rock hits you, dealing ' +
+          IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;

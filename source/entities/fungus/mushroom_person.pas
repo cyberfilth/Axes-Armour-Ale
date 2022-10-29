@@ -7,7 +7,7 @@ unit mushroom_person;
 interface
 
 uses
-  SysUtils, ai_animal, globalUtils, combat_resolver;
+  SysUtils, ai_animal, globalUtils, combat_resolver, ui;
 
 (* Create a mushroom person *)
 procedure createMushroomPerson(uniqueid, npcx, npcy: smallint);
@@ -88,10 +88,26 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-  case entityList[id].state of
-    stateNeutral: decisionNeutral(id);
-    stateHostile: decisionHostile(id);
-    stateEscape: decisionEscape(id);
+  (* Check for status effects *)
+
+  { Bewildered }
+  if (entityList[id].stsBewild = True) then
+  begin
+    Dec(entityList[id].tmrBewild);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' seems bewildered');
+    ai_animal.wander(id, entityList[id].posX, entityList[id].posY);
+    if (entityList[id].tmrBewild <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+
+  if (entityList[id].stsBewild <> True) then
+  begin
+    case entityList[id].state of
+      stateNeutral: decisionNeutral(id);
+      stateHostile: decisionHostile(id);
+      stateEscape: decisionEscape(id);
+    end;
   end;
 end;
 
