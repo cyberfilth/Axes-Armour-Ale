@@ -17,6 +17,8 @@ type
 procedure throwRock(id: smallint; var flightPath: a);
 (* Animate nearby enemies burning *)
 procedure areaBurnEffect(getEm: array of smallint);
+(* Animate nearby enemies being Bewildered *)
+procedure areaBewilderEffect(getEm: array of smallint);
 (* Animate the player throwing a projectile *)
 procedure thrownObjectAnim(var flightPath: b; prjGlyph, prjColour: shortstring);
 (* Animate an arrow *)
@@ -109,6 +111,57 @@ begin
     begin
       boomTimer := 80;
       boom := 'white';
+    end;
+
+    { prepare changes to the screen }
+    LockScreenUpdate;
+
+    (* Loop through array and draw each NPC *)
+    for i := Low(getEm) to High(getEm) do
+    begin
+      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].GlyphColour := boom;
+      map.mapDisplay[entityList[getEm[i]].posY, entityList[getEm[i]].posX].Glyph := entityList[getEm[i]].glyph;
+    end;
+
+    (* Repaint map *)
+    camera.drawMap;
+
+    { Write those changes to the screen }
+    UnlockScreenUpdate;
+    { only redraws the parts that have been updated }
+    UpdateScreen(False);
+    sleep(boomTimer);
+  end;
+  (* Restore game state *)
+  main.gameState := stGame;
+end;
+
+procedure areaBewilderEffect(getEm: array of smallint);
+var
+  i, x, boomTimer: byte;
+  boom: shortstring;
+begin
+  boomTimer := 0;
+  boom := 'red';
+  (* Change game state to stop receiving inputs *)
+  main.gameState := stAnim;
+  (* Loop through Bewildered colours *)
+  for x := 1 to 3 do
+  begin
+    if (x = 1) then
+    begin
+      boomTimer := 200;
+      boom := 'blue';
+    end
+    else if (x = 2) then
+    begin
+      boomTimer := 150;
+      boom := 'lightBlue';
+    end
+    else if (x = 3) then
+    begin
+      boomTimer := 80;
+      boom := 'cyan';
     end;
 
     { prepare changes to the screen }

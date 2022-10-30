@@ -81,14 +81,14 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-    (* Check for status effects *)
+  (* Check for status effects *)
 
   { Poison }
   if (entityList[id].stsPoison = True) then
   begin
     Dec(entityList[id].currentHP);
     Dec(entityList[id].tmrPoison);
-    if (entityList[id].inView = True) and (entityList[0].moveCount DIV 2 = 0) then
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
       ui.displayMessage(entityList[id].race + ' looks sick');
     if (entityList[id].tmrPoison <= 0) then
       entityList[id].stsBewild := False;
@@ -182,7 +182,8 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The hornet slightly wounds you')
       else
-        ui.displayMessage('The hornet stings you, inflicting ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The hornet stings you, inflicting ' +
+          IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;

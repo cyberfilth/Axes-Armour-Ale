@@ -18,7 +18,7 @@ uses
   { Quest items }
   smugglersMap, pixie_jar, pixie_jar_dim, parchment, gold_pieces,
   { Magical items }
-  staff_minor_scorch,
+  staff_minor_scorch, staff_bewilder,
   { Ammunition }
   arrow,
   { Traps }
@@ -39,10 +39,10 @@ const
   cptItems1: array[1..6] of string =
     ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar', 'gold');
   cptItems2: array[1..8] of string =
-    ('rock', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'gold',
+    ('rock', 'aleTankard', 'crudeDagger', 'staffBewilder', 'gold',
     'dimPixieJar', 'arrow', 'shortBow');
   cptItems3: array[1..7] of string =
-    ('aleTankard', 'crudeDagger', 'aleTankard', 'rock', 'wineFlask', 'arrow', 'gold');
+    ('aleTankard', 'staffMnrScorch', 'aleTankard', 'rock', 'wineFlask', 'arrow', 'gold');
 
   (* Array of items found in a dungeon, ordered by dungeon level *)
   dgnItems1: array[1..5] of string =
@@ -51,7 +51,7 @@ const
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
     'dimPixieJar', 'arrow', 'shortBow', 'gold');
   dgnItems3: array[1..7] of string =
-    ('aleTankard', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow', 'gold');
+    ('aleTankard', 'crudeDagger', 'aleTankard', 'staffBewilder', 'wineFlask', 'arrow', 'gold');
 
 (* Choose an item and call the generate code directly *)
 procedure dispenseItem(dungeon: dungeonTerrain);
@@ -154,6 +154,7 @@ begin
     'dimPixieJar': pixie_jar_dim.createPixieJarDim(c, r);
     'parchment': parchment.createParchment(c, r);
     'gold': gold_pieces.createGP(c, r);
+    'staffBewilder': staff_bewilder.createStaff(c, r);
   end;
 end;
 
@@ -181,6 +182,7 @@ begin
     19: parchment.collectParchment;
     20: bone_dagger.useItem(equipped, id);
     22: gold_pieces.useItem;
+    23: staff_bewilder.useItem(equipped);
   end;
 end;
 

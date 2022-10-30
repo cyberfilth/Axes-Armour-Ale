@@ -686,7 +686,7 @@ begin
         if (ItemsNode.FindNode('glyph').TextContent[1] = 'T') then { club / dagger }
           items.itemList[i].glyph := chr(24)
         else if (ItemsNode.FindNode('glyph').TextContent[1] = '=') then
-          { staff_minor_scorch}
+          { Magickal staff }
           items.itemList[i].glyph := chr(186)
         else if (ItemsNode.FindNode('glyph').TextContent[1] = '*') then { rock }
           items.itemList[i].glyph := chr(7)

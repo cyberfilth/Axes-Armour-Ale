@@ -8,7 +8,7 @@ interface
 
 uses
   SysUtils, StrUtils, video, items, item_lookup, player_stats,
-  staff_minor_scorch, pixie_jar, gold_pieces;
+  staff_minor_scorch, pixie_jar, gold_pieces, staff_bewilder;
 
 type
   (* Items in inventory *)
@@ -760,9 +760,9 @@ procedure Zzap(item: smallint);
 begin
   case item of
     8: { Staff of Minor Scorch }
-    begin
       staff_minor_scorch.Zap;
-    end;
+    23: { Staff of Flummox }
+        staff_bewilder.Zap
     else { No enchanted weapon equipped }
       ui.displayMessage('You have no magical weapon equipped');
   end;

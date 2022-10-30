@@ -98,7 +98,12 @@ begin
   begin
     Dec(entityList[id].tmrBewild);
     if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
-      ui.displayMessage(entityList[id].race + ' seems bewildered');
+      ui.displayMessage(entityList[id].race + ' seems bewildered')
+    else if (entityList[id].inView = True) then
+    begin
+      ui.displayMessage(entityList[id].race + ' attacks itself');
+      Dec(entityList[id].currentHP);
+    end;
     wander(id, entityList[id].posX, entityList[id].posY);
     if (entityList[id].tmrBewild <= 0) then
       entityList[id].stsBewild := False;
@@ -176,22 +181,22 @@ begin
   if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
     entityList[0].posY, entityList[id].visionRange) = True) then
     { If the player is in sight, run away }
-    begin
+  begin
     escapePlayer(id, entityList[id].posX, entityList[id].posY);
     (* Randomly decide if the infected hob says anything *)
     i := randomRange(1, 10);
     if (i = 2) then
-      begin
-           x := randomRange(1, 4);
-           case x of
-             1 : ui.displayMessage('The Hob screams "Noooo!"');
-             2 : ui.displayMessage('The Hob mutters "M M.. Matangoooo!"');
-             3 : ui.displayMessage('The Hob wails "It''sss tooo late...."');
-             else
-               ui.displayMessage('"The mushrooms! Don''t let them touch yoooooo!"');
-           end;
+    begin
+      x := randomRange(1, 4);
+      case x of
+        1: ui.displayMessage('The Hob screams "Noooo!"');
+        2: ui.displayMessage('The Hob mutters "M M.. Matangoooo!"');
+        3: ui.displayMessage('The Hob wails "It''sss tooo late...."');
+        else
+          ui.displayMessage('"The mushrooms! Don''t let them touch yoooooo!"');
       end;
-    end
+    end;
+  end
 
   { If the player is not in sight }
   else
@@ -241,18 +246,20 @@ begin
   (* Randomly decide if the infected hob says anything *)
   if (entityList[id].inView = True) then
   begin
-  i := randomRange(1, 10);
-  if (i = 2) then
-      begin
-         x := randomRange(1, 4);
-         case x of
-           1 : ui.displayMessage('The Hob screams "Help me! It''s growing inside meee!"');
-           2 : ui.displayMessage('The Hob yells "Aah, it''s taking over my mind!"');
-           3 : ui.displayMessage('The Hob whimpers "Noooo! I''m changing...."');
-           else
-             ui.displayMessage('The Hob screams "The mushrooms! Don''t let them touch yoooooo!"');
-           end;
+    i := randomRange(1, 10);
+    if (i = 2) then
+    begin
+      x := randomRange(1, 4);
+      case x of
+        1: ui.displayMessage(
+            'The Hob screams "Help me! It''s growing inside meee!"');
+        2: ui.displayMessage('The Hob yells "Aah, it''s taking over my mind!"');
+        3: ui.displayMessage('The Hob whimpers "Noooo! I''m changing...."');
+        else
+          ui.displayMessage(
+            'The Hob screams "The mushrooms! Don''t let them touch yoooooo!"');
       end;
+    end;
   end;
 end;
 
@@ -390,7 +397,8 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The infected Hob clutches you')
       else
-        ui.displayMessage('The infected Hob claws you, dealing ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The infected Hob claws you, dealing ' +
+          IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
@@ -426,8 +434,9 @@ begin
     'e':
     begin
       if (map.canMove((entities.entityList[id].posX + 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX + 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX + 1),
+        entities.entityList[id].posY) = False)) then
         entities.moveNPC(id, (entities.entityList[id].posX + 1),
           entities.entityList[id].posY);
     end;
@@ -443,8 +452,9 @@ begin
     'w':
     begin
       if (map.canMove((entities.entityList[id].posX - 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX - 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX - 1),
+        entities.entityList[id].posY) = False)) then
 
 
         entities.moveNPC(id, (entities.entityList[id].posX - 1),

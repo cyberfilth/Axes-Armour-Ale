@@ -95,7 +95,7 @@ begin
   begin
     Dec(entityList[id].currentHP);
     Dec(entityList[id].tmrPoison);
-    if (entityList[id].inView = True) and (entityList[0].moveCount DIV 2 = 0) then
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
       ui.displayMessage(entityList[id].race + ' looks sick');
     if (entityList[id].tmrPoison <= 0) then
       entityList[id].stsBewild := False;
@@ -104,8 +104,13 @@ begin
   if (entityList[id].stsBewild = True) then
   begin
     Dec(entityList[id].tmrBewild);
-    if (entityList[id].inView = True) and (entityList[0].moveCount DIV 2 = 0) then
-      ui.displayMessage(entityList[id].race + ' looks bewildered');
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks bewildered')
+    else if (entityList[id].inView = True) then
+    begin
+      ui.displayMessage(entityList[id].race + ' bites itself');
+      Dec(entityList[id].currentHP);
+    end;
     ai_animal.wander(id, entityList[id].posX, entityList[id].posY);
     if (entityList[id].tmrBewild <= 0) then
       entityList[id].stsBewild := False;

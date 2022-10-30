@@ -89,7 +89,12 @@ begin
   begin
     Dec(entityList[id].tmrBewild);
     if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
-      ui.displayMessage(entityList[id].race + ' behaves erratically');
+      ui.displayMessage(entityList[id].race + ' behaves erratically')
+    else if (entityList[id].inView = True) then
+    begin
+      ui.displayMessage(entityList[id].race + ' bites itself');
+      Dec(entityList[id].currentHP);
+    end;
     ai_animal.wander(id, entityList[id].posX, entityList[id].posY);
     if (entityList[id].tmrBewild <= 0) then
       entityList[id].stsBewild := False;

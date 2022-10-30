@@ -115,7 +115,12 @@ begin
   begin
     Dec(entityList[id].tmrBewild);
     if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
-      ui.displayMessage(entityList[id].race + ' seems bewildered');
+      ui.displayMessage(entityList[id].race + ' seems bewildered')
+    else if (entityList[id].inView = True) then
+    begin
+      ui.displayMessage(entityList[id].race + ' punches itself');
+      Dec(entityList[id].currentHP);
+    end;
     wander(id, entityList[id].posX, entityList[id].posY);
     if (entityList[id].tmrBewild <= 0) then
       entityList[id].stsBewild := False;
@@ -374,7 +379,8 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The Hob slightly wounds you')
       else
-        ui.displayMessage('The Hob claws you, dealing ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The Hob claws you, dealing ' +
+          IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
@@ -410,8 +416,9 @@ begin
     'e':
     begin
       if (map.canMove((entities.entityList[id].posX + 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX + 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX + 1),
+        entities.entityList[id].posY) = False)) then
         entities.moveNPC(id, (entities.entityList[id].posX + 1),
           entities.entityList[id].posY);
     end;
@@ -427,8 +434,9 @@ begin
     'w':
     begin
       if (map.canMove((entities.entityList[id].posX - 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX - 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX - 1),
+        entities.entityList[id].posY) = False)) then
 
 
         entities.moveNPC(id, (entities.entityList[id].posX - 1),

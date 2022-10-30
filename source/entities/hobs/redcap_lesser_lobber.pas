@@ -94,10 +94,41 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-  case entityList[id].state of
-    stateNeutral: decisionNeutral(id);
-    stateHostile: decisionHostile(id);
-    stateEscape: decisionEscape(id);
+  (* Check for status effects *)
+
+  { Poison }
+  if (entityList[id].stsPoison = True) then
+  begin
+    Dec(entityList[id].currentHP);
+    Dec(entityList[id].tmrPoison);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' looks sick');
+    if (entityList[id].tmrPoison <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+  { Bewildered }
+  if (entityList[id].stsBewild = True) then
+  begin
+    Dec(entityList[id].tmrBewild);
+    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
+      ui.displayMessage(entityList[id].race + ' seems bewildered')
+    else if (entityList[id].inView = True) then
+    begin
+      ui.displayMessage(entityList[id].race + ' drops a rock on its foot');
+      Dec(entityList[id].currentHP);
+    end;
+    wander(id, entityList[id].posX, entityList[id].posY);
+    if (entityList[id].tmrBewild <= 0) then
+      entityList[id].stsBewild := False;
+  end;
+
+  if (entityList[id].stsBewild <> True) then
+  begin
+    case entityList[id].state of
+      stateNeutral: decisionNeutral(id);
+      stateHostile: decisionHostile(id);
+      stateEscape: decisionEscape(id);
+    end;
   end;
 end;
 
@@ -358,7 +389,8 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The Hob slightly wounds you')
       else
-        ui.displayMessage('The Hob claws you, dealing ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The Hob claws you, dealing ' +
+          IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
@@ -394,8 +426,9 @@ begin
     'e':
     begin
       if (map.canMove((entities.entityList[id].posX + 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX + 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX + 1),
+        entities.entityList[id].posY) = False)) then
         entities.moveNPC(id, (entities.entityList[id].posX + 1),
           entities.entityList[id].posY);
     end;
@@ -411,8 +444,9 @@ begin
     'w':
     begin
       if (map.canMove((entities.entityList[id].posX - 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX - 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX - 1),
+        entities.entityList[id].posY) = False)) then
 
 
         entities.moveNPC(id, (entities.entityList[id].posX - 1),
@@ -427,12 +461,15 @@ procedure fireMissile(id: smallint);
 var
   damageAmount: smallint;
 begin
-  los.firingLine(id, entityList[id].posX, entityList[id].posY, entityList[0].posX, entityList[0].posY);
+  los.firingLine(id, entityList[id].posX, entityList[id].posY,
+    entityList[0].posX, entityList[0].posY);
   (* Check if rock has hit the player *)
-  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack + 3) - entities.entityList[0].defence;
+  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack + 3) -
+    entities.entityList[0].defence;
   if (damageAmount > 0) then
   begin
-    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
+    entities.entityList[0].currentHP :=
+      (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin
       killer := 'a ' + entityList[id].race;
@@ -442,7 +479,8 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The rock slightly wounds you')
       else
-        ui.displayMessage('The rock hits you, dealing ' + IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The rock hits you, dealing ' +
+          IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;

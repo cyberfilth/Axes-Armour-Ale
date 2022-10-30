@@ -104,7 +104,12 @@ begin
   begin
     Dec(entityList[id].tmrBewild);
     if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
-      ui.displayMessage(entityList[id].race + ' looks bewildered');
+      ui.displayMessage(entityList[id].race + ' looks bewildered')
+    else if (entityList[id].inView = True) then
+    begin
+      ui.displayMessage(entityList[id].race + ' flies into the ceiling');
+      Dec(entityList[id].currentHP);
+    end;
     if (entityList[id].tmrBewild <= 0) then
       entityList[id].stsBewild := False;
   end;
