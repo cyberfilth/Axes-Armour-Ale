@@ -17,7 +17,7 @@
 <p>
 Generate names and plot elements</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>dos</li><li><a href="player_stats.html">player_stats</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>dos</li><li><a href="player_stats.html">player_stats</a></li><li><a href="globalUtils.html">globalUtils</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -44,15 +44,27 @@ Generate names and plot elements</p>
 <tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="plot_gen.html#getTrollDate">getTrollDate</a></strong>;</code></td>
 </tr>
+<tr class="list">
+<td class="itemcode"><code>function <strong><a href="plot_gen.html#isVowel">isVowel</a></strong>(character: string): boolean;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <strong><a href="plot_gen.html#vowels">vowels</a></strong>(character: string): char;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>function <strong><a href="plot_gen.html#consonants">consonants</a></strong>(character: string): char;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>function <strong><a href="plot_gen.html#writeScroll">writeScroll</a></strong>(attr: string): string;</code></td>
+</tr>
 </table>
 <span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><strong><a href="plot_gen.html#DayStr">DayStr</a></strong>: array[0..6] of string =
+<td class="itemcode"><code><strong><a href="plot_gen.html#DayStr">DayStr</a></strong>: packed array[0..6] of string =
     ('Fastday', 'Onesday', 'Twosday', 'Frogday', 'Hawksday', 'Feastday', 'Marketday');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><strong><a href="plot_gen.html#MonthStr">MonthStr</a></strong>: array[1..12] of string =
+<td class="itemcode"><code><strong><a href="plot_gen.html#MonthStr">MonthStr</a></strong>: packed array[1..12] of string =
     ('Mistmon', 'Brittleice', 'Windmon', 'Gunther', 'Sweetbriar', 'Greenling',
     'Frogsong', 'Sunmon', 'Southflight',
     'Harvestmoon', 'Ghostmoon', 'Stormlight');</code></td>
@@ -61,7 +73,7 @@ Generate names and plot elements</p>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianFemaleFirst">aquilonianFemaleFirst</a></strong>: array[0..97] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianFemaleFirst">aquilonianFemaleFirst</a></strong>: packed[0..97] of
   string = ('Adam', 'Aeg', 'Al', 'Alb', 'Albion', 'Alc', 'Alcim',
     'Anger', 'Arac', 'Arac', 'Aracel', 'Arian', 'Ariann', 'Balb',
     'Bith', 'Bolb', 'Cair', 'Cairist', 'Call', 'Card', 'Carm', 'Cat',
@@ -76,7 +88,7 @@ Generate names and plot elements</p>
     'Suad', 'Teth', 'Tim', 'Tryph', 'Val', 'Vern', 'Vig', 'Vimand', 'Vir', 'Zel');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianFemaleLast">aquilonianFemaleLast</a></strong>: array[0..99] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianFemaleLast">aquilonianFemaleLast</a></strong>: packed[0..99] of
   string = ('a', 'e', 'ea', 'ia', 'ia', 'ya', 'ys', 'ana', 'ana',
     'are', 'are', 'ata', 'ata', 'ede', 'ede', 'eia', 'eia', 'eis',
     'eis', 'ele', 'ele', 'ena', 'ena', 'ene', 'ene', 'era', 'era',
@@ -91,7 +103,7 @@ Generate names and plot elements</p>
     'andra', 'antia', 'autia', 'imede', 'inome', 'ithea');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianMaleFirst">aquilonianMaleFirst</a></strong>: array[0..187] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianMaleFirst">aquilonianMaleFirst</a></strong>: packed[0..187] of
   string = ('Abant', 'Abantiad', 'Ac', 'Acris', 'Act', 'Alc', 'Alcid',
     'Am', 'Andr', 'Andr', 'Arct', 'Arct', 'Arp', 'Asclep', 'Atab',
     'Atab', 'Attal', 'Auf', 'Aufid', 'Bal', 'Balend', 'Barr', 'Barr',
@@ -118,7 +130,7 @@ Generate names and plot elements</p>
     'Vil', 'Volm', 'Volm', 'Volman', 'Zet');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianMaleLast">aquilonianMaleLast</a></strong>: array[0..99] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#aquilonianMaleLast">aquilonianMaleLast</a></strong>: packed[0..99] of
   string = ('a', 'i', 'o', 'as', 'el', 'er', 'es', 'ic', 'in', 'io',
     'is', 'on', 'os', 'us', 'yc', 'ago', 'ald', 'ana', 'ana', 'eas',
     'ell', 'ell', 'eri', 'eus', 'eus', 'ian', 'ias', 'ias', 'ion',
@@ -134,12 +146,13 @@ Generate names and plot elements</p>
     'onicus', 'antides');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><strong><a href="plot_gen.html#clanFirst">clanFirst</a></strong>: array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
-    'Grim', 'Rune', 'Storm', 'Frost', 'Thunder', 'Bright', 'Blood',
-    'Grey', 'Stone', 'Bronze', 'Silver', 'Bone', 'Mist', 'Ice');</code></td>
+<td class="itemcode"><code><strong><a href="plot_gen.html#clanFirst">clanFirst</a></strong>: packed[0..17] of
+  string = ('Iron', 'Rock', 'Dark', 'War', 'Grim', 'Rune', 'Storm',
+    'Frost', 'Thunder', 'Bright', 'Blood', 'Grey', 'Stone', 'Bronze',
+    'Silver', 'Bone', 'Mist', 'Ice');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><strong><a href="plot_gen.html#clanSecond">clanSecond</a></strong>: array[0..19] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#clanSecond">clanSecond</a></strong>: packed[0..19] of
   string = ('Axe', 'Hammer', 'Anvil', 'Smith', 'Forge', 'Beard',
     'Shield', 'Biter', 'Bane', 'Weaver', 'Mage', 'Spear', 'Seeker',
     'Sword', 'Crafter', 'Breaker', 'Born', 'Helm', 'Hold', 'Fist');</code></td>
@@ -148,7 +161,7 @@ Generate names and plot elements</p>
 <td class="itemcode"><code><strong><a href="plot_gen.html#Day">Day</a></strong>: word;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><strong><a href="plot_gen.html#dwarvenName">dwarvenName</a></strong>: array[0..109] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#dwarvenName">dwarvenName</a></strong>: packed[0..109] of
   string = ('Ailgor', 'Ainion', 'Alon', 'Alvion', 'Amur', 'Andol',
     'Argli', 'Arol', 'Artil', 'Artor', 'Avli', 'Balan', 'Balor',
     'Bamon', 'Bandiol', 'Baril', 'Baron', 'Baviol', 'Bavor', 'Bodol',
@@ -168,7 +181,7 @@ Generate names and plot elements</p>
     'Rurir', 'Ruvil', 'Ruvli', 'Thogin', 'Thogrur', 'Thondir');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><strong><a href="plot_gen.html#elvenHomea">elvenHomea</a></strong>: array[0..13] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#elvenHomea">elvenHomea</a></strong>: packed[0..13] of
   string = ('the Vale of', 'the Whispering Forest of', 'the forest of',
     'the white peaks of', 'the woods of', 'the Cinderlands of',
     'the Frostspike of', 'the snow pass of', 'the green fortress of',
@@ -176,7 +189,7 @@ Generate names and plot elements</p>
     'the Hidden Spires of', 'the Shimmering of');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><strong><a href="plot_gen.html#elvenHomeb">elvenHomeb</a></strong>: array[0..42] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#elvenHomeb">elvenHomeb</a></strong>: packed[0..42] of
   string = ('Felamae', 'Lorrom', 'Anorel', 'Weneres', 'Rathel',
     'Lasbreg-Dwyr', 'Renamar', 'Sarriel', 'Vius', 'Viusand', 'Ethgal',
     'Renfin', 'Syldar', 'Thrantor', 'Paceledrel', 'Borntae', 'Mai-Ionla',
@@ -186,7 +199,7 @@ Generate names and plot elements</p>
     'Glanduil', 'Iliphar', 'Ilrune', 'Saleh', 'Urijyre', 'Inamys', 'Caiwraek');</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><strong><a href="plot_gen.html#elvenName">elvenName</a></strong>: array[0..885] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#elvenName">elvenName</a></strong>: packed[0..885] of
   string = ('Aarall', 'Abiala', 'Acanos', 'Acarnar', 'Adali', 'Adari',
     'Adarore', 'Addin', 'Aderiel', 'Adius', 'Agrae', 'Aitese', 'Alane',
     'Alar', 'Alaril', 'Alasar', 'Aldas', 'Aler', 'Alerin', 'Alesan',
@@ -317,7 +330,7 @@ Generate names and plot elements</p>
     'Lunella', 'Seron', 'Tharene', 'Nellino', 'Dushani', 'Raliar', 'Valaras', 'Liaro');</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><strong><a href="plot_gen.html#firstSyllable">firstSyllable</a></strong>: array[0..73] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#firstSyllable">firstSyllable</a></strong>: packed[0..73] of
   string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
     'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con', 'Cor', 'Dag', 'Doo',
     'Elen', 'El', 'En', 'Eo', 'Faf', 'Fan', 'Fara', 'Fre', 'Fro',
@@ -328,7 +341,13 @@ Generate names and plot elements</p>
     'Tho', 'Tris', 'U', 'Uh', 'Ul', 'Vap', 'Vish', 'Vor', 'Ya', 'Yo', 'Yyr');</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code><strong><a href="plot_gen.html#i">i</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code><strong><a href="plot_gen.html#Month">Month</a></strong>: word;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="plot_gen.html#N">N</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code><strong><a href="plot_gen.html#playerName">playerName</a></strong>: string;</code></td>
@@ -337,7 +356,10 @@ Generate names and plot elements</p>
 <td class="itemcode"><code><strong><a href="plot_gen.html#playerTitle">playerTitle</a></strong>: string;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><strong><a href="plot_gen.html#secondSyllable">secondSyllable</a></strong>: array[0..62] of
+<td class="itemcode"><code><strong><a href="plot_gen.html#scrollMessage">scrollMessage</a></strong>: string;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="plot_gen.html#secondSyllable">secondSyllable</a></strong>: packed[0..62] of
   string = ('ba', 'bis', 'bo', 'bus', 'da', 'dal', 'dagz', 'den',
     'di', 'dil', 'dinn', 'do', 'dor', 'dra', 'dur', 'gi', 'gauble',
     'gen', 'glum', 'go', 'gorn', 'goth', 'had', 'hard', 'is', 'karrl',
@@ -346,39 +368,40 @@ Generate names and plot elements</p>
     'rin', 'rum', 'rus', 'rut', 'sekh', 'sha', 'thos', 'thur', 'toa',
     'tu', 'tur', 'tred', 'varl', 'wain', 'wan', 'win', 'wise', 'ya');</code></td>
 </tr>
-<tr class="list">
-<td class="itemcode"><code><strong><a href="plot_gen.html#titles">titles</a></strong>: array[0..108] of string = ('Abominable', 'Amorous',
-    'Afflicted', 'Ailing', 'Breathless', 'Broken', 'Bullish', 'Craggy',
-    'Bearded', 'Bony', 'Beastly', 'Drunken', 'Bitter', 'Fetid', 'Fierce',
-    'Fiery', 'Bold', 'Filthy', 'Craven', 'Fishy', 'Crooked', 'Flexible',
-    'Crusty', 'Forgetful', 'Brutal', 'Foul', 'Disturbed', 'Forgettable',
-    'Burly', 'Fragrant', 'Dramatic', 'Frisky', 'Gallant', 'Green',
-    'Delectable', 'Cold', 'Grey', 'Cursed', 'Grumpy', 'Grubby', 'Dark',
-    'Hairless', 'Hairy', 'Heathen', 'Defiant', 'Jaded', 'Knobbly',
-    'Indecent', 'Detestable', 'Dreaded', 'Jumpy', 'Aromatic', 'Wrinkled',
-    'Wild', 'Unsmiling', 'Warty', 'Towering', 'Valiant', 'Sweaty',
-    'Sour', 'Vain', 'Unseemly', 'Swarthy', 'Tragic', 'Strange', 'Stout',
-    'Stony', 'Stormy', 'Shameless', 'Stalwart', 'Quiet', 'Sleepy',
-    'Pure', 'Prickly', 'Scarred', 'Pimply', 'Pale', 'Savage', 'Ornate',
-    'Simple', 'Silly', 'Salty', 'Rotund', 'Miserable', 'Scrappy',
-    'Ragged', 'Lanky', 'Scowly', 'Hardy', 'Harsh', 'Gruesome', 'Gross',
-    'Grisly', 'Goodly', 'Gloomy', 'Nocturnal', 'Fair', 'Chiseled',
-    'Insatiable', 'Destructive', 'Dreadful', 'Musical', 'Frightful',
-    'Oily', 'Rascal', 'Remorseless', 'Squinty', 'Silvery', 'Thirsty');</code></td>
-</tr>
 <tr class="list2">
+<td class="itemcode"><code><strong><a href="plot_gen.html#titles">titles</a></strong>: packed[0..108] of
+  string = ('Abominable', 'Amorous', 'Afflicted', 'Ailing', 'Breathless',
+    'Broken', 'Bullish', 'Craggy', 'Bearded', 'Bony', 'Beastly',
+    'Drunken', 'Bitter', 'Fetid', 'Fierce', 'Fiery', 'Bold', 'Filthy',
+    'Craven', 'Fishy', 'Crooked', 'Flexible', 'Crusty', 'Forgetful',
+    'Brutal', 'Foul', 'Disturbed', 'Forgettable', 'Burly', 'Fragrant',
+    'Dramatic', 'Frisky', 'Gallant', 'Green', 'Delectable', 'Cold',
+    'Grey', 'Cursed', 'Grumpy', 'Grubby', 'Dark', 'Hairless', 'Hairy',
+    'Heathen', 'Defiant', 'Jaded', 'Knobbly', 'Indecent', 'Detestable',
+    'Dreaded', 'Jumpy', 'Aromatic', 'Wrinkled', 'Wild', 'Unsmiling',
+    'Warty', 'Towering', 'Valiant', 'Sweaty', 'Sour', 'Vain', 'Unseemly',
+    'Swarthy', 'Tragic', 'Strange', 'Stout', 'Stony', 'Stormy',
+    'Shameless', 'Stalwart', 'Quiet', 'Sleepy', 'Pure', 'Prickly',
+    'Scarred', 'Pimply', 'Pale', 'Savage', 'Ornate', 'Simple', 'Silly',
+    'Salty', 'Rotund', 'Miserable', 'Scrappy', 'Ragged', 'Lanky',
+    'Scowly', 'Hardy', 'Harsh', 'Gruesome', 'Gross', 'Grisly', 'Goodly',
+    'Gloomy', 'Nocturnal', 'Fair', 'Chiseled', 'Insatiable', 'Destructive',
+    'Dreadful', 'Musical', 'Frightful', 'Oily', 'Rascal', 'Remorseless',
+    'Squinty', 'Silvery', 'Thirsty');</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code><strong><a href="plot_gen.html#trollDate">trollDate</a></strong>: string;</code></td>
 </tr>
-<tr class="list">
-<td class="itemcode"><code><strong><a href="plot_gen.html#villageName">villageName</a></strong>: array[0..11] of
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="plot_gen.html#villageName">villageName</a></strong>: packed[0..11] of
   string = ('PigSpit', 'FootRot', 'MudLands', 'SquelchBottom',
     'DungMould', 'Belchford', 'Goatstone', 'Kloggington', 'Ordure Field',
     'Clagstone', 'Dogmire', 'Klart');</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><strong><a href="plot_gen.html#WDay">WDay</a></strong>: word;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><strong><a href="plot_gen.html#Year">Year</a></strong>: word;</code></td>
 </tr>
 </table>
@@ -456,10 +479,46 @@ Generate a title or honorfic for the player</p>
 Get the current date and display it in the in-game calendar</p>
 </td></tr>
 </table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="isVowel"></span><code>function <strong>isVowel</strong>(character: string): boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Return TRUE if character is a vowel</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="vowels"></span><code>function <strong>vowels</strong>(character: string): char;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Replace one vowel with another</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="consonants"></span><code>function <strong>consonants</strong>(character: string): char;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Replace one consonant with another</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="writeScroll"></span><code>function <strong>writeScroll</strong>(attr: string): string;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate a scrambled text string</p>
+</td></tr>
+</table>
 <h3 class="detail">Constants</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="DayStr"></span><code><strong>DayStr</strong>: array[0..6] of string =
+<td class="itemcode"><span id="DayStr"></span><code><strong>DayStr</strong>: packed array[0..6] of string =
     ('Fastday', 'Onesday', 'Twosday', 'Frogday', 'Hawksday', 'Feastday', 'Marketday');</code></td>
 </tr>
 <tr><td colspan="1">
@@ -467,7 +526,7 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="MonthStr"></span><code><strong>MonthStr</strong>: array[1..12] of string =
+<td class="itemcode"><span id="MonthStr"></span><code><strong>MonthStr</strong>: packed array[1..12] of string =
     ('Mistmon', 'Brittleice', 'Windmon', 'Gunther', 'Sweetbriar', 'Greenling',
     'Frogsong', 'Sunmon', 'Southflight',
     'Harvestmoon', 'Ghostmoon', 'Stormlight');</code></td>
@@ -478,7 +537,7 @@ Get the current date and display it in the in-game calendar</p>
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="aquilonianFemaleFirst"></span><code><strong>aquilonianFemaleFirst</strong>: array[0..97] of
+<td class="itemcode"><span id="aquilonianFemaleFirst"></span><code><strong>aquilonianFemaleFirst</strong>: packed[0..97] of
   string = ('Adam', 'Aeg', 'Al', 'Alb', 'Albion', 'Alc', 'Alcim',
     'Anger', 'Arac', 'Arac', 'Aracel', 'Arian', 'Ariann', 'Balb',
     'Bith', 'Bolb', 'Cair', 'Cairist', 'Call', 'Card', 'Carm', 'Cat',
@@ -497,7 +556,7 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="aquilonianFemaleLast"></span><code><strong>aquilonianFemaleLast</strong>: array[0..99] of
+<td class="itemcode"><span id="aquilonianFemaleLast"></span><code><strong>aquilonianFemaleLast</strong>: packed[0..99] of
   string = ('a', 'e', 'ea', 'ia', 'ia', 'ya', 'ys', 'ana', 'ana',
     'are', 'are', 'ata', 'ata', 'ede', 'ede', 'eia', 'eia', 'eis',
     'eis', 'ele', 'ele', 'ena', 'ena', 'ene', 'ene', 'era', 'era',
@@ -516,7 +575,7 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="aquilonianMaleFirst"></span><code><strong>aquilonianMaleFirst</strong>: array[0..187] of
+<td class="itemcode"><span id="aquilonianMaleFirst"></span><code><strong>aquilonianMaleFirst</strong>: packed[0..187] of
   string = ('Abant', 'Abantiad', 'Ac', 'Acris', 'Act', 'Alc', 'Alcid',
     'Am', 'Andr', 'Andr', 'Arct', 'Arct', 'Arp', 'Asclep', 'Atab',
     'Atab', 'Attal', 'Auf', 'Aufid', 'Bal', 'Balend', 'Barr', 'Barr',
@@ -547,7 +606,7 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="aquilonianMaleLast"></span><code><strong>aquilonianMaleLast</strong>: array[0..99] of
+<td class="itemcode"><span id="aquilonianMaleLast"></span><code><strong>aquilonianMaleLast</strong>: packed[0..99] of
   string = ('a', 'i', 'o', 'as', 'el', 'er', 'es', 'ic', 'in', 'io',
     'is', 'on', 'os', 'us', 'yc', 'ago', 'ald', 'ana', 'ana', 'eas',
     'ell', 'ell', 'eri', 'eus', 'eus', 'ian', 'ias', 'ias', 'ion',
@@ -567,16 +626,17 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="clanFirst"></span><code><strong>clanFirst</strong>: array[0..17] of string = ('Iron', 'Rock', 'Dark', 'War',
-    'Grim', 'Rune', 'Storm', 'Frost', 'Thunder', 'Bright', 'Blood',
-    'Grey', 'Stone', 'Bronze', 'Silver', 'Bone', 'Mist', 'Ice');</code></td>
+<td class="itemcode"><span id="clanFirst"></span><code><strong>clanFirst</strong>: packed[0..17] of
+  string = ('Iron', 'Rock', 'Dark', 'War', 'Grim', 'Rune', 'Storm',
+    'Frost', 'Thunder', 'Bright', 'Blood', 'Grey', 'Stone', 'Bronze',
+    'Silver', 'Bone', 'Mist', 'Ice');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="clanSecond"></span><code><strong>clanSecond</strong>: array[0..19] of
+<td class="itemcode"><span id="clanSecond"></span><code><strong>clanSecond</strong>: packed[0..19] of
   string = ('Axe', 'Hammer', 'Anvil', 'Smith', 'Forge', 'Beard',
     'Shield', 'Biter', 'Bane', 'Weaver', 'Mage', 'Spear', 'Seeker',
     'Sword', 'Crafter', 'Breaker', 'Born', 'Helm', 'Hold', 'Fist');</code></td>
@@ -593,7 +653,7 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="dwarvenName"></span><code><strong>dwarvenName</strong>: array[0..109] of
+<td class="itemcode"><span id="dwarvenName"></span><code><strong>dwarvenName</strong>: packed[0..109] of
   string = ('Ailgor', 'Ainion', 'Alon', 'Alvion', 'Amur', 'Andol',
     'Argli', 'Arol', 'Artil', 'Artor', 'Avli', 'Balan', 'Balor',
     'Bamon', 'Bandiol', 'Baril', 'Baron', 'Baviol', 'Bavor', 'Bodol',
@@ -617,7 +677,7 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="elvenHomea"></span><code><strong>elvenHomea</strong>: array[0..13] of
+<td class="itemcode"><span id="elvenHomea"></span><code><strong>elvenHomea</strong>: packed[0..13] of
   string = ('the Vale of', 'the Whispering Forest of', 'the forest of',
     'the white peaks of', 'the woods of', 'the Cinderlands of',
     'the Frostspike of', 'the snow pass of', 'the green fortress of',
@@ -629,7 +689,7 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="elvenHomeb"></span><code><strong>elvenHomeb</strong>: array[0..42] of
+<td class="itemcode"><span id="elvenHomeb"></span><code><strong>elvenHomeb</strong>: packed[0..42] of
   string = ('Felamae', 'Lorrom', 'Anorel', 'Weneres', 'Rathel',
     'Lasbreg-Dwyr', 'Renamar', 'Sarriel', 'Vius', 'Viusand', 'Ethgal',
     'Renfin', 'Syldar', 'Thrantor', 'Paceledrel', 'Borntae', 'Mai-Ionla',
@@ -643,7 +703,7 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="elvenName"></span><code><strong>elvenName</strong>: array[0..885] of
+<td class="itemcode"><span id="elvenName"></span><code><strong>elvenName</strong>: packed[0..885] of
   string = ('Aarall', 'Abiala', 'Acanos', 'Acarnar', 'Adali', 'Adari',
     'Adarore', 'Addin', 'Aderiel', 'Adius', 'Agrae', 'Aitese', 'Alane',
     'Alar', 'Alaril', 'Alasar', 'Aldas', 'Aler', 'Alerin', 'Alesan',
@@ -778,7 +838,7 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="firstSyllable"></span><code><strong>firstSyllable</strong>: array[0..73] of
+<td class="itemcode"><span id="firstSyllable"></span><code><strong>firstSyllable</strong>: packed[0..73] of
   string = ('A', 'Ag', 'Ar', 'Ara', 'Anu', 'Bal', 'Bil', 'Boro',
     'Bern', 'Bra', 'Cas', 'Cere', 'Co', 'Con', 'Cor', 'Dag', 'Doo',
     'Elen', 'El', 'En', 'Eo', 'Faf', 'Fan', 'Fara', 'Fre', 'Fro',
@@ -793,7 +853,21 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="i"></span><code><strong>i</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="Month"></span><code><strong>Month</strong>: word;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="N"></span><code><strong>N</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -814,7 +888,14 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="secondSyllable"></span><code><strong>secondSyllable</strong>: array[0..62] of
+<td class="itemcode"><span id="scrollMessage"></span><code><strong>scrollMessage</strong>: string;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="secondSyllable"></span><code><strong>secondSyllable</strong>: packed[0..62] of
   string = ('ba', 'bis', 'bo', 'bus', 'da', 'dal', 'dagz', 'den',
     'di', 'dil', 'dinn', 'do', 'dor', 'dra', 'dur', 'gi', 'gauble',
     'gen', 'glum', 'go', 'gorn', 'goth', 'had', 'hard', 'is', 'karrl',
@@ -828,24 +909,25 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="titles"></span><code><strong>titles</strong>: array[0..108] of string = ('Abominable', 'Amorous',
-    'Afflicted', 'Ailing', 'Breathless', 'Broken', 'Bullish', 'Craggy',
-    'Bearded', 'Bony', 'Beastly', 'Drunken', 'Bitter', 'Fetid', 'Fierce',
-    'Fiery', 'Bold', 'Filthy', 'Craven', 'Fishy', 'Crooked', 'Flexible',
-    'Crusty', 'Forgetful', 'Brutal', 'Foul', 'Disturbed', 'Forgettable',
-    'Burly', 'Fragrant', 'Dramatic', 'Frisky', 'Gallant', 'Green',
-    'Delectable', 'Cold', 'Grey', 'Cursed', 'Grumpy', 'Grubby', 'Dark',
-    'Hairless', 'Hairy', 'Heathen', 'Defiant', 'Jaded', 'Knobbly',
-    'Indecent', 'Detestable', 'Dreaded', 'Jumpy', 'Aromatic', 'Wrinkled',
-    'Wild', 'Unsmiling', 'Warty', 'Towering', 'Valiant', 'Sweaty',
-    'Sour', 'Vain', 'Unseemly', 'Swarthy', 'Tragic', 'Strange', 'Stout',
-    'Stony', 'Stormy', 'Shameless', 'Stalwart', 'Quiet', 'Sleepy',
-    'Pure', 'Prickly', 'Scarred', 'Pimply', 'Pale', 'Savage', 'Ornate',
-    'Simple', 'Silly', 'Salty', 'Rotund', 'Miserable', 'Scrappy',
-    'Ragged', 'Lanky', 'Scowly', 'Hardy', 'Harsh', 'Gruesome', 'Gross',
-    'Grisly', 'Goodly', 'Gloomy', 'Nocturnal', 'Fair', 'Chiseled',
-    'Insatiable', 'Destructive', 'Dreadful', 'Musical', 'Frightful',
-    'Oily', 'Rascal', 'Remorseless', 'Squinty', 'Silvery', 'Thirsty');</code></td>
+<td class="itemcode"><span id="titles"></span><code><strong>titles</strong>: packed[0..108] of
+  string = ('Abominable', 'Amorous', 'Afflicted', 'Ailing', 'Breathless',
+    'Broken', 'Bullish', 'Craggy', 'Bearded', 'Bony', 'Beastly',
+    'Drunken', 'Bitter', 'Fetid', 'Fierce', 'Fiery', 'Bold', 'Filthy',
+    'Craven', 'Fishy', 'Crooked', 'Flexible', 'Crusty', 'Forgetful',
+    'Brutal', 'Foul', 'Disturbed', 'Forgettable', 'Burly', 'Fragrant',
+    'Dramatic', 'Frisky', 'Gallant', 'Green', 'Delectable', 'Cold',
+    'Grey', 'Cursed', 'Grumpy', 'Grubby', 'Dark', 'Hairless', 'Hairy',
+    'Heathen', 'Defiant', 'Jaded', 'Knobbly', 'Indecent', 'Detestable',
+    'Dreaded', 'Jumpy', 'Aromatic', 'Wrinkled', 'Wild', 'Unsmiling',
+    'Warty', 'Towering', 'Valiant', 'Sweaty', 'Sour', 'Vain', 'Unseemly',
+    'Swarthy', 'Tragic', 'Strange', 'Stout', 'Stony', 'Stormy',
+    'Shameless', 'Stalwart', 'Quiet', 'Sleepy', 'Pure', 'Prickly',
+    'Scarred', 'Pimply', 'Pale', 'Savage', 'Ornate', 'Simple', 'Silly',
+    'Salty', 'Rotund', 'Miserable', 'Scrappy', 'Ragged', 'Lanky',
+    'Scowly', 'Hardy', 'Harsh', 'Gruesome', 'Gross', 'Grisly', 'Goodly',
+    'Gloomy', 'Nocturnal', 'Fair', 'Chiseled', 'Insatiable', 'Destructive',
+    'Dreadful', 'Musical', 'Frightful', 'Oily', 'Rascal', 'Remorseless',
+    'Squinty', 'Silvery', 'Thirsty');</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
@@ -859,7 +941,7 @@ Get the current date and display it in the in-game calendar</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="villageName"></span><code><strong>villageName</strong>: array[0..11] of
+<td class="itemcode"><span id="villageName"></span><code><strong>villageName</strong>: packed[0..11] of
   string = ('PigSpit', 'FootRot', 'MudLands', 'SquelchBottom',
     'DungMould', 'Belchford', 'Goatstone', 'Kloggington', 'Ordure Field',
     'Clagstone', 'Dogmire', 'Klart');</code></td>

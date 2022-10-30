@@ -36,96 +36,102 @@ User Interface - Unit responsible for displaying messages and screens</p>
 <td class="itemcode"><code>procedure <strong><a href="ui.html#displayStatusEffect">displayStatusEffect</a></strong>(onoff: byte; effectType: shortstring);</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="ui.html#redrawStatusEffects">redrawStatusEffects</a></strong>;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#displayMessage">displayMessage</a></strong>(message: shortstring);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#bufferMessage">bufferMessage</a></strong>(message: shortstring);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#writeBufferedMessages">writeBufferedMessages</a></strong>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#restoreMessages">restoreMessages</a></strong>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#updateLevel">updateLevel</a></strong>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#updateXP">updateXP</a></strong>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#updateHealth">updateHealth</a></strong>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#updateMagick">updateMagick</a></strong>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#updateAttack">updateAttack</a></strong>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#updateDefence">updateDefence</a></strong>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#updateDexterity">updateDexterity</a></strong>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#updateWeapon">updateWeapon</a></strong>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#updateArmour">updateArmour</a></strong>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#exitPrompt">exitPrompt</a></strong>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#clearStatusBar">clearStatusBar</a></strong>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#exitMessage">exitMessage</a></strong>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#displayDialog">displayDialog</a></strong>(title, message: shortstring);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#welcome">welcome</a></strong>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>function <strong><a href="ui.html#centreX">centreX</a></strong>(textstring: shortstring): byte;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="ui.html#clearPopup">clearPopup</a></strong>;</code></td>
 </tr>
 </table>
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
+<td class="itemcode"><code><strong><a href="ui.html#bewilderedStatusSet">bewilderedStatusSet</a></strong>: boolean;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code><strong><a href="ui.html#buffer">buffer</a></strong>: shortstring;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><strong><a href="ui.html#displayCol">displayCol</a></strong>: smallint;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><strong><a href="ui.html#displayRow">displayRow</a></strong>: smallint;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><strong><a href="ui.html#equippedArmour">equippedArmour</a></strong>: shortstring;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><strong><a href="ui.html#equippedWeapon">equippedWeapon</a></strong>: shortstring;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><strong><a href="ui.html#messageArray">messageArray</a></strong>: array[1..7] of shortstring = (' ', ' ', ' ', ' ', ' ', ' ', ' ');</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><strong><a href="ui.html#poisonStatusSet">poisonStatusSet</a></strong>: boolean;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><strong><a href="ui.html#vid">vid</a></strong>: TVideoMode;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><strong><a href="ui.html#x">x</a></strong>: smallint;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><strong><a href="ui.html#y">y</a></strong>: smallint;</code></td>
 </tr>
 </table>
@@ -174,6 +180,15 @@ Shutdown the video unit</p>
 <tr><td colspan="1">
 <p>
 Display status effects</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="redrawStatusEffects"></span><code>procedure <strong>redrawStatusEffects</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Redraw status effects when reloading screen</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
@@ -357,6 +372,15 @@ Redraw map after a pop-up closes</p>
 </td></tr>
 </table>
 <h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="bewilderedStatusSet"></span><code><strong>bewilderedStatusSet</strong>: boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Status effects</p>
+</td></tr>
+</table>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="buffer"></span><code><strong>buffer</strong>: shortstring;</code></td>

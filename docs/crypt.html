@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: crypt</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.16.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
+<h1 class="unit">Unit crypt</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Builds a map of randomly placed rooms with prefab rooms</p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>SysUtils</li><li><a href="globalUtils.html">globalUtils</a></li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">Record&nbsp;<a class="bold" href="crypt.coordinates.html"><code>coordinates</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="crypt.html#buildLevel">buildLevel</a></strong>(floorNumber: byte);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="crypt.html#createCorridor">createCorridor</a></strong>(fromX, fromY, toX, toY: smallint);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="crypt.html#carveHorizontally">carveHorizontally</a></strong>(x1, x2, y: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="crypt.html#carveVertically">carveVertically</a></strong>(y1, y2, x: smallint);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="crypt.html#createRoom">createRoom</a></strong>(gridNumber: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="crypt.html#generate">generate</a></strong>(title: string; idNumber: smallint; totalDepth: byte);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="crypt.html#leftToRight">leftToRight</a></strong>;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#TarraySmallint">TarraySmallint</a></strong> = array of smallint;</code></td>
+</tr>
+</table>
+<span id="PasDoc-Constants"></span><h3 class="summary">Constants</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_4X4a">PREFAB_4X4a</a></strong>: array [0..3, 0..3] of char = (
+    ('#', '.', '.', '#'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('#', '.', '.', '#'));</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_4X4b">PREFAB_4X4b</a></strong>: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '#', '#', '.'),
+    ('.', '#', '#', '.'),
+    ('.', '.', '.', '.'));</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_4X4c">PREFAB_4X4c</a></strong>: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'));</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_4X4d">PREFAB_4X4d</a></strong>: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '#', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'));</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_4X4e">PREFAB_4X4e</a></strong>: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '#', '.'),
+    ('.', '.', '.', '.'));</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_5x5a">PREFAB_5x5a</a></strong>: array [0..4, 0..4] of char = (
+    ('#', '.', '.', '.', '#'),
+    ('.', '#', '.', '#', '.'),
+    ('.', '.', '.', '.', '.'),
+    ('.', '#', '.', '#', '.'),
+    ('#', '.', '.', '.', '#'));</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_5x5b">PREFAB_5x5b</a></strong>: array [0..4, 0..4] of char = (
+    ('#', '.', '.', '.', '#'),
+    ('.', '.', '.', '.', '.'),
+    ('.', '.', '#', '.', '.'),
+    ('.', '.', '.', '.', '.'),
+    ('#', '.', '.', '.', '#'));</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_5x5c">PREFAB_5x5c</a></strong>: array [0..4, 0..4] of char = (
+    ('#', '#', '.', '#', '#'),
+    ('#', '.', '.', '.', '#'),
+    ('.', '.', '.', '.', '.'),
+    ('#', '.', '.', '.', '#'),
+    ('#', '#', '.', '#', '#'));</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_6x6a">PREFAB_6x6a</a></strong>: array [0..5, 0..5] of char = (
+    ('#', '#', '.', '.', '#', '#'),
+    ('#', '.', '.', '.', '.', '#'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('#', '.', '.', '.', '.', '#'),
+    ('#', '#', '.', '.', '#', '#'));</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_6x6b">PREFAB_6x6b</a></strong>: array [0..5, 0..5] of char = (
+    ('#', '.', '.', '.', '.', '#'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('.', '#', '#', '#', '#', '.'),
+    ('.', '#', '#', '#', '#', '.'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('#', '.', '.', '.', '.', '#'));</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_6x6c">PREFAB_6x6c</a></strong>: array [0..5, 0..5] of char = (
+    ('#', '#', '.', '.', '#', '#'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('#', '#', '.', '.', '#', '#'));</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_7x7a">PREFAB_7x7a</a></strong>: array [0..6, 0..6] of char = (
+    ('#', '#', '.', '.', '.', '#', '#'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('.', '.', '#', '.', '#', '.', '.'),
+    ('.', '.', '.', '.', '.', '.', '.'),
+    ('.', '.', '#', '.', '#', '.', '.'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('#', '#', '.', '.', '.', '#', '#'));</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_7x7b">PREFAB_7x7b</a></strong>: array [0..6, 0..6] of char = (
+    ('#', '#', '#', '.', '#', '#', '#'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('.', '.', '.', '.', '.', '.', '.'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '#', '#', '.', '#', '#', '#'));</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#PREFAB_7x7c">PREFAB_7x7c</a></strong>: array [0..6, 0..6] of char = (
+    ('#', '#', '#', '.', '#', '#', '#'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('#', '.', '#', '#', '#', '.', '#'),
+    ('.', '.', '#', '.', '#', '.', '.'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('#', '#', '#', '.', '#', '#', '#'));</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#c">c</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#centreList">centreList</a></strong>: array of <a href="crypt.coordinates.html">coordinates</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#dungeonArray">dungeonArray</a></strong>: array[1..<a href="globalUtils.html#MAXROWS">globalutils.MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">globalutils.MAXCOLUMNS</a>] of char;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#firstHalf">firstHalf</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#i">i</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#lastHalf">lastHalf</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#listLength">listLength</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#p">p</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#r">r</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#roomCounter">roomCounter</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#roomSquare">roomSquare</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#stairX">stairX</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#stairY">stairY</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#startX">startX</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#startY">startY</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="crypt.html#t">t</a></strong>: smallint;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="crypt.html#totalRooms">totalRooms</a></strong>: smallint;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="buildLevel"></span><code>procedure <strong>buildLevel</strong>(floorNumber: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Build a level in the dungeon</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="createCorridor"></span><code>procedure <strong>createCorridor</strong>(fromX, fromY, toX, toY: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Create corridors linking the rooms</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="carveHorizontally"></span><code>procedure <strong>carveHorizontally</strong>(x1, x2, y: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Carve a horizontal tunnel</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="carveVertically"></span><code>procedure <strong>carveVertically</strong>(y1, y2, x: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Carve a vertical tunnel</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="createRoom"></span><code>procedure <strong>createRoom</strong>(gridNumber: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Create a room</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generate"></span><code>procedure <strong>generate</strong>(title: string; idNumber: smallint; totalDepth: byte);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate a dungeon</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="leftToRight"></span><code>procedure <strong>leftToRight</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+sort room list in order from left to right</p>
+</td></tr>
+</table>
+<h3 class="detail">Types</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="TarraySmallint"></span><code><strong>TarraySmallint</strong> = array of smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Constants</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_4X4a"></span><code><strong>PREFAB_4X4a</strong>: array [0..3, 0..3] of char = (
+    ('#', '.', '.', '#'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('#', '.', '.', '#'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_4X4b"></span><code><strong>PREFAB_4X4b</strong>: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '#', '#', '.'),
+    ('.', '#', '#', '.'),
+    ('.', '.', '.', '.'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_4X4c"></span><code><strong>PREFAB_4X4c</strong>: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_4X4d"></span><code><strong>PREFAB_4X4d</strong>: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '#', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_4X4e"></span><code><strong>PREFAB_4X4e</strong>: array [0..3, 0..3] of char = (
+    ('.', '.', '.', '.'),
+    ('.', '.', '.', '.'),
+    ('.', '.', '#', '.'),
+    ('.', '.', '.', '.'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_5x5a"></span><code><strong>PREFAB_5x5a</strong>: array [0..4, 0..4] of char = (
+    ('#', '.', '.', '.', '#'),
+    ('.', '#', '.', '#', '.'),
+    ('.', '.', '.', '.', '.'),
+    ('.', '#', '.', '#', '.'),
+    ('#', '.', '.', '.', '#'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_5x5b"></span><code><strong>PREFAB_5x5b</strong>: array [0..4, 0..4] of char = (
+    ('#', '.', '.', '.', '#'),
+    ('.', '.', '.', '.', '.'),
+    ('.', '.', '#', '.', '.'),
+    ('.', '.', '.', '.', '.'),
+    ('#', '.', '.', '.', '#'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_5x5c"></span><code><strong>PREFAB_5x5c</strong>: array [0..4, 0..4] of char = (
+    ('#', '#', '.', '#', '#'),
+    ('#', '.', '.', '.', '#'),
+    ('.', '.', '.', '.', '.'),
+    ('#', '.', '.', '.', '#'),
+    ('#', '#', '.', '#', '#'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_6x6a"></span><code><strong>PREFAB_6x6a</strong>: array [0..5, 0..5] of char = (
+    ('#', '#', '.', '.', '#', '#'),
+    ('#', '.', '.', '.', '.', '#'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('#', '.', '.', '.', '.', '#'),
+    ('#', '#', '.', '.', '#', '#'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_6x6b"></span><code><strong>PREFAB_6x6b</strong>: array [0..5, 0..5] of char = (
+    ('#', '.', '.', '.', '.', '#'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('.', '#', '#', '#', '#', '.'),
+    ('.', '#', '#', '#', '#', '.'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('#', '.', '.', '.', '.', '#'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_6x6c"></span><code><strong>PREFAB_6x6c</strong>: array [0..5, 0..5] of char = (
+    ('#', '#', '.', '.', '#', '#'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('.', '.', '#', '#', '.', '.'),
+    ('.', '.', '.', '.', '.', '.'),
+    ('#', '#', '.', '.', '#', '#'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_7x7a"></span><code><strong>PREFAB_7x7a</strong>: array [0..6, 0..6] of char = (
+    ('#', '#', '.', '.', '.', '#', '#'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('.', '.', '#', '.', '#', '.', '.'),
+    ('.', '.', '.', '.', '.', '.', '.'),
+    ('.', '.', '#', '.', '#', '.', '.'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('#', '#', '.', '.', '.', '#', '#'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_7x7b"></span><code><strong>PREFAB_7x7b</strong>: array [0..6, 0..6] of char = (
+    ('#', '#', '#', '.', '#', '#', '#'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('.', '.', '.', '.', '.', '.', '.'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '#', '#', '.', '#', '#', '#'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="PREFAB_7x7c"></span><code><strong>PREFAB_7x7c</strong>: array [0..6, 0..6] of char = (
+    ('#', '#', '#', '.', '#', '#', '#'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('#', '.', '#', '#', '#', '.', '#'),
+    ('.', '.', '#', '.', '#', '.', '.'),
+    ('#', '.', '#', '.', '#', '.', '#'),
+    ('#', '.', '.', '.', '.', '.', '#'),
+    ('#', '#', '#', '.', '#', '#', '#'));</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="c"></span><code><strong>c</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="centreList"></span><code><strong>centreList</strong>: array of <a href="crypt.coordinates.html">coordinates</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+list of coordinates of centre of each room</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dungeonArray"></span><code><strong>dungeonArray</strong>: array[1..<a href="globalUtils.html#MAXROWS">globalutils.MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">globalutils.MAXCOLUMNS</a>] of char;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="firstHalf"></span><code><strong>firstHalf</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="i"></span><code><strong>i</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="lastHalf"></span><code><strong>lastHalf</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="listLength"></span><code><strong>listLength</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="p"></span><code><strong>p</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="r"></span><code><strong>r</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="roomCounter"></span><code><strong>roomCounter</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+start creating corridors once this rises above 1</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="roomSquare"></span><code><strong>roomSquare</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stairX"></span><code><strong>stairX</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stairY"></span><code><strong>stairY</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="startX"></span><code><strong>startX</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Player starting position</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="startY"></span><code><strong>startY</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Player starting position</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="t"></span><code><strong>t</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="totalRooms"></span><code><strong>totalRooms</strong>: smallint;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
+</span>
+</div></div></body></html>

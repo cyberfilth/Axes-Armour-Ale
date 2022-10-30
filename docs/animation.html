@@ -27,12 +27,15 @@ Unit responsible for projectile and magic animations</p>
 <td class="itemcode"><code>procedure <strong><a href="animation.html#areaBurnEffect">areaBurnEffect</a></strong>(getEm: array of smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <strong><a href="animation.html#thrownObjectAnim">thrownObjectAnim</a></strong>(var flightPath: <a href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="animation.html#areaBewilderEffect">areaBewilderEffect</a></strong>(getEm: array of smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <strong><a href="animation.html#arrowAnimation">arrowAnimation</a></strong>(var flightPath: <a href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="animation.html#thrownObjectAnim">thrownObjectAnim</a></strong>(var flightPath: <a href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="animation.html#arrowAnimation">arrowAnimation</a></strong>(var flightPath: <a href="animation.html#b">b</a>; prjGlyph, prjColour: shortstring);</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="animation.html#spinWebs">spinWebs</a></strong>;</code></td>
 </tr>
 </table>
@@ -63,6 +66,15 @@ Animate a rock being thrown</p>
 <tr><td colspan="1">
 <p>
 Animate nearby enemies burning</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="areaBewilderEffect"></span><code>procedure <strong>areaBewilderEffect</strong>(getEm: array of smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Animate nearby enemies being Bewildered</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
