@@ -19,7 +19,7 @@ var
 (* Checks that the distance to the target is within vision range *)
 function inView(x1, y1, x2, y2, visRange: smallint): boolean;
 (* Line of sight for projectiles *)
-procedure firingLine(id, x1, y1, x2, y2: smallint);
+procedure firingLine(projectile: shortstring; id, x1, y1, x2, y2: smallint);
 (* Player throws projectiles *)
 procedure playerProjectilePath(x1, y1, x2, y2: smallint; g, col: shortstring);
 
@@ -101,7 +101,7 @@ begin
     Result := True;
 end;
 
-procedure firingLine(id, x1, y1, x2, y2: smallint);
+procedure firingLine(projectile: shortstring; id, x1, y1, x2, y2: smallint);
 var
   i, deltax, deltay, numpixels, d, dinc1, dinc2, x, xinc1, xinc2, y,
   yinc1, yinc2: smallint;
@@ -183,7 +183,10 @@ begin
     end;
   end;
   (* Write the target path to the animation unit *)
-  animation.throwRock(id, targetArray);
+  if (projectile = 'rock') then
+     animation.throwRock(id, targetArray)
+  else if (projectile = 'necro') then
+     animation.castNecromancy (id, targetArray)
 end;
 
 procedure playerProjectilePath(x1, y1, x2, y2: smallint; g, col: shortstring);

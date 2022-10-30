@@ -24,7 +24,7 @@ Line of sight &amp; targeting functions</p>
 <td class="itemcode"><code>function <strong><a href="los.html#inView">inView</a></strong>(x1, y1, x2, y2, visRange: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <strong><a href="los.html#firingLine">firingLine</a></strong>(id, x1, y1, x2, y2: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="los.html#firingLine">firingLine</a></strong>(projectile: shortstring; id, x1, y1, x2, y2: smallint);</code></td>
 </tr>
 <tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="los.html#playerProjectilePath">playerProjectilePath</a></strong>(x1, y1, x2, y2: smallint; g, col: shortstring);</code></td>
@@ -55,7 +55,7 @@ Checks that the distance to the target is within vision range</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="firingLine"></span><code>procedure <strong>firingLine</strong>(id, x1, y1, x2, y2: smallint);</code></td>
+<td class="itemcode"><span id="firingLine"></span><code>procedure <strong>firingLine</strong>(projectile: shortstring; id, x1, y1, x2, y2: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>

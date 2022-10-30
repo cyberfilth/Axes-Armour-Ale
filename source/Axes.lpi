@@ -26,7 +26,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="dungeons;entities;items;player;screens;vision;entities/animals;entities/fungus;entities/gnomes;entities/hobs;items/armour;items/macguffins;items/weapons;items/traps;entities/bugs;entities/bogles;entities/undead"/>
+            <OtherUnitFiles Value="dungeons;entities;items;player;screens;vision;entities/animals;entities/fungus;entities/gnomes;entities/hobs;items/armour;items/macguffins;items/weapons;items/traps;entities/bugs;entities/bogles;entities/undead;entities/goblinkin"/>
             <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
@@ -67,7 +67,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="dungeons;entities;items;player;screens;vision;entities/animals;entities/bugs;entities/fungus;entities/gnomes;entities/hobs;items/armour;items/macguffins;items/weapons;entities/bogles;entities/undead"/>
+            <OtherUnitFiles Value="dungeons;entities;items;player;screens;vision;entities/animals;entities/bugs;entities/fungus;entities/gnomes;entities/hobs;items/armour;items/macguffins;items/weapons;entities/bogles;entities/undead;entities/goblinkin"/>
             <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -94,7 +94,7 @@
     <RunParams>
       <FormatVersion Value="2"/>
     </RunParams>
-    <Units Count="22">
+    <Units Count="24">
       <Unit0>
         <Filename Value="Axes.pas"/>
         <IsPartOfProject Value="True"/>
@@ -185,6 +185,14 @@
         <Filename Value="items/weapons/staff_bewilder.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit21>
+      <Unit22>
+        <Filename Value="entities/goblinkin/goblin_necromancer.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit22>
+      <Unit23>
+        <Filename Value="items/weapons/necro_axe.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit23>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -194,7 +202,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="dungeons;entities;items;player;screens;vision;entities/animals;entities/bugs;entities/fungus;entities/gnomes;entities/hobs;items/armour;items/macguffins;items/weapons;entities/bogles;entities/undead"/>
+      <OtherUnitFiles Value="dungeons;entities;items;player;screens;vision;entities/animals;entities/bugs;entities/fungus;entities/gnomes;entities/hobs;items/armour;items/macguffins;items/weapons;entities/bogles;entities/undead;entities/goblinkin"/>
       <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
   </CompilerOptions>

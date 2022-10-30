@@ -13,7 +13,7 @@ uses
   redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
   hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
   crypt_wolf, blue_fungus, embalming_spider, gnome_cultist, bogle_drunk, ghoul_lvl1,
-  skeleton_lvl1, zombie_weak;
+  skeleton_lvl1, zombie_weak, goblin_necromancer;
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
@@ -64,7 +64,7 @@ const
     cptUnique2: array[1..2] of string =
       ('embalmSpider', 'skeletonLVL1');
     cptUnique3: array[1..2] of string =
-      ('drunkBogle', 'drunkBogle');
+      ('GobNecro', 'GobNecro');
 
 var
   r, c: smallint;
@@ -229,6 +229,7 @@ begin
     'ghoulLVL1': ghoul_lvl1.createGhoul(i, c, r);
     'skeletonLVL1': skeleton_lvl1.createSkeleton(i, c, r);
     'zombieWeak': zombie_weak.createZombie(i, c, r);
+    'GobNecro': goblin_necromancer.createNecromancer(i, c, r);
   end;
 end;
 

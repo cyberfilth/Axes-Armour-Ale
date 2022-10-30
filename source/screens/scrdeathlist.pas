@@ -167,6 +167,7 @@ begin
           21: killType := 'Ghoul';
           22: killType := 'Skeleton';
           23: killType := 'Zombie';
+          24: killType := 'Goblin Necromancer';
           else
             killType := 'unknown';
         end;
