@@ -234,6 +234,7 @@ var
   i: smallint;
   stacked, skip: boolean;
 begin
+  Result := False;
   { Are items stacked }
   stacked := False;
   { Don't add to a new slot if item is stacked }

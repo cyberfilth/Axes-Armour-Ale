@@ -67,7 +67,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir)"/>
-            <OtherUnitFiles Value="dungeons;entities;items;player;screens;vision;entities/animals;entities/bugs;entities/fungus;entities/gnomes;entities/hobs;items/armour;items/macguffins;items/weapons;entities/bogles;entities/undead;entities/goblinkin"/>
+            <OtherUnitFiles Value="dungeons;entities;items;player;screens;vision;entities/animals;entities/bugs;entities/fungus;entities/gnomes;entities/hobs;items/armour;items/macguffins;items/weapons;entities/bogles;entities/undead;entities/goblinkin;items/traps"/>
             <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
