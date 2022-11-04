@@ -25,7 +25,7 @@
             <Filename Value="Axes"/>
           </Target>
           <SearchPaths>
-            <IncludeFiles Value="$(ProjOutDir)"/>
+            <IncludeFiles Value="$(ProjOutDir);entities"/>
             <OtherUnitFiles Value="dungeons;entities;items;player;screens;vision;entities/animals;entities/fungus;entities/gnomes;entities/hobs;items/armour;items/macguffins;items/weapons;items/traps;entities/bugs;entities/bogles;entities/undead;entities/goblinkin"/>
             <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
