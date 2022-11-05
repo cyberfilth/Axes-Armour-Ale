@@ -148,7 +148,7 @@ begin
   for i := 1 to entities.npcAmount do
   begin
     (* First check an NPC is visible (and not dead) *)
-    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) and (entityList[i].race <> 'Corpse') then
       NPCinRange := True;
   end;
 
@@ -208,7 +208,7 @@ begin
   for i := 1 to entities.npcAmount do
   begin
     (* First check an NPC is visible (and not dead) *)
-    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) and (entityList[i].race <> 'Corpse') then
     begin
       (* Add NPC to list of targets *)
       SetLength(tgtList, NumOfTargets);

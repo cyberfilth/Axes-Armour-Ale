@@ -215,8 +215,6 @@ var
   direction, attempts, testx, testy: smallint;
   i, x: byte;
 begin
-  { Set NPC state }
-  entityList[id].state := stateNeutral;
   attempts := 0;
   testx := 0;
   testy := 0;

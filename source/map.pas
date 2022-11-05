@@ -102,7 +102,12 @@ end;
 function isOccupied(checkX, checkY: smallint): boolean;
 begin
   if (maparea[checkY][checkX].Occupied = True) then
-    Result := True
+  begin
+    if (getCreatureName(checkX, checkY) = 'Corpse') then
+       Result := False
+    else
+       Result := True
+  end
   else
     Result := False;
 end;

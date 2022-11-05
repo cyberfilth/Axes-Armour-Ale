@@ -168,6 +168,7 @@ begin
           22: killType := 'Skeleton';
           23: killType := 'Zombie';
           24: killType := 'Goblin Necromancer';
+          25: killType := 'Zombie rotter';
           else
             killType := 'unknown';
         end;

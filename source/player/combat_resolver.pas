@@ -23,7 +23,7 @@ uses
 
 var
   (* List of creatures killed *)
-  deathList: array[0..24] of smallint;
+  deathList: array[0..25] of smallint;
   {
    0: CaveRat
    1: GiantRat
@@ -50,6 +50,7 @@ var
    22: skeletonLVL1
    23: zombieWeak
    24: Goblin necromancer
+   25: zombieRotter
   }
 
 (* Attack NPC's *)

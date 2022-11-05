@@ -7,7 +7,8 @@ unit goblin_necromancer;
 interface
 
 uses
-  SysUtils, Math, smell, globalUtils, universe, combat_resolver, player_stats, items, necro_axe;
+  SysUtils, Math, smell, globalUtils, universe, combat_resolver, player_stats, items,
+  necro_axe, dlgInfo;
 
 (* Create a Goblin Necromancer *)
 procedure createNecromancer(uniqueid, npcx, npcy: smallint);
@@ -133,8 +134,20 @@ begin
 end;
 
 procedure death(id: smallint);
+var
+  i: smallint;
 begin
   Inc(deathList[24]);
+  (* Necromancer raises the dead *)
+  dlgInfo.dialogType := dlgNecro;
+  for i := 1 to High(entityList) do
+    if (entityList[i].race = 'Corpse') then
+    begin
+      entityList[i].race := 'Zombie rotter';
+      entityList[i].description := 'a walking corpse';
+      entityList[i].glyph := 'z';
+      entityList[i].state := stateHostile;
+    end;
   (* Check if there is already an item on the floor here *)
   if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) then
   begin
@@ -415,8 +428,9 @@ begin
     'e':
     begin
       if (map.canMove((entities.entityList[id].posX + 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX + 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX + 1),
+        entities.entityList[id].posY) = False)) then
         entities.moveNPC(id, (entities.entityList[id].posX + 1),
           entities.entityList[id].posY);
     end;
@@ -432,8 +446,9 @@ begin
     'w':
     begin
       if (map.canMove((entities.entityList[id].posX - 1),
-        entities.entityList[id].posY) and (map.isOccupied(
-        (entities.entityList[id].posX - 1), entities.entityList[id].posY) = False)) then
+        entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX - 1),
+        entities.entityList[id].posY) = False)) then
 
 
         entities.moveNPC(id, (entities.entityList[id].posX - 1),

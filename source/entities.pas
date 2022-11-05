@@ -15,7 +15,8 @@ uses
   redcap_lesser_lobber, small_green_fungus, large_blood_bat, small_hyena,
   redcap_fungus, mushroom_person, hyena_fungus, small_hornet, small_corpse_spider,
   gnome_warrior, gnome_assassin, web, crypt_wolf, blue_fungus, embalming_spider,
-  gnome_cultist, bogle_drunk, ghoul_lvl1, skeleton_lvl1, zombie_weak, goblin_necromancer;
+  gnome_cultist, bogle_drunk, ghoul_lvl1, skeleton_lvl1, zombie_weak, goblin_necromancer,
+  corpse_zombie;
 
 type { NPC attitudes }
   Tattitudes = (stateNeutral, stateHostile, stateEscape);
@@ -348,6 +349,7 @@ begin
     'skeletonLVL1': skeleton_lvl1.takeTurn(i);
     'zombieWeak': zombie_weak.takeTurn(i);
     'GobNecro': goblin_necromancer.takeTurn(i);
+    'corpseZombie': corpse_zombie.takeTurn(i);
   end;
   (* Occupy their current tile *)
   occupyUpdate;
@@ -381,6 +383,7 @@ begin
     'skeletonLVL1': skeleton_lvl1.death(i);
     'zombieWeak': zombie_weak.death(i);
     'GobNecro': goblin_necromancer.death(i);
+    'corpseZombie': corpse_zombie.death(i);
   end;
 end;
 

@@ -215,8 +215,6 @@ procedure wander(id, spx, spy: smallint);
 var
   direction, attempts, testx, testy: smallint;
 begin
-  { Set NPC state }
-  entityList[id].state := stateNeutral;
   attempts := 0;
   testx := 0;
   testy := 0;

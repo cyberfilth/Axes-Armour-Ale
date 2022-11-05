@@ -49,7 +49,7 @@ begin
   for i := 1 to entities.npcAmount do
   begin
     (* First check an NPC is visible (and not dead) *)
-    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) and (entityList[i].race <> 'Corpse') then
     begin
       (* Area of effect is Players vision range - 1 *)
       if (los.inView(entityList[0].posX, entityList[0].posY, entityList[i].posX, entityList[i].posY, entityList[0].visionRange - 1) = True) then
@@ -70,7 +70,7 @@ begin
   for i := 1 to entities.npcAmount do
   begin
     (* First check an NPC is visible (and not dead) *)
-    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) and (entityList[i].race <> 'Corpse') then
     begin
       (* Area of effect is Players vision range - 1 *)
       if (los.inView(entityList[0].posX, entityList[0].posY,
@@ -133,7 +133,7 @@ begin
   for i := 1 to entities.npcAmount do
   begin
     (* First check an NPC is visible (and not dead) *)
-    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) and (entityList[i].race <> 'Corpse') then
     begin
       (* Area of effect is Players vision range - 1 *)
       if (los.inView(entityList[0].posX, entityList[0].posY, entityList[i].posX, entityList[i].posY, entityList[0].visionRange - 1) = True) then
@@ -154,7 +154,7 @@ begin
   for i := 1 to entities.npcAmount do
   begin
     (* First check an NPC is visible (and not dead) *)
-    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) and (entityList[i].race <> 'Corpse') then
     begin
       (* Area of effect is Players vision range - 1 *)
       if (los.inView(entityList[0].posX, entityList[0].posY, entityList[i].posX, entityList[i].posY, entityList[0].visionRange - 1) = True) then
@@ -205,7 +205,7 @@ begin
   for i := 1 to entities.npcAmount do
   begin
     (* First check an NPC is visible (and not dead) *)
-    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) and (entityList[i].race <> 'Corpse') then
     begin
       (* Area of effect is Players vision range *)
       if (los.inView(entityList[0].posX, entityList[0].posY, entityList[i].posX, entityList[i].posY, entityList[0].visionRange) = True) then
@@ -226,7 +226,7 @@ begin
   for i := 1 to entities.npcAmount do
   begin
     (* First check an NPC is visible (and not dead) *)
-    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) and (entityList[i].race <> 'Corpse') then
     begin
       (* Area of effect is Players vision range - 1 *)
       if (los.inView(entityList[0].posX, entityList[0].posY,

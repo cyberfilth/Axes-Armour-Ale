@@ -11,7 +11,7 @@ uses
 
 (* Types of pop-up dialog box *)
 type
-  dialogFlag = (dlgNone, dlgFoundSMap, dlgParchment);
+  dialogFlag = (dlgNone, dlgFoundSMap, dlgParchment, dlgNecro);
 
 var
   (* Notifies the game loop whether to display a pop-up or not *)
@@ -33,6 +33,8 @@ procedure checkNotifications;
 procedure foundMap;
 (* Read a parchment scroll *)
 procedure readScroll;
+(* Necromancers curse *)
+procedure displayCurse;
 
 implementation
 
@@ -174,6 +176,7 @@ begin
     dlgNone: exit;
     dlgFoundSMap: foundMap;
     dlgParchment: readScroll;
+    dlgNecro: displayCurse;
   end;
 end;
 
@@ -246,6 +249,41 @@ begin
     'ATT': TextOut(5, 11, 'LgreyBGblack', 'You feel your Attack improve');
     'DEF': TextOut(5, 11, 'LgreyBGblack', 'You feel your Defence improve');
   end;
+  TextOut(8, 13, 'LgreyBGblack', ' press [x] to continue');
+  UnlockScreenUpdate;
+  UpdateScreen(False);
+  dialogType := dlgNone;
+end;
+
+procedure displayCurse;
+var
+  x, y: smallint;
+begin
+  main.gameState := stDialogBox;
+  x := 3;
+  y := 5;
+  LockScreenUpdate;
+  (* Top border *)
+  TextOut(x, y, 'LgreyBGblack', chr(201));
+  for x := 4 to 53 do
+    TextOut(x, 5, 'LgreyBGblack', chr(205));
+  TextOut(54, y, 'LgreyBGblack', chr(187));
+  (* Vertical sides *)
+  for y := 6 to 12 do
+    TextOut(3, y, 'LgreyBGblack', chr(186) +
+      '                                                  ' + chr(186));
+  (* Bottom border *)
+  TextOut(3, 13, 'LgreyBGblack', chr(200)); // bottom left corner
+  for x := 4 to 53 do
+    TextOut(x, 13, 'LgreyBGblack', chr(205));
+  TextOut(54, 13, 'LgreyBGblack', chr(188)); // bottom right corner
+  (* Write the title *)
+  TextOut(5, 5, 'LgreyBGblack', ' Curses! ');
+  (* Write the message *)
+  TextOut(5, 7, 'LgreyBGblack', 'The necromancer collapses, dying.');
+  TextOut(5, 8, 'LgreyBGblack', 'As they fall, a curse leaves their lips');
+  TextOut(5, 10, 'LgreyBGblack', '"Arise, dead brothers. Arise!"');
+  TextOut(5, 12, 'LgreyBGblack', 'You hear corpses stumbling to their feet..');
   TextOut(8, 13, 'LgreyBGblack', ' press [x] to continue');
   UnlockScreenUpdate;
   UpdateScreen(False);

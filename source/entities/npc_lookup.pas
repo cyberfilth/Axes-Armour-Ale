@@ -13,7 +13,7 @@ uses
   redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
   hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
   crypt_wolf, blue_fungus, embalming_spider, gnome_cultist, bogle_drunk, ghoul_lvl1,
-  skeleton_lvl1, zombie_weak, goblin_necromancer;
+  skeleton_lvl1, zombie_weak, goblin_necromancer, corpse_zombie;
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
@@ -53,18 +53,18 @@ const
     ('drunkBogle', 'drunkBogle');
 
   (* Array of creatures found in a crypt, ordered by dungeon level *)
-    cptNPC1: array[1..4] of string =
-      ('bloodBat', 'smlCorpseSpider', 'ghoulLVL1', 'skeletonLVL1');
-    cptNPC2: array[1..5] of string =
-      ('zombieWeak', 'ghoulLVL1', 'zombieWeak', 'skeletonLVL1', 'blueFungus');
-    cptNPC3: array[1..5] of string =
-      ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'smlCorpseSpider');
-    cptUnique1: array[1..2] of string =
-      ('greenFungus', 'zombieWeak');
-    cptUnique2: array[1..2] of string =
-      ('embalmSpider', 'skeletonLVL1');
-    cptUnique3: array[1..2] of string =
-      ('GobNecro', 'GobNecro');
+  cptNPC1: array[1..4] of string =
+    ('bloodBat', 'smlCorpseSpider', 'ghoulLVL1', 'skeletonLVL1');
+  cptNPC2: array[1..5] of string =
+    ('zombieWeak', 'ghoulLVL1', 'zombieWeak', 'skeletonLVL1', 'blueFungus');
+  cptNPC3: array[1..5] of string =
+    ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'smlCorpseSpider');
+  cptUnique1: array[1..2] of string =
+    ('greenFungus', 'zombieWeak');
+  cptUnique2: array[1..2] of string =
+    ('embalmSpider', 'skeletonLVL1');
+  cptUnique3: array[1..2] of string =
+    ('GobNecro', 'GobNecro');
 
 var
   r, c: smallint;
@@ -230,6 +230,7 @@ begin
     'skeletonLVL1': skeleton_lvl1.createSkeleton(i, c, r);
     'zombieWeak': zombie_weak.createZombie(i, c, r);
     'GobNecro': goblin_necromancer.createNecromancer(i, c, r);
+    'corpseZombie': corpse_zombie.createZombie(i, c, r);
   end;
 end;
 
