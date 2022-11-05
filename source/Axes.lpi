@@ -94,7 +94,7 @@
     <RunParams>
       <FormatVersion Value="2"/>
     </RunParams>
-    <Units Count="24">
+    <Units Count="25">
       <Unit0>
         <Filename Value="Axes.pas"/>
         <IsPartOfProject Value="True"/>
@@ -193,6 +193,10 @@
         <Filename Value="items/weapons/necro_axe.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit23>
+      <Unit24>
+        <Filename Value="items/weapons/vampiric_staff.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit24>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

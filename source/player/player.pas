@@ -6,7 +6,7 @@ unit player;
 interface
 
 uses
-  SysUtils, player_inventory, player_stats, plot_gen, combat_resolver, items,
+  SysUtils, player_stats, plot_gen, combat_resolver, items,
   island, scrOverworld, file_handling, globalUtils, video, universe;
 
 (* Create player character *)
@@ -23,6 +23,8 @@ function combatCheck(x, y: smallint): boolean;
 procedure pickUp;
 (*Increase Health, no more than maxHP *)
 procedure increaseHealth(amount: smallint);
+(* Increase Health with no feedback *)
+procedure topupHealth(amount: smallint);
 (* Increase health without messages *)
 procedure levelupHealth(amount: smallint);
 (* Regenerate Magickal power *)
@@ -31,7 +33,7 @@ procedure regenMagick;
 implementation
 
 uses
-  map, fov, ui, entities, main;
+  map, fov, ui, entities, main, player_inventory;
 
 procedure createPlayer;
 begin
@@ -456,6 +458,18 @@ begin
   end
   else
     ui.bufferMessage('You are already at full health');
+end;
+
+procedure topupHealth(amount: smallint);
+begin
+  if (entities.entityList[0].currentHP <> entities.entityList[0].maxHP) then
+  begin
+    if ((entities.entityList[0].currentHP + amount) >= entities.entityList[0].maxHP) then
+      entities.entityList[0].currentHP := entities.entityList[0].maxHP
+    else
+      entities.entityList[0].currentHP := entities.entityList[0].currentHP + amount;
+    ui.updateHealth;
+  end
 end;
 
 procedure levelupHealth(amount: smallint);

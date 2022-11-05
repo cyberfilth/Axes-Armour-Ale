@@ -1,3 +1,4 @@
+(* Check if entity is next to the player *)
 function isNextToPlayer(spx, spy: smallint): boolean;
 begin
   Result := False;

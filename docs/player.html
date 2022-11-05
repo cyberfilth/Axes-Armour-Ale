@@ -17,7 +17,7 @@
 <p>
 Player creation and movement</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li><a href="player_inventory.html">player_inventory</a></li><li><a href="player_stats.html">player_stats</a></li><li><a href="plot_gen.html">plot_gen</a></li><li><a href="combat_resolver.html">combat_resolver</a></li><li><a href="items.html">items</a></li><li><a href="island.html">island</a></li><li><a href="scrOverworld.html">scrOverworld</a></li><li><a href="file_handling.html">file_handling</a></li><li><a href="globalUtils.html">globalUtils</a></li><li>video</li><li><a href="universe.html">universe</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li><a href="player_stats.html">player_stats</a></li><li><a href="plot_gen.html">plot_gen</a></li><li><a href="combat_resolver.html">combat_resolver</a></li><li><a href="items.html">items</a></li><li><a href="island.html">island</a></li><li><a href="scrOverworld.html">scrOverworld</a></li><li><a href="file_handling.html">file_handling</a></li><li><a href="globalUtils.html">globalUtils</a></li><li>video</li><li><a href="universe.html">universe</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -42,9 +42,12 @@ Player creation and movement</p>
 <td class="itemcode"><code>procedure <strong><a href="player.html#increaseHealth">increaseHealth</a></strong>(amount: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <strong><a href="player.html#levelupHealth">levelupHealth</a></strong>(amount: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="player.html#topupHealth">topupHealth</a></strong>(amount: smallint);</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="player.html#levelupHealth">levelupHealth</a></strong>(amount: smallint);</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="player.html#regenMagick">regenMagick</a></strong>;</code></td>
 </tr>
 </table>
@@ -111,6 +114,15 @@ Pick up an item from the floor</p>
 <tr><td colspan="1">
 <p>
 Increase Health, no more than maxHP</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="topupHealth"></span><code>procedure <strong>topupHealth</strong>(amount: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Increase Health with no feedback</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

@@ -7,8 +7,8 @@ unit player_inventory;
 interface
 
 uses
-  SysUtils, StrUtils, video, items, item_lookup, player_stats,
-  staff_minor_scorch, pixie_jar, gold_pieces, staff_bewilder;
+  SysUtils, StrUtils, video, items, item_lookup, player_stats, staff_minor_scorch,
+  pixie_jar, gold_pieces, staff_bewilder, vampiric_staff;
 
 type
   (* Items in inventory *)
@@ -268,27 +268,7 @@ begin
     begin
     (* Set an empty flag for the item on the map, this gets deleted when saving the map *)
         with itemList[itemNumber] do
-        begin
-          itemID := itemNumber;
-          itemName := 'empty';
-          itemDescription := '';
-          itemArticle := '';
-          itemType := itmEmptySlot;
-          itemMaterial := matEmpty;
-          useID := 1;
-          glyph := 'x';
-          glyphColour := 'lightCyan';
-          inView := False;
-          posX := 1;
-          posY := 1;
-          NumberOfUses := 0;
-          onMap := False;
-          throwable := False;
-          throwDamage := 0;
-          dice := 0;
-          adds := 0;
-          discovered := False;
-        end;
+        {$I emptyslot }
         (* Sort items in inventory *)
         sortInventory(0, high(inventory));
         Result := True;
@@ -300,27 +280,7 @@ begin
     Inc(player_stats.lightCounter, itemList[itemNumber].NumberOfUses);
     (* Set an empty flag for the item on the map, this gets deleted when saving the map *)
     with itemList[itemNumber] do
-    begin
-      itemID := itemNumber;
-      itemName := 'empty';
-      itemDescription := '';
-      itemArticle := '';
-      itemType := itmEmptySlot;
-      itemMaterial := matEmpty;
-      useID := 1;
-      glyph := 'x';
-      glyphColour := 'lightCyan';
-      inView := False;
-      posX := 1;
-      posY := 1;
-      NumberOfUses := 0;
-      onMap := False;
-      throwable := False;
-      throwDamage := 0;
-      dice := 0;
-      adds := 0;
-      discovered := False;
-    end;
+    {$I emptyslot }
     Result := True;
     pixie_jar.useItem;
   end
@@ -329,27 +289,7 @@ begin
         Inc(player_stats.treasure, itemList[itemNumber].NumberOfUses);
     (* Set an empty flag for the item on the map, this gets deleted when saving the map *)
     with itemList[itemNumber] do
-    begin
-      itemID := itemNumber;
-      itemName := 'empty';
-      itemDescription := '';
-      itemArticle := '';
-      itemType := itmEmptySlot;
-      itemMaterial := matEmpty;
-      useID := 1;
-      glyph := 'x';
-      glyphColour := 'lightCyan';
-      inView := False;
-      posX := 1;
-      posY := 1;
-      NumberOfUses := 0;
-      onMap := False;
-      throwable := False;
-      throwDamage := 0;
-      dice := 0;
-      adds := 0;
-      discovered := False;
-    end;
+    {$I emptyslot }
     Result := True;
     gold_pieces.useItem;
   end
@@ -358,27 +298,7 @@ begin
     item_lookup.lookupUse(itemList[itemNumber].useID, False, 0);
 (* Set an empty flag for the item on the map, this gets deleted when saving the map *)
     with itemList[itemNumber] do
-    begin
-      itemID := itemNumber;
-      itemName := 'empty';
-      itemDescription := '';
-      itemArticle := '';
-      itemType := itmEmptySlot;
-      itemMaterial := matEmpty;
-      useID := 1;
-      glyph := 'x';
-      glyphColour := 'lightCyan';
-      inView := False;
-      posX := 1;
-      posY := 1;
-      NumberOfUses := 0;
-      onMap := False;
-      throwable := False;
-      throwDamage := 0;
-      dice := 0;
-      adds := 0;
-      discovered := False;
-    end;
+    {$I emptyslot }
     Result := True;
   end;
   end;
@@ -763,7 +683,9 @@ begin
     8: { Staff of Minor Scorch }
       staff_minor_scorch.Zap;
     23: { Staff of Flummox }
-        staff_bewilder.Zap
+        staff_bewilder.Zap;
+    25: { Vampiric staff }
+        vampiric_staff.Zap
     else { No enchanted weapon equipped }
       ui.displayMessage('You have no magical weapon equipped');
   end;

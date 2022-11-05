@@ -7,7 +7,7 @@ unit magicEffects;
 interface
 
 uses
-  SysUtils, video, los, items, ui, player_stats, animation;
+  SysUtils, video, los, items, ui, player_stats, player, animation;
 
 type
   TSmallintArray = array of smallint;
@@ -16,6 +16,8 @@ type
 procedure minorScorch;
 (* Bewilder enemies in a circle around the player *)
 procedure bewilderArea;
+(* Drain enemy HP in a circle around the player *)
+procedure vampiricDrain;
 
 implementation
 
@@ -175,6 +177,77 @@ begin
   else
   begin
     ui.displayMessage('Bewilderment curse affects your enemies');
+  end;
+  Dec(player_stats.currentMagick, cost);
+end;
+
+procedure vampiricDrain;
+var
+  i, damageAmount, targetAmount, cost: smallint;
+  anyTargetHit: boolean;
+  targetList: TSmallintArray;
+begin
+  (*  Set array to 0 *)
+  SetLength(targetList, 0);
+  (* Cost of casting magick *)
+  cost := (5 - player_stats.playerLevel);
+  if (cost > player_stats.currentMagick) then
+  begin
+    ui.displayMessage('You don''t have enough magickal energy to cast!');
+    exit;
+  end;
+  i := 0;
+  targetAmount := 1;
+  anyTargetHit := False;
+  (* Damage amount is 4 + player level *)
+  damageAmount := 4 + player_stats.playerLevel;
+  (* Check if any enemies are near *)
+  for i := 1 to entities.npcAmount do
+  begin
+    (* First check an NPC is visible (and not dead) *)
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    begin
+      (* Area of effect is Players vision range *)
+      if (los.inView(entityList[0].posX, entityList[0].posY, entityList[i].posX, entityList[i].posY, entityList[0].visionRange) = True) then
+      begin
+        anyTargetHit := True;
+        (* Add NPC to list of targets *)
+        SetLength(targetList, targetAmount);
+        targetList[targetAmount - 1] := i;
+        Inc(targetAmount);
+      end;
+    end;
+  end;
+  (* Draw each affected NPC in red *)
+  if (anyTargetHit = True) then
+    animation.areaBurnEffect(targetList);
+
+  (* Deal damage *)
+  for i := 1 to entities.npcAmount do
+  begin
+    (* First check an NPC is visible (and not dead) *)
+    if (entityList[i].inView = True) and (entityList[i].isDead = False) then
+    begin
+      (* Area of effect is Players vision range - 1 *)
+      if (los.inView(entityList[0].posX, entityList[0].posY,
+        entityList[i].posX, entityList[i].posY, entityList[0].visionRange - 1) = True) then
+      begin
+        entityList[i].currentHP := (entityList[i].currentHP - damageAmount);
+        (* Check if NPC killed *)
+        if (entityList[i].currentHP < 1) then
+          entities.killEntity(i);
+        (* Add NPC HP to player *)
+        player.topupHealth(damageAmount);
+      end;
+    end;
+  end;
+
+  (* Display if there were any hits or not *)
+  if (anyTargetHit = False) then
+    ui.displayMessage('Vampiric energy shoots out, but hits nothing')
+  else
+  begin
+    ui.displayMessage('You drain your enemies');
   end;
   Dec(player_stats.currentMagick, cost);
 end;

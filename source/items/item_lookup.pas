@@ -18,7 +18,7 @@ uses
   { Quest items }
   smugglersMap, pixie_jar, pixie_jar_dim, parchment, gold_pieces,
   { Magical items }
-  staff_minor_scorch, staff_bewilder,
+  staff_minor_scorch, staff_bewilder, vampiric_staff,
   { Ammunition }
   arrow,
   { Traps }
@@ -42,7 +42,7 @@ const
     ('rock', 'aleTankard', 'crudeDagger', 'staffBewilder', 'gold',
     'dimPixieJar', 'arrow', 'shortBow');
   cptItems3: array[1..7] of string =
-    ('aleTankard', 'staffMnrScorch', 'aleTankard', 'rock', 'wineFlask', 'arrow', 'gold');
+    ('aleTankard', 'staffVampire', 'aleTankard', 'rock', 'wineFlask', 'arrow', 'gold');
 
   (* Array of items found in a dungeon, ordered by dungeon level *)
   dgnItems1: array[1..5] of string =
@@ -155,6 +155,7 @@ begin
     'parchment': parchment.createParchment(c, r);
     'gold': gold_pieces.createGP(c, r);
     'staffBewilder': staff_bewilder.createStaff(c, r);
+    'staffVampire': vampiric_staff.createStaff(c, r);
   end;
 end;
 
@@ -183,6 +184,7 @@ begin
     20: bone_dagger.useItem(equipped, id);
     22: gold_pieces.useItem;
     23: staff_bewilder.useItem(equipped);
+    25: vampiric_staff.useItem(equipped);
   end;
 end;
 
