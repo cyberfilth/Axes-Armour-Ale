@@ -25,7 +25,7 @@ var
   locationBuilderID: smallint;
 
 (* Check surrounding tiles to make sure 2 locations aren't placed next to each other *)
-function validLocation(x, y: smallint):boolean;
+function validLocation(x, y: smallint): boolean;
 (* Bottom row of the island *)
 procedure firstRow;
 (* Sprinkle locations over the island *)
@@ -40,102 +40,70 @@ function validLocation(x, y: smallint): boolean;
 begin
   Result := False;
   if (terrainArray[y][x] <> '>') and (terrainArray[y][x] <> '~') and
-  (terrainArray[y][x] <> '-') and (terrainArray[y + 1][x] <> '>')
-  and (terrainArray[y - 1][x] <> '>') and (terrainArray[y][x + 1] <> '>')
-  and (terrainArray[y][x - 1] <> '>') then
-      Result := True;
+    (terrainArray[y][x] <> '-') and (terrainArray[y + 1][x] <> '>') and
+    (terrainArray[y - 1][x] <> '>') and (terrainArray[y][x + 1] <> '>') and
+    (terrainArray[y][x - 1] <> '>') then
+    Result := True;
 end;
 
 procedure firstRow;
 var
- // locations1: array[0..2] of dungeonTerrain = (tDungeon, tVillage, tCrypt);
-  locations1: array[0..2] of dungeonTerrain = (tCrypt, tVillage, tCrypt);
-  //locations2: array[0..2] of dungeonTerrain = (tDungeon, tCavern, tDungeon);
-  locations2: array[0..2] of dungeonTerrain = (tCrypt, tCrypt, tCrypt);
-  cryptNames: array[0..3] of shortstring =
-  ('abandoned crypt', 'spooky tomb', 'haunted mausoleum', 'Cursed Sepulchre');
-  villageNames: array[0..3] of shortstring =
-    ('village of Barterville', 'village of Flatgrove', 'village of Little Wolding', 'village of Swineford');
-  dungeonNames: array[0..5] of shortstring =
-    ('Abandoned tunnels', 'Abandoned ruins', 'Unknown dungeon', 'Ruins of Cal Arath', 'Whispering ruins', 'Derelict tunnels');
-  cavernNames: array[0..4] of shortstring =
-    ('Pooka caves', 'dark cavern', 'Howling caves', 'deep chasm', 'deep grotto');
-  i, total, choice: byte;
-  (* Used so that no more than one village is created *)
-  villSelected: boolean;
-  placeType: dungeonTerrain;
+  cryptNames: array[0..3] of
+  shortstring = ('abandoned crypt', 'spooky tomb', 'haunted mausoleum',
+    'Cursed Sepulchre');
+  dungeonNames: array[0..5] of
+  shortstring = ('Abandoned tunnels', 'Abandoned ruins', 'Unknown dungeon',
+    'Ruins of Cal Arath', 'Whispering ruins', 'Derelict tunnels');
+  choice: byte;
   placeName: shortstring;
   placeX, placeY: smallint;
 begin
-   placeX := 0;
-   placeY := 0;
-   placeName := '';
-   villSelected := False;
-   locationBuilderID := 2;
-   total := globalUtils.randomRange(3, 4);
-   for i := 0 to total do
-   begin
-     { Choose a location type }
-     choice := Random(2);
-     if (villSelected = False) then
-       placeType := locations1[choice]
-     else
-       placeType := locations2[choice];
-
-     if (placeType = tVillage) then
-       villSelected := True;
-     { Generate a name }
-     if (placeType = tVillage) then
-       begin
-         repeat
-         choice := Random(3);
-         until villageNames[choice] <> 'used';
-         placeName := villageNames[choice];
-         villageNames[choice] := 'used';
-       end
-     else if (placeType = tDungeon) then
-     begin
-         repeat
-         choice := Random(Length(dungeonNames));
-         until dungeonNames[choice] <> 'used';
-         placeName := dungeonNames[choice];
-         dungeonNames[choice] := 'used';
-     end
-      else if (placeType = tCrypt) then
-     begin
-         repeat
-         choice := Random(Length(cryptNames));
-         until cryptNames[choice] <> 'used';
-         placeName := cryptNames[choice];
-         cryptNames[choice] := 'used';
-     end
-     else if (placeType = tCavern) then
-     begin
-         repeat
-         choice := Random(Length(cavernNames));
-         until cavernNames[choice] <> 'used';
-         placeName := cavernNames[choice];
-         cavernNames[choice] := 'used';
-     end;
-     { Place the location }
-     repeat
-       placeX := globalUtils.randomRange(11, 74);
-       placeY := globalUtils.randomRange(50, 57);
-     until validLocation(placeX, placeY) = True;
-     { Store location in locationLookup table }
-     SetLength(island.locationLookup, length(island.locationLookup) + 1);
-     with island.locationLookup[locationBuilderID - 1] do
-      begin
-        X := placeX;
-        Y := placeY;
-        id := locationBuilderID;
-        name := placeName;
-        generated := False;
-        theme := placeType;
-      end;
-     Inc(locationBuilderID);
-     terrainArray[placeY][placeX] := '>';
-   end;
+  placeX := 0;
+  placeY := 0;
+  placeName := '';
+  locationBuilderID := 2;
+  (* Place a dungeon *)
+  choice := Random(Length(dungeonNames));
+  placeName := dungeonNames[choice];
+  { Place the location }
+  repeat
+    placeX := globalUtils.randomRange(11, 74);
+    placeY := globalUtils.randomRange(50, 57);
+  until validLocation(placeX, placeY) = True;
+  { Store location in locationLookup table }
+  SetLength(island.locationLookup, length(island.locationLookup) + 1);
+  with island.locationLookup[locationBuilderID - 1] do
+  begin
+    X := placeX;
+    Y := placeY;
+    id := locationBuilderID;
+    Name := placeName;
+    generated := False;
+    theme := tDungeon;
+  end;
+  Inc(locationBuilderID);
+  terrainArray[placeY][placeX] := '>';
+  (* Place a crypt *)
+  choice := Random(Length(cryptNames));
+  placeName := cryptNames[choice];
+  { Place the location }
+  repeat
+    placeX := globalUtils.randomRange(11, 74);
+    placeY := globalUtils.randomRange(50, 57);
+  until validLocation(placeX, placeY) = True;
+  { Store location in locationLookup table }
+  SetLength(island.locationLookup, length(island.locationLookup) + 1);
+  with island.locationLookup[locationBuilderID - 1] do
+  begin
+    X := placeX;
+    Y := placeY;
+    id := locationBuilderID;
+    Name := placeName;
+    generated := False;
+    theme := tCrypt;
+  end;
+  Inc(locationBuilderID);
+  terrainArray[placeY][placeX] := '>';
 end;
 
 procedure seedLocations;
