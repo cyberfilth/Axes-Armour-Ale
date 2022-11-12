@@ -86,8 +86,6 @@ begin
   end
   else
     setSeed;
-  { Start error logging }
-  logging.beginLogging;
 
   (* Check for previous save file *)
   if (FileExists(globalUtils.saveDirectory + DirectorySeparator +
@@ -107,9 +105,10 @@ begin
       ui.setupScreen(0);
     end;
   end;
+  { Start error logging }
+  logging.beginLogging;
   { Initialise keyboard unit }
   keyboardinput.setupKeyboard;
-
   (* Set a Dwarven clan name *)
   plot_gen.generateClanName;
 end;
