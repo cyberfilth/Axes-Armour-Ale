@@ -49,16 +49,16 @@ var
   separateLines: array[1..6] of shortstring = (' ', ' ', ' ', ' ', ' ', ' ');
   epitaph, A, B, C, exitMessage, deathMessage, deathNumber, killType: shortstring;
   maxStrLength, iStart, iEnd, prevEnd, arrayNumber, toteKills, i,
-  lineNo, totalUnique: smallint;
+  lineNo, lMargin: smallint;
 begin
   A := killA[Random(15)];
   B := killB[Random(15)];
   C := killC[Random(9)];
   toteKills := countKills;
-  totalUnique := uniqueKills;
   i := 0;
   killType := '';
   lineNo := 8;
+  lMargin := 5;
   (* Set the maximum length of the string *)
   maxStrLength := 70;
   iStart := 1;
@@ -131,68 +131,76 @@ begin
   (* Write the message *)
   for arrayNumber := 1 to 6 do
   begin
-    TextOut(5, arrayNumber + 4, 'cyan', separateLines[arrayNumber]);
+    TextOut(lMargin, arrayNumber + 4, 'cyan', separateLines[arrayNumber]);
   end;
 
   (* Display list of entities killed *)
-  if (totalUnique < 16) then
+  for i := High(deathList) downto Low(deathList) do
   begin
-    for i := High(deathList) downto Low(deathList) do
+    if (deathList[i] <> 0) then
     begin
-      if (deathList[i] <> 0) then
-      begin
-        { Get entity name }
-        case i of
-          0: killType := 'Cave rat';
-          1: killType := 'Giant rat';
-          2: killType := 'Blood bat';
-          3: killType := 'Large Blood bat';
-          4: killType := 'Green fungus';
-          5: killType := 'Small green fungus';
-          6: killType := 'Fungus person';
-          7: killType := 'Hob';
-          8: killType := 'Hob rock thrower';
-          9: killType := 'Small hyena';
-          10: killType := 'Infected hyena';
-          11: killType := 'Infected Hob';
-          12: killType := 'Small hornet';
-          13: killType := 'Small corpse spider';
-          14: killType := 'Gnome warrior';
-          15: killType := 'Gnome assassin';
-          16: killType := 'Crypt wolf';
-          17: killType := 'Blue fungus';
-          18: killType := 'Embalming Spider';
-          19: killType := 'Gnome cultist';
-          20: killType := 'Bogle';
-          21: killType := 'Ghoul';
-          22: killType := 'Skeleton';
-          23: killType := 'Zombie';
-          24: killType := 'Goblin Necromancer';
-          25: killType := 'Zombie rotter';
-          else
-            killType := 'unknown';
-        end;
-        if (deathList[i] > 1) and (RightStr(killType, 6) = 'fungus') then
-        begin
-          killType := StringReplace(killtype, 'fungus', 'fungi', [rfReplaceAll, rfIgnoreCase]);
-          TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
-        end
-        else if (deathList[i] > 1) and (RightStr(killType, 6) = 'person') then
-        begin
-          killType := StringReplace(killtype, 'person', 'people', [rfReplaceAll, rfIgnoreCase]);
-          TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
-        end
-        else if (deathList[i] > 1) and (RightStr(killType, 4) = 'wolf') then
-        begin
-          killType := StringReplace(killtype, 'wolf', 'wolves', [rfReplaceAll, rfIgnoreCase]);
-          TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
-        end
-        else if (deathList[i] > 1) and (RightStr(killType, 1) <> 's') then
-          TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType + 's')
+      { Get entity name }
+      case i of
+        0: killType := 'Cave rat';
+        1: killType := 'Giant rat';
+        2: killType := 'Blood bat';
+        3: killType := 'Large Blood bat';
+        4: killType := 'Green fungus';
+        5: killType := 'Small green fungus';
+        6: killType := 'Fungus person';
+        7: killType := 'Hob';
+        8: killType := 'Hob rock thrower';
+        9: killType := 'Small hyena';
+        10: killType := 'Infected hyena';
+        11: killType := 'Infected Hob';
+        12: killType := 'Small hornet';
+        13: killType := 'Small corpse spider';
+        14: killType := 'Gnome warrior';
+        15: killType := 'Gnome assassin';
+        16: killType := 'Crypt wolf';
+        17: killType := 'Blue fungus';
+        18: killType := 'Embalming Spider';
+        19: killType := 'Gnome cultist';
+        20: killType := 'Bogle';
+        21: killType := 'Ghoul';
+        22: killType := 'Skeleton';
+        23: killType := 'Zombie';
+        24: killType := 'Goblin Necromancer';
+        25: killType := 'Zombie rotter';
         else
-          TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
-        Inc(lineNo);
+          killType := 'unknown';
       end;
+      if (deathList[i] > 1) and (RightStr(killType, 6) = 'fungus') then
+      begin
+        killType := StringReplace(killtype, 'fungus', 'fungi',
+          [rfReplaceAll, rfIgnoreCase]);
+        TextOut(lMargin, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
+      end
+      else if (deathList[i] > 1) and (RightStr(killType, 6) = 'person') then
+      begin
+        killType := StringReplace(killtype, 'person', 'people',
+          [rfReplaceAll, rfIgnoreCase]);
+        TextOut(lMargin, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
+      end
+      else if (deathList[i] > 1) and (RightStr(killType, 4) = 'wolf') then
+      begin
+        killType := StringReplace(killtype, 'wolf', 'wolves',
+          [rfReplaceAll, rfIgnoreCase]);
+        TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
+      end
+      else if (deathList[i] > 1) and (RightStr(killType, 1) <> 's') then
+        TextOut(lMargin, lineNo, 'cyan', IntToStr(deathList[i]) +
+          'x ' + killType + 's')
+      else
+        TextOut(lMargin, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
+      (* Start a new column if several entries *)
+      if (lineNo = 22) then
+      begin
+        lineNo := 8;
+        lMargin := 40;
+      end
+      else
+        Inc(lineNo);
     end;
   end;
   { As the number of NPC's increases, format a 2 column layout. Then a second screen of NPC's }

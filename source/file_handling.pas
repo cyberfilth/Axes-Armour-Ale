@@ -868,7 +868,7 @@ var
   Doc: TXMLDocument;
   i: integer;
   dfileName: shortstring;
-
+  deathTotal: smallint;
 begin
   try
     (* Set the save game file name *)
@@ -882,6 +882,8 @@ begin
     RandSeed := StrToDWord(UTF8Encode(RootNode.FindNode('RandSeed').TextContent));
     (* Above or below ground *)
     globalutils.womblingFree := (UTF8Encode(RootNode.FindNode('womble').TextContent));
+    (* Total number of unique NPC's in game *)
+    deathTotal := StrToInt(UTF8Encode(RootNode.FindNode('dthlst').TextContent));
     (* Last overworld coordinates *)
     globalutils.OWx := StrToInt(UTF8Encode(RootNode.FindNode('owx').TextContent));
     globalutils.OWy := StrToInt(UTF8Encode(RootNode.FindNode('owy').TextContent));
@@ -904,11 +906,8 @@ begin
 
     (* List of enemies killed *)
     deathNode := Doc.DocumentElement.FindNode('DL');
-    for i := 0 to 16 do
-    begin
-      combat_resolver.deathList[i] :=
-        StrToInt(UTF8Encode(deathNode.FindNode(UTF8Decode('kill_' + IntToStr(i))).TextContent));
-    end;
+    for i := 0 to deathTotal do
+      combat_resolver.deathList[i] := StrToInt(UTF8Encode(deathNode.FindNode(UTF8Decode('kill_' + IntToStr(i))).TextContent));
 
     (* Location data *)
     locationNode := Doc.DocumentElement.FindNode('locData');
@@ -1142,6 +1141,7 @@ begin
     DataNode := AddChild(RootNode, 'GameData');
     AddElement(datanode, 'RandSeed', IntToStr(RandSeed));
     AddElement(datanode, 'womble', globalutils.womblingFree);
+    AddElement(datanode, 'dthlst', IntToStr(High(deathList)));
     AddElement(datanode, 'owx', IntToStr(globalutils.OWx));
     AddElement(datanode, 'owy', IntToStr(globalutils.OWy));
     AddElement(datanode, 'OWgen', BoolToStr(universe.OWgen));
