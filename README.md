@@ -6,8 +6,8 @@
 ### A terminal-based, dungeon crawl game
 
 Alpha version, most features aren't implemented yet and what there is may change frequently. Currently there are the following features:
- - A procedurally generated cave, created using cellular automata
- - Game runs natively on GNU/Linux, Windows & OSX
+ - Procedurally generated caves and dungeons
+ - Game runs natively on GNU/Linux and Windows (also compiles for OSX)
  - Small, self-contained binary with no external dependencies.
  - Can be run without needing to be installed
 
