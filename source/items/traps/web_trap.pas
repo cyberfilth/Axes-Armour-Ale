@@ -70,6 +70,7 @@ begin
     begin
       (* remove the trap *)
       itemList[id].itemType := itmEmptySlot;
+      itemList[id].glyph := '.';
       itemList[id].inView := False;
       itemList[id].onMap := False;
       (* spawn more webs in the area *)

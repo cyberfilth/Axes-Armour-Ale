@@ -20,6 +20,8 @@ uses
   entities, globalUtils, map;
 
 procedure createWeb(uniqueid, npcx, npcy: smallint);
+var
+  i: smallint;
 begin
   (* Add a web to the list of entities *)
   entities.listLength := length(entities.entityList);
@@ -41,7 +43,9 @@ begin
     weaponAdds := 0;
     xpReward := 0;
     visionRange := 4;
-    moveCount := 0;
+    (* Number of turns before web dissolves *)
+    i := randomRange(5, 10);
+    moveCount := i;
     targetX := 0;
     targetY := 0;
     inView := False;
@@ -70,8 +74,14 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-  entities.moveNPC(id, entityList[id].posX, entityList[id].posY);
+  Dec(entityList[id].moveCount);
+  if (entityList[id].moveCount <= 0) then
+  begin
+    entityList[id].currentHP := 0;
+    killEntity(id);
+  end
+  else
+    entities.moveNPC(id, entityList[id].posX, entityList[id].posY);
 end;
 
 end.
-

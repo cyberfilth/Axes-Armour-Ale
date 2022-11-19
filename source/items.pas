@@ -75,6 +75,8 @@ function getItemID(x, y: smallint): smallint;
 function getItemGlyph(x, y: smallint): shortstring;
 (* Get the glyph colour at coordinates *)
 function getItemColour(x, y: smallint): shortstring;
+(* Get item type *)
+function getItemType(x, y: smallint): tItem;
 (* Is item on floor throwable *)
 function isItemThrowable(x, y: smallint): boolean;
 (* Get the Throw Damage at coordinates *)
@@ -178,6 +180,18 @@ begin
   begin
     if (itemList[i].posX = x) and (itemList[i].posY = y) then
       Result := itemList[i].glyphColour;
+  end;
+end;
+
+function getItemType(x, y: smallint): tItem;
+var
+  i: smallint;
+begin
+  Result := itmEmptySlot;
+  for i := 0 to High(itemList) do
+  begin
+    if (itemList[i].posX = x) and (itemList[i].posY = y) then
+      Result := itemList[i].itemType;
   end;
 end;
 
