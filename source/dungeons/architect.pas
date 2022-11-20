@@ -1,7 +1,7 @@
 (* Unit responsible for selecting themed dungeons and caves.
    The types of locations are:
    tCave - underground cave with no obstacles
-   tCavern - underground cave with rubble
+   tStoneCavern - underground cave with rubble
    tDungeon - rooms connected by corridors
    tCrypt - dungeon populated by undead
    tVillage - small settlement
@@ -54,6 +54,9 @@ var
   dungeonNames: array[0..5] of
   shortstring = ('Abandoned tunnels', 'Abandoned ruins', 'Unknown dungeon',
     'Ruins of Cal Arath', 'Whispering ruins', 'Derelict tunnels');
+  stoneNames: array[0..4] of
+  shortstring = ('rock cave', 'stony cavern', 'granite caves',
+    'Cursed Sepulchre', 'gravelly grotto');
   choice: byte;
   placeName: shortstring;
   placeX, placeY: smallint;
@@ -101,6 +104,28 @@ begin
     Name := placeName;
     generated := False;
     theme := tCrypt;
+  end;
+  Inc(locationBuilderID);
+  terrainArray[placeY][placeX] := '>';
+
+  (* Place a stone cavern *)
+  choice := Random(Length(stoneNames));
+  placeName := stoneNames[choice];
+  { Place the location }
+  repeat
+    placeX := globalUtils.randomRange(11, 74);
+    placeY := globalUtils.randomRange(50, 57);
+  until validLocation(placeX, placeY) = True;
+  { Store location in locationLookup table }
+  SetLength(island.locationLookup, length(island.locationLookup) + 1);
+  with island.locationLookup[locationBuilderID - 1] do
+  begin
+    X := placeX;
+    Y := placeY;
+    id := locationBuilderID;
+    Name := placeName;
+    generated := False;
+    theme := tStoneCavern;
   end;
   Inc(locationBuilderID);
   terrainArray[placeY][placeX] := '>';

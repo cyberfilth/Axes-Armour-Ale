@@ -38,6 +38,22 @@ const
   caveUnique3: array[1..2] of string =
     ('redcapLsrLbr', 'redcapLsrLbr');
 
+  (* Array of creatures found in stone cavern, ordered by cave level *)
+  stoneCavernNPC1: array[1..5] of string =
+    ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
+  stoneCavernNPC2: array[1..7] of string =
+    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
+    'greenFungus', 'hobFungus');
+  stoneCavernNPC3: array[1..7] of string =
+    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
+    'greenFungus', 'matango', 'hyenaFungus');
+  stoneCavernUnique1: array[1..2] of string =
+    ('largeBat', 'bloodBat');
+  stoneCavernUnique2: array[1..2] of string =
+    ('redcapLsrLbr', 'largeBat');
+  stoneCavernUnique3: array[1..2] of string =
+    ('redcapLsrLbr', 'redcapLsrLbr');
+
   (* Array of creatures found in a dungeon, ordered by dungeon level *)
   dgnNPC1: array[1..4] of string =
     ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr');
@@ -140,6 +156,24 @@ begin
           monster := dgnNPC3[randSelect];
         end;
       end;
+      tStoneCavern:
+      begin { Level 1}
+        if (universe.currentDepth = 1) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(stoneCavernNPC1));
+          monster := stoneCavernNPC1[randSelect];
+        end { Level 2 }
+        else if (universe.currentDepth = 2) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(stoneCavernNPC2));
+          monster := stoneCavernNPC2[randSelect];
+        end { Level 3 }
+        else if (universe.currentDepth = 3) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(stoneCavernNPC3));
+          monster := stoneCavernNPC3[randSelect];
+        end;
+      end;
     end;
   end
   else
@@ -198,6 +232,24 @@ begin
         begin
           randSelect := globalUtils.randomRange(1, Length(dgnUnique3));
           monster := dgnUnique3[randSelect];
+        end;
+      end;
+      tStoneCavern:
+      begin
+        if (universe.currentDepth = 1) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(stoneCavernUnique1));
+          monster := stoneCavernUnique1[randSelect];
+        end { Level 2 }
+        else if (universe.currentDepth = 2) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(stoneCavernUnique2));
+          monster := stoneCavernUnique2[randSelect];
+        end { Level 3 }
+        else if (universe.currentDepth = 3) then
+        begin
+          randSelect := globalUtils.randomRange(1, Length(stoneCavernUnique3));
+          monster := stoneCavernUnique3[randSelect];
         end;
       end;
     end;

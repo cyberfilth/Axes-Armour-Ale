@@ -8,7 +8,8 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, smallGrid, crypt;
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, smallGrid,
+  crypt, stone_cavern;
 
 var
   (* Number of dungeons *)
@@ -62,6 +63,7 @@ begin
     tCave: cave.generate(UTF8Encode(title), dID, totalDepth);
     tDungeon: smallGrid.generate(UTF8Encode(title), dID, totalDepth);
     tCrypt: crypt.generate(UTF8Encode(title), dID, totalDepth);
+    tStoneCavern: stone_cavern.generate(UTF8Encode(title), dID, totalDepth);
   end;
 
   (* Copy the 1st floor of the current dungeon to the game map *)
@@ -78,54 +80,23 @@ begin
   sniff;
   { Based on number of rooms in current level, dungeon type & dungeon level
      Caves have more lower level enemies, dungeons have fewer but stronger }
-  if (dungeonType = tCave) then
+  if (dungeonType = tCave) or (dungeonType = tStoneCavern) then
     NPCnumber := totalRooms + currentDepth
-  else if (dungeonType = tDungeon) then
-    NPCnumber := (totalRooms div 2) + currentDepth
-  else if (dungeonType = tCrypt) then
+  else if (dungeonType = tDungeon) or (dungeonType = tCrypt) then
     NPCnumber := (totalRooms div 2) + currentDepth;
   { player level is considered when generating the NPCs }
   entities.npcAmount := NPCnumber;
 
-  { First npcAmount-1 number of enemies are scattered
-    then an additional unique enemy is added          }
-
-  case dungeonType of
-    tDungeon: { Dungeon }
-    begin
-      (* Create the NPC's *)
-      for i := 1 to (NPCnumber - 1) do
-      begin
-        { create an encounter table: Monster type: Dungeon type: floor number }
-        { NPC generation will take the Player level into account when creating stats }
-        npc_lookup.NPCpicker(i, False, tDungeon);
-      end;
-    end;
-    tCrypt: { Crypt }
-    begin
-      for i := 1 to (NPCnumber - 1) do
-      begin
-        npc_lookup.NPCpicker(i, False, tCrypt);
-      end;
-    end;
-    tCave: { Cave }
-    begin
-      for i := 1 to (NPCnumber - 1) do
-      begin
-        npc_lookup.NPCpicker(i, False, tCave);
-      end;
-    end;
+  { First npcAmount-1 number of enemies are scattered on the floor }
+  for i := 1 to (NPCnumber - 1) do
+  begin
+    { create an encounter table: Monster type: Dungeon type: floor number }
+    { NPC generation will take the Player level into account when creating stats }
+    npc_lookup.NPCpicker(i, False, dungeonType);
   end;
 
   { Unique enemy is added to each floor }
-  case dungeonType of
-    tDungeon: { Dungeon }
-      npc_lookup.NPCpicker(NPCnumber, True, tDungeon);
-    tCrypt: { Crypt }
-      npc_lookup.NPCpicker(NPCnumber, True, tCrypt);
-    tCave: { Cave }
-      npc_lookup.NPCpicker(NPCnumber, True, tCave);
-  end;
+  npc_lookup.NPCpicker(NPCnumber, True, dungeonType);
 end;
 
 procedure litterItems;
@@ -138,38 +109,13 @@ begin
   { Based on number of rooms in current level, dungeon type & dungeon level }
   ItemNumber := (totalRooms div 3) + currentDepth;
 
-  case dungeonType of
-    tDungeon: { Dungeon }
-    begin
-      (* Create the items *);
-      for i := 0 to (ItemNumber - 1) do
-      begin
-        item_lookup.dispenseItem(tDungeon);
-      end;
-      (* Drop a single light source on each floor *)
-      pixie_jar.createPixieJar;
-    end;
-    tCrypt: { Crypt }
-    begin
-      (* Create the items *);
-      for i := 0 to (ItemNumber - 1) do
-      begin
-        item_lookup.dispenseItem(tCrypt);
-      end;
-      (* Drop a single light source on each floor *)
-      pixie_jar.createPixieJar;
-    end;
-    tCave: { Cave }
-    begin
-      (* Create the items *);
-      for i := 0 to (ItemNumber - 1) do
-      begin
-        item_lookup.dispenseItem(tCave);
-      end;
-      (* Drop a single light source on each floor *)
-      pixie_jar.createPixieJar;
-    end;
+  (* Create the items *);
+  for i := 0 to (ItemNumber - 1) do
+  begin
+    item_lookup.dispenseItem(dungeonType);
   end;
+  (* Drop a single light source on each floor *)
+  pixie_jar.createPixieJar;
 end;
 
 procedure createEllanToll;

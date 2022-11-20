@@ -66,7 +66,7 @@
             <Filename Value="Axes"/>
           </Target>
           <SearchPaths>
-            <IncludeFiles Value="$(ProjOutDir);entities"/>
+            <IncludeFiles Value="$(ProjOutDir);entities;dungeons"/>
             <OtherUnitFiles Value="dungeons;entities;items;player;screens;vision;entities/animals;entities/bugs;entities/fungus;entities/gnomes;entities/hobs;items/armour;items/macguffins;items/weapons;entities/bogles;entities/undead;entities/goblinkin;items/traps"/>
             <UnitOutputDirectory Value="lib/$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
@@ -95,7 +95,7 @@
     <RunParams>
       <FormatVersion Value="2"/>
     </RunParams>
-    <Units Count="26">
+    <Units Count="27">
       <Unit0>
         <Filename Value="Axes.pas"/>
         <IsPartOfProject Value="True"/>
@@ -202,6 +202,10 @@
         <Filename Value="entities/undead/corpse_zombie.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit25>
+      <Unit26>
+        <Filename Value="dungeons/stone_cavern.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit26>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

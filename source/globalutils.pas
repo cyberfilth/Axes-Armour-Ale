@@ -16,7 +16,7 @@ type
 
 (* Types of locations that can be explored. See 'architect' unit for explanation *)
 type
-  dungeonTerrain = (tCave, tCavern, tDungeon, tCrypt, tVillage);
+  dungeonTerrain = (tCave, tStoneCavern, tDungeon, tCrypt, tVillage);
 
 type (* Pathfinding - Path to player *)
   path = array[1..30] of TPoint;

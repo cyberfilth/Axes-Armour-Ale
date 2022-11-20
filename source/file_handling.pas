@@ -8,7 +8,7 @@ interface
 
 uses
   SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe, island,
-  cave, smallGrid, crypt, combat_resolver;
+  cave, smallGrid, crypt, stone_cavern, combat_resolver;
 
 (* Save the overworld map to disk *)
 procedure saveOverworldMap;
@@ -372,6 +372,17 @@ begin
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
           else
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
+        end
+        { if dungeon type is a stone cavern }
+        else if (dType = tStoneCavern) then
+        begin
+          if (stone_cavern.terrainArray[r][c] = '.') or
+            (stone_cavern.terrainArray[r][c] = 'X') or
+            (stone_cavern.terrainArray[r][c] = '>') or
+            (stone_cavern.terrainArray[r][c] = '<') then
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
+          else
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
         end;
         AddElement(datanode, 'Visible', UTF8Decode(BoolToStr(False)));
         AddElement(datanode, 'Occupied', UTF8Decode(BoolToStr(False)));
@@ -390,6 +401,11 @@ begin
         else if (dType = tCrypt) then
         begin
           AddElement(datanode, 'Glyph', UTF8Decode(crypt.dungeonArray[r][c]));
+        end
+        { if dungeon type is a stone crypt }
+        else if (dType = tStoneCavern) then
+        begin
+          AddElement(datanode, 'Glyph', UTF8Decode(stone_cavern.terrainArray[r][c]));
         end;
       end;
     end;

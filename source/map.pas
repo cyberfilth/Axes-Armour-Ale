@@ -75,6 +75,8 @@ procedure drawCaveTiles(c, r: smallint; hiDef: byte);
 procedure drawDungeonTiles(c, r: smallint; hiDef: byte);
 (* Draw crypt tile *)
 procedure drawCryptTiles(c, r: smallint; hiDef: byte);
+(* Draw stone cavern tiles *)
+procedure drawStoneCavernTiles(c, r: smallint; hiDef: byte);
 (* Place a tile on the map *)
 procedure drawTile(c, r: smallint; hiDef: byte);
 (* Display explored sections of map when reloading game *)
@@ -104,9 +106,9 @@ begin
   if (maparea[checkY][checkX].Occupied = True) then
   begin
     if (getCreatureName(checkX, checkY) = 'Corpse') then
-       Result := False
+      Result := False
     else
-       Result := True
+      Result := True;
   end
   else
     Result := False;
@@ -131,12 +133,15 @@ begin
   if (maparea[y][x].Glyph = '#') then
     Result := True;
   { Dungeon }
-  if (maparea[y][x].Glyph = 'A') or (maparea[y][x].Glyph = 'B') or (maparea[y][x].Glyph = 'C')
-  or (maparea[y][x].Glyph = 'D') or (maparea[y][x].Glyph = 'E') or (maparea[y][x].Glyph = 'F')
-  or (maparea[y][x].Glyph = 'G') or (maparea[y][x].Glyph = 'H') or (maparea[y][x].Glyph = 'I')
-  or (maparea[y][x].Glyph = 'J') or (maparea[y][x].Glyph = 'K') or (maparea[y][x].Glyph = 'L')
-  or (maparea[y][x].Glyph = 'M') or (maparea[y][x].Glyph = 'N') or (maparea[y][x].Glyph = 'O')
-  or (maparea[y][x].Glyph = 'P') or (maparea[y][x].Glyph = 'Q') then
+  if (maparea[y][x].Glyph = 'A') or (maparea[y][x].Glyph = 'B') or
+    (maparea[y][x].Glyph = 'C') or (maparea[y][x].Glyph = 'D') or
+    (maparea[y][x].Glyph = 'E') or (maparea[y][x].Glyph = 'F') or
+    (maparea[y][x].Glyph = 'G') or (maparea[y][x].Glyph = 'H') or
+    (maparea[y][x].Glyph = 'I') or (maparea[y][x].Glyph = 'J') or
+    (maparea[y][x].Glyph = 'K') or (maparea[y][x].Glyph = 'L') or
+    (maparea[y][x].Glyph = 'M') or (maparea[y][x].Glyph = 'N') or
+    (maparea[y][x].Glyph = 'O') or (maparea[y][x].Glyph = 'P') or
+    (maparea[y][x].Glyph = 'Q') then
     Result := True;
 end;
 
@@ -144,10 +149,11 @@ function canMove(checkX, checkY: smallint): boolean;
 begin
   Result := False;
   if (withinBounds(checkX, checkY) = True) then
-     if (maparea[checkY][checkX].Blocks = False) and (isOccupied(checkX, checkY) = False) then
-        Result := True
-  else
-    Result := False;
+    if (maparea[checkY][checkX].Blocks = False) and
+      (isOccupied(checkX, checkY) = False) then
+      Result := True
+    else
+      Result := False;
 end;
 
 function canSee(checkX, checkY: smallint): boolean;
@@ -352,7 +358,7 @@ begin
         end;
       end;
     end
-    { Default tile to show in case I missed something }
+      { Default tile to show in case I missed something }
     else
     begin
       mapDisplay[r][c].GlyphColour := 'white';
@@ -459,7 +465,7 @@ begin
         end;
       end;
     end;
-     'C': { 2 }
+    'C': { 2 }
     begin
       mapDisplay[r][c].Glyph := Chr(180);
       { Inside FoV }
@@ -879,7 +885,7 @@ begin
         end;
       end;
     end
-    (* Default block glyph *)
+      (* Default block glyph *)
     else
     begin
       mapDisplay[r][c].Glyph := Chr(219);
@@ -937,7 +943,7 @@ begin
           mapDisplay[r][c].GlyphColour := darkest;
       end;
     end;
-     '<': { Upstairs }
+    '<': { Upstairs }
     begin
       mapDisplay[r][c].Glyph := '<';
       if (hiDef = 1) then
@@ -964,6 +970,59 @@ begin
   end;
 end;
 
+procedure drawStoneCavernTiles(c, r: smallint; hiDef: byte);
+const
+  lit = 'lightGrey';
+  unlit = 'darkGrey';
+  dark = 'grey';
+  darkest = 'black';
+begin
+  case maparea[r][c].glyph of
+    '.', 'X': { Floor }
+    begin
+      mapDisplay[r][c].Glyph := '.';
+      if (hiDef = 1) then { In view }
+      begin
+        if (player_stats.lightEquipped = True) then
+          mapDisplay[r][c].GlyphColour := unlit
+        else
+          mapDisplay[r][c].GlyphColour := dark;
+      end
+      else { Not in view }
+      begin
+        if (player_stats.lightEquipped = True) then
+          mapDisplay[r][c].GlyphColour := dark
+        else
+          mapDisplay[r][c].GlyphColour := darkest;
+      end;
+    end;
+    '<': { Upstairs }
+    begin
+      mapDisplay[r][c].Glyph := '<';
+      if (hiDef = 1) then
+        mapDisplay[r][c].GlyphColour := lit
+      else
+        mapDisplay[r][c].GlyphColour := unlit;
+    end;
+    '>': { Downstairs }
+    begin
+      mapDisplay[r][c].Glyph := '>';
+      if (hiDef = 1) then
+        mapDisplay[r][c].GlyphColour := lit
+      else
+        mapDisplay[r][c].GlyphColour := unlit;
+    end;
+    '*': { Wall }
+    begin
+      mapDisplay[r][c].Glyph := chr(177);
+      if (hiDef = 1) then
+        mapDisplay[r][c].GlyphColour := lit
+      else
+        mapDisplay[r][c].GlyphColour := unlit;
+    end;
+  end;
+end;
+
 procedure drawTile(c, r: smallint; hiDef: byte);
 begin
   (* Draw black space if tile is not visible *)
@@ -978,6 +1037,8 @@ begin
     drawCaveTiles(c, r, hiDef)
   else if (mapType = tCrypt) then
     drawCryptTiles(c, r, hiDef)
+  else if (mapType = tStoneCavern) then
+    drawStoneCavernTiles(c, r, hiDef)
   else if (mapType = tDungeon) then
     drawDungeonTiles(c, r, hiDef);
 end;

@@ -35,6 +35,16 @@ const
   caveItems3: array[1..6] of string =
     ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
 
+  (* Array of items found in a stone cavern, ordered by cave level *)
+  stoneCavernItems1: array[1..8] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
+    'pointyStick', 'arrow', 'gold');
+  stoneCavernItems2: array[1..7] of string =
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
+    'rock', 'arrow', 'shortBow');
+  stoneCavernItems3: array[1..6] of string =
+    ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
+
   (* Array of items found in a crypt, ordered by dungeon level *)
   cptItems1: array[1..6] of string =
     ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar', 'gold');
@@ -99,6 +109,25 @@ begin
         thing := caveItems3[randSelect];
       end;
     end;
+    tStoneCavern:
+    begin { Level 1}
+      if (universe.currentDepth = 1) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(stoneCavernItems1));
+        thing := stoneCavernItems1[randSelect];
+      end { Level 2 }
+      else if (universe.currentDepth = 2) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(stoneCavernItems2));
+        thing := stoneCavernItems2[randSelect];
+      end { Level 3 }
+      else if (universe.currentDepth = 3) then
+      begin
+        randSelect := globalUtils.randomRange(1, Length(stoneCavernItems3));
+        thing := stoneCavernItems3[randSelect];
+      end;
+    end;
+
     tCrypt:
     begin
       if (universe.currentDepth = 1) then
