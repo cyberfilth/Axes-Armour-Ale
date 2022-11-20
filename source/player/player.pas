@@ -170,7 +170,10 @@ begin
         Dtype := island.getDungeonType(entityList[0].posX, entityList[0].posY);
         { Generate a new location if it doesn't already exist }
         if (island.locationExists(entityList[0].posX, entityList[0].posY) = False) then
+        begin
            universe.createNewDungeon(UTF8Decode(title), Dtype, locationID);
+           island.setVisitedFlag(entityList[0].posX, entityList[0].posY);
+        end;
         (* store overworld coordinates *)
         globalUtils.OWx := entityList[0].posX;
         globalUtils.OWy := entityList[0].posY;

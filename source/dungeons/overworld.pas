@@ -20,7 +20,7 @@ var
   r, c, iterations, tileCounter: smallint;
   z, feature: double;
   (* Shape of the island that will be imposed onto the array *)
-  {$I island}
+  {$I islandshape}
 
 (* Create an island *)
 procedure generate;

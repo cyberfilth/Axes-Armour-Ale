@@ -183,8 +183,8 @@ begin
     begin
       if (player_stats.canExitDungeon = True) then
       begin
-        ui.displayMessage('You leave the smugglers cave!');
-        main.WinningScreen;
+        ui.displayMessage('You leave the ' + UTF8Encode(universe.title));
+        main.returnToSurface;
       end
       else if (player_stats.canExitDungeon = False) then
         ui.displayMessage('The exit is locked...');

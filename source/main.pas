@@ -39,7 +39,7 @@ procedure overworldGameLoop;
 procedure returnToGameScreen;
 procedure gameOver;
 (* Shown when the player first exits the Smugglers Cave *)
-procedure WinningScreen;
+procedure returnToSurface;
 
 implementation
 
@@ -570,7 +570,7 @@ begin
   scrRIP.displayRIPscreen;
 end;
 
-procedure WinningScreen;
+procedure returnToSurface;
 begin
   (* Check if the world has already been generated *)
   if (universe.OWgen = False) then

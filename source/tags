@@ -30,7 +30,6 @@ TextOut	ui.pas	/^procedure TextOut(X, Y: word; textcol: shortstring; const S: st
 WinAlphaInput	backup/keyboardinput.pas	/^procedure WinAlphaInput(Keypress: TKeyEvent);$/;"	p
 WinAlphaInput	keyboardinput.pas	/^procedure WinAlphaInput(Keypress: TKeyEvent);$/;"	p
 WinningScreen	backup/main.pas	/^procedure WinningScreen;$/;"	p
-WinningScreen	main.pas	/^procedure WinningScreen;$/;"	p
 Zap	items/weapons/backup/staff_bewilder.pas	/^procedure Zap;$/;"	p
 Zap	items/weapons/backup/staff_confusion.pas	/^procedure Zap;$/;"	p
 Zap	items/weapons/backup/staff_minor_scorch.pas	/^procedure Zap;$/;"	p
@@ -871,6 +870,7 @@ returnToGameScreen	backup/main.pas	/^procedure returnToGameScreen;$/;"	p
 returnToGameScreen	main.pas	/^procedure returnToGameScreen;$/;"	p
 returnToOverworldScreen	backup/main.pas	/^procedure returnToOverworldScreen;$/;"	p
 returnToOverworldScreen	main.pas	/^procedure returnToOverworldScreen;$/;"	p
+returnToSurface	main.pas	/^procedure returnToSurface;$/;"	p
 rightHasFloor	dungeons/backup/stone_cavern.pas	/^function rightHasFloor(): boolean;$/;"	f
 rightHasFloor	dungeons/cave.pas	/^function rightHasFloor(): boolean;$/;"	f
 rightHasFloor	dungeons/stone_cavern.pas	/^function rightHasFloor(): boolean;$/;"	f
@@ -890,6 +890,8 @@ seedLocations	dungeons/architect.pas	/^procedure seedLocations;$/;"	p
 setSeed	backup/main.pas	/^procedure setSeed;$/;"	p
 setSeed	main.pas	/^procedure setSeed;$/;"	p
 setTheScene	screens/scrcharintro.pas	/^procedure setTheScene;$/;"	p
+setVisitedFlag	backup/island.pas	/^procedure setVisitedFlag(xPOS, yPOS: smallint);$/;"	p
+setVisitedFlag	island.pas	/^procedure setVisitedFlag(xPOS, yPOS: smallint);$/;"	p
 setaround	dungeons/backup/stone_cavern.pas	/^  procedure setaround(x, y: smallint; d: smallint);$/;"	p
 setaround	dungeons/cave.pas	/^  procedure setaround(x, y: smallint; d: smallint);$/;"	p
 setaround	dungeons/stone_cavern.pas	/^  procedure setaround(x, y: smallint; d: smallint);$/;"	p

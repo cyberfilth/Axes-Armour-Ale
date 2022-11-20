@@ -75,6 +75,8 @@ function getLocationID(xPOS, yPOS: smallint): smallint;
 function getDungeonType(xPOS, yPOS: smallint): dungeonTerrain;
 (* Return True if the location already exists on disk *)
 function locationExists(xPOS, yPOS: smallint): boolean;
+(* Set a location as VISITED *)
+procedure setVisitedFlag(xPOS, yPOS: smallint);
 
 
 implementation
@@ -347,6 +349,20 @@ begin
         Result := True
       else
         Result := False;
+      exit;
+    end;
+  end;
+end;
+
+procedure setVisitedFlag(xPOS, yPOS: smallint);
+var
+  i: smallint;
+begin
+  for i := 0 to High(locationLookup) do
+  begin
+    if (locationLookup[i].X = xPOS) and (locationLookup[i].Y = yPOS) then
+    begin
+      locationLookup[i].generated := True;
       exit;
     end;
   end;
