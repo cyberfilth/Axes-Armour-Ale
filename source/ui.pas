@@ -512,7 +512,7 @@ end;
 procedure exitMessage;
 begin
   ClrScr;
-  {$IFDEF DEBUG}
+  {$ifopt D+}
   writeln('DEBUG VERSION');
   writeln('Random seed: ' + IntToStr(RandSeed));
   {$EndIf}
