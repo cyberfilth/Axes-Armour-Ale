@@ -188,8 +188,8 @@ begin
     (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '>') and
     (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '<') then
   begin
-    Inc(npcAmount);
-    web.createWeb(npcAmount, entityList[id].posX, entityList[id].posY);
+    entities.npcAmount := High(entityList);
+    web.createWeb(High(entityList) + 1, entityList[id].posX, entityList[id].posY);
   end;
 end;
 

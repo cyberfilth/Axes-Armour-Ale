@@ -26,11 +26,9 @@ const
   caveNPC1: array[1..5] of string =
     ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
   caveNPC2: array[1..7] of string =
-    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
-    'greenFungus', 'hobFungus');
+    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
   caveNPC3: array[1..7] of string =
-    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
-    'greenFungus', 'matango', 'hyenaFungus');
+    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'greenFungus', 'matango', 'hyenaFungus');
   caveUnique1: array[1..2] of string =
     ('largeBat', 'bloodBat');
   caveUnique2: array[1..2] of string =
@@ -42,11 +40,9 @@ const
   stoneCavernNPC1: array[1..5] of string =
     ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
   stoneCavernNPC2: array[1..7] of string =
-    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat',
-    'greenFungus', 'hobFungus');
+    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
   stoneCavernNPC3: array[1..7] of string =
-    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser',
-    'greenFungus', 'matango', 'hyenaFungus');
+    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'greenFungus', 'matango', 'hyenaFungus');
   stoneCavernUnique1: array[1..2] of string =
     ('largeBat', 'bloodBat');
   stoneCavernUnique2: array[1..2] of string =
@@ -102,7 +98,7 @@ begin
   if (unique = False) then
   begin
     case dungeon of
-      tCave:
+      tCave: { ------------------- Cave }
       begin { Level 1}
         if (universe.currentDepth = 1) then
         begin
@@ -120,7 +116,7 @@ begin
           monster := caveNPC3[randSelect];
         end;
       end;
-      tCrypt:
+      tCrypt: { ------------------- Crypt }
       begin
         if (universe.currentDepth = 1) then
         begin
@@ -138,7 +134,7 @@ begin
           monster := cptNPC3[randSelect];
         end;
       end;
-      tDungeon:
+      tDungeon: { ------------------- Dungeon }
       begin
         if (universe.currentDepth = 1) then
         begin
@@ -156,7 +152,7 @@ begin
           monster := dgnNPC3[randSelect];
         end;
       end;
-      tStoneCavern:
+      tStoneCavern: { ------------------- Stone Cavern }
       begin { Level 1}
         if (universe.currentDepth = 1) then
         begin

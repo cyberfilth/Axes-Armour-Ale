@@ -4,7 +4,6 @@ unit entities;
 
 {$mode objfpc}{$H+}
 {$ModeSwitch advancedrecords}
-{$RANGECHECKS OFF}
 
 interface
 

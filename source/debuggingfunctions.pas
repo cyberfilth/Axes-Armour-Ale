@@ -32,7 +32,7 @@ begin
   logAction('');
   logAction('-- showEntitiesItems --');
   (* Highlight entities *)
-  for i := 1 to High(entityList) do
+  for i := 0 to High(entityList) do
   begin
     logAction(IntToStr(i) + ': ' + entityList[i].race + ' is at ' +
       IntToStr(entityList[i].posX) + ', ' + IntToStr(entityList[i].posY));

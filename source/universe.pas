@@ -88,7 +88,7 @@ begin
   entities.npcAmount := NPCnumber;
 
   { First npcAmount-1 number of enemies are scattered on the floor }
-  for i := 1 to (NPCnumber - 1) do
+  for i := 1 to (NPCnumber) do
   begin
     { create an encounter table: Monster type: Dungeon type: floor number }
     { NPC generation will take the Player level into account when creating stats }

@@ -19,7 +19,7 @@ unit combat_resolver;
 interface
 
 uses
-  SysUtils, globalUtils, ui;
+  SysUtils, globalUtils, ui, logging;
 
 var
   (* List of creatures killed *)
@@ -92,7 +92,15 @@ begin
     begin
       (* If the target was a web *)
       if (entities.entityList[npcID].intName = 'stickyWeb') then
-         ui.displayMessage('You break ' + opponent)
+      begin
+         ui.displayMessage('You break ' + opponent);
+         logAction('Killed web ID: ' + IntToStr(npcID));
+         logAction('EntityList name: ' + entityList[npcID].race);
+         logAction('EntityList glyph: ' + entityList[npcID].glyph);
+         entities.killEntity(npcID);
+         logAction('EntityList glyph: ' + entityList[npcID].glyph);
+         logAction('----');
+      end
       else
       (* If the target was an NPC *)
          ui.displayMessage('You kill ' + opponent);

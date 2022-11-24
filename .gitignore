@@ -21,6 +21,8 @@ Axes
 
 # FP IDE local files
 fp.dsk
+source/fp.cfg
+source/fp.ini
 
 # Free Pascal IDE error logs
 *.err
@@ -56,5 +58,3 @@ axesData/
 
 # Notes, scripts and logs
 *.txt
-
-source/fp.ini
