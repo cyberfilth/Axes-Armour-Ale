@@ -182,15 +182,28 @@ end;
 {$I nextto}
 
 procedure spinWeb(id: smallint);
+var
+  i, counter: smallint;
 begin
-  (* Don't spin webs on items or stairs *)
-  if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) and
-    (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '>') and
-    (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '<') then
-  begin
-    entities.npcAmount := High(entityList);
-    web.createWeb(High(entityList) + 1, entityList[id].posX, entityList[id].posY);
-  end;
+  (* Check if there are already lots of webs *)
+  counter := 0;
+  for i := 1 to High(entityList) do
+    begin
+      if (entityList[i].intName = 'stickyWeb') then
+        Inc(counter);
+    end; 
+  (* Only spin webs if there are less than 5 on the level *)
+  if (counter <=5) then
+    begin
+      (* Don't spin webs on items or stairs *)
+      if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) and
+      (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '>') and
+      (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '<') then
+      begin
+        entities.npcAmount := High(entityList);
+        web.createWeb(High(entityList) + 1, entityList[id].posX, entityList[id].posY);
+      end;
+    end;
 end;
 
 end.
