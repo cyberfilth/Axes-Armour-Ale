@@ -88,8 +88,7 @@ begin
     setSeed;
 
   (* Check for previous save file *)
-  if (FileExists(globalUtils.saveDirectory + DirectorySeparator +
-    globalutils.saveFile)) then
+  if (FileExists(globalUtils.saveDirectory + DirectorySeparator + globalutils.saveFile)) then
   begin
     saveExists := True;
     { Initialise video unit and show title screen }
@@ -105,8 +104,6 @@ begin
       ui.setupScreen(0);
     end;
   end;
-  { Start error logging }
-  logging.beginLogging;
   { Initialise keyboard unit }
   keyboardinput.setupKeyboard;
   (* Set a Dwarven clan name *)
@@ -137,7 +134,10 @@ begin
 end;
 
 procedure exitToTitleMenu;
+var
+  x: smallint;
 begin
+  x := 0;
   (* Don't attempt to save game from Title screen *)
   if (gameState <> stTitle) then
   begin
@@ -152,18 +152,12 @@ begin
   gameState := stTitle;
   ClearScreen;
   (* Clear the message array *)
-  ui.messageArray[1] := ' ';
-  ui.messageArray[2] := ' ';
-  ui.messageArray[3] := ' ';
-  ui.messageArray[4] := ' ';
-  ui.messageArray[5] := ' ';
-  ui.messageArray[6] := ' ';
-  ui.messageArray[7] := ' ';
+  for x := 1 to 7 do
+    ui.messageArray[x] := ' ';
   (* prepare changes to the screen *)
   LockScreenUpdate;
   (* Check for previous save file *)
-  if (FileExists(globalUtils.saveDirectory + DirectorySeparator +
-    globalutils.saveFile)) then
+  if (FileExists(globalUtils.saveDirectory + DirectorySeparator + globalutils.saveFile)) then
   begin
     saveExists := True;
     scrtitle.displayTitleScreen(1);
@@ -188,6 +182,10 @@ procedure newGame;
 var
   i: byte;
 begin
+  (* Delete old saved game *)
+  deleteGameData;
+  { Start error logging }
+  logging.beginLogging;
   (* Game state = game running *)
   gameState := stGame;
   globalUtils.womblingFree := 'underground';
@@ -289,6 +287,8 @@ procedure continue;
 var
   i: byte;
 begin
+  { Start error logging }
+  logging.beginLogging;
   (* Initialise items list *)
   items.initialiseItems;
   file_handling.loadGame;

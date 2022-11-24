@@ -154,8 +154,7 @@ begin
   end
 
   { If NPC can see the player }
-  else if (los.inView(entityList[id].posX, entityList[id].posY,
-    entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
+  else if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
   begin
     { If next to the player }
     if (isNextToPlayer(entityList[id].posX, entityList[id].posY) = True) then
@@ -174,8 +173,7 @@ end;
 procedure decisionEscape(id: smallint);
 begin
   { Check if player is in sight }
-  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
-    entityList[0].posY, entityList[id].visionRange) = True) then
+  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
     { If the player is in sight, run away }
     ai_animal.escapePlayer(id, entityList[id].posX, entityList[id].posY)
 

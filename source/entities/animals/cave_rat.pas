@@ -174,8 +174,7 @@ end;
 procedure decisionEscape(id: smallint);
 begin
   { Check if player is in sight }
-  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
-    entityList[0].posY, entityList[id].visionRange) = True) then
+  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
     { If the player is in sight, run away }
     ai_animal.escapePlayer(id, entityList[id].posX, entityList[id].posY)
 

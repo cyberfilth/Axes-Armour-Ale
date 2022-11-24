@@ -1146,6 +1146,5 @@ writeBufferedMessages	ui.pas	/^procedure writeBufferedMessages;$/;"	p
 writeNewDungeonLevel	backup/file_handling.pas	/^procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte; dtype: dungeonTerrain);$/;"	p
 writeNewDungeonLevel	backup/file_handling.pas	/^procedure writeNewDungeonLevel(title: string;$/;"	p
 writeNewDungeonLevel	file_handling.pas	/^procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte; dtype: dungeonTerrain);$/;"	p
-writeNewDungeonLevel	file_handling.pas	/^procedure writeNewDungeonLevel(title: string;$/;"	p
 writeScroll	backup/plot_gen.pas	/^function writeScroll(attr: string): string;$/;"	f
 writeScroll	plot_gen.pas	/^function writeScroll(attr: string): string;$/;"	f

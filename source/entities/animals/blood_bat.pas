@@ -321,8 +321,7 @@ procedure combat(id: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entityList[id].attack) -
-    entityList[0].defence;
+  damageAmount := globalutils.randomRange(1, entityList[id].attack) - entityList[0].defence;
   if (damageAmount > 0) then
   begin
     entityList[0].currentHP := (entityList[0].currentHP - damageAmount);
@@ -336,8 +335,7 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The bat slightly wounds you')
       else
-        ui.displayMessage('The bat bites you, inflicting ' +
-          IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The bat bites you, inflicting ' + IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
@@ -353,8 +351,7 @@ procedure infighting(npcID, enemyID: smallint);
 var
   damageAmount: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entityList[npcID].attack) -
-    entityList[enemyID].defence;
+  damageAmount := globalutils.randomRange(1, entityList[npcID].attack) - entityList[enemyID].defence;
   if (damageAmount > 0) then
   begin
     entityList[enemyID].currentHP := (entityList[enemyID].currentHP - damageAmount);

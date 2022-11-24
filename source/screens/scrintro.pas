@@ -54,10 +54,8 @@ begin
   screenBlank;
   TextOut(ui.centreX(header), 2, 'cyan', header);
   { Flavour text }
-  TextOut(3, 6, 'cyan',
-    'The smugglers roughly grab you and throw you down the crudely carved');
-  TextOut(3, 7, 'cyan',
-    'stairs, into the cavern. You gaze around, struggling to penetrate the');
+  TextOut(3, 6, 'cyan', 'The smugglers roughly grab you and throw you down the crudely carved');
+  TextOut(3, 7, 'cyan', 'stairs, into the cavern. You gaze around, struggling to penetrate the');
   TextOut(3, 8, 'cyan', 'darkness by your feeble torchlight.');
   TextOut(3, 9, 'cyan', '"Somewhere down there is the map, stolen by those thieving imps.');
   TextOut(4, 10, 'cyan', 'Find it and bring it back, you little ' + insult + '"');

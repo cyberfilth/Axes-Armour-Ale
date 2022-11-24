@@ -15,8 +15,7 @@ procedure saveOverworldMap;
 (* Read overworld map from disk *)
 procedure loadOverworldMap;
 (* Write a newly generate level of a dungeon to disk *)
-procedure writeNewDungeonLevel(title: string;
-  idNumber, lvlNum, totalDepth, totalRooms: byte; dtype: dungeonTerrain);
+procedure writeNewDungeonLevel(title: string; idNumber, lvlNum, totalDepth, totalRooms: byte; dtype: dungeonTerrain);
 (* Write explored dungeon level to disk *)
 procedure saveDungeonLevel;
 (* Read dungeon level from disk *)

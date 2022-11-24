@@ -7,7 +7,7 @@ unit embalming_spider;
 interface
 
 uses
-  SysUtils, ai_animal, combat_resolver, items, web, ui;
+  SysUtils, ai_animal, combat_resolver, items, web, ui, logging;
 
 (* Create an Embalming Spider *)
 procedure createEmbalmSpider(uniqueid, npcx, npcy: smallint);
@@ -189,21 +189,35 @@ begin
   counter := 0;
   for i := 1 to High(entityList) do
     begin
-      if (entityList[i].intName = 'stickyWeb') then
+      if (entityList[i].intName = 'stickyWeb') and (entityList[i].isDead = False) then
         Inc(counter);
     end; 
   (* Only spin webs if there are less than 5 on the level *)
   if (counter <=5) then
-    begin
-      (* Don't spin webs on items or stairs *)
-      if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) and
-      (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '>') and
-      (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '<') then
+    try
       begin
-        entities.npcAmount := High(entityList);
-        web.createWeb(High(entityList) + 1, entityList[id].posX, entityList[id].posY);
+        (* Don't spin webs on items or stairs *)
+        if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) and
+        (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '>') and
+        (map.maparea[entityList[id].posY, entityList[id].posX].Glyph <> '<') then
+          begin
+            entities.npcAmount := High(entityList);
+            web.createWeb(High(entityList) + 1, entityList[id].posX, entityList[id].posY);
+          end;
       end;
-    end;
+    except
+      on E: ERangeError do
+        begin
+          logAction('embalming_spider.spinWeb');
+          logAction('Error: valid range exceeded');
+          logAction(E.Message);
+        end;
+      on E: Exception do { generic handler }
+        begin
+          logAction('embalming_spider.spinWeb');
+          logAction('Caught ' + E.ClassName + ': ' + E.Message);
+        end;
+      end;
 end;
 
 end.

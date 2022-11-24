@@ -142,8 +142,7 @@ end;
 procedure decisionHostile(id: smallint);
 begin
   {------------------------------- If NPC can see the player }
-  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
-    entityList[0].posY, entityList[id].visionRange) = True) then
+  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
   begin
     entityList[id].moveCount := 5;
     {------------------------------- If next to the player }
@@ -220,12 +219,10 @@ procedure combat(id: smallint);
 var
   damageAmount, chance: smallint;
 begin
-  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) -
-    entities.entityList[0].defence;
+  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) - entities.entityList[0].defence;
   if (damageAmount > 0) then
   begin
-    entities.entityList[0].currentHP :=
-      (entities.entityList[0].currentHP - damageAmount);
+    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin
       killer := 'a ' + entityList[id].race;
@@ -236,8 +233,7 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The Crypt Wolf slightly wounds you')
       else
-        ui.displayMessage('The Crypt Wolf claws you, dealing ' +
-          IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The Crypt Wolf claws you, dealing ' + IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;
@@ -274,10 +270,8 @@ begin
       exit;
   end;
   (* Check if the next step on the path is valid *)
-  if (map.canMove(entityList[id].smellPath[i + 1].X,
-    entityList[id].smellPath[i + 1].Y) = True) then
-    entities.moveNPC(id, entityList[id].smellPath[i + 1].X,
-      entityList[id].smellPath[i + 1].Y)
+  if (map.canMove(entityList[id].smellPath[i + 1].X, entityList[id].smellPath[i + 1].Y) = True) then
+      entities.moveNPC(id, entityList[id].smellPath[i + 1].X, entityList[id].smellPath[i + 1].Y)
   else
     (* If the path is blocked, generate a new one *)
   begin
@@ -286,10 +280,8 @@ begin
     (* Set flags *)
     entityList[id].hasPath := True;
     entityList[id].destinationReached := False;
-    if (map.canMove(entityList[id].smellPath[2].X, entityList[id].smellPath[2].Y) =
-      True) then
-      entities.moveNPC(id, entityList[id].smellPath[2].X,
-        entityList[id].smellPath[2].Y);
+    if (map.canMove(entityList[id].smellPath[2].X, entityList[id].smellPath[2].Y) = True) then
+      entities.moveNPC(id, entityList[id].smellPath[2].X, entityList[id].smellPath[2].Y);
   end;
 end;
 
