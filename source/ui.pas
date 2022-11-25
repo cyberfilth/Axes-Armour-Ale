@@ -279,8 +279,7 @@ end;
 procedure updateLevel;
 begin
   (* Paint over previous stats *)
-  TextOut(scrGame.minX + 9, 4, 'black', Chr(219) + Chr(219) + Chr(219) +
-    Chr(219) + Chr(219) + Chr(219) + Chr(219));
+  TextOut(scrGame.minX + 9, 4, 'black', Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219));
   (* Write out Level number *)
   TextOut(scrGame.minX + 9, 4, 'cyan', IntToStr(player_stats.playerLevel));
 end;
@@ -288,8 +287,7 @@ end;
 procedure updateXP;
 begin
   (* Paint over previous stats *)
-  TextOut(scrGame.minX + 14, 6, 'black', Chr(219) + Chr(219) + Chr(219) +
-    Chr(219) + Chr(219) + Chr(219) + Chr(219));
+  TextOut(scrGame.minX + 14, 6, 'black', Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219));
   (* Write out XP amount *)
   TextOut(scrGame.minX + 14, 6, 'cyan', IntToStr(entities.entityList[0].xpReward));
 end;
@@ -306,12 +304,10 @@ begin
     Exit;
   end;
   (* Paint over previous stats *)
-  TextOut(scrGame.minX + 10, 7, 'black', Chr(219) + Chr(219) + Chr(219) +
-    Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) +
+  TextOut(scrGame.minX + 10, 7, 'black', Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) +
     Chr(219) + Chr(219) + Chr(219));
   (* Write stats *)
-  TextOut(scrGame.minX + 10, 7, 'cyan', IntToStr(entities.entityList[0].currentHP) +
-    '/' + IntToStr(entities.entityList[0].maxHP));
+  TextOut(scrGame.minX + 10, 7, 'cyan', IntToStr(entities.entityList[0].currentHP) + '/' + IntToStr(entities.entityList[0].maxHP));
   (* Paint over health bar *)
   TextOut(scrGame.minX + 2, 8, 'black', Chr(223) + Chr(223) + Chr(223) +
     Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) +
@@ -319,8 +315,7 @@ begin
   (* Length of health bar *)
   bars := 0;
   (* Calculate percentage of total health *)
-  healthPercentage :=
-    (entities.entityList[0].currentHP * 100) div entities.entityList[0].maxHP;
+  healthPercentage := (entities.entityList[0].currentHP * 100) div entities.entityList[0].maxHP;
   (* Calculate the length of the health bar *)
   if (healthPercentage <= 6) then
     bars := 1
@@ -368,8 +363,7 @@ begin
     Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) + Chr(219) +
     Chr(219) + Chr(219) + Chr(219));
   (* Write stats *)
-  TextOut(scrGame.minX + 10, 9, 'cyan', IntToStr(player_stats.currentMagick) +
-    '/' + IntToStr(player_stats.maxMagick));
+  TextOut(scrGame.minX + 10, 9, 'cyan', IntToStr(player_stats.currentMagick) + '/' + IntToStr(player_stats.maxMagick));
   (* Paint over magick bar *)
   TextOut(scrGame.minX + 2, 10, 'black', Chr(223) + Chr(223) + Chr(223) +
     Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) +

@@ -200,8 +200,7 @@ end;
 procedure decisionEscape(id: smallint);
 begin
   { Check if player is in sight }
-  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
-    entityList[0].posY, entityList[id].visionRange) = True) then
+  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
     { If the player is in sight, run away }
     escapePlayer(id, entityList[id].posX, entityList[id].posY)
 
@@ -363,21 +362,15 @@ procedure combat(id: smallint);
 var
   damageAmount, chance, insultChance: smallint;
   humanInsults: array[1..5] of
-  string = ('Ya lanky git!', 'Human scum!', 'I''ll ''ave you Longshanks!',
-    'Oi, short-timer!', 'C''mon then!!!');
-  ElfInsults: array[1..5] of string = ('Yer pointy eared ponce!',
-    'Bloody elf!', 'C''mon then Sir Prancelot!', 'Tree hugger!', 'Leaf licker!');
-  DwarfInsults: array[1..5] of
-  string = ('Ya smelly dwarf!', 'Short-arse!', 'Go back to yer mine!',
-    'Bloody dirt-digger!', 'Ha! Half-pint!');
+  string = ('Ya lanky git!', 'Human scum!', 'I''ll ''ave you Longshanks!', 'Oi, short-timer!', 'C''mon then!!!');
+  ElfInsults: array[1..5] of string = ('Yer pointy eared ponce!', 'Bloody elf!', 'C''mon then Sir Prancelot!', 'Tree hugger!', 'Leaf licker!');
+  DwarfInsults: array[1..5] of string = ('Ya smelly dwarf!', 'Short-arse!', 'Go back to yer mine!', 'Bloody dirt-digger!', 'Ha! Half-pint!');
 begin
-  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) -
-    entities.entityList[0].defence;
+  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack) - entities.entityList[0].defence;
   insultChance := randomRange(1, 7);
   if (damageAmount > 0) then
   begin
-    entities.entityList[0].currentHP :=
-      (entities.entityList[0].currentHP - damageAmount);
+    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin
       killer := 'a ' + entityList[id].race;
@@ -389,8 +382,7 @@ begin
         ui.displayMessage('The Bogle slightly wounds you')
       else
       begin
-        ui.displayMessage('The Bogle claws you, dealing ' +
-          IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The Bogle claws you, dealing ' + IntToStr(damageAmount) + ' damage');
         if (insultChance < 6) then
         begin
           if (player_stats.playerRace = 'Human') then
@@ -435,32 +427,22 @@ begin
     end;
     'e':
     begin
-      if (map.canMove((entities.entityList[id].posX + 1),
-        entities.entityList[id].posY) and
-        (map.isOccupied((entities.entityList[id].posX + 1),
-        entities.entityList[id].posY) = False)) then
-        entities.moveNPC(id, (entities.entityList[id].posX + 1),
-          entities.entityList[id].posY);
+      if (map.canMove((entities.entityList[id].posX + 1), entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX + 1), entities.entityList[id].posY) = False)) then
+        entities.moveNPC(id, (entities.entityList[id].posX + 1), entities.entityList[id].posY);
     end;
     's':
     begin
-      if (map.canMove(entities.entityList[id].posX,
-        (entities.entityList[id].posY + 1)) and
-        (map.isOccupied(entities.entityList[id].posX,
-        (entities.entityList[id].posY + 1)) = False)) then
-        entities.moveNPC(id, entities.entityList[id].posX,
-          (entities.entityList[id].posY + 1));
+      if (map.canMove(entities.entityList[id].posX, (entities.entityList[id].posY + 1)) and
+        (map.isOccupied(entities.entityList[id].posX, (entities.entityList[id].posY + 1)) = False)) then
+        entities.moveNPC(id, entities.entityList[id].posX, (entities.entityList[id].posY + 1));
     end;
     'w':
     begin
-      if (map.canMove((entities.entityList[id].posX - 1),
-        entities.entityList[id].posY) and
-        (map.isOccupied((entities.entityList[id].posX - 1),
-        entities.entityList[id].posY) = False)) then
+      if (map.canMove((entities.entityList[id].posX - 1), entities.entityList[id].posY) and
+        (map.isOccupied((entities.entityList[id].posX - 1), entities.entityList[id].posY) = False)) then
 
-
-        entities.moveNPC(id, (entities.entityList[id].posX - 1),
-          entities.entityList[id].posY);
+        entities.moveNPC(id, (entities.entityList[id].posX - 1), entities.entityList[id].posY);
     end
     else
       entities.moveNPC(id, entities.entityList[id].posX, entities.entityList[id].posY);
@@ -471,15 +453,12 @@ procedure fireMissile(id: smallint);
 var
   damageAmount: smallint;
 begin
-  los.firingLine('rock', id, entityList[id].posX, entityList[id].posY,
-    entityList[0].posX, entityList[0].posY);
+  los.firingLine('rock', id, entityList[id].posX, entityList[id].posY, entityList[0].posX, entityList[0].posY);
   (* Check if rock has hit the player *)
-  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack + 3) -
-    entities.entityList[0].defence;
+  damageAmount := globalutils.randomRange(1, entities.entityList[id].attack + 3) - entities.entityList[0].defence;
   if (damageAmount > 0) then
   begin
-    entities.entityList[0].currentHP :=
-      (entities.entityList[0].currentHP - damageAmount);
+    entities.entityList[0].currentHP := (entities.entityList[0].currentHP - damageAmount);
     if (entities.entityList[0].currentHP < 1) then
     begin
       killer := 'a ' + entityList[id].race;
@@ -489,8 +468,7 @@ begin
       if (damageAmount = 1) then
         ui.displayMessage('The rock slightly wounds you')
       else
-        ui.displayMessage('The rock hits you, dealing ' +
-          IntToStr(damageAmount) + ' damage');
+        ui.displayMessage('The rock hits you, dealing ' + IntToStr(damageAmount) + ' damage');
       (* Update health display to show damage *)
       ui.updateHealth;
     end;

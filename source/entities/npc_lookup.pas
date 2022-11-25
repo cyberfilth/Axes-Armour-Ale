@@ -173,10 +173,10 @@ begin
     end;
   end
   else
-    (* Select a unique NPC *)
+                    (* Select a unique NPC *)
   begin
     case dungeon of
-      tCave:
+      tCave: { ------------------- Cave }
       begin { Level 1}
         if (universe.currentDepth = 1) then
         begin
@@ -194,7 +194,7 @@ begin
           monster := caveUnique3[randSelect];
         end;
       end;
-      tCrypt:
+      tCrypt: { ------------------- Crypt }
       begin
         if (universe.currentDepth = 1) then
         begin
@@ -212,7 +212,7 @@ begin
           monster := cptUnique3[randSelect];
         end;
       end;
-      tDungeon:
+      tDungeon: { ------------------- Dungeon }
       begin
         if (universe.currentDepth = 1) then
         begin
@@ -230,7 +230,7 @@ begin
           monster := dgnUnique3[randSelect];
         end;
       end;
-      tStoneCavern:
+      tStoneCavern: { ------------------- Stone Cavern }
       begin
         if (universe.currentDepth = 1) then
         begin
