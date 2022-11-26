@@ -69,21 +69,17 @@ begin
   (* Create a farewell message *)
   if (toteKills = 0) then
   begin
-    epitaph := entityList[0].race + ' the ' + entityList[0].description +
-      ' failed to kill anything';
+    epitaph := entityList[0].race + ' the ' + entityList[0].description + ' failed to kill anything';
     deathMessage := 'With no deeds to forget, their name will pass out of memory...';
   end
   else if (toteKills = 1) then
   begin
-    epitaph := entityList[0].race + ' the ' + entityList[0].description +
-      ' has one kill to their name';
-    deathMessage :=
-      'They made no impact on the world, their name will never be remembered...';
+    epitaph := entityList[0].race + ' the ' + entityList[0].description + ' has one kill to their name';
+    deathMessage := 'They made no impact on the world, their name will never be remembered...';
   end
   else if (toteKills = 2) then
   begin
-    epitaph := entityList[0].race + ' the ' + entityList[0].description +
-      ' managed to end two lives';
+    epitaph := entityList[0].race + ' the ' + entityList[0].description + ' managed to end two lives';
     deathMessage := 'They will soon be forgotten...';
   end
   else
@@ -167,30 +163,28 @@ begin
         23: killType := 'Zombie';
         24: killType := 'Goblin Necromancer';
         25: killType := 'Zombie rotter';
+        26: killType := 'Rabid dog';
+        27: killType := 'Cave Bear';
         else
           killType := 'unknown';
       end;
       if (deathList[i] > 1) and (RightStr(killType, 6) = 'fungus') then
       begin
-        killType := StringReplace(killtype, 'fungus', 'fungi',
-          [rfReplaceAll, rfIgnoreCase]);
+        killType := StringReplace(killtype, 'fungus', 'fungi', [rfReplaceAll, rfIgnoreCase]);
         TextOut(lMargin, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
       end
       else if (deathList[i] > 1) and (RightStr(killType, 6) = 'person') then
       begin
-        killType := StringReplace(killtype, 'person', 'people',
-          [rfReplaceAll, rfIgnoreCase]);
+        killType := StringReplace(killtype, 'person', 'people', [rfReplaceAll, rfIgnoreCase]);
         TextOut(lMargin, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
       end
       else if (deathList[i] > 1) and (RightStr(killType, 4) = 'wolf') then
       begin
-        killType := StringReplace(killtype, 'wolf', 'wolves',
-          [rfReplaceAll, rfIgnoreCase]);
+        killType := StringReplace(killtype, 'wolf', 'wolves', [rfReplaceAll, rfIgnoreCase]);
         TextOut(5, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
       end
       else if (deathList[i] > 1) and (RightStr(killType, 1) <> 's') then
-        TextOut(lMargin, lineNo, 'cyan', IntToStr(deathList[i]) +
-          'x ' + killType + 's')
+        TextOut(lMargin, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType + 's')
       else
         TextOut(lMargin, lineNo, 'cyan', IntToStr(deathList[i]) + 'x ' + killType);
       (* Start a new column if several entries *)

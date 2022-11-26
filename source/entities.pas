@@ -15,7 +15,7 @@ uses
   redcap_fungus, mushroom_person, hyena_fungus, small_hornet, small_corpse_spider,
   gnome_warrior, gnome_assassin, web, crypt_wolf, blue_fungus, embalming_spider,
   gnome_cultist, bogle_drunk, ghoul_lvl1, skeleton_lvl1, zombie_weak, goblin_necromancer,
-  corpse_zombie;
+  corpse_zombie, rabid_dog, cave_bear;
 
 type { NPC attitudes }
   Tattitudes = (stateNeutral, stateHostile, stateEscape);
@@ -38,8 +38,7 @@ type
     (* Description of creature *)
     description: string;
     (* health and position on game map *)
-    currentHP, maxHP, attack, defence, posX, posY, targetX, targetY,
-    xpReward, visionRange: smallint;
+    currentHP, maxHP, attack, defence, posX, posY, targetX, targetY, xpReward, visionRange: smallint;
     (* Weapon stats *)
     weaponDice, weaponAdds: smallint;
     (* Character used to represent NPC on game map *)
@@ -172,7 +171,6 @@ begin
 end;
 
 function getCreatureHP(x, y: smallint): smallint;
-
 var
   i: smallint;
 begin
@@ -185,7 +183,6 @@ begin
 end;
 
 function getCreatureMaxHP(x, y: smallint): smallint;
-
 var
   i: smallint;
 begin
@@ -198,7 +195,6 @@ begin
 end;
 
 function getCreatureID(x, y: smallint): smallint;
-
 var
   i: smallint;
 begin
@@ -257,8 +253,7 @@ end;
 
 procedure redrawMapDisplay(id: byte);
 begin
-(* Redrawing NPC directly to map display as looping through
-     entity list in the camera unit wasn't working *)
+(* Redrawing NPC directly to map display as looping through entity list in the camera unit wasn't working *)
   if (entityList[id].isDead = False) and (entityList[id].inView = True) then
   begin
     map.mapDisplay[entityList[id].posY, entityList[id].posX].GlyphColour := entityList[id].glyphColour;
@@ -274,7 +269,6 @@ begin
 end;
 
 function countLivingEntities: byte;
-
 var
   i, Count: byte;
 begin
@@ -349,6 +343,8 @@ begin
     'zombieWeak': zombie_weak.takeTurn(i);
     'GobNecro': goblin_necromancer.takeTurn(i);
     'corpseZombie': corpse_zombie.takeTurn(i);
+    'rabidDog': rabid_dog.takeTurn(i);
+    'caveBear': cave_bear.takeTurn(i);
   end;
   (* Occupy their current tile *)
   occupyUpdate;
@@ -383,6 +379,8 @@ begin
     'zombieWeak': zombie_weak.death(i);
     'GobNecro': goblin_necromancer.death(i);
     'corpseZombie': corpse_zombie.death(i);
+    'rabidDog': rabid_dog.death;
+    'caveBear': cave_bear.death;
   end;
 end;
 

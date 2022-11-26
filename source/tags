@@ -97,8 +97,10 @@ chasePlayer	entities/animals/backup/hyena_fungus.pas	/^procedure chasePlayer(id,
 chasePlayer	entities/animals/backup/large_blood_bat.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/animals/backup/small_hyena.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/animals/blood_bat.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
+chasePlayer	entities/animals/cave_bear.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/animals/hyena_fungus.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/animals/large_blood_bat.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
+chasePlayer	entities/animals/rabid_dog.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/animals/small_hyena.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/animals/backup/crypt_wolf.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/animals/crypt_wolf.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
@@ -145,9 +147,11 @@ combat	entities/animals/backup/large_blood_bat.pas	/^procedure combat(id: smalli
 combat	entities/animals/backup/small_hornet.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/animals/backup/small_hyena.pas	/^procedure combat(npcID, enemyID: smallint);$/;"	p
 combat	entities/animals/blood_bat.pas	/^procedure combat(id: smallint);$/;"	p
+combat	entities/animals/cave_bear.pas	/^procedure combat(npcID, enemyID: smallint);$/;"	p
 combat	entities/animals/crypt_wolf.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/animals/hyena_fungus.pas	/^procedure combat(npcID, enemyID: smallint);$/;"	p
 combat	entities/animals/large_blood_bat.pas	/^procedure combat(id: smallint);$/;"	p
+combat	entities/animals/rabid_dog.pas	/^procedure combat(npcID, enemyID: smallint);$/;"	p
 combat	entities/animals/small_hyena.pas	/^procedure combat(npcID, enemyID: smallint);$/;"	p
 combat	entities/bogles/backup/bogle_drunk.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/bogles/bogle_drunk.pas	/^procedure combat(id: smallint);$/;"	p
@@ -206,6 +210,7 @@ createBoneArmour	items/armour/backup/lesser_bone_armour.pas	/^procedure createBo
 createBoneArmour	items/armour/lesser_bone_armour.pas	/^procedure createBoneArmour(itmx, itmy: smallint);$/;"	p
 createBoneDagger	items/weapons/backup/bone_dagger.pas	/^procedure createBoneDagger(itmx, itmy: smallint);$/;"	p
 createBoneDagger	items/weapons/bone_dagger.pas	/^procedure createBoneDagger(itmx, itmy: smallint);$/;"	p
+createCaveBear	entities/animals/cave_bear.pas	/^procedure createCaveBear(uniqueid, npcx, npcy: smallint);$/;"	p
 createCaveRat	entities/animals/cave_rat.pas	/^procedure createCaveRat(uniqueid, npcx, npcy: smallint);$/;"	p
 createClothArmour	items/armour/backup/cloth_armour1.pas	/^procedure createClothArmour(itmx, itmy: smallint);$/;"	p
 createClothArmour	items/armour/cloth_armour1.pas	/^procedure createClothArmour(itmx, itmy: smallint);$/;"	p
@@ -262,6 +267,7 @@ createPixieJarDim	items/pixie_jar_dim.pas	/^procedure createPixieJarDim(itmx, it
 createPlayer	player/player.pas	/^procedure createPlayer;$/;"	p
 createPointyStick	items/weapons/backup/pointy_stick.pas	/^procedure createPointyStick(itmx, itmy: smallint);$/;"	p
 createPointyStick	items/weapons/pointy_stick.pas	/^procedure createPointyStick(itmx, itmy: smallint);$/;"	p
+createRabidDog	entities/animals/rabid_dog.pas	/^procedure createRabidDog(uniqueid, npcx, npcy: smallint);$/;"	p
 createRedcap	entities/hobs/backup/redcap_lesser.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
 createRedcap	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
 createRedcap	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -304,11 +310,13 @@ createZombie	entities/undead/zombie_weak.pas	/^procedure createZombie(uniqueid, 
 cycleTargets	screens/scrthrow.pas	/^procedure cycleTargets(selection: smallint);$/;"	p
 death	entities/animals/backup/crypt_wolf.pas	/^procedure death;$/;"	p
 death	entities/animals/blood_bat.pas	/^procedure death;$/;"	p
+death	entities/animals/cave_bear.pas	/^procedure death;$/;"	p
 death	entities/animals/cave_rat.pas	/^procedure death;$/;"	p
 death	entities/animals/crypt_wolf.pas	/^procedure death;$/;"	p
 death	entities/animals/giant_cave_rat.pas	/^procedure death;$/;"	p
 death	entities/animals/hyena_fungus.pas	/^procedure death;$/;"	p
 death	entities/animals/large_blood_bat.pas	/^procedure death;$/;"	p
+death	entities/animals/rabid_dog.pas	/^procedure death;$/;"	p
 death	entities/animals/small_hyena.pas	/^procedure death;$/;"	p
 death	entities/bogles/backup/bogle_drunk.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/bogles/bogle_drunk.pas	/^procedure death(id: smallint);$/;"	p
@@ -372,11 +380,13 @@ decisionHostile	entities/animals/backup/hyena_fungus.pas	/^procedure decisionHos
 decisionHostile	entities/animals/backup/large_blood_bat.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/backup/small_hyena.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/blood_bat.pas	/^procedure decisionHostile(id: smallint);$/;"	p
+decisionHostile	entities/animals/cave_bear.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/cave_rat.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/crypt_wolf.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/giant_cave_rat.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/hyena_fungus.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/large_blood_bat.pas	/^procedure decisionHostile(id: smallint);$/;"	p
+decisionHostile	entities/animals/rabid_dog.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/small_hyena.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/bogles/backup/bogle_drunk.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/bogles/bogle_drunk.pas	/^procedure decisionHostile(id: smallint);$/;"	p
@@ -412,11 +422,13 @@ decisionNeutral	entities/animals/backup/hyena_fungus.pas	/^procedure decisionNeu
 decisionNeutral	entities/animals/backup/large_blood_bat.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/backup/small_hyena.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/blood_bat.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
+decisionNeutral	entities/animals/cave_bear.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/cave_rat.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/crypt_wolf.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/giant_cave_rat.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/hyena_fungus.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/large_blood_bat.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
+decisionNeutral	entities/animals/rabid_dog.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/small_hyena.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/bogles/backup/bogle_drunk.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/bogles/bogle_drunk.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
@@ -534,8 +546,10 @@ escapePlayer	entities/animals/backup/hyena_fungus.pas	/^procedure escapePlayer(i
 escapePlayer	entities/animals/backup/large_blood_bat.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/animals/backup/small_hyena.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/animals/blood_bat.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
+escapePlayer	entities/animals/cave_bear.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/animals/hyena_fungus.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/animals/large_blood_bat.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
+escapePlayer	entities/animals/rabid_dog.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/animals/small_hyena.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/bogles/backup/bogle_drunk.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/bogles/bogle_drunk.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
@@ -717,11 +731,13 @@ isNextToPlayer	entities/animals/backup/large_blood_bat.pas	/^function isNextToPl
 isNextToPlayer	entities/animals/backup/small_hornet.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/backup/small_hyena.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/blood_bat.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
+isNextToPlayer	entities/animals/cave_bear.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/cave_rat.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/crypt_wolf.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/giant_cave_rat.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/hyena_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/large_blood_bat.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
+isNextToPlayer	entities/animals/rabid_dog.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/small_hyena.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/bogles/backup/bogle_drunk.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/bogles/bogle_drunk.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
@@ -934,11 +950,13 @@ takeTurn	entities/animals/backup/large_blood_bat.pas	/^procedure takeTurn(id: sm
 takeTurn	entities/animals/backup/small_hornet.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/backup/small_hyena.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p
+takeTurn	entities/animals/cave_bear.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/cave_rat.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/crypt_wolf.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/giant_cave_rat.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/hyena_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/large_blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p
+takeTurn	entities/animals/rabid_dog.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/small_hyena.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bogles/backup/bogle_drunk.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bogles/bogle_drunk.pas	/^procedure takeTurn(id: smallint);$/;"	p
@@ -1104,9 +1122,11 @@ wander	entities/animals/backup/large_blood_bat.pas	/^procedure wander(id, spx, s
 wander	entities/animals/backup/small_hornet.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/backup/small_hyena.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/blood_bat.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
+wander	entities/animals/cave_bear.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/crypt_wolf.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/hyena_fungus.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/large_blood_bat.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
+wander	entities/animals/rabid_dog.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/small_hyena.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/bogles/backup/bogle_drunk.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/bogles/bogle_drunk.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p

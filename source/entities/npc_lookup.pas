@@ -13,7 +13,7 @@ uses
   redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
   hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
   crypt_wolf, blue_fungus, embalming_spider, gnome_cultist, bogle_drunk, ghoul_lvl1,
-  skeleton_lvl1, zombie_weak, goblin_necromancer, corpse_zombie;
+  skeleton_lvl1, zombie_weak, goblin_necromancer, corpse_zombie, rabid_dog, cave_bear;
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
@@ -38,13 +38,13 @@ const
 
   (* Array of creatures found in stone cavern, ordered by cave level *)
   stoneCavernNPC1: array[1..5] of string =
-    ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
+    ('caveRat', 'rabidDog', 'caveRat', 'bloodBat', 'greenFungus');
   stoneCavernNPC2: array[1..7] of string =
-    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
+    ('rabidDog', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
   stoneCavernNPC3: array[1..7] of string =
     ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'greenFungus', 'matango', 'hyenaFungus');
   stoneCavernUnique1: array[1..2] of string =
-    ('largeBat', 'bloodBat');
+    ('caveBear', 'caveBear');
   stoneCavernUnique2: array[1..2] of string =
     ('redcapLsrLbr', 'largeBat');
   stoneCavernUnique3: array[1..2] of string =
@@ -279,6 +279,8 @@ begin
     'zombieWeak': zombie_weak.createZombie(i, c, r);
     'GobNecro': goblin_necromancer.createNecromancer(i, c, r);
     'corpseZombie': corpse_zombie.createZombie(i, c, r);
+    'rabidDog': rabid_dog.createRabidDog(i, c, r);
+    'caveBear': cave_bear.createCaveBear(i, c, r);
   end;
 end;
 

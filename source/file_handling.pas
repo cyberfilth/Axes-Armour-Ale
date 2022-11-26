@@ -171,19 +171,15 @@ begin
     begin
       for c := 1 to overworld.MAXC do
       begin
-        island.overworldMap[r][c].id :=
-          StrToInt(UTF8Encode(RootNode.Attributes.Item[0].NodeValue));
+        island.overworldMap[r][c].id := StrToInt(UTF8Encode(RootNode.Attributes.Item[0].NodeValue));
         Blocks := RootNode.FirstChild;
         island.overworldMap[r][c].Blocks := StrToBool(UTF8Encode(Blocks.TextContent));
         Occupied := Blocks.NextSibling;
-        island.overworldMap[r][c].Occupied :=
-          StrToBool(UTF8Encode(Occupied.TextContent));
+        island.overworldMap[r][c].Occupied := StrToBool(UTF8Encode(Occupied.TextContent));
         Discovered := Occupied.NextSibling;
-        island.overworldMap[r][c].Discovered :=
-          StrToBool(UTF8Encode(Discovered.TextContent));
+        island.overworldMap[r][c].Discovered := StrToBool(UTF8Encode(Discovered.TextContent));
         TerrainType := Discovered.NextSibling;
-        island.overworldMap[r][c].TerrainType :=
-          overworldTerrain(GetEnumValue(Typeinfo(overworldTerrain),
+        island.overworldMap[r][c].TerrainType := overworldTerrain(GetEnumValue(Typeinfo(overworldTerrain),
           UTF8Encode(TerrainType.TextContent)));
         Glyph := TerrainType.NextSibling;
         if (UTF8Encode(Glyph.TextContent[1]) = 'A') then
@@ -450,8 +446,7 @@ var
 
 begin
   id_int := 0;
-  dfileName := (globalUtils.saveDirectory + PathDelim + 'd_' +
-    IntToStr(uniqueID) + '_f' + IntToStr(currentDepth) + '.dat');
+  dfileName := (globalUtils.saveDirectory + PathDelim + 'd_' + IntToStr(uniqueID) + '_f' + IntToStr(currentDepth) + '.dat');
   try
     { Create a document }
     Doc := TXMLDocument.Create;
@@ -619,14 +614,12 @@ end;
 procedure loadDungeonLevel(dungeonID: smallint; lvl: byte);
 var
   dfileName: shortstring;
-  RootNode, Tile, ItemsNode, ParentNode, NPCnode, NextNode, Blocks,
-  Visible, Occupied, Discovered, GlyphNode: TDOMNode;
+  RootNode, Tile, ItemsNode, ParentNode, NPCnode, NextNode, Blocks, Visible, Occupied, Discovered, GlyphNode: TDOMNode;
   Doc: TXMLDocument;
   r, c, itemAmount, i, coords: integer;
   levelVisited: boolean;
 begin
-  dfileName := globalUtils.saveDirectory + PathDelim + 'd_' +
-    IntToStr(dungeonID) + '_f' + IntToStr(lvl) + '.dat';
+  dfileName := globalUtils.saveDirectory + PathDelim + 'd_' + IntToStr(dungeonID) + '_f' + IntToStr(lvl) + '.dat';
   try
     (* Read in dat file from disk *)
     ReadXMLFile(Doc, dfileName);
@@ -637,17 +630,14 @@ begin
     (* Has this level been explored already *)
     levelVisited := StrToBool(UTF8Encode(RootNode.FindNode('levelVisited').TextContent));
     (* Number of items on current level *)
-    itemAmount := StrToInt(UTF8Encode(RootNode.FindNode(
-      'itemsOnThisFloor').TextContent));
+    itemAmount := StrToInt(UTF8Encode(RootNode.FindNode( 'itemsOnThisFloor').TextContent));
     (* Number of entities on current level *)
     entities.npcAmount := StrToInt(
       UTF8Encode(RootNode.FindNode('entitiesOnThisFloor').TextContent));
     (* Total depth of current dungeon *)
-    universe.totalDepth := StrToInt(
-      UTF8Encode(RootNode.FindNode('totalDepth').TextContent));
+    universe.totalDepth := StrToInt( UTF8Encode(RootNode.FindNode('totalDepth').TextContent));
     (* Number of rooms in current level *)
-    universe.totalRooms := StrToInt(
-      UTF8Encode(RootNode.FindNode('totalRooms').TextContent));
+    universe.totalRooms := StrToInt( UTF8Encode(RootNode.FindNode('totalRooms').TextContent));
     universe.currentDepth := lvl;
 
     (* Map tile data *)
@@ -681,21 +671,13 @@ begin
       SetLength(itemList, itemAmount);
       for i := Low(itemList) to High(itemList) do
       begin
-        items.itemList[i].itemID :=
-          StrToInt(UTF8Encode(ItemsNode.Attributes.Item[0].NodeValue));
+        items.itemList[i].itemID := StrToInt(UTF8Encode(ItemsNode.Attributes.Item[0].NodeValue));
         items.itemList[i].itemName := UTF8Encode(ItemsNode.FindNode('Name').TextContent);
-        items.itemList[i].itemDescription :=
-          UTF8Encode(ItemsNode.FindNode('description').TextContent);
-        items.itemList[i].itemArticle :=
-          UTF8Encode(ItemsNode.FindNode('article').TextContent);
-        items.itemList[i].itemType :=
-          tItem(GetEnumValue(Typeinfo(tItem),
-          UTF8Encode(ItemsNode.FindNode('itemType').TextContent)));
-        items.itemList[i].itemMaterial :=
-          tMaterial(GetEnumValue(Typeinfo(tMaterial),
-          UTF8Encode(ItemsNode.FindNode('itemMaterial').TextContent)));
-        items.itemList[i].useID :=
-          StrToInt(UTF8Encode(ItemsNode.FindNode('useID').TextContent));
+        items.itemList[i].itemDescription := UTF8Encode(ItemsNode.FindNode('description').TextContent);
+        items.itemList[i].itemArticle := UTF8Encode(ItemsNode.FindNode('article').TextContent);
+        items.itemList[i].itemType := tItem(GetEnumValue(Typeinfo(tItem), UTF8Encode(ItemsNode.FindNode('itemType').TextContent)));
+        items.itemList[i].itemMaterial := tMaterial(GetEnumValue(Typeinfo(tMaterial), UTF8Encode(ItemsNode.FindNode('itemMaterial').TextContent)));
+        items.itemList[i].useID := StrToInt(UTF8Encode(ItemsNode.FindNode('useID').TextContent));
 
         { Convert plain text to extended ASCII }
         if (ItemsNode.FindNode('glyph').TextContent[1] = 'T') then { club / dagger }
@@ -713,31 +695,19 @@ begin
         else if (ItemsNode.FindNode('glyph').TextContent[1] = 'A') then { axe }
           items.itemList[i].glyph := chr(194)
         else
-          items.itemList[i].glyph :=
-            char(widechar(ItemsNode.FindNode('glyph').TextContent[1]));
+          items.itemList[i].glyph := char(widechar(ItemsNode.FindNode('glyph').TextContent[1]));
 
-        items.itemList[i].glyphColour :=
-          UTF8Encode(ItemsNode.FindNode('glyphColour').TextContent);
-        items.itemList[i].inView :=
-          StrToBool(UTF8Encode(ItemsNode.FindNode('inView').TextContent));
-        items.itemList[i].posX :=
-          StrToInt(UTF8Encode(ItemsNode.FindNode('posX').TextContent));
-        items.itemList[i].posY :=
-          StrToInt(UTF8Encode(ItemsNode.FindNode('posY').TextContent));
-        items.itemList[i].NumberOfUses :=
-          StrToInt(UTF8Encode(ItemsNode.FindNode('numUses').TextContent));
-        items.itemList[i].onMap :=
-          StrToBool(UTF8Encode(ItemsNode.FindNode('onMap').TextContent));
-        items.itemList[i].throwable :=
-          StrToBool(UTF8Encode(ItemsNode.FindNode('throwable').TextContent));
-        items.itemList[i].throwDamage :=
-          StrToInt(UTF8Encode(ItemsNode.FindNode('throwDamage').TextContent));
-        items.itemList[i].dice :=
-          StrToInt(UTF8Encode(ItemsNode.FindNode('dice').TextContent));
-        items.itemList[i].adds :=
-          StrToInt(UTF8Encode(ItemsNode.FindNode('adds').TextContent));
-        items.itemList[i].discovered :=
-          StrToBool(UTF8Encode(ItemsNode.FindNode('discovered').TextContent));
+        items.itemList[i].glyphColour := UTF8Encode(ItemsNode.FindNode('glyphColour').TextContent);
+        items.itemList[i].inView := StrToBool(UTF8Encode(ItemsNode.FindNode('inView').TextContent));
+        items.itemList[i].posX := StrToInt(UTF8Encode(ItemsNode.FindNode('posX').TextContent));
+        items.itemList[i].posY := StrToInt(UTF8Encode(ItemsNode.FindNode('posY').TextContent));
+        items.itemList[i].NumberOfUses := StrToInt(UTF8Encode(ItemsNode.FindNode('numUses').TextContent));
+        items.itemList[i].onMap := StrToBool(UTF8Encode(ItemsNode.FindNode('onMap').TextContent));
+        items.itemList[i].throwable := StrToBool(UTF8Encode(ItemsNode.FindNode('throwable').TextContent));
+        items.itemList[i].throwDamage := StrToInt(UTF8Encode(ItemsNode.FindNode('throwDamage').TextContent));
+        items.itemList[i].dice := StrToInt(UTF8Encode(ItemsNode.FindNode('dice').TextContent));
+        items.itemList[i].adds := StrToInt(UTF8Encode(ItemsNode.FindNode('adds').TextContent));
+        items.itemList[i].discovered := StrToBool(UTF8Encode(ItemsNode.FindNode('discovered').TextContent));
         ParentNode := ItemsNode.NextSibling;
         ItemsNode := ParentNode;
       end;
@@ -755,15 +725,11 @@ begin
       begin
         entities.listLength := length(entities.entityList);
         SetLength(entities.entityList, entities.listLength + 1);
-        entities.entityList[i].npcID :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('npcID').TextContent));
+        entities.entityList[i].npcID := StrToInt(UTF8Encode(NPCnode.FindNode('npcID').TextContent));
         entities.entityList[i].race := UTF8Encode(NPCnode.FindNode('race').TextContent);
-        entities.entityList[i].intName :=
-          UTF8Encode(NPCnode.FindNode('intName').TextContent);
-        entities.entityList[i].article :=
-          StrToBool(UTF8Encode(NPCnode.FindNode('article').TextContent));
-        entities.entityList[i].description :=
-          UTF8Encode(NPCnode.FindNode('description').TextContent);
+        entities.entityList[i].intName := UTF8Encode(NPCnode.FindNode('intName').TextContent);
+        entities.entityList[i].article := StrToBool(UTF8Encode(NPCnode.FindNode('article').TextContent));
+        entities.entityList[i].description := UTF8Encode(NPCnode.FindNode('description').TextContent);
 
         { Convert plain text to extended ASCII }
         if (NPCnode.FindNode('glyph').TextContent[1] = '=') then
@@ -771,77 +737,43 @@ begin
         else if (NPCnode.FindNode('glyph').TextContent[1] = '!') then
           entities.entityList[i].glyph := chr(157)
         else
-          entities.entityList[i].glyph :=
-            UTF8Encode(char(widechar(NPCnode.FindNode('glyph').TextContent[1])));
+          entities.entityList[i].glyph := UTF8Encode(char(widechar(NPCnode.FindNode('glyph').TextContent[1])));
 
-        entities.entityList[i].glyphColour :=
-          UTF8Encode(NPCnode.FindNode('glyphColour').TextContent);
-        entities.entityList[i].maxHP :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('maxHP').TextContent));
-        entities.entityList[i].currentHP :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('currentHP').TextContent));
-        entities.entityList[i].attack :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('attack').TextContent));
-        entities.entityList[i].defence :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('defence').TextContent));
-        entities.entityList[i].weaponDice :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('weaponDice').TextContent));
-        entities.entityList[i].weaponAdds :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('weaponAdds').TextContent));
-        entities.entityList[i].xpReward :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('xpReward').TextContent));
-        entities.entityList[i].visionRange :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('visRange').TextContent));
-        entities.entityList[i].moveCount :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('moveCount').TextContent));
-        entities.entityList[i].targetX :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('targetX').TextContent));
-        entities.entityList[i].targetY :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('targetY').TextContent));
-        entities.entityList[i].inView :=
-          StrToBool(UTF8Encode(NPCnode.FindNode('inView').TextContent));
-        entities.entityList[i].blocks :=
-          StrToBool(UTF8Encode(NPCnode.FindNode('blocks').TextContent));
-        entities.entityList[i].faction :=
-          Tfactions(GetEnumValue(Typeinfo(Tfactions),
-          UTF8Encode(NPCnode.FindNode('faction').TextContent)));
-        entities.entityList[i].state :=
-          Tattitudes(GetEnumValue(Typeinfo(Tattitudes),
-          UTF8Encode(NPCnode.FindNode('state').TextContent)));
-        entities.entityList[i].discovered :=
-          StrToBool(UTF8Encode(NPCnode.FindNode('discovered').TextContent));
-        entities.entityList[i].weaponEquipped :=
-          StrToBool(UTF8Encode(NPCnode.FindNode('weaponEquipped').TextContent));
-        entities.entityList[i].armourEquipped :=
-          StrToBool(UTF8Encode(NPCnode.FindNode('armourEquipped').TextContent));
+        entities.entityList[i].glyphColour := UTF8Encode(NPCnode.FindNode('glyphColour').TextContent);
+        entities.entityList[i].maxHP := StrToInt(UTF8Encode(NPCnode.FindNode('maxHP').TextContent));
+        entities.entityList[i].currentHP := StrToInt(UTF8Encode(NPCnode.FindNode('currentHP').TextContent));
+        entities.entityList[i].attack := StrToInt(UTF8Encode(NPCnode.FindNode('attack').TextContent));
+        entities.entityList[i].defence := StrToInt(UTF8Encode(NPCnode.FindNode('defence').TextContent));
+        entities.entityList[i].weaponDice := StrToInt(UTF8Encode(NPCnode.FindNode('weaponDice').TextContent));
+        entities.entityList[i].weaponAdds := StrToInt(UTF8Encode(NPCnode.FindNode('weaponAdds').TextContent));
+        entities.entityList[i].xpReward := StrToInt(UTF8Encode(NPCnode.FindNode('xpReward').TextContent));
+        entities.entityList[i].visionRange := StrToInt(UTF8Encode(NPCnode.FindNode('visRange').TextContent));
+        entities.entityList[i].moveCount := StrToInt(UTF8Encode(NPCnode.FindNode('moveCount').TextContent));
+        entities.entityList[i].targetX := StrToInt(UTF8Encode(NPCnode.FindNode('targetX').TextContent));
+        entities.entityList[i].targetY := StrToInt(UTF8Encode(NPCnode.FindNode('targetY').TextContent));
+        entities.entityList[i].inView := StrToBool(UTF8Encode(NPCnode.FindNode('inView').TextContent));
+        entities.entityList[i].blocks := StrToBool(UTF8Encode(NPCnode.FindNode('blocks').TextContent));
+        entities.entityList[i].faction := Tfactions(GetEnumValue(Typeinfo(Tfactions), UTF8Encode(NPCnode.FindNode('faction').TextContent)));
+        entities.entityList[i].state := Tattitudes(GetEnumValue(Typeinfo(Tattitudes), UTF8Encode(NPCnode.FindNode('state').TextContent)));
+        entities.entityList[i].discovered := StrToBool(UTF8Encode(NPCnode.FindNode('discovered').TextContent));
+        entities.entityList[i].weaponEquipped := StrToBool(UTF8Encode(NPCnode.FindNode('weaponEquipped').TextContent));
+        entities.entityList[i].armourEquipped := StrToBool(UTF8Encode(NPCnode.FindNode('armourEquipped').TextContent));
         entities.entityList[i].isDead := False;
-        entities.entityList[i].stsDrunk :=
-          StrToBool(UTF8Encode(NPCnode.FindNode('stsDrunk').TextContent));
-        entities.entityList[i].stsPoison :=
-          StrToBool(UTF8Encode(NPCnode.FindNode('stsPoison').TextContent));
-        entities.entityList[i].stsBewild :=
-          StrToBool(UTF8Encode(NPCnode.FindNode('stsBewild').TextContent));
-        entities.entityList[i].tmrDrunk :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('tmrDrunk').TextContent));
-        entities.entityList[i].tmrPoison :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('tmrPoison').TextContent));
-        entities.entityList[i].tmrBewild :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('tmrBewild').TextContent));
-        entities.entityList[i].hasPath :=
-          StrToBool(UTF8Encode(NPCnode.FindNode('hasPath').TextContent));
-        entities.entityList[i].destinationReached :=
-          StrToBool(UTF8Encode(NPCnode.FindNode('destReach').TextContent));
+        entities.entityList[i].stsDrunk := StrToBool(UTF8Encode(NPCnode.FindNode('stsDrunk').TextContent));
+        entities.entityList[i].stsPoison := StrToBool(UTF8Encode(NPCnode.FindNode('stsPoison').TextContent));
+        entities.entityList[i].stsBewild := StrToBool(UTF8Encode(NPCnode.FindNode('stsBewild').TextContent));
+        entities.entityList[i].tmrDrunk := StrToInt(UTF8Encode(NPCnode.FindNode('tmrDrunk').TextContent));
+        entities.entityList[i].tmrPoison := StrToInt(UTF8Encode(NPCnode.FindNode('tmrPoison').TextContent));
+        entities.entityList[i].tmrBewild := StrToInt(UTF8Encode(NPCnode.FindNode('tmrBewild').TextContent));
+        entities.entityList[i].hasPath := StrToBool(UTF8Encode(NPCnode.FindNode('hasPath').TextContent));
+        entities.entityList[i].destinationReached := StrToBool(UTF8Encode(NPCnode.FindNode('destReach').TextContent));
         for coords := 1 to 30 do
         begin
-          entities.entityList[i].smellPath[coords].X :=
-            StrToInt(UTF8Encode(NPCnode.FindNode(UTF8Decode('coordX' + IntToStr(coords))).TextContent));
-          entities.entityList[i].smellPath[coords].Y :=
-            StrToInt(UTF8Encode(NPCnode.FindNode(UTF8Decode('coordY' + IntToStr(coords))).TextContent));
+          entities.entityList[i].smellPath[coords].X := StrToInt(UTF8Encode(NPCnode.FindNode(UTF8Decode('coordX' + IntToStr(coords))).TextContent));
+          entities.entityList[i].smellPath[coords].Y := StrToInt(UTF8Encode(NPCnode.FindNode(UTF8Decode('coordY' + IntToStr(coords))).TextContent));
         end;
-        entities.entityList[i].posX :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('posX').TextContent));
-        entities.entityList[i].posY :=
-          StrToInt(UTF8Encode(NPCnode.FindNode('posY').TextContent));
+        entities.entityList[i].posX := StrToInt(UTF8Encode(NPCnode.FindNode('posX').TextContent));
+        entities.entityList[i].posY := StrToInt(UTF8Encode(NPCnode.FindNode('posY').TextContent));
         ParentNode := NPCnode.NextSibling;
         NPCnode := ParentNode;
       end;
@@ -904,20 +836,15 @@ begin
     globalutils.OWy := StrToInt(UTF8Encode(RootNode.FindNode('owy').TextContent));
     universe.OWgen := StrToBool(UTF8Encode(RootNode.FindNode('OWgen').TextContent));
     (* Total number of unique locations *)
-    SetLength(island.locationLookup,
-      StrToInt(UTF8Encode(RootNode.FindNode('locations').TextContent)));
+    SetLength(island.locationLookup, StrToInt(UTF8Encode(RootNode.FindNode('locations').TextContent)));
     (* Current dungeon ID *)
-    universe.uniqueID := StrToInt(
-      UTF8Encode(RootNode.FindNode('dungeonID').TextContent));
+    universe.uniqueID := StrToInt( UTF8Encode(RootNode.FindNode('dungeonID').TextContent));
     (* Current depth *)
-    universe.currentDepth :=
-      StrToInt(UTF8Encode(RootNode.FindNode('currentDepth').TextContent));
+    universe.currentDepth := StrToInt(UTF8Encode(RootNode.FindNode('currentDepth').TextContent));
     (* Can the player exit the dungeon *)
-    player_stats.canExitDungeon :=
-      StrToBool(UTF8Encode(RootNode.FindNode('canExitDungeon').TextContent));
+    player_stats.canExitDungeon := StrToBool(UTF8Encode(RootNode.FindNode('canExitDungeon').TextContent));
     (* Type of map *)
-    map.mapType := dungeonTerrain(GetEnumValue(Typeinfo(dungeonTerrain),
-      UTF8Encode(RootNode.FindNode('mapType').TextContent)));
+    map.mapType := dungeonTerrain(GetEnumValue(Typeinfo(dungeonTerrain), UTF8Encode(RootNode.FindNode('mapType').TextContent)));
 
     (* List of enemies killed *)
     deathNode := Doc.DocumentElement.FindNode('DL');
@@ -928,19 +855,12 @@ begin
     locationNode := Doc.DocumentElement.FindNode('locData');
     for i := 0 to High(island.locationLookup) do
     begin
-      island.locationLookup[i].X :=
-        StrToInt(UTF8Encode(locationNode.FindNode('X').TextContent));
-      island.locationLookup[i].Y :=
-        StrToInt(UTF8Encode(locationNode.FindNode('Y').TextContent));
-      island.locationLookup[i].id :=
-        StrToInt(UTF8Encode(locationNode.FindNode('id').TextContent));
-      island.locationLookup[i].Name :=
-        UTF8Encode(locationNode.FindNode('name').TextContent);
-      island.locationLookup[i].generated :=
-        StrToBool(UTF8Encode(locationNode.FindNode('generated').TextContent));
-      island.locationLookup[i].theme :=
-        dungeonTerrain(GetEnumValue(Typeinfo(dungeonTerrain),
-        (UTF8Encode(locationNode.FindNode('theme').TextContent))));
+      island.locationLookup[i].X := StrToInt(UTF8Encode(locationNode.FindNode('X').TextContent));
+      island.locationLookup[i].Y := StrToInt(UTF8Encode(locationNode.FindNode('Y').TextContent));
+      island.locationLookup[i].id := StrToInt(UTF8Encode(locationNode.FindNode('id').TextContent));
+      island.locationLookup[i].Name := UTF8Encode(locationNode.FindNode('name').TextContent);
+      island.locationLookup[i].generated := StrToBool(UTF8Encode(locationNode.FindNode('generated').TextContent));
+      island.locationLookup[i].theme := dungeonTerrain(GetEnumValue(Typeinfo(dungeonTerrain), (UTF8Encode(locationNode.FindNode('theme').TextContent))));
       ParentNode := locationNode.NextSibling;
       locationNode := ParentNode;
     end;
@@ -951,89 +871,51 @@ begin
     entities.listLength := length(entities.entityList);
     SetLength(entities.entityList, entities.listLength + 1);
     entities.entityList[0].npcID := 0;
-    entities.entityList[0].race :=
-      UTF8Encode(PlayerDataNode.FindNode('race').TextContent);
-    entities.entityList[0].description :=
-      UTF8Encode(PlayerDataNode.FindNode('description').TextContent);
-    entities.entityList[0].glyph :=
-      UTF8Encode(char(widechar(PlayerDataNode.FindNode('glyph').TextContent[1])));
-    entities.entityList[0].glyphColour :=
-      UTF8Encode(PlayerDataNode.FindNode('glyphColour').TextContent);
-    entities.entityList[0].maxHP :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('maxHP').TextContent));
-    entities.entityList[0].currentHP :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('currentHP').TextContent));
-    entities.entityList[0].attack :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('attack').TextContent));
-    entities.entityList[0].defence :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('defence').TextContent));
-    entities.entityList[0].weaponDice :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('weaponDice').TextContent));
-    entities.entityList[0].weaponAdds :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('weaponAdds').TextContent));
-    entities.entityList[0].xpReward :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('xpReward').TextContent));
-    entities.entityList[0].visionRange :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('visRange').TextContent));
-    entities.entityList[0].moveCount :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('moveCount').TextContent));
-    entities.entityList[0].targetX :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('targetX').TextContent));
-    entities.entityList[0].targetY :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('targetY').TextContent));
+    entities.entityList[0].race := UTF8Encode(PlayerDataNode.FindNode('race').TextContent);
+    entities.entityList[0].description := UTF8Encode(PlayerDataNode.FindNode('description').TextContent);
+    entities.entityList[0].glyph := UTF8Encode(char(widechar(PlayerDataNode.FindNode('glyph').TextContent[1])));
+    entities.entityList[0].glyphColour := UTF8Encode(PlayerDataNode.FindNode('glyphColour').TextContent);
+    entities.entityList[0].maxHP := StrToInt(UTF8Encode(PlayerDataNode.FindNode('maxHP').TextContent));
+    entities.entityList[0].currentHP := StrToInt(UTF8Encode(PlayerDataNode.FindNode('currentHP').TextContent));
+    entities.entityList[0].attack := StrToInt(UTF8Encode(PlayerDataNode.FindNode('attack').TextContent));
+    entities.entityList[0].defence := StrToInt(UTF8Encode(PlayerDataNode.FindNode('defence').TextContent));
+    entities.entityList[0].weaponDice := StrToInt(UTF8Encode(PlayerDataNode.FindNode('weaponDice').TextContent));
+    entities.entityList[0].weaponAdds := StrToInt(UTF8Encode(PlayerDataNode.FindNode('weaponAdds').TextContent));
+    entities.entityList[0].xpReward := StrToInt(UTF8Encode(PlayerDataNode.FindNode('xpReward').TextContent));
+    entities.entityList[0].visionRange := StrToInt(UTF8Encode(PlayerDataNode.FindNode('visRange').TextContent));
+    entities.entityList[0].moveCount := StrToInt(UTF8Encode(PlayerDataNode.FindNode('moveCount').TextContent));
+    entities.entityList[0].targetX := StrToInt(UTF8Encode(PlayerDataNode.FindNode('targetX').TextContent));
+    entities.entityList[0].targetY := StrToInt(UTF8Encode(PlayerDataNode.FindNode('targetY').TextContent));
     entities.entityList[0].inView := True;
     entities.entityList[0].blocks := False;
     entities.entityList[0].discovered := True;
-    entities.entityList[0].weaponEquipped :=
-      StrToBool(UTF8Encode(PlayerDataNode.FindNode('weaponEquipped').TextContent));
-    entities.entityList[0].armourEquipped :=
-      StrToBool(UTF8Encode(PlayerDataNode.FindNode('armourEquipped').TextContent));
+    entities.entityList[0].weaponEquipped := StrToBool(UTF8Encode(PlayerDataNode.FindNode('weaponEquipped').TextContent));
+    entities.entityList[0].armourEquipped := StrToBool(UTF8Encode(PlayerDataNode.FindNode('armourEquipped').TextContent));
     entities.entityList[0].isDead := False;
-    entities.entityList[0].stsDrunk :=
-      StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsDrunk').TextContent));
-    entities.entityList[0].stsPoison :=
-      StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsPoison').TextContent));
-    entities.entityList[0].stsBewild :=
-      StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsBewild').TextContent));
-    entities.entityList[0].tmrDrunk :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrDrunk').TextContent));
-    entities.entityList[0].tmrPoison :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrPoison').TextContent));
-    entities.entityList[0].tmrBewild :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrBewild').TextContent));
-    entities.entityList[0].posX :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('posX').TextContent));
-    entities.entityList[0].posY :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('posY').TextContent));
+    entities.entityList[0].stsDrunk := StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsDrunk').TextContent));
+    entities.entityList[0].stsPoison := StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsPoison').TextContent));
+    entities.entityList[0].stsBewild := StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsBewild').TextContent));
+    entities.entityList[0].tmrDrunk := StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrDrunk').TextContent));
+    entities.entityList[0].tmrPoison := StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrPoison').TextContent));
+    entities.entityList[0].tmrBewild := StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrBewild').TextContent));
+    entities.entityList[0].posX := StrToInt(UTF8Encode(PlayerDataNode.FindNode('posX').TextContent));
+    entities.entityList[0].posY := StrToInt(UTF8Encode(PlayerDataNode.FindNode('posY').TextContent));
 
     (* Player stats *)
-    player_stats.playerLevel :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('playerLevel').TextContent));
-    player_stats.dexterity :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('dexterity').TextContent));
-    player_stats.currentMagick :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('currentMagick').TextContent));
-    player_stats.maxMagick :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('maxMagick').TextContent));
-    player_stats.maxVisionRange :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('maxVisionRange').TextContent));
-    player_stats.playerRace := UTF8Encode(PlayerDataNode.FindNode(
-      'playerRace').TextContent);
+    player_stats.playerLevel := StrToInt(UTF8Encode(PlayerDataNode.FindNode('playerLevel').TextContent));
+    player_stats.dexterity := StrToInt(UTF8Encode(PlayerDataNode.FindNode('dexterity').TextContent));
+    player_stats.currentMagick := StrToInt(UTF8Encode(PlayerDataNode.FindNode('currentMagick').TextContent));
+    player_stats.maxMagick := StrToInt(UTF8Encode(PlayerDataNode.FindNode('maxMagick').TextContent));
+    player_stats.maxVisionRange := StrToInt(UTF8Encode(PlayerDataNode.FindNode('maxVisionRange').TextContent));
+    player_stats.playerRace := UTF8Encode(PlayerDataNode.FindNode( 'playerRace').TextContent);
     player_stats.clanName := UTF8Encode(PlayerDataNode.FindNode('clanName').TextContent);
-    player_stats.enchantedWeaponEquipped :=
-      StrToBool(UTF8Encode(PlayerDataNode.FindNode('enchantedWeapon').TextContent));
-    player_stats.projectileWeaponEquipped :=
-      StrToBool(UTF8Encode(PlayerDataNode.FindNode('projectileWeapon').TextContent));
-    player_stats.lightEquipped :=
-      StrToBool(UTF8Encode(PlayerDataNode.FindNode('lightEquipped').TextContent));
-    player_stats.enchWeapType :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('enchWeapType').TextContent));
-    player_stats.lightCounter :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('lightCounter').TextContent));
-    player_stats.armourPoints :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('armourPoints').TextContent));
-    player_stats.treasure :=
-      StrToInt(UTF8Encode(PlayerDataNode.FindNode('treasure').TextContent));
+    player_stats.enchantedWeaponEquipped := StrToBool(UTF8Encode(PlayerDataNode.FindNode('enchantedWeapon').TextContent));
+    player_stats.projectileWeaponEquipped := StrToBool(UTF8Encode(PlayerDataNode.FindNode('projectileWeapon').TextContent));
+    player_stats.lightEquipped := StrToBool(UTF8Encode(PlayerDataNode.FindNode('lightEquipped').TextContent));
+    player_stats.enchWeapType := StrToInt(UTF8Encode(PlayerDataNode.FindNode('enchWeapType').TextContent));
+    player_stats.lightCounter := StrToInt(UTF8Encode(PlayerDataNode.FindNode('lightCounter').TextContent));
+    player_stats.armourPoints := StrToInt(UTF8Encode(PlayerDataNode.FindNode('armourPoints').TextContent));
+    player_stats.treasure := StrToInt(UTF8Encode(PlayerDataNode.FindNode('treasure').TextContent));
 
     (* Player Inventory *)
     player_inventory.initialiseInventory;
@@ -1042,24 +924,14 @@ begin
     for i := 0 to 9 do
     begin
       player_inventory.inventory[i].id := i;
-      player_inventory.inventory[i].sortIndex :=
-        StrToInt(UTF8Encode(InventoryNode.FindNode('sortIndex').TextContent));
-      player_inventory.inventory[i].Name :=
-        UTF8Encode(InventoryNode.FindNode('Name').TextContent);
-      player_inventory.inventory[i].equipped :=
-        StrToBool(UTF8Encode(InventoryNode.FindNode('equipped').TextContent));
-      player_inventory.inventory[i].description :=
-        UTF8Encode(InventoryNode.FindNode('description').TextContent);
-      player_inventory.inventory[i].article :=
-        UTF8Encode(InventoryNode.FindNode('article').TextContent);
-      player_inventory.inventory[i].itemType :=
-        tItem(GetEnumValue(Typeinfo(tItem),
-        UTF8Encode(InventoryNode.FindNode('itemType').TextContent)));
-      player_inventory.inventory[i].itemMaterial :=
-        tMaterial(GetEnumValue(Typeinfo(tMaterial),
-        UTF8Encode(InventoryNode.FindNode('itemMaterial').TextContent)));
-      player_inventory.inventory[i].useID :=
-        StrToInt(UTF8Encode(InventoryNode.FindNode('useID').TextContent));
+      player_inventory.inventory[i].sortIndex := StrToInt(UTF8Encode(InventoryNode.FindNode('sortIndex').TextContent));
+      player_inventory.inventory[i].Name := UTF8Encode(InventoryNode.FindNode('Name').TextContent);
+      player_inventory.inventory[i].equipped := StrToBool(UTF8Encode(InventoryNode.FindNode('equipped').TextContent));
+      player_inventory.inventory[i].description := UTF8Encode(InventoryNode.FindNode('description').TextContent);
+      player_inventory.inventory[i].article := UTF8Encode(InventoryNode.FindNode('article').TextContent);
+      player_inventory.inventory[i].itemType := tItem(GetEnumValue(Typeinfo(tItem), UTF8Encode(InventoryNode.FindNode('itemType').TextContent)));
+      player_inventory.inventory[i].itemMaterial := tMaterial(GetEnumValue(Typeinfo(tMaterial), UTF8Encode(InventoryNode.FindNode('itemMaterial').TextContent)));
+      player_inventory.inventory[i].useID := StrToInt(UTF8Encode(InventoryNode.FindNode('useID').TextContent));
 
       { Convert plain text to extended ASCII }
       if (InventoryNode.FindNode('glyph').TextContent[1] = 'T') then
@@ -1075,23 +947,15 @@ begin
       else if (InventoryNode.FindNode('glyph').TextContent[1] = 'A') then
         player_inventory.inventory[i].glyph := chr(194)
       else
-        player_inventory.inventory[i].glyph :=
-          char(widechar(InventoryNode.FindNode('glyph').TextContent[1]));
+        player_inventory.inventory[i].glyph := char(widechar(InventoryNode.FindNode('glyph').TextContent[1]));
 
-      player_inventory.inventory[i].glyphColour :=
-        UTF8Encode(InventoryNode.FindNode('glyphColour').TextContent);
-      player_inventory.inventory[i].numUses :=
-        StrToInt(UTF8Encode(InventoryNode.FindNode('numUses').TextContent));
-      player_inventory.inventory[i].throwable :=
-        StrToBool(UTF8Encode(InventoryNode.FindNode('throwable').TextContent));
-      player_inventory.inventory[i].throwDamage :=
-        StrToInt(UTF8Encode(InventoryNode.FindNode('throwDamage').TextContent));
-      player_inventory.inventory[i].dice :=
-        StrToInt(UTF8Encode(InventoryNode.FindNode('dice').TextContent));
-      player_inventory.inventory[i].adds :=
-        StrToInt(UTF8Encode(InventoryNode.FindNode('adds').TextContent));
-      player_inventory.inventory[i].inInventory :=
-        StrToBool(UTF8Encode(InventoryNode.FindNode('inInventory').TextContent));
+      player_inventory.inventory[i].glyphColour := UTF8Encode(InventoryNode.FindNode('glyphColour').TextContent);
+      player_inventory.inventory[i].numUses := StrToInt(UTF8Encode(InventoryNode.FindNode('numUses').TextContent));
+      player_inventory.inventory[i].throwable := StrToBool(UTF8Encode(InventoryNode.FindNode('throwable').TextContent));
+      player_inventory.inventory[i].throwDamage := StrToInt(UTF8Encode(InventoryNode.FindNode('throwDamage').TextContent));
+      player_inventory.inventory[i].dice := StrToInt(UTF8Encode(InventoryNode.FindNode('dice').TextContent));
+      player_inventory.inventory[i].adds := StrToInt(UTF8Encode(InventoryNode.FindNode('adds').TextContent));
+      player_inventory.inventory[i].inInventory := StrToBool(UTF8Encode(InventoryNode.FindNode('inInventory').TextContent));
       ParentNode := InventoryNode.NextSibling;
       InventoryNode := ParentNode;
     end;
@@ -1166,8 +1030,7 @@ begin
     AddElement(datanode, 'levelVisited', BoolToStr(True));
     AddElement(datanode, 'indexID', IntToStr(items.indexID));
     AddElement(datanode, 'totalDepth', IntToStr(totalDepth));
-    AddElement(datanode, 'canExitDungeon',
-      UTF8Encode(BoolToStr(player_stats.canExitDungeon)));
+    AddElement(datanode, 'canExitDungeon', UTF8Encode(BoolToStr(player_stats.canExitDungeon)));
     WriteStr(Value, map.mapType);
     AddElement(datanode, 'mapType', Value);
 
@@ -1175,8 +1038,7 @@ begin
     DataNode := AddChild(RootNode, 'DL');
     for i := Low(combat_resolver.deathList) to High(combat_resolver.deathList) do
     begin
-      AddElement(DataNode, 'kill_' + IntToStr(i),
-        IntToStr(combat_resolver.deathList[i]));
+      AddElement(DataNode, 'kill_' + IntToStr(i), IntToStr(combat_resolver.deathList[i]));
     end;
 
     (* Location data *)
@@ -1209,10 +1071,8 @@ begin
     AddElement(DataNode, 'moveCount', IntToStr(entities.entityList[0].moveCount));
     AddElement(DataNode, 'targetX', IntToStr(entities.entityList[0].targetX));
     AddElement(DataNode, 'targetY', IntToStr(entities.entityList[0].targetY));
-    AddElement(DataNode, 'weaponEquipped',
-      BoolToStr(entities.entityList[0].weaponEquipped));
-    AddElement(DataNode, 'armourEquipped',
-      BoolToStr(entities.entityList[0].armourEquipped));
+    AddElement(DataNode, 'weaponEquipped', BoolToStr(entities.entityList[0].weaponEquipped));
+    AddElement(DataNode, 'armourEquipped', BoolToStr(entities.entityList[0].armourEquipped));
     AddElement(DataNode, 'stsDrunk', BoolToStr(entities.entityList[0].stsDrunk));
     AddElement(DataNode, 'stsPoison', BoolToStr(entities.entityList[0].stsPoison));
     AddElement(DataNode, 'stsBewild', BoolToStr(entities.entityList[0].stsBewild));
@@ -1230,10 +1090,8 @@ begin
     AddElement(DataNode, 'maxVisionRange', IntToStr(player_stats.maxVisionRange));
     AddElement(DataNode, 'playerRace', player_stats.playerRace);
     AddElement(DataNode, 'clanName', player_stats.clanName);
-    AddElement(DataNode, 'enchantedWeapon',
-      BoolToStr(player_stats.enchantedWeaponEquipped));
-    AddElement(DataNode, 'projectileWeapon',
-      BoolToStr(player_stats.projectileWeaponEquipped));
+    AddElement(DataNode, 'enchantedWeapon', BoolToStr(player_stats.enchantedWeaponEquipped));
+    AddElement(DataNode, 'projectileWeapon', BoolToStr(player_stats.projectileWeaponEquipped));
     AddElement(DataNode, 'lightEquipped', BoolToStr(player_stats.lightEquipped));
     AddElement(DataNode, 'enchWeapType', IntToStr(player_stats.enchWeapType));
     AddElement(DataNode, 'lightCounter', IntToStr(player_stats.lightCounter));
