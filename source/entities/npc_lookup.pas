@@ -38,7 +38,7 @@ const
 
   (* Array of creatures found in stone cavern, ordered by cave level *)
   stoneCavernNPC1: array[1..5] of string =
-    ('caveRat', 'rabidDog', 'caveRat', 'bloodBat', 'greenFungus');
+    ('caveRat', 'rabidDog', 'caveRat', 'caveRat', 'greenFungus');
   stoneCavernNPC2: array[1..7] of string =
     ('rabidDog', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
   stoneCavernNPC3: array[1..7] of string =

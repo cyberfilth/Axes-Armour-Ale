@@ -112,6 +112,7 @@ begin
     'white': tint := video.White;
     'DgreyBGblack': tint := $80;
     'LgreyBGblack': tint := $70;
+    'blackBGbrown': tint := 96;
     else
       tint := $07;
   end;

@@ -48,7 +48,7 @@ begin
     article := True;
     description := 'a giant, fanged bear';
     glyph := 'B';
-    glyphColour := 'brown';
+    glyphColour := 'blackBGbrown';
     maxHP := randomRange(6, 9) + universe.currentDepth;
     currentHP := maxHP;
     attack := randomRange(entityList[0].attack + 1, entityList[0].attack + 3);
@@ -79,6 +79,7 @@ begin
     entities.initPath(uniqueid);
     posX := npcx;
     posY := npcy;
+    entities.initPath(uniqueid);
   end;
   (* Occupy tile *)
   map.occupy(npcx, npcy);
@@ -135,7 +136,7 @@ procedure decisionNeutral(id: smallint);
 var
   stopAndSmellFlowers: byte;
 begin
-  stopAndSmellFlowers := globalutils.randomRange(1, 5);
+  stopAndSmellFlowers := globalutils.randomRange(1, 3);
   if (stopAndSmellFlowers = 1) then
     { Either wander randomly }
     wander(id, entityList[id].posX, entityList[id].posY)
@@ -157,7 +158,7 @@ begin
   else if (los.inView(entityList[id].posX, entityList[id].posY,
     entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
   begin
-    entityList[id].moveCount := 3;
+    entityList[id].moveCount := 5;
     { If next to the player }
     if (isNextToPlayer(entityList[id].posX, entityList[id].posY) = True) then
       { Attack the Player }
@@ -314,7 +315,7 @@ begin
       if (enemyID = 0) then
         (* If the enemy is the player *)
       begin
-        killer := 'an ' + entityList[npcID].race;
+        killer := 'a ' + entityList[npcID].race;
         exit;
       end
       else
