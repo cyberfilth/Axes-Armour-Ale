@@ -8,8 +8,7 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, smallGrid,
-  crypt, stone_cavern;
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, smallGrid, crypt, stone_cavern;
 
 var
   (* Number of dungeons *)
@@ -86,7 +85,6 @@ begin
     NPCnumber := (totalRooms div 2) + currentDepth;
   { player level is considered when generating the NPCs }
   entities.npcAmount := NPCnumber;
-
   { First npcAmount-1 number of enemies are scattered on the floor }
   for i := 1 to (NPCnumber - 1) do
   begin

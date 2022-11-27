@@ -9,13 +9,13 @@
 </head>
 <body>
 <div class="container"><div class="navigation">
-<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
 <h1 class="unit">Unit architect</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
-Unit responsible for selecting themed dungeons and caves. The types of locations are: tCave - underground cave with no obstacles tCavern - underground cave with rubble tDungeon - rooms connected by corridors tCrypt - dungeon populated by undead tVillage - small settlement
+Unit responsible for selecting themed dungeons and caves. The types of locations are: tCave - underground cave with no obstacles tStoneCavern - underground cave with rubble tDungeon - rooms connected by corridors tCrypt - dungeon populated by undead tVillage - small settlement
 
 <p>Arrays containing location types for certain areas of the island. The further north the player goes, the more difficult the locations become</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
@@ -23,7 +23,7 @@ Unit responsible for selecting themed dungeons and caves. The types of locations
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>function <strong><a href="architect.html#validLocation">validLocation</a></strong>(x, y: smallint):boolean;</code></td>
+<td class="itemcode"><code>function <strong><a href="architect.html#validLocation">validLocation</a></strong>(x, y: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="architect.html#firstRow">firstRow</a></strong>;</code></td>
@@ -42,7 +42,7 @@ Unit responsible for selecting themed dungeons and caves. The types of locations
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="validLocation"></span><code>function <strong>validLocation</strong>(x, y: smallint):boolean;</code></td>
+<td class="itemcode"><span id="validLocation"></span><code>function <strong>validLocation</strong>(x, y: smallint): boolean;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>

@@ -29,10 +29,9 @@ var
   r, c, i, iterations, tileCounter, stairX, stairY: smallint;
   totalRooms: byte;
   distances: TDist;
-
-(* TESTING - Write cavern to text file *)
-//filename: shortstring;
-//myfile: Text;
+  (* TESTING - Write cavern to text file *)
+  //filename: shortstring;
+  //myfile: Text;
 
 (* Fill array with walls *)
 procedure fillWithWalls;
@@ -90,10 +89,8 @@ var
 begin
   numOfFloorTiles := 0;
   repeat
-
     fillWithWalls;
     randomTileFill;
-
     (* Run through cave generator process 5 times *)
     for iterations := 1 to 5 do
     begin
@@ -271,10 +268,7 @@ begin
           Inc(numOfFloorTiles);
       end;
     end;
-
-  until (numOfFloorTiles > 1000) and (leftHasFloor() = True) and
-    (rightHasFloor() = True);
-
+  until (numOfFloorTiles > 1000) and (leftHasFloor() = True) and (rightHasFloor() = True);
 end;
 
 procedure generate(title: string; idNumber: smallint; totalDepth: byte);
@@ -297,6 +291,7 @@ begin
       until (terrainArray[r][c] = '.');
       (* Place the stairs *)
       terrainArray[r][c] := '>';
+
       (* Save location of stairs *)
       stairX := c;
       stairY := r;
@@ -309,8 +304,7 @@ begin
         end;
       end;
       universe.totalRooms := totalRooms;
-      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth,
-        totalRooms, tStoneCavern);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tStoneCavern);
     end
     { If the floor number is an odd number }
     else if (Odd(i)) and (i <> totalDepth) then
@@ -330,8 +324,7 @@ begin
       (* Save location of stairs *)
       stairX := c;
       stairY := r;
-      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth,
-        totalRooms, tStoneCavern);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tStoneCavern);
     end
     else if not (Odd(i)) and (i <> totalDepth) then
       { If the floor number is an even number }
@@ -351,8 +344,7 @@ begin
       (* Save location of stairs *)
       stairX := c;
       stairY := r;
-      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth,
-        totalRooms, tStoneCavern);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tStoneCavern);
     end
     else
       (* Last floor *)
@@ -362,10 +354,8 @@ begin
         digCave(i);
       until terrainArray[stairY][stairX] = '.';
       terrainArray[stairY][stairX] := '<';
-      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth,
-        totalRooms, tStoneCavern);
+      file_handling.writeNewDungeonLevel(title, idNumber, i, totalDepth, totalRooms, tStoneCavern);
     end;
-
 
     { Write map to text file for testing }
     //filename := 'cavern_level_' + IntToStr(i) + '.txt';
@@ -381,7 +371,6 @@ begin
     //end;
     //closeFile(myfile);
     { end of writing map to text file }
-
   end;
 end;
 
@@ -468,11 +457,9 @@ begin
   c := 0;
   i := 1;
   maxPillars := randomRange(3, 6);
-  { Can a pillar be placed here?
-    Checks that all surrounding tiles are floor }
+  { Can a pillar be placed here?  Checks that all surrounding tiles are floor }
   canPlace := True;
   { Attempt to place maxPillars number of pillars }
-
   for i := 1 to maxPillars do
   begin
     { Choose a likely spot }
@@ -502,7 +489,6 @@ begin
       terrainArray[r][c] := '*';
     canPlace := True;
   end;
-
 end;
 
 end.

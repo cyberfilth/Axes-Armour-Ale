@@ -23,6 +23,7 @@ begin
   Inc(entityList[0].maxHP, 100);
   entityList[0].currentHP := entityList[0].maxHP;
   Inc(player_stats.lightCounter, 500);
+  showEntitiesItems
 end;
 
 procedure showEntitiesItems;

@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container"><div class="navigation">
-<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
 <h1 class="unit">Unit combat_resolver</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -21,7 +21,7 @@ Combat Resolver unit
 
 <p>This is partly inspired by the Tunnels &amp; Trolls rules, my favourite tabletop RPG.</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="ui.html">ui</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="ui.html">ui</a></li><li><a href="logging.html">logging</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -34,7 +34,7 @@ Combat Resolver unit
 <span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code><strong><a href="combat_resolver.html#deathList">deathList</a></strong>: array[0..24] of smallint;</code></td>
+<td class="itemcode"><code><strong><a href="combat_resolver.html#deathList">deathList</a></strong>: array[0..27] of smallint;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -60,7 +60,7 @@ Spite damage - damage dealt by the loser of a combat round 'in spite' of losing<
 <h3 class="detail">Variables</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="deathList"></span><code><strong>deathList</strong>: array[0..24] of smallint;</code></td>
+<td class="itemcode"><span id="deathList"></span><code><strong>deathList</strong>: array[0..27] of smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>

@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container"><div class="navigation">
-<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
 <h1 class="unit">Unit item_lookup</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section"><a class="section" href="#PasDoc-Constants">Constants</a></div><div class="one_section">Variables</div></div>
@@ -17,7 +17,7 @@
 <p>
 Lookup table for items, based on the environment</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li><a href="universe.html">universe</a></li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="ale_tankard.html">ale_tankard</a></li><li><a href="wine_flask.html">wine_flask</a></li><li><a href="crude_dagger.html">crude_dagger</a></li><li><a href="basic_club.html">basic_club</a></li><li><a href="rock.html">rock</a></li><li><a href="short_bow.html">short_bow</a></li><li><a href="pointy_stick.html">pointy_stick</a></li><li><a href="gnomish_dagger.html">gnomish_dagger</a></li><li><a href="gnomish_mace.html">gnomish_mace</a></li><li><a href="gnomish_axe.html">gnomish_axe</a></li><li><a href="bone_dagger.html">bone_dagger</a></li><li><a href="leather_armour1.html">leather_armour1</a></li><li><a href="cloth_armour1.html">cloth_armour1</a></li><li><a href="smugglersMap.html">smugglersMap</a></li><li><a href="pixie_jar.html">pixie_jar</a></li><li><a href="pixie_jar_dim.html">pixie_jar_dim</a></li><li><a href="parchment.html">parchment</a></li><li><a href="gold_pieces.html">gold_pieces</a></li><li><a href="staff_minor_scorch.html">staff_minor_scorch</a></li><li><a href="staff_bewilder.html">staff_bewilder</a></li><li><a href="vampiric_staff.html">vampiric_staff</a></li><li><a href="arrow.html">arrow</a></li><li><a href="web_trap.html">web_trap</a></li><li><a href="poison_spore.html">poison_spore</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li><a href="universe.html">universe</a></li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="ale_tankard.html">ale_tankard</a></li><li><a href="wine_flask.html">wine_flask</a></li><li><a href="crude_dagger.html">crude_dagger</a></li><li><a href="basic_club.html">basic_club</a></li><li><a href="rock.html">rock</a></li><li><a href="short_bow.html">short_bow</a></li><li><a href="pointy_stick.html">pointy_stick</a></li><li><a href="gnomish_dagger.html">gnomish_dagger</a></li><li><a href="gnomish_mace.html">gnomish_mace</a></li><li><a href="gnomish_axe.html">gnomish_axe</a></li><li><a href="bone_dagger.html">bone_dagger</a></li><li><a href="necro_axe.html">necro_axe</a></li><li><a href="leather_armour1.html">leather_armour1</a></li><li><a href="cloth_armour1.html">cloth_armour1</a></li><li><a href="lesser_bone_armour.html">lesser_bone_armour</a></li><li><a href="smugglersMap.html">smugglersMap</a></li><li><a href="pixie_jar.html">pixie_jar</a></li><li><a href="pixie_jar_dim.html">pixie_jar_dim</a></li><li><a href="parchment.html">parchment</a></li><li><a href="gold_pieces.html">gold_pieces</a></li><li><a href="staff_minor_scorch.html">staff_minor_scorch</a></li><li><a href="staff_bewilder.html">staff_bewilder</a></li><li><a href="vampiric_staff.html">vampiric_staff</a></li><li><a href="arrow.html">arrow</a></li><li><a href="web_trap.html">web_trap</a></li><li><a href="poison_spore.html">poison_spore</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -47,28 +47,42 @@ Lookup table for items, based on the environment</p>
     ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code><strong><a href="item_lookup.html#stoneCavernItems1">stoneCavernItems1</a></strong>: array[1..8] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
+    'pointyStick', 'arrow', 'gold');</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="item_lookup.html#stoneCavernItems2">stoneCavernItems2</a></strong>: array[1..7] of string =
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
+    'rock', 'arrow', 'shortBow');</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="item_lookup.html#stoneCavernItems3">stoneCavernItems3</a></strong>: array[1..6] of string =
+    ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code><strong><a href="item_lookup.html#cptItems1">cptItems1</a></strong>: array[1..6] of string =
     ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar', 'gold');</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><strong><a href="item_lookup.html#cptItems2">cptItems2</a></strong>: array[1..8] of string =
     ('rock', 'aleTankard', 'crudeDagger', 'staffBewilder', 'gold',
     'dimPixieJar', 'arrow', 'shortBow');</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><strong><a href="item_lookup.html#cptItems3">cptItems3</a></strong>: array[1..7] of string =
     ('aleTankard', 'staffVampire', 'aleTankard', 'rock', 'wineFlask', 'arrow', 'gold');</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><strong><a href="item_lookup.html#dgnItems1">dgnItems1</a></strong>: array[1..5] of string =
     ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar');</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code><strong><a href="item_lookup.html#dgnItems2">dgnItems2</a></strong>: array[1..8] of string =
     ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
     'dimPixieJar', 'arrow', 'shortBow', 'gold');</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code><strong><a href="item_lookup.html#dgnItems3">dgnItems3</a></strong>: array[1..7] of string =
     ('aleTankard', 'crudeDagger', 'aleTankard', 'staffBewilder', 'wineFlask', 'arrow', 'gold');</code></td>
 </tr>
@@ -126,6 +140,34 @@ Array of items found in a cave, ordered by cave level</p>
 <table class="detail wide_list">
 <tr class="list">
 <td class="itemcode"><span id="caveItems3"></span><code><strong>caveItems3</strong>: array[1..6] of string =
+    ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stoneCavernItems1"></span><code><strong>stoneCavernItems1</strong>: array[1..8] of string =
+    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
+    'pointyStick', 'arrow', 'gold');</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Array of items found in a stone cavern, ordered by cave level</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stoneCavernItems2"></span><code><strong>stoneCavernItems2</strong>: array[1..7] of string =
+    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
+    'rock', 'arrow', 'shortBow');</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="stoneCavernItems3"></span><code><strong>stoneCavernItems3</strong>: array[1..6] of string =
     ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');</code></td>
 </tr>
 <tr><td colspan="1">

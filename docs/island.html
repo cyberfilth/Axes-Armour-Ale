@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container"><div class="navigation">
-<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
 <h1 class="unit">Unit island</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -17,7 +17,7 @@
 <p>
 Stores the overworld map and provides helper functions</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li><a href="overworld.html">overworld</a></li><li><a href="globalUtils.html">globalUtils</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>overworld</li><li><a href="globalUtils.html">globalUtils</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -60,6 +60,9 @@ Stores the overworld map and provides helper functions</p>
 <tr class="list">
 <td class="itemcode"><code>function <strong><a href="island.html#locationExists">locationExists</a></strong>(xPOS, yPOS: smallint): boolean;</code></td>
 </tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="island.html#setVisitedFlag">setVisitedFlag</a></strong>(xPOS, yPOS: smallint);</code></td>
+</tr>
 </table>
 <span id="PasDoc-Types"></span><h3 class="summary">Types</h3>
 <table class="summary wide_list">
@@ -73,10 +76,10 @@ Stores the overworld map and provides helper functions</p>
 <td class="itemcode"><code><strong><a href="island.html#locationLookup">locationLookup</a></strong>: array of <a href="island.locationTile.html">locationTile</a>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><strong><a href="island.html#overworldDisplay">overworldDisplay</a></strong>: array[1..<a href="overworld.html#MAXR">overworld.MAXR</a>, 1..<a href="overworld.html#MAXC">overworld.MAXC</a>] of <a href="island.displayTile.html">displayTile</a>;</code></td>
+<td class="itemcode"><code><strong><a href="island.html#overworldDisplay">overworldDisplay</a></strong>: array[1..overworld.MAXR, 1..overworld.MAXC] of <a href="island.displayTile.html">displayTile</a>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><strong><a href="island.html#overworldMap">overworldMap</a></strong>: array[1..<a href="overworld.html#MAXR">overworld.MAXR</a>, 1..<a href="overworld.html#MAXC">overworld.MAXC</a>] of <a href="island.overworldTile.html">overworldTile</a>;</code></td>
+<td class="itemcode"><code><strong><a href="island.html#overworldMap">overworldMap</a></strong>: array[1..overworld.MAXR, 1..overworld.MAXC] of <a href="island.overworldTile.html">overworldTile</a>;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -144,6 +147,15 @@ Return the dungeon type of the location on the map</p>
 Return True if the location already exists on disk</p>
 </td></tr>
 </table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="setVisitedFlag"></span><code>procedure <strong>setVisitedFlag</strong>(xPOS, yPOS: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Set a location as VISITED</p>
+</td></tr>
+</table>
 <h3 class="detail">Types</h3>
 <table class="detail wide_list">
 <tr class="list">
@@ -175,7 +187,7 @@ List of locations on the island</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="overworldDisplay"></span><code><strong>overworldDisplay</strong>: array[1..<a href="overworld.html#MAXR">overworld.MAXR</a>, 1..<a href="overworld.html#MAXC">overworld.MAXC</a>] of <a href="island.displayTile.html">displayTile</a>;</code></td>
+<td class="itemcode"><span id="overworldDisplay"></span><code><strong>overworldDisplay</strong>: array[1..overworld.MAXR, 1..overworld.MAXC] of <a href="island.displayTile.html">displayTile</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -184,7 +196,7 @@ The overworld map that the camera uses</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="overworldMap"></span><code><strong>overworldMap</strong>: array[1..<a href="overworld.html#MAXR">overworld.MAXR</a>, 1..<a href="overworld.html#MAXC">overworld.MAXC</a>] of <a href="island.overworldTile.html">overworldTile</a>;</code></td>
+<td class="itemcode"><span id="overworldMap"></span><code><strong>overworldMap</strong>: array[1..overworld.MAXR, 1..overworld.MAXC] of <a href="island.overworldTile.html">overworldTile</a>;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>

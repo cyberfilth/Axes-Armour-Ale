@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container"><div class="navigation">
-<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li><li><a href="GVUses.png">Unit dependency graph</a></li></ul></div><div class="content">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
 <h1 class="unit">Unit items</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section"><a class="section" href="#PasDoc-Types">Types</a></div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
@@ -56,18 +56,21 @@ Items and objects in the game world</p>
 <td class="itemcode"><code>function <strong><a href="items.html#getItemColour">getItemColour</a></strong>(x, y: smallint): shortstring;</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>function <strong><a href="items.html#getItemType">getItemType</a></strong>(x, y: smallint): <a href="items.html#tItem">tItem</a>;</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>function <strong><a href="items.html#isItemThrowable">isItemThrowable</a></strong>(x, y: smallint): boolean;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>function <strong><a href="items.html#getThrowDamage">getThrowDamage</a></strong>(x, y: smallint): smallint;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="items.html#checkForTraps">checkForTraps</a></strong>;</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>function <strong><a href="items.html#countNonEmptyItems">countNonEmptyItems</a></strong>: byte;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="items.html#redrawItems">redrawItems</a></strong>;</code></td>
 </tr>
 </table>
@@ -164,6 +167,15 @@ Get the item glyph at coordinates</p>
 <tr><td colspan="1">
 <p>
 Get the glyph colour at coordinates</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="getItemType"></span><code>function <strong>getItemType</strong>(x, y: smallint): <a href="items.html#tItem">tItem</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Get item type</p>
 </td></tr>
 </table>
 <table class="detail wide_list">
