@@ -35,7 +35,7 @@ var
 begin
   (* Determine hostility *)
   mood := randomRange(1, 2);
-  (* Add a cave rat to the list of creatures *)
+  (* Add a spider to the list of creatures *)
   entities.listLength := length(entities.entityList);
   SetLength(entities.entityList, entities.listLength + 1);
   with entities.entityList[entities.listLength] do
@@ -72,9 +72,11 @@ begin
     stsDrunk := False;
     stsPoison := False;
     stsBewild := False;
+    stsFrozen := False;	
     tmrDrunk := 0;
     tmrPoison := 0;
     tmrBewild := 0;
+    tmrFrozen := 0;
     hasPath := False;
     destinationReached := False;
     entities.initPath(uniqueid);

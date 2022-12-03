@@ -1,6 +1,6 @@
-(* Weak enemy with simple AI, no pathfinding *)
+(* Scorpion that can paralyse the player *)
 
-unit cave_rat;
+unit scorpion;
 
 {$mode objfpc}{$H+}
 
@@ -9,8 +9,8 @@ interface
 uses
   SysUtils, ai_animal, combat_resolver, ui;
 
-(* Create a cave rat *)
-procedure createCaveRat(uniqueid, npcx, npcy: smallint);
+(* Create a Scorpion *)
+procedure createScorpion(uniqueid, npcx, npcy: smallint);
 (* The NPC takes their turn in the game loop *)
 procedure takeTurn(id: smallint);
 (* Creature death *)
@@ -27,30 +27,26 @@ function isNextToPlayer(spx, spy: smallint): boolean;
 implementation
 
 uses
-  entities, globalutils, los, map;
+  entities, globalutils, los, map, player_stats;
 
-procedure createCaveRat(uniqueid, npcx, npcy: smallint);
-var
-  mood: byte;
+procedure createScorpion(uniqueid, npcx, npcy: smallint);
 begin
-  (* Determine hostility *)
-  mood := randomRange(1, 2);
-  (* Add a cave rat to the list of creatures *)
+  (* Add a scorpion to the list of creatures *)
   entities.listLength := length(entities.entityList);
   SetLength(entities.entityList, entities.listLength + 1);
   with entities.entityList[entities.listLength] do
   begin
     npcID := uniqueid;
-    race := 'Cave Rat';
-    intName := 'CaveRat';
+    race := 'Scorpion';
+    intName := 'scorpion';
     article := True;
-    description := 'a large rat';
-    glyph := 'r';
-    glyphColour := 'brown';
-    maxHP := randomRange(4, 5);
+    description := 'a vicious scorpion';
+    glyph := 'S';
+    glyphColour := 'LgreyBGblack';
+    maxHP := randomRange(6, 8) + player_stats.playerLevel;
     currentHP := maxHP;
-    attack := randomRange(entityList[0].attack - 1, entityList[0].attack + 2);
-    defence := randomRange(entityList[0].defence, entityList[0].defence + 1);
+    attack := randomRange(7, 9);
+    defence := randomRange(4, 6) + player_stats.playerLevel;
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;
@@ -60,11 +56,8 @@ begin
     targetY := 0;
     inView := False;
     blocks := False;
-    faction := animalFaction;
-    if (mood = 1) then
-      state := stateHostile
-    else
-      state := stateNeutral;
+    faction := bugFaction;
+    state := stateHostile;
     discovered := False;
     weaponEquipped := False;
     armourEquipped := False;
@@ -92,25 +85,15 @@ procedure takeTurn(id: smallint);
 begin
   (* Check for status effects *)
 
-  { Poison }
-  if (entityList[id].stsPoison = True) then
-  begin
-    Dec(entityList[id].currentHP);
-    Dec(entityList[id].tmrPoison);
-    if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
-      ui.displayMessage(entityList[id].race + ' looks sick');
-    if (entityList[id].tmrPoison <= 0) then
-      entityList[id].stsBewild := False;
-  end;
   { Bewildered }
   if (entityList[id].stsBewild = True) then
   begin
     Dec(entityList[id].tmrBewild);
     if (entityList[id].inView = True) and (entityList[0].moveCount div 2 = 0) then
-      ui.displayMessage(entityList[id].race + ' looks bewildered')
+      ui.displayMessage(entityList[id].race + ' behaves erratically')
     else if (entityList[id].inView = True) then
     begin
-      ui.displayMessage(entityList[id].race + ' bites itself');
+      ui.displayMessage(entityList[id].race + ' stings itself');
       Dec(entityList[id].currentHP);
     end;
     ai_animal.wander(id, entityList[id].posX, entityList[id].posY);
@@ -130,7 +113,7 @@ end;
 
 procedure death;
 begin
-  Inc(deathList[0]);
+  Inc(deathList[28]);
 end;
 
 procedure decisionNeutral(id: smallint);
@@ -148,7 +131,7 @@ end;
 
 procedure decisionHostile(id: smallint);
 begin
-  { If health is below 50%, escape }
+  { If health is low, escape }
   if (entityList[id].currentHP < (entityList[id].maxHP div 2)) then
   begin
     entityList[id].state := stateEscape;
@@ -176,7 +159,8 @@ end;
 procedure decisionEscape(id: smallint);
 begin
   { Check if player is in sight }
-  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX, entityList[0].posY, entityList[id].visionRange) = True) then
+  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
+    entityList[0].posY, entityList[id].visionRange) = True) then
     { If the player is in sight, run away }
     ai_animal.escapePlayer(id, entityList[id].posX, entityList[id].posY)
 

@@ -64,9 +64,9 @@ type
     (* Has the NPC been killed, to be removed at end of game loop *)
     isDead: boolean;
     (* status effects *)
-    stsDrunk, stsPoison, stsBewild: boolean;
+    stsDrunk, stsPoison, stsBewild, stsFrozen: boolean;
     (* status timers *)
-    tmrDrunk, tmrPoison, tmrBewild: smallint;
+    tmrDrunk, tmrPoison, tmrBewild, tmrFrozen: smallint;
     (* Pathfinding variables *)
     hasPath, destinationReached: boolean;
     smellPath: array[1..30] of TPoint;
@@ -78,7 +78,7 @@ type
 
 var
   entityList: array of Creature;
-  npcAmount, listLength: byte;
+  npcAmount, listLength: smallint;
 
 (* Add player to list of creatures on the map *)
 procedure spawnPlayer;
@@ -101,11 +101,11 @@ function isCreatureVisible(x, y: smallint): boolean;
 (* Ensure all NPC's are correctly occupying tiles *)
 procedure occupyUpdate;
 (* Update the map display to show all NPC's *)
-procedure redrawMapDisplay(id: byte);
+procedure redrawMapDisplay(id: smallint);
 (* Clear list of NPC's *)
 procedure newFloorNPCs;
 (* Count all living NPC's *)
-function countLivingEntities: byte;
+function countLivingEntities: smallint;
 (* When the light source goes out *)
 procedure outOfView;
 (* Initialise pathfinding array *)
@@ -251,7 +251,7 @@ begin
       map.occupy(entityList[i].posX, entityList[i].posY);
 end;
 
-procedure redrawMapDisplay(id: byte);
+procedure redrawMapDisplay(id: smallint);
 begin
 (* Redrawing NPC directly to map display as looping through entity list in the camera unit wasn't working *)
   if (entityList[id].isDead = False) and (entityList[id].inView = True) then
@@ -268,7 +268,7 @@ begin
   SetLength(entityList, 1);
 end;
 
-function countLivingEntities: byte;
+function countLivingEntities: smallint;
 var
   i, Count: byte;
 begin

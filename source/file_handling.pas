@@ -8,7 +8,7 @@ interface
 
 uses
   SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe, island,
-  cave, smallGrid, crypt, stone_cavern, combat_resolver;
+  cave, smallGrid, crypt, stone_cavern, combat_resolver, ui;
 
 (* Save the overworld map to disk *)
 procedure saveOverworldMap;
@@ -41,7 +41,6 @@ var
   Gplaceholder: char;
 
   procedure AddElement(Node: TDOMNode; Name, Value: shortstring);
-
   var
     NameNode, ValueNode: TDomNode;
   begin
@@ -349,10 +348,8 @@ begin
         { if dungeon type is a dungeon }
         else if (dType = tDungeon) then
         begin
-          if (smallGrid.processed_dungeon[r][c] = '.') or
-            (smallGrid.processed_dungeon[r][c] = 'X') or
-            (smallGrid.processed_dungeon[r][c] = '>') or
-            (smallGrid.processed_dungeon[r][c] = '<') then
+          if (smallGrid.processed_dungeon[r][c] = '.') or (smallGrid.processed_dungeon[r][c] = 'X') or
+            (smallGrid.processed_dungeon[r][c] = '>') or (smallGrid.processed_dungeon[r][c] = '<') then
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
           else
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
@@ -360,10 +357,8 @@ begin
         { if dungeon type is a crypt }
         else if (dType = tCrypt) then
         begin
-          if (crypt.dungeonArray[r][c] = '.') or
-            (crypt.dungeonArray[r][c] = 'X') or
-            (crypt.dungeonArray[r][c] = '>') or
-            (crypt.dungeonArray[r][c] = '<') then
+          if (crypt.dungeonArray[r][c] = '.') or (crypt.dungeonArray[r][c] = 'X') or
+            (crypt.dungeonArray[r][c] = '>') or (crypt.dungeonArray[r][c] = '<') then
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
           else
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
@@ -371,10 +366,8 @@ begin
         { if dungeon type is a stone cavern }
         else if (dType = tStoneCavern) then
         begin
-          if (stone_cavern.terrainArray[r][c] = '.') or
-            (stone_cavern.terrainArray[r][c] = 'X') or
-            (stone_cavern.terrainArray[r][c] = '>') or
-            (stone_cavern.terrainArray[r][c] = '<') then
+          if (stone_cavern.terrainArray[r][c] = '.') or (stone_cavern.terrainArray[r][c] = 'X') or
+            (stone_cavern.terrainArray[r][c] = '>') or (stone_cavern.terrainArray[r][c] = '<') then
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
           else
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
@@ -421,7 +414,6 @@ var
   dfileName, Value: shortstring;
 
   procedure AddElement(Node: TDOMNode; Name, Value: shortstring);
-
   var
     NameNode, ValueNode: TDomNode;
   begin
@@ -575,28 +567,24 @@ begin
           AddElement(DataNode, 'faction', Value);
           WriteStr(Value, entities.entityList[i].state);
           AddElement(DataNode, 'state', Value);
-          AddElement(DataNode, 'discovered',
-            BoolToStr(entities.entityList[i].discovered));
-          AddElement(DataNode, 'weaponEquipped',
-            BoolToStr(entities.entityList[i].weaponEquipped));
-          AddElement(DataNode, 'armourEquipped',
-            BoolToStr(entities.entityList[i].armourEquipped));
+          AddElement(DataNode, 'discovered', BoolToStr(entities.entityList[i].discovered));
+          AddElement(DataNode, 'weaponEquipped', BoolToStr(entities.entityList[i].weaponEquipped));
+          AddElement(DataNode, 'armourEquipped', BoolToStr(entities.entityList[i].armourEquipped));
           AddElement(DataNode, 'stsDrunk', BoolToStr(entities.entityList[i].stsDrunk));
           AddElement(DataNode, 'stsPoison', BoolToStr(entities.entityList[i].stsPoison));
           AddElement(DataNode, 'stsBewild', BoolToStr(entities.entityList[i].stsBewild));
+          AddElement(DataNode, 'stsFrozen', BoolToStr(entities.entityList[i].stsFrozen));
           AddElement(DataNode, 'tmrDrunk', IntToStr(entities.entityList[i].tmrDrunk));
           AddElement(DataNode, 'tmrPoison', IntToStr(entities.entityList[i].tmrPoison));
           AddElement(DataNode, 'tmrBewild', IntToStr(entities.entityList[i].tmrBewild));
+          AddElement(DataNode, 'tmrFrozen', IntToStr(entities.entityList[i].tmrFrozen));
           AddElement(DataNode, 'hasPath', BoolToStr(entities.entityList[i].hasPath));
-          AddElement(DataNode, 'destReach',
-            BoolToStr(entities.entityList[i].destinationReached));
+          AddElement(DataNode, 'destReach', BoolToStr(entities.entityList[i].destinationReached));
           (* Save path coordinates *)
           for coords := 1 to 30 do
           begin
-            AddElement(DataNode, 'coordX' + IntToStr(coords),
-              IntToStr(entities.entityList[i].smellPath[coords].X));
-            AddElement(DataNode, 'coordY' + IntToStr(coords),
-              IntToStr(entities.entityList[i].smellPath[coords].Y));
+            AddElement(DataNode, 'coordX' + IntToStr(coords), IntToStr(entities.entityList[i].smellPath[coords].X));
+            AddElement(DataNode, 'coordY' + IntToStr(coords), IntToStr(entities.entityList[i].smellPath[coords].Y));
           end;
           AddElement(DataNode, 'posX', IntToStr(entities.entityList[i].posX));
           AddElement(DataNode, 'posY', IntToStr(entities.entityList[i].posY));
@@ -895,11 +883,21 @@ begin
     entities.entityList[0].stsDrunk := StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsDrunk').TextContent));
     entities.entityList[0].stsPoison := StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsPoison').TextContent));
     entities.entityList[0].stsBewild := StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsBewild').TextContent));
+    entities.entityList[0].stsFrozen := StrToBool(UTF8Encode(PlayerDataNode.FindNode('stsFrozen').TextContent));
     entities.entityList[0].tmrDrunk := StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrDrunk').TextContent));
     entities.entityList[0].tmrPoison := StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrPoison').TextContent));
     entities.entityList[0].tmrBewild := StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrBewild').TextContent));
+    entities.entityList[0].tmrFrozen := StrToInt(UTF8Encode(PlayerDataNode.FindNode('tmrFrozen').TextContent));
     entities.entityList[0].posX := StrToInt(UTF8Encode(PlayerDataNode.FindNode('posX').TextContent));
     entities.entityList[0].posY := StrToInt(UTF8Encode(PlayerDataNode.FindNode('posY').TextContent));
+
+    (* Set status variables *)
+    if (entityList[0].stsPoison = True) then
+      ui.poisonStatusSet := True;
+    if (entityList[0].stsBewild = True) then
+      ui.bewilderedStatusSet := True;
+    if (entityList[0].stsFrozen = True) then
+      ui.frozenStatusSet := True;
 
     (* Player stats *)
     player_stats.playerLevel := StrToInt(UTF8Encode(PlayerDataNode.FindNode('playerLevel').TextContent));
@@ -1076,9 +1074,11 @@ begin
     AddElement(DataNode, 'stsDrunk', BoolToStr(entities.entityList[0].stsDrunk));
     AddElement(DataNode, 'stsPoison', BoolToStr(entities.entityList[0].stsPoison));
     AddElement(DataNode, 'stsBewild', BoolToStr(entities.entityList[0].stsBewild));
+    AddElement(DataNode, 'stsFrozen', BoolToStr(entities.entityList[0].stsFrozen));
     AddElement(DataNode, 'tmrDrunk', IntToStr(entities.entityList[0].tmrDrunk));
     AddElement(DataNode, 'tmrPoison', IntToStr(entities.entityList[0].tmrPoison));
     AddElement(DataNode, 'tmrBewild', IntToStr(entities.entityList[0].tmrBewild));
+    AddElement(DataNode, 'tmrFrozen', IntToStr(entities.entityList[0].tmrFrozen));
     AddElement(DataNode, 'posX', IntToStr(entities.entityList[0].posX));
     AddElement(DataNode, 'posY', IntToStr(entities.entityList[0].posY));
 

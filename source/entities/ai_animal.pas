@@ -191,7 +191,7 @@ begin
              end
              else if (entityList[id].intName = 'smlCorpseSpider') then
              begin
-               (* Spider does poison damage *)
+               (* Corpse Spider does poison damage *)
                entityList[0].stsPoison := True;
                entityList[0].tmrPoison := damageAmount + 2;
                if (killer = 'empty') then
@@ -199,7 +199,7 @@ begin
              end
              else if (entityList[id].intName = 'embalmSpider') then
              begin
-               (* Spider does poison damage *)
+               (* Embalming Spider does poison damage *)
                entityList[0].stsPoison := True;
                entityList[0].tmrPoison := damageAmount + 3;
                if (killer = 'empty') then

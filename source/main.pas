@@ -319,6 +319,8 @@ begin
     ui.screenBlank;
     (* Draw the game screen *)
     scrGame.displayGameScreen;
+    (* Draw the status effects *)
+    ui.redrawStatusEffects;
     (* draw map through the camera *)
     camera.drawMap;
     (* Generate the welcome message *)
@@ -345,6 +347,8 @@ begin
     ui.screenBlank;
     (* Draw the game screen *)
     scrOverworld.drawSidepanel;
+    (* Draw the status effects *)
+    ui.redrawStatusEffects;
     (* draw map through the camera *)
     camera.drawOWMap;
     { Write those changes to the screen }

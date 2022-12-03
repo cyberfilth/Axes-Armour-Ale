@@ -103,7 +103,7 @@ begin
     TextOut(10, y, 'cyan', 'You need ' + IntToStr(3250 - entityList[0].xpReward) + ' experience point(s) to advance to level 11');
 
   (* Status effects *)
-  if (entityList[0].stsDrunk = True) or (entityList[0].stsPoison = True) then
+  if (entityList[0].stsDrunk = True) or (entityList[0].stsPoison = True) or (entityList[0].stsBewild = True) or (entityList[0].stsFrozen = True) then
     begin
          Inc(y, 3);
          if (entityList[0].stsDrunk = True) then
@@ -112,6 +112,8 @@ begin
            statusFX := statusFX + '  [ poisoned ]  ';
          if (entityList[0].stsBewild = True) then
            statusFX := statusFX + '  [ bewildered ]  ';
+         if (entityList[0].stsFrozen = True) then
+           statusFX := statusFX + '  [ frozen ]  ';
          TextOut(10, y, 'cyan', 'Current status:');
          Inc(y);
          TextOut(centreX(statusFX), y, 'cyan', statusFX);

@@ -22,7 +22,7 @@ var
   buffer: shortstring;
   equippedWeapon, equippedArmour: shortstring;
   (* Status effects *)
-  poisonStatusSet, bewilderedStatusSet: boolean;
+  poisonStatusSet, bewilderedStatusSet, frozenStatusSet: boolean;
 
 (* Write to the screen *)
 procedure TextOut(X, Y: word; textcol: shortstring; const S: string);
@@ -184,6 +184,14 @@ begin
     else if (onoff = 0) then
       TextOut(18, 20, 'black', '            ');
   end;
+  { FROZEN }
+    if (effectType = 'frozen') then
+  begin
+    if (onoff = 1) then
+      TextOut(33, 20, 'lightGrey', '[Frozen]')
+    else if (onoff = 0) then
+      TextOut(33, 20, 'black', '        ');
+  end;
 end;
 
 procedure redrawStatusEffects;
@@ -192,6 +200,8 @@ begin
      TextOut(5, 20, 'green', '[Poisoned]');
   if (bewilderedStatusSet = True) then
      TextOut(18, 20, 'blue', '[Bewildered]');
+ if (frozenStatusSet = True) then
+    TextOut(33, 20, 'lightGrey', '[Frozen]');
 end;
 
 procedure displayMessage(message: shortstring);

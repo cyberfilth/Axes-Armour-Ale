@@ -100,9 +100,11 @@ begin
     stsDrunk := False;
     stsPoison := False;
     stsBewild := False;
+    stsFrozen := False;
     tmrDrunk := 0;
     tmrPoison := 0;
     tmrBewild := 0;
+    tmrFrozen := 0;
     posX := map.startX;
     posY := map.startY;
   end;
@@ -266,76 +268,85 @@ var
   (* store original values in case player cannot move *)
   originalX, originalY: smallint;
 begin
-  (* Unoccupy tile *)
-  map.unoccupy(entityList[0].posX, entityList[0].posY);
-  (* Repaint visited tiles *)
-  fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 0);
-  originalX := entities.entityList[0].posX;
-  originalY := entities.entityList[0].posY;
-  (* If the player is bewildered, move in a random direction *)
-  if (entityList[0].stsBewild = True) then
-  begin
-    dir := randomRange(1,8);
-  end;
-  (* Else choose a direction *)
-  case dir of
-    1: Dec(entities.entityList[0].posY); // N
-    2: Dec(entities.entityList[0].posX); // W
-    3: Inc(entities.entityList[0].posY); // S
-    4: Inc(entities.entityList[0].posX); // E
-    5:                      // NE
+  (* Check if player is frozen in place *)
+  if (entityList[0].stsFrozen = False) then
     begin
-      Inc(entities.entityList[0].posX);
-      Dec(entities.entityList[0].posY);
-    end;
-    6:                      // SE
-    begin
-      Inc(entities.entityList[0].posX);
-      Inc(entities.entityList[0].posY);
-    end;
-    7:                      // SW
-    begin
-      Dec(entities.entityList[0].posX);
-      Inc(entities.entityList[0].posY);
-    end;
-    8:                      // NW
-    begin
-      Dec(entities.entityList[0].posX);
-      Dec(entities.entityList[0].posY);
-    end;
-    9:
-    begin
-                           // Wait in place
-    end;
-  end;
-  (* check if tile is occupied *)
-  if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
-    (* check if tile is occupied by hostile NPC *)
-    if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) =  True) then
-    begin
-      entities.entityList[0].posX := originalX;
-      entities.entityList[0].posY := originalY;
-    end;
-  Inc(entities.entityList[0].moveCount);
-  (* check if tile is walkable *)
-  if (map.canMove(entities.entityList[0].posX, entities.entityList[0].posY) = False) then
-  begin
-    entities.entityList[0].posX := originalX;
-    entities.entityList[0].posY := originalY;
-    (* display a clumsy message if player is intoxicated *)
-    if (entityList[0].stsDrunk = True) then
-      ui.displayMessage('You bump into a wall');
-    Dec(entities.entityList[0].moveCount);
-  end;
-  (* Occupy tile *)
-  map.occupy(entityList[0].posX, entityList[0].posY);
-  fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
-    entities.entityList[0].visionRange, 1);
-  ui.writeBufferedMessages;
+      (* Unoccupy tile *)
+      map.unoccupy(entityList[0].posX, entityList[0].posY);
+      (* Repaint visited tiles *)
+      fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 0);
+      originalX := entities.entityList[0].posX;
+      originalY := entities.entityList[0].posY;
+      (* If the player is bewildered, move in a random direction *)
+      if (entityList[0].stsBewild = True) then
+      begin
+        dir := randomRange(1,8);
+      end;
+      (* Else choose a direction *)
+      case dir of
+        1: Dec(entities.entityList[0].posY); // N
+        2: Dec(entities.entityList[0].posX); // W
+        3: Inc(entities.entityList[0].posY); // S
+        4: Inc(entities.entityList[0].posX); // E
+        5:                      // NE
+        begin
+          Inc(entities.entityList[0].posX);
+          Dec(entities.entityList[0].posY);
+        end;
+        6:                      // SE
+        begin
+          Inc(entities.entityList[0].posX);
+          Inc(entities.entityList[0].posY);
+        end;
+        7:                      // SW
+        begin
+          Dec(entities.entityList[0].posX);
+          Inc(entities.entityList[0].posY);
+        end;
+        8:                      // NW
+        begin
+          Dec(entities.entityList[0].posX);
+          Dec(entities.entityList[0].posY);
+        end;
+        9:
+        begin
+                              // Wait in place
+        end;
+      end;
+      (* check if tile is occupied *)
+      if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
+        (* check if tile is occupied by hostile NPC *)
+        if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) =  True) then
+        begin
+          entities.entityList[0].posX := originalX;
+          entities.entityList[0].posY := originalY;
+        end;
+      Inc(entities.entityList[0].moveCount);
+      (* check if tile is walkable *)
+      if (map.canMove(entities.entityList[0].posX, entities.entityList[0].posY) = False) then
+      begin
+        entities.entityList[0].posX := originalX;
+        entities.entityList[0].posY := originalY;
+        (* display a clumsy message if player is intoxicated *)
+        if (entityList[0].stsDrunk = True) then
+          ui.displayMessage('You bump into a wall');
+        Dec(entities.entityList[0].moveCount);
+      end;
+      (* Occupy tile *)
+      map.occupy(entityList[0].posX, entityList[0].posY);
+      fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
+        entities.entityList[0].visionRange, 1);
+      ui.writeBufferedMessages;
 
-  (* Regenerate Magick *)
-  if (player_stats.playerRace <> 'Dwarf') then
-    regenMagick;
+      (* Regenerate Magick *)
+      if (player_stats.playerRace <> 'Dwarf') then
+        regenMagick;
+  end
+  { Display a message if the player is frozen }
+  else
+    begin
+      ui.displayMessage('You are frozen in place, unable to move');
+    end;  
 end;
 
 procedure processStatus;
@@ -388,7 +399,6 @@ begin
       (* Update UI *)
       ui.displayStatusEffect(1, 'bewildered');
       ui.bewilderedStatusSet := True;
-      //entityList[0].glyphColour := 'green';
     end;
    if (entities.entityList[0].tmrBewild <= 0) then
     begin
@@ -397,11 +407,32 @@ begin
       (* Update UI *)
       ui.displayStatusEffect(0, 'bewildered');
       ui.bewilderedStatusSet := False;
-      //entityList[0].glyphColour := 'yellow';
     end
    else
        Dec(entityList[0].tmrBewild);
   end;
+
+  (* Frozen *)
+  if (entities.entityList[0].stsFrozen = True) then
+  begin
+    if (ui.frozenStatusSet = False) then
+    begin
+      (* Update UI *)
+      ui.displayStatusEffect(1, 'frozen');
+      ui.frozenStatusSet := True;
+    end;
+   if (entities.entityList[0].tmrFrozen <= 0) then
+    begin
+      entities.entityList[0].tmrFrozen := 0;
+      entities.entityList[0].stsFrozen := False;
+      (* Update UI *)
+      ui.displayStatusEffect(0, 'frozen');
+      ui.frozenStatusSet := False;
+    end
+   else
+       Dec(entityList[0].tmrFrozen);
+  end;
+
 end;
 
 
