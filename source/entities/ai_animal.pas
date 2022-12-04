@@ -197,6 +197,22 @@ begin
                if (killer = 'empty') then
                   killer := 'a small Corpse Spider';
              end
+             else if (entityList[id].intName = 'scorpion') then
+             begin
+               (* Scorpion paralyses the player *)
+               entityList[0].stsFrozen := True;
+               entityList[0].tmrFrozen := damageAmount + 4;
+               if (killer = 'empty') then
+                  killer := 'a Scorpion';
+             end
+	     else if (entityList[id].intName = 'smallScorpion') then
+             begin
+               (* Scorpion poisons the player *)
+               entityList[0].stsPoison := True;
+               entityList[0].tmrPoison := damageAmount + 2;
+               if (killer = 'empty') then
+                  killer := 'a small Scorpion';
+             end
              else if (entityList[id].intName = 'embalmSpider') then
              begin
                (* Embalming Spider does poison damage *)

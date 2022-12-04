@@ -13,7 +13,8 @@ uses
   redcap_lesser, redcap_lesser_lobber, small_green_fungus, small_hyena, redcap_fungus,
   hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
   crypt_wolf, blue_fungus, embalming_spider, gnome_cultist, bogle_drunk, ghoul_lvl1,
-  skeleton_lvl1, zombie_weak, goblin_necromancer, corpse_zombie, rabid_dog, cave_bear;
+  skeleton_lvl1, zombie_weak, goblin_necromancer, corpse_zombie, rabid_dog, cave_bear,
+  scorpion, small_scorpion;
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
@@ -29,26 +30,20 @@ const
     ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
   caveNPC3: array[1..7] of string =
     ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'greenFungus', 'matango', 'hyenaFungus');
-  caveUnique1: array[1..2] of string =
-    ('largeBat', 'bloodBat');
-  caveUnique2: array[1..2] of string =
-    ('redcapLsrLbr', 'largeBat');
-  caveUnique3: array[1..2] of string =
-    ('redcapLsrLbr', 'redcapLsrLbr');
+  caveUnique1: array[1..2] of string = ('largeBat', 'bloodBat');
+  caveUnique2: array[1..2] of string = ('redcapLsrLbr', 'largeBat');
+  caveUnique3: array[1..2] of string = ('redcapLsrLbr', 'redcapLsrLbr');
 
   (* Array of creatures found in stone cavern, ordered by cave level *)
   stoneCavernNPC1: array[1..5] of string =
-    ('caveRat', 'rabidDog', 'caveRat', 'caveRat', 'greenFungus');
+    ('caveRat', 'rabidDog', 'caveRat', 'caveRat', 'smallScorpion');
   stoneCavernNPC2: array[1..7] of string =
-    ('rabidDog', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
+    ('rabidDog', 'giantRat', 'largeBat', 'smallScorpion', 'giantRat', 'greenFungus', 'smallScorpion');
   stoneCavernNPC3: array[1..7] of string =
     ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'greenFungus', 'matango', 'hyenaFungus');
-  stoneCavernUnique1: array[1..2] of string =
-    ('caveBear', 'caveBear');
-  stoneCavernUnique2: array[1..2] of string =
-    ('redcapLsrLbr', 'largeBat');
-  stoneCavernUnique3: array[1..2] of string =
-    ('redcapLsrLbr', 'redcapLsrLbr');
+  stoneCavernUnique1: array[1..2] of string = ('caveBear', 'caveBear');
+  stoneCavernUnique2: array[1..2] of string = ('scorpion', 'scorpion');
+  stoneCavernUnique3: array[1..2] of string = ('redcapLsrLbr', 'redcapLsrLbr');
 
   (* Array of creatures found in a dungeon, ordered by dungeon level *)
   dgnNPC1: array[1..4] of string =
@@ -57,12 +52,9 @@ const
     ('smlCorpseSpider', 'GnmCult', 'GnmWarr', 'GnmWarr', 'blueFungus');
   dgnNPC3: array[1..5] of string =
     ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'smlCorpseSpider');
-  dgnUnique1: array[1..2] of string =
-    ('blueFungus', 'GnmAss');
-  dgnUnique2: array[1..2] of string =
-    ('embalmSpider', 'GnmAss');
-  dgnUnique3: array[1..2] of string =
-    ('drunkBogle', 'drunkBogle');
+  dgnUnique1: array[1..2] of string = ('blueFungus', 'GnmAss');
+  dgnUnique2: array[1..2] of string = ('embalmSpider', 'GnmAss');
+  dgnUnique3: array[1..2] of string = ('drunkBogle', 'drunkBogle');
 
   (* Array of creatures found in a crypt, ordered by dungeon level *)
   cptNPC1: array[1..4] of string =
@@ -71,12 +63,9 @@ const
     ('zombieWeak', 'ghoulLVL1', 'zombieWeak', 'skeletonLVL1', 'blueFungus');
   cptNPC3: array[1..5] of string =
     ('corpseZombie', 'corpseZombie', 'skeletonLVL1', 'corpseZombie', 'smlCorpseSpider');
-  cptUnique1: array[1..2] of string =
-    ('greenFungus', 'zombieWeak');
-  cptUnique2: array[1..2] of string =
-    ('embalmSpider', 'embalmSpider');
-  cptUnique3: array[1..2] of string =
-    ('GobNecro', 'GobNecro');
+  cptUnique1: array[1..2] of string = ('greenFungus', 'zombieWeak');
+  cptUnique2: array[1..2] of string = ('embalmSpider', 'embalmSpider');
+  cptUnique3: array[1..2] of string = ('GobNecro', 'GobNecro');
 
 var
   r, c: smallint;
@@ -281,6 +270,8 @@ begin
     'corpseZombie': corpse_zombie.createZombie(i, c, r);
     'rabidDog': rabid_dog.createRabidDog(i, c, r);
     'caveBear': cave_bear.createCaveBear(i, c, r);
+    'scorpion': scorpion.createScorpion(i, c, r);
+    'smallScorpion': small_scorpion.createSmallScorpion(i, c, r);
   end;
 end;
 

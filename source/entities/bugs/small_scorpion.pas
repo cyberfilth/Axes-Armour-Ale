@@ -1,6 +1,6 @@
-(* Scorpion that can paralyse the player *)
+(* Scorpion that can poison the player *)
 
-unit scorpion;
+unit small_scorpion;
 
 {$mode objfpc}{$H+}
 
@@ -9,8 +9,8 @@ interface
 uses
   SysUtils, ai_animal, combat_resolver, ui;
 
-(* Create a Scorpion *)
-procedure createScorpion(uniqueid, npcx, npcy: smallint);
+(* Create a small Scorpion *)
+procedure createSmallScorpion(uniqueid, npcx, npcy: smallint);
 (* The NPC takes their turn in the game loop *)
 procedure takeTurn(id: smallint);
 (* Creature death *)
@@ -29,28 +29,28 @@ implementation
 uses
   entities, globalutils, los, map, player_stats;
 
-procedure createScorpion(uniqueid, npcx, npcy: smallint);
+procedure createSmallScorpion(uniqueid, npcx, npcy: smallint);
 begin
-  (* Add a scorpion to the list of creatures *)
+  (* Add a small scorpion to the list of creatures *)
   entities.listLength := length(entities.entityList);
   SetLength(entities.entityList, entities.listLength + 1);
   with entities.entityList[entities.listLength] do
   begin
     npcID := uniqueid;
-    race := 'Scorpion';
-    intName := 'scorpion';
+    race := 'small Scorpion';
+    intName := 'smallScorpion';
     article := True;
-    description := 'a vicious scorpion';
-    glyph := 'S';
-    glyphColour := 'LgreyBGblack';
-    maxHP := randomRange(6, 8) + player_stats.playerLevel;
+    description := 'a small scorpion';
+    glyph := 's';
+    glyphColour := 'lightGrey';
+    maxHP := randomRange(4, 6) + player_stats.playerLevel;
     currentHP := maxHP;
     attack := randomRange(7, 9);
     defence := randomRange(4, 6) + player_stats.playerLevel;
     weaponDice := 0;
     weaponAdds := 0;
     xpReward := maxHP;
-    visionRange := 4;
+    visionRange := 5;
     moveCount := 0;
     targetX := 0;
     targetY := 0;
@@ -113,7 +113,7 @@ end;
 
 procedure death;
 begin
-  Inc(deathList[28]);
+  Inc(deathList[29]);
 end;
 
 procedure decisionNeutral(id: smallint);

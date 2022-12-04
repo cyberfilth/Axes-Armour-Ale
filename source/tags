@@ -241,6 +241,7 @@ createSmallHornet	entities/animals/backup/small_hornet.pas	/^procedure createSma
 createSmallHornet	entities/bugs/small_hornet.pas	/^procedure createSmallHornet(uniqueid, npcx, npcy: smallint);$/;"	p
 createSmallHyena	entities/animals/backup/small_hyena.pas	/^procedure createSmallHyena(uniqueid, npcx, npcy: smallint);$/;"	p
 createSmallHyena	entities/animals/small_hyena.pas	/^procedure createSmallHyena(uniqueid, npcx, npcy: smallint);$/;"	p
+createSmallScorpion	entities/bugs/small_scorpion.pas	/^procedure createSmallScorpion(uniqueid, npcx, npcy: smallint);$/;"	p
 createSmugglersMap	items/macguffins/backup/smugglersmap.pas	/^procedure createSmugglersMap(itmx, itmy: smallint);$/;"	p
 createSmugglersMap	items/macguffins/smugglersmap.pas	/^procedure createSmugglersMap(itmx, itmy: smallint);$/;"	p
 createSpore	items/traps/backup/poison_spore.pas	/^procedure createSpore(itmx, itmy: smallint);$/;"	p
@@ -278,6 +279,7 @@ death	entities/bugs/embalming_spider.pas	/^procedure death;$/;"	p
 death	entities/bugs/scorpion.pas	/^procedure death;$/;"	p
 death	entities/bugs/small_corpse_spider.pas	/^procedure death;$/;"	p
 death	entities/bugs/small_hornet.pas	/^procedure death;$/;"	p
+death	entities/bugs/small_scorpion.pas	/^procedure death;$/;"	p
 death	entities/fungus/backup/blue_fungus.pas	/^procedure death;$/;"	p
 death	entities/fungus/blue_fungus.pas	/^procedure death;$/;"	p
 death	entities/fungus/green_fungus.pas	/^procedure death;$/;"	p
@@ -309,6 +311,7 @@ decisionEscape	entities/bugs/backup/small_corpse_spider.pas	/^procedure decision
 decisionEscape	entities/bugs/embalming_spider.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/bugs/scorpion.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/bugs/small_corpse_spider.pas	/^procedure decisionEscape(id: smallint);$/;"	p
+decisionEscape	entities/bugs/small_scorpion.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/fungus/mushroom_person.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/gnomes/backup/gnome_cultist.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/gnomes/backup/gnome_warrior.pas	/^procedure decisionEscape(id: smallint);$/;"	p
@@ -350,6 +353,7 @@ decisionHostile	entities/bugs/backup/small_corpse_spider.pas	/^procedure decisio
 decisionHostile	entities/bugs/embalming_spider.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/bugs/scorpion.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/bugs/small_corpse_spider.pas	/^procedure decisionHostile(id: smallint);$/;"	p
+decisionHostile	entities/bugs/small_scorpion.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/fungus/mushroom_person.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/gnomes/backup/gnome_cultist.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/gnomes/backup/gnome_warrior.pas	/^procedure decisionHostile(id: smallint);$/;"	p
@@ -393,6 +397,7 @@ decisionNeutral	entities/bugs/backup/small_corpse_spider.pas	/^procedure decisio
 decisionNeutral	entities/bugs/embalming_spider.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/bugs/scorpion.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/bugs/small_corpse_spider.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
+decisionNeutral	entities/bugs/small_scorpion.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/fungus/mushroom_person.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/gnomes/backup/gnome_cultist.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/gnomes/backup/gnome_warrior.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
@@ -635,6 +640,7 @@ isNextToPlayer	entities/bugs/embalming_spider.pas	/^function isNextToPlayer(spx,
 isNextToPlayer	entities/bugs/scorpion.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/bugs/small_corpse_spider.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/bugs/small_hornet.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
+isNextToPlayer	entities/bugs/small_scorpion.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/fungus/backup/blue_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/fungus/blue_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/fungus/green_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
@@ -797,6 +803,7 @@ takeTurn	entities/bugs/embalming_spider.pas	/^procedure takeTurn(id: smallint);$
 takeTurn	entities/bugs/scorpion.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bugs/small_corpse_spider.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bugs/small_hornet.pas	/^procedure takeTurn(id: smallint);$/;"	p
+takeTurn	entities/bugs/small_scorpion.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bugs/web.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/fungus/backup/blue_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/fungus/blue_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p

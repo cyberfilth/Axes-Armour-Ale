@@ -15,7 +15,7 @@ uses
   redcap_fungus, mushroom_person, hyena_fungus, small_hornet, small_corpse_spider,
   gnome_warrior, gnome_assassin, web, crypt_wolf, blue_fungus, embalming_spider,
   gnome_cultist, bogle_drunk, ghoul_lvl1, skeleton_lvl1, zombie_weak, goblin_necromancer,
-  corpse_zombie, rabid_dog, cave_bear;
+  corpse_zombie, rabid_dog, cave_bear, scorpion, small_scorpion;
 
 type { NPC attitudes }
   Tattitudes = (stateNeutral, stateHostile, stateEscape);
@@ -345,6 +345,8 @@ begin
     'corpseZombie': corpse_zombie.takeTurn(i);
     'rabidDog': rabid_dog.takeTurn(i);
     'caveBear': cave_bear.takeTurn(i);
+    'scorpion': scorpion.takeTurn(i);
+    'smallScorpion': small_scorpion.takeTurn(i);
   end;
   (* Occupy their current tile *)
   occupyUpdate;
@@ -381,6 +383,8 @@ begin
     'corpseZombie': corpse_zombie.death(i);
     'rabidDog': rabid_dog.death;
     'caveBear': cave_bear.death;
+    'scorpion': scorpion.death;
+    'smallScorpion': small_scorpion.death;
   end;
 end;
 
