@@ -372,7 +372,7 @@ begin
   begin
     if (enemyID = 0) then
     begin
-      ui.displayMessage('The dog dog strikes but misses');
+      ui.displayMessage('The rabid dog strikes but misses');
       combat_resolver.spiteDMG(npcID);
     end
     else
