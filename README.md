@@ -40,5 +40,8 @@ Wear armour or Wield a weapon with 'w'
 Zap magic with 'z'
 To exit a menu / quit the game press ESCAPE (on Linux you will need to double-tap the ESCAPE key)
 </pre>
+<br />
+
+<a href="https://www.freepascal.org/" target="_blank"><img src="https://img.shields.io/badge/Free%20Pascal-v3.2.2-blue"></a>   <a href="https://www.vim.org/" target="_blank"><img src="https://img.shields.io/badge/Built%20with-Vim-green"></a>
 
 Code documentation can be found at https://cyberfilth.github.io/Axes-Armour-Ale/intro.html
