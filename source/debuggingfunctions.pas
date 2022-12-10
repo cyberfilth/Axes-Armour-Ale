@@ -35,16 +35,14 @@ begin
   (* Highlight entities *)
   for i := 0 to High(entityList) do
   begin
-    logAction(IntToStr(i) + ': ' + entityList[i].race + ' is at ' +
-      IntToStr(entityList[i].posX) + ', ' + IntToStr(entityList[i].posY));
+    logAction(IntToStr(i) + ': ' + entityList[i].race + ' is at ' + IntToStr(entityList[i].posX) + ', ' + IntToStr(entityList[i].posY));
     map.mapDisplay[entityList[i].posY, entityList[i].posX].GlyphColour := 'white';
     map.mapDisplay[entityList[i].posY, entityList[i].posX].Glyph := entityList[i].glyph;
   end;
   (* Highlight items *)
   for i := 0 to High(itemList) do
   begin
-    logAction(IntToStr(i) + ': ' + itemList[i].itemName + ' is at ' +
-      IntToStr(itemList[i].posX) + ', ' + IntToStr(itemList[i].posY));
+    logAction(IntToStr(i) + ': ' + itemList[i].itemName + ' is at ' + IntToStr(itemList[i].posX) + ', ' + IntToStr(itemList[i].posY));
     map.mapDisplay[itemList[i].posY, itemList[i].posX].GlyphColour := 'yellow';
     map.mapDisplay[itemList[i].posY, itemList[i].posX].Glyph := 'X';
   end;

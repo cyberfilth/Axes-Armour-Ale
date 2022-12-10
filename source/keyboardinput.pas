@@ -9,7 +9,7 @@ interface
 
 uses
   Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelp, scrTargeting,
-  scrLook, scrThrow, scrCharacter, globalUtils, scrDeathList{$IFDEF DEBUG}, debuggingFunctions{$ENDIF};
+  scrLook, scrThrow, scrCharacter, globalUtils, scrDeathList{$ifopt D+}, debuggingFunctions{$EndIf};
 
 (* Initialise keyboard unit *)
 procedure setupKeyboard;
@@ -629,7 +629,7 @@ begin
       gameState := stQuitMenu;
       ui.exitPrompt;
     end;
-    {$IFDEF DEBUG}
+    {$ifopt D+}
     '/':
     begin
       debuggingFunctions.topUpStats;
@@ -640,7 +640,7 @@ begin
       debuggingFunctions.showEntitiesItems;
       main.gameLoop;
     end;
-    {$ENDIF}
+    {$EndIf}
   end;
 end;
 
