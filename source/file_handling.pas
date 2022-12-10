@@ -620,8 +620,7 @@ begin
     (* Number of items on current level *)
     itemAmount := StrToInt(UTF8Encode(RootNode.FindNode( 'itemsOnThisFloor').TextContent));
     (* Number of entities on current level *)
-    entities.npcAmount := StrToInt(
-      UTF8Encode(RootNode.FindNode('entitiesOnThisFloor').TextContent));
+    entities.npcAmount := StrToInt( UTF8Encode(RootNode.FindNode('entitiesOnThisFloor').TextContent));
     (* Total depth of current dungeon *)
     universe.totalDepth := StrToInt( UTF8Encode(RootNode.FindNode('totalDepth').TextContent));
     (* Number of rooms in current level *)
@@ -833,7 +832,7 @@ begin
     player_stats.canExitDungeon := StrToBool(UTF8Encode(RootNode.FindNode('canExitDungeon').TextContent));
     (* Type of map *)
     map.mapType := dungeonTerrain(GetEnumValue(Typeinfo(dungeonTerrain), UTF8Encode(RootNode.FindNode('mapType').TextContent)));
-
+    universe.dungeonType := dungeonTerrain(GetEnumValue(Typeinfo(dungeonTerrain), UTF8Encode(RootNode.FindNode('mapType').TextContent)));
     (* List of enemies killed *)
     deathNode := Doc.DocumentElement.FindNode('DL');
     for i := 0 to deathTotal do

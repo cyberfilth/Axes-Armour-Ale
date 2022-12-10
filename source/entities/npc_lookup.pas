@@ -24,45 +24,33 @@ implementation
 procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
 const
   (* Array of creatures found in a cave, ordered by cave level *)
-  caveNPC1: array[1..5] of string =
-    ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
-  caveNPC2: array[1..7] of string =
-    ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
-  caveNPC3: array[1..7] of string =
-    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'greenFungus', 'matango', 'hyenaFungus');
+  caveNPC1: array[1..5] of string = ('caveRat', 'smallHyena', 'caveRat', 'bloodBat', 'greenFungus');
+  caveNPC2: array[1..7] of string = ('smallHyena', 'giantRat', 'largeBat', 'redcapLesser', 'giantRat', 'greenFungus', 'hobFungus');
+  caveNPC3: array[1..7] of string = ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'greenFungus', 'matango', 'hyenaFungus');
   caveUnique1: array[1..2] of string = ('largeBat', 'bloodBat');
   caveUnique2: array[1..2] of string = ('redcapLsrLbr', 'largeBat');
   caveUnique3: array[1..2] of string = ('redcapLsrLbr', 'redcapLsrLbr');
 
   (* Array of creatures found in stone cavern, ordered by cave level *)
-  stoneCavernNPC1: array[1..5] of string =
-    ('caveRat', 'rabidDog', 'caveRat', 'caveRat', 'smallScorpion');
-  stoneCavernNPC2: array[1..7] of string =
-    ('rabidDog', 'giantRat', 'largeBat', 'smallScorpion', 'giantRat', 'greenFungus', 'smallScorpion');
-  stoneCavernNPC3: array[1..7] of string =
-    ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'greenFungus', 'matango', 'hyenaFungus');
+  stoneCavernNPC1: array[1..4] of string = ('caveRat', 'rabidDog', 'giantRat', 'smallScorpion');
+  stoneCavernNPC2: array[1..6] of string = ('rabidDog', 'giantRat', 'largeBat', 'smallScorpion', 'greenFungus', 'smallScorpion');
+  stoneCavernNPC3: array[1..7] of string = ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'greenFungus', 'matango', 'hyenaFungus');
   stoneCavernUnique1: array[1..2] of string = ('caveBear', 'caveBear');
   stoneCavernUnique2: array[1..2] of string = ('scorpion', 'scorpion');
   stoneCavernUnique3: array[1..2] of string = ('redcapLsrLbr', 'redcapLsrLbr');
 
   (* Array of creatures found in a dungeon, ordered by dungeon level *)
-  dgnNPC1: array[1..4] of string =
-    ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr');
-  dgnNPC2: array[1..5] of string =
-    ('smlCorpseSpider', 'GnmCult', 'GnmWarr', 'GnmWarr', 'blueFungus');
-  dgnNPC3: array[1..5] of string =
-    ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'smlCorpseSpider');
+  dgnNPC1: array[1..4] of string = ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr');
+  dgnNPC2: array[1..5] of string = ('smlCorpseSpider', 'GnmCult', 'GnmWarr', 'GnmWarr', 'blueFungus');
+  dgnNPC3: array[1..5] of string = ('GnmCult', 'GnmWarr', 'giantRat', 'bloodBat', 'smlCorpseSpider');
   dgnUnique1: array[1..2] of string = ('blueFungus', 'GnmAss');
   dgnUnique2: array[1..2] of string = ('embalmSpider', 'GnmAss');
   dgnUnique3: array[1..2] of string = ('drunkBogle', 'drunkBogle');
 
   (* Array of creatures found in a crypt, ordered by dungeon level *)
-  cptNPC1: array[1..4] of string =
-    ('bloodBat', 'smlCorpseSpider', 'ghoulLVL1', 'skeletonLVL1');
-  cptNPC2: array[1..5] of string =
-    ('zombieWeak', 'ghoulLVL1', 'zombieWeak', 'skeletonLVL1', 'blueFungus');
-  cptNPC3: array[1..5] of string =
-    ('corpseZombie', 'corpseZombie', 'skeletonLVL1', 'corpseZombie', 'smlCorpseSpider');
+  cptNPC1: array[1..4] of string = ('bloodBat', 'smlCorpseSpider', 'ghoulLVL1', 'skeletonLVL1');
+  cptNPC2: array[1..5] of string = ('zombieWeak', 'ghoulLVL1', 'zombieWeak', 'skeletonLVL1', 'blueFungus');
+  cptNPC3: array[1..5] of string = ('corpseZombie', 'corpseZombie', 'skeletonLVL1', 'corpseZombie', 'smlCorpseSpider');
   cptUnique1: array[1..2] of string = ('greenFungus', 'zombieWeak');
   cptUnique2: array[1..2] of string = ('embalmSpider', 'embalmSpider');
   cptUnique3: array[1..2] of string = ('GobNecro', 'GobNecro');
