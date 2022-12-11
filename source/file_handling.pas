@@ -542,6 +542,8 @@ begin
           { Convert extended ASCII to plain text }
           if (entities.entityList[i].glyph = chr(1)) then
             AddElement(DataNode, 'glyph', '=') { Hob }
+          else if (entities.entityList[i].glyph = chr(2)) then
+            AddElement(DataNode, 'glyph', '#') { Trog }
           else if (entities.entityList[i].glyph = chr(157)) then
             AddElement(DataNode, 'glyph', '!') { Hornet }
           else
@@ -721,6 +723,8 @@ begin
         { Convert plain text to extended ASCII }
         if (NPCnode.FindNode('glyph').TextContent[1] = '=') then
           entities.entityList[i].glyph := chr(1)
+        else if (NPCnode.FindNode('glyph').TextContent[1] = '#') then
+          entities.entityList[i].glyph := chr(2)
         else if (NPCnode.FindNode('glyph').TextContent[1] = '!') then
           entities.entityList[i].glyph := chr(157)
         else

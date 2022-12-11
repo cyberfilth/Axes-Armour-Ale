@@ -165,8 +165,9 @@ begin
         25: killType := 'Zombie rotter';
         26: killType := 'Rabid dog';
         27: killType := 'Cave Bear';
-	28: killType := 'Scorpion';
-	29: killType := 'small Scorpion';
+        28: killType := 'Scorpion';
+        29: killType := 'small Scorpion';
+        30: killType := 'Troglodyte';
         else
           killType := 'unknown';
       end;

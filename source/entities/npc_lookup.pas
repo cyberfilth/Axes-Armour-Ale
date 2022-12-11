@@ -14,7 +14,7 @@ uses
   hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
   crypt_wolf, blue_fungus, embalming_spider, gnome_cultist, bogle_drunk, ghoul_lvl1,
   skeleton_lvl1, zombie_weak, goblin_necromancer, corpse_zombie, rabid_dog, cave_bear,
-  scorpion, small_scorpion;
+  scorpion, small_scorpion, trog_simple;
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
@@ -33,11 +33,11 @@ const
 
   (* Array of creatures found in stone cavern, ordered by cave level *)
   stoneCavernNPC1: array[1..4] of string = ('caveRat', 'rabidDog', 'giantRat', 'smallScorpion');
-  stoneCavernNPC2: array[1..6] of string = ('rabidDog', 'giantRat', 'largeBat', 'smallScorpion', 'greenFungus', 'smallScorpion');
-  stoneCavernNPC3: array[1..7] of string = ('smallGrFungus', 'redcapLesser', 'giantRat', 'redcapLesser', 'greenFungus', 'matango', 'hyenaFungus');
+  stoneCavernNPC2: array[1..6] of string = ('rabidDog', 'trogSimple', 'largeBat', 'smallScorpion', 'greenFungus', 'smallScorpion');
+  stoneCavernNPC3: array[1..7] of string = ('smallGrFungus', 'scorpion', 'giantRat', 'smallScorpion', 'smlCorpseSpider', 'trogSimple', 'trogSimple');
   stoneCavernUnique1: array[1..2] of string = ('caveBear', 'caveBear');
   stoneCavernUnique2: array[1..2] of string = ('scorpion', 'scorpion');
-  stoneCavernUnique3: array[1..2] of string = ('redcapLsrLbr', 'redcapLsrLbr');
+  stoneCavernUnique3: array[1..2] of string = ('caveBear', 'smlCorpseSpider');
 
   (* Array of creatures found in a dungeon, ordered by dungeon level *)
   dgnNPC1: array[1..4] of string = ('smallHornet', 'smlCorpseSpider', 'GnmWarr', 'GnmWarr');
@@ -260,6 +260,7 @@ begin
     'caveBear': cave_bear.createCaveBear(i, c, r);
     'scorpion': scorpion.createScorpion(i, c, r);
     'smallScorpion': small_scorpion.createSmallScorpion(i, c, r);
+    'trogSimple': trog_simple.createTroglodyte(i, c, r);
   end;
 end;
 
