@@ -190,6 +190,7 @@ createDrunkBogle	entities/bogles/bogle_drunk.pas	/^procedure createDrunkBogle(un
 createEllanToll	universe.pas	/^procedure createEllanToll;$/;"	p
 createEmbalmSpider	entities/bugs/backup/embalming_spider.pas	/^procedure createEmbalmSpider(uniqueid, npcx, npcy: smallint);$/;"	p
 createEmbalmSpider	entities/bugs/embalming_spider.pas	/^procedure createEmbalmSpider(uniqueid, npcx, npcy: smallint);$/;"	p
+createFlintDagger	items/weapons/flint_dagger.pas	/^procedure createFlintDagger(itmx, itmy: smallint);$/;"	p
 createGP	items/gold_pieces.pas	/^procedure createGP(itmx, itmy: smallint);$/;"	p
 createGhoul	entities/undead/backup/ghoul_lvl1.pas	/^procedure createGhoul(uniqueid, npcx, npcy: smallint);$/;"	p
 createGhoul	entities/undead/ghoul_lvl1.pas	/^procedure createGhoul(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -860,6 +861,7 @@ throw	items/weapons/backup/vampiric_staff.pas	/^procedure throw;$/;"	p
 throw	items/weapons/basic_club.pas	/^procedure throw;$/;"	p
 throw	items/weapons/bone_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
 throw	items/weapons/crude_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
+throw	items/weapons/flint_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
 throw	items/weapons/gnomish_axe.pas	/^procedure throw(itemID: smallint);$/;"	p
 throw	items/weapons/gnomish_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
 throw	items/weapons/gnomish_mace.pas	/^procedure throw(itemID: smallint);$/;"	p
@@ -877,6 +879,7 @@ thrownDamaged	items/weapons/backup/gnomish_mace.pas	/^procedure thrownDamaged(it
 thrownDamaged	items/weapons/backup/necro_axe.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownDamaged	items/weapons/bone_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownDamaged	items/weapons/crude_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
+thrownDamaged	items/weapons/flint_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownDamaged	items/weapons/gnomish_axe.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownDamaged	items/weapons/gnomish_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownDamaged	items/weapons/gnomish_mace.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
@@ -929,6 +932,7 @@ useItem	items/weapons/backup/vampiric_staff.pas	/^procedure useItem(equipped: bo
 useItem	items/weapons/basic_club.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/bone_dagger.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
 useItem	items/weapons/crude_dagger.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
+useItem	items/weapons/flint_dagger.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
 useItem	items/weapons/gnomish_axe.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
 useItem	items/weapons/gnomish_dagger.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
 useItem	items/weapons/gnomish_mace.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p

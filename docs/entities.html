@@ -17,7 +17,7 @@
 <p>
 Unit responsible for NPC stat, initialising enemies and utility functions</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Classes</li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="player_stats.html">player_stats</a></li><li><a href="cave_rat.html">cave_rat</a></li><li><a href="giant_cave_rat.html">giant_cave_rat</a></li><li><a href="blood_bat.html">blood_bat</a></li><li><a href="green_fungus.html">green_fungus</a></li><li><a href="redcap_lesser.html">redcap_lesser</a></li><li><a href="redcap_lesser_lobber.html">redcap_lesser_lobber</a></li><li><a href="small_green_fungus.html">small_green_fungus</a></li><li><a href="large_blood_bat.html">large_blood_bat</a></li><li><a href="small_hyena.html">small_hyena</a></li><li><a href="redcap_fungus.html">redcap_fungus</a></li><li><a href="mushroom_person.html">mushroom_person</a></li><li><a href="hyena_fungus.html">hyena_fungus</a></li><li><a href="small_hornet.html">small_hornet</a></li><li><a href="small_corpse_spider.html">small_corpse_spider</a></li><li><a href="gnome_warrior.html">gnome_warrior</a></li><li><a href="gnome_assassin.html">gnome_assassin</a></li><li><a href="web.html">web</a></li><li><a href="crypt_wolf.html">crypt_wolf</a></li><li><a href="blue_fungus.html">blue_fungus</a></li><li><a href="embalming_spider.html">embalming_spider</a></li><li><a href="gnome_cultist.html">gnome_cultist</a></li><li><a href="bogle_drunk.html">bogle_drunk</a></li><li><a href="ghoul_lvl1.html">ghoul_lvl1</a></li><li><a href="skeleton_lvl1.html">skeleton_lvl1</a></li><li><a href="zombie_weak.html">zombie_weak</a></li><li><a href="goblin_necromancer.html">goblin_necromancer</a></li><li>corpse_zombie</li><li><a href="rabid_dog.html">rabid_dog</a></li><li><a href="cave_bear.html">cave_bear</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Classes</li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="player_stats.html">player_stats</a></li><li><a href="cave_rat.html">cave_rat</a></li><li><a href="giant_cave_rat.html">giant_cave_rat</a></li><li><a href="blood_bat.html">blood_bat</a></li><li><a href="green_fungus.html">green_fungus</a></li><li><a href="redcap_lesser.html">redcap_lesser</a></li><li><a href="redcap_lesser_lobber.html">redcap_lesser_lobber</a></li><li><a href="small_green_fungus.html">small_green_fungus</a></li><li><a href="large_blood_bat.html">large_blood_bat</a></li><li><a href="small_hyena.html">small_hyena</a></li><li><a href="redcap_fungus.html">redcap_fungus</a></li><li><a href="mushroom_person.html">mushroom_person</a></li><li><a href="hyena_fungus.html">hyena_fungus</a></li><li><a href="small_hornet.html">small_hornet</a></li><li><a href="small_corpse_spider.html">small_corpse_spider</a></li><li><a href="gnome_warrior.html">gnome_warrior</a></li><li><a href="gnome_assassin.html">gnome_assassin</a></li><li><a href="web.html">web</a></li><li><a href="crypt_wolf.html">crypt_wolf</a></li><li><a href="blue_fungus.html">blue_fungus</a></li><li><a href="embalming_spider.html">embalming_spider</a></li><li><a href="gnome_cultist.html">gnome_cultist</a></li><li><a href="bogle_drunk.html">bogle_drunk</a></li><li><a href="ghoul_lvl1.html">ghoul_lvl1</a></li><li><a href="skeleton_lvl1.html">skeleton_lvl1</a></li><li><a href="zombie_weak.html">zombie_weak</a></li><li><a href="goblin_necromancer.html">goblin_necromancer</a></li><li>corpse_zombie</li><li><a href="rabid_dog.html">rabid_dog</a></li><li><a href="cave_bear.html">cave_bear</a></li><li><a href="scorpion.html">scorpion</a></li><li><a href="small_scorpion.html">small_scorpion</a></li><li><a href="trog_simple.html">trog_simple</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
 <table class="classestable wide_list">
 <tr class="listheader">
@@ -62,13 +62,13 @@ Unit responsible for NPC stat, initialising enemies and utility functions</p>
 <td class="itemcode"><code>procedure <strong><a href="entities.html#occupyUpdate">occupyUpdate</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <strong><a href="entities.html#redrawMapDisplay">redrawMapDisplay</a></strong>(id: byte);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="entities.html#redrawMapDisplay">redrawMapDisplay</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="entities.html#newFloorNPCs">newFloorNPCs</a></strong>;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <strong><a href="entities.html#countLivingEntities">countLivingEntities</a></strong>: byte;</code></td>
+<td class="itemcode"><code>function <strong><a href="entities.html#countLivingEntities">countLivingEntities</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="entities.html#outOfView">outOfView</a></strong>;</code></td>
@@ -95,10 +95,10 @@ Unit responsible for NPC stat, initialising enemies and utility functions</p>
 <td class="itemcode"><code><strong><a href="entities.html#entityList">entityList</a></strong>: array of <a href="entities.Creature.html">Creature</a>;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code><strong><a href="entities.html#listLength">listLength</a></strong>: byte;</code></td>
+<td class="itemcode"><code><strong><a href="entities.html#listLength">listLength</a></strong>: smallint;</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code><strong><a href="entities.html#npcAmount">npcAmount</a></strong>: byte;</code></td>
+<td class="itemcode"><code><strong><a href="entities.html#npcAmount">npcAmount</a></strong>: smallint;</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -195,7 +195,7 @@ Ensure all NPC's are correctly occupying tiles</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="redrawMapDisplay"></span><code>procedure <strong>redrawMapDisplay</strong>(id: byte);</code></td>
+<td class="itemcode"><span id="redrawMapDisplay"></span><code>procedure <strong>redrawMapDisplay</strong>(id: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -213,7 +213,7 @@ Clear list of NPC's</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="countLivingEntities"></span><code>function <strong>countLivingEntities</strong>: byte;</code></td>
+<td class="itemcode"><span id="countLivingEntities"></span><code>function <strong>countLivingEntities</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
@@ -300,14 +300,14 @@ NPC factions / groups</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="listLength"></span><code><strong>listLength</strong>: byte;</code></td>
+<td class="itemcode"><span id="listLength"></span><code><strong>listLength</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>
 </table>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="npcAmount"></span><code><strong>npcAmount</strong>: byte;</code></td>
+<td class="itemcode"><span id="npcAmount"></span><code><strong>npcAmount</strong>: smallint;</code></td>
 </tr>
 <tr><td colspan="1">
 &nbsp;</td></tr>

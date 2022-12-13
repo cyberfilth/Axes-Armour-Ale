@@ -12,7 +12,7 @@ uses
   ale_tankard, wine_flask,
   { List of weapons }
   crude_dagger, basic_club, rock, short_bow, pointy_stick, gnomish_dagger, gnomish_mace,
-  gnomish_axe, bone_dagger, necro_axe,
+  gnomish_axe, bone_dagger, necro_axe, flint_dagger,
   { List of armour }
   leather_armour1, cloth_armour1, lesser_bone_armour,
   { Quest items }
@@ -26,42 +26,24 @@ uses
 
 const
   (* Array of items found in a cave, ordered by cave level *)
-  caveItems1: array[1..8] of string =
-    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
-    'pointyStick', 'arrow', 'gold');
-  caveItems2: array[1..7] of string =
-    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
-    'rock', 'arrow', 'shortBow');
-  caveItems3: array[1..6] of string =
-    ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
+  caveItems1: array[1..8] of string = ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'pointyStick', 'arrow', 'gold');
+  caveItems2: array[1..7] of string = ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'rock', 'arrow', 'shortBow');
+  caveItems3: array[1..6] of string = ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
 
   (* Array of items found in a stone cavern, ordered by cave level *)
-  stoneCavernItems1: array[1..8] of string =
-    ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock',
-    'pointyStick', 'arrow', 'gold');
-  stoneCavernItems2: array[1..7] of string =
-    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
-    'rock', 'arrow', 'shortBow');
-  stoneCavernItems3: array[1..6] of string =
-    ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
+  stoneCavernItems1: array[1..8] of string = ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'pointyStick', 'arrow', 'gold');
+  stoneCavernItems2: array[1..7] of string = ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'rock', 'arrow', 'shortBow');
+  stoneCavernItems3: array[1..6] of string = ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
 
   (* Array of items found in a crypt, ordered by dungeon level *)
-  cptItems1: array[1..6] of string =
-    ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar', 'gold');
-  cptItems2: array[1..8] of string =
-    ('rock', 'aleTankard', 'crudeDagger', 'staffBewilder', 'gold',
-    'dimPixieJar', 'arrow', 'shortBow');
-  cptItems3: array[1..7] of string =
-    ('aleTankard', 'staffVampire', 'aleTankard', 'rock', 'wineFlask', 'arrow', 'gold');
+  cptItems1: array[1..6] of string = ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar', 'gold');
+  cptItems2: array[1..8] of string = ('rock', 'aleTankard', 'crudeDagger', 'staffBewilder', 'gold', 'dimPixieJar', 'arrow', 'shortBow');
+  cptItems3: array[1..7] of string = ('aleTankard', 'staffVampire', 'aleTankard', 'rock', 'wineFlask', 'arrow', 'gold');
 
   (* Array of items found in a dungeon, ordered by dungeon level *)
-  dgnItems1: array[1..5] of string =
-    ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar');
-  dgnItems2: array[1..8] of string =
-    ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1',
-    'dimPixieJar', 'arrow', 'shortBow', 'gold');
-  dgnItems3: array[1..7] of string =
-    ('aleTankard', 'crudeDagger', 'aleTankard', 'staffBewilder', 'wineFlask', 'arrow', 'gold');
+  dgnItems1: array[1..5] of string = ('aleTankard', 'stickyWeb', 'wineFlask', 'arrow', 'dimPixieJar');
+  dgnItems2: array[1..8] of string = ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'dimPixieJar', 'arrow', 'shortBow', 'gold');
+  dgnItems3: array[1..7] of string = ('aleTankard', 'crudeDagger', 'aleTankard', 'staffBewilder', 'wineFlask', 'arrow', 'gold');
 
 (* Choose an item and call the generate code directly *)
 procedure dispenseItem(dungeon: dungeonTerrain);
@@ -127,11 +109,10 @@ begin
         thing := stoneCavernItems3[randSelect];
       end;
     end;
-
     tCrypt:
     begin
       if (universe.currentDepth = 1) then
-      begin
+      begin { Level 1 }
         randSelect := globalUtils.randomRange(1, Length(cptItems1));
         thing := cptItems1[randSelect];
       end { Level 2 }
@@ -185,6 +166,7 @@ begin
     'gold': gold_pieces.createGP(c, r);
     'staffBewilder': staff_bewilder.createStaff(c, r);
     'staffVampire': vampiric_staff.createStaff(c, r);
+    'flintDagger': flint_dagger.createFlintDagger(c, r);
   end;
 end;
 
@@ -216,6 +198,7 @@ begin
     23: staff_bewilder.useItem(equipped);
     24: necro_axe.useItem(equipped, id);
     25: vampiric_staff.useItem(equipped);
+    26: flint_dagger.useItem(equipped, id);
   end;
 end;
 
@@ -223,6 +206,7 @@ procedure dropFirstItem;
 var
   r, c: smallint;
 begin
+  { Cave }
   if (dungeonType = tCave) then
   begin
     (* Choose random location on the map *)
@@ -240,6 +224,7 @@ begin
     else
       rock.createRock(c, r);
   end
+  { Dungeon }
   else if (dungeonType = tDungeon) then
   begin
     (* Choose random location on the map *)
@@ -249,11 +234,44 @@ begin
       (* choose a location that is not a wall or occupied *)
     until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
     SetLength(itemList, High(itemList) + 1);
-    (* Drop the quest object *)
     if (universe.currentDepth = 3) then
       gnomish_axe.createGnomishAxe(c, r)
     else if (universe.currentDepth = 2) then
       parchment.createParchment(c, r)
+    else
+      wine_flask.createWineFlask(c, r);
+  end
+  { Crypt }
+  else if (dungeonType = tCrypt) then
+  begin
+    (* Choose random location on the map *)
+    repeat
+      r := globalutils.randomRange(3, (MAXROWS - 3));
+      c := globalutils.randomRange(3, (MAXCOLUMNS - 3));
+      (* choose a location that is not a wall or occupied *)
+    until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
+    SetLength(itemList, High(itemList) + 1);
+    if (universe.currentDepth = 3) then
+      web_trap.createWebTrap(c, r)
+    else if (universe.currentDepth = 2) then
+      parchment.createParchment(c, r)
+    else
+      wine_flask.createWineFlask(c, r);
+  end
+  { Stone cavern }
+  else if (dungeonType = tStoneCavern) then
+  begin
+    (* Choose random location on the map *)
+    repeat
+      r := globalutils.randomRange(3, (MAXROWS - 3));
+      c := globalutils.randomRange(3, (MAXCOLUMNS - 3));
+      (* choose a location that is not a wall or occupied *)
+    until (maparea[r][c].Blocks = False) and (maparea[r][c].Occupied = False);
+    SetLength(itemList, High(itemList) + 1);
+    if (universe.currentDepth = 3) then
+      basic_club.createClub(c, r)
+    else if (universe.currentDepth = 2) then
+      gold_pieces.createGP(c, r)
     else
       wine_flask.createWineFlask(c, r);
   end;
