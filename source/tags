@@ -298,7 +298,7 @@ death	entities/goblinkin/goblin_necromancer.pas	/^procedure death(id: smallint);
 death	entities/hobs/redcap_fungus.pas	/^procedure death;$/;"	p
 death	entities/hobs/redcap_lesser.pas	/^procedure death;$/;"	p
 death	entities/hobs/redcap_lesser_lobber.pas	/^procedure death;$/;"	p
-death	entities/troglodytes/trog_simple.pas	/^procedure death;$/;"	p
+death	entities/troglodytes/trog_simple.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/undead/backup/corpse_zombie.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/undead/backup/ghoul_lvl1.pas	/^procedure death;$/;"	p
 death	entities/undead/backup/skeleton_lvl1.pas	/^procedure death(id: smallint);$/;"	p

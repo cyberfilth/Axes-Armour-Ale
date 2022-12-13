@@ -7,14 +7,14 @@ unit trog_simple;
 interface
 
 uses
-  SysUtils, Math, smell, universe, combat_resolver;
+  SysUtils, Math, smell, universe, combat_resolver, items, flint_dagger;
 
 (* Create a Troglodyte *)
 procedure createTroglodyte(uniqueid, npcx, npcy: smallint);
 (* Take a turn *)
 procedure takeTurn(id: smallint);
 (* Creature death *)
-procedure death;
+procedure death(id: smallint);
 (* Decision tree for Neutral state *)
 procedure decisionNeutral(id: smallint);
 (* Decision tree for Hostile state *)
@@ -145,9 +145,17 @@ begin
   end;
 end;
 
-procedure death;
+procedure death(id: smallint);
 begin
   Inc(deathList[30]);
+  (* Check if there is already an item on the floor here *)
+  if (items.containsItem(entityList[id].posX, entityList[id].posY) = False) then
+  begin
+    { Place item on the game map }
+    SetLength(itemList, Length(itemList) + 1);
+    flint_dagger.createFlintDagger(entityList[id].posX, entityList[id].posY);
+    ui.displayMessage('The Trog drops a dagger');
+  end;
 end;
 
 procedure decisionNeutral(id: smallint);

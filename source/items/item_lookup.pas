@@ -31,8 +31,8 @@ const
   caveItems3: array[1..6] of string = ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
 
   (* Array of items found in a stone cavern, ordered by cave level *)
-  stoneCavernItems1: array[1..8] of string = ('aleTankard', 'clothArmour1', 'wineFlask', 'basicClub', 'rock', 'pointyStick', 'arrow', 'gold');
-  stoneCavernItems2: array[1..7] of string = ('aleTankard', 'aleTankard', 'crudeDagger', 'leatherArmour1', 'rock', 'arrow', 'shortBow');
+  stoneCavernItems1: array[1..7] of string = ('aleTankard', 'leatherArmour1', 'wineFlask', 'basicClub', 'rock', 'arrow', 'gold');
+  stoneCavernItems2: array[1..6] of string = ('aleTankard', 'crudeDagger', 'leatherArmour1', 'rock', 'arrow', 'shortBow');
   stoneCavernItems3: array[1..6] of string = ('gold', 'crudeDagger', 'aleTankard', 'leatherArmour1', 'wineFlask', 'arrow');
 
   (* Array of items found in a crypt, ordered by dungeon level *)

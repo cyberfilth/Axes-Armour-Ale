@@ -386,7 +386,7 @@ begin
     'caveBear': cave_bear.death;
     'scorpion': scorpion.death;
     'smallScorpion': small_scorpion.death;
-    'trogSimple': trog_simple.death;
+    'trogSimple': trog_simple.death(i);
   end;
 end;
 
