@@ -12,7 +12,7 @@ uses
   ale_tankard, wine_flask,
   { List of weapons }
   crude_dagger, basic_club, rock, short_bow, pointy_stick, gnomish_dagger, gnomish_mace,
-  gnomish_axe, bone_dagger, necro_axe, flint_dagger,
+  gnomish_axe, bone_dagger, necro_axe, flint_dagger, terbutje,
   { List of armour }
   leather_armour1, cloth_armour1, lesser_bone_armour,
   { Quest items }
@@ -167,6 +167,7 @@ begin
     'staffBewilder': staff_bewilder.createStaff(c, r);
     'staffVampire': vampiric_staff.createStaff(c, r);
     'flintDagger': flint_dagger.createFlintDagger(c, r);
+    'terbutje': terbutje.createTerbutje(c, r);
   end;
 end;
 
@@ -199,6 +200,7 @@ begin
     24: necro_axe.useItem(equipped, id);
     25: vampiric_staff.useItem(equipped);
     26: flint_dagger.useItem(equipped, id);
+    27: terbutje.useItem(equipped);
   end;
 end;
 

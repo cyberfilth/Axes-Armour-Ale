@@ -24,17 +24,12 @@ uses
 procedure displayKillScreen;
 var
   { Kill message is made up of the following fragments }
-  killA: array[0..15] of string = (' killed ', ' despatched ',
-    ' annihilated ', ' slaughtered ', ' eradicated ', ' whacked ',
-    ' massacred ', ' cut down ', ' eliminated ', ' exterminated ',
-    ' butchered ', ' ended ', ' bumped off ', ' destroyed ', ' murdered ', ' wasted ');
-  killB: array[0..15] of string = ('assorted ', 'various ', 'sundry ',
-    'manifold ', 'a swarm of ', 'a horde of ', 'a stream of ',
-    'an assortment of ', 'an array of ', 'a multitude of ',
-    'a diverse range of ', 'a motley collection of ', 'an eclectic mix of ',
+  killA: array[0..15] of string = (' killed ', ' despatched ', ' annihilated ', ' slaughtered ', ' eradicated ', ' whacked ',
+    ' massacred ', ' cut down ', ' eliminated ', ' exterminated ', ' butchered ', ' ended ', ' bumped off ', ' destroyed ', ' murdered ', ' wasted ');
+  killB: array[0..15] of string = ('assorted ', 'various ', 'sundry ', 'manifold ', 'a swarm of ', 'a horde of ', 'a stream of ',
+    'an assortment of ', 'an array of ', 'a multitude of ', 'a diverse range of ', 'a motley collection of ', 'an eclectic mix of ',
     'a disparate mix of ', 'a gaggle of ', 'a bestiary of ');
-  killC: array[0..9] of string = ('fiends.', 'creatures.', 'monsters.',
-    'enemies.', 'beasts.', 'varmints.', 'monstrosities.', 'critters.',
+  killC: array[0..9] of string = ('fiends.', 'creatures.', 'monsters.', 'enemies.', 'beasts.', 'varmints.', 'monstrosities.', 'critters.',
     'beasties.', 'terrors.');
   messageText: array[0..8] of
   string = ('But ultimately, they died before their adventure had really begun...',
@@ -168,6 +163,7 @@ begin
         28: killType := 'Scorpion';
         29: killType := 'small Scorpion';
         30: killType := 'Troglodyte';
+        31: killType := 'Troglodyte giant';
         else
           killType := 'unknown';
       end;

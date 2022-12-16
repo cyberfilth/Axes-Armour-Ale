@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Axes, Armour &amp; Ale: trog_simple</title>
+<title>Axes, Armour &amp; Ale: trog_giant</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="PasDoc 0.16.0">
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
@@ -10,58 +10,58 @@
 <body>
 <div class="container"><div class="navigation">
 <h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
-<h1 class="unit">Unit trog_simple</h1>
+<h1 class="unit">Unit trog_giant</h1>
 <div class="sections">
 <div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section">Classes, Interfaces, Objects and Records</div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section">Variables</div></div>
 <span id="PasDoc-Description"></span><h2 class="description">Description</h2>
 <p>
 Intelligent enemy with scent tracking</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Math</li><li><a href="smell.html">smell</a></li><li><a href="universe.html">universe</a></li><li><a href="combat_resolver.html">combat_resolver</a></li><li><a href="items.html">items</a></li><li><a href="flint_dagger.html">flint_dagger</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Math</li><li><a href="smell.html">smell</a></li><li><a href="universe.html">universe</a></li><li><a href="combat_resolver.html">combat_resolver</a></li><li><a href="items.html">items</a></li><li><a href="terbutje.html">terbutje</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
-<td class="itemcode"><code>procedure <strong><a href="trog_simple.html#createTroglodyte">createTroglodyte</a></strong>(uniqueid, npcx, npcy: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="trog_giant.html#createGiantTroglodyte">createGiantTroglodyte</a></strong>(uniqueid, npcx, npcy: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <strong><a href="trog_simple.html#takeTurn">takeTurn</a></strong>(id: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="trog_giant.html#takeTurn">takeTurn</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <strong><a href="trog_simple.html#death">death</a></strong>(id: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="trog_giant.html#death">death</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <strong><a href="trog_simple.html#decisionNeutral">decisionNeutral</a></strong>(id: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="trog_giant.html#decisionNeutral">decisionNeutral</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <strong><a href="trog_simple.html#decisionHostile">decisionHostile</a></strong>(id: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="trog_giant.html#decisionHostile">decisionHostile</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <strong><a href="trog_simple.html#decisionEscape">decisionEscape</a></strong>(id: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="trog_giant.html#decisionEscape">decisionEscape</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <strong><a href="trog_simple.html#wander">wander</a></strong>(id, spx, spy: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="trog_giant.html#wander">wander</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <strong><a href="trog_simple.html#chaseTarget">chaseTarget</a></strong>(id, spx, spy: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="trog_giant.html#chaseTarget">chaseTarget</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>function <strong><a href="trog_simple.html#isNextToPlayer">isNextToPlayer</a></strong>(spx, spy: smallint): boolean;</code></td>
+<td class="itemcode"><code>function <strong><a href="trog_giant.html#isNextToPlayer">isNextToPlayer</a></strong>(spx, spy: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <strong><a href="trog_simple.html#escapePlayer">escapePlayer</a></strong>(id, spx, spy: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="trog_giant.html#escapePlayer">escapePlayer</a></strong>(id, spx, spy: smallint);</code></td>
 </tr>
 <tr class="list">
-<td class="itemcode"><code>procedure <strong><a href="trog_simple.html#combat">combat</a></strong>(id: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="trog_giant.html#combat">combat</a></strong>(id: smallint);</code></td>
 </tr>
 <tr class="list2">
-<td class="itemcode"><code>procedure <strong><a href="trog_simple.html#followScent">followScent</a></strong>(id: smallint);</code></td>
+<td class="itemcode"><code>procedure <strong><a href="trog_giant.html#followScent">followScent</a></strong>(id: smallint);</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
 <h3 class="detail">Functions and Procedures</h3>
 <table class="detail wide_list">
 <tr class="list">
-<td class="itemcode"><span id="createTroglodyte"></span><code>procedure <strong>createTroglodyte</strong>(uniqueid, npcx, npcy: smallint);</code></td>
+<td class="itemcode"><span id="createGiantTroglodyte"></span><code>procedure <strong>createGiantTroglodyte</strong>(uniqueid, npcx, npcy: smallint);</code></td>
 </tr>
 <tr><td colspan="1">
 <p>
