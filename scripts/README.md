@@ -2,7 +2,7 @@
 
 Scripts used to develop / compile **Axes, Armour & Ale**
 
-VIM is used to develop this game, and a 'tags' file is located in the source directory, to quickly navigate through the files.
+Vim is used to develop this game, and a 'tags' file is located in the source directory, to quickly navigate through the files.
 <br />
 The Free Pascal IDE can also be used, it is recommended that you place the *fp.cfg* & *fp.ini* files in the source folder if you want to edit the source code using FP IDE.
 
