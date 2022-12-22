@@ -1,7 +1,10 @@
 # Scripts
 
 Scripts used to develop / compile **Axes, Armour & Ale**
-A combination of VIM and the Free Pascal textmode IDE is used to develop this game. Place the *fp.cfg* & *fp.ini* files in the source folder if you want to edit the source code.
+
+VIM is used to develop this game, and a 'tags' file is located in the source directory, to quickly navigate through the files.
+<br />
+The Free Pascal IDE can also be used, it is recommended that you place the *fp.cfg* & *fp.ini* files in the source folder if you want to edit the source code using FP IDE.
 
   * *compile_Linux.sh* - BASH script to compile the release version for Linux 64 bit 
   * *debug_Linux.sh* - BASH script to compile the debug version for Linux 64 bit
