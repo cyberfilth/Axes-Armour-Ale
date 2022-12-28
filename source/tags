@@ -17,10 +17,6 @@ NPCpicker	entities/npc_lookup.pas	/^procedure NPCpicker(i: byte; unique: boolean
 RIPInput	keyboardinput.pas	/^procedure RIPInput(Keypress: TKeyEvent);$/;"	p
 TextOut	ui.pas	/^procedure TextOut(X, Y: word; textcol: shortstring; const S: string);$/;"	p
 WinAlphaInput	keyboardinput.pas	/^procedure WinAlphaInput(Keypress: TKeyEvent);$/;"	p
-Zap	items/weapons/backup/staff_bewilder.pas	/^procedure Zap;$/;"	p
-Zap	items/weapons/backup/staff_confusion.pas	/^procedure Zap;$/;"	p
-Zap	items/weapons/backup/staff_minor_scorch.pas	/^procedure Zap;$/;"	p
-Zap	items/weapons/backup/vampiric_staff.pas	/^procedure Zap;$/;"	p
 Zap	items/weapons/staff_bewilder.pas	/^procedure Zap;$/;"	p
 Zap	items/weapons/staff_minor_scorch.pas	/^procedure Zap;$/;"	p
 Zap	items/weapons/vampiric_staff.pas	/^procedure Zap;$/;"	p
@@ -60,39 +56,23 @@ centreX	ui.pas	/^function centreX(textstring: shortstring): byte;$/;"	f
 charIntroInput	keyboardinput.pas	/^procedure charIntroInput(Keypress: TKeyEvent);$/;"	p
 charSelInput	keyboardinput.pas	/^procedure charSelInput(Keypress: TKeyEvent);$/;"	p
 chasePlayer	entities/ai_animal.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
-chasePlayer	entities/animals/backup/hyena_fungus.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
-chasePlayer	entities/animals/backup/large_blood_bat.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
-chasePlayer	entities/animals/backup/small_hyena.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/animals/blood_bat.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/animals/cave_bear.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/animals/hyena_fungus.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/animals/large_blood_bat.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/animals/rabid_dog.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
 chasePlayer	entities/animals/small_hyena.pas	/^procedure chasePlayer(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/animals/backup/crypt_wolf.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/animals/crypt_wolf.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/bogles/backup/bogle_drunk.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/bogles/bogle_drunk.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/gnomes/backup/gnome_cultist.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/gnomes/backup/gnome_warrior.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/gnomes/gnome_assassin.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/gnomes/gnome_cultist.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/gnomes/gnome_warrior.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/goblinkin/goblin_necromancer.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/hobs/backup/redcap_fungus.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/hobs/backup/redcap_lesser.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/hobs/redcap_fungus.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/hobs/redcap_lesser.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/hobs/redcap_lesser_lobber.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/troglodytes/trog_giant.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/troglodytes/trog_simple.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/undead/backup/corpse_zombie.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/undead/backup/ghoul_lvl1.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/undead/backup/skeleton_lvl1.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chaseTarget	entities/undead/backup/zombie_weak.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/undead/corpse_zombie.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/undead/ghoul_lvl1.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/undead/skeleton_lvl1.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
@@ -104,14 +84,8 @@ choose	screens/scrcharselect.pas	/^procedure choose;$/;"	p
 chuckProjectile	screens/scrthrow.pas	/^procedure chuckProjectile;$/;"	p
 clearPopup	ui.pas	/^procedure clearPopup;$/;"	p
 clearStatusBar	ui.pas	/^procedure clearStatusBar;$/;"	p
-collectParchment	items/macguffins/backup/parchment.pas	/^procedure collectParchment;$/;"	p
 collectParchment	items/macguffins/parchment.pas	/^procedure collectParchment;$/;"	p
 combat	entities/ai_animal.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/animals/backup/crypt_wolf.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/animals/backup/hyena_fungus.pas	/^procedure combat(npcID, enemyID: smallint);$/;"	p
-combat	entities/animals/backup/large_blood_bat.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/animals/backup/small_hornet.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/animals/backup/small_hyena.pas	/^procedure combat(npcID, enemyID: smallint);$/;"	p
 combat	entities/animals/blood_bat.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/animals/cave_bear.pas	/^procedure combat(npcID, enemyID: smallint);$/;"	p
 combat	entities/animals/crypt_wolf.pas	/^procedure combat(id: smallint);$/;"	p
@@ -119,33 +93,20 @@ combat	entities/animals/hyena_fungus.pas	/^procedure combat(npcID, enemyID: smal
 combat	entities/animals/large_blood_bat.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/animals/rabid_dog.pas	/^procedure combat(npcID, enemyID: smallint);$/;"	p
 combat	entities/animals/small_hyena.pas	/^procedure combat(npcID, enemyID: smallint);$/;"	p
-combat	entities/bogles/backup/bogle_drunk.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/bogles/bogle_drunk.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/bugs/small_hornet.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/fungus/backup/blue_fungus.pas	/^procedure combat(idOwner, idTarget: smallint);$/;"	p
 combat	entities/fungus/blue_fungus.pas	/^procedure combat(idOwner, idTarget: smallint);$/;"	p
 combat	entities/fungus/green_fungus.pas	/^procedure combat(idOwner, idTarget: smallint);$/;"	p
 combat	entities/fungus/small_green_fungus.pas	/^procedure combat(idOwner, idTarget: smallint);$/;"	p
-combat	entities/gnomes/backup/gnome_cultist.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/gnomes/backup/gnome_warrior.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/gnomes/gnome_assassin.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/gnomes/gnome_cultist.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/gnomes/gnome_warrior.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/goblinkin/goblin_necromancer.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/hobs/backup/redcap_fungus.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/hobs/backup/redcap_lesser.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/hobs/redcap_fungus.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/hobs/redcap_lesser.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/hobs/redcap_lesser_lobber.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/troglodytes/trog_giant.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/troglodytes/trog_simple.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/undead/backup/corpse_zombie.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/undead/backup/ghoul_lvl1.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/undead/backup/skeleton_lvl1.pas	/^procedure combat(id: smallint);$/;"	p
-combat	entities/undead/backup/zombie_weak.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/undead/corpse_zombie.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/undead/ghoul_lvl1.pas	/^procedure combat(id: smallint);$/;"	p
 combat	entities/undead/skeleton_lvl1.pas	/^procedure combat(id: smallint);$/;"	p
@@ -160,117 +121,76 @@ countLivingEntities	entities.pas	/^function countLivingEntities: smallint;$/;"	f
 countNonEmptyItems	items.pas	/^function countNonEmptyItems: byte;$/;"	f
 createAleTankard	items/ale_tankard.pas	/^procedure createAleTankard(itmx, itmy: smallint);$/;"	p
 createArrow	items/arrow.pas	/^procedure createArrow(itmx, itmy: smallint);$/;"	p
-createBloodBat	entities/animals/backup/large_blood_bat.pas	/^procedure createBloodBat(uniqueid, npcx, npcy: smallint);$/;"	p
 createBloodBat	entities/animals/blood_bat.pas	/^procedure createBloodBat(uniqueid, npcx, npcy: smallint);$/;"	p
 createBloodBat	entities/animals/large_blood_bat.pas	/^procedure createBloodBat(uniqueid, npcx, npcy: smallint);$/;"	p
-createBloodbat	entities/animals/backup/large_blood_bat.pas	/^procedure createBloodbat(uniqueid, npcx, npcy: smallint);$/;"	p
 createBloodbat	entities/animals/blood_bat.pas	/^procedure createBloodbat(uniqueid, npcx, npcy: smallint);$/;"	p
 createBloodbat	entities/animals/large_blood_bat.pas	/^procedure createBloodbat(uniqueid, npcx, npcy: smallint);$/;"	p
-createBlueFungus	entities/fungus/backup/blue_fungus.pas	/^procedure createBlueFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createBlueFungus	entities/fungus/blue_fungus.pas	/^procedure createBlueFungus(uniqueid, npcx, npcy: smallint);$/;"	p
-createBoneArmour	items/armour/backup/lesser_bone_armour.pas	/^procedure createBoneArmour(itmx, itmy: smallint);$/;"	p
 createBoneArmour	items/armour/lesser_bone_armour.pas	/^procedure createBoneArmour(itmx, itmy: smallint);$/;"	p
-createBoneDagger	items/weapons/backup/bone_dagger.pas	/^procedure createBoneDagger(itmx, itmy: smallint);$/;"	p
 createBoneDagger	items/weapons/bone_dagger.pas	/^procedure createBoneDagger(itmx, itmy: smallint);$/;"	p
 createCaveBear	entities/animals/cave_bear.pas	/^procedure createCaveBear(uniqueid, npcx, npcy: smallint);$/;"	p
 createCaveRat	entities/animals/cave_rat.pas	/^procedure createCaveRat(uniqueid, npcx, npcy: smallint);$/;"	p
-createClothArmour	items/armour/backup/cloth_armour1.pas	/^procedure createClothArmour(itmx, itmy: smallint);$/;"	p
 createClothArmour	items/armour/cloth_armour1.pas	/^procedure createClothArmour(itmx, itmy: smallint);$/;"	p
-createClub	items/weapons/backup/basic_club.pas	/^procedure createClub(itmx, itmy: smallint);$/;"	p
 createClub	items/weapons/basic_club.pas	/^procedure createClub(itmx, itmy: smallint);$/;"	p
-createCorpseSpider	entities/bugs/backup/small_corpse_spider.pas	/^procedure createCorpseSpider (uniqueid, npcx, npcy: smallint);$/;"	p
-createCorpseSpider	entities/bugs/backup/small_corpse_spider.pas	/^procedure createCorpseSpider(uniqueid, npcx, npcy: smallint);$/;"	p
 createCorpseSpider	entities/bugs/small_corpse_spider.pas	/^procedure createCorpseSpider(uniqueid, npcx, npcy: smallint);$/;"	p
 createCorridor	dungeons/crypt.pas	/^procedure createCorridor(fromX, fromY, toX, toY: smallint);$/;"	p
 createCorridor	dungeons/smallgrid.pas	/^procedure createCorridor(fromX, fromY, toX, toY: smallint);$/;"	p
-createCryptWolf	entities/animals/backup/crypt_wolf.pas	/^procedure createCryptWolf(uniqueid, npcx, npcy: smallint);$/;"	p
 createCryptWolf	entities/animals/crypt_wolf.pas	/^procedure createCryptWolf(uniqueid, npcx, npcy: smallint);$/;"	p
-createDagger	items/weapons/backup/crude_dagger.pas	/^procedure createDagger(itmx, itmy: smallint);$/;"	p
 createDagger	items/weapons/crude_dagger.pas	/^procedure createDagger(itmx, itmy: smallint);$/;"	p
-createDrunkBogle	entities/bogles/backup/bogle_drunk.pas	/^procedure createDrunkBogle(uniqueid, npcx, npcy: smallint);$/;"	p
 createDrunkBogle	entities/bogles/bogle_drunk.pas	/^procedure createDrunkBogle(uniqueid, npcx, npcy: smallint);$/;"	p
 createEllanToll	universe.pas	/^procedure createEllanToll;$/;"	p
-createEmbalmSpider	entities/bugs/backup/embalming_spider.pas	/^procedure createEmbalmSpider(uniqueid, npcx, npcy: smallint);$/;"	p
 createEmbalmSpider	entities/bugs/embalming_spider.pas	/^procedure createEmbalmSpider(uniqueid, npcx, npcy: smallint);$/;"	p
 createFlintDagger	items/weapons/flint_dagger.pas	/^procedure createFlintDagger(itmx, itmy: smallint);$/;"	p
 createGP	items/gold_pieces.pas	/^procedure createGP(itmx, itmy: smallint);$/;"	p
-createGhoul	entities/undead/backup/ghoul_lvl1.pas	/^procedure createGhoul(uniqueid, npcx, npcy: smallint);$/;"	p
 createGhoul	entities/undead/ghoul_lvl1.pas	/^procedure createGhoul(uniqueid, npcx, npcy: smallint);$/;"	p
 createGiantCaveRat	entities/animals/giant_cave_rat.pas	/^procedure createGiantCaveRat(uniqueid, npcx, npcy: smallint);$/;"	p
 createGiantTroglodyte	entities/troglodytes/trog_giant.pas	/^procedure createGiantTroglodyte(uniqueid, npcx, npcy: smallint);$/;"	p
 createGnomeAssassin	entities/gnomes/gnome_assassin.pas	/^procedure createGnomeAssassin(uniqueid, npcx, npcy: smallint);$/;"	p
-createGnomeCultist	entities/gnomes/backup/gnome_cultist.pas	/^procedure createGnomeCultist(uniqueid, npcx, npcy: smallint);$/;"	p
 createGnomeCultist	entities/gnomes/gnome_cultist.pas	/^procedure createGnomeCultist(uniqueid, npcx, npcy: smallint);$/;"	p
-createGnomeWarrior	entities/gnomes/backup/gnome_warrior.pas	/^procedure createGnomeWarrior(uniqueid, npcx, npcy: smallint);$/;"	p
 createGnomeWarrior	entities/gnomes/gnome_warrior.pas	/^procedure createGnomeWarrior(uniqueid, npcx, npcy: smallint);$/;"	p
-createGnomishAxe	items/weapons/backup/gnomish_axe.pas	/^procedure createGnomishAxe(itmx, itmy: smallint);$/;"	p
 createGnomishAxe	items/weapons/gnomish_axe.pas	/^procedure createGnomishAxe(itmx, itmy: smallint);$/;"	p
 createGnomishDagger	items/weapons/gnomish_dagger.pas	/^procedure createGnomishDagger(itmx, itmy: smallint);$/;"	p
-createGnomishMace	items/weapons/backup/gnomish_mace.pas	/^procedure createGnomishMace(itmx, itmy: smallint);$/;"	p
 createGnomishMace	items/weapons/gnomish_mace.pas	/^procedure createGnomishMace(itmx, itmy: smallint);$/;"	p
 createGreenFungus	entities/fungus/green_fungus.pas	/^procedure createGreenFungus(uniqueid, npcx, npcy: smallint);$/;"	p
-createInfectedHyena	entities/animals/backup/hyena_fungus.pas	/^procedure createInfectedHyena(uniqueid, npcx, npcy: smallint);$/;"	p
 createInfectedHyena	entities/animals/hyena_fungus.pas	/^procedure createInfectedHyena(uniqueid, npcx, npcy: smallint);$/;"	p
-createLeatherArmour	items/armour/backup/leather_armour1.pas	/^procedure createLeatherArmour(itmx, itmy: smallint);$/;"	p
 createLeatherArmour	items/armour/leather_armour1.pas	/^procedure createLeatherArmour(itmx, itmy: smallint);$/;"	p
 createMushroomPerson	entities/fungus/mushroom_person.pas	/^procedure createMushroomPerson(uniqueid, npcx, npcy: smallint);$/;"	p
-createNecroAxe	items/weapons/backup/necro_axe.pas	/^procedure createNecroAxe(itmx, itmy: smallint);$/;"	p
 createNecroAxe	items/weapons/necro_axe.pas	/^procedure createNecroAxe(itmx, itmy: smallint);$/;"	p
-createNecromancer	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure createNecromancer(uniqueid, npcx, npcy: smallint);$/;"	p
 createNecromancer	entities/goblinkin/goblin_necromancer.pas	/^procedure createNecromancer(uniqueid, npcx, npcy: smallint);$/;"	p
 createNewDungeon	universe.pas	/^procedure createNewDungeon(title: string; levelType: dungeonTerrain; dID: smallint);$/;"	p
-createParchment	items/macguffins/backup/parchment.pas	/^procedure createParchment(itmx, itmy: smallint);$/;"	p
 createParchment	items/macguffins/parchment.pas	/^procedure createParchment(itmx, itmy: smallint);$/;"	p
 createPixieJar	items/pixie_jar.pas	/^procedure createPixieJar;$/;"	p
 createPixieJarDim	items/pixie_jar_dim.pas	/^procedure createPixieJarDim(itmx, itmy: smallint);$/;"	p
 createPlayer	player/player.pas	/^procedure createPlayer;$/;"	p
-createPointyStick	items/weapons/backup/pointy_stick.pas	/^procedure createPointyStick(itmx, itmy: smallint);$/;"	p
 createPointyStick	items/weapons/pointy_stick.pas	/^procedure createPointyStick(itmx, itmy: smallint);$/;"	p
 createRabidDog	entities/animals/rabid_dog.pas	/^procedure createRabidDog(uniqueid, npcx, npcy: smallint);$/;"	p
-createRedcap	entities/hobs/backup/redcap_lesser.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
-createRedcap	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
-createRedcap	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
 createRedcap	entities/hobs/redcap_lesser.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
 createRedcap	entities/hobs/redcap_lesser_lobber.pas	/^procedure createRedcap(uniqueid, npcx, npcy: smallint);$/;"	p
-createRedcapFungus	entities/hobs/backup/redcap_fungus.pas	/^procedure createRedcapFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createRedcapFungus	entities/hobs/redcap_fungus.pas	/^procedure createRedcapFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createRock	items/rock.pas	/^procedure createRock(itmx, itmy: smallint);$/;"	p
 createRoom	dungeons/crypt.pas	/^procedure createRoom(gridNumber: smallint);$/;"	p
 createRoom	dungeons/smallgrid.pas	/^procedure createRoom(gridNumber: smallint);$/;"	p
+createRoom	dungeons/village.pas	/^procedure createRoom(gridNumber: smallint);$/;"	p
 createScorpion	entities/bugs/scorpion.pas	/^procedure createScorpion(uniqueid, npcx, npcy: smallint);$/;"	p
-createShortBow	items/weapons/backup/short_bow.pas	/^procedure createShortBow(itmx, itmy: smallint);$/;"	p
 createShortBow	items/weapons/short_bow.pas	/^procedure createShortBow(itmx, itmy: smallint);$/;"	p
-createSkeleton	entities/undead/backup/skeleton_lvl1.pas	/^procedure createSkeleton(uniqueid, npcx, npcy: smallint);$/;"	p
 createSkeleton	entities/undead/skeleton_lvl1.pas	/^procedure createSkeleton(uniqueid, npcx, npcy: smallint);$/;"	p
 createSmallGreenFungus	entities/fungus/small_green_fungus.pas	/^procedure createSmallGreenFungus(uniqueid, npcx, npcy: smallint);$/;"	p
-createSmallHornet	entities/animals/backup/small_hornet.pas	/^procedure createSmallHornet(uniqueid, npcx, npcy: smallint);$/;"	p
 createSmallHornet	entities/bugs/small_hornet.pas	/^procedure createSmallHornet(uniqueid, npcx, npcy: smallint);$/;"	p
-createSmallHyena	entities/animals/backup/small_hyena.pas	/^procedure createSmallHyena(uniqueid, npcx, npcy: smallint);$/;"	p
 createSmallHyena	entities/animals/small_hyena.pas	/^procedure createSmallHyena(uniqueid, npcx, npcy: smallint);$/;"	p
 createSmallScorpion	entities/bugs/small_scorpion.pas	/^procedure createSmallScorpion(uniqueid, npcx, npcy: smallint);$/;"	p
-createSmugglersMap	items/macguffins/backup/smugglersmap.pas	/^procedure createSmugglersMap(itmx, itmy: smallint);$/;"	p
 createSmugglersMap	items/macguffins/smugglersmap.pas	/^procedure createSmugglersMap(itmx, itmy: smallint);$/;"	p
-createSpore	items/traps/backup/poison_spore.pas	/^procedure createSpore(itmx, itmy: smallint);$/;"	p
 createSpore	items/traps/poison_spore.pas	/^procedure createSpore(itmx, itmy: smallint);$/;"	p
-createStaff	items/weapons/backup/staff_bewilder.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
-createStaff	items/weapons/backup/staff_confusion.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
-createStaff	items/weapons/backup/staff_minor_scorch.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
-createStaff	items/weapons/backup/vampiric_staff.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
 createStaff	items/weapons/staff_bewilder.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
 createStaff	items/weapons/staff_minor_scorch.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
 createStaff	items/weapons/vampiric_staff.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
 createTerbutje	items/weapons/terbutje.pas	/^procedure createTerbutje(itmx, itmy: smallint);$/;"	p
 createTroglodyte	entities/troglodytes/trog_simple.pas	/^procedure createTroglodyte(uniqueid, npcx, npcy: smallint);$/;"	p
-createWeb	entities/bugs/backup/web.pas	/^procedure createWeb(uniqueid, npcx, npcy: smallint);$/;"	p
 createWeb	entities/bugs/web.pas	/^procedure createWeb(uniqueid, npcx, npcy: smallint);$/;"	p
 createWebTrap	items/traps/web_trap.pas	/^procedure createWebTrap(itmx, itmy: smallint);$/;"	p
 createWineFlask	items/wine_flask.pas	/^procedure createWineFlask(itmx, itmy: smallint);$/;"	p
-createZombie	entities/undead/backup/corpse_zombie.pas	/^procedure createZombie(uniqueid, npcx, npcy: smallint);$/;"	p
-createZombie	entities/undead/backup/zombie_weak.pas	/^procedure createZombie(uniqueid, npcx, npcy: smallint);$/;"	p
 createZombie	entities/undead/corpse_zombie.pas	/^procedure createZombie(uniqueid, npcx, npcy: smallint);$/;"	p
 createZombie	entities/undead/zombie_weak.pas	/^procedure createZombie(uniqueid, npcx, npcy: smallint);$/;"	p
 cycleTargets	screens/scrthrow.pas	/^procedure cycleTargets(selection: smallint);$/;"	p
-death	entities/animals/backup/crypt_wolf.pas	/^procedure death;$/;"	p
 death	entities/animals/blood_bat.pas	/^procedure death;$/;"	p
 death	entities/animals/cave_bear.pas	/^procedure death;$/;"	p
 death	entities/animals/cave_rat.pas	/^procedure death;$/;"	p
@@ -280,75 +200,49 @@ death	entities/animals/hyena_fungus.pas	/^procedure death;$/;"	p
 death	entities/animals/large_blood_bat.pas	/^procedure death;$/;"	p
 death	entities/animals/rabid_dog.pas	/^procedure death;$/;"	p
 death	entities/animals/small_hyena.pas	/^procedure death;$/;"	p
-death	entities/bogles/backup/bogle_drunk.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/bogles/bogle_drunk.pas	/^procedure death(id: smallint);$/;"	p
-death	entities/bugs/backup/embalming_spider.pas	/^procedure death;$/;"	p
 death	entities/bugs/embalming_spider.pas	/^procedure death;$/;"	p
 death	entities/bugs/scorpion.pas	/^procedure death;$/;"	p
 death	entities/bugs/small_corpse_spider.pas	/^procedure death;$/;"	p
 death	entities/bugs/small_hornet.pas	/^procedure death;$/;"	p
 death	entities/bugs/small_scorpion.pas	/^procedure death;$/;"	p
-death	entities/fungus/backup/blue_fungus.pas	/^procedure death;$/;"	p
 death	entities/fungus/blue_fungus.pas	/^procedure death;$/;"	p
 death	entities/fungus/green_fungus.pas	/^procedure death;$/;"	p
 death	entities/fungus/mushroom_person.pas	/^procedure death;$/;"	p
 death	entities/fungus/small_green_fungus.pas	/^procedure death;$/;"	p
-death	entities/gnomes/backup/gnome_cultist.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/gnomes/gnome_assassin.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/gnomes/gnome_cultist.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/gnomes/gnome_warrior.pas	/^procedure death;$/;"	p
-death	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/goblinkin/goblin_necromancer.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/hobs/redcap_fungus.pas	/^procedure death;$/;"	p
 death	entities/hobs/redcap_lesser.pas	/^procedure death;$/;"	p
 death	entities/hobs/redcap_lesser_lobber.pas	/^procedure death;$/;"	p
 death	entities/troglodytes/trog_giant.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/troglodytes/trog_simple.pas	/^procedure death(id: smallint);$/;"	p
-death	entities/undead/backup/corpse_zombie.pas	/^procedure death(id: smallint);$/;"	p
-death	entities/undead/backup/ghoul_lvl1.pas	/^procedure death;$/;"	p
-death	entities/undead/backup/skeleton_lvl1.pas	/^procedure death(id: smallint);$/;"	p
-death	entities/undead/backup/zombie_weak.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/undead/corpse_zombie.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/undead/ghoul_lvl1.pas	/^procedure death;$/;"	p
 death	entities/undead/skeleton_lvl1.pas	/^procedure death(id: smallint);$/;"	p
 death	entities/undead/zombie_weak.pas	/^procedure death(id: smallint);$/;"	p
 decisionEscape	entities/animals/cave_rat.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/animals/giant_cave_rat.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/bogles/backup/bogle_drunk.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/bogles/bogle_drunk.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/bugs/backup/embalming_spider.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/bugs/backup/small_corpse_spider.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/bugs/embalming_spider.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/bugs/scorpion.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/bugs/small_corpse_spider.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/bugs/small_scorpion.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/fungus/mushroom_person.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/gnomes/backup/gnome_cultist.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/gnomes/backup/gnome_warrior.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/gnomes/gnome_assassin.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/gnomes/gnome_cultist.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/gnomes/gnome_warrior.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/goblinkin/goblin_necromancer.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/hobs/backup/redcap_fungus.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/hobs/backup/redcap_lesser.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/hobs/redcap_fungus.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/hobs/redcap_lesser.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/hobs/redcap_lesser_lobber.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/troglodytes/trog_giant.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/troglodytes/trog_simple.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/undead/backup/ghoul_lvl1.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/undead/backup/skeleton_lvl1.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionEscape	entities/undead/backup/zombie_weak.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/undead/ghoul_lvl1.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/undead/skeleton_lvl1.pas	/^procedure decisionEscape(id: smallint);$/;"	p
 decisionEscape	entities/undead/zombie_weak.pas	/^procedure decisionEscape(id: smallint);$/;"	p
-decisionHostile	entities/animals/backup/crypt_wolf.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/animals/backup/hyena_fungus.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/animals/backup/large_blood_bat.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/animals/backup/small_hyena.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/blood_bat.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/cave_bear.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/cave_rat.pas	/^procedure decisionHostile(id: smallint);$/;"	p
@@ -358,43 +252,25 @@ decisionHostile	entities/animals/hyena_fungus.pas	/^procedure decisionHostile(id
 decisionHostile	entities/animals/large_blood_bat.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/rabid_dog.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/animals/small_hyena.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/bogles/backup/bogle_drunk.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/bogles/bogle_drunk.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/bugs/backup/embalming_spider.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/bugs/backup/small_corpse_spider.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/bugs/embalming_spider.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/bugs/scorpion.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/bugs/small_corpse_spider.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/bugs/small_scorpion.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/fungus/mushroom_person.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/gnomes/backup/gnome_cultist.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/gnomes/backup/gnome_warrior.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/gnomes/gnome_assassin.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/gnomes/gnome_cultist.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/gnomes/gnome_warrior.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/goblinkin/goblin_necromancer.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/hobs/backup/redcap_fungus.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/hobs/backup/redcap_lesser.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/hobs/redcap_fungus.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/hobs/redcap_lesser.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/hobs/redcap_lesser_lobber.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/troglodytes/trog_giant.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/troglodytes/trog_simple.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/undead/backup/corpse_zombie.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/undead/backup/ghoul_lvl1.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/undead/backup/skeleton_lvl1.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionHostile	entities/undead/backup/zombie_weak.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/undead/corpse_zombie.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/undead/ghoul_lvl1.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/undead/skeleton_lvl1.pas	/^procedure decisionHostile(id: smallint);$/;"	p
 decisionHostile	entities/undead/zombie_weak.pas	/^procedure decisionHostile(id: smallint);$/;"	p
-decisionNeutral	entities/animals/backup/crypt_wolf.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/animals/backup/hyena_fungus.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/animals/backup/large_blood_bat.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/animals/backup/small_hyena.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/blood_bat.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/cave_bear.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/cave_rat.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
@@ -404,35 +280,21 @@ decisionNeutral	entities/animals/hyena_fungus.pas	/^procedure decisionNeutral(id
 decisionNeutral	entities/animals/large_blood_bat.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/rabid_dog.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/animals/small_hyena.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/bogles/backup/bogle_drunk.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/bogles/bogle_drunk.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/bugs/backup/embalming_spider.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/bugs/backup/small_corpse_spider.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/bugs/embalming_spider.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/bugs/scorpion.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/bugs/small_corpse_spider.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/bugs/small_scorpion.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/fungus/mushroom_person.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/gnomes/backup/gnome_cultist.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/gnomes/backup/gnome_warrior.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/gnomes/gnome_assassin.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/gnomes/gnome_cultist.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/gnomes/gnome_warrior.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/goblinkin/goblin_necromancer.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/hobs/backup/redcap_fungus.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/hobs/backup/redcap_lesser.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/hobs/redcap_fungus.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/hobs/redcap_lesser.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/hobs/redcap_lesser_lobber.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/troglodytes/trog_giant.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/troglodytes/trog_simple.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/undead/backup/corpse_zombie.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/undead/backup/ghoul_lvl1.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/undead/backup/skeleton_lvl1.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
-decisionNeutral	entities/undead/backup/zombie_weak.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/undead/corpse_zombie.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/undead/ghoul_lvl1.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/undead/skeleton_lvl1.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
@@ -484,6 +346,7 @@ drawSkull	screens/scrrip.pas	/^procedure drawSkull;$/;"	p
 drawStoneCavernTiles	map.pas	/^procedure drawStoneCavernTiles(c, r: smallint; hiDef: byte);$/;"	p
 drawTile	map.pas	/^procedure drawTile(c, r: smallint; hiDef: byte);$/;"	p
 drawTrajectory	screens/scrtargeting.pas	/^procedure drawTrajectory(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
+drawVillageTiles	map.pas	/^procedure drawVillageTiles(c, r: smallint; hiDef: byte);$/;"	p
 drop	player/player_inventory.pas	/^procedure drop;$/;"	p
 dropFirstItem	items/item_lookup.pas	/^procedure dropFirstItem;$/;"	p
 dropInput	keyboardinput.pas	/^procedure dropInput(Keypress: TKeyEvent);$/;"	p
@@ -496,36 +359,22 @@ entityDeath	entities.pas	/^    procedure entityDeath(i: smallint);$/;"	p
 entityTakeTurn	entities.pas	/^    procedure entityTakeTurn(i: smallint);$/;"	p
 eraseTerrain	screens/scroverworld.pas	/^procedure eraseTerrain;$/;"	p
 escapePlayer	entities/ai_animal.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/animals/backup/hyena_fungus.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/animals/backup/large_blood_bat.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/animals/backup/small_hyena.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/animals/blood_bat.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/animals/cave_bear.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/animals/hyena_fungus.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/animals/large_blood_bat.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/animals/rabid_dog.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/animals/small_hyena.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/bogles/backup/bogle_drunk.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/bogles/bogle_drunk.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/gnomes/backup/gnome_cultist.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/gnomes/backup/gnome_warrior.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/gnomes/gnome_assassin.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/gnomes/gnome_cultist.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/gnomes/gnome_warrior.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/goblinkin/goblin_necromancer.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/hobs/backup/redcap_fungus.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/hobs/backup/redcap_lesser.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/hobs/redcap_fungus.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/hobs/redcap_lesser.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/hobs/redcap_lesser_lobber.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/troglodytes/trog_giant.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/troglodytes/trog_simple.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/undead/backup/ghoul_lvl1.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/undead/backup/skeleton_lvl1.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
-escapePlayer	entities/undead/backup/zombie_weak.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/undead/ghoul_lvl1.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/undead/skeleton_lvl1.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 escapePlayer	entities/undead/zombie_weak.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
@@ -540,39 +389,22 @@ fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
 fillWithWalls	dungeons/stone_cavern.pas	/^procedure fillWithWalls;$/;"	p
 fireBow	screens/scrtargeting.pas	/^procedure fireBow;$/;"	p
 fireBowInput	keyboardinput.pas	/^procedure fireBowInput(Keypress: TKeyEvent);$/;"	p
-fireMagick	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure fireMagick(id: smallint);$/;"	p
 fireMagick	entities/goblinkin/goblin_necromancer.pas	/^procedure fireMagick(id: smallint);$/;"	p
-fireMissile	entities/bogles/backup/bogle_drunk.pas	/^procedure fireMissile(id: smallint);$/;"	p
 fireMissile	entities/bogles/bogle_drunk.pas	/^procedure fireMissile(id: smallint);$/;"	p
-fireMissile	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure fireMissile(id: smallint);$/;"	p
-fireMissile	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure fireMissile(id: smallint);$/;"	p
 fireMissile	entities/hobs/redcap_lesser_lobber.pas	/^procedure fireMissile(id: smallint);$/;"	p
 firingLine	vision/los.pas	/^procedure firingLine(projectile: shortstring; id, x1, y1, x2, y2: smallint);$/;"	p
 firstRow	dungeons/architect.pas	/^procedure firstRow;$/;"	p
-followScent	entities/animals/backup/crypt_wolf.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/animals/crypt_wolf.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/bogles/backup/bogle_drunk.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/bogles/bogle_drunk.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/gnomes/backup/gnome_cultist.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/gnomes/backup/gnome_warrior.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/gnomes/gnome_assassin.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/gnomes/gnome_cultist.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/gnomes/gnome_warrior.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/goblinkin/goblin_necromancer.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/hobs/backup/redcap_fungus.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/hobs/backup/redcap_lesser.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/hobs/redcap_fungus.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/hobs/redcap_lesser.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/hobs/redcap_lesser_lobber.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/troglodytes/trog_giant.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/troglodytes/trog_simple.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/undead/backup/corpse_zombie.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/undead/backup/ghoul_lvl1.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/undead/backup/skeleton_lvl1.pas	/^procedure followScent(id: smallint);$/;"	p
-followScent	entities/undead/backup/zombie_weak.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/undead/corpse_zombie.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/undead/ghoul_lvl1.pas	/^procedure followScent(id: smallint);$/;"	p
 followScent	entities/undead/skeleton_lvl1.pas	/^procedure followScent(id: smallint);$/;"	p
@@ -586,6 +418,7 @@ generate	dungeons/crypt.pas	/^procedure generate(title: string; idNumber: smalli
 generate	dungeons/overworld.pas	/^procedure generate;$/;"	p
 generate	dungeons/smallgrid.pas	/^procedure generate(title: string; idNumber: smallint; totalDepth: byte);$/;"	p
 generate	dungeons/stone_cavern.pas	/^procedure generate(title: string; idNumber: smallint; totalDepth: byte);$/;"	p
+generate	dungeons/village.pas	/^procedure generate(title: string; idNumber: smallint);$/;"	p
 generateClanName	plot_gen.pas	/^procedure generateClanName;$/;"	p
 generateDwarfName	plot_gen.pas	/^procedure generateDwarfName;$/;"	p
 generateElfName	plot_gen.pas	/^procedure generateElfName;$/;"	p
@@ -626,7 +459,6 @@ increaseDexterity	player/player_stats.pas	/^procedure increaseDexterity;$/;"	p
 increaseHealth	player/player.pas	/^procedure increaseHealth(amount: smallint);$/;"	p
 increaseMaxHealth	player/player_stats.pas	/^procedure increaseMaxHealth;$/;"	p
 infighting	entities/ai_animal.pas	/^procedure infighting(npcID, enemyID: smallint);$/;"	p
-infighting	entities/animals/backup/small_hornet.pas	/^procedure infighting(npcID, enemyID: smallint);$/;"	p
 infighting	entities/animals/blood_bat.pas	/^procedure infighting(npcID, enemyID: smallint);$/;"	p
 infighting	entities/bugs/small_hornet.pas	/^procedure infighting(npcID, enemyID: smallint);$/;"	p
 infoDialog	screens/dlginfo.pas	/^procedure infoDialog(message: shortstring);$/;"	p
@@ -638,11 +470,6 @@ introInput	keyboardinput.pas	/^procedure introInput(Keypress: TKeyEvent);$/;"	p
 inventoryInput	keyboardinput.pas	/^procedure inventoryInput(Keypress: TKeyEvent);$/;"	p
 isCreatureVisible	entities.pas	/^function isCreatureVisible(x, y: smallint): boolean;$/;"	f
 isItemThrowable	items.pas	/^function isItemThrowable(x, y: smallint): boolean;$/;"	f
-isNextToPlayer	entities/animals/backup/crypt_wolf.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/animals/backup/hyena_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/animals/backup/large_blood_bat.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/animals/backup/small_hornet.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/animals/backup/small_hyena.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/blood_bat.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/cave_bear.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/cave_rat.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
@@ -652,40 +479,25 @@ isNextToPlayer	entities/animals/hyena_fungus.pas	/^function isNextToPlayer(spx, 
 isNextToPlayer	entities/animals/large_blood_bat.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/rabid_dog.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/animals/small_hyena.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/bogles/backup/bogle_drunk.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/bogles/bogle_drunk.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/bugs/backup/embalming_spider.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/bugs/backup/small_corpse_spider.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/bugs/embalming_spider.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/bugs/scorpion.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/bugs/small_corpse_spider.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/bugs/small_hornet.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/bugs/small_scorpion.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/fungus/backup/blue_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/fungus/blue_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/fungus/green_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/fungus/mushroom_person.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/fungus/small_green_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/gnomes/backup/gnome_cultist.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/gnomes/backup/gnome_warrior.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/gnomes/gnome_assassin.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/gnomes/gnome_cultist.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/gnomes/gnome_warrior.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/goblinkin/backup/goblin_necromancer.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/goblinkin/goblin_necromancer.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/hobs/backup/redcap_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/hobs/backup/redcap_lesser.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/hobs/backup/redcap_lesser_archer.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/hobs/backup/redcap_lesser_lobber.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/hobs/redcap_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/hobs/redcap_lesser.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/hobs/redcap_lesser_lobber.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/troglodytes/trog_giant.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/troglodytes/trog_simple.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/undead/backup/corpse_zombie.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/undead/backup/ghoul_lvl1.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/undead/backup/skeleton_lvl1.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/undead/backup/zombie_weak.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/undead/corpse_zombie.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/undead/ghoul_lvl1.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/undead/skeleton_lvl1.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
@@ -697,6 +509,7 @@ islandFOV	vision/fov.pas	/^procedure islandFOV(centreX, centreY: smallint);$/;"	
 killEntity	entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 leftHasFloor	dungeons/cave.pas	/^function leftHasFloor(): boolean;$/;"	f
 leftHasFloor	dungeons/stone_cavern.pas	/^function leftHasFloor(): boolean;$/;"	f
+leftShacks	dungeons/village.pas	/^procedure leftShacks;$/;"	p
 leftToRight	dungeons/crypt.pas	/^procedure leftToRight;$/;"	p
 leftToRight	dungeons/smallgrid.pas	/^procedure leftToRight;$/;"	p
 lerp	dungeons/noise.pas	/^  function lerp(t, a, b: float64): float64; inline;$/;"	f
@@ -724,7 +537,6 @@ newGame	screens/dlginfo.pas	/^procedure newGame;$/;"	p
 newWarning	screens/dlginfo.pas	/^procedure newWarning;$/;"	p
 noise	dungeons/noise.pas	/^  function noise(x, y, z: float64): float64;$/;"	f
 notInView	map.pas	/^procedure notInView;$/;"	p
-obtainMap	items/macguffins/backup/smugglersmap.pas	/^procedure obtainMap;$/;"	p
 obtainMap	items/macguffins/smugglersmap.pas	/^procedure obtainMap;$/;"	p
 occupy	map.pas	/^procedure occupy(x, y: smallint);$/;"	p
 occupyUpdate	entities.pas	/^procedure occupyUpdate;$/;"	p
@@ -768,6 +580,7 @@ returnToOverworldScreen	main.pas	/^procedure returnToOverworldScreen;$/;"	p
 returnToSurface	main.pas	/^procedure returnToSurface;$/;"	p
 rightHasFloor	dungeons/cave.pas	/^function rightHasFloor(): boolean;$/;"	f
 rightHasFloor	dungeons/stone_cavern.pas	/^function rightHasFloor(): boolean;$/;"	f
+rightShacks	dungeons/village.pas	/^procedure rightShacks;$/;"	p
 rollDice	globalutils.pas	/^function rollDice(numberOfDice: byte): smallint;$/;"	f
 saveDungeonLevel	file_handling.pas	/^procedure saveDungeonLevel;$/;"	p
 saveGame	file_handling.pas	/^procedure saveGame;$/;"	p
@@ -795,18 +608,12 @@ sniff	vision/smell.pas	/^procedure sniff;$/;"	p
 sortInventory	player/player_inventory.pas	/^procedure sortInventory(iLo, iHi: integer);$/;"	p
 spawnDenizens	universe.pas	/^procedure spawnDenizens;$/;"	p
 spawnPlayer	entities.pas	/^procedure spawnPlayer;$/;"	p
-spinWeb	entities/bugs/backup/embalming_spider.pas	/^procedure spinWeb(id: smallint);$/;"	p
 spinWeb	entities/bugs/embalming_spider.pas	/^procedure spinWeb(id: smallint);$/;"	p
 spinWebs	animation.pas	/^procedure spinWebs;$/;"	p
 spiteDMG	player/combat_resolver.pas	/^procedure spiteDMG(npc: smallint);$/;"	p
 startingInventory	player/player_inventory.pas	/^procedure startingInventory;$/;"	p
 stateInputLoop	main.pas	/^procedure stateInputLoop;$/;"	p
 storeEllanToll	island.pas	/^procedure storeEllanToll;$/;"	p
-takeTurn	entities/animals/backup/crypt_wolf.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/animals/backup/hyena_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/animals/backup/large_blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/animals/backup/small_hornet.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/animals/backup/small_hyena.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/cave_bear.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/cave_rat.pas	/^procedure takeTurn(id: smallint);$/;"	p
@@ -816,60 +623,32 @@ takeTurn	entities/animals/hyena_fungus.pas	/^procedure takeTurn(id: smallint);$/
 takeTurn	entities/animals/large_blood_bat.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/rabid_dog.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/animals/small_hyena.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/bogles/backup/bogle_drunk.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bogles/bogle_drunk.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/bugs/backup/embalming_spider.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/bugs/backup/small_corpse_spider.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/bugs/backup/web.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bugs/embalming_spider.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bugs/scorpion.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bugs/small_corpse_spider.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bugs/small_hornet.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bugs/small_scorpion.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/bugs/web.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/fungus/backup/blue_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/fungus/blue_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/fungus/green_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/fungus/mushroom_person.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/fungus/small_green_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/gnomes/backup/gnome_cultist.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/gnomes/backup/gnome_warrior.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/gnomes/gnome_assassin.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/gnomes/gnome_cultist.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/gnomes/gnome_warrior.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/goblinkin/goblin_necromancer.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/hobs/backup/redcap_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/hobs/backup/redcap_lesser.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/troglodytes/trog_giant.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/troglodytes/trog_simple.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/undead/backup/corpse_zombie.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/undead/backup/ghoul_lvl1.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/undead/backup/skeleton_lvl1.pas	/^procedure takeTurn(id: smallint);$/;"	p
-takeTurn	entities/undead/backup/zombie_weak.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/undead/corpse_zombie.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/undead/ghoul_lvl1.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/undead/skeleton_lvl1.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/undead/zombie_weak.pas	/^procedure takeTurn(id: smallint);$/;"	p
 target	screens/scrthrow.pas	/^procedure target;$/;"	p
 targetInput	keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
-throw	items/weapons/backup/basic_club.pas	/^procedure throw;$/;"	p
-throw	items/weapons/backup/bone_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
-throw	items/weapons/backup/crude_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
-throw	items/weapons/backup/gnomish_axe.pas	/^procedure throw(itemID: smallint);$/;"	p
-throw	items/weapons/backup/gnomish_mace.pas	/^procedure throw(itemID: smallint);$/;"	p
-throw	items/weapons/backup/necro_axe.pas	/^procedure throw(itemID: smallint);$/;"	p
-throw	items/weapons/backup/pointy_stick.pas	/^procedure throw;$/;"	p
-throw	items/weapons/backup/short_bow.pas	/^procedure throw;$/;"	p
-throw	items/weapons/backup/staff_bewilder.pas	/^procedure throw;$/;"	p
-throw	items/weapons/backup/staff_confusion.pas	/^procedure throw;$/;"	p
-throw	items/weapons/backup/staff_minor_scorch.pas	/^procedure throw;$/;"	p
-throw	items/weapons/backup/vampiric_staff.pas	/^procedure throw;$/;"	p
 throw	items/weapons/basic_club.pas	/^procedure throw;$/;"	p
 throw	items/weapons/bone_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
 throw	items/weapons/crude_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
@@ -885,11 +664,6 @@ throw	items/weapons/staff_minor_scorch.pas	/^procedure throw;$/;"	p
 throw	items/weapons/terbutje.pas	/^procedure throw;$/;"	p
 throw	items/weapons/vampiric_staff.pas	/^procedure throw;$/;"	p
 throwRock	animation.pas	/^procedure throwRock(id: smallint; var flightPath: a);$/;"	p
-thrownDamaged	items/weapons/backup/bone_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
-thrownDamaged	items/weapons/backup/crude_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
-thrownDamaged	items/weapons/backup/gnomish_axe.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
-thrownDamaged	items/weapons/backup/gnomish_mace.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
-thrownDamaged	items/weapons/backup/necro_axe.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownDamaged	items/weapons/bone_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownDamaged	items/weapons/crude_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownDamaged	items/weapons/flint_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
@@ -901,7 +675,6 @@ thrownObjectAnim	animation.pas	/^procedure thrownObjectAnim(var flightPath: b; p
 titleInput	keyboardinput.pas	/^procedure titleInput(Keypress: TKeyEvent);$/;"	p
 topUpStats	debuggingfunctions.pas	/^procedure topUpStats;$/;"	p
 topupHealth	player/player.pas	/^procedure topupHealth(amount: smallint);$/;"	p
-triggered	items/traps/backup/poison_spore.pas	/^procedure triggered(id: smallint);$/;"	p
 triggered	items/traps/poison_spore.pas	/^procedure triggered(id: smallint);$/;"	p
 triggered	items/traps/web_trap.pas	/^procedure triggered(id: smallint);$/;"	p
 uniqueKills	screens/scrdeathlist.pas	/^function uniqueKills: smallint;$/;"	f
@@ -916,9 +689,6 @@ updateMagick	ui.pas	/^procedure updateMagick;$/;"	p
 updateWeapon	ui.pas	/^procedure updateWeapon;$/;"	p
 updateXP	ui.pas	/^procedure updateXP;$/;"	p
 useItem	items/ale_tankard.pas	/^procedure useItem;$/;"	p
-useItem	items/armour/backup/cloth_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
-useItem	items/armour/backup/leather_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
-useItem	items/armour/backup/lesser_bone_armour.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/armour/cloth_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/armour/leather_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/armour/lesser_bone_armour.pas	/^procedure useItem(equipped: boolean);$/;"	p
@@ -927,21 +697,8 @@ useItem	items/gold_pieces.pas	/^procedure useItem;$/;"	p
 useItem	items/pixie_jar.pas	/^procedure useItem;$/;"	p
 useItem	items/pixie_jar_dim.pas	/^procedure useItem;$/;"	p
 useItem	items/rock.pas	/^procedure useItem;$/;"	p
-useItem	items/traps/backup/poison_spore.pas	/^procedure useItem;$/;"	p
 useItem	items/traps/poison_spore.pas	/^procedure useItem;$/;"	p
 useItem	items/traps/web_trap.pas	/^procedure useItem;$/;"	p
-useItem	items/weapons/backup/basic_club.pas	/^procedure useItem(equipped: boolean);$/;"	p
-useItem	items/weapons/backup/bone_dagger.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
-useItem	items/weapons/backup/crude_dagger.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
-useItem	items/weapons/backup/gnomish_axe.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
-useItem	items/weapons/backup/gnomish_mace.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
-useItem	items/weapons/backup/necro_axe.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
-useItem	items/weapons/backup/pointy_stick.pas	/^procedure useItem(equipped: boolean);$/;"	p
-useItem	items/weapons/backup/short_bow.pas	/^procedure useItem(equipped: boolean);$/;"	p
-useItem	items/weapons/backup/staff_bewilder.pas	/^procedure useItem(equipped: boolean);$/;"	p
-useItem	items/weapons/backup/staff_confusion.pas	/^procedure useItem(equipped: boolean);$/;"	p
-useItem	items/weapons/backup/staff_minor_scorch.pas	/^procedure useItem(equipped: boolean);$/;"	p
-useItem	items/weapons/backup/vampiric_staff.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/basic_club.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/bone_dagger.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
 useItem	items/weapons/crude_dagger.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
@@ -962,11 +719,6 @@ validProjectile	screens/scrthrow.pas	/^function validProjectile(selection: char)
 vampiricDrain	magiceffects.pas	/^procedure vampiricDrain;$/;"	p
 vowels	plot_gen.pas	/^function vowels(character: string): char;$/;"	f
 wander	entities/ai_animal.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/animals/backup/crypt_wolf.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/animals/backup/hyena_fungus.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/animals/backup/large_blood_bat.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/animals/backup/small_hornet.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/animals/backup/small_hyena.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/blood_bat.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/cave_bear.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/crypt_wolf.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
@@ -974,29 +726,17 @@ wander	entities/animals/hyena_fungus.pas	/^procedure wander(id, spx, spy: smalli
 wander	entities/animals/large_blood_bat.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/rabid_dog.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/animals/small_hyena.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/bogles/backup/bogle_drunk.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/bogles/bogle_drunk.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/bugs/small_hornet.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/gnomes/backup/gnome_cultist.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/gnomes/backup/gnome_warrior.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/gnomes/gnome_assassin.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/gnomes/gnome_cultist.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/gnomes/gnome_warrior.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/goblinkin/backup/goblin_necromancer.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/goblinkin/goblin_necromancer.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/hobs/backup/redcap_fungus.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/hobs/backup/redcap_lesser.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/hobs/backup/redcap_lesser_archer.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/hobs/backup/redcap_lesser_lobber.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/hobs/redcap_fungus.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/hobs/redcap_lesser.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/hobs/redcap_lesser_lobber.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/troglodytes/trog_giant.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/troglodytes/trog_simple.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/undead/backup/corpse_zombie.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/undead/backup/ghoul_lvl1.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/undead/backup/skeleton_lvl1.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
-wander	entities/undead/backup/zombie_weak.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/undead/corpse_zombie.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/undead/ghoul_lvl1.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/undead/skeleton_lvl1.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p

@@ -69,9 +69,8 @@ procedure calcDistances(x, y: smallint);
 
   (* Set distance around current tile *)
   procedure setaround(x, y: smallint; d: smallint);
-  const
-    r: array[1..4] of tpoint =              { the four directions of movement }
-      ((x: 0; y: -1), (x: 1; y: 0), (x: 0; y: 1), (x: -1; y: 0));
+  const  { the four directions of movement }
+    r: array[1..4] of tpoint = ((x: 0; y: -1), (x: 1; y: 0), (x: 0; y: 1), (x: -1; y: 0));
   var
     a: smallint;
     dx, dy: smallint;

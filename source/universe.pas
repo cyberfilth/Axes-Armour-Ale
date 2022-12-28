@@ -8,7 +8,7 @@ unit universe;
 interface
 
 uses
-  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, smallGrid, crypt, stone_cavern;
+  SysUtils, globalUtils, cave, smell, player_stats, pixie_jar, smallGrid, crypt, stone_cavern, village;
 
 var
   (* Number of dungeons *)
@@ -24,6 +24,7 @@ var
   levelVisited: boolean;
   (* Has the the overworld been generated before *)
   OWgen: boolean;
+  homeland: string;
 
 (* Creates a dungeon of a specified type *)
 procedure createNewDungeon(title: string; levelType: dungeonTerrain; dID: smallint);
@@ -54,7 +55,10 @@ begin
   universe.title := title;
   { First cave }
   dungeonType := levelType;
-  totalDepth := 3;
+  if (dungeonType = tVillage) then
+    totalDepth := 1
+  else
+    totalDepth := 3;
   currentDepth := 1;
 
   (* generate the dungeon *)
@@ -63,6 +67,7 @@ begin
     tDungeon: smallGrid.generate(UTF8Encode(title), dID, totalDepth);
     tCrypt: crypt.generate(UTF8Encode(title), dID, totalDepth);
     tStoneCavern: stone_cavern.generate(UTF8Encode(title), dID, totalDepth);
+    tVillage: village.generate(UTF8Encode(title), dID);
   end;
 
   (* Copy the 1st floor of the current dungeon to the game map *)

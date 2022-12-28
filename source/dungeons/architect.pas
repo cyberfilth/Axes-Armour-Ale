@@ -18,7 +18,7 @@ unit architect;
 interface
 
 uses
-  SysUtils, globalUtils;
+  SysUtils, globalUtils, player_stats, universe, plot_gen;
 
 var
   (* Unique location ID for the locationLookup table *)
@@ -48,15 +48,10 @@ end;
 
 procedure firstRow;
 var
-  cryptNames: array[0..3] of
-  shortstring = ('abandoned crypt', 'spooky tomb', 'haunted mausoleum',
-    'Cursed Sepulchre');
-  dungeonNames: array[0..5] of
-  shortstring = ('Abandoned tunnels', 'Abandoned ruins', 'Unknown dungeon',
+  cryptNames: array[0..3] of shortstring = ('abandoned crypt', 'spooky tomb', 'haunted mausoleum', 'Cursed Sepulchre');
+  dungeonNames: array[0..5] of shortstring = ('Abandoned tunnels', 'Abandoned ruins', 'Unknown dungeon',
     'Ruins of Cal Arath', 'Whispering ruins', 'Derelict tunnels');
-  stoneNames: array[0..4] of
-  shortstring = ('rock cave', 'stony cavern', 'granite caves',
-    'Cursed Sepulchre', 'gravelly grotto');
+  stoneNames: array[0..4] of shortstring = ('rock cave', 'stony cavern', 'granite caves', 'Cursed Sepulchre', 'gravelly grotto');
   choice: byte;
   placeName: shortstring;
   placeX, placeY: smallint;
@@ -65,6 +60,28 @@ begin
   placeY := 0;
   placeName := '';
   locationBuilderID := 2;
+
+  (* Generate a village *)
+  if (player_stats.playerRace = 'human') then
+    placeName := UTF8Encode(universe.homeland)
+  else
+    placeName := UTF8Encode(plot_gen.smallVillage);
+  placeX := 19;
+  placeY := 49;
+  { Store location in locationLookup table }
+  SetLength(island.locationLookup, length(island.locationLookup) + 1);
+  with island.locationLookup[locationBuilderID - 1] do
+  begin
+    X := placeX;
+    Y := placeY;
+    id := locationBuilderID;
+    Name := placeName;
+    generated := False;
+    theme := tVillage;
+  end;
+  Inc(locationBuilderID);
+  terrainArray[placeY][placeX] := '>';
+
   (* Place a dungeon *)
   choice := Random(Length(dungeonNames));
   placeName := dungeonNames[choice];
@@ -86,6 +103,7 @@ begin
   end;
   Inc(locationBuilderID);
   terrainArray[placeY][placeX] := '>';
+
   (* Place a crypt *)
   choice := Random(Length(cryptNames));
   placeName := cryptNames[choice];

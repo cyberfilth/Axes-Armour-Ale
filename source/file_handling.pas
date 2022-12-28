@@ -8,7 +8,7 @@ interface
 
 uses
   SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe, island,
-  cave, smallGrid, crypt, stone_cavern, combat_resolver, ui;
+  cave, smallGrid, crypt, stone_cavern, village, combat_resolver, ui;
 
 (* Save the overworld map to disk *)
 procedure saveOverworldMap;
@@ -354,6 +354,15 @@ begin
           else
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
         end
+	{ if location is a village }
+        else if (dType = tVillage) then
+        begin
+          if (village.dungeonArray[r][c] = '.') or (village.dungeonArray[r][c] = 'X') or
+            (village.dungeonArray[r][c] = '"') then
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
+          else
+            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
+        end
         { if dungeon type is a crypt }
         else if (dType = tCrypt) then
         begin
@@ -384,6 +393,11 @@ begin
         else if (dType = tDungeon) then
         begin
           AddElement(datanode, 'Glyph', UTF8Decode(smallGrid.processed_dungeon[r][c]));
+        end
+	{ if location is a village }
+        else if (dType = tVillage) then
+        begin
+          AddElement(datanode, 'Glyph', UTF8Decode(village.dungeonArray[r][c]));
         end
         { if dungeon type is a crypt }
         else if (dType = tCrypt) then
@@ -826,6 +840,7 @@ begin
     globalutils.OWx := StrToInt(UTF8Encode(RootNode.FindNode('owx').TextContent));
     globalutils.OWy := StrToInt(UTF8Encode(RootNode.FindNode('owy').TextContent));
     universe.OWgen := StrToBool(UTF8Encode(RootNode.FindNode('OWgen').TextContent));
+    universe.homeland := RootNode.FindNode('homeland').TextContent;
     (* Total number of unique locations *)
     SetLength(island.locationLookup, StrToInt(UTF8Encode(RootNode.FindNode('locations').TextContent)));
     (* Current dungeon ID *)
@@ -1025,6 +1040,7 @@ begin
     AddElement(datanode, 'owx', IntToStr(globalutils.OWx));
     AddElement(datanode, 'owy', IntToStr(globalutils.OWy));
     AddElement(datanode, 'OWgen', BoolToStr(universe.OWgen));
+    AddElement(datanode, 'homeland', UTF8Encode(universe.homeland));
     AddElement(datanode, 'locations', IntToStr(Length(island.locationLookup)));
     AddElement(datanode, 'dungeonID', IntToStr(uniqueID));
     AddElement(datanode, 'currentDepth', IntToStr(currentDepth));

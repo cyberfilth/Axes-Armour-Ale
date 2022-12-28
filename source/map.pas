@@ -4,6 +4,7 @@ unit map;
 
 {$mode objfpc}{$H+}
 {$RANGECHECKS OFF}
+{$warn 5024 off}
 
 interface
 
@@ -77,6 +78,8 @@ procedure drawDungeonTiles(c, r: smallint; hiDef: byte);
 procedure drawCryptTiles(c, r: smallint; hiDef: byte);
 (* Draw stone cavern tiles *)
 procedure drawStoneCavernTiles(c, r: smallint; hiDef: byte);
+(* Draw village tiles *)
+procedure drawVillageTiles(c, r: smallint; hiDef: byte);
 (* Place a tile on the map *)
 procedure drawTile(c, r: smallint; hiDef: byte);
 (* Display explored sections of map when reloading game *)
@@ -1017,6 +1020,27 @@ begin
         mapDisplay[r][c].GlyphColour := lit
       else
         mapDisplay[r][c].GlyphColour := unlit;
+    end;
+  end;
+end;
+
+procedure drawVillageTiles(c, r: smallint; hiDef: byte);
+begin
+  case maparea[r][c].glyph of
+    '.', 'X': { Mud }
+    begin
+      mapDisplay[r][c].Glyph := '.';
+      mapDisplay[r][c].GlyphColour := 'brown';
+    end;
+    '"': { Grass }
+    begin
+      mapDisplay[r][c].Glyph := '"';
+      mapDisplay[r][c].GlyphColour := 'green';
+    end;
+    '#': { Walls }
+    begin
+      mapDisplay[r][c].Glyph := chr(219);
+      mapDisplay[r][c].GlyphColour := 'lightGrey';
     end;
   end;
 end;

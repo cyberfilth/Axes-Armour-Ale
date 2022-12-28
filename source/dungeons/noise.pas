@@ -50,38 +50,22 @@ implementation
   begin
     Result := 0;
     case (hash and 15) of
-      0:
-        Result := x + y;
-      1:
-        Result := y - x;
-      2:
-        Result := x - y;
-      3:
-        Result := -x - y;
-      4:
-        Result := x + z;
-      5:
-        Result := z - x;
-      6:
-        Result := x - z;
-      7:
-        Result := -x - z;
-      8:
-        Result := y + z;
-      9:
-        Result := z - y;
-      10:
-        Result := y - z;
-      11:
-        Result := -y - z;
-      12:
-        Result := x + y;
-      13:
-        Result := z - y;
-      14:
-        Result := y - x;
-      15:
-        Result := -y - z;
+      0: Result := x + y;
+      1: Result := y - x;
+      2: Result := x - y;
+      3: Result := -x - y;
+      4: Result := x + z;
+      5: Result := z - x;
+      6: Result := x - z;
+      7: Result := -x - z;
+      8: Result := y + z;
+      9: Result := z - y;
+      10: Result := y - z;
+      11: Result := -y - z;
+      12: Result := x + y;
+      13: Result := z - y;
+      14: Result := y - x;
+      15: Result := -y - z;
     end;
   end;
 
