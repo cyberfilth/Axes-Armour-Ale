@@ -515,7 +515,7 @@ end;
 
 procedure regenMagick;
 begin
-  (* Player cannot regenerate if they have status effects *)
+  (* Player cannot regenerate if they have certain status effects *)
   if (entityList[0].stsPoison = False) and (entityList[0].stsDrunk = False) then
   begin
     { Elves regenerate magick every 3 turns }

@@ -22,8 +22,6 @@ var
   i, j, q, qq, ii, jj, ax, ay, k, choose, r, c, listLength: integer;
   (* list of coordinates of centre of each building *)
   centreList: array of coordinates;
-  (* Player starting position *)
-  startX, startY: smallint;
 
 (* Create a building *)
 procedure createRoom(gridNumber: smallint);
@@ -37,7 +35,7 @@ procedure generate(title: string; idNumber: smallint);
 implementation
 
 uses
-  universe, file_handling, map;
+  universe, file_handling;
 
 procedure createRoom(gridNumber: smallint);
 var
@@ -154,6 +152,7 @@ begin
       roomWidth := 4;
       roomHeight := 4;
     end;
+  end;
 
   (* Save coordinates of the centre of the room *)
   listLength := Length(centreList);
@@ -207,7 +206,6 @@ begin
       dungeonArray[9, 61] := '.';
   end;
 end;
-end;
 
 procedure leftShacks;
 var
@@ -256,11 +254,8 @@ begin
 end;
 
 procedure generate(title: string; idNumber: smallint);
-var
-  i2: byte;
 begin
   choose := 0;
-  i2 := 0;
   { Create a dirt path in the centre of the village }
   for i := 1 to MAXROWS do
     for j := 1 to MAXCOLUMNS do
@@ -404,26 +399,19 @@ begin
   rightShacks;
 
   { set player start coordinates }
-  map.startX := 66;
-  map.startY := 3;
+  dungeonArray[3][66] := '<';
 
   { write the village map to universe.currentDungeon }
   for r := 1 to globalUtils.MAXROWS do
   begin
     for c := 1 to globalUtils.MAXCOLUMNS do
-      begin
-        universe.currentDungeon[r][c] := dungeonArray[r][c];
-      end;
+    begin
+      universe.currentDungeon[r][c] := dungeonArray[r][c];
+    end;
   end;
 
   universe.totalRooms := 9;
   file_handling.writeNewDungeonLevel(title, idNumber, 1, 1, 9, tVillage);
-
-  { Place a starting location marker for NPC's in the centre of each building }
-  for i2 := 0 to high(centreList) do
-  begin
-    dungeonArray[centreList[i2].y][centreList[i2].x] := 'X';
-  end;
 end;
 
 end.

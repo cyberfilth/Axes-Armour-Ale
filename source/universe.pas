@@ -87,7 +87,9 @@ begin
   if (dungeonType = tCave) or (dungeonType = tStoneCavern) then
     NPCnumber := totalRooms + currentDepth
   else if (dungeonType = tDungeon) or (dungeonType = tCrypt) then
-    NPCnumber := (totalRooms div 2) + currentDepth;
+    NPCnumber := (totalRooms div 2) + currentDepth
+  else if (dungeonType = tVillage) then
+    NPCnumber := 9;
   { player level is considered when generating the NPCs }
   entities.npcAmount := NPCnumber;
   { First npcAmount-1 number of enemies are scattered on the floor }

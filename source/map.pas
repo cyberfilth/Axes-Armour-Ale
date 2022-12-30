@@ -1027,7 +1027,7 @@ end;
 procedure drawVillageTiles(c, r: smallint; hiDef: byte);
 begin
   case maparea[r][c].glyph of
-    '.', 'X': { Mud }
+    '.', '<': { Mud }
     begin
       mapDisplay[r][c].Glyph := '.';
       mapDisplay[r][c].GlyphColour := 'brown';
@@ -1062,7 +1062,9 @@ begin
   else if (mapType = tStoneCavern) then
     drawStoneCavernTiles(c, r, hiDef)
   else if (mapType = tDungeon) then
-    drawDungeonTiles(c, r, hiDef);
+    drawDungeonTiles(c, r, hiDef)
+  else if (mapType = tVillage) then
+    drawVillageTiles(c, r, hiDef);
 end;
 
 procedure loadDisplayedMap;
@@ -1113,7 +1115,8 @@ begin
       if (universe.currentDungeon[r][c] = '.') or { floor tile }
         (universe.currentDungeon[r][c] = 'X') or { Room centre marker }
         (universe.currentDungeon[r][c] = '<') or { Upstairs tile }
-        (universe.currentDungeon[r][c] = '>') then { Downstairs tile }
+        (universe.currentDungeon[r][c] = '>') or { Downstairs tile }
+        (universe.currentDungeon[r][c] = '"') then { Grass }
         maparea[r][c].Blocks := False;
       drawTile(c, r, 1);
     end;
