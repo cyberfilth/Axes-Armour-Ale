@@ -1027,12 +1027,12 @@ end;
 procedure drawVillageTiles(c, r: smallint; hiDef: byte);
 begin
   case maparea[r][c].glyph of
-    '.', '<': { Mud }
+    '.': { Mud }
     begin
       mapDisplay[r][c].Glyph := '.';
       mapDisplay[r][c].GlyphColour := 'brown';
     end;
-    '"': { Grass }
+    '"', '<': { Grass }
     begin
       mapDisplay[r][c].Glyph := '"';
       mapDisplay[r][c].GlyphColour := 'green';

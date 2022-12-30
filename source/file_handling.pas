@@ -354,10 +354,10 @@ begin
           else
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
         end
-	{ if location is a village }
+        { if location is a village }
         else if (dType = tVillage) then
         begin
-          if (village.dungeonArray[r][c] = '.') or (village.dungeonArray[r][c] = 'X') or
+          if (village.dungeonArray[r][c] = '.') or (village.dungeonArray[r][c] = '<') or
             (village.dungeonArray[r][c] = '"') then
             AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
           else
