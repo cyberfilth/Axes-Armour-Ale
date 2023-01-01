@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Axes, Armour &amp; Ale: village</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="PasDoc 0.16.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<link rel="StyleSheet" type="text/css" href="pasdoc.css">
+</head>
+<body>
+<div class="container"><div class="navigation">
+<h2><a href="index.html">Axes, Armour &amp; Ale</a></h2><ul><li><a href="AllUnits.html">Units</a></li><li><a href="ClassHierarchy.html">Class Hierarchy</a></li><li><a href="AllClasses.html">Classes, Interfaces, Objects and Records</a></li><li><a href="AllTypes.html">Types</a></li><li><a href="AllVariables.html">Variables</a></li><li><a href="AllConstants.html">Constants</a></li><li><a href="AllFunctions.html">Functions and Procedures</a></li><li><a href="AllIdentifiers.html">Identifiers</a></li></ul></div><div class="content">
+<h1 class="unit">Unit village</h1>
+<div class="sections">
+<div class="one_section"><a class="section" href="#PasDoc-Description">Description</a></div><div class="one_section"><a class="section" href="#PasDoc-Uses">Uses</a></div><div class="one_section"><a class="section" href="#PasDoc-Classes">Classes, Interfaces, Objects and Records</a></div><div class="one_section"><a class="section" href="#PasDoc-FuncsProcs">Functions and Procedures</a></div><div class="one_section">Types</div><div class="one_section">Constants</div><div class="one_section"><a class="section" href="#PasDoc-Variables">Variables</a></div></div>
+<span id="PasDoc-Description"></span><h2 class="description">Description</h2>
+<p>
+Generates a small village of shacks and a village hall</p>
+<span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
+<ul class="useslist"><li>SysUtils</li><li><a href="globalUtils.html">globalutils</a></li></ul><h2 class="overview">Overview</h2>
+<span id="PasDoc-Classes"></span><h3 class="cio">Classes, Interfaces, Objects and Records</h3>
+<table class="classestable wide_list">
+<tr class="listheader">
+<th class="itemname">Name</th>
+<th class="itemdesc">Description</th>
+</tr>
+<tr class="list">
+<td class="itemname">Record&nbsp;<a class="bold" href="village.coordinates.html"><code>coordinates</code></a></td>
+<td class="itemdesc">&nbsp;</td>
+</tr>
+</table>
+<span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="village.html#createRoom">createRoom</a></strong>(gridNumber: smallint);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="village.html#leftShacks">leftShacks</a></strong>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="village.html#rightShacks">rightShacks</a></strong>;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="village.html#generate">generate</a></strong>(title: string; idNumber: smallint);</code></td>
+</tr>
+</table>
+<span id="PasDoc-Variables"></span><h3 class="summary">Variables</h3>
+<table class="summary wide_list">
+<tr class="list">
+<td class="itemcode"><code><strong><a href="village.html#ax">ax</a></strong>: integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="village.html#ay">ay</a></strong>: integer;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="village.html#c">c</a></strong>: integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="village.html#centreList">centreList</a></strong>: array of <a href="village.coordinates.html">coordinates</a>;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="village.html#choose">choose</a></strong>: integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="village.html#dungeonArray">dungeonArray</a></strong>: array[1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of char;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="village.html#i">i</a></strong>: integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="village.html#ii">ii</a></strong>: integer;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="village.html#j">j</a></strong>: integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="village.html#jj">jj</a></strong>: integer;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="village.html#k">k</a></strong>: integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="village.html#listLength">listLength</a></strong>: integer;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="village.html#q">q</a></strong>: integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="village.html#qq">qq</a></strong>: integer;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="village.html#r">r</a></strong>: integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="village.html#x">x</a></strong>: array [1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>, 1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..5] of char;</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code><strong><a href="village.html#xx">xx</a></strong>: array[1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>, 1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>] of integer;</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code><strong><a href="village.html#y">y</a></strong>: array [1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>, 1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..5] of char;</code></td>
+</tr>
+</table>
+<h2 class="description">Description</h2>
+<h3 class="detail">Functions and Procedures</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="createRoom"></span><code>procedure <strong>createRoom</strong>(gridNumber: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Create a building</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="leftShacks"></span><code>procedure <strong>leftShacks</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate shacks on the left of the map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="rightShacks"></span><code>procedure <strong>rightShacks</strong>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate shacks on the right of the map</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="generate"></span><code>procedure <strong>generate</strong>(title: string; idNumber: smallint);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Generate a village map</p>
+</td></tr>
+</table>
+<h3 class="detail">Variables</h3>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ax"></span><code><strong>ax</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ay"></span><code><strong>ay</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="c"></span><code><strong>c</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="centreList"></span><code><strong>centreList</strong>: array of <a href="village.coordinates.html">coordinates</a>;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+list of coordinates of centre of each building</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="choose"></span><code><strong>choose</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="dungeonArray"></span><code><strong>dungeonArray</strong>: array[1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>] of char;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="i"></span><code><strong>i</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="ii"></span><code><strong>ii</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="j"></span><code><strong>j</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="jj"></span><code><strong>jj</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="k"></span><code><strong>k</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="listLength"></span><code><strong>listLength</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="q"></span><code><strong>q</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="qq"></span><code><strong>qq</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="r"></span><code><strong>r</strong>: integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="x"></span><code><strong>x</strong>: array [1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>, 1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..5] of char;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="xx"></span><code><strong>xx</strong>: array[1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>, 1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>] of integer;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="y"></span><code><strong>y</strong>: array [1..<a href="globalUtils.html#MAXCOLUMNS">MAXCOLUMNS</a>, 1..<a href="globalUtils.html#MAXROWS">MAXROWS</a>, 1..5] of char;</code></td>
+</tr>
+<tr><td colspan="1">
+&nbsp;</td></tr>
+</table>
+<hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>
+</span>
+</div></div></body></html>

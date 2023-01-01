@@ -141,63 +141,66 @@ procedure processLight;
 var
   response: smallint;
 begin
-  if (lightEquipped = True) then
-  begin
-      Dec(lightCounter);
-
-  (* Light starts growing dimmer *)
-  if (lightCounter = 50) then
-  begin
-    ui.displayMessage(chr(16) + ' The light grows dimmer, your Pixie is growing weak')
-  end
-
-  else if (lightCounter = 35) and (entityList[0].visionRange > 1) then
+  if (main.gameState <> stVillage) then
     begin
-         Dec(entityList[0].visionRange);
-         entities.outOfView;
-         map.notInView;
-         map.loadDisplayedMap;
-         ui.displayMessage(chr(16) + ' The light grows dimmer');
+    if (lightEquipped = True) then
+    begin
+        Dec(lightCounter);
+
+    (* Light starts growing dimmer *)
+    if (lightCounter = 50) then
+    begin
+      ui.displayMessage(chr(16) + ' The light grows dimmer, your Pixie is growing weak')
     end
 
-  else if (lightCounter = 20) and (entityList[0].visionRange > 1)  then
-    begin
-         Dec(entityList[0].visionRange);
-         entities.outOfView;
-         map.notInView;
-         map.loadDisplayedMap;
-         ui.displayMessage(chr(16) + ' The light grows dimmer, your Pixie is dying!');
-    end
-
-  else if (lightCounter = 10) and (entityList[0].visionRange > 1)  then
-    begin
-         Dec(entityList[0].visionRange);
-         entities.outOfView;
-         map.notInView;
-         map.loadDisplayedMap;
-         ui.displayMessage(chr(16) + ' The light grows dimmer...');
-    end
-
-  (* The light goes out *)
-  else if (lightCounter = 0) then
-    begin
-         response := randomRange(1, 2);
-         entityList[0].visionRange := 0;
-         if response = 1 then
-            ui.displayMessage(chr(16) + ' The light goes out. The Pixie has expired')
-         else
-            ui.displayMessage(chr(16) + ' The light goes out. Your Pixie has died');
-         lightEquipped := False;
-         entities.outOfView;
-         map.notInView;
-         map.loadDisplayedMap;
-         ui.displayMessage('You hear something frightful in the darkness!');
-    end;
-  end
-  else
+    else if (lightCounter = 35) and (entityList[0].visionRange > 1) then
       begin
-        killer := 'an unseen shadow';
-        entityList[0].currentHP := 0;
+          Dec(entityList[0].visionRange);
+          entities.outOfView;
+          map.notInView;
+          map.loadDisplayedMap;
+          ui.displayMessage(chr(16) + ' The light grows dimmer');
+      end
+
+    else if (lightCounter = 20) and (entityList[0].visionRange > 1)  then
+      begin
+          Dec(entityList[0].visionRange);
+          entities.outOfView;
+          map.notInView;
+          map.loadDisplayedMap;
+          ui.displayMessage(chr(16) + ' The light grows dimmer, your Pixie is dying!');
+      end
+
+    else if (lightCounter = 10) and (entityList[0].visionRange > 1)  then
+      begin
+          Dec(entityList[0].visionRange);
+          entities.outOfView;
+          map.notInView;
+          map.loadDisplayedMap;
+          ui.displayMessage(chr(16) + ' The light grows dimmer...');
+      end
+
+    (* The light goes out *)
+    else if (lightCounter = 0) then
+      begin
+          response := randomRange(1, 2);
+          entityList[0].visionRange := 0;
+          if response = 1 then
+              ui.displayMessage(chr(16) + ' The light goes out. The Pixie has expired')
+          else
+              ui.displayMessage(chr(16) + ' The light goes out. Your Pixie has died');
+          lightEquipped := False;
+          entities.outOfView;
+          map.notInView;
+          map.loadDisplayedMap;
+          ui.displayMessage('You hear something frightful in the darkness!');
+      end;
+    end
+    else
+        begin
+          killer := 'an unseen shadow';
+          entityList[0].currentHP := 0;
+        end;
       end;
 end;
 

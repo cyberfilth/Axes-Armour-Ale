@@ -17,7 +17,7 @@ uses
 type
   gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
     stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget,
-    stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha,
+    stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha, stVillage,
     stSelectAmmo, stSelectTarget, stFireBow, stCharInfo, stOverworld, stQuitMenuOW);
 
 var
@@ -416,6 +416,8 @@ begin
       stLoseSave: LoseSaveInput(Keypress);
       { ---------------------------------    Winning Alpha version of game }
       stWinAlpha: WinAlphaInput(Keypress);
+      { ---------------------------------    Controls when in a village }
+      stVillage: villageInput(Keypress);
     end;
   end;
 end;

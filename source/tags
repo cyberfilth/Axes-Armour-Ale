@@ -722,6 +722,7 @@ useItem	items/wine_flask.pas	/^procedure useItem;$/;"	p
 validLocation	dungeons/architect.pas	/^function validLocation(x, y: smallint): boolean;$/;"	f
 validProjectile	screens/scrthrow.pas	/^function validProjectile(selection: char): boolean;$/;"	f
 vampiricDrain	magiceffects.pas	/^procedure vampiricDrain;$/;"	p
+villageInput	keyboardinput.pas	/^procedure villageInput(Keypress: TKeyEvent);$/;"	p
 vowels	plot_gen.pas	/^function vowels(character: string): char;$/;"	f
 wander	entities/ai_animal.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p
 wander	entities/ai_villager.pas	/^procedure wander(id, spx, spy: smallint);$/;"	p

@@ -8,7 +8,7 @@ unit KeyboardInput;
 interface
 
 uses
-  Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelp, scrTargeting,
+  Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelp, scrTargeting, universe,
   scrLook, scrThrow, scrCharacter, globalUtils, scrDeathList{$ifopt D+}, debuggingFunctions{$EndIf};
 
 (* Initialise keyboard unit *)
@@ -63,6 +63,8 @@ procedure ammoTarget(Keypress: TKeyEvent);
 procedure CharInfoInput(Keypress: TKeyEvent);
 (* Input in WIN ALPHA state *)
 procedure WinAlphaInput(Keypress: TKeyEvent);
+(* Input when in a village *)
+procedure villageInput(Keypress: TKeyEvent);
 
 implementation
 
@@ -167,7 +169,10 @@ begin
     end;
     #27: { Escape key - Cancel }
     begin
-      gameState := stGame;
+      if (universe.dungeonType = tVillage) then
+        gameState := stVillage
+      else
+        gameState := stGame;
       main.returnToGameScreen;
     end;
   end;
@@ -212,7 +217,10 @@ begin
     end;
     'x', 'X': { Exit menu }
     begin
-      gameState := stGame;
+      if (universe.dungeonType = tVillage) then
+        gameState := stVillage
+      else
+        gameState := stGame;
       main.returnToGameScreen;
     end;
     { List of inventory slots }
@@ -234,7 +242,10 @@ begin
   case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit menu }
     begin
-      gameState := stGame;
+      if (universe.dungeonType = tVillage) then
+        gameState := stVillage
+      else
+        gameState := stGame;
       main.returnToGameScreen;
     end;
     'I': { Inventory menu }
@@ -271,7 +282,10 @@ begin
   case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit menu }
     begin
-      gameState := stGame;
+      if (universe.dungeonType = tVillage) then
+        gameState := stVillage
+      else
+        gameState := stGame;
       main.returnToGameScreen;
     end;
     'I': { Inventory menu }
@@ -308,7 +322,10 @@ begin
   case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit menu }
     begin
-      gameState := stGame;
+      if (universe.dungeonType = tVillage) then
+        gameState := stVillage
+      else
+        gameState := stGame;
       main.returnToGameScreen;
     end;
     'I': { Inventory menu }
@@ -666,7 +683,10 @@ begin
     'x', 'X': { Exit dialog box }
     begin
       { Clear the box }
-      main.gameState := stGame;
+      if (universe.dungeonType = tVillage) then
+        gameState := stVillage
+      else
+        main.gameState := stGame;
       { Redraw the map }
       ui.clearPopup;
     end;
@@ -679,7 +699,10 @@ begin
     'x', 'X': { Exit dialog box }
     begin
       { Clear the box }
-      main.gameState := stGame;
+      if (universe.dungeonType = tVillage) then
+        gameState := stVillage
+      else
+        main.gameState := stGame;
       { Redraw the map }
       main.returnToGameScreen;
     end;
@@ -842,7 +865,10 @@ begin
     'x', 'X': { Exit dialog box }
     begin
       { Clear the box }
-      main.gameState := stGame;
+      if (universe.dungeonType = tVillage) then
+        gameState := stVillage
+      else
+        main.gameState := stGame;
       { Redraw the map }
       main.returnToGameScreen;
     end;
@@ -856,6 +882,128 @@ begin
     begin
       main.gameState := stOverworld;
       main.returnToOverworldScreen;
+    end;
+  end;
+end;
+
+procedure villageInput(Keypress: TKeyEvent);
+begin
+  { Arrow keys }
+  case GetKeyEventCode(Keypress) of
+    kbdLeft:
+    begin
+      player.movePlayer(2);
+      main.gameLoop;
+    end;
+    kbdRight:
+    begin
+      player.movePlayer(4);
+      main.gameLoop;
+    end;
+    kbdUp:
+    begin
+      player.movePlayer(1);
+      main.gameLoop;
+    end;
+    KbdDown:
+    begin
+      player.movePlayer(3);
+      main.gameLoop;
+    end;
+  end;
+  { Numpad and VI keys }
+  case GetKeyEventChar(Keypress) of
+    '8', 'k', 'K': { N }
+    begin
+      player.movePlayer(1);
+      main.gameLoop;
+    end;
+    '9', 'u', 'U': { NE }
+    begin
+      player.movePlayer(5);
+      main.gameLoop;
+    end;
+    '6', 'l', 'L': { E }
+    begin
+      player.movePlayer(4);
+      main.gameLoop;
+    end;
+    '3', 'n', 'N': { SE }
+    begin
+      player.movePlayer(6);
+      main.gameLoop;
+    end;
+    '2', 'j', 'J': { S }
+    begin
+      player.movePlayer(3);
+      main.gameLoop;
+    end;
+    '1', 'b', 'B': { SW }
+    begin
+      player.movePlayer(7);
+      main.gameLoop;
+    end;
+    '4', 'h', 'H': { W }
+    begin
+      player.movePlayer(2);
+      main.gameLoop;
+    end;
+    '7', 'y', 'Y': { NW }
+    begin
+      player.movePlayer(8);
+      main.gameLoop;
+    end;
+    '5', '.': { Wait in place }
+    begin
+      player.movePlayer(9);
+      main.gameLoop;
+    end;
+    'i', 'I': { Inventory }
+    begin
+      main.gameState := stInventory;
+      player_inventory.showInventory;
+    end;
+    'd', 'D': { Drop menu }
+    begin
+      main.gameState := stDropMenu;
+      player_inventory.drop;
+    end;
+    'q', 'Q': { Quaff menu }
+    begin
+      main.gameState := stQuaffMenu;
+      player_inventory.quaff;
+    end;
+    'w', 'W': { Wear / Wield menu }
+    begin
+      gameState := stWearWield;
+      player_inventory.wield('n');
+    end;
+    ',', 'g', 'G': { Get item }
+    begin
+      player.pickUp;
+      main.gameLoop;
+    end;
+    ';': { Look command }
+    begin
+      gameState := stLook;
+      scrLook.targetX := entityList[0].posX;
+      scrLook.targetY := entityList[0].posY;
+      scrLook.look(0);
+    end;
+    '?': { Help screen }
+    begin
+      main.gameState := stHelpScreen;
+      scrHelp.displayHelpScreen;
+    end;
+    'c', 'C': { Character sheet }
+    begin
+      main.gameState := stCharInfo;
+      scrCharacter.displayCharacterSheet;
+    end;
+    #27: { Escape key - Quit }
+    begin
+      gameState := stQuitMenu;
+      ui.exitPrompt;
     end;
   end;
 end;

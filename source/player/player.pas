@@ -181,8 +181,11 @@ begin
         globalUtils.OWy := entityList[0].posY;
         (* Set underground flag *)
         globalUtils.womblingFree := 'underground';
-        (* Set game state to Game (underground) *)
-        gameState := stGame;
+        (* Set game state *)
+        if (Dtype = tVillage) then
+          gameState := stVillage
+        else
+          gameState := stGame;
         (* Set dungeon name *)
         universe.title := UTF8Decode(title);
         (* Clear list of items *)
@@ -199,7 +202,6 @@ begin
                       drawTile(c, r, 0);
                  end;
             end;
-
         map.mapType := Dtype;
         map.loadDisplayedMap;
         (* Find the entrance to place the player *)
@@ -208,10 +210,18 @@ begin
         map.occupy(entityList[0].posX, entityList[0].posY);
         (* Message log *)
         ui.displayMessage('             ');
-        ui.displayMessage('              ');
-        ui.displayMessage('               ');
-        ui.displayMessage('Good Luck...');
-        ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
+        ui.displayMessage('             ');
+        ui.displayMessage('             ');
+        if (Dtype = tVillage) then
+          begin
+            ui.displayMessage('             ');
+            ui.displayMessage('You enter the village of ' + UTF8Encode(universe.title));
+          end
+        else
+          begin
+            ui.displayMessage('Good Luck...');
+            ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
+          end;
         (* Redraw map and the contents *)
         main.returnToGameScreen;
         main.gameLoop;
