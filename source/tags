@@ -78,6 +78,8 @@ chaseTarget	entities/undead/ghoul_lvl1.pas	/^procedure chaseTarget(id, spx, spy:
 chaseTarget	entities/undead/skeleton_lvl1.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/undead/zombie_weak.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chat	entities/ai_villager.pas	/^procedure chat(id: smallint);$/;"	p
+chatCheck	player/player.pas	/^function chatCheck(x, y: smallint): boolean;$/;"	f
+chatCheck	player/player.pas	/^function chatCheck(x, y:smallint):boolean;$/;"	f
 checkForTraps	items.pas	/^procedure checkForTraps;$/;"	p
 checkLevel	player/player_stats.pas	/^procedure checkLevel;$/;"	p
 checkNotifications	screens/dlginfo.pas	/^procedure checkNotifications;$/;"	p

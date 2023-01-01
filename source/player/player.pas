@@ -19,6 +19,8 @@ procedure movePlayer(dir: word);
 procedure processStatus;
 (* Check if tile is occupied by an NPC *)
 function combatCheck(x, y: smallint): boolean;
+(* Check if a tile is occupied by a friendly NPC *)
+function chatCheck(x, y:smallint):boolean;
 (* Pick up an item from the floor *)
 procedure pickUp;
 (*Increase Health, no more than maxHP *)
@@ -278,85 +280,151 @@ var
   (* store original values in case player cannot move *)
   originalX, originalY: smallint;
 begin
-  (* Check if player is frozen in place *)
-  if (entityList[0].stsFrozen = False) then
+  (* Check if the player is in a village *)
+  if (gameState = stVillage) then
     begin
-      (* Unoccupy tile *)
-      map.unoccupy(entityList[0].posX, entityList[0].posY);
-      (* Repaint visited tiles *)
-      fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 0);
-      originalX := entities.entityList[0].posX;
-      originalY := entities.entityList[0].posY;
-      (* If the player is bewildered, move in a random direction *)
-      if (entityList[0].stsBewild = True) then
-      begin
-        dir := randomRange(1,8);
-      end;
-      (* Else choose a direction *)
-      case dir of
-        1: Dec(entities.entityList[0].posY); // N
-        2: Dec(entities.entityList[0].posX); // W
-        3: Inc(entities.entityList[0].posY); // S
-        4: Inc(entities.entityList[0].posX); // E
-        5:                      // NE
-        begin
-          Inc(entities.entityList[0].posX);
-          Dec(entities.entityList[0].posY);
+        (* Unoccupy tile *)
+        map.unoccupy(entityList[0].posX, entityList[0].posY);
+        (* Repaint visited tiles *)
+        fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 0);
+        originalX := entities.entityList[0].posX;
+        originalY := entities.entityList[0].posY;
+        (* Choose a direction: duplicate code will be refactored eventually *)
+        case dir of
+          1: Dec(entities.entityList[0].posY); // N
+          2: Dec(entities.entityList[0].posX); // W
+          3: Inc(entities.entityList[0].posY); // S
+          4: Inc(entities.entityList[0].posX); // E
+          5:                      // NE
+          begin
+            Inc(entities.entityList[0].posX);
+            Dec(entities.entityList[0].posY);
+          end;
+          6:                      // SE
+          begin
+            Inc(entities.entityList[0].posX);
+            Inc(entities.entityList[0].posY);
+          end;
+          7:                      // SW
+          begin
+            Dec(entities.entityList[0].posX);
+            Inc(entities.entityList[0].posY);
+          end;
+          8:                      // NW
+          begin
+            Dec(entities.entityList[0].posX);
+            Dec(entities.entityList[0].posY);
+          end;
+          9:
+          begin
+                                // Wait in place
+          end;
         end;
-        6:                      // SE
-        begin
-          Inc(entities.entityList[0].posX);
-          Inc(entities.entityList[0].posY);
-        end;
-        7:                      // SW
-        begin
-          Dec(entities.entityList[0].posX);
-          Inc(entities.entityList[0].posY);
-        end;
-        8:                      // NW
-        begin
-          Dec(entities.entityList[0].posX);
-          Dec(entities.entityList[0].posY);
-        end;
-        9:
-        begin
-                              // Wait in place
-        end;
-      end;
-      (* check if tile is occupied *)
-      if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
-        (* check if tile is occupied by hostile NPC *)
-        if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) =  True) then
+        (* check if tile is occupied *)
+        if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
+          (* check if tile is occupied by NPC and initiate chat if so *)
+          if (chatCheck(entities.entityList[0].posX, entities.entityList[0].posY) =  True) then
+          begin
+            entities.entityList[0].posX := originalX;
+            entities.entityList[0].posY := originalY;
+          end;
+        Inc(entities.entityList[0].moveCount);
+        (* check if tile is walkable *)
+        if (map.canMove(entities.entityList[0].posX, entities.entityList[0].posY) = False) then
         begin
           entities.entityList[0].posX := originalX;
           entities.entityList[0].posY := originalY;
+          (* display a clumsy message if player is intoxicated *)
+          if (entityList[0].stsDrunk = True) then
+            ui.displayMessage('You stagger into a wall');
+          Dec(entities.entityList[0].moveCount);
         end;
-      Inc(entities.entityList[0].moveCount);
-      (* check if tile is walkable *)
-      if (map.canMove(entities.entityList[0].posX, entities.entityList[0].posY) = False) then
+        (* Occupy tile *)
+        map.occupy(entityList[0].posX, entityList[0].posY); // trigger is here
+        fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY, entities.entityList[0].visionRange, 1);
+        ui.writeBufferedMessages;
+    end
+    else
       begin
-        entities.entityList[0].posX := originalX;
-        entities.entityList[0].posY := originalY;
-        (* display a clumsy message if player is intoxicated *)
-        if (entityList[0].stsDrunk = True) then
-          ui.displayMessage('You bump into a wall');
-        Dec(entities.entityList[0].moveCount);
-      end;
-      (* Occupy tile *)
-      map.occupy(entityList[0].posX, entityList[0].posY);
-      fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY,
-        entities.entityList[0].visionRange, 1);
-      ui.writeBufferedMessages;
+      (* Check if player is frozen in place *)
+      if (entityList[0].stsFrozen = False) then
+      begin
+        (* Unoccupy tile *)
+        map.unoccupy(entityList[0].posX, entityList[0].posY);
+        (* Repaint visited tiles *)
+        fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 0);
+        originalX := entities.entityList[0].posX;
+        originalY := entities.entityList[0].posY;
+        (* If the player is bewildered, move in a random direction *)
+        if (entityList[0].stsBewild = True) then
+        begin
+          dir := randomRange(1,8);
+        end;
+        (* Else choose a direction *)
+        case dir of
+          1: Dec(entities.entityList[0].posY); // N
+          2: Dec(entities.entityList[0].posX); // W
+          3: Inc(entities.entityList[0].posY); // S
+          4: Inc(entities.entityList[0].posX); // E
+          5:                      // NE
+          begin
+            Inc(entities.entityList[0].posX);
+            Dec(entities.entityList[0].posY);
+          end;
+          6:                      // SE
+          begin
+            Inc(entities.entityList[0].posX);
+            Inc(entities.entityList[0].posY);
+          end;
+          7:                      // SW
+          begin
+            Dec(entities.entityList[0].posX);
+            Inc(entities.entityList[0].posY);
+          end;
+          8:                      // NW
+          begin
+            Dec(entities.entityList[0].posX);
+            Dec(entities.entityList[0].posY);
+          end;
+          9:
+          begin
+                                // Wait in place
+          end;
+        end;
+        (* check if tile is occupied *)
+        if (map.isOccupied(entities.entityList[0].posX, entities.entityList[0].posY) = True) then
+          (* check if tile is occupied by hostile NPC *)
+          if (combatCheck(entities.entityList[0].posX, entities.entityList[0].posY) =  True) then
+          begin
+            entities.entityList[0].posX := originalX;
+            entities.entityList[0].posY := originalY;
+          end;
+        Inc(entities.entityList[0].moveCount);
+        (* check if tile is walkable *)
+        if (map.canMove(entities.entityList[0].posX, entities.entityList[0].posY) = False) then
+        begin
+          entities.entityList[0].posX := originalX;
+          entities.entityList[0].posY := originalY;
+          (* display a clumsy message if player is intoxicated *)
+          if (entityList[0].stsDrunk = True) then
+            ui.displayMessage('You bump into a wall');
+          Dec(entities.entityList[0].moveCount);
+        end;
+        (* Occupy tile *)
+        map.occupy(entityList[0].posX, entityList[0].posY);
+        fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY, entities.entityList[0].visionRange, 1);
+        ui.writeBufferedMessages;
 
-      (* Regenerate Magick *)
-      if (player_stats.playerRace <> 'Dwarf') then
-        regenMagick;
-  end
-  { Display a message if the player is frozen }
-  else
-    begin
-      ui.displayMessage('You are frozen in place, unable to move');
-    end;  
+        (* Regenerate Magick *)
+        if (player_stats.playerRace <> 'Dwarf') then
+          regenMagick;
+    end
+    { Display a message if the player is frozen }
+    else
+      begin
+        ui.displayMessage('You are frozen in place, unable to move');
+      end;  
+  end;
 end;
 
 procedure processStatus;
@@ -442,9 +510,7 @@ begin
    else
        Dec(entityList[0].tmrFrozen);
   end;
-
 end;
-
 
 function combatCheck(x, y: smallint): boolean;
 var
@@ -457,6 +523,23 @@ begin
     begin
       if (y = entities.entityList[i].posY) then
         combat_resolver.combat(i);
+      Result := True;
+    end;
+  end;
+end;
+
+function chatCheck(x, y: smallint): boolean;
+var
+  i: smallint;
+begin
+  Result := False;
+  for i := 1 to entities.npcAmount do
+  begin
+    if (x = entities.entityList[i].posX) then
+    begin
+      if (y = entities.entityList[i].posY) then
+        //combat_resolver.combat(i);
+        ui.displayMessage('Chat to NPC');
       Result := True;
     end;
   end;
