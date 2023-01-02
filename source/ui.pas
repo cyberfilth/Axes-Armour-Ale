@@ -210,7 +210,7 @@ var
   tempCounter: smallint;
 begin
   (* Catch duplicate messages *)
-  if (message = messageArray[1]) then
+  if (message = messageArray[1]) and (Length(message) = Length(messageArray[1])) then
   begin
     (* Clear first line *)
     for x := 1 to 80 do

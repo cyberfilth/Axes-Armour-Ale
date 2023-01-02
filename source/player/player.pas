@@ -211,12 +211,12 @@ begin
         (* Draw player and FOV *)
         map.occupy(entityList[0].posX, entityList[0].posY);
         (* Message log *)
-        ui.displayMessage('             ');
-        ui.displayMessage('             ');
+        ui.displayMessage('           ');
+        ui.displayMessage('            ');
         ui.displayMessage('             ');
         if (Dtype = tVillage) then
           begin
-            ui.displayMessage('             ');
+            ui.displayMessage('              ');
             ui.displayMessage('You enter the village of ' + UTF8Encode(universe.title));
           end
         else
@@ -291,10 +291,25 @@ begin
         originalY := entities.entityList[0].posY;
         (* Choose a direction: duplicate code will be refactored eventually *)
         case dir of
-          1: Dec(entities.entityList[0].posY); // N
-          2: Dec(entities.entityList[0].posX); // W
-          3: Inc(entities.entityList[0].posY); // S
-          4: Inc(entities.entityList[0].posX); // E
+          1: // N 
+          begin
+            (* Check if at the boundaries of the map *)
+            if (entityList[0].posY = 1) then
+              ui.displayMessage('Do you want to leave the village? [Y/N]');
+            Dec(entities.entityList[0].posY); 
+          end;
+          2: // W
+          begin
+            Dec(entities.entityList[0].posX);
+          end;
+          3: // S
+          begin
+            Inc(entities.entityList[0].posY);
+          end;
+          4: // E
+          begin
+            Inc(entities.entityList[0].posX);
+          end;
           5:                      // NE
           begin
             Inc(entities.entityList[0].posX);
@@ -345,6 +360,7 @@ begin
         ui.writeBufferedMessages;
     end
     else
+      (* If the player is not in a village *)
       begin
       (* Check if player is frozen in place *)
       if (entityList[0].stsFrozen = False) then
