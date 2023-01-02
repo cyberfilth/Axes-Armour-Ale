@@ -308,6 +308,7 @@ deleteGameData	file_handling.pas	/^procedure deleteGameData;$/;"	p
 descendStairs	map.pas	/^procedure descendStairs;$/;"	p
 destroyWeapon	player/player_inventory.pas	/^procedure destroyWeapon;$/;"	p
 dialogBoxInput	keyboardinput.pas	/^procedure dialogBoxInput(Keypress: TKeyEvent);$/;"	p
+dialogLeaveVillage	keyboardinput.pas	/^procedure dialogLeaveVillage(Keypress: TKeyEvent);$/;"	p
 digCave	dungeons/cave.pas	/^procedure digCave(floorNumber: byte);$/;"	p
 digCave	dungeons/stone_cavern.pas	/^procedure digCave(floorNumber: byte);$/;"	p
 dispenseItem	items/item_lookup.pas	/^procedure dispenseItem(dungeon: dungeonTerrain);$/;"	p
@@ -513,6 +514,7 @@ isVowel	plot_gen.pas	/^function isVowel(character: string): boolean;$/;"	f
 isWall	map.pas	/^function isWall(x, y: smallint): boolean;$/;"	f
 islandFOV	vision/fov.pas	/^procedure islandFOV(centreX, centreY: smallint);$/;"	p
 killEntity	entities.pas	/^procedure killEntity(id: smallint);$/;"	p
+leaveVillage	screens/dlginfo.pas	/^procedure leaveVillage;$/;"	p
 leftHasFloor	dungeons/cave.pas	/^function leftHasFloor(): boolean;$/;"	f
 leftHasFloor	dungeons/stone_cavern.pas	/^function leftHasFloor(): boolean;$/;"	f
 leftShacks	dungeons/village.pas	/^procedure leftShacks;$/;"	p

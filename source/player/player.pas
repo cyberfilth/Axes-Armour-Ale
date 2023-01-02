@@ -6,7 +6,7 @@ unit player;
 interface
 
 uses
-  SysUtils, player_stats, plot_gen, combat_resolver, items,
+  SysUtils, player_stats, plot_gen, combat_resolver, items, dlgInfo,
   island, scrOverworld, file_handling, globalUtils, video, universe;
 
 (* Create player character *)
@@ -295,35 +295,35 @@ begin
           begin
             (* Check if at the boundaries of the map *)
             if (entityList[0].posY = 1) then
-              ui.displayMessage('Do you want to leave the village? [Y/N]')
+              dlginfo.dialogType := dlgLveVill
             else
               Dec(entities.entityList[0].posY); 
           end;
           2: // W
           begin
             if (entityList[0].posX = 12) then
-              ui.displayMessage('Do you want to leave the village? [Y/N]')
+              dlginfo.dialogType := dlgLveVill
             else
               Dec(entities.entityList[0].posX);
           end;
           3: // S
           begin
             if (entityList[0].posY = 20) then
-              ui.displayMessage('Do you want to leave the village? [Y/N]')
+              dlginfo.dialogType := dlgLveVill
             else
               Inc(entities.entityList[0].posY);
           end;
           4: // E
           begin
             if (entityList[0].posX = 67) then
-              ui.displayMessage('Do you want to leave the village? [Y/N]')
+              dlginfo.dialogType := dlgLveVill
             else
               Inc(entities.entityList[0].posX);
           end;
           5:                      // NE
           begin
             if (entityList[0].posY = 1) or (entityList[0].posX = 67) then
-              ui.displayMessage('Do you want to leave the village? [Y/N]')
+              dlginfo.dialogType := dlgLveVill
             else
               begin
                 Inc(entities.entityList[0].posX);
@@ -333,7 +333,7 @@ begin
           6:                      // SE
           begin
             if (entityList[0].posY = 20) or (entityList[0].posX = 67) then
-              ui.displayMessage('Do you want to leave the village? [Y/N]')
+              dlginfo.dialogType := dlgLveVill
             else
               begin
                 Inc(entities.entityList[0].posX);
@@ -343,7 +343,7 @@ begin
           7:                      // SW
           begin
             if (entityList[0].posY = 20) or (entityList[0].posX = 12) then
-              ui.displayMessage('Do you want to leave the village? [Y/N]')
+              dlginfo.dialogType := dlgLveVill
             else
               begin
                 Dec(entities.entityList[0].posX);
@@ -353,7 +353,7 @@ begin
           8:                      // NW
           begin
             if (entityList[0].posY = 1) or (entityList[0].posX = 12) then
-              ui.displayMessage('Do you want to leave the village? [Y/N]')
+              dlginfo.dialogType := dlgLveVill
             else
               begin
                 Dec(entities.entityList[0].posX);

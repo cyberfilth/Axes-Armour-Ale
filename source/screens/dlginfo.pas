@@ -11,7 +11,7 @@ uses
 
 (* Types of pop-up dialog box *)
 type
-  dialogFlag = (dlgNone, dlgFoundSMap, dlgParchment, dlgNecro);
+  dialogFlag = (dlgNone, dlgFoundSMap, dlgParchment, dlgNecro, dlgLveVill);
 
 var
   (* Notifies the game loop whether to display a pop-up or not *)
@@ -35,6 +35,8 @@ procedure foundMap;
 procedure readScroll;
 (* Necromancers curse *)
 procedure displayCurse;
+(* Prompt to leave the village *)
+procedure leaveVillage;
 
 implementation
 
@@ -177,6 +179,7 @@ begin
     dlgFoundSMap: foundMap;
     dlgParchment: readScroll;
     dlgNecro: displayCurse;
+    dlgLveVill: leaveVillage;
   end;
 end;
 
@@ -288,6 +291,36 @@ begin
   UnlockScreenUpdate;
   UpdateScreen(False);
   dialogType := dlgNone;
+end;
+
+procedure leaveVillage;
+var
+  x, y: smallint;
+begin
+  main.gameState := stLeaveVillage;
+  x := 3;
+  y := 5;
+  LockScreenUpdate;
+  (* Top border *)
+  TextOut(x, y, 'LgreyBGblack', chr(201));
+  for x := 4 to 53 do
+    TextOut(x, 5, 'LgreyBGblack', chr(205));
+  TextOut(54, y, 'LgreyBGblack', chr(187));
+  (* Vertical sides *)
+  for y := 6 to 8 do
+    TextOut(3, y, 'LgreyBGblack', chr(186) + '                                                  ' + chr(186));
+  (* Bottom border *)
+  TextOut(3, 9, 'LgreyBGblack', chr(200)); // bottom left corner
+  for x := 4 to 53 do
+    TextOut(x, 9, 'LgreyBGblack', chr(205));
+  TextOut(54, 9, 'LgreyBGblack', chr(188)); // bottom right corner
+  (* Write the title *)
+  TextOut(5, 5, 'LgreyBGblack', ' Leave Village? ');
+  (* Write the message *)
+  TextOut(5, 7, 'LgreyBGblack', 'Do you want to leave the village?');
+  TextOut(8, 9, 'LgreyBGblack', '[y] to leave, [n] to stay');
+  UnlockScreenUpdate;
+  UpdateScreen(False);
 end;
 
 end.

@@ -15,10 +15,10 @@ uses
 
 (* Finite State Machine game states *)
 type
-  gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu,
-    stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget,
-    stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha, stVillage,
-    stSelectAmmo, stSelectTarget, stFireBow, stCharInfo, stOverworld, stQuitMenuOW);
+  gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu, stLeaveVillage,
+  stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget,
+  stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha, stVillage,
+  stSelectAmmo, stSelectTarget, stFireBow, stCharInfo, stOverworld, stQuitMenuOW);
 
 var
   (* State machine for game menus / controls *)
@@ -420,6 +420,8 @@ begin
       stWinAlpha: WinAlphaInput(Keypress);
       { ---------------------------------    Controls when in a village }
       stVillage: villageInput(Keypress);
+      { ---------------------------------    Leave village dialog box }
+      stLeaveVillage: dialogLeaveVillage(Keypress);
     end;
   end;
 end;

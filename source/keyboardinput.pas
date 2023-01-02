@@ -47,6 +47,8 @@ procedure gameInput(Keypress: TKeyEvent);
 procedure LoseSaveInput(Keypress: TKeyEvent);
 (* Input in the DIALOG state *)
 procedure dialogBoxInput(Keypress: TKeyEvent);
+(* Input in the LEAVEVILLAGE dialog *)
+procedure dialogLeaveVillage(Keypress: TKeyEvent);
 (* Input in the HELP SCREEN state *)
 procedure helpScreenInput(Keypress: TKeyEvent);
 (* Input in the LOOK state *)
@@ -63,7 +65,7 @@ procedure ammoTarget(Keypress: TKeyEvent);
 procedure CharInfoInput(Keypress: TKeyEvent);
 (* Input in WIN ALPHA state *)
 procedure WinAlphaInput(Keypress: TKeyEvent);
-(* Input when in a village *)
+(* Controls when in a village *)
 procedure villageInput(Keypress: TKeyEvent);
 
 implementation
@@ -690,6 +692,24 @@ begin
       { Redraw the map }
       ui.clearPopup;
     end;
+  end;
+end;
+
+procedure dialogLeaveVillage(Keypress: TKeyEvent);
+begin
+  case GetKeyEventChar(Keypress) of
+    'y', 'Y': { Leave the village }
+    begin
+      ui.clearPopup;
+      gameState := stVillage;
+      main.returnToSurface;
+    end;
+    'n', 'N': { Remain in the village }
+    begin
+      gameState := stVillage;
+      { Redraw the map }
+      ui.clearPopup;
+    end;      
   end;
 end;
 
