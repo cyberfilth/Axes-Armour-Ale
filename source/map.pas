@@ -1039,8 +1039,8 @@ begin
     end;
     '#': { Walls }
     begin
-      mapDisplay[r][c].Glyph := chr(219);
-      mapDisplay[r][c].GlyphColour := 'lightGrey';
+      mapDisplay[r][c].Glyph := chr(177);
+      mapDisplay[r][c].GlyphColour := 'darkGrey';
     end;
   end;
 end;

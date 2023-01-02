@@ -304,8 +304,10 @@ begin
   begin
     file_handling.loadDungeonLevel(universe.uniqueID, universe.currentDepth);
     map.loadDisplayedMap;
-    (* Game state = game running *)
-    gameState := stGame;
+    if (universe.dungeonType = tVillage) then
+      gameState := stVillage
+    else
+      gameState := stGame;
     (* Draw player and FOV *)
     fov.fieldOfView(entityList[0].posX, entityList[0].posY, entityList[0].visionRange, 1);
     (* Redraw all items *)

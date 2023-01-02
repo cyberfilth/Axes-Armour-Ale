@@ -295,40 +295,70 @@ begin
           begin
             (* Check if at the boundaries of the map *)
             if (entityList[0].posY = 1) then
-              ui.displayMessage('Do you want to leave the village? [Y/N]');
-            Dec(entities.entityList[0].posY); 
+              ui.displayMessage('Do you want to leave the village? [Y/N]')
+            else
+              Dec(entities.entityList[0].posY); 
           end;
           2: // W
           begin
-            Dec(entities.entityList[0].posX);
+            if (entityList[0].posX = 12) then
+              ui.displayMessage('Do you want to leave the village? [Y/N]')
+            else
+              Dec(entities.entityList[0].posX);
           end;
           3: // S
           begin
-            Inc(entities.entityList[0].posY);
+            if (entityList[0].posY = 20) then
+              ui.displayMessage('Do you want to leave the village? [Y/N]')
+            else
+              Inc(entities.entityList[0].posY);
           end;
           4: // E
           begin
-            Inc(entities.entityList[0].posX);
+            if (entityList[0].posX = 67) then
+              ui.displayMessage('Do you want to leave the village? [Y/N]')
+            else
+              Inc(entities.entityList[0].posX);
           end;
           5:                      // NE
           begin
-            Inc(entities.entityList[0].posX);
-            Dec(entities.entityList[0].posY);
+            if (entityList[0].posY = 1) or (entityList[0].posX = 67) then
+              ui.displayMessage('Do you want to leave the village? [Y/N]')
+            else
+              begin
+                Inc(entities.entityList[0].posX);
+                Dec(entities.entityList[0].posY);
+              end;
           end;
           6:                      // SE
           begin
-            Inc(entities.entityList[0].posX);
-            Inc(entities.entityList[0].posY);
+            if (entityList[0].posY = 20) or (entityList[0].posX = 67) then
+              ui.displayMessage('Do you want to leave the village? [Y/N]')
+            else
+              begin
+                Inc(entities.entityList[0].posX);
+                Inc(entities.entityList[0].posY);
+              end;
           end;
           7:                      // SW
           begin
-            Dec(entities.entityList[0].posX);
-            Inc(entities.entityList[0].posY);
+            if (entityList[0].posY = 20) or (entityList[0].posX = 12) then
+              ui.displayMessage('Do you want to leave the village? [Y/N]')
+            else
+              begin
+                Dec(entities.entityList[0].posX);
+                Inc(entities.entityList[0].posY);
+              end;
           end;
           8:                      // NW
           begin
-            Dec(entities.entityList[0].posX);
-            Dec(entities.entityList[0].posY);
+            if (entityList[0].posY = 1) or (entityList[0].posX = 12) then
+              ui.displayMessage('Do you want to leave the village? [Y/N]')
+            else
+              begin
+                Dec(entities.entityList[0].posX);
+                Dec(entities.entityList[0].posY);
+              end;
           end;
           9:
           begin
