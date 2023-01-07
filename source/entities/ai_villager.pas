@@ -55,10 +55,11 @@ end;
 
 procedure chat;
 var
-  response: packed array[0..11] of
-  shortString = ('Well met!', 'How do!', 'Greetings', 'Any news?', 'Seen any Orcs lately?', 'My bowels haven''t moved in a week...', 
+  response: packed array[0..15] of
+  shortString = ('Allreet!', 'How do!', 'Greetings', 'Any news?', 'Seen any Orcs lately?', 'My bowels haven''t moved in a week...', 
                 'There''s raiding parties about', 'You''re funny lookin''', 'It''s uncivilised up North!', 'Outta the way!', 'You still ''ere?',
-                'Ooh look!, an ''Adventurer''. Bloody murderer more like!');
+                'Ooh look!, an ''Adventurer''. Bloody murderer more like!', 'There''s been no ale deliveries in weeks!', 'Killed any interestin'' people lately?', 
+                'Ain''t nuthin'' ''ere but mud, misery and a merchant', 'Nuthin'' ''ere for you, fancy-pants!');
   choice: smallint;
 begin
   choice := randomRange(0, 2);
@@ -69,7 +70,7 @@ begin
       ui.displayMessage('"' + response[choice] + '"');
     end
     else
-      ui.displayMessage('The villager grunbles and avoids you');
+      ui.displayMessage('The villager grunbles');
 end;
 
 end.
