@@ -6,8 +6,7 @@ unit player;
 interface
 
 uses
-  SysUtils, player_stats, plot_gen, combat_resolver, items, dlgInfo,
-  island, scrOverworld, file_handling, globalUtils, video, universe;
+  SysUtils, player_stats, plot_gen, combat_resolver, items, dlgInfo, ai_villager, island, scrOverworld, file_handling, globalUtils, video, universe;
 
 (* Create player character *)
 procedure createPlayer;
@@ -584,8 +583,7 @@ begin
     if (x = entities.entityList[i].posX) then
     begin
       if (y = entities.entityList[i].posY) then
-        //combat_resolver.combat(i);
-        ui.displayMessage('Chat to NPC');
+        ai_villager.chat;
       Result := True;
     end;
   end;

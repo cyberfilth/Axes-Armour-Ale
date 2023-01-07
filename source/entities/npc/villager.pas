@@ -7,7 +7,7 @@ unit villager;
 interface
 
 uses
-  SysUtils, ai_villager, ui;
+  SysUtils, ai_villager;
 
 (* Create a villager *)
 procedure createVillager(uniqueid, npcx, npcy: smallint);
@@ -21,7 +21,7 @@ function isNextToPlayer(spx, spy: smallint): boolean;
 implementation
 
 uses
-  entities, globalutils, los, map;
+  entities, globalutils, map;
 
 procedure createVillager(uniqueid, npcx, npcy: smallint);
 begin
@@ -59,7 +59,7 @@ begin
     stsDrunk := False;
     stsPoison := False;
     stsBewild := False;
-    stsFrozen := False;	
+    stsFrozen := False;
     tmrDrunk := 0;
     tmrPoison := 0;
     tmrBewild := 0;
@@ -77,14 +77,14 @@ end;
 
 procedure takeTurn(id: smallint);
 begin
-  ai_villager.wander(id, entityList[id].posX, entityList[id].posY);
+  decisionNeutral(id);
 end;
 
 procedure decisionNeutral(id: smallint);
 var
   stopAndSmellFlowers: byte;
 begin
-  stopAndSmellFlowers := globalutils.randomRange(1, 2);
+  stopAndSmellFlowers := globalutils.randomRange(1, 10);
   if (stopAndSmellFlowers = 1) then
     { Either wander randomly }
     ai_villager.wander(id, entityList[id].posX, entityList[id].posY)

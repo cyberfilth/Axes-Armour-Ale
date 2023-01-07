@@ -77,7 +77,7 @@ chaseTarget	entities/undead/corpse_zombie.pas	/^procedure chaseTarget(id, spx, s
 chaseTarget	entities/undead/ghoul_lvl1.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/undead/skeleton_lvl1.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
 chaseTarget	entities/undead/zombie_weak.pas	/^procedure chaseTarget(id, spx, spy: smallint);$/;"	p
-chat	entities/ai_villager.pas	/^procedure chat(id: smallint);$/;"	p
+chat	entities/ai_villager.pas	/^procedure chat;$/;"	p
 chatCheck	player/player.pas	/^function chatCheck(x, y: smallint): boolean;$/;"	f
 chatCheck	player/player.pas	/^function chatCheck(x, y:smallint):boolean;$/;"	f
 checkForTraps	items.pas	/^procedure checkForTraps;$/;"	p

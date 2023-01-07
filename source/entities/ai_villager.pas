@@ -7,12 +7,12 @@ unit ai_villager;
 interface
 
 uses
-  SysUtils, Math;
+  SysUtils;
 
 (* Move in a random direction *)
 procedure wander(id, spx, spy: smallint);
 (* Villager talks *)
-procedure chat(id: smallint);
+procedure chat;
 
 implementation
 
@@ -53,9 +53,23 @@ begin
   entities.moveNPC(id, testx, testy);
 end;
 
-procedure chat(id: smallint);
+procedure chat;
+var
+  response: packed array[0..11] of
+  shortString = ('Well met!', 'How do!', 'Greetings', 'Any news?', 'Seen any Orcs lately?', 'My bowels haven''t moved in a week...', 
+                'There''s raiding parties about', 'You''re funny lookin''', 'It''s uncivilised up North!', 'Outta the way!', 'You still ''ere?',
+                'Ooh look!, an ''Adventurer''. Bloody murderer more like!');
+  choice: smallint;
 begin
-
+  choice := randomRange(0, 2);
+  if (choice = 1) then
+    begin
+      choice := randomRange(0, High(response));
+      ui.displayMessage('The villager mutters...');
+      ui.displayMessage('"' + response[choice] + '"');
+    end
+    else
+      ui.displayMessage('The villager grunbles and avoids you');
 end;
 
 end.
