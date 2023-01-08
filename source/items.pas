@@ -34,6 +34,8 @@ type
     posX, posY: smallint;
     (* Number of uses for magic items / durability for breakable items *)
     NumberOfUses: smallint;
+    (* Value of buying / selling items *)
+    buy, sell: smallint;
     (* Character used to represent item on game map *)
     glyph: shortstring;
     (* Colour of the glyph *)

@@ -13,6 +13,8 @@
       posX := 1;
       posY := 1;
       NumberOfUses := 0;
+      buy := 0;
+      sell := 0;
       onMap := False;
       throwable := False;
       throwDamage := 0;

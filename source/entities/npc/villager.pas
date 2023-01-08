@@ -1,4 +1,4 @@
-(* Weak enemy with simple AI, no pathfinding *)
+(* Simple wandering NPC *)
 
 unit villager;
 
