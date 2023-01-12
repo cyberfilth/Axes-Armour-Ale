@@ -328,7 +328,10 @@ begin
     (* Generate the welcome message *)
     plot_gen.getTrollDate;
     ui.displayMessage('Good Luck...');
-    ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
+    if (gameState = stVillage) then
+      ui.displayMessage('You are in the village of ' + UTF8Encode(universe.title))
+    else
+      ui.displayMessage('You are in the ' + UTF8Encode(universe.title));
     ui.displayMessage('It is ' + plot_gen.trollDate);
     { Write those changes to the screen }
     UnlockScreenUpdate;

@@ -6,7 +6,8 @@ unit player;
 interface
 
 uses
-  SysUtils, player_stats, plot_gen, combat_resolver, items, dlgInfo, ai_villager, island, scrOverworld, file_handling, globalUtils, video, universe;
+  SysUtils, player_stats, plot_gen, combat_resolver, items, dlgInfo, ai_villager, ai_merchant, island, scrOverworld, file_handling,
+  globalUtils, video, universe;
 
 (* Create player character *)
 procedure createPlayer;
@@ -583,7 +584,13 @@ begin
     if (x = entities.entityList[i].posX) then
     begin
       if (y = entities.entityList[i].posY) then
-        ai_villager.chat;
+        begin
+          { Check if the NPC is a villager or a merchant }
+          if (entities.getCreatureName(x, y) = 'merchant') then
+            ai_merchant.barter 
+          else
+            ai_villager.chat;
+        end;
       Result := True;
     end;
   end;

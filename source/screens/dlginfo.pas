@@ -318,7 +318,7 @@ begin
   TextOut(5, 5, 'LgreyBGblack', ' Leave Village? ');
   (* Write the message *)
   TextOut(5, 7, 'LgreyBGblack', 'Do you want to leave the village?');
-  TextOut(8, 9, 'LgreyBGblack', '[y] to leave, [n] to stay');
+  TextOut(14, 9, 'LgreyBGblack', ' [y] to leave, [n] to stay ');
   UnlockScreenUpdate;
   UpdateScreen(False);
 end;
