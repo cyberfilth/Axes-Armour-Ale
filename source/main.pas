@@ -16,7 +16,7 @@ uses
 (* Finite State Machine game states *)
 type
   gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu, stLeaveVillage,
-  stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget,
+  stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget, stBarter,
   stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha, stVillage,
   stSelectAmmo, stSelectTarget, stFireBow, stCharInfo, stOverworld, stQuitMenuOW);
 

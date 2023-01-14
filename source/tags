@@ -32,6 +32,7 @@ areaBurnEffect	animation.pas	/^procedure areaBurnEffect(getEm: array of smallint
 arrowAnimation	animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
 arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	map.pas	/^procedure ascendStairs;$/;"	p
+barter	entities/ai_merchant.pas	/^procedure barter;$/;"	p
 beginLogging	logging.pas	/^procedure beginLogging;$/;"	p
 bewilderArea	magiceffects.pas	/^procedure bewilderArea;$/;"	p
 blockORnot	dungeons/cave.pas	/^function blockORnot(x, y: integer): Tbkinds;$/;"	f
@@ -157,6 +158,7 @@ createGnomishMace	items/weapons/gnomish_mace.pas	/^procedure createGnomishMace(i
 createGreenFungus	entities/fungus/green_fungus.pas	/^procedure createGreenFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createInfectedHyena	entities/animals/hyena_fungus.pas	/^procedure createInfectedHyena(uniqueid, npcx, npcy: smallint);$/;"	p
 createLeatherArmour	items/armour/leather_armour1.pas	/^procedure createLeatherArmour(itmx, itmy: smallint);$/;"	p
+createMerchant	entities/npc/merchant.pas	/^procedure createMerchant(uniqueid, npcx, npcy: smallint);$/;"	p
 createMushroomPerson	entities/fungus/mushroom_person.pas	/^procedure createMushroomPerson(uniqueid, npcx, npcy: smallint);$/;"	p
 createNecroAxe	items/weapons/necro_axe.pas	/^procedure createNecroAxe(itmx, itmy: smallint);$/;"	p
 createNecromancer	entities/goblinkin/goblin_necromancer.pas	/^procedure createNecromancer(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -502,6 +504,7 @@ isNextToPlayer	entities/goblinkin/goblin_necromancer.pas	/^function isNextToPlay
 isNextToPlayer	entities/hobs/redcap_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/hobs/redcap_lesser.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/hobs/redcap_lesser_lobber.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
+isNextToPlayer	entities/npc/merchant.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/npc/villager.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/troglodytes/trog_giant.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/troglodytes/trog_simple.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
@@ -649,6 +652,7 @@ takeTurn	entities/goblinkin/goblin_necromancer.pas	/^procedure takeTurn(id: smal
 takeTurn	entities/hobs/redcap_fungus.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
+takeTurn	entities/npc/merchant.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/npc/villager.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/troglodytes/trog_giant.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/troglodytes/trog_simple.pas	/^procedure takeTurn(id: smallint);$/;"	p

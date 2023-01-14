@@ -373,6 +373,10 @@ begin
             entities.entityList[0].posX := originalX;
             entities.entityList[0].posY := originalY;
           end;
+// if it's not an npc, it must be a merchant
+// initate barter screen
+
+          
         Inc(entities.entityList[0].moveCount);
         (* check if tile is walkable *)
         if (map.canMove(entities.entityList[0].posX, entities.entityList[0].posY) = False) then

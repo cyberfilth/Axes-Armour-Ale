@@ -44,6 +44,8 @@ begin
     posX := c;
     posY := r;
     NumberOfUses := duration;
+    buy := 10;
+    sell := 20;
     onMap := True;
     throwable := False;
     throwDamage := 0;
