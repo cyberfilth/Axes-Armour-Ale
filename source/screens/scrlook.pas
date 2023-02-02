@@ -21,6 +21,9 @@ procedure look(dir: word);
 
 implementation
 
+uses
+  main;
+
 procedure look(dir: word);
 var
   i: byte;
@@ -30,8 +33,7 @@ begin
   (* Clear the message log *)
   paintOverMsg;
   (* Display hint text *)
-  TextOut(centreX('[x] to exit the Look screen'), 24, 'lightGrey',
-    '[x] to exit the Look screen');
+  TextOut(centreX('[x] to exit the Look screen'), 24, 'lightGrey', '[x] to exit the Look screen');
   (* Turn player glyph to an X *)
   entityList[0].glyph := 'X';
   entityList[0].glyphColour := 'white';
@@ -94,8 +96,7 @@ begin
       (* Check to see if the entity is the player *)
       if (entities.getCreatureID(targetX, targetY) = 0) then
       begin
-        healthMsg := 'Health: ' + IntToStr(entities.getCreatureHP(targetX, targetY)) +
-          '/' + IntToStr(entities.getCreatureMaxHP(targetX, targetY));
+        healthMsg := 'Health: ' + IntToStr(entities.getCreatureHP(targetX, targetY)) + '/' + IntToStr(entities.getCreatureMaxHP(targetX, targetY));
         playerName := entityList[0].race + ' the ' + entityList[0].description;
         TextOut(centreX(playerName), 21, 'white', playerName);
         TextOut(centreX(healthMsg), 22, 'white', healthMsg);
@@ -106,10 +107,12 @@ begin
         (* Check that it isn't dead *)
         if (isCreatureVisible(targetX, targetY) = True) then
         begin
-          healthMsg := 'Health: ' + IntToStr(entities.getCreatureHP(targetX, targetY)) +
-            '/' + IntToStr(entities.getCreatureMaxHP(targetX, targetY));
-          TextOut(centreX(entities.getCreatureDescription(targetX, targetY)),
-            21, 'white', entities.getCreatureDescription(targetX, targetY));
+          (* Don't display NPC health *)
+          if (main.gameState <> stVillage) then
+            healthMsg := ' '
+          else
+            healthMsg := 'Health: ' + IntToStr(entities.getCreatureHP(targetX, targetY)) + '/' + IntToStr(entities.getCreatureMaxHP(targetX, targetY));
+          TextOut(centreX(entities.getCreatureDescription(targetX, targetY)), 21, 'white', entities.getCreatureDescription(targetX, targetY));
           TextOut(centreX(healthMsg), 22, 'white', healthMsg);
         end;
       end;
@@ -118,10 +121,8 @@ begin
     (* else to see if an item is under the cursor *)
     else if (items.containsItem(targetX, targetY) = True) and (items.getItemType(targetX, targetY) <> itmEmptySlot) then
     begin
-      TextOut(centreX(getItemName(targetX, targetY)), 21, 'white',
-        getItemName(targetX, targetY));
-      TextOut(centreX(getItemDescription(targetX, targetY)), 22,
-        'white', getItemDescription(targetX, targetY));
+      TextOut(centreX(getItemName(targetX, targetY)), 21, 'white', getItemName(targetX, targetY));
+      TextOut(centreX(getItemDescription(targetX, targetY)), 22, 'white', getItemDescription(targetX, targetY));
     end
     (* else describe the terrain *)
     else if (map.maparea[targetY, targetX].Glyph = '.') then

@@ -18,6 +18,9 @@ procedure dumpMap;
 
 implementation
 
+uses
+  main;
+
 procedure topUpStats;
 begin
   Inc(entityList[0].maxHP, 100);
@@ -29,6 +32,7 @@ end;
 procedure showEntitiesItems;
 var
   i: smallint;
+  stateValue: shortstring;
 begin
   logAction('');
   logAction('-- showEntitiesItems --');
@@ -48,6 +52,9 @@ begin
   end;
   logAction('');
   dumpMap;
+  (* Write out the game state *)
+  WriteStr(stateValue, main.gameState);
+  logAction('gameState: ' + stateValue);
 end;
 
 procedure dumpMap;
