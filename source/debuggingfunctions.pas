@@ -36,8 +36,8 @@ begin
   for i := 0 to High(entityList) do
   begin
     logAction(IntToStr(i) + ': ' + entityList[i].race + ' is at ' + IntToStr(entityList[i].posX) + ', ' + IntToStr(entityList[i].posY));
-    //map.mapDisplay[entityList[i].posY, entityList[i].posX].GlyphColour := 'white';
-   // map.mapDisplay[entityList[i].posY, entityList[i].posX].Glyph := entityList[i].glyph;
+    map.mapDisplay[entityList[i].posY, entityList[i].posX].GlyphColour := 'white';
+    map.mapDisplay[entityList[i].posY, entityList[i].posX].Glyph := entityList[i].glyph;
   end;
   (* Highlight items *)
   for i := 0 to High(itemList) do

@@ -67,6 +67,12 @@ procedure CharInfoInput(Keypress: TKeyEvent);
 procedure WinAlphaInput(Keypress: TKeyEvent);
 (* Controls when in a village *)
 procedure villageInput(Keypress: TKeyEvent);
+(* Input when being asked to BUY / SELL items *)
+procedure barterInput(Keypress: TKeyEvent);
+(* Input when buying items *)
+procedure barterBuyInput(Keypress: TKeyEvent);
+(* Input when selling items *)
+procedure barterSellInput(Keypress: TKeyEvent);
 
 implementation
 
@@ -1020,12 +1026,52 @@ begin
       main.gameState := stCharInfo;
       scrCharacter.displayCharacterSheet;
     end;
+    {$ifopt D+}
+    '/':
+    begin
+      debuggingFunctions.topUpStats;
+      main.gameLoop;
+    end;
+    '@':
+    begin
+      debuggingFunctions.showEntitiesItems;
+      main.gameLoop;
+    end;
+    {$EndIf}
     #27: { Escape key - Quit }
     begin
       gameState := stQuitMenu;
       ui.exitPrompt;
     end;
   end;
+end;
+
+procedure barterInput(Keypress: TKeyEvent);
+begin
+  case GetKeyEventChar(Keypress) of
+    'y', 'Y': { Enter Barter menu }
+    begin
+      gameState := stVillage;
+      { Redraw the map }
+      ui.clearPopup;
+    end;
+    'n', 'N': { Return to main screen}
+    begin
+      gameState := stVillage;
+      { Redraw the map }
+      ui.clearPopup;
+    end;      
+  end;
+end;
+
+procedure barterBuyInput(Keypress: TKeyEvent);
+begin
+
+end;
+
+procedure barterSellInput(Keypress: TKeyEvent);
+begin
+
 end;
 
 end.

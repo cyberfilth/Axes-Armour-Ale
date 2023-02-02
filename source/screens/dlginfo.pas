@@ -11,7 +11,7 @@ uses
 
 (* Types of pop-up dialog box *)
 type
-  dialogFlag = (dlgNone, dlgFoundSMap, dlgParchment, dlgNecro, dlgLveVill);
+  dialogFlag = (dlgNone, dlgFoundSMap, dlgParchment, dlgNecro, dlgLveVill, dlgMerchantIntro);
 
 var
   (* Notifies the game loop whether to display a pop-up or not *)
@@ -37,6 +37,8 @@ procedure readScroll;
 procedure displayCurse;
 (* Prompt to leave the village *)
 procedure leaveVillage;
+(* Buy / Sell items dialog box *)
+procedure buySellIntro;
 
 implementation
 
@@ -180,6 +182,7 @@ begin
     dlgParchment: readScroll;
     dlgNecro: displayCurse;
     dlgLveVill: leaveVillage;
+    dlgMerchantIntro: buySellIntro;
   end;
 end;
 
@@ -319,6 +322,42 @@ begin
   (* Write the message *)
   TextOut(5, 7, 'LgreyBGblack', 'Do you want to leave the village?');
   TextOut(14, 9, 'LgreyBGblack', ' [y] to leave, [n] to stay ');
+  UnlockScreenUpdate;
+  UpdateScreen(False);
+end;
+
+procedure buySellIntro;
+var
+  x, y: smallint;
+  BG, FG: shortstring;
+begin
+  main.gameState := stBarterIntro;
+  x := 3;
+  y := 5;
+  BG := 'blue';
+  FG := 'yellow';
+  LockScreenUpdate;
+  (* Top border *)
+  TextOut(x, y, BG, chr(201));
+  for x := 4 to 53 do
+    TextOut(x, 5, BG, chr(205));
+  TextOut(54, y, BG, chr(187));
+  (* End borders around title *)
+  TextOut(5, y, BG, chr(181));
+  TextOut(25, y, BG, chr(198));
+  (* Vertical sides *)
+  for y := 6 to 8 do
+    TextOut(3, y, BG, chr(186) + '                                                  ' + chr(186));
+  (* Bottom border *)
+  TextOut(3, 9, BG, chr(200)); // bottom left corner
+  for x := 4 to 53 do
+    TextOut(x, 9, BG, chr(205));
+  TextOut(54, 9, BG, chr(188)); // bottom right corner
+  (* Write the title *)
+  TextOut(6, 5, 'white', 'The merchant speaks');
+  (* Write the message *)
+  TextOut(5, 7, FG, 'Do you want to see my wares?');
+  TextOut(22, 9,FG, ' [y]es, [n]o ');
   UnlockScreenUpdate;
   UpdateScreen(False);
 end;

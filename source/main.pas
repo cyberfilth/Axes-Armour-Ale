@@ -15,10 +15,9 @@ uses
 
 (* Finite State Machine game states *)
 type
-  gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu, stLeaveVillage,
-  stWearWield, stQuitMenu, stGameOver, stDialogLevel, stAnim, stLoseSave, stTarget, stBarter,
-  stCharSelect, stCharIntro, stDialogBox, stHelpScreen, stLook, stWinAlpha, stVillage,
-  stSelectAmmo, stSelectTarget, stFireBow, stCharInfo, stOverworld, stQuitMenuOW);
+  gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu, stLeaveVillage, stWearWield, stQuitMenu, stGameOver,
+  stDialogLevel, stAnim, stLoseSave, stTarget, stBarterIntro, stBarterBuy, stBarterSell, stCharSelect, stCharIntro, stDialogBox,
+  stHelpScreen, stLook, stWinAlpha, stVillage, stSelectAmmo, stSelectTarget, stFireBow, stCharInfo, stOverworld, stQuitMenuOW);
 
 var
   (* State machine for game menus / controls *)
@@ -425,6 +424,12 @@ begin
       stVillage: villageInput(Keypress);
       { ---------------------------------    Leave village dialog box }
       stLeaveVillage: dialogLeaveVillage(Keypress);
+      { ---------------------------------    Prompt to trade with merchant }
+      stBarterIntro: barterInput(Keypress);
+      { ---------------------------------    Sell items to merchant }
+      stBarterSell: barterSellInput(Keypress);
+      { ---------------------------------    Buy items from merchant }
+      stBarterBuy: barterBuyInput(Keypress);
     end;
   end;
 end;

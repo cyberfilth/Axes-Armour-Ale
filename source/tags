@@ -32,7 +32,9 @@ areaBurnEffect	animation.pas	/^procedure areaBurnEffect(getEm: array of smallint
 arrowAnimation	animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
 arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	map.pas	/^procedure ascendStairs;$/;"	p
-barter	entities/ai_merchant.pas	/^procedure barter;$/;"	p
+barterBuyInput	keyboardinput.pas	/^procedure barterBuyInput(Keypress: TKeyEvent);$/;"	p
+barterInput	keyboardinput.pas	/^procedure barterInput(Keypress: TKeyEvent);$/;"	p
+barterSellInput	keyboardinput.pas	/^procedure barterSellInput(Keypress: TKeyEvent);$/;"	p
 beginLogging	logging.pas	/^procedure beginLogging;$/;"	p
 bewilderArea	magiceffects.pas	/^procedure bewilderArea;$/;"	p
 blockORnot	dungeons/cave.pas	/^function blockORnot(x, y: integer): Tbkinds;$/;"	f
@@ -41,6 +43,7 @@ blockORnot	vision/smell.pas	/^function blockORnot(x, y: integer): Tbkinds;$/;"	f
 bufferMessage	ui.pas	/^procedure bufferMessage(message: shortstring);$/;"	p
 buildLevel	dungeons/crypt.pas	/^procedure buildLevel(floorNumber: byte);$/;"	p
 buildLevel	dungeons/smallgrid.pas	/^procedure buildLevel(floorNumber: byte);$/;"	p
+buySellIntro	screens/dlginfo.pas	/^procedure buySellIntro;$/;"	p
 calcDistances	dungeons/cave.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
 calcDistances	dungeons/stone_cavern.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
 calcDistances	vision/smell.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
@@ -504,7 +507,6 @@ isNextToPlayer	entities/goblinkin/goblin_necromancer.pas	/^function isNextToPlay
 isNextToPlayer	entities/hobs/redcap_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/hobs/redcap_lesser.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/hobs/redcap_lesser_lobber.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
-isNextToPlayer	entities/npc/merchant.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/npc/villager.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/troglodytes/trog_giant.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/troglodytes/trog_simple.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f

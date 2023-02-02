@@ -6,7 +6,7 @@ unit player;
 interface
 
 uses
-  SysUtils, player_stats, plot_gen, combat_resolver, items, dlgInfo, ai_villager, ai_merchant, island, scrOverworld, file_handling,
+  SysUtils, player_stats, plot_gen, combat_resolver, items, dlgInfo, ai_villager, island, scrOverworld, file_handling,
   globalUtils, video, universe;
 
 (* Create player character *)
@@ -373,10 +373,6 @@ begin
             entities.entityList[0].posX := originalX;
             entities.entityList[0].posY := originalY;
           end;
-// if it's not an npc, it must be a merchant
-// initate barter screen
-
-          
         Inc(entities.entityList[0].moveCount);
         (* check if tile is walkable *)
         if (map.canMove(entities.entityList[0].posX, entities.entityList[0].posY) = False) then
@@ -389,7 +385,7 @@ begin
           Dec(entities.entityList[0].moveCount);
         end;
         (* Occupy tile *)
-        map.occupy(entityList[0].posX, entityList[0].posY); // trigger is here
+        map.occupy(entityList[0].posX, entityList[0].posY);
         fov.fieldOfView(entities.entityList[0].posX, entities.entityList[0].posY, entities.entityList[0].visionRange, 1);
         ui.writeBufferedMessages;
     end
@@ -591,7 +587,7 @@ begin
         begin
           { Check if the NPC is a villager or a merchant }
           if (entities.getCreatureName(x, y) = 'merchant') then
-            ai_merchant.barter 
+            dialogType := dlgMerchantIntro
           else
             ai_villager.chat;
         end;

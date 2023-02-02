@@ -14,7 +14,7 @@ uses
   hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
   crypt_wolf, blue_fungus, embalming_spider, gnome_cultist, bogle_drunk, ghoul_lvl1,
   skeleton_lvl1, zombie_weak, goblin_necromancer, corpse_zombie, rabid_dog, cave_bear,
-  scorpion, small_scorpion, trog_simple, trog_giant, villager;
+  scorpion, small_scorpion, trog_simple, trog_giant, villager, merchant;
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
@@ -63,9 +63,6 @@ begin
   r := 0;
   c := 0;
   monster := '';
-  (* Check if the location is a village *)
-  if (dungeon <> tVillage) then
-  begin
     (* Choose random location on the map *)
     repeat
       r := globalutils.randomRange(2, (MAXROWS - 1));
@@ -150,6 +147,12 @@ begin
             monster := stoneCavernNPC3[randSelect];
           end;
         end;
+        tVillage: { ------------------- Village }
+        begin
+          r := village.centreList[i - 1].y;
+          c := village.centreList[i - 1].x;
+          monster := 'villager';
+        end;
       end;
     end
     else
@@ -228,6 +231,12 @@ begin
             monster := stoneCavernUnique3[randSelect];
           end;
         end;
+        tVillage: { ------------------- Village }
+        begin
+          r := village.centreList[i - 1].y;
+          c := village.centreList[i - 1].x;
+          monster := 'merchant';
+        end;
       end;
     end;
 
@@ -265,23 +274,9 @@ begin
       'smallScorpion': small_scorpion.createSmallScorpion(i, c, r);
       'trogSimple': trog_simple.createTroglodyte(i, c, r);
       'trogGiant': trog_giant.createGiantTroglodyte(i, c, r);
+      'villager': villager.createVillager(i, c, r);
+      'merchant': merchant.createMerchant(i, c, r);
     end;
-  end
-  else
-    (* Villagers / NPC's *)
-  begin
-     r := village.centreList[i - 1].y;
-     c := village.centreList[i - 1].x;
-     villager.createVillager(i, c, r);
-  end;
-
-(* Create NPC *)
-	  case monster of
-	    'villager': villager.createVillager(i, c, r);
-
-
-  end;
-
 end;
 
 end.
