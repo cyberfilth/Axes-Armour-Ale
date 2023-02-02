@@ -9,15 +9,19 @@ unit main;
 interface
 
 uses
-  SysUtils, Video, keyboard, KeyboardInput, ui, camera, map, scrGame, globalUtils,
-  universe, fov, scrRIP, plot_gen, file_handling, smell, scrTitle, scrTargeting, scrWinAlpha,
-  dlgInfo, scrOverworld, island, combat_resolver, logging;
+  SysUtils, Video, keyboard, KeyboardInput, ui, camera, map, scrGame, globalUtils, universe, fov, scrRIP, plot_gen, file_handling, smell, 
+  scrTitle, scrTargeting, scrWinAlpha, dlgInfo, scrOverworld, island, combat_resolver, logging;
 
 (* Finite State Machine game states *)
 type
-  gameStatus = (stTitle, stIntro, stGame, stInventory, stDropMenu, stQuaffMenu, stLeaveVillage, stWearWield, stQuitMenu, stGameOver,
-  stDialogLevel, stAnim, stLoseSave, stTarget, stBarterIntro, stBarterBuy, stBarterSell, stCharSelect, stCharIntro, stDialogBox,
-  stHelpScreen, stLook, stWinAlpha, stVillage, stSelectAmmo, stSelectTarget, stFireBow, stCharInfo, stOverworld, stQuitMenuOW);
+  gameStatus = (
+  { Menus }
+  stInventory, stDropMenu, stQuaffMenu, stWearWield, stQuitMenu, stDialogLevel, stCharSelect, stHelpScreen, stSelectAmmo, 
+  stSelectTarget, stQuitMenuOW, stTarget, stCharIntro, stDialogBox,
+  { Game states }
+  stLook, stWinAlpha, stVillage, stFireBow, stCharInfo, stOverworld, stGame, stTitle, stIntro, stLeaveVillage, stGameOver, stAnim, stLoseSave,
+  { Merchant Buy/Sell menus }
+  stBarterIntro, stBarterShowWares, stBarterBuy, stBarterSell);  
 
 var
   (* State machine for game menus / controls *)
