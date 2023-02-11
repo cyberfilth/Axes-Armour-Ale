@@ -334,6 +334,7 @@ displayQuaffMenu	screens/scrinventory.pas	/^procedure displayQuaffMenu;$/;"	p
 displayRIPscreen	screens/scrrip.pas	/^procedure displayRIPscreen;$/;"	p
 displayStatusEffect	ui.pas	/^procedure displayStatusEffect(onoff: byte; effectType: shortstring);$/;"	p
 displayTitleScreen	screens/scrtitle.pas	/^procedure displayTitleScreen(yn: byte);$/;"	p
+displayVillageWares	screens/dlgmerchant.pas	/^procedure displayVillageWares;$/;"	p
 displayWieldMenu	screens/scrinventory.pas	/^procedure displayWieldMenu;$/;"	p
 displayWinscreen	screens/scrwinalpha.pas	/^procedure displayWinscreen;$/;"	p
 drawBat	screens/scrrip.pas	/^procedure drawBat;$/;"	p
