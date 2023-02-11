@@ -10,7 +10,7 @@ interface
 
 uses
   SysUtils, Video, keyboard, KeyboardInput, ui, camera, map, scrGame, globalUtils, universe, fov, scrRIP, plot_gen, file_handling, smell, 
-  scrTitle, scrTargeting, scrWinAlpha, dlgInfo, scrOverworld, island, combat_resolver, logging;
+  scrTitle, scrTargeting, scrWinAlpha, dlgInfo, scrOverworld, island, combat_resolver, merchant_inventory, logging;
 
 (* Finite State Machine game states *)
 type
@@ -21,7 +21,7 @@ type
   { Game states }
   stLook, stWinAlpha, stVillage, stFireBow, stCharInfo, stOverworld, stGame, stTitle, stIntro, stLeaveVillage, stGameOver, stAnim, stLoseSave,
   { Merchant Buy/Sell menus }
-  stBarterIntro, stBarterShowWares, stBarterBuy, stBarterSell);  
+  stBarterIntro, stBarterShowWares, stBarterBuy, stBarterSell);
 
 var
   (* State machine for game menus / controls *)
@@ -236,6 +236,8 @@ begin
     combat_resolver.deathList[i] := 0;
   (* Set starting inventory *)
   player_inventory.startingInventory;
+  (* Initialise Merchant inventory *)
+  merchant_inventory.initialiseVillageInventory;
   (* Spawn game entities *)
   universe.spawnDenizens;
   (* Initialise items list *)

@@ -477,6 +477,7 @@ initPath	entities.pas	/^procedure initPath(id: smallint);$/;"	p
 initialise	main.pas	/^procedure initialise;$/;"	p
 initialiseInventory	player/player_inventory.pas	/^procedure initialiseInventory;$/;"	p
 initialiseItems	items.pas	/^procedure initialiseItems;$/;"	p
+initialiseVillageInventory	entities/npc/merchant_inventory.pas	/^procedure initialiseVillageInventory;$/;"	p
 introInput	keyboardinput.pas	/^procedure introInput(Keypress: TKeyEvent);$/;"	p
 inventoryInput	keyboardinput.pas	/^procedure inventoryInput(Keypress: TKeyEvent);$/;"	p
 isCreatureVisible	entities.pas	/^function isCreatureVisible(x, y: smallint): boolean;$/;"	f
@@ -614,6 +615,7 @@ setupScreen	ui.pas	/^procedure setupScreen(yn: byte);$/;"	p
 showEntitiesItems	debuggingfunctions.pas	/^procedure showEntitiesItems;$/;"	p
 showInventory	player/player_inventory.pas	/^procedure showInventory;$/;"	p
 showLevelUpOptions	player/player_stats.pas	/^procedure showLevelUpOptions;$/;"	p
+showSaleItems	entities/npc/merchant.pas	/^procedure showSaleItems(id: smallint);$/;"	p
 shutdownKeyboard	keyboardinput.pas	/^procedure shutdownKeyboard;$/;"	p
 shutdownScreen	ui.pas	/^procedure shutdownScreen;$/;"	p
 smallVillage	plot_gen.pas	/^function smallVillage: string;$/;"	f

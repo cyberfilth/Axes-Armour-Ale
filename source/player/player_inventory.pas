@@ -72,7 +72,6 @@ uses
   scrInventory, ui, entities;
 
 procedure initialiseInventory;
-
 var
   i: byte;
 begin

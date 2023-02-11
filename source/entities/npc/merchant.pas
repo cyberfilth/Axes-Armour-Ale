@@ -13,6 +13,8 @@ uses
 procedure createMerchant(uniqueid, npcx, npcy: smallint);
 (* The NPC takes their turn in the game loop *)
 procedure takeTurn(id: smallint);
+(* Display the merchants inventory *)
+procedure showSaleItems(id: smallint);
 
 implementation
 
@@ -71,10 +73,14 @@ begin
   map.occupy(npcx, npcy);
 end;
 
-
 procedure takeTurn(id: smallint);
 begin
   entities.moveNPC(id, entityList[id].posX, entityList[id].posY);
+end;
+
+procedure showSaleItems(id: smallint);
+begin
+
 end;
 
 end.

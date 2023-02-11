@@ -30,7 +30,7 @@ procedure saveGame;
 implementation
 
 uses
-  map, main, entities, player_stats, player_inventory, overworld, items;
+  map, main, entities, player_stats, player_inventory, overworld, items, merchant_inventory;
 
 procedure saveOverworldMap;
 var
@@ -981,6 +981,49 @@ begin
       ParentNode := InventoryNode.NextSibling;
       InventoryNode := ParentNode;
     end;
+
+    (* Merchant Inventory *)
+    merchant_inventory.initialiseVillageInventory;
+
+    InventoryNode := Doc.DocumentElement.FindNode('VMI');
+    for i := 0 to 9 do
+    begin
+      merchant_inventory.villageInv[i].id := i;
+      merchant_inventory.villageInv[i].Name := UTF8Encode(InventoryNode.FindNode('nm').TextContent);
+      merchant_inventory.villageInv[i].description := UTF8Encode(InventoryNode.FindNode('dsc').TextContent);
+      merchant_inventory.villageInv[i].article := UTF8Encode(InventoryNode.FindNode('art').TextContent);
+      merchant_inventory.villageInv[i].itemType := tItem(GetEnumValue(Typeinfo(tItem), UTF8Encode(InventoryNode.FindNode('typ').TextContent)));
+      merchant_inventory.villageInv[i].itemMaterial := tMaterial(GetEnumValue(Typeinfo(tMaterial), UTF8Encode(InventoryNode.FindNode('mat').TextContent)));
+      merchant_inventory.villageInv[i].useID := StrToInt(UTF8Encode(InventoryNode.FindNode('uid').TextContent));
+
+      { Convert plain text to extended ASCII }
+      if (InventoryNode.FindNode('gly').TextContent[1] = 'T') then
+        merchant_inventory.villageInv[i].glyph := chr(24)
+      else if (InventoryNode.FindNode('gly').TextContent[1] = '=') then
+        merchant_inventory.villageInv[i].glyph := chr(186)
+      else if (InventoryNode.FindNode('gly').TextContent[1] = '*') then
+        merchant_inventory.villageInv[i].glyph := chr(7)
+      else if (InventoryNode.FindNode('gly').TextContent[1] = 'i') then
+        merchant_inventory.villageInv[i].glyph := chr(173)
+      else if (InventoryNode.FindNode('gly').TextContent[1] = '0') then
+        merchant_inventory.villageInv[i].glyph := chr(232)
+      else if (InventoryNode.FindNode('gly').TextContent[1] = 'A') then
+        merchant_inventory.villageInv[i].glyph := chr(194)
+      else
+        merchant_inventory.villageInv[i].glyph := char(widechar(InventoryNode.FindNode('gly').TextContent[1]));
+
+      merchant_inventory.villageInv[i].glyphColour := UTF8Encode(InventoryNode.FindNode('col').TextContent);
+      merchant_inventory.villageInv[i].numUses := StrToInt(UTF8Encode(InventoryNode.FindNode('use').TextContent));
+      merchant_inventory.villageInv[i].buy := StrToInt(UTF8Encode(InventoryNode.FindNode('buy').TextContent));
+      merchant_inventory.villageInv[i].sell := StrToInt(UTF8Encode(InventoryNode.FindNode('sel').TextContent));
+      merchant_inventory.villageInv[i].throwable := StrToBool(UTF8Encode(InventoryNode.FindNode('thr').TextContent));
+      merchant_inventory.villageInv[i].throwDamage := StrToInt(UTF8Encode(InventoryNode.FindNode('dam').TextContent));
+      merchant_inventory.villageInv[i].dice := StrToInt(UTF8Encode(InventoryNode.FindNode('dce').TextContent));
+      merchant_inventory.villageInv[i].adds := StrToInt(UTF8Encode(InventoryNode.FindNode('add').TextContent));
+      ParentNode := InventoryNode.NextSibling;
+      InventoryNode := ParentNode;
+    end;
+
   finally
     (* free memory *)
     Doc.Free;
@@ -1164,6 +1207,46 @@ begin
       AddElement(DataNode, 'dice', IntToStr(inventory[i].dice));
       AddElement(DataNode, 'adds', IntToStr(inventory[i].adds));
       AddElement(DataNode, 'inInventory', BoolToStr(inventory[i].inInventory));
+    end;
+
+    (* Merchant inventory *)
+    for i := 0 to 9 do
+    begin
+      DataNode := AddChild(RootNode, 'VMI');
+      TDOMElement(dataNode).SetAttribute('id', UTF8Decode(IntToStr(i)));
+      AddElement(DataNode, 'nm', merchant_inventory.villageInv[i].Name);
+      AddElement(DataNode, 'dsc', merchant_inventory.villageInv[i].description);
+      AddElement(DataNode, 'art', merchant_inventory.villageInv[i].article);
+      WriteStr(Value, merchant_inventory.villageInv[i].itemType);
+      AddElement(DataNode, 'typ', Value);
+      WriteStr(Value, merchant_inventory.villageInv[i].itemMaterial);
+      AddElement(DataNode, 'mat', Value);
+      AddElement(DataNode, 'uid', IntToStr(merchant_inventory.villageInv[i].useID));
+
+      { Convert extended ASCII to plain text }
+      if (merchant_inventory.villageInv[i].glyph = chr(24)) then
+        AddElement(DataNode, 'gly', 'T')
+      else if (merchant_inventory.villageInv[i].glyph = chr(186)) then
+        AddElement(DataNode, 'gly', '=')
+      else if (merchant_inventory.villageInv[i].glyph = chr(7)) then
+        AddElement(DataNode, 'gly', '*')
+      else if (merchant_inventory.villageInv[i].glyph = chr(173)) then
+        AddElement(DataNode, 'gly', 'i')
+      else if (merchant_inventory.villageInv[i].glyph = chr(232)) then
+        AddElement(DataNode, 'gly', '0')
+      else if (merchant_inventory.villageInv[i].glyph = chr(194)) then
+        AddElement(DataNode, 'gly', 'A')
+      else
+        AddElement(DataNode, 'gly', merchant_inventory.villageInv[i].glyph);
+
+      AddElement(DataNode, 'col', merchant_inventory.villageInv[i].glyphColour);
+      AddElement(DataNode, 'use', IntToStr(merchant_inventory.villageInv[i].numUses));
+      AddElement(DataNode, 'buy', IntToStr(merchant_inventory.villageInv[i].buy));
+      AddElement(DataNode, 'sel', IntToStr(merchant_inventory.villageInv[i].sell));
+      AddElement(DataNode, 'thr', BoolToStr(merchant_inventory.villageInv[i].throwable));
+      AddElement(DataNode, 'dam', IntToStr(merchant_inventory.villageInv[i].throwDamage));
+      AddElement(DataNode, 'dce', IntToStr(merchant_inventory.villageInv[i].dice));
+      AddElement(DataNode, 'add', IntToStr(merchant_inventory.villageInv[i].adds));
     end;
 
     (* Save XML *)
