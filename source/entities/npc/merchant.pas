@@ -7,7 +7,7 @@ unit merchant;
 interface
 
 uses
-  SysUtils;
+  SysUtils, merchant_inventory;
 
 (* Create a merchant *)
 procedure createMerchant(uniqueid, npcx, npcy: smallint);
@@ -69,6 +69,8 @@ begin
     posX := npcx;
     posY := npcy;
   end;
+  (* Generate list of wares in inventory *)
+  merchant_inventory.populateVillageInventory;
   (* Occupy tile *)
   map.occupy(npcx, npcy);
 end;

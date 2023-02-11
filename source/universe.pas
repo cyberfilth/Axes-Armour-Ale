@@ -83,7 +83,7 @@ begin
   { Generate a smell map so NPC's aren't initially placed next to the player }
   sniff;
   { Based on number of rooms in current level, dungeon type & dungeon level
-     Caves have more lower level enemies, dungeons have fewer but stronger }
+    Caves have more lower level enemies, dungeons have fewer but stronger    }
   if (dungeonType = tCave) or (dungeonType = tStoneCavern) then
     NPCnumber := totalRooms + currentDepth
   else if (dungeonType = tDungeon) or (dungeonType = tCrypt) then

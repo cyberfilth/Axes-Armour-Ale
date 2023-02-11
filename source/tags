@@ -563,6 +563,7 @@ pickUp	player/player.pas	/^procedure pickUp;$/;"	p
 placeAtEntrance	map.pas	/^procedure placeAtEntrance;$/;"	p
 placePillar	dungeons/stone_cavern.pas	/^procedure placePillar;$/;"	p
 playerProjectilePath	vision/los.pas	/^procedure playerProjectilePath(x1, y1, x2, y2: smallint; g, col: shortstring);$/;"	p
+populateVillageInventory	entities/npc/merchant_inventory.pas	/^procedure populateVillageInventory;$/;"	p
 prettify	dungeons/smallgrid.pas	/^procedure prettify;$/;"	p
 processLight	player/player_stats.pas	/^procedure processLight;$/;"	p
 processStatus	player/player.pas	/^procedure processStatus;$/;"	p
