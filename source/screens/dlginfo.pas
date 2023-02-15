@@ -329,13 +329,25 @@ end;
 procedure buySellIntro;
 var
   x, y: smallint;
-  BG, FG: shortstring;
+  BG, FG, greeting: shortstring;
+  randGreet: byte;
 begin
   main.gameState := stBarterIntro;
+  greeting := '';
+  randGreet := randomRange(0, 3);
   x := 3;
   y := 5;
-  BG := 'blue';
-  FG := 'yellow';
+  BG := 'cyan';
+  FG := 'white';
+  (* Select a random greeting *)
+  if (randGreet = 0) then
+    greeting := 'Greetings, are you looking to trade?'
+  else if (randGreet = 1) then
+    greeting := 'Welcome, would you like to see my wares?'
+  else if (randGreet = 2) then
+    greeting := 'Hail!, would you like to buy something?'
+  else
+    greeting := 'Greetings, are you looking for equipment?';
   LockScreenUpdate;
   (* Top border *)
   TextOut(x, y, BG, chr(201));
@@ -354,10 +366,10 @@ begin
     TextOut(x, 9, BG, chr(205));
   TextOut(54, 9, BG, chr(188)); // bottom right corner
   (* Write the title *)
-  TextOut(6, 5, 'white', 'The merchant speaks');
+  TextOut(6, 5, BG, 'The merchant speaks');
   (* Write the message *)
-  TextOut(5, 7, FG, 'Do you want to see my wares?');
-  TextOut(22, 9,FG, ' [y]es, [n]o ');
+  TextOut(5, 7, FG, greeting);
+  TextOut(22, 9,BG, ' [y]es, [n]o ');
   UnlockScreenUpdate;
   UpdateScreen(False);
 end;

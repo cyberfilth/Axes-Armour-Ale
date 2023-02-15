@@ -9,7 +9,7 @@ interface
 
 uses
   Keyboard, map, dlgInfo, scrIntro, scrCharSelect, scrCharIntro, scrHelp, scrTargeting, universe,
-  scrLook, scrThrow, scrCharacter, globalUtils, scrDeathList{$ifopt D+}, debuggingFunctions{$EndIf};
+  scrLook, scrThrow, scrCharacter, globalUtils, scrDeathList, dlgMerchant {$ifopt D+}, debuggingFunctions{$EndIf};
 
 (* Initialise keyboard unit *)
 procedure setupKeyboard;
@@ -69,10 +69,8 @@ procedure WinAlphaInput(Keypress: TKeyEvent);
 procedure villageInput(Keypress: TKeyEvent);
 (* Input when being asked to BUY / SELL items *)
 procedure barterInput(Keypress: TKeyEvent);
-(* Input when buying items *)
-procedure barterBuyInput(Keypress: TKeyEvent);
-(* Input when selling items *)
-procedure barterSellInput(Keypress: TKeyEvent);
+(* Input when displaying items *)
+procedure barterShowWaresInput(Keypress: TKeyEvent);
 
 implementation
 
@@ -1051,9 +1049,10 @@ begin
   case GetKeyEventChar(Keypress) of
     'y', 'Y': { Enter Barter menu }
     begin
-      gameState := stVillage;
       { Redraw the map }
       ui.clearPopup;
+      gameState := stBarterShowWares;
+      dlgMerchant.displayVillageWares;
     end;
     'n', 'N': { Return to main screen}
     begin
@@ -1064,14 +1063,17 @@ begin
   end;
 end;
 
-procedure barterBuyInput(Keypress: TKeyEvent);
+procedure barterShowWaresInput(Keypress: TKeyEvent);
 begin
+  case GetKeyEventChar(Keypress) of
+    'x', 'X': { Exit Barter menu }
+    begin
+      gameState := stVillage;
+      { Redraw the map }
+      ui.clearPopup;
+    end;
 
-end;
-
-procedure barterSellInput(Keypress: TKeyEvent);
-begin
-
+  end;
 end;
 
 end.

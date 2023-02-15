@@ -433,9 +433,7 @@ begin
       { ---------------------------------    Prompt to trade with merchant }
       stBarterIntro: barterInput(Keypress);
       { ---------------------------------    Sell items to merchant }
-      stBarterSell: barterSellInput(Keypress);
-      { ---------------------------------    Buy items from merchant }
-      stBarterBuy: barterBuyInput(Keypress);
+      stBarterShowWares: barterShowWaresInput(Keypress);
     end;
   end;
 end;

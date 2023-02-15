@@ -67,8 +67,8 @@ begin
     glyph := chr(173);
     glyphColour := 'brown';
     numUses := 5;
-    buy := 0;
-    sell := 0;
+    buy := 1;
+    sell := 2;
     throwable := True;
     throwDamage := 4;
     dice := 1;

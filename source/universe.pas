@@ -35,7 +35,6 @@ procedure litterItems;
 (* Generate the overworld *)
 procedure createEllanToll;
 
-
 implementation
 
 uses

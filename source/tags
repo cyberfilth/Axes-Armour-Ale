@@ -32,9 +32,8 @@ areaBurnEffect	animation.pas	/^procedure areaBurnEffect(getEm: array of smallint
 arrowAnimation	animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
 arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	map.pas	/^procedure ascendStairs;$/;"	p
-barterBuyInput	keyboardinput.pas	/^procedure barterBuyInput(Keypress: TKeyEvent);$/;"	p
 barterInput	keyboardinput.pas	/^procedure barterInput(Keypress: TKeyEvent);$/;"	p
-barterSellInput	keyboardinput.pas	/^procedure barterSellInput(Keypress: TKeyEvent);$/;"	p
+barterShowWaresInput	keyboardinput.pas	/^procedure barterShowWaresInput(Keypress: TKeyEvent);$/;"	p
 beginLogging	logging.pas	/^procedure beginLogging;$/;"	p
 bewilderArea	magiceffects.pas	/^procedure bewilderArea;$/;"	p
 blockORnot	dungeons/cave.pas	/^function blockORnot(x, y: integer): Tbkinds;$/;"	f
@@ -617,7 +616,6 @@ setupScreen	ui.pas	/^procedure setupScreen(yn: byte);$/;"	p
 showEntitiesItems	debuggingfunctions.pas	/^procedure showEntitiesItems;$/;"	p
 showInventory	player/player_inventory.pas	/^procedure showInventory;$/;"	p
 showLevelUpOptions	player/player_stats.pas	/^procedure showLevelUpOptions;$/;"	p
-showSaleItems	entities/npc/merchant.pas	/^procedure showSaleItems(id: smallint);$/;"	p
 shutdownKeyboard	keyboardinput.pas	/^procedure shutdownKeyboard;$/;"	p
 shutdownScreen	ui.pas	/^procedure shutdownScreen;$/;"	p
 smallVillage	plot_gen.pas	/^function smallVillage: string;$/;"	f
