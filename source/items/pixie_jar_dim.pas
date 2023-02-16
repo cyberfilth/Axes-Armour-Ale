@@ -38,8 +38,7 @@ begin
     posX := itmx;
     posY := itmy;
     NumberOfUses := duration;
-    buy := 5;
-    sell := 10;
+    value := 5;
     onMap := True;
     throwable := False;
     throwDamage := 0;
@@ -52,7 +51,7 @@ end;
 
 procedure useItem;
 begin
-  ui.displayMessage('You pick up the Pixie in the jar.');
+  ui.displayMessage('You pick up the Pixie in the jar');
   if (entityList[0].visionRange < player_stats.maxVisionRange) then
      entityList[0].visionRange := player_stats.maxVisionRange;
   lightEquipped := True;

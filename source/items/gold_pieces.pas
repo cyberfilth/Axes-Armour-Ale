@@ -43,8 +43,7 @@ begin
     posX := itmx;
     posY := itmy;
     NumberOfUses := amount;
-    buy := 1;
-    sell := 1;
+    value := 1;
     onMap := True;
     throwable := False;
     throwDamage := 0;
@@ -57,7 +56,7 @@ end;
 
 procedure useItem;
 begin
-  ui.displayMessage('You pick up the gold.');
+  ui.displayMessage('You pick up the gold');
 end;
 
 end.

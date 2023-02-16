@@ -41,6 +41,7 @@ begin
     posX := itmx;
     posY := itmy;
     NumberOfUses := 3;
+    value := 2;
     onMap := True;
     throwable := True;
     throwDamage := 5;

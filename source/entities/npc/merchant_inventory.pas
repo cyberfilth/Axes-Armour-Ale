@@ -10,7 +10,7 @@ uses
 type
   (* Items in inventory *)
   Equipment = record
-    id, useID, numUses, buy, sell, throwDamage, dice, adds: smallint;
+    id, useID, numUses, value, throwDamage, dice, adds: smallint;
     Name, description, article, glyph, glyphColour: shortstring;
     itemType: tItem;
     itemMaterial: tMaterial;
@@ -43,8 +43,7 @@ begin
     villageInv[i].glyph := 'x';
     villageInv[i].glyphColour := 'x';
     villageInv[i].numUses := 0;
-    villageInv[i].buy := 0;
-    villageInv[i].sell := 0;
+    villageInv[i].value := 0;
     villageInv[i].throwable := False;
     villageInv[i].throwDamage := 0;
     villageInv[i].dice := 0;
@@ -67,8 +66,7 @@ begin
     glyph := chr(173);
     glyphColour := 'brown';
     numUses := 5;
-    buy := 1;
-    sell := 2;
+    value := 1;
     throwable := True;
     throwDamage := 4;
     dice := 1;

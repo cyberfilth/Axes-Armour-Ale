@@ -32,6 +32,7 @@ areaBurnEffect	animation.pas	/^procedure areaBurnEffect(getEm: array of smallint
 arrowAnimation	animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
 arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	map.pas	/^procedure ascendStairs;$/;"	p
+barterConfimBuyInput	keyboardinput.pas	/^procedure barterConfimBuyInput(Keypress: TKeyEvent);$/;"	p
 barterInput	keyboardinput.pas	/^procedure barterInput(Keypress: TKeyEvent);$/;"	p
 barterShowWaresInput	keyboardinput.pas	/^procedure barterShowWaresInput(Keypress: TKeyEvent);$/;"	p
 beginLogging	logging.pas	/^procedure beginLogging;$/;"	p
@@ -43,6 +44,7 @@ bufferMessage	ui.pas	/^procedure bufferMessage(message: shortstring);$/;"	p
 buildLevel	dungeons/crypt.pas	/^procedure buildLevel(floorNumber: byte);$/;"	p
 buildLevel	dungeons/smallgrid.pas	/^procedure buildLevel(floorNumber: byte);$/;"	p
 buySellIntro	screens/dlginfo.pas	/^procedure buySellIntro;$/;"	p
+buyVillage	screens/dlgmerchant.pas	/^procedure buyVillage;$/;"	p
 calcDistances	dungeons/cave.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
 calcDistances	dungeons/stone_cavern.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
 calcDistances	vision/smell.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
@@ -366,6 +368,8 @@ dumpMap	debuggingfunctions.pas	/^procedure dumpMap;$/;"	p
 dwarfText	screens/scrcharintro.pas	/^procedure dwarfText;$/;"	p
 elfText	screens/scrcharintro.pas	/^procedure elfText;$/;"	p
 elvenTown	plot_gen.pas	/^function elvenTown: string;$/;"	f
+emptySlotAvailable	player/player_inventory.pas	/^function emptySlotAvailable: boolean;$/;"	f
+emptySlotAvailable	player/player_inventory.pas	/^function emptySlotAvailable:boolean;$/;"	f
 entityDeath	entities.pas	/^    procedure entityDeath(i: smallint);$/;"	p
 entityTakeTurn	entities.pas	/^    procedure entityTakeTurn(i: smallint);$/;"	p
 eraseTerrain	screens/scroverworld.pas	/^procedure eraseTerrain;$/;"	p
@@ -391,6 +395,7 @@ escapePlayer	entities/undead/skeleton_lvl1.pas	/^procedure escapePlayer(id, spx,
 escapePlayer	entities/undead/zombie_weak.pas	/^procedure escapePlayer(id, spx, spy: smallint);$/;"	p
 examineInventory	player/player_inventory.pas	/^procedure examineInventory(selection: smallint);$/;"	p
 exitApplication	main.pas	/^procedure exitApplication;$/;"	p
+exitDialog	screens/dlgmerchant.pas	/^procedure exitDialog;$/;"	p
 exitMessage	ui.pas	/^procedure exitMessage;$/;"	p
 exitPrompt	ui.pas	/^procedure exitPrompt;$/;"	p
 exitToTitleMenu	main.pas	/^procedure exitToTitleMenu;$/;"	p
@@ -604,6 +609,7 @@ scentDirection	vision/smell.pas	/^function scentDirection(y, x: smallint): char;
 scentDirectionCoords	vision/smell.pas	/^function scentDirectionCoords(y, x: smallint): TPoint;$/;"	f
 screenBlank	ui.pas	/^procedure screenBlank;$/;"	p
 seedLocations	dungeons/architect.pas	/^procedure seedLocations;$/;"	p
+selectVillageItem	screens/dlgmerchant.pas	/^procedure selectVillageItem(selection: word);$/;"	p
 setSeed	main.pas	/^procedure setSeed;$/;"	p
 setTheScene	screens/scrcharintro.pas	/^procedure setTheScene;$/;"	p
 setVisitedFlag	island.pas	/^procedure setVisitedFlag(xPOS, yPOS: smallint);$/;"	p

@@ -17,7 +17,7 @@
 <p>
 Player input for game controls and menu selections, grouped in procedures</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>Keyboard</li><li><a href="map.html">map</a></li><li><a href="dlgInfo.html">dlgInfo</a></li><li><a href="scrIntro.html">scrIntro</a></li><li><a href="scrCharSelect.html">scrCharSelect</a></li><li><a href="scrCharIntro.html">scrCharIntro</a></li><li><a href="scrHelp.html">scrHelp</a></li><li><a href="scrTargeting.html">scrTargeting</a></li><li><a href="universe.html">universe</a></li><li><a href="scrLook.html">scrLook</a></li><li><a href="scrThrow.html">scrThrow</a></li><li><a href="scrCharacter.html">scrCharacter</a></li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="scrDeathList.html">scrDeathList</a></li><li><a href="debuggingFunctions.html">debuggingFunctions</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>Keyboard</li><li><a href="map.html">map</a></li><li><a href="dlgInfo.html">dlgInfo</a></li><li><a href="scrIntro.html">scrIntro</a></li><li><a href="scrCharSelect.html">scrCharSelect</a></li><li><a href="scrCharIntro.html">scrCharIntro</a></li><li><a href="scrHelp.html">scrHelp</a></li><li><a href="scrTargeting.html">scrTargeting</a></li><li><a href="universe.html">universe</a></li><li><a href="scrLook.html">scrLook</a></li><li><a href="scrThrow.html">scrThrow</a></li><li><a href="scrCharacter.html">scrCharacter</a></li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="scrDeathList.html">scrDeathList</a></li><li><a href="dlgMerchant.html">dlgMerchant</a></li><li><a href="debuggingFunctions.html">debuggingFunctions</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -75,31 +75,43 @@ Player input for game controls and menu selections, grouped in procedures</p>
 <td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#dialogBoxInput">dialogBoxInput</a></strong>(Keypress: TKeyEvent);</code></td>
 </tr>
 <tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#dialogLeaveVillage">dialogLeaveVillage</a></strong>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#helpScreenInput">helpScreenInput</a></strong>(Keypress: TKeyEvent);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#lookInput">lookInput</a></strong>(Keypress: TKeyEvent);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#fireBowInput">fireBowInput</a></strong>(Keypress: TKeyEvent);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#targetInput">targetInput</a></strong>(Keypress: TKeyEvent);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#ammoProjectile">ammoProjectile</a></strong>(Keypress: TKeyEvent);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#ammoTarget">ammoTarget</a></strong>(Keypress: TKeyEvent);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#CharInfoInput">CharInfoInput</a></strong>(Keypress: TKeyEvent);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#WinAlphaInput">WinAlphaInput</a></strong>(Keypress: TKeyEvent);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#villageInput">villageInput</a></strong>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#barterInput">barterInput</a></strong>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list2">
+<td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#barterShowWaresInput">barterShowWaresInput</a></strong>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr class="list">
+<td class="itemcode"><code>procedure <strong><a href="KeyboardInput.html#barterConfimBuyInput">barterConfimBuyInput</a></strong>(Keypress: TKeyEvent);</code></td>
 </tr>
 </table>
 <h2 class="description">Description</h2>
@@ -268,6 +280,15 @@ Input in the DIALOG state</p>
 </table>
 <table class="detail wide_list">
 <tr class="list">
+<td class="itemcode"><span id="dialogLeaveVillage"></span><code>procedure <strong>dialogLeaveVillage</strong>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input in the LEAVEVILLAGE dialog</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
 <td class="itemcode"><span id="helpScreenInput"></span><code>procedure <strong>helpScreenInput</strong>(Keypress: TKeyEvent);</code></td>
 </tr>
 <tr><td colspan="1">
@@ -344,7 +365,34 @@ Input in WIN ALPHA state</p>
 </tr>
 <tr><td colspan="1">
 <p>
-Input when in a village</p>
+Controls when in a village</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="barterInput"></span><code>procedure <strong>barterInput</strong>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input when being asked to BUY / SELL items</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="barterShowWaresInput"></span><code>procedure <strong>barterShowWaresInput</strong>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input when displaying items</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="barterConfimBuyInput"></span><code>procedure <strong>barterConfimBuyInput</strong>(Keypress: TKeyEvent);</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Input when confirming selection before buying</p>
 </td></tr>
 </table>
 <hr><span class="appinfo"><em>Generated by <a href="https://pasdoc.github.io/">PasDoc 0.16.0</a>. </em>

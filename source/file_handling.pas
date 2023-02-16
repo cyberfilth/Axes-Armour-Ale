@@ -531,8 +531,7 @@ begin
           AddElement(DataNode, 'posX', IntToStr(itemList[i].posX));
           AddElement(DataNode, 'posY', IntToStr(itemList[i].posY));
           AddElement(DataNode, 'numUses', IntToStr(itemList[i].NumberOfUses));
-          AddElement(DataNode, 'buy', IntToStr(itemList[i].buy));
-          AddElement(DataNode, 'sell', IntToStr(itemList[i].sell));
+          AddElement(DataNode, 'val', IntToStr(itemList[i].value));
           AddElement(DataNode, 'onMap', BoolToStr(itemList[i].onMap));
           AddElement(DataNode, 'throwable', BoolToStr(itemList[i].throwable));
           AddElement(DataNode, 'throwDamage', IntToStr(itemList[i].throwDamage));
@@ -707,8 +706,7 @@ begin
         items.itemList[i].posX := StrToInt(UTF8Encode(ItemsNode.FindNode('posX').TextContent));
         items.itemList[i].posY := StrToInt(UTF8Encode(ItemsNode.FindNode('posY').TextContent));
         items.itemList[i].NumberOfUses := StrToInt(UTF8Encode(ItemsNode.FindNode('numUses').TextContent));
-        items.itemList[i].buy := StrToInt(UTF8Encode(ItemsNode.FindNode('buy').TextContent));
-        items.itemList[i].sell := StrToInt(UTF8Encode(ItemsNode.FindNode('sell').TextContent));
+        items.itemList[i].value := StrToInt(UTF8Encode(ItemsNode.FindNode('val').TextContent));
         items.itemList[i].onMap := StrToBool(UTF8Encode(ItemsNode.FindNode('onMap').TextContent));
         items.itemList[i].throwable := StrToBool(UTF8Encode(ItemsNode.FindNode('throwable').TextContent));
         items.itemList[i].throwDamage := StrToInt(UTF8Encode(ItemsNode.FindNode('throwDamage').TextContent));
@@ -971,8 +969,7 @@ begin
 
       player_inventory.inventory[i].glyphColour := UTF8Encode(InventoryNode.FindNode('glyphColour').TextContent);
       player_inventory.inventory[i].numUses := StrToInt(UTF8Encode(InventoryNode.FindNode('numUses').TextContent));
-      player_inventory.inventory[i].buy := StrToInt(UTF8Encode(InventoryNode.FindNode('buy').TextContent));
-      player_inventory.inventory[i].sell := StrToInt(UTF8Encode(InventoryNode.FindNode('sell').TextContent));
+      player_inventory.inventory[i].value := StrToInt(UTF8Encode(InventoryNode.FindNode('val').TextContent));
       player_inventory.inventory[i].throwable := StrToBool(UTF8Encode(InventoryNode.FindNode('throwable').TextContent));
       player_inventory.inventory[i].throwDamage := StrToInt(UTF8Encode(InventoryNode.FindNode('throwDamage').TextContent));
       player_inventory.inventory[i].dice := StrToInt(UTF8Encode(InventoryNode.FindNode('dice').TextContent));
@@ -1014,8 +1011,7 @@ begin
 
       merchant_inventory.villageInv[i].glyphColour := UTF8Encode(InventoryNode.FindNode('col').TextContent);
       merchant_inventory.villageInv[i].numUses := StrToInt(UTF8Encode(InventoryNode.FindNode('use').TextContent));
-      merchant_inventory.villageInv[i].buy := StrToInt(UTF8Encode(InventoryNode.FindNode('buy').TextContent));
-      merchant_inventory.villageInv[i].sell := StrToInt(UTF8Encode(InventoryNode.FindNode('sel').TextContent));
+      merchant_inventory.villageInv[i].value := StrToInt(UTF8Encode(InventoryNode.FindNode('val').TextContent));
       merchant_inventory.villageInv[i].throwable := StrToBool(UTF8Encode(InventoryNode.FindNode('thr').TextContent));
       merchant_inventory.villageInv[i].throwDamage := StrToInt(UTF8Encode(InventoryNode.FindNode('dam').TextContent));
       merchant_inventory.villageInv[i].dice := StrToInt(UTF8Encode(InventoryNode.FindNode('dce').TextContent));
@@ -1200,8 +1196,7 @@ begin
 
       AddElement(DataNode, 'glyphColour', inventory[i].glyphColour);
       AddElement(DataNode, 'numUses', IntToStr(inventory[i].numUses));
-      AddElement(DataNode, 'buy', IntToStr(inventory[i].buy));
-      AddElement(DataNode, 'sell', IntToStr(inventory[i].sell));
+      AddElement(DataNode, 'val', IntToStr(inventory[i].value));
       AddElement(DataNode, 'throwable', BoolToStr(inventory[i].throwable));
       AddElement(DataNode, 'throwDamage', IntToStr(inventory[i].throwDamage));
       AddElement(DataNode, 'dice', IntToStr(inventory[i].dice));
@@ -1241,8 +1236,7 @@ begin
 
       AddElement(DataNode, 'col', merchant_inventory.villageInv[i].glyphColour);
       AddElement(DataNode, 'use', IntToStr(merchant_inventory.villageInv[i].numUses));
-      AddElement(DataNode, 'buy', IntToStr(merchant_inventory.villageInv[i].buy));
-      AddElement(DataNode, 'sel', IntToStr(merchant_inventory.villageInv[i].sell));
+      AddElement(DataNode, 'val', IntToStr(merchant_inventory.villageInv[i].value));
       AddElement(DataNode, 'thr', BoolToStr(merchant_inventory.villageInv[i].throwable));
       AddElement(DataNode, 'dam', IntToStr(merchant_inventory.villageInv[i].throwDamage));
       AddElement(DataNode, 'dce', IntToStr(merchant_inventory.villageInv[i].dice));

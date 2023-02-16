@@ -71,6 +71,8 @@ procedure villageInput(Keypress: TKeyEvent);
 procedure barterInput(Keypress: TKeyEvent);
 (* Input when displaying items *)
 procedure barterShowWaresInput(Keypress: TKeyEvent);
+(* Input when confirming selection before buying *)
+procedure barterConfimBuyInput(Keypress: TKeyEvent);
 
 implementation
 
@@ -1072,7 +1074,58 @@ begin
       { Redraw the map }
       ui.clearPopup;
     end;
+    '0':
+      begin
+        dlgMerchant.selectVillageItem(0);
+      end;
+    '1':
+      begin
+        dlgMerchant.selectVillageItem(1);
+      end;
+    '2':
+      begin
+        dlgMerchant.selectVillageItem(2);
+      end;
+    '3':
+      begin
+        dlgMerchant.selectVillageItem(3);
+      end;
+    '4':
+      begin
+        dlgMerchant.selectVillageItem(4);
+      end;
+    '5':
+      begin
+        dlgMerchant.selectVillageItem(5);
+      end;
+    '6':
+      begin
+        dlgMerchant.selectVillageItem(6);
+      end;
+    '7':
+      begin
+        dlgMerchant.selectVillageItem(7);
+      end;
+    '8':
+      begin
+        dlgMerchant.selectVillageItem(8);
+      end;
+    '9':
+      begin
+        dlgMerchant.selectVillageItem(9);
+      end;
+  end;
+end;
 
+procedure barterConfimBuyInput(Keypress: TKeyEvent);
+begin
+  case GetKeyEventChar(Keypress) of
+    'x', 'X': { Exit Barter menu }
+    begin
+      gameState := stVillage;
+      { Redraw the map }
+      ui.clearPopup;
+    end;
   end;
 end;
 

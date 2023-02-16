@@ -17,7 +17,7 @@
 <p>
 Axes, Armour &amp; Ale - A fantasy roguelike. </p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li>Video</li><li>keyboard</li><li><a href="KeyboardInput.html">KeyboardInput</a></li><li><a href="ui.html">ui</a></li><li><a href="camera.html">camera</a></li><li><a href="map.html">map</a></li><li><a href="scrGame.html">scrGame</a></li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="universe.html">universe</a></li><li><a href="fov.html">fov</a></li><li><a href="scrRIP.html">scrRIP</a></li><li><a href="plot_gen.html">plot_gen</a></li><li><a href="file_handling.html">file_handling</a></li><li><a href="smell.html">smell</a></li><li><a href="scrTitle.html">scrTitle</a></li><li><a href="scrTargeting.html">scrTargeting</a></li><li><a href="scrWinAlpha.html">scrWinAlpha</a></li><li><a href="dlgInfo.html">dlgInfo</a></li><li><a href="scrOverworld.html">scrOverworld</a></li><li><a href="island.html">island</a></li><li><a href="combat_resolver.html">combat_resolver</a></li><li><a href="logging.html">logging</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li>Video</li><li>keyboard</li><li><a href="KeyboardInput.html">KeyboardInput</a></li><li><a href="ui.html">ui</a></li><li><a href="camera.html">camera</a></li><li><a href="map.html">map</a></li><li><a href="scrGame.html">scrGame</a></li><li><a href="globalUtils.html">globalUtils</a></li><li><a href="universe.html">universe</a></li><li><a href="fov.html">fov</a></li><li><a href="scrRIP.html">scrRIP</a></li><li><a href="plot_gen.html">plot_gen</a></li><li><a href="file_handling.html">file_handling</a></li><li><a href="smell.html">smell</a></li><li><a href="scrTitle.html">scrTitle</a></li><li><a href="scrTargeting.html">scrTargeting</a></li><li><a href="scrWinAlpha.html">scrWinAlpha</a></li><li><a href="dlgInfo.html">dlgInfo</a></li><li><a href="scrOverworld.html">scrOverworld</a></li><li><a href="island.html">island</a></li><li><a href="combat_resolver.html">combat_resolver</a></li><li><a href="merchant_inventory.html">merchant_inventory</a></li><li><a href="logging.html">logging</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -181,13 +181,7 @@ Finite State Machine game states</p>
 <h6 class="description_section">Values</h6>
 <ul>
 <li>
-<span id="stTitle">stTitle</span></li>
-<li>
-<span id="stIntro">stIntro</span></li>
-<li>
-<span id="stGame">stGame</span></li>
-<li>
-<span id="stInventory">stInventory</span></li>
+<span id="stInventory">stInventory</span>: Menus</li>
 <li>
 <span id="stDropMenu">stDropMenu</span></li>
 <li>
@@ -197,33 +191,29 @@ Finite State Machine game states</p>
 <li>
 <span id="stQuitMenu">stQuitMenu</span></li>
 <li>
-<span id="stGameOver">stGameOver</span></li>
-<li>
 <span id="stDialogLevel">stDialogLevel</span></li>
 <li>
-<span id="stAnim">stAnim</span></li>
+<span id="stCharSelect">stCharSelect</span></li>
 <li>
-<span id="stLoseSave">stLoseSave</span></li>
+<span id="stHelpScreen">stHelpScreen</span></li>
+<li>
+<span id="stSelectAmmo">stSelectAmmo</span></li>
+<li>
+<span id="stSelectTarget">stSelectTarget</span></li>
+<li>
+<span id="stQuitMenuOW">stQuitMenuOW</span></li>
 <li>
 <span id="stTarget">stTarget</span></li>
-<li>
-<span id="stCharSelect">stCharSelect</span></li>
 <li>
 <span id="stCharIntro">stCharIntro</span></li>
 <li>
 <span id="stDialogBox">stDialogBox</span></li>
 <li>
-<span id="stHelpScreen">stHelpScreen</span></li>
-<li>
-<span id="stLook">stLook</span></li>
+<span id="stLook">stLook</span>: Game states</li>
 <li>
 <span id="stWinAlpha">stWinAlpha</span></li>
 <li>
 <span id="stVillage">stVillage</span></li>
-<li>
-<span id="stSelectAmmo">stSelectAmmo</span></li>
-<li>
-<span id="stSelectTarget">stSelectTarget</span></li>
 <li>
 <span id="stFireBow">stFireBow</span></li>
 <li>
@@ -231,7 +221,25 @@ Finite State Machine game states</p>
 <li>
 <span id="stOverworld">stOverworld</span></li>
 <li>
-<span id="stQuitMenuOW">stQuitMenuOW</span></li>
+<span id="stGame">stGame</span></li>
+<li>
+<span id="stTitle">stTitle</span></li>
+<li>
+<span id="stIntro">stIntro</span></li>
+<li>
+<span id="stLeaveVillage">stLeaveVillage</span></li>
+<li>
+<span id="stGameOver">stGameOver</span></li>
+<li>
+<span id="stAnim">stAnim</span></li>
+<li>
+<span id="stLoseSave">stLoseSave</span></li>
+<li>
+<span id="stBarterIntro">stBarterIntro</span>: Merchant Buy/Sell menus</li>
+<li>
+<span id="stBarterShowWares">stBarterShowWares</span></li>
+<li>
+<span id="stBarterConfirmBuy">stBarterConfirmBuy</span></li>
 </ul>
 </td></tr>
 </table>

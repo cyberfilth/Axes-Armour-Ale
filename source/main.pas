@@ -21,7 +21,7 @@ type
   { Game states }
   stLook, stWinAlpha, stVillage, stFireBow, stCharInfo, stOverworld, stGame, stTitle, stIntro, stLeaveVillage, stGameOver, stAnim, stLoseSave,
   { Merchant Buy/Sell menus }
-  stBarterIntro, stBarterShowWares, stBarterBuy, stBarterSell);
+  stBarterIntro, stBarterShowWares, stBarterConfirmBuy);
 
 var
   (* State machine for game menus / controls *)
@@ -434,6 +434,8 @@ begin
       stBarterIntro: barterInput(Keypress);
       { ---------------------------------    Sell items to merchant }
       stBarterShowWares: barterShowWaresInput(Keypress);
+      { ---------------------------------    Confirm item to buy }
+      stBarterConfirmBuy: barterConfimBuyInput(Keypress);
     end;
   end;
 end;

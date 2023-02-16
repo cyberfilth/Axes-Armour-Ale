@@ -13,7 +13,7 @@ uses
 type
   (* Items in inventory *)
   Equipment = record
-    id, useID, sortIndex, numUses, buy, sell, throwDamage, dice, adds: smallint;
+    id, useID, sortIndex, numUses, value, throwDamage, dice, adds: smallint;
     Name, description, article, glyph, glyphColour: shortstring;
     itemType: tItem;
     itemMaterial: tMaterial;
@@ -65,6 +65,8 @@ function carryingArrows: boolean;
 procedure removeArrow;
 (* Equipped weapon is destroyed *)
 procedure destroyWeapon;
+(* Check for an empty inventory slot *)
+function emptySlotAvailable:boolean;
 
 implementation
 
@@ -88,8 +90,7 @@ begin
     inventory[i].glyph := 'x';
     inventory[i].glyphColour := 'x';
     inventory[i].numUses := 0;
-    inventory[i].buy := 0;
-    inventory[i].sell := 0;
+    inventory[i].value := 0;
     inventory[i].inInventory := False;
     inventory[i].throwable := False;
     inventory[i].throwDamage := 0;
@@ -141,8 +142,7 @@ begin
       glyph := chr(173);
       glyphColour := 'brown';
       numUses := 5;
-      buy := 0;
-      sell := 0;
+      value := 0;
       inInventory := True;
       throwable := True;
       throwDamage := 4;
@@ -171,8 +171,7 @@ begin
       glyph := chr(24);
       glyphColour := 'brown';
       numUses := 5;
-      buy := 0;
-      sell := 0;
+      value := 0;
       inInventory := True;
       throwable := True;
       throwDamage := 4;
@@ -200,8 +199,7 @@ begin
       glyph := '}';
       glyphColour := 'brown';
       numUses := 1;
-      buy := 0;
-      sell := 0;
+      value := 0;
       inInventory := True;
       throwable := True;
       throwDamage := 1;
@@ -225,8 +223,7 @@ begin
       glyph := '|';
       glyphColour := 'brown';
       numUses := 5;
-      buy := 0;
-      sell := 0;
+      value := 0;
       inInventory := True;
       throwable := False;
       throwDamage := 5;
@@ -348,8 +345,7 @@ begin
         inventory[i].glyph := itemList[itemNumber].glyph;
         inventory[i].glyphColour := itemList[itemNumber].glyphColour;
         inventory[i].numUses := itemList[itemNumber].NumberOfUses;
-        inventory[i].buy := itemList[itemNumber].buy;
-        inventory[i].sell := itemList[itemNumber].sell;
+        inventory[i].value := itemList[itemNumber].value;
         inventory[i].throwable := itemList[itemNumber].throwable;
         inventory[i].throwDamage := itemList[itemNumber].throwDamage;
         inventory[i].dice := itemList[itemNumber].dice;
@@ -389,8 +385,7 @@ begin
     newItem.posX := entities.entityList[0].posX;
     newItem.posY := entities.entityList[0].posY;
     newItem.NumberOfUses := inventory[itemNumber].numUses;
-    newItem.buy := inventory[itemNumber].buy;
-    newItem.sell := inventory[itemNumber].sell;
+    newItem.value := inventory[itemNumber].value;
     newItem.onMap := True;
     newItem.throwable := inventory[itemNumber].throwable;
     newItem.throwDamage := inventory[itemNumber].throwDamage;
@@ -417,8 +412,7 @@ begin
     inventory[itemNumber].glyphColour := 'x';
     inventory[itemNumber].inInventory := False;
     inventory[itemNumber].numUses := 0;
-    inventory[itemNumber].buy := 0;
-    inventory[itemNumber].sell := 0;
+    inventory[itemNumber].value := 0;
     inventory[itemNumber].throwable := False;
     inventory[itemNumber].throwDamage := 0;
     inventory[itemNumber].dice := 0;
@@ -592,8 +586,7 @@ begin
     inventory[selection].glyphColour := 'x';
     inventory[selection].inInventory := False;
     inventory[selection].numUses := 0;
-    inventory[selection].buy := 0;
-    inventory[selection].sell := 0;
+    inventory[selection].value := 0;
     inventory[selection].throwable := False;
     inventory[selection].throwDamage := 0;
     inventory[selection].dice := 0;
@@ -741,8 +734,7 @@ begin
          inventory[i].glyphColour := 'x';
          inventory[i].inInventory := False;
          inventory[i].numUses := 0;
-         inventory[i].buy := 0;
-         inventory[i].sell := 0;
+         inventory[i].value := 0;
          inventory[i].throwable := False;
          inventory[i].throwDamage := 0;
          inventory[i].dice := 0;
@@ -777,8 +769,7 @@ begin
       inventory[i].glyphColour := 'x';
       inventory[i].inInventory := False;
       inventory[i].numUses := 0;
-      inventory[i].buy := 0;
-      inventory[i].sell := 0;
+      inventory[i].value := 0;
       inventory[i].throwable := False;
       inventory[i].throwDamage := 0;
       inventory[i].dice := 0;
@@ -786,6 +777,18 @@ begin
       inventory[i].useID := 0;
     end;
   end;
+end;
+
+function emptySlotAvailable: boolean;
+var
+  i: smallint;
+begin
+  Result := False;
+  for i := 0 to High(inventory) do
+      begin
+        if (inventory[i].itemType = itmEmptySlot) then
+           Result := True
+      end;
 end;
 
 end.

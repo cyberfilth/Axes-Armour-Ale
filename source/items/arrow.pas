@@ -34,8 +34,7 @@ begin
     posX := itmx;
     posY := itmy;
     NumberOfUses := 1;
-    buy := 1;
-    sell := 2;
+    value := 1;
     onMap := True;
     throwable := False;
     throwDamage := 5;

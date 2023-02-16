@@ -17,7 +17,7 @@
 <p>
 Player creation and movement</p>
 <span id="PasDoc-Uses"></span><h2 class="uses">Uses</h2>
-<ul class="useslist"><li>SysUtils</li><li><a href="player_stats.html">player_stats</a></li><li><a href="plot_gen.html">plot_gen</a></li><li><a href="combat_resolver.html">combat_resolver</a></li><li><a href="items.html">items</a></li><li><a href="island.html">island</a></li><li><a href="scrOverworld.html">scrOverworld</a></li><li><a href="file_handling.html">file_handling</a></li><li><a href="globalUtils.html">globalUtils</a></li><li>video</li><li><a href="universe.html">universe</a></li></ul><h2 class="overview">Overview</h2>
+<ul class="useslist"><li>SysUtils</li><li><a href="player_stats.html">player_stats</a></li><li><a href="plot_gen.html">plot_gen</a></li><li><a href="combat_resolver.html">combat_resolver</a></li><li><a href="items.html">items</a></li><li><a href="dlgInfo.html">dlgInfo</a></li><li><a href="ai_villager.html">ai_villager</a></li><li><a href="island.html">island</a></li><li><a href="scrOverworld.html">scrOverworld</a></li><li><a href="file_handling.html">file_handling</a></li><li><a href="globalUtils.html">globalUtils</a></li><li>video</li><li><a href="universe.html">universe</a></li></ul><h2 class="overview">Overview</h2>
 <span id="PasDoc-FuncsProcs"></span><h3 class="summary">Functions and Procedures</h3>
 <table class="summary wide_list">
 <tr class="list">
@@ -36,18 +36,21 @@ Player creation and movement</p>
 <td class="itemcode"><code>function <strong><a href="player.html#combatCheck">combatCheck</a></strong>(x, y: smallint): boolean;</code></td>
 </tr>
 <tr class="list2">
+<td class="itemcode"><code>function <strong><a href="player.html#chatCheck">chatCheck</a></strong>(x, y:smallint):boolean;</code></td>
+</tr>
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="player.html#pickUp">pickUp</a></strong>;</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="player.html#increaseHealth">increaseHealth</a></strong>(amount: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="player.html#topupHealth">topupHealth</a></strong>(amount: smallint);</code></td>
 </tr>
-<tr class="list">
+<tr class="list2">
 <td class="itemcode"><code>procedure <strong><a href="player.html#levelupHealth">levelupHealth</a></strong>(amount: smallint);</code></td>
 </tr>
-<tr class="list2">
+<tr class="list">
 <td class="itemcode"><code>procedure <strong><a href="player.html#regenMagick">regenMagick</a></strong>;</code></td>
 </tr>
 </table>
@@ -96,6 +99,15 @@ Process status effects</p>
 <tr><td colspan="1">
 <p>
 Check if tile is occupied by an NPC</p>
+</td></tr>
+</table>
+<table class="detail wide_list">
+<tr class="list">
+<td class="itemcode"><span id="chatCheck"></span><code>function <strong>chatCheck</strong>(x, y:smallint):boolean;</code></td>
+</tr>
+<tr><td colspan="1">
+<p>
+Check if a tile is occupied by a friendly NPC</p>
 </td></tr>
 </table>
 <table class="detail wide_list">

@@ -39,8 +39,7 @@ begin
     posX := itmx;
     posY := itmy;
     NumberOfUses := 5;
-    buy := 0;
-    sell := 0;
+    value := 0;
     onMap := True;
     throwable := True;
     throwDamage := 3;
@@ -53,7 +52,7 @@ end;
 
 procedure useItem;
 begin
-  ui.displayMessage('You can''t pick up a spore.');
+  ui.displayMessage('You can''t pick up a spore');
 end;
 
 procedure triggered(id: smallint);
