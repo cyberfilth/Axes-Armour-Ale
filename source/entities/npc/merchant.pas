@@ -39,8 +39,7 @@ begin
     defence := 1;
     weaponDice := 0;
     weaponAdds := 0;
-    (* Uses the xpReward stat for how much money they have *)
-    xpReward := 20;
+    xpReward := 0;
     visionRange := 4;
     moveCount := 0;
     targetX := 0;

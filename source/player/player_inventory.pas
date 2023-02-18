@@ -7,8 +7,7 @@ unit player_inventory;
 interface
 
 uses
-  SysUtils, StrUtils, video, items, item_lookup, player_stats, staff_minor_scorch,
-  pixie_jar, gold_pieces, staff_bewilder, vampiric_staff;
+  SysUtils, StrUtils, video, items, item_lookup, player_stats, staff_minor_scorch, pixie_jar, gold_pieces, staff_bewilder, vampiric_staff, merchant_inventory;
 
 type
   (* Items in inventory *)
@@ -35,8 +34,10 @@ procedure loadEquippedItems;
 procedure startingInventory;
 (* Add to inventory *)
 function addToInventory(itemNumber: smallint): boolean;
+(* Add bought item to inventory *)
+procedure buyItemVillInventory(itemNumber: smallint);
 (* Add to an empty slot in inventory *)
-function addToInventory_emptySlot(itemNumber: smallint; skip: boolean): boolean;
+function addToInventory_emptySlot(itemNumber: smallint; skip: boolean; source: shortstring): boolean;
 (* Remove from inventory *)
 function removeFromInventory(itemNumber: smallint): boolean;
 (* Sort inventory *)
@@ -66,7 +67,7 @@ procedure removeArrow;
 (* Equipped weapon is destroyed *)
 procedure destroyWeapon;
 (* Check for an empty inventory slot *)
-function emptySlotAvailable:boolean;
+function emptySlotAvailable: boolean;
 
 implementation
 
@@ -270,7 +271,7 @@ begin
       end;
     end;
     (* Check for an empty inventory slot *)
-    if (addToInventory_emptySlot(itemNumber, skip) = True) or (stacked = True) then
+    if (addToInventory_emptySlot(itemNumber, skip, 'ground') = True) or (stacked = True) then
     begin
     (* Set an empty flag for the item on the map, this gets deleted when saving the map *)
         with itemList[itemNumber] do
@@ -310,13 +311,68 @@ begin
   end;
 end;
 
-function addToInventory_emptySlot(itemNumber: smallint; skip: boolean):boolean;
-var i: smallint;
+procedure buyItemVillInventory(itemNumber: smallint);
+var
+  i: smallint;
+  stacked, skip: boolean;
+begin
+  { Are items stacked }
+  stacked := False;
+  { Don't add to a new slot if item is stacked }
+  skip := False;
+  (* Check for adding an arrow to existing arrow slot *)
+  if (merchant_inventory.villageInv[itemNumber].Name = 'arrow') then
+  begin
+    for i := 0 to 9 do
+    begin
+      if (inventory[i].Name = 'arrow') then
+      begin
+        Inc(inventory[i].numUses, merchant_inventory.villageInv[itemNumber].numUses);
+        stacked := True;
+        skip := True;
+      end;
+    end;
+  end;
+  (* Check for an empty inventory slot *)
+  if (addToInventory_emptySlot(itemNumber, skip, 'village') = True) or (stacked = True) then
+  begin
+    (* Sort items in inventory *)
+    sortInventory(0, high(inventory));
+    exit;
+  end
+  else if (merchant_inventory.villageInv[itemNumber].itemType = itmLightSource) then
+  begin { Pixie in a Jar }
+    Inc(player_stats.lightCounter, merchant_inventory.villageInv[itemNumber].NumUses);
+    pixie_jar.useItem;
+  end
+  else if (itemList[itemNumber].itemType = itmTreasure) then
+  begin { Treasure }
+        Inc(player_stats.treasure, itemList[itemNumber].NumberOfUses);
+    (* Set an empty flag for the item on the map, this gets deleted when saving the map *)
+    with itemList[itemNumber] do
+    {$I emptyslot }
+    gold_pieces.useItem;
+  end
+  else  { Quest item }
+  begin
+    item_lookup.lookupUse(itemList[itemNumber].useID, False, 0);
+    (* Set an empty flag for the item on the map, this gets deleted when saving the map *)
+    with itemList[itemNumber] do
+    {$I emptyslot }
+  end;
+end;
+
+function addToInventory_emptySlot(itemNumber: smallint; skip: boolean; source: shortstring): boolean;
+var
+  i: smallint;
 begin
   Result := False;
   if (skip = False) then
   begin
-  for i := 0 to 9 do
+   (* Items picked up from the ground *)
+   if (source = 'ground') then 
+   begin
+   for i := 0 to 9 do
     begin
       if (inventory[i].Name = 'Empty') then
       begin
@@ -354,11 +410,54 @@ begin
         if (itemList[itemNumber].itemName = 'arrow') and (itemList[itemNumber].NumberOfUses > 1) then
            ui.displayMessage('You pick up the ' + inventory[i].Name + 's')
         else
-            ui.displayMessage('You pick up the ' + inventory[i].Name);
+          ui.displayMessage('You pick up the ' + inventory[i].Name);
         Result := True;
         exit;
       end;
     end;
+    end
+    else
+    (* Items purchased from a village merchant *)
+    begin
+    for i := 0 to 9 do
+    begin
+      if (inventory[i].Name = 'Empty') then
+      begin
+        (* Populate inventory with item description *)
+        inventory[i].id := i;
+        (* Set sortIndex for sorting inventory *)
+        if (villageInv[itemNumber].itemType = itmWeapon) then
+          inventory[i].sortIndex := 1
+        else if (villageInv[itemNumber].itemType = itmProjectileWeapon) then
+          inventory[i].sortIndex := 2
+        else if (villageInv[itemNumber].itemType = itmArmour) then
+          inventory[i].sortIndex := 3
+        else if (villageInv[itemNumber].itemType = itmDrink) then
+          inventory[i].sortIndex := 4
+        else if (villageInv[itemNumber].itemType = itmProjectile) then
+          inventory[i].sortIndex := 5
+        else if (villageInv[itemNumber].itemType = itmAmmo) then
+          inventory[i].sortIndex := 6;
+        inventory[i].Name := villageInv[itemNumber].Name;
+        inventory[i].description := villageInv[itemNumber].description;
+        inventory[i].article := villageInv[itemNumber].article;
+        inventory[i].itemType := villageInv[itemNumber].itemType;
+        inventory[i].itemMaterial := villageInv[itemNumber].itemMaterial;
+        inventory[i].useID := villageInv[itemNumber].useID;
+        inventory[i].glyph := villageInv[itemNumber].glyph;
+        inventory[i].glyphColour := villageInv[itemNumber].glyphColour;
+        inventory[i].numUses := villageInv[itemNumber].numUses;
+        inventory[i].value := villageInv[itemNumber].value;
+        inventory[i].throwable := villageInv[itemNumber].throwable;
+        inventory[i].throwDamage := villageInv[itemNumber].throwDamage;
+        inventory[i].dice := villageInv[itemNumber].dice;
+        inventory[i].adds := villageInv[itemNumber].adds;
+        inventory[i].inInventory := True;
+        Result := True;
+        exit;
+      end;
+    end;
+   end;
   end;
 end;
 
@@ -692,60 +791,62 @@ begin
     8: { Staff of Minor Scorch }
       staff_minor_scorch.Zap;
     23: { Staff of Flummox }
-        staff_bewilder.Zap;
+      staff_bewilder.Zap;
     25: { Vampiric staff }
-        vampiric_staff.Zap
+      vampiric_staff.Zap
     else { No enchanted weapon equipped }
       ui.displayMessage('You have no magical weapon equipped');
   end;
 end;
 
 function carryingArrows: boolean;
-var i: byte;
+var
+  i: byte;
 begin
   i := 0;
   Result := False;
   for i := 0 to 9 do
-    begin
-      if (inventory[i].itemType = itmAmmo) then
-         Result := True;
-    end;
+  begin
+    if (inventory[i].itemType = itmAmmo) then
+      Result := True;
+  end;
 end;
 
 procedure removeArrow;
-var i: byte;
+var
+  i: byte;
 begin
-   i := 0;
-   for i := 0 to 9 do
+  i := 0;
+  for i := 0 to 9 do
+  begin
+    if (inventory[i].itemType = itmAmmo) then
     begin
-      if (inventory[i].itemType = itmAmmo) then
-      begin
       (* If it's the last arrow, remove from inventory *)
       if (inventory[i].numUses = 1) then
       begin
-         (* Remove from inventory *)
-         inventory[i].Name := 'Empty';
-         inventory[i].equipped := False;
-         inventory[i].description := 'x';
-         inventory[i].article := 'x';
-         inventory[i].itemType := itmEmptySlot;
-         inventory[i].itemMaterial := matEmpty;
-         inventory[i].glyph := 'x';
-         inventory[i].glyphColour := 'x';
-         inventory[i].inInventory := False;
-         inventory[i].numUses := 0;
-         inventory[i].value := 0;
-         inventory[i].throwable := False;
-         inventory[i].throwDamage := 0;
-         inventory[i].dice := 0;
-         inventory[i].adds := 0;
-         inventory[i].useID := 0;
+        (* Remove from inventory *)
+        inventory[i].Name := 'Empty';
+        inventory[i].equipped := False;
+        inventory[i].description := 'x';
+        inventory[i].article := 'x';
+        inventory[i].itemType := itmEmptySlot;
+        inventory[i].itemMaterial := matEmpty;
+        inventory[i].glyph := 'x';
+        inventory[i].glyphColour := 'x';
+        inventory[i].inInventory := False;
+        inventory[i].numUses := 0;
+        inventory[i].value := 0;
+        inventory[i].throwable := False;
+        inventory[i].throwDamage := 0;
+        inventory[i].dice := 0;
+        inventory[i].adds := 0;
+        inventory[i].useID := 0;
       end
       (* If it's not the last arrow, decrement the number of arrows *)
       else
-          Dec(inventory[i].numUses);
+        Dec(inventory[i].numUses);
     end;
-   end;
+  end;
 end;
 
 procedure destroyWeapon;
@@ -785,10 +886,10 @@ var
 begin
   Result := False;
   for i := 0 to High(inventory) do
-      begin
-        if (inventory[i].itemType = itmEmptySlot) then
-           Result := True
-      end;
+  begin
+    if (inventory[i].itemType = itmEmptySlot) then
+      Result := True;
+  end;
 end;
 
 end.

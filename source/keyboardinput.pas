@@ -72,7 +72,9 @@ procedure barterInput(Keypress: TKeyEvent);
 (* Input when displaying items *)
 procedure barterShowWaresInput(Keypress: TKeyEvent);
 (* Input when confirming selection before buying *)
-procedure barterConfimBuyInput(Keypress: TKeyEvent);
+procedure barterConfirmBuyInput(Keypress: TKeyEvent);
+(* Confirmation dialog to exit barter screen *)
+procedure barterExitInput(Keypress: TKeyEvent);
 
 implementation
 
@@ -715,7 +717,7 @@ begin
       gameState := stVillage;
       { Redraw the map }
       ui.clearPopup;
-    end;      
+    end;
   end;
 end;
 
@@ -1061,7 +1063,7 @@ begin
       gameState := stVillage;
       { Redraw the map }
       ui.clearPopup;
-    end;      
+    end;
   end;
 end;
 
@@ -1117,7 +1119,21 @@ begin
   end;
 end;
 
-procedure barterConfimBuyInput(Keypress: TKeyEvent);
+procedure barterConfirmBuyInput(Keypress: TKeyEvent);
+begin
+  case GetKeyEventChar(Keypress) of
+    'x', 'X': { Exit Barter menu }
+    begin
+      gameState := stVillage;
+      { Redraw the map }
+      ui.clearPopup;
+    end;
+    'y', 'Y': { YES to buy item }
+      dlgMerchant.buyVillage;
+  end;
+end;
+
+procedure barterExitInput(Keypress: TKeyEvent);
 begin
   case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit Barter menu }

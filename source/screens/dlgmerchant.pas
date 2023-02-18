@@ -22,7 +22,7 @@ procedure selectVillageItem(selection: word);
 (* Buy the selected item *)
 procedure buyVillage;
 (* Display a message that the item cannot be bought *)
-procedure exitDialog;
+procedure exitDialogVillage(msg: byte);
 
 implementation
 
@@ -148,35 +148,81 @@ end;
 
 procedure buyVillage;
 var
-  msgString: shortstring;
+  blockerType: byte;
   canBuy: boolean;
+  i: smallint;
 begin
-  msgString := '';
+  blockerType := 1;
   canBuy := False;
+  i := 0;
   (* Check if the player can afford the item *)
   if (currentCost > player_stats.treasure) then
-       msgString := 'You do not have enough gold'
+    blockerType := 1
   (* Check if the player has space in their inventory *)
   else if (player_inventory.emptySlotAvailable = False) then
-       msgString := 'You don''t have space for this'
+    blockerType := 2
   else
       canBuy := True;
-
   (* Show message that the item cannot be bought and exit *)
   if (canBuy = False) then
+    exitDialogVillage(blockerType);
+
+  (* Player buys the item *)
+  if (canBuy = True) then
   begin
-
+    (* Add item to inventory *)
+    player_inventory.buyItemVillInventory(currentBuy);
+    (* Update the merchants money *)
+    Inc(merchant_inventory.villagePurse, currentCost);
+    (* Remove from merchants inventory *)
+    i := currentBuy;
+    {$I ../entities/npc/merchant_inventoryemptyslot}
+    exitDialogVillage(3);
   end;
-
-  (* Add item to inventory *)
-
-  (* Remove from merchants inventory *)
 end;
 
-procedure exitDialog;
+procedure exitDialogVillage(msg: byte);
+var
+  x, y: smallint;
+  BG, FG, msgString: shortstring;
 begin
   ui.clearPopup;
-
+  main.gameState := stBarterExitdlg;
+  if (msg = 1) then
+    msgString := 'You do not have enough gold'
+  else if (msg = 2) then
+    msgString := 'You don''t have space for this'
+  else
+    msgString := 'You purchase the equipment';
+    x := 3;
+    y := 5;
+    BG := 'cyan';
+    FG := 'white';
+    LockScreenUpdate;
+    (* Top border *)
+    TextOut(x, y, BG, chr(201));
+    for x := 4 to 53 do
+      TextOut(x, 5, BG, chr(205));
+    TextOut(54, y, BG, chr(187));
+    (* End borders around title *)
+    TextOut(5, y, BG, chr(181));
+    TextOut(6 + Length('Cannot buy this item'), y, BG, chr(198));
+    (* Vertical sides *)
+    for y := 6 to 8 do
+      TextOut(3, y, BG, chr(186) + '                                                  ' + chr(186));
+    (* Bottom border *)
+    TextOut(3, 9, BG, chr(200)); // bottom left corner
+    for x := 4 to 53 do
+      TextOut(x, 9, BG, chr(205));
+    TextOut(54, 9, BG, chr(188)); // bottom right corner
+    (* Write the title *)
+    TextOut(6, 5, BG, 'Cannot buy this item');
+    Inc(y);
+    (* Display the message *)
+    TextOut(5, 7, FG, msgString);
+    TextOut(17, 9, BG, ' [x] to exit ');
+    UnlockScreenUpdate;
+    UpdateScreen(False);
 end;
 
 end.

@@ -21,7 +21,7 @@ type
   { Game states }
   stLook, stWinAlpha, stVillage, stFireBow, stCharInfo, stOverworld, stGame, stTitle, stIntro, stLeaveVillage, stGameOver, stAnim, stLoseSave,
   { Merchant Buy/Sell menus }
-  stBarterIntro, stBarterShowWares, stBarterConfirmBuy);
+  stBarterIntro, stBarterShowWares, stBarterConfirmBuy, stBarterExitdlg);
 
 var
   (* State machine for game menus / controls *)
@@ -238,6 +238,7 @@ begin
   player_inventory.startingInventory;
   (* Initialise Merchant inventory *)
   merchant_inventory.initialiseVillageInventory;
+  merchant_inventory.villagePurse := 20;
   (* Spawn game entities *)
   universe.spawnDenizens;
   (* Initialise items list *)
@@ -435,7 +436,9 @@ begin
       { ---------------------------------    Sell items to merchant }
       stBarterShowWares: barterShowWaresInput(Keypress);
       { ---------------------------------    Confirm item to buy }
-      stBarterConfirmBuy: barterConfimBuyInput(Keypress);
+      stBarterConfirmBuy: barterConfirmBuyInput(Keypress);
+      { ---------------------------------    Exit Barter dialog }
+      stBarterExitdlg: barterExitInput(Keypress);
     end;
   end;
 end;
@@ -552,6 +555,8 @@ begin
   for i := 1 to entities.npcAmount do
     entities.redrawMapDisplay(i);
   (* Redraw all items *)
+  if (High(itemList) > 0 ) then
+  begin
   for i := 0 to High(itemList) do
     if (map.canSee(items.itemList[i].posX, items.itemList[i].posY) = True) then
     begin
@@ -569,6 +574,7 @@ begin
       items.itemList[i].inView := False;
       map.drawTile(itemList[i].posX, itemList[i].posY, 0);
     end;
+  end;
   (* draw map through the camera *)
   camera.drawMap;
   entities.occupyUpdate;

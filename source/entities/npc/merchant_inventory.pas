@@ -20,6 +20,8 @@ type
 var
   (* Inventory of village merchant *)
   villageInv: array[0..9] of Equipment;
+  (* Purse of village merchant *)
+  villagePurse: integer;
 
 (* Initialise village merchant inventory *)
 procedure initialiseVillageInventory;
@@ -33,23 +35,7 @@ var
   i: byte;
 begin
   for i := 0 to 9 do
-  begin
-    villageInv[i].id := i;
-    villageInv[i].Name := 'Empty';
-    villageInv[i].description := 'x';
-    villageInv[i].article := 'x';
-    villageInv[i].itemType := itmEmptySlot;
-    villageInv[i].itemMaterial := matEmpty;
-    villageInv[i].glyph := 'x';
-    villageInv[i].glyphColour := 'x';
-    villageInv[i].numUses := 0;
-    villageInv[i].value := 0;
-    villageInv[i].throwable := False;
-    villageInv[i].throwDamage := 0;
-    villageInv[i].dice := 0;
-    villageInv[i].adds := 0;
-    villageInv[i].useID := 0;
-  end;
+      {$I merchant_inventoryemptyslot}
 end;
 
 // TEST CODE: this will be replaced by a randomly generated list of items

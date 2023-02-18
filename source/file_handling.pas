@@ -858,6 +858,8 @@ begin
     deathNode := Doc.DocumentElement.FindNode('DL');
     for i := 0 to deathTotal do
       combat_resolver.deathList[i] := StrToInt(UTF8Encode(deathNode.FindNode(UTF8Decode('kill_' + IntToStr(i))).TextContent));
+    (* Amount of cash the village merchant has *)
+    merchant_inventory.villagePurse := StrToDWord(UTF8Encode(RootNode.FindNode('villPurse').TextContent));
 
     (* Location data *)
     locationNode := Doc.DocumentElement.FindNode('locData');
@@ -1095,6 +1097,7 @@ begin
     AddElement(datanode, 'canExitDungeon', UTF8Encode(BoolToStr(player_stats.canExitDungeon)));
     WriteStr(Value, map.mapType);
     AddElement(datanode, 'mapType', Value);
+    AddElement(datanode, 'villPurse', IntToStr(merchant_inventory.villagePurse));
 
     (* List of enemies killed *)
     DataNode := AddChild(RootNode, 'DL');
