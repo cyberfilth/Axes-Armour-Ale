@@ -68,6 +68,10 @@ procedure removeArrow;
 procedure destroyWeapon;
 (* Check for an empty inventory slot *)
 function emptySlotAvailable: boolean;
+(* Total number of sellable items *)
+function totalForSale: smallint;
+(* Remove a sold item from inventory *)
+procedure removeSoldItem(itm: smallint);
 
 implementation
 
@@ -890,6 +894,45 @@ begin
     if (inventory[i].itemType = itmEmptySlot) then
       Result := True;
   end;
+end;
+
+function totalForSale: smallint;
+var
+  i, x: smallint;
+begin
+  i := 0;
+  x := 0;
+  for i := 0 to High(inventory) do
+  begin
+    if (inventory[i].itemType = itmDrink) or (inventory[i].itemType = itmWeapon) or (inventory[i].itemType = itmArmour) then
+    begin
+      if (inventory[i].equipped = False) then
+      	Inc(x);
+    end;  
+  end;
+  Result := x;
+end;
+
+procedure removeSoldItem(itm: smallint);
+begin
+  (* Remove weapon from inventory *)
+  inventory[itm].sortIndex := 10;
+  inventory[itm].Name := 'Empty';
+  inventory[itm].equipped := False;
+  inventory[itm].description := 'x';
+  inventory[itm].article := 'x';
+  inventory[itm].itemType := itmEmptySlot;
+  inventory[itm].itemMaterial := matEmpty;
+  inventory[itm].glyph := 'x';
+  inventory[itm].glyphColour := 'x';
+  inventory[itm].inInventory := False;
+  inventory[itm].numUses := 0;
+  inventory[itm].value := 0;
+  inventory[itm].throwable := False;
+  inventory[itm].throwDamage := 0;
+  inventory[itm].dice := 0;
+  inventory[itm].adds := 0;
+  inventory[itm].useID := 0;
 end;
 
 end.

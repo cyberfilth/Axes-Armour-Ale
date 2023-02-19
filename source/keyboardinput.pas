@@ -69,12 +69,18 @@ procedure WinAlphaInput(Keypress: TKeyEvent);
 procedure villageInput(Keypress: TKeyEvent);
 (* Input when being asked to BUY / SELL items *)
 procedure barterInput(Keypress: TKeyEvent);
-(* Input when displaying items *)
+(* Input when displaying items to buy *)
 procedure barterShowWaresInput(Keypress: TKeyEvent);
 (* Input when confirming selection before buying *)
 procedure barterConfirmBuyInput(Keypress: TKeyEvent);
 (* Confirmation dialog to exit barter screen *)
 procedure barterExitInput(Keypress: TKeyEvent);
+(* Input to choose between buying/selling from merchant *)
+procedure barterBuySellInput(Keypress: TKeyEvent);
+(* Input when displaying items to sell *)
+procedure barterShowSellWaresInput(Keypress: TKeyEvent);
+(* Input when confirming selection before buying *)
+procedure barterConfirmSellInput(Keypress: TKeyEvent);
 
 implementation
 
@@ -1055,8 +1061,8 @@ begin
     begin
       { Redraw the map }
       ui.clearPopup;
-      gameState := stBarterShowWares;
-      dlgMerchant.displayVillageWares;
+      gameState := stBarterBuySell;
+      dlgMerchant.buySellVillagePrompt;
     end;
     'n', 'N': { Return to main screen}
     begin
@@ -1142,6 +1148,94 @@ begin
       { Redraw the map }
       ui.clearPopup;
     end;
+  end;
+end;
+
+procedure barterBuySellInput(Keypress: TKeyEvent);
+begin
+  case GetKeyEventChar(Keypress) of
+    'x', 'X': { Exit Barter menu }
+    begin
+      gameState := stVillage;
+      { Redraw the map }
+      ui.clearPopup;
+    end;
+    'b', 'B': { Enter BUY menu }
+    begin
+      ui.clearPopup;
+      dlgMerchant.displayVillageWares;
+    end;
+    's', 'S': { Enter SELL menu }
+    begin
+      ui.clearPopup;
+      dlgMerchant.displayVillPlayerInv;
+    end;
+  end;
+end;
+
+procedure barterShowSellWaresInput(Keypress: TKeyEvent);
+begin
+  case GetKeyEventChar(Keypress) of
+    'x', 'X': { Exit Barter menu }
+    begin
+      gameState := stVillage;
+      { Redraw the map }
+      ui.clearPopup;
+    end;
+     '0':
+      begin
+        dlgMerchant.selectPlayerItem(0);
+      end;
+    '1':
+      begin
+        dlgMerchant.selectPlayerItem(1);
+      end;
+    '2':
+      begin
+        dlgMerchant.selectPlayerItem(2);
+      end;
+    '3':
+      begin
+        dlgMerchant.selectPlayerItem(3);
+      end;
+    '4':
+      begin
+        dlgMerchant.selectPlayerItem(4);
+      end;
+    '5':
+      begin
+        dlgMerchant.selectPlayerItem(5);
+      end;
+    '6':
+      begin
+        dlgMerchant.selectPlayerItem(6);
+      end;
+    '7':
+      begin
+        dlgMerchant.selectPlayerItem(7);
+      end;
+    '8':
+      begin
+        dlgMerchant.selectPlayerItem(8);
+      end;
+    '9':
+      begin
+        dlgMerchant.selectPlayerItem(9);
+      end;
+  end;
+end;
+
+procedure barterConfirmSellInput(Keypress: TKeyEvent);
+begin
+  case GetKeyEventChar(Keypress) of
+    'x', 'X': { Exit Barter menu }
+    begin
+      gameState := stVillage;
+      { Redraw the map }
+      ui.clearPopup;
+    end;
+    'y', 'Y': { YES to sell item }
+      dlgMerchant.sellVillage;
   end;
 end;
 

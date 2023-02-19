@@ -31,9 +31,12 @@ areaBurnEffect	animation.pas	/^procedure areaBurnEffect(getEm: array of smallint
 arrowAnimation	animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
 arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	map.pas	/^procedure ascendStairs;$/;"	p
+barterBuySellInput	keyboardinput.pas	/^procedure barterBuySellInput(Keypress: TKeyEvent);$/;"	p
 barterConfirmBuyInput	keyboardinput.pas	/^procedure barterConfirmBuyInput(Keypress: TKeyEvent);$/;"	p
+barterConfirmSellInput	keyboardinput.pas	/^procedure barterConfirmSellInput(Keypress: TKeyEvent);$/;"	p
 barterExitInput	keyboardinput.pas	/^procedure barterExitInput(Keypress: TKeyEvent);$/;"	p
 barterInput	keyboardinput.pas	/^procedure barterInput(Keypress: TKeyEvent);$/;"	p
+barterShowSellWaresInput	keyboardinput.pas	/^procedure barterShowSellWaresInput(Keypress: TKeyEvent);$/;"	p
 barterShowWaresInput	keyboardinput.pas	/^procedure barterShowWaresInput(Keypress: TKeyEvent);$/;"	p
 beginLogging	logging.pas	/^procedure beginLogging;$/;"	p
 bewilderArea	magiceffects.pas	/^procedure bewilderArea;$/;"	p
@@ -45,6 +48,7 @@ buildLevel	dungeons/crypt.pas	/^procedure buildLevel(floorNumber: byte);$/;"	p
 buildLevel	dungeons/smallgrid.pas	/^procedure buildLevel(floorNumber: byte);$/;"	p
 buyItemVillInventory	player/player_inventory.pas	/^procedure buyItemVillInventory(itemNumber: smallint);$/;"	p
 buySellIntro	screens/dlginfo.pas	/^procedure buySellIntro;$/;"	p
+buySellVillagePrompt	screens/dlgmerchant.pas	/^procedure buySellVillagePrompt;$/;"	p
 buyVillage	screens/dlgmerchant.pas	/^procedure buyVillage;$/;"	p
 calcDistances	dungeons/cave.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
 calcDistances	dungeons/stone_cavern.pas	/^procedure calcDistances(x, y: smallint);$/;"	p
@@ -336,6 +340,7 @@ displayQuaffMenu	screens/scrinventory.pas	/^procedure displayQuaffMenu;$/;"	p
 displayRIPscreen	screens/scrrip.pas	/^procedure displayRIPscreen;$/;"	p
 displayStatusEffect	ui.pas	/^procedure displayStatusEffect(onoff: byte; effectType: shortstring);$/;"	p
 displayTitleScreen	screens/scrtitle.pas	/^procedure displayTitleScreen(yn: byte);$/;"	p
+displayVillPlayerInv	screens/dlgmerchant.pas	/^procedure displayVillPlayerInv;$/;"	p
 displayVillageWares	screens/dlgmerchant.pas	/^procedure displayVillageWares;$/;"	p
 displayWieldMenu	screens/scrinventory.pas	/^procedure displayWieldMenu;$/;"	p
 displayWinscreen	screens/scrwinalpha.pas	/^procedure displayWinscreen;$/;"	p
@@ -592,6 +597,7 @@ regenMagick	player/player.pas	/^procedure regenMagick;$/;"	p
 removeArrow	player/player_inventory.pas	/^procedure removeArrow;$/;"	p
 removeFromGround	screens/scrthrow.pas	/^procedure removeFromGround;$/;"	p
 removeFromInventory	player/player_inventory.pas	/^function removeFromInventory(itemNumber: smallint): boolean;$/;"	f
+removeSoldItem	player/player_inventory.pas	/^procedure removeSoldItem(itm: smallint);$/;"	p
 removeThrownFromInventory	screens/scrthrow.pas	/^procedure removeThrownFromInventory;$/;"	p
 restoreMessages	ui.pas	/^procedure restoreMessages;$/;"	p
 restorePlayerGlyph	screens/scrtargeting.pas	/^procedure restorePlayerGlyph;$/;"	p
@@ -602,6 +608,7 @@ rightHasFloor	dungeons/cave.pas	/^function rightHasFloor(): boolean;$/;"	f
 rightHasFloor	dungeons/stone_cavern.pas	/^function rightHasFloor(): boolean;$/;"	f
 rightShacks	dungeons/village.pas	/^procedure rightShacks;$/;"	p
 rollDice	globalutils.pas	/^function rollDice(numberOfDice: byte): smallint;$/;"	f
+saleValue	screens/dlgmerchant.pas	/^function saleValue(amnt: smallint): smallint;$/;"	f
 saveDungeonLevel	file_handling.pas	/^procedure saveDungeonLevel;$/;"	p
 saveGame	file_handling.pas	/^procedure saveGame;$/;"	p
 saveOverworldMap	file_handling.pas	/^procedure saveOverworldMap;$/;"	p
@@ -609,7 +616,9 @@ scentDirection	vision/smell.pas	/^function scentDirection(y, x: smallint): char;
 scentDirectionCoords	vision/smell.pas	/^function scentDirectionCoords(y, x: smallint): TPoint;$/;"	f
 screenBlank	ui.pas	/^procedure screenBlank;$/;"	p
 seedLocations	dungeons/architect.pas	/^procedure seedLocations;$/;"	p
+selectPlayerItem	screens/dlgmerchant.pas	/^procedure selectPlayerItem(selection: word);$/;"	p
 selectVillageItem	screens/dlgmerchant.pas	/^procedure selectVillageItem(selection: word);$/;"	p
+sellVillage	screens/dlgmerchant.pas	/^procedure sellVillage;$/;"	p
 setSeed	main.pas	/^procedure setSeed;$/;"	p
 setTheScene	screens/scrcharintro.pas	/^procedure setTheScene;$/;"	p
 setVisitedFlag	island.pas	/^procedure setVisitedFlag(xPOS, yPOS: smallint);$/;"	p
@@ -698,6 +707,7 @@ thrownObjectAnim	animation.pas	/^procedure thrownObjectAnim(var flightPath: b; p
 titleInput	keyboardinput.pas	/^procedure titleInput(Keypress: TKeyEvent);$/;"	p
 topUpStats	debuggingfunctions.pas	/^procedure topUpStats;$/;"	p
 topupHealth	player/player.pas	/^procedure topupHealth(amount: smallint);$/;"	p
+totalForSale	player/player_inventory.pas	/^function totalForSale: smallint;$/;"	f
 triggered	items/traps/poison_spore.pas	/^procedure triggered(id: smallint);$/;"	p
 triggered	items/traps/web_trap.pas	/^procedure triggered(id: smallint);$/;"	p
 uniqueKills	screens/scrdeathlist.pas	/^function uniqueKills: smallint;$/;"	f

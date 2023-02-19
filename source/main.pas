@@ -21,7 +21,7 @@ type
   { Game states }
   stLook, stWinAlpha, stVillage, stFireBow, stCharInfo, stOverworld, stGame, stTitle, stIntro, stLeaveVillage, stGameOver, stAnim, stLoseSave,
   { Merchant Buy/Sell menus }
-  stBarterIntro, stBarterShowWares, stBarterConfirmBuy, stBarterExitdlg);
+  stBarterIntro, stBarterShowWares, stBarterConfirmBuy, stBarterExitdlg, stBarterBuySell, stBarterShowSellWares, stBarterConfirmSell);
 
 var
   (* State machine for game menus / controls *)
@@ -433,12 +433,18 @@ begin
       stLeaveVillage: dialogLeaveVillage(Keypress);
       { ---------------------------------    Prompt to trade with merchant }
       stBarterIntro: barterInput(Keypress);
-      { ---------------------------------    Sell items to merchant }
+      { ---------------------------------    Buy items from merchant }
       stBarterShowWares: barterShowWaresInput(Keypress);
       { ---------------------------------    Confirm item to buy }
       stBarterConfirmBuy: barterConfirmBuyInput(Keypress);
       { ---------------------------------    Exit Barter dialog }
       stBarterExitdlg: barterExitInput(Keypress);
+      { ---------------------------------    Barter menu - Sell / Buy }
+      stBarterBuySell: barterBuySellInput(Keypress);
+      { ---------------------------------    Sell items to merchant }
+      stBarterShowSellWares: barterShowSellWaresInput(Keypress);
+      { ---------------------------------    Confirm item to sell }
+      stBarterConfirmSell: barterConfirmSellInput(Keypress);
     end;
   end;
 end;

@@ -345,7 +345,7 @@ begin
   else if (randGreet = 1) then
     greeting := 'Welcome, would you like to see my wares?'
   else if (randGreet = 2) then
-    greeting := 'Hail!, would you like to buy something?'
+    greeting := 'Hail!, would you like to buy / sell something?'
   else
     greeting := 'Greetings, are you looking for equipment?';
   LockScreenUpdate;
