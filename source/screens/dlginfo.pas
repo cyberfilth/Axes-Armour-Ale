@@ -351,6 +351,7 @@ begin
   7: greeting := 'Ho there! what treasures do you seek?';
   else
 		greeting := 'Welcome, what can I interest you in today?';
+  end;
     
   LockScreenUpdate;
   (* Top border *)
