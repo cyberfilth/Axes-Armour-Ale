@@ -201,6 +201,7 @@ createStaff	items/weapons/vampiric_staff.pas	/^procedure createStaff(itmx, itmy:
 createSword	items/weapons/rusty_sword.pas	/^procedure createSword(itmx, itmy: smallint);$/;"	p
 createTerbutje	items/weapons/terbutje.pas	/^procedure createTerbutje(itmx, itmy: smallint);$/;"	p
 createTroglodyte	entities/troglodytes/trog_simple.pas	/^procedure createTroglodyte(uniqueid, npcx, npcy: smallint);$/;"	p
+createVillager	entities/npc/village_idiot.pas	/^procedure createVillager(uniqueid, npcx, npcy: smallint);$/;"	p
 createVillager	entities/npc/villager.pas	/^procedure createVillager(uniqueid, npcx, npcy: smallint);$/;"	p
 createWeb	entities/bugs/web.pas	/^procedure createWeb(uniqueid, npcx, npcy: smallint);$/;"	p
 createWebTrap	items/traps/web_trap.pas	/^procedure createWebTrap(itmx, itmy: smallint);$/;"	p
@@ -312,6 +313,7 @@ decisionNeutral	entities/goblinkin/goblin_necromancer.pas	/^procedure decisionNe
 decisionNeutral	entities/hobs/redcap_fungus.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/hobs/redcap_lesser.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/hobs/redcap_lesser_lobber.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
+decisionNeutral	entities/npc/village_idiot.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/npc/villager.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/troglodytes/trog_giant.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
 decisionNeutral	entities/troglodytes/trog_simple.pas	/^procedure decisionNeutral(id: smallint);$/;"	p
@@ -453,6 +455,7 @@ generateTitle	plot_gen.pas	/^procedure generateTitle;$/;"	p
 getCreatureDescription	entities.pas	/^function getCreatureDescription(x, y: smallint): shortstring;$/;"	f
 getCreatureHP	entities.pas	/^function getCreatureHP(x, y: smallint): smallint;$/;"	f
 getCreatureID	entities.pas	/^function getCreatureID(x, y: smallint): smallint;$/;"	f
+getCreatureIntName	entities.pas	/^function getCreatureIntName(x, y: smallint): shortstring;$/;"	f
 getCreatureMaxHP	entities.pas	/^function getCreatureMaxHP(x, y: smallint): smallint;$/;"	f
 getCreatureName	entities.pas	/^function getCreatureName(x, y: smallint): shortstring;$/;"	f
 getDungeonType	island.pas	/^function getDungeonType(xPOS, yPOS: smallint): dungeonTerrain;$/;"	f
@@ -522,6 +525,7 @@ isNextToPlayer	entities/goblinkin/goblin_necromancer.pas	/^function isNextToPlay
 isNextToPlayer	entities/hobs/redcap_fungus.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/hobs/redcap_lesser.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/hobs/redcap_lesser_lobber.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
+isNextToPlayer	entities/npc/village_idiot.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/npc/villager.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/troglodytes/trog_giant.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
 isNextToPlayer	entities/troglodytes/trog_simple.pas	/^function isNextToPlayer(spx, spy: smallint): boolean;$/;"	f
@@ -587,6 +591,7 @@ quaffInput	keyboardinput.pas	/^procedure quaffInput(Keypress: TKeyEvent);$/;"	p
 quaffSelection	player/player_inventory.pas	/^procedure quaffSelection(selection: smallint);$/;"	p
 quitInput	keyboardinput.pas	/^procedure quitInput(Keypress: TKeyEvent);$/;"	p
 quitInputOW	keyboardinput.pas	/^procedure quitInputOW(Keypress: TKeyEvent);$/;"	p
+ramblings	entities/ai_villager.pas	/^procedure ramblings;$/;"	p
 randomRange	globalutils.pas	/^function randomRange(fromNumber, toNumber: smallint): smallint;$/;"	f
 randomTileFill	dungeons/cave.pas	/^procedure randomTileFill;$/;"	p
 randomTileFill	dungeons/stone_cavern.pas	/^procedure randomTileFill;$/;"	p
@@ -676,6 +681,7 @@ takeTurn	entities/hobs/redcap_fungus.pas	/^procedure takeTurn(id: smallint);$/;"
 takeTurn	entities/hobs/redcap_lesser.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/hobs/redcap_lesser_lobber.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/npc/merchant.pas	/^procedure takeTurn(id: smallint);$/;"	p
+takeTurn	entities/npc/village_idiot.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/npc/villager.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/troglodytes/trog_giant.pas	/^procedure takeTurn(id: smallint);$/;"	p
 takeTurn	entities/troglodytes/trog_simple.pas	/^procedure takeTurn(id: smallint);$/;"	p

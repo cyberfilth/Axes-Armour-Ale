@@ -586,8 +586,10 @@ begin
       if (y = entities.entityList[i].posY) then
         begin
           { Check if the NPC is a villager or a merchant }
-          if (entities.getCreatureName(x, y) = 'merchant') then
+          if (entities.getCreatureIntName(x, y) = 'Merchant') then
             dialogType := dlgMerchantIntro
+          else if (entities.getCreatureIntName(x, y) = 'villageIdiot') then
+            ai_villager.ramblings 
           else
             ai_villager.chat;
         end;

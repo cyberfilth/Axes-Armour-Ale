@@ -13,7 +13,7 @@ uses
   cave_rat, giant_cave_rat, blood_bat, green_fungus, redcap_lesser, redcap_lesser_lobber, small_green_fungus, large_blood_bat, small_hyena,
   redcap_fungus, mushroom_person, hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin, web, crypt_wolf,
   blue_fungus, embalming_spider, gnome_cultist, bogle_drunk, ghoul_lvl1, skeleton_lvl1, zombie_weak, goblin_necromancer, corpse_zombie,
-  rabid_dog, cave_bear, scorpion, small_scorpion, trog_simple, trog_giant, villager, merchant;
+  rabid_dog, cave_bear, scorpion, small_scorpion, trog_simple, trog_giant, villager, village_idiot, merchant;
 
 type { NPC attitudes }
   Tattitudes = (stateNeutral, stateHostile, stateEscape);
@@ -92,6 +92,8 @@ function getCreatureMaxHP(x, y: smallint): smallint;
 function getCreatureID(x, y: smallint): smallint;
 (* Get creature name at coordinates *)
 function getCreatureName(x, y: smallint): shortstring;
+(* Get creature internal name at coordinates *)
+function getCreatureIntName(x, y: smallint): shortstring;
 (* Get creature description *)
 function getCreatureDescription(x, y: smallint): shortstring;
 (* Check if creature is visible at coordinates *)
@@ -214,6 +216,18 @@ begin
   begin
     if (entityList[i].posX = x) and (entityList[i].posY = y) then
       Result := entityList[i].race;
+  end;
+end;
+
+function getCreatureIntName(x, y: smallint): shortstring;
+var
+  i: smallint;
+begin
+  Result := '';
+  for i := 0 to npcAmount do
+  begin
+    if (entityList[i].posX = x) and (entityList[i].posY = y) then
+      Result := entityList[i].intName;
   end;
 end;
 
@@ -348,6 +362,7 @@ begin
     'trogSimple': trog_simple.takeTurn(i);
     'trogGiant': trog_giant.takeTurn(i);
     'villager': villager.takeTurn(i);	
+    'villageIdiot': village_idiot.takeTurn(i);
     'Merchant': merchant.takeTurn(i);
   end;
   (* Occupy their current tile *)
