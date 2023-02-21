@@ -201,6 +201,7 @@ var
 begin
   ui.clearPopup;
   main.gameState := stBarterExitdlg;
+  msgString := '';
   if (msg = 1) then
     msgString := 'You do not have enough gold'
   else if (msg = 2) then

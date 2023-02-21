@@ -32,7 +32,7 @@ begin
     article := True;
     description := 'a merchant';
     glyph := '@';
-    glyphColour := 'lightGreen';
+    glyphColour := 'white';
     maxHP := 4000;
     currentHP := maxHP;
     attack := 1;

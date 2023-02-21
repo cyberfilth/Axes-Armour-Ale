@@ -9,10 +9,10 @@ interface
 uses
   universe, globalUtils,
   { List of drinks }
-  ale_tankard, wine_flask,
+  ale_tankard, wine_flask, large_ale,
   { List of weapons }
   crude_dagger, basic_club, rock, short_bow, pointy_stick, gnomish_dagger, gnomish_mace,
-  gnomish_axe, bone_dagger, necro_axe, flint_dagger, terbutje,
+  gnomish_axe, bone_dagger, necro_axe, flint_dagger, terbutje, leather_whip, rusty_sword,
   { List of armour }
   leather_armour1, cloth_armour1, lesser_bone_armour,
   { Quest items }
@@ -168,6 +168,9 @@ begin
     'staffVampire': vampiric_staff.createStaff(c, r);
     'flintDagger': flint_dagger.createFlintDagger(c, r);
     'terbutje': terbutje.createTerbutje(c, r);
+    'bullwhip': leather_whip.createWhip(c, r);
+    'largeAle': large_ale.createLargeAle(c, r);
+    'rustySword': rusty_sword.createSword(c, r);
   end;
 end;
 
@@ -201,6 +204,9 @@ begin
     25: vampiric_staff.useItem(equipped);
     26: flint_dagger.useItem(equipped, id);
     27: terbutje.useItem(equipped);
+    28: leather_whip.useItem(equipped);
+    29: large_ale.useItem;
+    30: rusty_sword.useItem(equipped, id);
   end;
 end;
 

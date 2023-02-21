@@ -334,20 +334,24 @@ var
 begin
   main.gameState := stBarterIntro;
   greeting := '';
-  randGreet := randomRange(0, 3);
+  randGreet := randomRange(0, 8);
   x := 3;
   y := 5;
   BG := 'cyan';
   FG := 'white';
   (* Select a random greeting *)
-  if (randGreet = 0) then
-    greeting := 'Greetings, are you looking to trade?'
-  else if (randGreet = 1) then
-    greeting := 'Welcome, would you like to see my wares?'
-  else if (randGreet = 2) then
-    greeting := 'Hail!, would you like to buy / sell something?'
+  case randGreet of
+  0: greeting := 'Greetings, are you looking to trade?';
+  1: greeting := 'Welcome, would you like to see my wares?';
+  2: greeting := 'Hail!, would you like to buy / sell something?';
+  3: greeting := 'Greetings, are you looking for equipment?';
+  4: greeting := 'Greetings, how can I be of service?';
+  5: greeting := 'Step right up, what can I offer you?';
+  6: greeting := 'Hail, what can I do for you today?';
+  7: greeting := 'Ho there! what treasures do you seek?';
   else
-    greeting := 'Greetings, are you looking for equipment?';
+		greeting := 'Welcome, what can I interest you in today?';
+    
   LockScreenUpdate;
   (* Top border *)
   TextOut(x, y, BG, chr(201));

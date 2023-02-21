@@ -1,13 +1,13 @@
-(* A wooden club studded with spikes made of obsidian *)
+(* A leather bullwhip *)
 
-unit terbutje;
+unit leather_whip;
 
 {$mode fpc}{$H+}
 
 interface
 
-(* Create a terbutje *)
-procedure createTerbutje(itmx, itmy: smallint);
+(* Create a whip *)
+procedure createWhip(itmx, itmy: smallint);
 (* Equip weapon *)
 procedure useItem(equipped: boolean);
 (* Remove weapon from inventory when thrown *)
@@ -18,18 +18,18 @@ implementation
 uses
   items, entities, ui;
 
-procedure createTerbutje(itmx, itmy: smallint);
+procedure createWhip(itmx, itmy: smallint);
 begin
   SetLength(itemList, length(itemList) + 1);
   with itemList[High(itemList)] do
   begin
     itemID := indexID;
-    itemName := 'Terbutje';
-    itemDescription := 'Club covered in obsidian spikes, 1D6+9 to attack';
+    itemName := 'Bullwhip';
+    itemDescription := 'Leather whip, 1D6+9 to attack';
     itemArticle := 'a';
     itemType := itmWeapon;
-    itemMaterial := matWood;
-    useID := 27;
+    itemMaterial := matLeather;
+    useID := 28;
     glyph := chr(24);
     glyphColour := 'brown';
     inView := False;
@@ -39,7 +39,7 @@ begin
     value := 5;
     onMap := True;
     throwable := True;
-    throwDamage := 8;
+    throwDamage := 2;
     dice := 1;
     adds := 9;
     discovered := False;
@@ -55,8 +55,8 @@ begin
     entityList[0].weaponEquipped := True;
     Inc(entityList[0].weaponDice);
     Inc(entityList[0].weaponAdds,9);
-    ui.displayMessage('You equip the terbutje. The terbutje adds 1D6+9 to your attack');
-    ui.equippedWeapon := 'Terbutje';
+    ui.displayMessage('You equip the bullwhip. The whip adds 1D6+9 to your attack');
+    ui.equippedWeapon := 'Bullwhip';
     ui.writeBufferedMessages;
   end
   else
@@ -65,7 +65,7 @@ begin
     entityList[0].weaponEquipped := False;
     Dec(entityList[0].weaponDice);
     Dec(entityList[0].weaponAdds,9);
-    ui.displayMessage('You unequip the terbutje.');
+    ui.displayMessage('You unequip the bullwhip.');
     ui.equippedWeapon := 'No weapon equipped';
     ui.writeBufferedMessages;
   end;

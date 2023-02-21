@@ -5,7 +5,7 @@ unit merchant_inventory;
 interface
 
 uses
-  SysUtils, items;
+  SysUtils, items, globalutils;
 
 type
   (* Items in inventory *)
@@ -38,26 +38,89 @@ begin
       {$I merchant_inventoryemptyslot}
 end;
 
-// TEST CODE: this will be replaced by a randomly generated list of items
 procedure populateVillageInventory;
+var
+	randChoice: smallint;
 begin
+	randChoice := 0;
   with villageInv[0] do
   begin
     id := 0;
-    Name := 'pointy stick';
-    description := 'adds 1D6+1 to attack';
+    Name := 'Bullwhip';
+    description := 'Leather whip, 1D6+9 to attack';
     article := 'a';
     itemType := itmWeapon;
-    itemMaterial := matWood;
-    glyph := chr(173);
+    itemMaterial := matLeather;
+    glyph := chr(24);
     glyphColour := 'brown';
     numUses := 5;
-    value := 1;
+    value := 7;
     throwable := True;
-    throwDamage := 4;
+    throwDamage := 2;
     dice := 1;
-    adds := 1;
-    useID := 11;
+    adds := 9;
+    useID := 28;
+  end;
+  randChoice := randomRange(0, 1);
+  if (randChoice = 0) then
+  begin
+   with villageInv[1] do
+		begin
+		  id := 1;
+		  Name := 'large ale';
+		  description := 'restores 12 health points';
+		  article := 'a';
+		  itemType := itmDrink;
+		  itemMaterial := matFlammable;
+		  glyph := '!';
+		  glyphColour := 'lightCyan';
+		  numUses := 5;
+		  value := 3;
+		  throwable := False;
+		  throwDamage := 0;
+		  dice := 0;
+		  adds := 0;
+		  useID := 29; 
+		end;
+	end
+		else
+		begin
+			with villageInv[1] do
+			begin
+				id := 1;
+				Name := 'Rusty sword';
+				description := 'adds 2D6 to attack';
+				article := 'a';
+				itemType := itmWeapon;
+				itemMaterial := matIron;
+				glyph := chr(24);
+				glyphColour := 'white';
+				numUses := 5;
+				value := 9;
+				throwable := True;
+				throwDamage := 9;
+				dice := 2;
+				adds := 0;
+				useID := 30; 
+			end;
+		end;	
+  with villageInv[2] do
+  begin
+    id := 2;
+    Name := 'flask of wine';
+    description := 'cures poison effects';
+    article := 'a';
+    itemType := itmDrink;
+    itemMaterial := matFlammable;
+    glyph := '!';
+    glyphColour := 'green';
+    numUses := 5;
+    value := 2;
+    throwable := False;
+    throwDamage := 0;
+    dice := 0;
+    adds := 0;
+    useID := 6;
   end;
 end;
 

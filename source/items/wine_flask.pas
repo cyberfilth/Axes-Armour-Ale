@@ -26,7 +26,7 @@ begin
     itemDescription := 'cures poison';
     itemArticle := 'a';
     itemType := itmDrink;
-    itemMaterial := matSteel;
+    itemMaterial := matFlammable;
     useID := 6;
     glyph := '!';
     glyphColour := 'green';

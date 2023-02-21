@@ -166,6 +166,7 @@ createGnomishDagger	items/weapons/gnomish_dagger.pas	/^procedure createGnomishDa
 createGnomishMace	items/weapons/gnomish_mace.pas	/^procedure createGnomishMace(itmx, itmy: smallint);$/;"	p
 createGreenFungus	entities/fungus/green_fungus.pas	/^procedure createGreenFungus(uniqueid, npcx, npcy: smallint);$/;"	p
 createInfectedHyena	entities/animals/hyena_fungus.pas	/^procedure createInfectedHyena(uniqueid, npcx, npcy: smallint);$/;"	p
+createLargeAle	items/large_ale.pas	/^procedure createLargeAle(itmx, itmy: smallint);$/;"	p
 createLeatherArmour	items/armour/leather_armour1.pas	/^procedure createLeatherArmour(itmx, itmy: smallint);$/;"	p
 createMerchant	entities/npc/merchant.pas	/^procedure createMerchant(uniqueid, npcx, npcy: smallint);$/;"	p
 createMushroomPerson	entities/fungus/mushroom_person.pas	/^procedure createMushroomPerson(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -197,11 +198,13 @@ createSpore	items/traps/poison_spore.pas	/^procedure createSpore(itmx, itmy: sma
 createStaff	items/weapons/staff_bewilder.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
 createStaff	items/weapons/staff_minor_scorch.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
 createStaff	items/weapons/vampiric_staff.pas	/^procedure createStaff(itmx, itmy: smallint);$/;"	p
+createSword	items/weapons/rusty_sword.pas	/^procedure createSword(itmx, itmy: smallint);$/;"	p
 createTerbutje	items/weapons/terbutje.pas	/^procedure createTerbutje(itmx, itmy: smallint);$/;"	p
 createTroglodyte	entities/troglodytes/trog_simple.pas	/^procedure createTroglodyte(uniqueid, npcx, npcy: smallint);$/;"	p
 createVillager	entities/npc/villager.pas	/^procedure createVillager(uniqueid, npcx, npcy: smallint);$/;"	p
 createWeb	entities/bugs/web.pas	/^procedure createWeb(uniqueid, npcx, npcy: smallint);$/;"	p
 createWebTrap	items/traps/web_trap.pas	/^procedure createWebTrap(itmx, itmy: smallint);$/;"	p
+createWhip	items/weapons/leather_whip.pas	/^procedure createWhip(itmx, itmy: smallint);$/;"	p
 createWineFlask	items/wine_flask.pas	/^procedure createWineFlask(itmx, itmy: smallint);$/;"	p
 createZombie	entities/undead/corpse_zombie.pas	/^procedure createZombie(uniqueid, npcx, npcy: smallint);$/;"	p
 createZombie	entities/undead/zombie_weak.pas	/^procedure createZombie(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -688,8 +691,10 @@ throw	items/weapons/flint_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
 throw	items/weapons/gnomish_axe.pas	/^procedure throw(itemID: smallint);$/;"	p
 throw	items/weapons/gnomish_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
 throw	items/weapons/gnomish_mace.pas	/^procedure throw(itemID: smallint);$/;"	p
+throw	items/weapons/leather_whip.pas	/^procedure throw;$/;"	p
 throw	items/weapons/necro_axe.pas	/^procedure throw(itemID: smallint);$/;"	p
 throw	items/weapons/pointy_stick.pas	/^procedure throw;$/;"	p
+throw	items/weapons/rusty_sword.pas	/^procedure throw(itemID: smallint);$/;"	p
 throw	items/weapons/short_bow.pas	/^procedure throw;$/;"	p
 throw	items/weapons/staff_bewilder.pas	/^procedure throw;$/;"	p
 throw	items/weapons/staff_minor_scorch.pas	/^procedure throw;$/;"	p
@@ -703,6 +708,7 @@ thrownDamaged	items/weapons/gnomish_axe.pas	/^procedure thrownDamaged(itmID: sma
 thrownDamaged	items/weapons/gnomish_dagger.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownDamaged	items/weapons/gnomish_mace.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownDamaged	items/weapons/necro_axe.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
+thrownDamaged	items/weapons/rusty_sword.pas	/^procedure thrownDamaged(itmID: smallint; inventory: boolean);$/;"	p
 thrownObjectAnim	animation.pas	/^procedure thrownObjectAnim(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
 titleInput	keyboardinput.pas	/^procedure titleInput(Keypress: TKeyEvent);$/;"	p
 topUpStats	debuggingfunctions.pas	/^procedure topUpStats;$/;"	p
@@ -727,6 +733,7 @@ useItem	items/armour/leather_armour1.pas	/^procedure useItem(equipped: boolean);
 useItem	items/armour/lesser_bone_armour.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/arrow.pas	/^procedure useItem;$/;"	p
 useItem	items/gold_pieces.pas	/^procedure useItem;$/;"	p
+useItem	items/large_ale.pas	/^procedure useItem;$/;"	p
 useItem	items/pixie_jar.pas	/^procedure useItem;$/;"	p
 useItem	items/pixie_jar_dim.pas	/^procedure useItem;$/;"	p
 useItem	items/rock.pas	/^procedure useItem;$/;"	p
@@ -739,8 +746,10 @@ useItem	items/weapons/flint_dagger.pas	/^procedure useItem(equipped: boolean; id
 useItem	items/weapons/gnomish_axe.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
 useItem	items/weapons/gnomish_dagger.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
 useItem	items/weapons/gnomish_mace.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
+useItem	items/weapons/leather_whip.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/necro_axe.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
 useItem	items/weapons/pointy_stick.pas	/^procedure useItem(equipped: boolean);$/;"	p
+useItem	items/weapons/rusty_sword.pas	/^procedure useItem(equipped: boolean; ident: smallint);$/;"	p
 useItem	items/weapons/short_bow.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/staff_bewilder.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/weapons/staff_minor_scorch.pas	/^procedure useItem(equipped: boolean);$/;"	p
