@@ -5,7 +5,7 @@ unit merchant_inventory;
 interface
 
 uses
-  SysUtils, items, globalutils;
+  SysUtils, items, globalutils, player_stats;
 
 type
   (* Items in inventory *)
@@ -122,6 +122,27 @@ begin
     adds := 0;
     useID := 6;
   end;
+  if (player_stats.playerRace <> 'Dwarf') then
+  begin  
+  with villageInv[3] do
+		begin
+		  id := 3;
+		  Name := 'Elven wine';
+		  description := 'restores Magick';
+		  article := 'an';
+		  itemType := itmDrink;
+		  itemMaterial := matFlammable;
+		  glyph := '!';
+		  glyphColour := 'green';
+		  numUses := 5;
+		  value := 4;
+		  throwable := False;
+		  throwDamage := 0;
+		  dice := 0;
+		  adds := 0;
+		  useID := 31;
+		end;
+  end;  
 end;
 
 end.

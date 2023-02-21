@@ -9,7 +9,7 @@ interface
 uses
   universe, globalUtils,
   { List of drinks }
-  ale_tankard, wine_flask, large_ale,
+  ale_tankard, wine_flask, large_ale, elven_wine,
   { List of weapons }
   crude_dagger, basic_club, rock, short_bow, pointy_stick, gnomish_dagger, gnomish_mace,
   gnomish_axe, bone_dagger, necro_axe, flint_dagger, terbutje, leather_whip, rusty_sword,
@@ -171,6 +171,7 @@ begin
     'bullwhip': leather_whip.createWhip(c, r);
     'largeAle': large_ale.createLargeAle(c, r);
     'rustySword': rusty_sword.createSword(c, r);
+    'ElvenWine': elven_wine.createWineFlask(c, r);
   end;
 end;
 
@@ -207,6 +208,7 @@ begin
     28: leather_whip.useItem(equipped);
     29: large_ale.useItem;
     30: rusty_sword.useItem(equipped, id);
+    31: elven_wine.useItem;
   end;
 end;
 

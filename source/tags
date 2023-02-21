@@ -205,6 +205,7 @@ createVillager	entities/npc/villager.pas	/^procedure createVillager(uniqueid, np
 createWeb	entities/bugs/web.pas	/^procedure createWeb(uniqueid, npcx, npcy: smallint);$/;"	p
 createWebTrap	items/traps/web_trap.pas	/^procedure createWebTrap(itmx, itmy: smallint);$/;"	p
 createWhip	items/weapons/leather_whip.pas	/^procedure createWhip(itmx, itmy: smallint);$/;"	p
+createWineFlask	items/elven_wine.pas	/^procedure createWineFlask(itmx, itmy: smallint);$/;"	p
 createWineFlask	items/wine_flask.pas	/^procedure createWineFlask(itmx, itmy: smallint);$/;"	p
 createZombie	entities/undead/corpse_zombie.pas	/^procedure createZombie(uniqueid, npcx, npcy: smallint);$/;"	p
 createZombie	entities/undead/zombie_weak.pas	/^procedure createZombie(uniqueid, npcx, npcy: smallint);$/;"	p
@@ -732,6 +733,7 @@ useItem	items/armour/cloth_armour1.pas	/^procedure useItem(equipped: boolean);$/
 useItem	items/armour/leather_armour1.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/armour/lesser_bone_armour.pas	/^procedure useItem(equipped: boolean);$/;"	p
 useItem	items/arrow.pas	/^procedure useItem;$/;"	p
+useItem	items/elven_wine.pas	/^procedure useItem;$/;"	p
 useItem	items/gold_pieces.pas	/^procedure useItem;$/;"	p
 useItem	items/large_ale.pas	/^procedure useItem;$/;"	p
 useItem	items/pixie_jar.pas	/^procedure useItem;$/;"	p
