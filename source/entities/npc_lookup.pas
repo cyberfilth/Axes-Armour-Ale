@@ -14,7 +14,7 @@ uses
   hyena_fungus, small_hornet, small_corpse_spider, gnome_warrior, gnome_assassin,
   crypt_wolf, blue_fungus, embalming_spider, gnome_cultist, bogle_drunk, ghoul_lvl1,
   skeleton_lvl1, zombie_weak, goblin_necromancer, corpse_zombie, rabid_dog, cave_bear,
-  scorpion, small_scorpion, trog_simple, trog_giant, villager, village_idiot, merchant;
+  scorpion, small_scorpion, trog_simple, trog_giant, villager, village_idiot, merchant, pig;
 
 (* randomly choose a creature and call the generate code directly *)
 procedure NPCpicker(i: byte; unique: boolean; dungeon: dungeonTerrain);
@@ -153,6 +153,8 @@ begin
           c := village.centreList[i - 1].x;
           if (i = 2) then
           	monster := 'villageIdiot'
+          else if (i = 1) then
+            monster := 'pig'
           else	
           	monster := 'villager';
         end;
@@ -280,6 +282,7 @@ begin
       'villager': villager.createVillager(i, c, r);
       'merchant': merchant.createMerchant(i, c, r);
       'villageIdiot': village_idiot.createVillager(i, c, r);
+      'pig': pig.createPig(i, c, r);
     end;
 end;
 

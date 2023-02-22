@@ -590,6 +590,8 @@ begin
             dialogType := dlgMerchantIntro
           else if (entities.getCreatureIntName(x, y) = 'villageIdiot') then
             ai_villager.ramblings 
+          else if (entities.getCreatureIntName(x, y) = 'pig') then
+            ai_villager.oink 
           else
             ai_villager.chat;
         end;

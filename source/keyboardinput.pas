@@ -766,7 +766,10 @@ begin
   case GetKeyEventChar(Keypress) of
     'x', 'X': { Exit Look input }
     begin
-      main.gameState := stGame;
+      if (universe.dungeonType = tVillage) then
+        gameState := stVillage
+      else
+        main.gameState := stGame;
       scrTargeting.restorePlayerGlyph;
       ui.clearPopup;
     end;

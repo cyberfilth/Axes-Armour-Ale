@@ -1,6 +1,6 @@
-(* Simple wandering NPC *)
+(* Wandering village pig *)
 
-unit villager;
+unit pig;
 
 {$mode objfpc}{$H+}
 
@@ -9,13 +9,13 @@ interface
 uses
   SysUtils, ai_villager;
 
-(* Create a villager *)
-procedure createVillager(uniqueid, npcx, npcy: smallint);
-(* The NPC takes their turn in the game loop *)
+(* Create a pig *)
+procedure createPig(uniqueid, npcx, npcy: smallint);
+(* Pig takes their turn in the game loop *)
 procedure takeTurn(id: smallint);
 (* Decision tree for Neutral state *)
 procedure decisionNeutral(id: smallint);
-(* Check if player is next to NPC *)
+(* Check if player is next to pig *)
 function isNextToPlayer(spx, spy: smallint): boolean;
 
 implementation
@@ -23,20 +23,20 @@ implementation
 uses
   entities, globalutils, map;
 
-procedure createVillager(uniqueid, npcx, npcy: smallint);
+procedure createPig(uniqueid, npcx, npcy: smallint);
 begin
-  (* Add a villager to the list of creatures *)
+  (* Add createPig to the list of creatures *)
   entities.listLength := length(entities.entityList);
   SetLength(entities.entityList, entities.listLength + 1);
   with entities.entityList[entities.listLength] do
   begin
     npcID := uniqueid;
-    race := 'villager';
-    intName := 'villager';
+    race := 'pig';
+    intName := 'pig';
     article := True;
-    description := 'a villager';
-    glyph := '@';
-    glyphColour := 'lightGrey';
+    description := 'a large pig';
+    glyph := 'p';
+    glyphColour := 'pink';
     maxHP := 4;
     currentHP := maxHP;
     attack := 1;
@@ -84,7 +84,7 @@ procedure decisionNeutral(id: smallint);
 var
   stopAndSmellFlowers: byte;
 begin
-  stopAndSmellFlowers := globalutils.randomRange(1, 10);
+  stopAndSmellFlowers := globalutils.randomRange(1, 3);
   if (stopAndSmellFlowers = 1) then
     { Either wander randomly }
     ai_villager.wander(id, entityList[id].posX, entityList[id].posY)
