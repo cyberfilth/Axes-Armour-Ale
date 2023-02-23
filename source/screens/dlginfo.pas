@@ -90,7 +90,15 @@ begin
     TextOut(x, y + 1, 'LgreyBGblack', chr(205));
   TextOut(47, y + 1, 'LgreyBGblack', chr(188)); // bottom right corner
   (* Write the title *)
+  {$IFDEF Linux}
   TextOut(10, 5, 'LgreyBGblack', chr(181) + ' Level up ' + chr(198));
+  {$ENDIF}
+  {$IFDEF Darwin}
+  TextOut(10, 5, 'LgreyBGblack', chr(181) + ' Level up ' + chr(198));
+  {$ENDIF}
+  {$IFDEF Windows}
+  TextOut(10, 5, 'LgreyBGblack', ' Level up ');
+  {$ENDIF}
 
   (* Write the message *)
   TextOut(10, 7, 'LgreyBGblack', 'Your experiences have sharpened your');
@@ -360,8 +368,18 @@ begin
     TextOut(x, 5, BG, chr(205));
   TextOut(54, y, BG, chr(187));
   (* End borders around title *)
+  {$IFDEF Linux}
   TextOut(5, y, BG, chr(181));
   TextOut(25, y, BG, chr(198));
+  {$ENDIF}
+  {$IFDEF Darwin}
+  TextOut(5, y, BG, chr(181));
+  TextOut(25, y, BG, chr(198));
+  {$ENDIF}
+  {$IFDEF Windows}
+  TextOut(5, y, BG, ' ');
+  TextOut(25, y, BG, ' ');
+  {$ENDIF}
   (* Vertical sides *)
   for y := 6 to 8 do
     TextOut(3, y, BG, chr(186) + '                                                  ' + chr(186));
