@@ -345,12 +345,12 @@ begin
   1: greeting := 'Welcome, would you like to see my wares?';
   2: greeting := 'Hail!, would you like to buy / sell something?';
   3: greeting := 'Greetings, are you looking for equipment?';
-  4: greeting := 'Greetings, how can I be of service?';
-  5: greeting := 'Step right up, what can I offer you?';
-  6: greeting := 'Hail, what can I do for you today?';
-  7: greeting := 'Ho there! what treasures do you seek?';
+  4: greeting := 'Greetings, can I be of service?';
+  5: greeting := 'Step right up, can I offer you something?';
+  6: greeting := 'Hail, can I do something for you today?';
+  7: greeting := 'Ho there! do you seek treasures?';
   else
-		greeting := 'Welcome, what can I interest you in today?';
+		greeting := 'Welcome, can I interest you in items today?';
   end;
     
   LockScreenUpdate;
