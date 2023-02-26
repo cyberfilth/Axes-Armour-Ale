@@ -7,7 +7,7 @@ unit gnomish_mace;
 interface
 
 uses
-  SysUtils;
+  SysUtils, globalutils;
 
 (* Create a mace *)
 procedure createGnomishMace(itmx, itmy: smallint);

@@ -14,7 +14,7 @@ procedure useItem;
 implementation
 
 uses
-  items, entities, ui, player_stats;
+  items, entities, ui, player_stats, globalutils;
 
 procedure createWineFlask(itmx, itmy: smallint);
 begin

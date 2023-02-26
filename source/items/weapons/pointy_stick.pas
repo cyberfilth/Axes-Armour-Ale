@@ -16,7 +16,7 @@ procedure throw;
 implementation
 
 uses
-  items, entities, ui;
+  items, entities, ui, globalutils;
 
 procedure createPointyStick(itmx, itmy: smallint);
 begin

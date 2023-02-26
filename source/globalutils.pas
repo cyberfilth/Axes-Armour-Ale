@@ -18,6 +18,9 @@ type
 type
   dungeonTerrain = (tCave, tStoneCavern, tDungeon, tCrypt, tVillage);
 
+type
+  tMaterial = (matSteel, matIron, matWood, matLeather, matWool, matPaper, matFlammable, matStone, matGlass, matEmpty, matBone, matGold);
+
 type (* Pathfinding - Path to player *)
   path = array[1..30] of TPoint;
 

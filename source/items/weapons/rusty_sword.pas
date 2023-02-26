@@ -7,7 +7,7 @@ unit rusty_sword;
 interface
 
 uses
-  SysUtils;
+  SysUtils, globalutils;
 
 (* Create a sword *)
 procedure createSword(itmx, itmy: smallint);

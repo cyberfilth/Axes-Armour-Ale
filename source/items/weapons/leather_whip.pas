@@ -16,7 +16,7 @@ procedure throw;
 implementation
 
 uses
-  items, entities, ui;
+  items, entities, ui, globalutils;
 
 procedure createWhip(itmx, itmy: smallint);
 begin

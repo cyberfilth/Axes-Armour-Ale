@@ -7,15 +7,10 @@ unit items;
 interface
 
 uses
-  ui, web_trap, poison_spore;
+  ui, web_trap, poison_spore, globalutils;
 
 type
-  tItem = (itmDrink, itmWeapon, itmArmour, itmQuest, itmProjectile, itmEmptySlot,
-          itmProjectileWeapon, itmAmmo, itmLightSource, itmTrap, itmTreasure);
-
-type
-  tMaterial = (matSteel, matIron, matWood, matLeather, matWool, matPaper, matFlammable,
-              matStone, matGlass, matEmpty, matBone, matGold);
+  tItem = (itmDrink, itmWeapon, itmArmour, itmQuest, itmProjectile, itmEmptySlot, itmProjectileWeapon, itmAmmo, itmLightSource, itmTrap, itmTreasure);
 
 (* Store information about items *)
 type

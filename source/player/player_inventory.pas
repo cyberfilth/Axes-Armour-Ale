@@ -7,7 +7,7 @@ unit player_inventory;
 interface
 
 uses
-  SysUtils, StrUtils, video, items, item_lookup, player_stats, staff_minor_scorch, pixie_jar, gold_pieces, staff_bewilder, vampiric_staff, merchant_inventory;
+  SysUtils, StrUtils, video, items, item_lookup, player_stats, staff_minor_scorch, pixie_jar, gold_pieces, staff_bewilder, vampiric_staff, merchant_inventory, globalutils;
 
 type
   (* Items in inventory *)

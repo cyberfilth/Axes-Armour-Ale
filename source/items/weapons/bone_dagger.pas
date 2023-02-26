@@ -7,7 +7,7 @@ unit bone_dagger;
 interface
 
 uses
-  SysUtils;
+  SysUtils, globalutils;
 
 (* Create a dagger *)
 procedure createBoneDagger(itmx, itmy: smallint);

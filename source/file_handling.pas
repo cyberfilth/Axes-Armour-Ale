@@ -7,8 +7,7 @@ unit file_handling;
 interface
 
 uses
-  SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe, island,
-  cave, smallGrid, crypt, stone_cavern, village, combat_resolver, ui;
+  SysUtils, DOM, XMLWrite, XMLRead, TypInfo, globalutils, universe, island,cave, smallGrid, crypt, stone_cavern, village, combat_resolver, ui;
 
 (* Save the overworld map to disk *)
 procedure saveOverworldMap;
@@ -26,6 +25,13 @@ procedure deleteGameData;
 procedure loadGame;
 (* Save game state to file *)
 procedure saveGame;
+(* Convert enums to values for save files *)
+function terrainLookup(inputTerrain: overworldTerrain):char;
+function terrainReverseLookup(inputTerrain: char):overworldTerrain;
+function colourLookup(inputColour: shortstring):shortstring;
+function colourReverseLookup(inputColour: shortstring):shortstring;
+function materialLookup(inputMaterial: tMaterial):shortstring;
+function materialReverseLookup(inputMaterial: shortstring):tMaterial;
 
 implementation
 
@@ -37,7 +43,7 @@ var
   r, c, id_int: smallint;
   Doc: TXMLDocument;
   RootNode, dataNode: TDOMNode;
-  dfileName, Value: shortstring;
+  dfileName: shortstring;
   Gplaceholder: char;
 
   procedure AddElement(Node: TDOMNode; Name, Value: shortstring);
@@ -84,11 +90,10 @@ begin
         DataNode := AddChild(RootNode, 'et');
         TDOMElement(dataNode).SetAttribute('id', UTF8Decode(IntToStr(id_int)));
 
-        AddElement(datanode, 'Blk', BoolToStr(island.overworldMap[r][c].Blocks));
-        AddElement(datanode, 'Occ', BoolToStr(island.overworldMap[r][c].Occupied));
-        AddElement(datanode, 'Dsc', BoolToStr(island.overworldMap[r][c].Discovered));
-        WriteStr(Value, island.overworldMap[r][c].TerrainType);
-        AddElement(datanode, 'TT', Value);
+        AddElement(datanode, 'B', BoolToStr(island.overworldMap[r][c].Blocks));
+        AddElement(datanode, 'O', BoolToStr(island.overworldMap[r][c].Occupied));
+        AddElement(datanode, 'D', BoolToStr(island.overworldMap[r][c].Discovered));
+        AddElement(datanode, 'T', terrainLookup(island.overworldMap[r][c].TerrainType));
         { Translate the Glyph to ASCII }
         if (island.overworldMap[r][c].Glyph = chr(6)) and
           (island.overworldMap[r][c].GlyphColour = 'green') then
@@ -141,7 +146,6 @@ begin
         else
           Gplaceholder := 'X';
         AddElement(datanode, 'G', Gplaceholder);
-        AddElement(datanode, 'GC', island.overworldMap[r][c].GlyphColour);
       end;
     end;
     (* Save XML *)
@@ -149,7 +153,7 @@ begin
   finally
     { free memory }
     Doc.Free;
-  end;
+  end;  
 end;
 
 procedure loadOverworldMap;
@@ -178,8 +182,7 @@ begin
         Discovered := Occupied.NextSibling;
         island.overworldMap[r][c].Discovered := StrToBool(UTF8Encode(Discovered.TextContent));
         TerrainType := Discovered.NextSibling;
-        island.overworldMap[r][c].TerrainType := overworldTerrain(GetEnumValue(Typeinfo(overworldTerrain),
-          UTF8Encode(TerrainType.TextContent)));
+        island.overworldMap[r][c].TerrainType := terrainReverseLookup(TerrainType.TextContent[1]);
         Glyph := TerrainType.NextSibling;
         if (UTF8Encode(Glyph.TextContent[1]) = 'A') then
         begin
@@ -1251,6 +1254,136 @@ begin
   finally
     { Free memory }
     Doc.Free;
+  end;
+end;
+
+function terrainLookup(inputTerrain: overworldTerrain):char;
+begin
+  Result := '0';
+  case inputTerrain of
+    tSea: Result := '0';
+    tForest: Result:= '1';
+    tPlains: Result:= '2'
+  else { tLocation }
+    Result:= '3';
+  end;
+end;
+
+function terrainReverseLookup(inputTerrain: char):overworldTerrain;
+begin
+  Result := tPlains;
+  case inputTerrain of
+    '0': Result := tSea;
+    '1': Result := tForest;
+    '2': Result := tPlains
+  else
+    Result := tLocation;
+  end;
+end;
+
+function colourLookup(inputColour: shortstring):shortstring;
+begin
+  Result := '0';
+  case inputColour of
+    'lightBlue': Result := '0';
+    'black': Result := '1';
+    'blue': Result := '2';
+    'green': Result := '3';
+    'lightGreen': Result := '4';
+    'cyan': Result := '5';
+    'red': Result := '6';
+    'pink': Result := '7';
+    'magenta': Result := '8';
+    'lightMagenta': Result := '9';
+    'brown': Result := '10';
+    'grey': Result := '11';
+    'darkGrey': Result := '12';
+    'brownBlock': Result := '13';
+    'lightCyan': Result := '14';
+    'yellow': Result := '15';
+    'lightGrey': Result := '16';
+    'white': Result := '17';
+    'DgreyBGblack': Result := '18';
+    'LgreyBGblack': Result := '19';
+    'blackBGbrown': Result := '20';
+    'greenBlink': Result := '21';
+    'pinkBlink': Result := '22';
+    'cyanBGblackTXT': Result := '23'
+  else
+    Result := '5';
+  end;
+end;
+
+function colourReverseLookup(inputColour: shortstring):shortstring;
+begin
+  Result := 'cyan';
+  case inputColour of
+    '0': Result := 'lightBlue';
+    '1': Result := 'black';
+    '2': Result := 'blue';
+    '3': Result := 'green';
+    '4': Result := 'lightGreen';
+    '5': Result := 'cyan';
+    '6': Result := 'red';
+    '7': Result := 'pink';
+    '8': Result := 'magenta';
+    '9': Result := 'lightMagenta';
+    '10': Result := 'brown';
+    '11': Result := 'grey';
+    '12': Result := 'darkGrey';
+    '13': Result := 'brownBlock';
+    '14': Result := 'lightCyan';
+    '15': Result := 'yellow';
+    '16': Result := 'lightGrey';
+    '17': Result := 'white';
+    '18': Result := 'DgreyBGblack';
+    '19': Result := 'LgreyBGblack';
+    '20': Result := 'blackBGbrown';
+    '21': Result := 'greenBlink';
+    '22': Result := 'pinkBlink';
+    '23': Result := 'cyanBGblackTXT'
+  else
+    Result := 'cyan';
+  end;
+end;
+
+function materialLookup(inputMaterial: tMaterial):shortstring;
+begin
+  Result := '0';
+  case inputMaterial of
+    matSteel: Result := '0';
+    matIron: Result := '1';
+    matWood: Result := '2';
+    matLeather: Result := '3';
+    matWool: Result := '4';
+    matPaper: Result := '5';
+    matFlammable: Result := '6';
+    matStone: Result := '7';
+    matGlass: Result := '8';
+    matBone: Result := '9';
+    matGold: Result := '10'
+  else { matEmpty }
+    Result := '11';
+  end;
+end;
+
+function materialReverseLookup(inputMaterial: shortstring):tMaterial;
+begin
+  Result := matEmpty;
+  case inputMaterial of
+    '0': Result := matSteel;
+    '1': Result := matIron;
+    '2': Result:= matWood;
+    '3': Result := matLeather;
+    '4': Result := matWool;
+    '5': Result := matPaper;
+    '6': Result := matFlammable;
+    '7': Result := matStone;
+    '8': Result := matGlass;
+    '9': Result := matBone;
+    '10': Result := matGold
+  else { matEmpty }
+    Result := matEmpty;
   end;
 end;
 

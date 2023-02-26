@@ -34,7 +34,7 @@ type
     (* Article (the) *)
     article: boolean;
     (* Description of creature *)
-    description: string;
+    description: shortstring;
     (* health and position on game map *)
     currentHP, maxHP, attack, defence, posX, posY, targetX, targetY, xpReward, visionRange: smallint;
     (* Weapon stats *)

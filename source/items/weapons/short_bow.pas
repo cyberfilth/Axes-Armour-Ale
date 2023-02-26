@@ -16,7 +16,7 @@ procedure throw;
 implementation
 
 uses
-  items, entities, ui, player_stats;
+  items, entities, ui, player_stats, globalutils;
 
 procedure createShortBow(itmx, itmy: smallint);
 begin

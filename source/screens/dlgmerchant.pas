@@ -7,7 +7,7 @@ unit dlgMerchant;
 interface
 
 uses
-  SysUtils, video, merchant_inventory, player_inventory, player_stats, items;
+  SysUtils, video, merchant_inventory, player_inventory, player_stats, items, globalutils;
 
 var
   (* cost of selected item *)

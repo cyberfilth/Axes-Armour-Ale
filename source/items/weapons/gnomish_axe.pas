@@ -7,7 +7,7 @@ unit gnomish_axe;
 interface
 
 uses
-  SysUtils;
+  SysUtils, globalutils;
 
 (* Create an axe *)
 procedure createGnomishAxe(itmx, itmy: smallint);

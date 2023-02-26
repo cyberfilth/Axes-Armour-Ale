@@ -14,7 +14,7 @@ procedure useItem;
 implementation
 
 uses
-  items, ui;
+  items, ui, globalutils;
 
 procedure createArrow(itmx, itmy: smallint);
 begin

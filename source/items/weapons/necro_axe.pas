@@ -7,7 +7,7 @@ unit necro_axe;
 interface
 
 uses
-  SysUtils;
+  SysUtils, globalutils;
 
 (* Create an axe *)
 procedure createNecroAxe(itmx, itmy: smallint);

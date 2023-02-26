@@ -16,7 +16,7 @@ procedure throw;
 implementation
 
 uses
-  items, entities, ui;
+  items, entities, ui, globalutils;
 
 procedure createClub(itmx, itmy: smallint);
 begin
