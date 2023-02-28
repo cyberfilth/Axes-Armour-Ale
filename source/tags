@@ -31,6 +31,7 @@ areaBurnEffect	animation.pas	/^procedure areaBurnEffect(getEm: array of smallint
 arrowAnimation	animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
 arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	map.pas	/^procedure ascendStairs;$/;"	p
+attitudeLookup	file_handling.pas	/^function attitudeLookup(inputState: Tattitudes):char;$/;"	f
 barterBuySellInput	keyboardinput.pas	/^procedure barterBuySellInput(Keypress: TKeyEvent);$/;"	p
 barterConfirmBuyInput	keyboardinput.pas	/^procedure barterConfirmBuyInput(Keypress: TKeyEvent);$/;"	p
 barterConfirmSellInput	keyboardinput.pas	/^procedure barterConfirmSellInput(Keypress: TKeyEvent);$/;"	p
@@ -414,6 +415,8 @@ exitDialogVillage	screens/dlgmerchant.pas	/^procedure exitDialogVillage(msg: byt
 exitMessage	ui.pas	/^procedure exitMessage;$/;"	p
 exitPrompt	ui.pas	/^procedure exitPrompt;$/;"	p
 exitToTitleMenu	main.pas	/^procedure exitToTitleMenu;$/;"	p
+factionLookup	file_handling.pas	/^function factionLookup(inputFaction: Tfactions):char;$/;"	f
+factionReverseLookup	file_handling.pas	/^function factionReverseLookup(factionType: char):Tfactions;$/;"	f
 fade	dungeons/noise.pas	/^  function fade(t: float64): float64; inline;$/;"	f
 fieldOfView	vision/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
 fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
@@ -542,6 +545,8 @@ isOccupied	map.pas	/^function isOccupied(checkX, checkY: smallint): boolean;$/;"
 isVowel	plot_gen.pas	/^function isVowel(character: string): boolean;$/;"	f
 isWall	map.pas	/^function isWall(x, y: smallint): boolean;$/;"	f
 islandFOV	vision/fov.pas	/^procedure islandFOV(centreX, centreY: smallint);$/;"	p
+itemTypeLookup	file_handling.pas	/^function itemTypeLookup(inputType: tItem):shortstring; $/;"	f
+itemTypeReverseLookup	file_handling.pas	/^function itemTypeReverseLookup(inputType: shortstring):tItem;$/;"	f
 killEntity	entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 leaveVillage	screens/dlginfo.pas	/^procedure leaveVillage;$/;"	p
 leftHasFloor	dungeons/cave.pas	/^function leftHasFloor(): boolean;$/;"	f

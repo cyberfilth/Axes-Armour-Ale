@@ -32,6 +32,12 @@ function colourLookup(inputColour: shortstring):shortstring;
 function colourReverseLookup(inputColour: shortstring):shortstring;
 function materialLookup(inputMaterial: tMaterial):shortstring;
 function materialReverseLookup(inputMaterial: shortstring):tMaterial;
+function itemTypeLookup(inputType: tItem):shortstring; 
+function itemTypeReverseLookup(inputType: shortstring):tItem;
+function factionLookup(inputFaction: Tfactions):char;
+function factionReverseLookup(factionType: char):Tfactions;
+function attitudeLookup(inputState: Tattitudes):char;
+function attitudeReverseLookup(inputState: char):Tfactions;
 
 implementation
 
@@ -344,73 +350,73 @@ begin
         if (dType = tCave) then
         begin
           if (cave.terrainArray[r][c] = '*') then
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)))
+            AddElement(datanode, 'B', UTF8Decode(BoolToStr(True)))
           else
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)));
+            AddElement(datanode, 'B', UTF8Decode(BoolToStr(False)));
         end
         { if dungeon type is a dungeon }
         else if (dType = tDungeon) then
         begin
           if (smallGrid.processed_dungeon[r][c] = '.') or (smallGrid.processed_dungeon[r][c] = 'X') or
             (smallGrid.processed_dungeon[r][c] = '>') or (smallGrid.processed_dungeon[r][c] = '<') then
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
+            AddElement(datanode, 'B', UTF8Decode(BoolToStr(False)))
           else
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
+            AddElement(datanode, 'B', UTF8Decode(BoolToStr(True)));
         end
         { if location is a village }
         else if (dType = tVillage) then
         begin
           if (village.dungeonArray[r][c] = '.') or (village.dungeonArray[r][c] = '<') or
             (village.dungeonArray[r][c] = '"') then
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
+            AddElement(datanode, 'B', UTF8Decode(BoolToStr(False)))
           else
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
+            AddElement(datanode, 'B', UTF8Decode(BoolToStr(True)));
         end
         { if dungeon type is a crypt }
         else if (dType = tCrypt) then
         begin
           if (crypt.dungeonArray[r][c] = '.') or (crypt.dungeonArray[r][c] = 'X') or
             (crypt.dungeonArray[r][c] = '>') or (crypt.dungeonArray[r][c] = '<') then
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
+            AddElement(datanode, 'B', UTF8Decode(BoolToStr(False)))
           else
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
+            AddElement(datanode, 'B', UTF8Decode(BoolToStr(True)));
         end
         { if dungeon type is a stone cavern }
         else if (dType = tStoneCavern) then
         begin
           if (stone_cavern.terrainArray[r][c] = '.') or (stone_cavern.terrainArray[r][c] = 'X') or
             (stone_cavern.terrainArray[r][c] = '>') or (stone_cavern.terrainArray[r][c] = '<') then
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(False)))
+            AddElement(datanode, 'B', UTF8Decode(BoolToStr(False)))
           else
-            AddElement(datanode, 'Blocks', UTF8Decode(BoolToStr(True)));
+            AddElement(datanode, 'B', UTF8Decode(BoolToStr(True)));
         end;
-        AddElement(datanode, 'Visible', UTF8Decode(BoolToStr(False)));
-        AddElement(datanode, 'Occupied', UTF8Decode(BoolToStr(False)));
-        AddElement(datanode, 'Discovered', UTF8Decode(BoolToStr(False)));
+        AddElement(datanode, 'V', UTF8Decode(BoolToStr(False)));
+        AddElement(datanode, 'O', UTF8Decode(BoolToStr(False)));
+        AddElement(datanode, 'D', UTF8Decode(BoolToStr(False)));
         { if dungeon type is a cave }
         if (dType = tCave) then
         begin
-          AddElement(datanode, 'Glyph', UTF8Decode(cave.terrainArray[r][c]));
+          AddElement(datanode, 'G', UTF8Decode(cave.terrainArray[r][c]));
         end
         { if dungeon type is a dungeon }
         else if (dType = tDungeon) then
         begin
-          AddElement(datanode, 'Glyph', UTF8Decode(smallGrid.processed_dungeon[r][c]));
+          AddElement(datanode, 'G', UTF8Decode(smallGrid.processed_dungeon[r][c]));
         end
         { if location is a village }
         else if (dType = tVillage) then
         begin
-          AddElement(datanode, 'Glyph', UTF8Decode(village.dungeonArray[r][c]));
+          AddElement(datanode, 'G', UTF8Decode(village.dungeonArray[r][c]));
         end
         { if dungeon type is a crypt }
         else if (dType = tCrypt) then
         begin
-          AddElement(datanode, 'Glyph', UTF8Decode(crypt.dungeonArray[r][c]));
+          AddElement(datanode, 'G', UTF8Decode(crypt.dungeonArray[r][c]));
         end
         { if dungeon type is a stone crypt }
         else if (dType = tStoneCavern) then
         begin
-          AddElement(datanode, 'Glyph', UTF8Decode(stone_cavern.terrainArray[r][c]));
+          AddElement(datanode, 'G', UTF8Decode(stone_cavern.terrainArray[r][c]));
         end;
       end;
     end;
@@ -486,11 +492,11 @@ begin
         Inc(id_int);
         DataNode := AddChild(RootNode, 'map_tiles');
         TDOMElement(dataNode).SetAttribute('id', UTF8Decode(IntToStr(maparea[r][c].id)));
-        AddElement(datanode, 'Blocks', BoolToStr(map.maparea[r][c].Blocks));
-        AddElement(datanode, 'Visible', BoolToStr(map.maparea[r][c].Visible));
-        AddElement(datanode, 'Occupied', BoolToStr(map.maparea[r][c].Occupied));
-        AddElement(datanode, 'Discovered', BoolToStr(map.maparea[r][c].Discovered));
-        AddElement(datanode, 'Glyph', map.maparea[r][c].Glyph);
+        AddElement(datanode, 'B', BoolToStr(map.maparea[r][c].Blocks));
+        AddElement(datanode, 'V', BoolToStr(map.maparea[r][c].Visible));
+        AddElement(datanode, 'O', BoolToStr(map.maparea[r][c].Occupied));
+        AddElement(datanode, 'D', BoolToStr(map.maparea[r][c].Discovered));
+        AddElement(datanode, 'G', map.maparea[r][c].Glyph);
       end;
     end;
 
@@ -502,45 +508,43 @@ begin
       begin
         begin
           DataNode := AddChild(RootNode, 'Items');
-          TDOMElement(dataNode).SetAttribute('itemID',
+          TDOMElement(dataNode).SetAttribute('ID',
             UTF8Decode(IntToStr(itemList[i].itemID)));
-          AddElement(DataNode, 'Name', itemList[i].itemName);
-          AddElement(DataNode, 'description', itemList[i].itemDescription);
-          AddElement(DataNode, 'article', itemList[i].itemArticle);
-          WriteStr(Value, itemList[i].itemType);
-          AddElement(DataNode, 'itemType', Value);
-          WriteStr(Value, itemList[i].itemMaterial);
-          AddElement(DataNode, 'itemMaterial', Value);
-          AddElement(DataNode, 'useID', IntToStr(itemList[i].useID));
+          AddElement(DataNode, 'n', itemList[i].itemName);
+          AddElement(DataNode, 'd', itemList[i].itemDescription);
+          AddElement(DataNode, 'a', itemList[i].itemArticle);
+          AddElement(DataNode, 'i', itemTypeLookup(itemList[i].itemType));
+          AddElement(DataNode, 'm', materialLookup(itemList[i].itemMaterial));
+          AddElement(DataNode, 'u', IntToStr(itemList[i].useID));
 
           { Convert extended ASCII to plain text }
           if (itemList[i].glyph = chr(24)) then
-            AddElement(DataNode, 'glyph', 'T')
+            AddElement(DataNode, 'g', 'T')
           else if (itemList[i].glyph = chr(186)) then
-            AddElement(DataNode, 'glyph', '=')
+            AddElement(DataNode, 'g', '=')
           else if (itemList[i].glyph = chr(7)) then
-            AddElement(DataNode, 'glyph', '*')
+            AddElement(DataNode, 'g', '*')
           else if (itemList[i].glyph = chr(173)) then
-            AddElement(DataNode, 'glyph', 'i')
+            AddElement(DataNode, 'g', 'i')
           else if (itemList[i].glyph = chr(232)) then
-            AddElement(DataNode, 'glyph', '0')
+            AddElement(DataNode, 'g', '0')
           else if (itemList[i].glyph = chr(194)) then
-            AddElement(DataNode, 'glyph', 'A')
+            AddElement(DataNode, 'g', 'A')
           else
-            AddElement(DataNode, 'glyph', itemList[i].glyph);
+            AddElement(DataNode, 'g', itemList[i].glyph);
 
-          AddElement(DataNode, 'glyphColour', itemList[i].glyphColour);
-          AddElement(DataNode, 'inView', BoolToStr(itemList[i].inView));
-          AddElement(DataNode, 'posX', IntToStr(itemList[i].posX));
-          AddElement(DataNode, 'posY', IntToStr(itemList[i].posY));
-          AddElement(DataNode, 'numUses', IntToStr(itemList[i].NumberOfUses));
-          AddElement(DataNode, 'val', IntToStr(itemList[i].value));
-          AddElement(DataNode, 'onMap', BoolToStr(itemList[i].onMap));
-          AddElement(DataNode, 'throwable', BoolToStr(itemList[i].throwable));
-          AddElement(DataNode, 'throwDamage', IntToStr(itemList[i].throwDamage));
-          AddElement(DataNode, 'dice', IntToStr(itemList[i].dice));
-          AddElement(DataNode, 'adds', IntToStr(itemList[i].adds));
-          AddElement(DataNode, 'discovered', BoolToStr(itemList[i].discovered));
+          AddElement(DataNode, 'c', colourLookup(itemList[i].glyphColour));
+          AddElement(DataNode, 'v', BoolToStr(itemList[i].inView));
+          AddElement(DataNode, 'x', IntToStr(itemList[i].posX));
+          AddElement(DataNode, 'y', IntToStr(itemList[i].posY));
+          AddElement(DataNode, 's', IntToStr(itemList[i].NumberOfUses));
+          AddElement(DataNode, 'p', IntToStr(itemList[i].value));
+          AddElement(DataNode, 'm', BoolToStr(itemList[i].onMap));
+          AddElement(DataNode, 't', BoolToStr(itemList[i].throwable));
+          AddElement(DataNode, 'h', IntToStr(itemList[i].throwDamage));
+          AddElement(DataNode, 'e', IntToStr(itemList[i].dice));
+          AddElement(DataNode, '+', IntToStr(itemList[i].adds));
+          AddElement(DataNode, 'o', BoolToStr(itemList[i].discovered));
         end;
       end;
 
@@ -551,63 +555,59 @@ begin
       begin
         begin
           DataNode := AddChild(RootNode, 'NPCdata');
-          AddElement(DataNode, 'npcID', IntToStr(entities.entityList[i].npcID));
-          AddElement(DataNode, 'race', entities.entityList[i].race);
-          AddElement(DataNode, 'intName', entities.entityList[i].intName);
-          AddElement(DataNode, 'article', BoolToStr(entities.entityList[i].article));
-          AddElement(DataNode, 'description', entities.entityList[i].description);
+          AddElement(DataNode, 'i', IntToStr(entities.entityList[i].npcID));
+          AddElement(DataNode, 'r', entities.entityList[i].race);
+          AddElement(DataNode, 'n', entities.entityList[i].intName);
+          AddElement(DataNode, 'a', BoolToStr(entities.entityList[i].article));
+          AddElement(DataNode, 'd', entities.entityList[i].description);
 
           { Convert extended ASCII to plain text }
           if (entities.entityList[i].glyph = chr(1)) then
-            AddElement(DataNode, 'glyph', '=') { Hob }
+            AddElement(DataNode, 'g', '=') { Hob }
           else if (entities.entityList[i].glyph = chr(2)) then
-            AddElement(DataNode, 'glyph', '#') { Trog }
+            AddElement(DataNode, 'g', '#') { Trog }
           else if (entities.entityList[i].glyph = chr(157)) then
-            AddElement(DataNode, 'glyph', '!') { Hornet }
+            AddElement(DataNode, 'g', '!') { Hornet }
           else
-            AddElement(DataNode, 'glyph', entities.entityList[i].glyph);
+            AddElement(DataNode, 'g', entities.entityList[i].glyph);
 
-          AddElement(DataNode, 'glyphColour', entities.entityList[i].glyphColour);
-          AddElement(DataNode, 'maxHP', IntToStr(entities.entityList[i].maxHP));
-          AddElement(DataNode, 'currentHP', IntToStr(entities.entityList[i].currentHP));
-          AddElement(DataNode, 'attack', IntToStr(entities.entityList[i].attack));
-          AddElement(DataNode, 'defence', IntToStr(entities.entityList[i].defence));
-          AddElement(DataNode, 'weaponDice',
-            IntToStr(entities.entityList[i].weaponDice));
-          AddElement(DataNode, 'weaponAdds',
-            IntToStr(entities.entityList[i].weaponAdds));
-          AddElement(DataNode, 'xpReward', IntToStr(entities.entityList[i].xpReward));
-          AddElement(DataNode, 'visRange', IntToStr(entities.entityList[i].visionRange));
-          AddElement(DataNode, 'moveCount', IntToStr(entities.entityList[i].moveCount));
-          AddElement(DataNode, 'targetX', IntToStr(entities.entityList[i].targetX));
-          AddElement(DataNode, 'targetY', IntToStr(entities.entityList[i].targetY));
-          AddElement(DataNode, 'inView', BoolToStr(entities.entityList[i].inView));
-          AddElement(DataNode, 'blocks', BoolToStr(entities.entityList[i].blocks));
-          WriteStr(Value, entities.entityList[i].faction);
-          AddElement(DataNode, 'faction', Value);
-          WriteStr(Value, entities.entityList[i].state);
-          AddElement(DataNode, 'state', Value);
-          AddElement(DataNode, 'discovered', BoolToStr(entities.entityList[i].discovered));
-          AddElement(DataNode, 'weaponEquipped', BoolToStr(entities.entityList[i].weaponEquipped));
-          AddElement(DataNode, 'armourEquipped', BoolToStr(entities.entityList[i].armourEquipped));
-          AddElement(DataNode, 'stsDrunk', BoolToStr(entities.entityList[i].stsDrunk));
-          AddElement(DataNode, 'stsPoison', BoolToStr(entities.entityList[i].stsPoison));
-          AddElement(DataNode, 'stsBewild', BoolToStr(entities.entityList[i].stsBewild));
-          AddElement(DataNode, 'stsFrozen', BoolToStr(entities.entityList[i].stsFrozen));
-          AddElement(DataNode, 'tmrDrunk', IntToStr(entities.entityList[i].tmrDrunk));
-          AddElement(DataNode, 'tmrPoison', IntToStr(entities.entityList[i].tmrPoison));
-          AddElement(DataNode, 'tmrBewild', IntToStr(entities.entityList[i].tmrBewild));
-          AddElement(DataNode, 'tmrFrozen', IntToStr(entities.entityList[i].tmrFrozen));
-          AddElement(DataNode, 'hasPath', BoolToStr(entities.entityList[i].hasPath));
-          AddElement(DataNode, 'destReach', BoolToStr(entities.entityList[i].destinationReached));
+          AddElement(DataNode, 'c', colourLookup(entities.entityList[i].glyphColour));
+          AddElement(DataNode, 'h', IntToStr(entities.entityList[i].maxHP));
+          AddElement(DataNode, 'p', IntToStr(entities.entityList[i].currentHP));
+          AddElement(DataNode, 't', IntToStr(entities.entityList[i].attack));
+          AddElement(DataNode, 'f', IntToStr(entities.entityList[i].defence));
+          AddElement(DataNode, 'w', IntToStr(entities.entityList[i].weaponDice));
+          AddElement(DataNode, '+', IntToStr(entities.entityList[i].weaponAdds));
+          AddElement(DataNode, 'e', IntToStr(entities.entityList[i].xpReward));
+          AddElement(DataNode, 's', IntToStr(entities.entityList[i].visionRange));
+          AddElement(DataNode, 'm', IntToStr(entities.entityList[i].moveCount));
+          AddElement(DataNode, '-', IntToStr(entities.entityList[i].targetX));
+          AddElement(DataNode, 'z', IntToStr(entities.entityList[i].targetY));
+          AddElement(DataNode, 'q', BoolToStr(entities.entityList[i].inView));
+          AddElement(DataNode, 'b', BoolToStr(entities.entityList[i].blocks));
+          AddElement(DataNode, '1', factionLookup(entities.entityList[i].faction));
+          AddElement(DataNode, '2', attitudeLookup(entities.entityList[i].state));
+          AddElement(DataNode, '3', BoolToStr(entities.entityList[i].discovered));
+          AddElement(DataNode, '4', BoolToStr(entities.entityList[i].weaponEquipped));
+          AddElement(DataNode, '5', BoolToStr(entities.entityList[i].armourEquipped));
+          AddElement(DataNode, '6', BoolToStr(entities.entityList[i].stsDrunk));
+          AddElement(DataNode, '7', BoolToStr(entities.entityList[i].stsPoison));
+          AddElement(DataNode, '8', BoolToStr(entities.entityList[i].stsBewild));
+          AddElement(DataNode, '9', BoolToStr(entities.entityList[i].stsFrozen));
+          AddElement(DataNode, '0', IntToStr(entities.entityList[i].tmrDrunk));
+          AddElement(DataNode, 'f', IntToStr(entities.entityList[i].tmrPoison));
+          AddElement(DataNode, 'j', IntToStr(entities.entityList[i].tmrBewild));
+          AddElement(DataNode, 'k', IntToStr(entities.entityList[i].tmrFrozen));
+          AddElement(DataNode, 'l', BoolToStr(entities.entityList[i].hasPath));
+          AddElement(DataNode, 'o', BoolToStr(entities.entityList[i].destinationReached));
           (* Save path coordinates *)
           for coords := 1 to 30 do
           begin
-            AddElement(DataNode, 'coordX' + IntToStr(coords), IntToStr(entities.entityList[i].smellPath[coords].X));
-            AddElement(DataNode, 'coordY' + IntToStr(coords), IntToStr(entities.entityList[i].smellPath[coords].Y));
+            AddElement(DataNode, 'u' + IntToStr(coords), IntToStr(entities.entityList[i].smellPath[coords].X));
+            AddElement(DataNode, 'v' + IntToStr(coords), IntToStr(entities.entityList[i].smellPath[coords].Y));
           end;
-          AddElement(DataNode, 'posX', IntToStr(entities.entityList[i].posX));
-          AddElement(DataNode, 'posY', IntToStr(entities.entityList[i].posY));
+          AddElement(DataNode, 'x', IntToStr(entities.entityList[i].posX));
+          AddElement(DataNode, 'y', IntToStr(entities.entityList[i].posY));
         end;
       end;
 
@@ -679,43 +679,43 @@ begin
       for i := Low(itemList) to High(itemList) do
       begin
         items.itemList[i].itemID := StrToInt(UTF8Encode(ItemsNode.Attributes.Item[0].NodeValue));
-        items.itemList[i].itemName := UTF8Encode(ItemsNode.FindNode('Name').TextContent);
-        items.itemList[i].itemDescription := UTF8Encode(ItemsNode.FindNode('description').TextContent);
-        items.itemList[i].itemArticle := UTF8Encode(ItemsNode.FindNode('article').TextContent);
-        items.itemList[i].itemType := tItem(GetEnumValue(Typeinfo(tItem), UTF8Encode(ItemsNode.FindNode('itemType').TextContent)));
-        items.itemList[i].itemMaterial := tMaterial(GetEnumValue(Typeinfo(tMaterial), UTF8Encode(ItemsNode.FindNode('itemMaterial').TextContent)));
-        items.itemList[i].useID := StrToInt(UTF8Encode(ItemsNode.FindNode('useID').TextContent));
+        items.itemList[i].itemName := UTF8Encode(ItemsNode.FindNode('n').TextContent);
+        items.itemList[i].itemDescription := UTF8Encode(ItemsNode.FindNode('d').TextContent);
+        items.itemList[i].itemArticle := UTF8Encode(ItemsNode.FindNode('a').TextContent);
+        items.itemList[i].itemType := itemTypeReverseLookup(ItemsNode.FindNode('i').TextContent);
+        items.itemList[i].itemMaterial := materialReverseLookup(ItemsNode.FindNode('m').TextContent);
+        items.itemList[i].useID := StrToInt(UTF8Encode(ItemsNode.FindNode('u').TextContent));
 
         { Convert plain text to extended ASCII }
-        if (ItemsNode.FindNode('glyph').TextContent[1] = 'T') then { club / dagger }
+        if (ItemsNode.FindNode('g').TextContent[1] = 'T') then { club / dagger }
           items.itemList[i].glyph := chr(24)
-        else if (ItemsNode.FindNode('glyph').TextContent[1] = '=') then
+        else if (ItemsNode.FindNode('g').TextContent[1] = '=') then
           { Magickal staff }
           items.itemList[i].glyph := chr(186)
-        else if (ItemsNode.FindNode('glyph').TextContent[1] = '*') then { rock }
+        else if (ItemsNode.FindNode('g').TextContent[1] = '*') then { rock }
           items.itemList[i].glyph := chr(7)
-        else if (ItemsNode.FindNode('glyph').TextContent[1] = 'i') then { pointy stick }
+        else if (ItemsNode.FindNode('g').TextContent[1] = 'i') then { pointy stick }
           items.itemList[i].glyph := chr(173)
-        else if (ItemsNode.FindNode('glyph').TextContent[1] = '0') then
+        else if (ItemsNode.FindNode('g').TextContent[1] = '0') then
           { Pixie in a jar }
           items.itemList[i].glyph := chr(232)
-        else if (ItemsNode.FindNode('glyph').TextContent[1] = 'A') then { axe }
+        else if (ItemsNode.FindNode('g').TextContent[1] = 'A') then { axe }
           items.itemList[i].glyph := chr(194)
         else
-          items.itemList[i].glyph := char(widechar(ItemsNode.FindNode('glyph').TextContent[1]));
+          items.itemList[i].glyph := char(widechar(ItemsNode.FindNode('g').TextContent[1]));
 
-        items.itemList[i].glyphColour := UTF8Encode(ItemsNode.FindNode('glyphColour').TextContent);
-        items.itemList[i].inView := StrToBool(UTF8Encode(ItemsNode.FindNode('inView').TextContent));
-        items.itemList[i].posX := StrToInt(UTF8Encode(ItemsNode.FindNode('posX').TextContent));
-        items.itemList[i].posY := StrToInt(UTF8Encode(ItemsNode.FindNode('posY').TextContent));
-        items.itemList[i].NumberOfUses := StrToInt(UTF8Encode(ItemsNode.FindNode('numUses').TextContent));
-        items.itemList[i].value := StrToInt(UTF8Encode(ItemsNode.FindNode('val').TextContent));
-        items.itemList[i].onMap := StrToBool(UTF8Encode(ItemsNode.FindNode('onMap').TextContent));
-        items.itemList[i].throwable := StrToBool(UTF8Encode(ItemsNode.FindNode('throwable').TextContent));
-        items.itemList[i].throwDamage := StrToInt(UTF8Encode(ItemsNode.FindNode('throwDamage').TextContent));
-        items.itemList[i].dice := StrToInt(UTF8Encode(ItemsNode.FindNode('dice').TextContent));
-        items.itemList[i].adds := StrToInt(UTF8Encode(ItemsNode.FindNode('adds').TextContent));
-        items.itemList[i].discovered := StrToBool(UTF8Encode(ItemsNode.FindNode('discovered').TextContent));
+        items.itemList[i].glyphColour := UTF8Encode(ItemsNode.FindNode('c').TextContent);
+        items.itemList[i].inView := StrToBool(UTF8Encode(ItemsNode.FindNode('v').TextContent));
+        items.itemList[i].posX := StrToInt(UTF8Encode(ItemsNode.FindNode('x').TextContent));
+        items.itemList[i].posY := StrToInt(UTF8Encode(ItemsNode.FindNode('y').TextContent));
+        items.itemList[i].NumberOfUses := StrToInt(UTF8Encode(ItemsNode.FindNode('s').TextContent));
+        items.itemList[i].value := StrToInt(UTF8Encode(ItemsNode.FindNode('p').TextContent));
+        items.itemList[i].onMap := StrToBool(UTF8Encode(ItemsNode.FindNode('m').TextContent));
+        items.itemList[i].throwable := StrToBool(UTF8Encode(ItemsNode.FindNode('t').TextContent));
+        items.itemList[i].throwDamage := StrToInt(UTF8Encode(ItemsNode.FindNode('h').TextContent));
+        items.itemList[i].dice := StrToInt(UTF8Encode(ItemsNode.FindNode('e').TextContent));
+        items.itemList[i].adds := StrToInt(UTF8Encode(ItemsNode.FindNode('+').TextContent));
+        items.itemList[i].discovered := StrToBool(UTF8Encode(ItemsNode.FindNode('o').TextContent));
         ParentNode := ItemsNode.NextSibling;
         ItemsNode := ParentNode;
       end;
@@ -733,57 +733,59 @@ begin
       begin
         entities.listLength := length(entities.entityList);
         SetLength(entities.entityList, entities.listLength + 1);
-        entities.entityList[i].npcID := StrToInt(UTF8Encode(NPCnode.FindNode('npcID').TextContent));
-        entities.entityList[i].race := UTF8Encode(NPCnode.FindNode('race').TextContent);
-        entities.entityList[i].intName := UTF8Encode(NPCnode.FindNode('intName').TextContent);
-        entities.entityList[i].article := StrToBool(UTF8Encode(NPCnode.FindNode('article').TextContent));
-        entities.entityList[i].description := UTF8Encode(NPCnode.FindNode('description').TextContent);
+        entities.entityList[i].npcID := StrToInt(UTF8Encode(NPCnode.FindNode('i').TextContent));
+        entities.entityList[i].race := UTF8Encode(NPCnode.FindNode('r').TextContent);
+        entities.entityList[i].intName := UTF8Encode(NPCnode.FindNode('n').TextContent);
+        entities.entityList[i].article := StrToBool(UTF8Encode(NPCnode.FindNode('a').TextContent));
+        entities.entityList[i].description := UTF8Encode(NPCnode.FindNode('d').TextContent);
 
         { Convert plain text to extended ASCII }
-        if (NPCnode.FindNode('glyph').TextContent[1] = '=') then
+        if (NPCnode.FindNode('g').TextContent[1] = '=') then
           entities.entityList[i].glyph := chr(1)
-        else if (NPCnode.FindNode('glyph').TextContent[1] = '#') then
+        else if (NPCnode.FindNode('g').TextContent[1] = '#') then
           entities.entityList[i].glyph := chr(2)
-        else if (NPCnode.FindNode('glyph').TextContent[1] = '!') then
+        else if (NPCnode.FindNode('g').TextContent[1] = '!') then
           entities.entityList[i].glyph := chr(157)
         else
-          entities.entityList[i].glyph := UTF8Encode(char(widechar(NPCnode.FindNode('glyph').TextContent[1])));
+          entities.entityList[i].glyph := UTF8Encode(char(widechar(NPCnode.FindNode('g').TextContent[1])));
 
-        entities.entityList[i].glyphColour := UTF8Encode(NPCnode.FindNode('glyphColour').TextContent);
-        entities.entityList[i].maxHP := StrToInt(UTF8Encode(NPCnode.FindNode('maxHP').TextContent));
-        entities.entityList[i].currentHP := StrToInt(UTF8Encode(NPCnode.FindNode('currentHP').TextContent));
-        entities.entityList[i].attack := StrToInt(UTF8Encode(NPCnode.FindNode('attack').TextContent));
-        entities.entityList[i].defence := StrToInt(UTF8Encode(NPCnode.FindNode('defence').TextContent));
-        entities.entityList[i].weaponDice := StrToInt(UTF8Encode(NPCnode.FindNode('weaponDice').TextContent));
-        entities.entityList[i].weaponAdds := StrToInt(UTF8Encode(NPCnode.FindNode('weaponAdds').TextContent));
-        entities.entityList[i].xpReward := StrToInt(UTF8Encode(NPCnode.FindNode('xpReward').TextContent));
-        entities.entityList[i].visionRange := StrToInt(UTF8Encode(NPCnode.FindNode('visRange').TextContent));
-        entities.entityList[i].moveCount := StrToInt(UTF8Encode(NPCnode.FindNode('moveCount').TextContent));
-        entities.entityList[i].targetX := StrToInt(UTF8Encode(NPCnode.FindNode('targetX').TextContent));
-        entities.entityList[i].targetY := StrToInt(UTF8Encode(NPCnode.FindNode('targetY').TextContent));
-        entities.entityList[i].inView := StrToBool(UTF8Encode(NPCnode.FindNode('inView').TextContent));
-        entities.entityList[i].blocks := StrToBool(UTF8Encode(NPCnode.FindNode('blocks').TextContent));
-        entities.entityList[i].faction := Tfactions(GetEnumValue(Typeinfo(Tfactions), UTF8Encode(NPCnode.FindNode('faction').TextContent)));
-        entities.entityList[i].state := Tattitudes(GetEnumValue(Typeinfo(Tattitudes), UTF8Encode(NPCnode.FindNode('state').TextContent)));
-        entities.entityList[i].discovered := StrToBool(UTF8Encode(NPCnode.FindNode('discovered').TextContent));
-        entities.entityList[i].weaponEquipped := StrToBool(UTF8Encode(NPCnode.FindNode('weaponEquipped').TextContent));
-        entities.entityList[i].armourEquipped := StrToBool(UTF8Encode(NPCnode.FindNode('armourEquipped').TextContent));
+        entities.entityList[i].glyphColour := UTF8Encode(NPCnode.FindNode('c').TextContent);
+        entities.entityList[i].maxHP := StrToInt(UTF8Encode(NPCnode.FindNode('h').TextContent));
+        entities.entityList[i].currentHP := StrToInt(UTF8Encode(NPCnode.FindNode('p').TextContent));
+        entities.entityList[i].attack := StrToInt(UTF8Encode(NPCnode.FindNode('t').TextContent));
+        entities.entityList[i].defence := StrToInt(UTF8Encode(NPCnode.FindNode('f').TextContent));
+        entities.entityList[i].weaponDice := StrToInt(UTF8Encode(NPCnode.FindNode('w').TextContent));
+        entities.entityList[i].weaponAdds := StrToInt(UTF8Encode(NPCnode.FindNode('+').TextContent));
+        entities.entityList[i].xpReward := StrToInt(UTF8Encode(NPCnode.FindNode('e').TextContent));
+        entities.entityList[i].visionRange := StrToInt(UTF8Encode(NPCnode.FindNode('s').TextContent));
+        entities.entityList[i].moveCount := StrToInt(UTF8Encode(NPCnode.FindNode('m').TextContent));
+        entities.entityList[i].targetX := StrToInt(UTF8Encode(NPCnode.FindNode('-').TextContent));
+        entities.entityList[i].targetY := StrToInt(UTF8Encode(NPCnode.FindNode('x').TextContent));
+        entities.entityList[i].inView := StrToBool(UTF8Encode(NPCnode.FindNode('q').TextContent));
+        entities.entityList[i].blocks := StrToBool(UTF8Encode(NPCnode.FindNode('b').TextContent));
+        entities.entityList[i].faction := factionReverseLookup(NPCnode.FindNode('1').TextContent);
+        entities.entityList[i].state := attitudeReverseLookup(NPCnode.FindNode('2').TextContent);
+        entities.entityList[i].discovered := StrToBool(UTF8Encode(NPCnode.FindNode('3').TextContent));
+        entities.entityList[i].weaponEquipped := StrToBool(UTF8Encode(NPCnode.FindNode('4').TextContent));
+        entities.entityList[i].armourEquipped := StrToBool(UTF8Encode(NPCnode.FindNode('5').TextContent));
         entities.entityList[i].isDead := False;
-        entities.entityList[i].stsDrunk := StrToBool(UTF8Encode(NPCnode.FindNode('stsDrunk').TextContent));
-        entities.entityList[i].stsPoison := StrToBool(UTF8Encode(NPCnode.FindNode('stsPoison').TextContent));
-        entities.entityList[i].stsBewild := StrToBool(UTF8Encode(NPCnode.FindNode('stsBewild').TextContent));
-        entities.entityList[i].tmrDrunk := StrToInt(UTF8Encode(NPCnode.FindNode('tmrDrunk').TextContent));
-        entities.entityList[i].tmrPoison := StrToInt(UTF8Encode(NPCnode.FindNode('tmrPoison').TextContent));
-        entities.entityList[i].tmrBewild := StrToInt(UTF8Encode(NPCnode.FindNode('tmrBewild').TextContent));
-        entities.entityList[i].hasPath := StrToBool(UTF8Encode(NPCnode.FindNode('hasPath').TextContent));
-        entities.entityList[i].destinationReached := StrToBool(UTF8Encode(NPCnode.FindNode('destReach').TextContent));
+        entities.entityList[i].stsDrunk := StrToBool(UTF8Encode(NPCnode.FindNode('6').TextContent));
+        entities.entityList[i].stsPoison := StrToBool(UTF8Encode(NPCnode.FindNode('7').TextContent));
+        entities.entityList[i].stsBewild := StrToBool(UTF8Encode(NPCnode.FindNode('8').TextContent));
+        entities.entityList[i].stsFrozen := StrToBool(UTF8Encode(NPCnode.FindNode('9').TextContent));
+        entities.entityList[i].tmrDrunk := StrToInt(UTF8Encode(NPCnode.FindNode('0').TextContent));
+        entities.entityList[i].tmrPoison := StrToInt(UTF8Encode(NPCnode.FindNode('f').TextContent));
+        entities.entityList[i].tmrBewild := StrToInt(UTF8Encode(NPCnode.FindNode('j').TextContent));
+        entities.entityList[i].tmrFrozen := StrToInt(UTF8Encode(NPCnode.FindNode('k').TextContent));
+        entities.entityList[i].hasPath := StrToBool(UTF8Encode(NPCnode.FindNode('l').TextContent));
+        entities.entityList[i].destinationReached := StrToBool(UTF8Encode(NPCnode.FindNode('o').TextContent));
         for coords := 1 to 30 do
         begin
-          entities.entityList[i].smellPath[coords].X := StrToInt(UTF8Encode(NPCnode.FindNode(UTF8Decode('coordX' + IntToStr(coords))).TextContent));
-          entities.entityList[i].smellPath[coords].Y := StrToInt(UTF8Encode(NPCnode.FindNode(UTF8Decode('coordY' + IntToStr(coords))).TextContent));
+          entities.entityList[i].smellPath[coords].X := StrToInt(UTF8Encode(NPCnode.FindNode(UTF8Decode('u' + IntToStr(coords))).TextContent));
+          entities.entityList[i].smellPath[coords].Y := StrToInt(UTF8Encode(NPCnode.FindNode(UTF8Decode('v' + IntToStr(coords))).TextContent));
         end;
-        entities.entityList[i].posX := StrToInt(UTF8Encode(NPCnode.FindNode('posX').TextContent));
-        entities.entityList[i].posY := StrToInt(UTF8Encode(NPCnode.FindNode('posY').TextContent));
+        entities.entityList[i].posX := StrToInt(UTF8Encode(NPCnode.FindNode('x').TextContent));
+        entities.entityList[i].posY := StrToInt(UTF8Encode(NPCnode.FindNode('y').TextContent));
         ParentNode := NPCnode.NextSibling;
         NPCnode := ParentNode;
       end;
@@ -1283,7 +1285,7 @@ end;
 
 function colourLookup(inputColour: shortstring):shortstring;
 begin
-  Result := '0';
+  Result := '5';
   case inputColour of
     'lightBlue': Result := '0';
     'black': Result := '1';
@@ -1349,7 +1351,7 @@ end;
 
 function materialLookup(inputMaterial: tMaterial):shortstring;
 begin
-  Result := '0';
+  Result := '11';
   case inputMaterial of
     matSteel: Result := '0';
     matIron: Result := '1';
@@ -1384,6 +1386,96 @@ begin
     '10': Result := matGold
   else { matEmpty }
     Result := matEmpty;
+  end;
+end;
+
+function itemTypeLookup(inputType: tItem):shortstring; 
+begin
+  Result := '10';
+  case inputType of
+    itmDrink: Result := '0';
+    itmWeapon: Result := '1';
+    itmArmour: Result := '2';
+    itmQuest: Result := '3';
+    itmProjectile: Result := '4';
+    itmProjectileWeapon: Result := '5';
+    itmAmmo: Result := '6';
+    itmLightSource: Result := '7';
+    itmTrap: Result := '8';
+    itmTreasure: Result := '9'
+  else { itmEmptySlot }
+    Result := '10';
+  end;
+end;
+
+function itemTypeReverseLookup(inputType: shortstring):tItem;
+begin
+  Result := itmEmptySlot;
+  case inputType of
+    '0': Result := itmDrink;
+    '1': Result := itmWeapon;
+    '2': Result := itmArmour;
+    '3': Result := itmQuest;
+    '4': Result := itmProjectile;
+    '5': Result := itmProjectileWeapon;
+    '6': Result := itmAmmo;
+    '7': Result := itmLightSource;
+    '8': Result := itmTrap;
+    '9': Result := itmTreasure
+  else { itmEmptySlot }
+    Result := '10';
+  end;
+end;
+
+function factionLookup(inputFaction: Tfactions):char;
+begin
+  Result := '2';
+  case inputFaction of
+    redcapFaction: Result := '0';
+    bugFaction: Result := '1';
+    animalFaction: Result := '2';
+    fungusFaction: Result := '3';
+    undeadFaction: Result := '4';
+    trapFaction: Result := '5'
+  else { npcFaction }
+    Result := '6';
+  end;
+end;
+
+function factionReverseLookup(factionType: char):Tfactions;
+begin
+  Result := animalFaction;
+  case inputFaction of
+    '0': Result := redcapFaction;
+    '1': Result := bugFaction;
+    '2': Result := animalFaction;
+    '3': Result := fungusFaction;
+    '4': Result := undeadFaction;
+    '5': Result := trapFaction
+  else { npcFaction }
+    Result := npcFaction;
+  end;
+end;
+
+function attitudeLookup(inputState: Tattitudes):char;
+begin
+  Result := '0';
+  case inputState of
+    stateNeutral: Result := '0';
+    stateHostile: Result := '1'
+  else { stateEscape }
+    Result := '2';
+  end;
+end;
+
+function attitudeReverseLookup(inputState: char):Tfactions;
+begin
+  Result := stateNeutral;
+  case inputState of
+    '0': Result := stateNeutral;
+    '1': Result := stateHostile
+  else { 2 }
+    Result := stateEscape;
   end;
 end;
 
