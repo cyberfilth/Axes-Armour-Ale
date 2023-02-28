@@ -32,6 +32,7 @@ arrowAnimation	animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGl
 arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	map.pas	/^procedure ascendStairs;$/;"	p
 attitudeLookup	file_handling.pas	/^function attitudeLookup(inputState: Tattitudes):char;$/;"	f
+attitudeReverseLookup	file_handling.pas	/^function attitudeReverseLookup(inputState: char):Tfactions;$/;"	f
 barterBuySellInput	keyboardinput.pas	/^procedure barterBuySellInput(Keypress: TKeyEvent);$/;"	p
 barterConfirmBuyInput	keyboardinput.pas	/^procedure barterConfirmBuyInput(Keypress: TKeyEvent);$/;"	p
 barterConfirmSellInput	keyboardinput.pas	/^procedure barterConfirmSellInput(Keypress: TKeyEvent);$/;"	p
