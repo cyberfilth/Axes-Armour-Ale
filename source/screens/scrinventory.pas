@@ -7,7 +7,7 @@ unit scrInventory;
 interface
 
 uses
-  SysUtils, entities, player_stats;
+  SysUtils, entities, player_stats, globalUtils;
 
 (* Draw the outline of the screen *)
 procedure drawOutline;

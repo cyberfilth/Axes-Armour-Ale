@@ -30,14 +30,14 @@ function terrainLookup(inputTerrain: overworldTerrain):char;
 function terrainReverseLookup(inputTerrain: char):overworldTerrain;
 function colourLookup(inputColour: shortstring):shortstring;
 function colourReverseLookup(inputColour: shortstring):shortstring;
-function materialLookup(inputMaterial: tMaterial):shortstring;
-function materialReverseLookup(inputMaterial: shortstring):tMaterial;
-function itemTypeLookup(inputType: tItem):shortstring; 
-function itemTypeReverseLookup(inputType: shortstring):tItem;
+function materialLookup(inputMaterial: tMaterial):char;
+function materialReverseLookup(inputMaterial: char):tMaterial;
+function itemTypeLookup(inputType: tItem):char; 
+function itemTypeReverseLookup(inputType: char):tItem;
 function factionLookup(inputFaction: Tfactions):char;
 function factionReverseLookup(factionType: char):Tfactions;
 function attitudeLookup(inputState: Tattitudes):char;
-function attitudeReverseLookup(inputState: char):Tfactions;
+function attitudeReverseLookup(inputState: char):Tattitudes;
 
 implementation
 
@@ -434,7 +434,7 @@ var
   r, c, id_int, i, coords: smallint;
   Doc: TXMLDocument;
   RootNode, dataNode: TDOMNode;
-  dfileName, Value: shortstring;
+  dfileName: shortstring;
 
   procedure AddElement(Node: TDOMNode; Name, Value: shortstring);
   var
@@ -543,7 +543,7 @@ begin
           AddElement(DataNode, 't', BoolToStr(itemList[i].throwable));
           AddElement(DataNode, 'h', IntToStr(itemList[i].throwDamage));
           AddElement(DataNode, 'e', IntToStr(itemList[i].dice));
-          AddElement(DataNode, '+', IntToStr(itemList[i].adds));
+          AddElement(DataNode, 'A', IntToStr(itemList[i].adds));
           AddElement(DataNode, 'o', BoolToStr(itemList[i].discovered));
         end;
       end;
@@ -577,7 +577,7 @@ begin
           AddElement(DataNode, 't', IntToStr(entities.entityList[i].attack));
           AddElement(DataNode, 'f', IntToStr(entities.entityList[i].defence));
           AddElement(DataNode, 'w', IntToStr(entities.entityList[i].weaponDice));
-          AddElement(DataNode, '+', IntToStr(entities.entityList[i].weaponAdds));
+          AddElement(DataNode, 'A', IntToStr(entities.entityList[i].weaponAdds));
           AddElement(DataNode, 'e', IntToStr(entities.entityList[i].xpReward));
           AddElement(DataNode, 's', IntToStr(entities.entityList[i].visionRange));
           AddElement(DataNode, 'm', IntToStr(entities.entityList[i].moveCount));
@@ -682,8 +682,8 @@ begin
         items.itemList[i].itemName := UTF8Encode(ItemsNode.FindNode('n').TextContent);
         items.itemList[i].itemDescription := UTF8Encode(ItemsNode.FindNode('d').TextContent);
         items.itemList[i].itemArticle := UTF8Encode(ItemsNode.FindNode('a').TextContent);
-        items.itemList[i].itemType := itemTypeReverseLookup(ItemsNode.FindNode('i').TextContent);
-        items.itemList[i].itemMaterial := materialReverseLookup(ItemsNode.FindNode('m').TextContent);
+        items.itemList[i].itemType := itemTypeReverseLookup(ItemsNode.FindNode('i').TextContent[1]);
+        items.itemList[i].itemMaterial := materialReverseLookup(ItemsNode.FindNode('m').TextContent[1]);
         items.itemList[i].useID := StrToInt(UTF8Encode(ItemsNode.FindNode('u').TextContent));
 
         { Convert plain text to extended ASCII }
@@ -714,7 +714,7 @@ begin
         items.itemList[i].throwable := StrToBool(UTF8Encode(ItemsNode.FindNode('t').TextContent));
         items.itemList[i].throwDamage := StrToInt(UTF8Encode(ItemsNode.FindNode('h').TextContent));
         items.itemList[i].dice := StrToInt(UTF8Encode(ItemsNode.FindNode('e').TextContent));
-        items.itemList[i].adds := StrToInt(UTF8Encode(ItemsNode.FindNode('+').TextContent));
+        items.itemList[i].adds := StrToInt(UTF8Encode(ItemsNode.FindNode('A').TextContent));
         items.itemList[i].discovered := StrToBool(UTF8Encode(ItemsNode.FindNode('o').TextContent));
         ParentNode := ItemsNode.NextSibling;
         ItemsNode := ParentNode;
@@ -755,7 +755,7 @@ begin
         entities.entityList[i].attack := StrToInt(UTF8Encode(NPCnode.FindNode('t').TextContent));
         entities.entityList[i].defence := StrToInt(UTF8Encode(NPCnode.FindNode('f').TextContent));
         entities.entityList[i].weaponDice := StrToInt(UTF8Encode(NPCnode.FindNode('w').TextContent));
-        entities.entityList[i].weaponAdds := StrToInt(UTF8Encode(NPCnode.FindNode('+').TextContent));
+        entities.entityList[i].weaponAdds := StrToInt(UTF8Encode(NPCnode.FindNode('A').TextContent));
         entities.entityList[i].xpReward := StrToInt(UTF8Encode(NPCnode.FindNode('e').TextContent));
         entities.entityList[i].visionRange := StrToInt(UTF8Encode(NPCnode.FindNode('s').TextContent));
         entities.entityList[i].moveCount := StrToInt(UTF8Encode(NPCnode.FindNode('m').TextContent));
@@ -763,8 +763,8 @@ begin
         entities.entityList[i].targetY := StrToInt(UTF8Encode(NPCnode.FindNode('x').TextContent));
         entities.entityList[i].inView := StrToBool(UTF8Encode(NPCnode.FindNode('q').TextContent));
         entities.entityList[i].blocks := StrToBool(UTF8Encode(NPCnode.FindNode('b').TextContent));
-        entities.entityList[i].faction := factionReverseLookup(NPCnode.FindNode('1').TextContent);
-        entities.entityList[i].state := attitudeReverseLookup(NPCnode.FindNode('2').TextContent);
+        entities.entityList[i].faction := factionReverseLookup(NPCnode.FindNode('1').TextContent[1]);
+        entities.entityList[i].state := attitudeReverseLookup(NPCnode.FindNode('2').TextContent[1]);
         entities.entityList[i].discovered := StrToBool(UTF8Encode(NPCnode.FindNode('3').TextContent));
         entities.entityList[i].weaponEquipped := StrToBool(UTF8Encode(NPCnode.FindNode('4').TextContent));
         entities.entityList[i].armourEquipped := StrToBool(UTF8Encode(NPCnode.FindNode('5').TextContent));
@@ -895,7 +895,7 @@ begin
     entities.entityList[0].attack := StrToInt(UTF8Encode(PlayerDataNode.FindNode('t').TextContent));
     entities.entityList[0].defence := StrToInt(UTF8Encode(PlayerDataNode.FindNode('f').TextContent));
     entities.entityList[0].weaponDice := StrToInt(UTF8Encode(PlayerDataNode.FindNode('w').TextContent));
-    entities.entityList[0].weaponAdds := StrToInt(UTF8Encode(PlayerDataNode.FindNode('+').TextContent));
+    entities.entityList[0].weaponAdds := StrToInt(UTF8Encode(PlayerDataNode.FindNode('A').TextContent));
     entities.entityList[0].xpReward := StrToInt(UTF8Encode(PlayerDataNode.FindNode('e').TextContent));
     entities.entityList[0].visionRange := StrToInt(UTF8Encode(PlayerDataNode.FindNode('s').TextContent));
     entities.entityList[0].moveCount := StrToInt(UTF8Encode(PlayerDataNode.FindNode('m').TextContent));
@@ -954,8 +954,8 @@ begin
       player_inventory.inventory[i].equipped := StrToBool(UTF8Encode(InventoryNode.FindNode('q').TextContent));
       player_inventory.inventory[i].description := UTF8Encode(InventoryNode.FindNode('d').TextContent);
       player_inventory.inventory[i].article := UTF8Encode(InventoryNode.FindNode('a').TextContent);
-      player_inventory.inventory[i].itemType := itemList(InventoryNode.FindNode('i').TextContent);
-      player_inventory.inventory[i].itemMaterial := materialLookup(InventoryNode.FindNode('m').TextContent);
+      player_inventory.inventory[i].itemType := itemTypeReverseLookup(InventoryNode.FindNode('i').TextContent[1]);
+      player_inventory.inventory[i].itemMaterial := materialReverseLookup(InventoryNode.FindNode('m').TextContent[1]);
       player_inventory.inventory[i].useID := StrToInt(UTF8Encode(InventoryNode.FindNode('u').TextContent));
 
       { Convert plain text to extended ASCII }
@@ -980,7 +980,7 @@ begin
       player_inventory.inventory[i].throwable := StrToBool(UTF8Encode(InventoryNode.FindNode('t').TextContent));
       player_inventory.inventory[i].throwDamage := StrToInt(UTF8Encode(InventoryNode.FindNode('h').TextContent));
       player_inventory.inventory[i].dice := StrToInt(UTF8Encode(InventoryNode.FindNode('e').TextContent));
-      player_inventory.inventory[i].adds := StrToInt(UTF8Encode(InventoryNode.FindNode('+').TextContent));
+      player_inventory.inventory[i].adds := StrToInt(UTF8Encode(InventoryNode.FindNode('A').TextContent));
       player_inventory.inventory[i].inInventory := StrToBool(UTF8Encode(InventoryNode.FindNode('inInventory').TextContent));
       ParentNode := InventoryNode.NextSibling;
       InventoryNode := ParentNode;
@@ -1135,7 +1135,7 @@ begin
     AddElement(DataNode, 't', IntToStr(entities.entityList[0].attack));
     AddElement(DataNode, 'f', IntToStr(entities.entityList[0].defence));
     AddElement(DataNode, 'w', IntToStr(entities.entityList[0].weaponDice));
-    AddElement(DataNode, '+', IntToStr(entities.entityList[0].weaponAdds));
+    AddElement(DataNode, 'A', IntToStr(entities.entityList[0].weaponAdds));
     AddElement(DataNode, 'e', IntToStr(entities.entityList[0].xpReward));
     AddElement(DataNode, 's', IntToStr(entities.entityList[0].visionRange));
     AddElement(DataNode, 'm', IntToStr(entities.entityList[0].moveCount));
@@ -1206,7 +1206,7 @@ begin
       AddElement(DataNode, 't', BoolToStr(inventory[i].throwable));
       AddElement(DataNode, 'h', IntToStr(inventory[i].throwDamage));
       AddElement(DataNode, 'e', IntToStr(inventory[i].dice));
-      AddElement(DataNode, '+', IntToStr(inventory[i].adds));
+      AddElement(DataNode, 'A', IntToStr(inventory[i].adds));
       AddElement(DataNode, 'inInventory', BoolToStr(inventory[i].inInventory));
     end;
 
@@ -1347,9 +1347,9 @@ begin
   end;
 end;
 
-function materialLookup(inputMaterial: tMaterial):shortstring;
+function materialLookup(inputMaterial: tMaterial):char;
 begin
-  Result := '11';
+  Result := 'b';
   case inputMaterial of
     matSteel: Result := '0';
     matIron: Result := '1';
@@ -1361,13 +1361,13 @@ begin
     matStone: Result := '7';
     matGlass: Result := '8';
     matBone: Result := '9';
-    matGold: Result := '10'
+    matGold: Result := 'a'
   else { matEmpty }
-    Result := '11';
+    Result := 'b';
   end;
 end;
 
-function materialReverseLookup(inputMaterial: shortstring):tMaterial;
+function materialReverseLookup(inputMaterial: char):tMaterial;
 begin
   Result := matEmpty;
   case inputMaterial of
@@ -1381,15 +1381,15 @@ begin
     '7': Result := matStone;
     '8': Result := matGlass;
     '9': Result := matBone;
-    '10': Result := matGold
+    'b': Result := matGold
   else { matEmpty }
     Result := matEmpty;
   end;
 end;
 
-function itemTypeLookup(inputType: tItem):shortstring; 
+function itemTypeLookup(inputType: tItem):char; 
 begin
-  Result := '10';
+  Result := 'a';
   case inputType of
     itmDrink: Result := '0';
     itmWeapon: Result := '1';
@@ -1402,11 +1402,11 @@ begin
     itmTrap: Result := '8';
     itmTreasure: Result := '9'
   else { itmEmptySlot }
-    Result := '10';
+    Result := 'a';
   end;
 end;
 
-function itemTypeReverseLookup(inputType: shortstring):tItem;
+function itemTypeReverseLookup(inputType: char):tItem;
 begin
   Result := itmEmptySlot;
   case inputType of
@@ -1421,7 +1421,7 @@ begin
     '8': Result := itmTrap;
     '9': Result := itmTreasure
   else { itmEmptySlot }
-    Result := '10';
+    Result := itmEmptySlot;
   end;
 end;
 
@@ -1443,7 +1443,7 @@ end;
 function factionReverseLookup(factionType: char):Tfactions;
 begin
   Result := animalFaction;
-  case inputFaction of
+  case factionType of
     '0': Result := redcapFaction;
     '1': Result := bugFaction;
     '2': Result := animalFaction;
@@ -1466,7 +1466,7 @@ begin
   end;
 end;
 
-function attitudeReverseLookup(inputState: char):Tfactions;
+function attitudeReverseLookup(inputState: char):Tattitudes;
 begin
   Result := stateNeutral;
   case inputState of

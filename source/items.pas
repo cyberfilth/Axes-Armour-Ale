@@ -9,9 +9,6 @@ interface
 uses
   ui, web_trap, poison_spore, globalutils;
 
-type
-  tItem = (itmDrink, itmWeapon, itmArmour, itmQuest, itmProjectile, itmEmptySlot, itmProjectileWeapon, itmAmmo, itmLightSource, itmTrap, itmTreasure);
-
 (* Store information about items *)
 type
   Item = record
