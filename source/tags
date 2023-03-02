@@ -31,8 +31,8 @@ areaBurnEffect	animation.pas	/^procedure areaBurnEffect(getEm: array of smallint
 arrowAnimation	animation.pas	/^procedure arrowAnimation(var flightPath: b; prjGlyph, prjColour: shortstring);$/;"	p
 arrowHit	screens/scrtargeting.pas	/^procedure arrowHit(x, y: smallint);$/;"	p
 ascendStairs	map.pas	/^procedure ascendStairs;$/;"	p
-attitudeLookup	file_handling.pas	/^function attitudeLookup(inputState: Tattitudes):char;$/;"	f
-attitudeReverseLookup	file_handling.pas	/^function attitudeReverseLookup(inputState: char):Tattitudes;$/;"	f
+attitudeLookup	file_handling.pas	/^function attitudeLookup(inputState: Tattitudes):shortstring;$/;"	f
+attitudeReverseLookup	file_handling.pas	/^function attitudeReverseLookup(inputState: shortstring):Tattitudes;$/;"	f
 barterBuySellInput	keyboardinput.pas	/^procedure barterBuySellInput(Keypress: TKeyEvent);$/;"	p
 barterConfirmBuyInput	keyboardinput.pas	/^procedure barterConfirmBuyInput(Keypress: TKeyEvent);$/;"	p
 barterConfirmSellInput	keyboardinput.pas	/^procedure barterConfirmSellInput(Keypress: TKeyEvent);$/;"	p
@@ -416,8 +416,8 @@ exitDialogVillage	screens/dlgmerchant.pas	/^procedure exitDialogVillage(msg: byt
 exitMessage	ui.pas	/^procedure exitMessage;$/;"	p
 exitPrompt	ui.pas	/^procedure exitPrompt;$/;"	p
 exitToTitleMenu	main.pas	/^procedure exitToTitleMenu;$/;"	p
-factionLookup	file_handling.pas	/^function factionLookup(inputFaction: Tfactions):char;$/;"	f
-factionReverseLookup	file_handling.pas	/^function factionReverseLookup(factionType: char):Tfactions;$/;"	f
+factionLookup	file_handling.pas	/^function factionLookup(inputFaction: Tfactions):shortstring;$/;"	f
+factionReverseLookup	file_handling.pas	/^function factionReverseLookup(factionType: shortstring):Tfactions;$/;"	f
 fade	dungeons/noise.pas	/^  function fade(t: float64): float64; inline;$/;"	f
 fieldOfView	vision/fov.pas	/^procedure fieldOfView(centreX, centreY, radius: smallint; hiDef: byte);$/;"	p
 fillWithWalls	dungeons/cave.pas	/^procedure fillWithWalls;$/;"	p
@@ -546,8 +546,8 @@ isOccupied	map.pas	/^function isOccupied(checkX, checkY: smallint): boolean;$/;"
 isVowel	plot_gen.pas	/^function isVowel(character: string): boolean;$/;"	f
 isWall	map.pas	/^function isWall(x, y: smallint): boolean;$/;"	f
 islandFOV	vision/fov.pas	/^procedure islandFOV(centreX, centreY: smallint);$/;"	p
-itemTypeLookup	file_handling.pas	/^function itemTypeLookup(inputType: tItem):char; $/;"	f
-itemTypeReverseLookup	file_handling.pas	/^function itemTypeReverseLookup(inputType: char):tItem;$/;"	f
+itemTypeLookup	file_handling.pas	/^function itemTypeLookup(inputType: tItem):shortstring; $/;"	f
+itemTypeReverseLookup	file_handling.pas	/^function itemTypeReverseLookup(inputType: shortstring):tItem;$/;"	f
 killEntity	entities.pas	/^procedure killEntity(id: smallint);$/;"	p
 leaveVillage	screens/dlginfo.pas	/^procedure leaveVillage;$/;"	p
 leftHasFloor	dungeons/cave.pas	/^function leftHasFloor(): boolean;$/;"	f
@@ -570,8 +570,8 @@ logAction	logging.pas	/^procedure logAction(textString: string);$/;"	p
 look	screens/scrlook.pas	/^procedure look(dir: word);$/;"	p
 lookInput	keyboardinput.pas	/^procedure lookInput(Keypress: TKeyEvent);$/;"	p
 lookupUse	items/item_lookup.pas	/^procedure lookupUse(x: smallint; equipped: boolean; id: smallint);$/;"	p
-materialLookup	file_handling.pas	/^function materialLookup(inputMaterial: tMaterial):char;$/;"	f
-materialReverseLookup	file_handling.pas	/^function materialReverseLookup(inputMaterial: char):tMaterial;$/;"	f
+materialLookup	file_handling.pas	/^function materialLookup(inputMaterial: tMaterial):shortstring;$/;"	f
+materialReverseLookup	file_handling.pas	/^function materialReverseLookup(inputMaterial: shortstring):tMaterial;$/;"	f
 minorScorch	magiceffects.pas	/^procedure minorScorch;$/;"	p
 moveNPC	entities.pas	/^procedure moveNPC(id, newX, newY: smallint);$/;"	p
 movePlayer	player/player.pas	/^procedure movePlayer(dir: word);$/;"	p
@@ -706,8 +706,8 @@ takeTurn	entities/undead/skeleton_lvl1.pas	/^procedure takeTurn(id: smallint);$/
 takeTurn	entities/undead/zombie_weak.pas	/^procedure takeTurn(id: smallint);$/;"	p
 target	screens/scrthrow.pas	/^procedure target;$/;"	p
 targetInput	keyboardinput.pas	/^procedure targetInput(Keypress: TKeyEvent);$/;"	p
-terrainLookup	file_handling.pas	/^function terrainLookup(inputTerrain: overworldTerrain):char;$/;"	f
-terrainReverseLookup	file_handling.pas	/^function terrainReverseLookup(inputTerrain: char):overworldTerrain;$/;"	f
+terrainLookup	file_handling.pas	/^function terrainLookup(inputTerrain: overworldTerrain):shortstring;$/;"	f
+terrainReverseLookup	file_handling.pas	/^function terrainReverseLookup(inputTerrain: shortstring):overworldTerrain;$/;"	f
 throw	items/weapons/basic_club.pas	/^procedure throw;$/;"	p
 throw	items/weapons/bone_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
 throw	items/weapons/crude_dagger.pas	/^procedure throw(itemID: smallint);$/;"	p
