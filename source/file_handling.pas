@@ -102,50 +102,50 @@ begin
         AddElement(datanode, 'Terrain', terrainLookup(island.overworldMap[r][c].TerrainType));
         { Translate the Glyph to ASCII }
         if (island.overworldMap[r][c].Glyph = chr(6)) and
-          (island.overworldMap[r][c].GlyphColour = 'green') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('green')) then
           Gplaceholder := 'A'
         else if (island.overworldMap[r][c].Glyph = chr(6)) and
-          (island.overworldMap[r][c].GlyphColour = 'lightGreen') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('lightGreen')) then
           Gplaceholder := 'B'
         else if (island.overworldMap[r][c].Glyph = chr(5)) then
           Gplaceholder := 'C'
         else if (island.overworldMap[r][c].Glyph = '"') and
-          (island.overworldMap[r][c].GlyphColour = 'green') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('green')) then
           Gplaceholder := 'D'
         else if (island.overworldMap[r][c].Glyph = '''') and
-          (island.overworldMap[r][c].GlyphColour = 'green') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('green')) then
           Gplaceholder := 'E'
         else if (island.overworldMap[r][c].Glyph = '"') and
-          (island.overworldMap[r][c].GlyphColour = 'lightGreen') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('lightGreen')) then
           Gplaceholder := 'F'
         else if (island.overworldMap[r][c].Glyph = '''') and
-          (island.overworldMap[r][c].GlyphColour = 'lightGreen') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('lightGreen')) then
           Gplaceholder := 'G'
         else if (island.overworldMap[r][c].Glyph = '.') and
-          (island.overworldMap[r][c].GlyphColour = 'brown') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('brown')) then
           Gplaceholder := 'H'
         else if (island.overworldMap[r][c].Glyph = ',') and
-          (island.overworldMap[r][c].GlyphColour = 'brown') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('brown')) then
           Gplaceholder := 'I'
         else if (island.overworldMap[r][c].Glyph = '.') and
-          (island.overworldMap[r][c].GlyphColour = 'yellow') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('yellow')) then
           Gplaceholder := 'J'
         else if (island.overworldMap[r][c].Glyph = chr(94)) then
           Gplaceholder := 'K'
         else if (island.overworldMap[r][c].Glyph = ':') and
-          (island.overworldMap[r][c].GlyphColour = 'brown') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('brown')) then
           Gplaceholder := 'L'
         else if (island.overworldMap[r][c].Glyph = ';') and
-          (island.overworldMap[r][c].GlyphColour = 'brown') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('brown')) then
           Gplaceholder := 'M'
         else if (island.overworldMap[r][c].Glyph = ':') and
-          (island.overworldMap[r][c].GlyphColour = 'yellow') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('yellow')) then
           Gplaceholder := 'N'
         else if (island.overworldMap[r][c].Glyph = '~') and
-          (island.overworldMap[r][c].GlyphColour = 'lightBlue') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('lightBlue')) then
           Gplaceholder := '-'
         else if (island.overworldMap[r][c].Glyph = chr(247)) and
-          (island.overworldMap[r][c].GlyphColour = 'blue') then
+          (island.overworldMap[r][c].GlyphColour = colourLookup('blue')) then
           Gplaceholder := '~'
         else if (island.overworldMap[r][c].Glyph = '>') then
           Gplaceholder := '>'
@@ -193,87 +193,87 @@ begin
         if (UTF8Encode(Glyph.TextContent[1]) = 'A') then
         begin
           island.overworldMap[r][c].Glyph := chr(6);
-          island.overworldMap[r][c].GlyphColour := 'green';
+          island.overworldMap[r][c].GlyphColour := colourLookup('green');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'B') then
         begin
           island.overworldMap[r][c].Glyph := chr(6);
-          island.overworldMap[r][c].GlyphColour := 'lightGreen';
+          island.overworldMap[r][c].GlyphColour := colourLookup('lightGreen');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'C') then
         begin
           island.overworldMap[r][c].Glyph := chr(5);
-          island.overworldMap[r][c].GlyphColour := 'green';
+          island.overworldMap[r][c].GlyphColour := colourLookup('green');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'D') then
         begin
           island.overworldMap[r][c].Glyph := '"';
-          island.overworldMap[r][c].GlyphColour := 'green';
+          island.overworldMap[r][c].GlyphColour := colourLookup('green');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'E') then
         begin
           island.overworldMap[r][c].Glyph := '''';
-          island.overworldMap[r][c].GlyphColour := 'green';
+          island.overworldMap[r][c].GlyphColour := colourLookup('green');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'F') then
         begin
           island.overworldMap[r][c].Glyph := '"';
-          island.overworldMap[r][c].GlyphColour := 'lightGreen';
+          island.overworldMap[r][c].GlyphColour := colourLookup('lightGreen');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'G') then
         begin
           island.overworldMap[r][c].Glyph := '''';
-          island.overworldMap[r][c].GlyphColour := 'lightGreen';
+          island.overworldMap[r][c].GlyphColour := colourLookup('lightGreen');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'H') then
         begin
           island.overworldMap[r][c].Glyph := '.';
-          island.overworldMap[r][c].GlyphColour := 'brown';
+          island.overworldMap[r][c].GlyphColour := colourLookup('brown');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'I') then
         begin
           island.overworldMap[r][c].Glyph := ',';
-          island.overworldMap[r][c].GlyphColour := 'brown';
+          island.overworldMap[r][c].GlyphColour := colourLookup('brown');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'J') then
         begin
           island.overworldMap[r][c].Glyph := '.';
-          island.overworldMap[r][c].GlyphColour := 'yellow';
+          island.overworldMap[r][c].GlyphColour := colourLookup('yellow');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'K') then
         begin
           island.overworldMap[r][c].Glyph := chr(94);
-          island.overworldMap[r][c].GlyphColour := 'brown';
+          island.overworldMap[r][c].GlyphColour := colourLookup('brown');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'L') then
         begin
           island.overworldMap[r][c].Glyph := ':';
-          island.overworldMap[r][c].GlyphColour := 'brown';
+          island.overworldMap[r][c].GlyphColour := colourLookup('brown');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'M') then
         begin
           island.overworldMap[r][c].Glyph := ';';
-          island.overworldMap[r][c].GlyphColour := 'brown';
+          island.overworldMap[r][c].GlyphColour := colourLookup('brown');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = 'N') then
         begin
           island.overworldMap[r][c].Glyph := ':';
-          island.overworldMap[r][c].GlyphColour := 'yellow';
+          island.overworldMap[r][c].GlyphColour := colourLookup('yellow');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = '>') then
         begin
           island.overworldMap[r][c].Glyph := '>';
-          island.overworldMap[r][c].GlyphColour := 'white';
+          island.overworldMap[r][c].GlyphColour := colourLookup('white');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = '~') then
         begin
           island.overworldMap[r][c].Glyph := chr(247);
-          island.overworldMap[r][c].GlyphColour := 'blue';
+          island.overworldMap[r][c].GlyphColour := colourLookup('blue');
         end
         else if (UTF8Encode(Glyph.TextContent[1]) = '-') then
         begin
           island.overworldMap[r][c].Glyph := '~';
-          island.overworldMap[r][c].GlyphColour := 'lightBlue';
+          island.overworldMap[r][c].GlyphColour := colourLookup('lightBlue');
         end;
         NextNode := RootNode.NextSibling;
         RootNode := NextNode;
@@ -533,7 +533,7 @@ begin
           else
             AddElement(DataNode, 'g', itemList[i].glyph);
 
-          AddElement(DataNode, 'gc', itemList[i].glyphColour);
+          AddElement(DataNode, 'gc', colourLookup(itemList[i].glyphColour));
           AddElement(DataNode, 'inv', BoolToStr(itemList[i].inView));
           AddElement(DataNode, 'posX', IntToStr(itemList[i].posX));
           AddElement(DataNode, 'posY', IntToStr(itemList[i].posY));
@@ -571,7 +571,7 @@ begin
           else
             AddElement(DataNode, 'g', entities.entityList[i].glyph);
 
-          AddElement(DataNode, 'gc', entities.entityList[i].glyphColour);
+          AddElement(DataNode, 'gc', colourLookup(entities.entityList[i].glyphColour));
           AddElement(DataNode, 'mhp', IntToStr(entities.entityList[i].maxHP));
           AddElement(DataNode, 'chp', IntToStr(entities.entityList[i].currentHP));
           AddElement(DataNode, 'att', IntToStr(entities.entityList[i].attack));
@@ -704,7 +704,7 @@ begin
         else
           items.itemList[i].glyph := char(widechar(ItemsNode.FindNode('g').TextContent[1]));
 
-        items.itemList[i].glyphColour := UTF8Encode(ItemsNode.FindNode('gc').TextContent);
+        items.itemList[i].glyphColour := colourReverseLookup(UTF8Encode(ItemsNode.FindNode('gc').TextContent));
         items.itemList[i].inView := StrToBool(UTF8Encode(ItemsNode.FindNode('inv').TextContent));
         items.itemList[i].posX := StrToInt(UTF8Encode(ItemsNode.FindNode('posX').TextContent));
         items.itemList[i].posY := StrToInt(UTF8Encode(ItemsNode.FindNode('posY').TextContent));
@@ -749,7 +749,7 @@ begin
         else
           entities.entityList[i].glyph := UTF8Encode(char(widechar(NPCnode.FindNode('g').TextContent[1])));
 
-        entities.entityList[i].glyphColour := UTF8Encode(NPCnode.FindNode('gc').TextContent);
+        entities.entityList[i].glyphColour := colourReverseLookup(UTF8Encode(NPCnode.FindNode('gc').TextContent));
         entities.entityList[i].maxHP := StrToInt(UTF8Encode(NPCnode.FindNode('mhp').TextContent));
         entities.entityList[i].currentHP := StrToInt(UTF8Encode(NPCnode.FindNode('chp').TextContent));
         entities.entityList[i].attack := StrToInt(UTF8Encode(NPCnode.FindNode('att').TextContent));
@@ -887,7 +887,7 @@ begin
     entities.entityList[0].race := UTF8Encode(PlayerDataNode.FindNode('rce').TextContent);
     entities.entityList[0].description := UTF8Encode(PlayerDataNode.FindNode('dsc').TextContent);
     entities.entityList[0].glyph := UTF8Encode(char(widechar(PlayerDataNode.FindNode('g').TextContent[1])));
-    entities.entityList[0].glyphColour := UTF8Encode(PlayerDataNode.FindNode('gc').TextContent);
+    entities.entityList[0].glyphColour := colourReverseLookup(UTF8Encode(PlayerDataNode.FindNode('gc').TextContent));
     entities.entityList[0].maxHP := StrToInt(UTF8Encode(PlayerDataNode.FindNode('mhp').TextContent));
     entities.entityList[0].currentHP := StrToInt(UTF8Encode(PlayerDataNode.FindNode('chp').TextContent));
     entities.entityList[0].attack := StrToInt(UTF8Encode(PlayerDataNode.FindNode('att').TextContent));
@@ -972,7 +972,7 @@ begin
       else
         player_inventory.inventory[i].glyph := char(widechar(InventoryNode.FindNode('g').TextContent[1]));
 
-      player_inventory.inventory[i].glyphColour := UTF8Encode(InventoryNode.FindNode('gc').TextContent);
+      player_inventory.inventory[i].glyphColour := colourReverseLookup(UTF8Encode(InventoryNode.FindNode('gc').TextContent));
       player_inventory.inventory[i].numUses := StrToInt(UTF8Encode(InventoryNode.FindNode('numUses').TextContent));
       player_inventory.inventory[i].value := StrToInt(UTF8Encode(InventoryNode.FindNode('val').TextContent));
       player_inventory.inventory[i].throwable := StrToBool(UTF8Encode(InventoryNode.FindNode('throwable').TextContent));
@@ -1014,7 +1014,7 @@ begin
       else
         merchant_inventory.villageInv[i].glyph := char(widechar(InventoryNode.FindNode('gly').TextContent[1]));
 
-      merchant_inventory.villageInv[i].glyphColour := UTF8Encode(InventoryNode.FindNode('col').TextContent);
+      merchant_inventory.villageInv[i].glyphColour := colourReverseLookup(UTF8Encode(InventoryNode.FindNode('col').TextContent));
       merchant_inventory.villageInv[i].numUses := StrToInt(UTF8Encode(InventoryNode.FindNode('use').TextContent));
       merchant_inventory.villageInv[i].value := StrToInt(UTF8Encode(InventoryNode.FindNode('val').TextContent));
       merchant_inventory.villageInv[i].throwable := StrToBool(UTF8Encode(InventoryNode.FindNode('thr').TextContent));
@@ -1127,7 +1127,7 @@ begin
     AddElement(DataNode, 'rce', entities.entityList[0].race);
     AddElement(DataNode, 'dsc', entities.entityList[0].description);
     AddElement(DataNode, 'g', entities.entityList[0].glyph);
-    AddElement(DataNode, 'gc', entities.entityList[0].glyphColour);
+    AddElement(DataNode, 'gc', colourLookup(entities.entityList[0].glyphColour));
     AddElement(DataNode, 'mhp', IntToStr(entities.entityList[0].maxHP));
     AddElement(DataNode, 'chp', IntToStr(entities.entityList[0].currentHP));
     AddElement(DataNode, 'att', IntToStr(entities.entityList[0].attack));
@@ -1198,7 +1198,7 @@ begin
       else
         AddElement(DataNode, 'g', inventory[i].glyph);
 
-      AddElement(DataNode, 'gc', inventory[i].glyphColour);
+      AddElement(DataNode, 'gc', colourLookup(inventory[i].glyphColour));
       AddElement(DataNode, 'numUses', IntToStr(inventory[i].numUses));
       AddElement(DataNode, 'val', IntToStr(inventory[i].value));
       AddElement(DataNode, 'throwable', BoolToStr(inventory[i].throwable));
@@ -1238,7 +1238,7 @@ begin
       else
         AddElement(DataNode, 'gly', merchant_inventory.villageInv[i].glyph);
 
-      AddElement(DataNode, 'col', merchant_inventory.villageInv[i].glyphColour);
+      AddElement(DataNode, 'col', colourLookup(merchant_inventory.villageInv[i].glyphColour));
       AddElement(DataNode, 'use', IntToStr(merchant_inventory.villageInv[i].numUses));
       AddElement(DataNode, 'val', IntToStr(merchant_inventory.villageInv[i].value));
       AddElement(DataNode, 'thr', BoolToStr(merchant_inventory.villageInv[i].throwable));
