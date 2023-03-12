@@ -13,7 +13,7 @@ procedure useItem(equipped: boolean);
 implementation
 
 uses
-  items, entities, ui, player_stats, globalutils;
+  items, entities, ui, player_stats;
 
 procedure createBoneArmour(itmx, itmy: smallint);
 begin

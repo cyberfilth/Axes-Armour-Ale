@@ -7,7 +7,7 @@ unit magicEffects;
 interface
 
 uses
-  SysUtils, video, los, items, ui, player_stats, player, animation, globalutils;
+  SysUtils, video, los, items, ui, player_stats, player, animation;
 
 type
   TSmallintArray = array of smallint;

@@ -8,7 +8,7 @@ unit scrLook;
 interface
 
 uses
-  SysUtils, Classes, video, ui, entities, map, items, camera, fov, scrTargeting, globalUtils;
+  SysUtils, Classes, video, ui, entities, map, items, camera, fov, scrTargeting;
 
 var
   (* Target coordinates *)

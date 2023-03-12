@@ -7,7 +7,7 @@ unit gnomish_dagger;
 interface
 
 uses
-  SysUtils, globalutils;
+  SysUtils;
 
 (* Create a dagger *)
 procedure createGnomishDagger(itmx, itmy: smallint);

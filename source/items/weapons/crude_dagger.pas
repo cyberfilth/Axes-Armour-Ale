@@ -7,7 +7,7 @@ unit crude_dagger;
 interface
 
 uses
-  SysUtils, globalutils;
+  SysUtils;
 
 (* Create a dagger *)
 procedure createDagger(itmx, itmy: smallint);

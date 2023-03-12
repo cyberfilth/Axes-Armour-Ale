@@ -7,7 +7,7 @@ unit flint_dagger;
 interface
 
 uses
-  SysUtils, globalutils;
+  SysUtils;
 
 (* Create a dagger *)
 procedure createFlintDagger(itmx, itmy: smallint);

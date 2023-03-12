@@ -18,7 +18,7 @@ unit architect;
 interface
 
 uses
-  SysUtils, globalUtils, player_stats, universe, plot_gen;
+  SysUtils, globalUtils, player_stats, universe, plot_gen, logging;
 
 var
   (* Unique location ID for the locationLookup table *)
@@ -48,18 +48,27 @@ end;
 
 procedure firstRow;
 var
-  cryptNames: array[0..3] of shortstring = ('abandoned crypt', 'spooky tomb', 'haunted mausoleum', 'Cursed Sepulchre');
-  dungeonNames: array[0..5] of shortstring = ('Abandoned tunnels', 'Abandoned ruins', 'Unknown dungeon',
-    'Ruins of Cal Arath', 'Whispering ruins', 'Derelict tunnels');
-  stoneNames: array[0..4] of shortstring = ('rock cave', 'stony cavern', 'granite caves', 'Cursed Sepulchre', 'gravelly grotto');
+  cryptNames: array[0..3] of
+  shortstring = ('abandoned crypt', 'spooky tomb', 'haunted mausoleum', 'Cursed Sepulchre');
+  dungeonNames: array[0..5] of
+  shortstring = ('Abandoned tunnels', 'Abandoned ruins', 'Unknown dungeon', 'Ruins of Cal Arath', 'Whispering ruins', 'Derelict tunnels');
+  stoneNames: array[0..4] of
+  shortstring = ('rock cave', 'stony cavern', 'granite caves', 'Cursed Sepulchre', 'gravelly grotto');
   choice: byte;
   placeName: shortstring;
-  placeX, placeY: smallint;
+  placeX, placeY, i, t, j, x: smallint;
+  placeHolder, randOrder: array of smallint;
 begin
   placeX := 0;
   placeY := 0;
+  t := 0;
+  j := 0;
+  x := 0;
   placeName := '';
   locationBuilderID := 2;
+  placeHolder := [0, 1, 2];
+  randOrder := [0, 0, 0];
+  i := length(placeHolder);
 
   (* Generate a village *)
   if (player_stats.playerRace = 'human') then
@@ -81,72 +90,102 @@ begin
   end;
   Inc(locationBuilderID);
   terrainArray[placeY][placeX] := '>';
+  placeY := globalUtils.randomRange(50, 57);
 
-  (* Place a dungeon *)
-  choice := Random(Length(dungeonNames));
-  placeName := dungeonNames[choice];
-  { Place the location }
-  repeat
-    placeX := globalUtils.randomRange(11, 74);
-    placeY := globalUtils.randomRange(50, 57);
-  until validLocation(placeX, placeY) = True;
-  { Store location in locationLookup table }
-  SetLength(island.locationLookup, length(island.locationLookup) + 1);
-  with island.locationLookup[locationBuilderID - 1] do
-  begin
-    X := placeX;
-    Y := placeY;
-    id := locationBuilderID;
-    Name := placeName;
-    generated := False;
-    theme := tDungeon;
-  end;
-  Inc(locationBuilderID);
-  terrainArray[placeY][placeX] := '>';
+  { Randomise order locations are placed using Sattolo cycle
+    Then place one location on the left and two on the right }
 
-  (* Place a crypt *)
-  choice := Random(Length(cryptNames));
-  placeName := cryptNames[choice];
-  { Place the location }
-  repeat
-    placeX := globalUtils.randomRange(11, 74);
-    placeY := globalUtils.randomRange(50, 57);
-  until validLocation(placeX, placeY) = True;
-  { Store location in locationLookup table }
-  SetLength(island.locationLookup, length(island.locationLookup) + 1);
-  with island.locationLookup[locationBuilderID - 1] do
+  while i > 0 do
   begin
-    X := placeX;
-    Y := placeY;
-    id := locationBuilderID;
-    Name := placeName;
-    generated := False;
-    theme := tCrypt;
+    Dec(i);
+    j := randomrange(0, i);
+    t := placeHolder[i];
+    placeHolder[i] := placeHolder[j];
+    placeHolder[j] := t;
+    randOrder[i] := placeHolder[i];
   end;
-  Inc(locationBuilderID);
-  terrainArray[placeY][placeX] := '>';
-
-  (* Place a stone cavern *)
-  choice := Random(Length(stoneNames));
-  placeName := stoneNames[choice];
-  { Place the location }
-  repeat
-    placeX := globalUtils.randomRange(11, 74);
-    placeY := globalUtils.randomRange(50, 57);
-  until validLocation(placeX, placeY) = True;
-  { Store location in locationLookup table }
-  SetLength(island.locationLookup, length(island.locationLookup) + 1);
-  with island.locationLookup[locationBuilderID - 1] do
+  { Place the locations }
+  for x := 0 to 3 do
   begin
-    X := placeX;
-    Y := placeY;
-    id := locationBuilderID;
-    Name := placeName;
-    generated := False;
-    theme := tStoneCavern;
+    case randOrder[x] of
+      0: (* Place a dungeon *)
+      begin
+        choice := Random(Length(dungeonNames));
+        placeName := dungeonNames[choice];
+        { Place the location }
+        repeat
+          if (x = 0) then
+            placeX := globalUtils.randomRange(11, 37)
+          else
+            placeX := globalUtils.randomRange(39, 74);
+        until validLocation(placeX, placeY) = True;
+        { Store location in locationLookup table }
+        SetLength(island.locationLookup, length(island.locationLookup) + 1);
+        with island.locationLookup[locationBuilderID - 1] do
+        begin
+          X := placeX;
+          Y := placeY;
+          id := locationBuilderID;
+          Name := placeName;
+          generated := False;
+          theme := tDungeon;
+        end;
+        Inc(locationBuilderID);
+        terrainArray[placeY][placeX] := '>';
+      end;
+      1: (* Place a crypt *)
+      begin
+        choice := Random(Length(cryptNames));
+        placeName := cryptNames[choice];
+        { Place the location }
+        repeat
+          if (x = 0) then
+            placeX := globalUtils.randomRange(11, 37)
+          else
+            placeX := globalUtils.randomRange(39, 74);
+        until validLocation(placeX, placeY) = True;
+        { Store location in locationLookup table }
+        SetLength(island.locationLookup, length(island.locationLookup) + 1);
+        with island.locationLookup[locationBuilderID - 1] do
+        begin
+          X := placeX;
+          Y := placeY;
+          id := locationBuilderID;
+          Name := placeName;
+          generated := False;
+          theme := tCrypt;
+        end;
+        Inc(locationBuilderID);
+        terrainArray[placeY][placeX] := '>';
+      end;
+      2: (* Place a stone cavern *)
+      begin
+        choice := Random(Length(stoneNames));
+        placeName := stoneNames[choice];
+        { Place the location }
+        repeat
+          if (x = 0) then
+            placeX := globalUtils.randomRange(11, 37)
+          else
+            placeX := globalUtils.randomRange(39, 74);
+        until validLocation(placeX, placeY) = True;
+        { Store location in locationLookup table }
+        SetLength(island.locationLookup, length(island.locationLookup) + 1);
+        with island.locationLookup[locationBuilderID - 1] do
+        begin
+          X := placeX;
+          Y := placeY;
+          id := locationBuilderID;
+          Name := placeName;
+          generated := False;
+          theme := tStoneCavern;
+        end;
+        Inc(locationBuilderID);
+        terrainArray[placeY][placeX] := '>';
+      end;
+    end;
   end;
-  Inc(locationBuilderID);
-  terrainArray[placeY][placeX] := '>';
+  { End of Sattolo cycle }
 end;
 
 procedure seedLocations;

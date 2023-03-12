@@ -14,7 +14,7 @@ procedure useItem(equipped: boolean);
 implementation
 
 uses
-  items, entities, ui, player_stats, globalutils;
+  items, entities, ui, player_stats;
 
 procedure createLeatherArmour(itmx, itmy: smallint);
 begin

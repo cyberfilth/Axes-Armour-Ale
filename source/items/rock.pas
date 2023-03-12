@@ -14,7 +14,7 @@ procedure useItem;
 implementation
 
 uses
-  items, ui, globalutils;
+  items, ui;
 
 procedure createRock(itmx, itmy: smallint);
 begin

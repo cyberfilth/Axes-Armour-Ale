@@ -13,7 +13,7 @@ procedure useItem;
 implementation
 
 uses
-  items, entities, ui, player, globalutils;
+  items, entities, ui, player;
 
 procedure createLargeAle(itmx, itmy: smallint);
 begin

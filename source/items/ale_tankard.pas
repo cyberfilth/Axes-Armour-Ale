@@ -13,7 +13,7 @@ procedure useItem;
 implementation
 
 uses
-  items, entities, ui, player, globalutils;
+  items, entities, ui, player;
 
 procedure createAleTankard(itmx, itmy: smallint);
 begin

@@ -8,8 +8,8 @@ unit scrThrow;
 interface
 
 uses
-  SysUtils, Math, video, map, camera, fov, los, ui, player_inventory, player_stats, items, entities, scrTargeting, crude_dagger, basic_club,
-  staff_minor_scorch, pointy_stick, globalutils;
+  SysUtils, Math, video, map, camera, fov, los, ui, player_inventory, player_stats,
+  items, entities, scrTargeting, crude_dagger, basic_club, staff_minor_scorch, pointy_stick;
 
 type
   (* Enemies *)

@@ -15,6 +15,12 @@ uses
   blue_fungus, embalming_spider, gnome_cultist, bogle_drunk, ghoul_lvl1, skeleton_lvl1, zombie_weak, goblin_necromancer, corpse_zombie,
   rabid_dog, cave_bear, scorpion, small_scorpion, trog_simple, trog_giant, villager, village_idiot, merchant, pig;
 
+type { NPC attitudes }
+  Tattitudes = (stateNeutral, stateHostile, stateEscape);
+
+type {NPC factions / groups }
+  Tfactions = (redcapFaction, bugFaction, animalFaction, fungusFaction, undeadFaction, trapFaction, npcFaction);
+
 type
   (* Store information about NPC's *)
   { Creature }
@@ -28,7 +34,7 @@ type
     (* Article (the) *)
     article: boolean;
     (* Description of creature *)
-    description: shortstring;
+    description: string;
     (* health and position on game map *)
     currentHP, maxHP, attack, defence, posX, posY, targetX, targetY, xpReward, visionRange: smallint;
     (* Weapon stats *)

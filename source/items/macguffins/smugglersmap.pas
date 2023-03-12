@@ -16,7 +16,7 @@ procedure obtainMap;
 implementation
 
 uses
-  items, ui, globalutils;
+  items, ui;
 
 procedure createSmugglersMap(itmx, itmy: smallint);
 begin

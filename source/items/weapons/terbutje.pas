@@ -16,7 +16,7 @@ procedure throw;
 implementation
 
 uses
-  items, entities, ui, globalutils;
+  items, entities, ui;
 
 procedure createTerbutje(itmx, itmy: smallint);
 begin

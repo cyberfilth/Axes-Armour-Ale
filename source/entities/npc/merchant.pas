@@ -7,7 +7,7 @@ unit merchant;
 interface
 
 uses
-  SysUtils, merchant_inventory, globalUtils;
+  SysUtils, merchant_inventory;
 
 (* Create a merchant *)
 procedure createMerchant(uniqueid, npcx, npcy: smallint);

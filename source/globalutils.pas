@@ -18,18 +18,6 @@ type
 type
   dungeonTerrain = (tCave, tStoneCavern, tDungeon, tCrypt, tVillage);
 
-type
-  tMaterial = (matSteel, matIron, matWood, matLeather, matWool, matPaper, matFlammable, matStone, matGlass, matEmpty, matBone, matGold);
-
-type
-  tItem = (itmDrink, itmWeapon, itmArmour, itmQuest, itmProjectile, itmEmptySlot, itmProjectileWeapon, itmAmmo, itmLightSource, itmTrap, itmTreasure);
-
-type { NPC attitudes }
-  Tattitudes = (stateNeutral, stateHostile, stateEscape);
-
-type {NPC factions / groups }
-  Tfactions = (redcapFaction, bugFaction, animalFaction, fungusFaction, undeadFaction, trapFaction, npcFaction);
-
 type (* Pathfinding - Path to player *)
   path = array[1..30] of TPoint;
 
