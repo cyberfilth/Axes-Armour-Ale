@@ -9,7 +9,7 @@ interface
 uses
   sysutils;
 
-(* Create Gpld *)
+(* Create Gold *)
 procedure createGP(itmx, itmy: smallint);
 (* Item cannot be equipped *)
 procedure useItem;
