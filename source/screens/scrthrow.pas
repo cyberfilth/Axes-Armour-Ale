@@ -484,7 +484,7 @@ begin
        itmID := i;
 
    (* Weapon damage for edged weapons *)
-  case itemList[i].useID of
+  case itemList[itmID].useID of
        2: crude_dagger.thrownDamaged(i, False);
   end;
 
@@ -524,15 +524,14 @@ end;
 
 procedure removeThrownFromInventory;
 var
-  itemNumber, dmgID, b: smallint;
+  dmgID, b: smallint;
   newItem: Item;
 begin
-  itemNumber := throwableWeapons[selectedProjectile].id;
   b := throwableWeapons[selectedProjectile].playerInventoryID;
-  dmgID := player_inventory.inventory[itemNumber].id;
+  dmgID := player_inventory.inventory[b].id;
 
   (* Weapon damage for edged weapons *)
-  case player_inventory.inventory[itemNumber].useID of
+  case player_inventory.inventory[b].useID of
        2: crude_dagger.thrownDamaged(dmgID, True);
   end;
 
@@ -571,8 +570,8 @@ begin
   (* Unequip weapon if equipped *)
   if (throwableWeapons[selectedProjectile].equppd = True) then
   begin
-       case player_inventory.inventory[itemNumber].useID of
-         2: crude_dagger.throw(itemNumber);
+       case player_inventory.inventory[b].useID of
+         2: crude_dagger.throw(b);
          4: basic_club.throw;
          8: staff_minor_scorch.throw;
          11: pointy_stick.throw;

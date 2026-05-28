@@ -18,6 +18,8 @@ procedure displayHelpScreen;
 implementation
 
 procedure drawOutline;
+var 
+  x: smallint;
 begin
   TextOut(10, 1, 'cyan', chr(218));
   for x := 11 to 69 do

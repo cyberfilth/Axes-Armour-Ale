@@ -217,23 +217,42 @@ end;
 procedure exitDialogVillage(msg: byte);
 var
   x, y: smallint;
-  BG, FG, msgString: shortstring;
+  BG, FG, msgString, titleString: shortstring;
 begin
   ui.clearPopup;
   main.gameState := stBarterExitdlg;
   msgString := '';
+  titleString := '';
   if (msg = 1) then
-    msgString := 'You do not have enough gold'
+  begin
+    msgString := 'You do not have enough gold';
+    titleString := 'We cannot trade';
+  end
   else if (msg = 2) then
-    msgString := 'You don''t have space for this'
+  begin
+    msgString := 'You don''t have space for this';
+    titleString := 'We cannot trade';
+  end
   else if (msg = 3) then
-    msgString := 'You purchase the equipment'
+  begin
+    msgString := 'You purchase the equipment';
+    titleString := 'Trade complete';
+  end
   else if (msg = 4) then
-    msgString := 'You have nothing I want to buy'
+  begin
+    msgString := 'You have nothing I want to buy';
+    titleString := 'We cannot trade';
+  end
   else if (msg = 5) then
-    msgString := 'I don''t have any funds right now'
+  begin
+    msgString := 'I don''t have any funds right now';
+    titleString := 'We cannot trade';
+  end
   else if (msg = 6) then
+  begin
     msgString := 'You sell the equipment';
+    titleString := 'Trade complete';
+  end;
   x := 3;
   y := 5;
   BG := 'cyan';
@@ -245,29 +264,28 @@ begin
     TextOut(x, 5, BG, chr(205));
   TextOut(54, y, BG, chr(187));
   (* End borders around title *)
-    {$IFDEF Linux}
-    TextOut(5, y, BG, chr(181));
-    TextOut(6 + Length('We cannot trade'), y, BG, chr(198));
-    {$ENDIF}
-    {$IFDEF Darwin}
-    TextOut(5, y, BG, chr(181));
-    TextOut(6 + Length('We cannot trade'), y, BG, chr(198));
-    {$ENDIF}
-    {$IFDEF Windows}
-    TextOut(5, y, BG, ' ');
-    TextOut(6 + Length('We cannot trade'), y, BG, ' ');
-    {$ENDIF}
+  {$IFDEF Linux}
+  TextOut(5, y, BG, chr(181));
+  TextOut(6 + Length(titleString), y, BG, chr(198));
+  {$ENDIF}
+  {$IFDEF Darwin}
+  TextOut(5, y, BG, chr(181));
+  TextOut(6 + Length(titleString), y, BG, chr(198));
+  {$ENDIF}
+  {$IFDEF Windows}
+  TextOut(5, y, BG, ' ');
+  TextOut(6 + Length(titleString), y, BG, ' ');
+  {$ENDIF}
   (* Vertical sides *)
   for y := 6 to 8 do
     TextOut(3, y, BG, chr(186) + '                                                  ' + chr(186));
   (* Bottom border *)
-  TextOut(3, 9, BG, chr(200)); // bottom left corner
+  TextOut(3, 9, BG, chr(200));
   for x := 4 to 53 do
     TextOut(x, 9, BG, chr(205));
-  TextOut(54, 9, BG, chr(188)); // bottom right corner
+  TextOut(54, 9, BG, chr(188));
   (* Write the title *)
-  TextOut(6, 5, BG, 'We cannot trade');
-  Inc(y);
+  TextOut(6, 5, BG, titleString);
   (* Display the message *)
   TextOut(5, 7, FG, msgString);
   TextOut(17, 9, BG, ' [x] to exit ');
@@ -389,7 +407,7 @@ begin
     TextOut(6, 5, BG, ' Select item from your inventory ');
 
     (* List items *)
-    for i := 0 to totalEntries do
+    for i := 0 to High(player_inventory.inventory) do
     begin
       if (player_inventory.inventory[i].itemType = itmDrink) or
         (player_inventory.inventory[i].itemType = itmWeapon) or

@@ -22,7 +22,6 @@ var
   options, hintText, randSelectText: shortstring;
 begin
   yLine := 4;
-  randSelect := 2;
   options := 'a - Dwarf     b - Elf     c - Human';
   hintText := 'a - c to select race';
   randSelectText := '[SPACE] to randomly select a race';

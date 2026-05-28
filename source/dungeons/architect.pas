@@ -105,7 +105,7 @@ begin
     randOrder[i] := placeHolder[i];
   end;
   { Place the locations }
-  for x := 0 to 3 do
+  for x := 0 to 2 do
   begin
     case randOrder[x] of
       0: (* Place a dungeon *)

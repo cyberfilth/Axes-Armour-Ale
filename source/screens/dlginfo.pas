@@ -342,7 +342,7 @@ var
 begin
   main.gameState := stBarterIntro;
   greeting := '';
-  randGreet := randomRange(0, 8);
+  randGreet := randomRange(0, 7);
   x := 3;
   y := 5;
   BG := 'cyan';

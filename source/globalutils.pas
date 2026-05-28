@@ -23,7 +23,7 @@ type (* Pathfinding - Path to player *)
 
 const
   (* Version info - a = Alpha, d = Debug, r = Release *)
-  VERSION = '59a';
+  VERSION = '60a';
   (* Columns of the game map *)
   MAXCOLUMNS = 80;
   (* Rows of the game map *)
@@ -62,19 +62,12 @@ end;
 function rollDice(numberOfDice: byte): smallint;
 var
   i: byte;
-  x: smallint;
+  total: smallint;
 begin
-  x := 0; { initialise variable }
-  if (numberOfDice = 0) then
-    Result := 0
-  else
-  begin
-    for i := 0 to numberOfDice do
-    begin
-      x := Random(6) + 1;
-    end;
-    Result := x;
-  end;
+  total := 0;
+  for i := 1 to numberOfDice do
+    Inc(total, Random(6) + 1);
+  Result := total;
 end;
 
 end.
