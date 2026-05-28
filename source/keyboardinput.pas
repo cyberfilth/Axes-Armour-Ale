@@ -859,7 +859,7 @@ begin
       if (scrThrow.validProjectile('k') = True) then
         scrThrow.projectileTarget;
     'l', 'L':
-      if (scrThrow.validProjectile('k') = True) then
+      if (scrThrow.validProjectile('l') = True) then
         scrThrow.projectileTarget;
     'x', 'X': { Exit Look input }
     begin
