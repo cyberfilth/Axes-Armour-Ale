@@ -348,13 +348,13 @@ end;
 
 procedure generateElfName;
 begin
-  playerName := elvenName[Random(885)];
+  playerName := elvenName[Random(Length(elvenName))];
   generateTitle;
 end;
 
 procedure generateDwarfName;
 begin
-  playerName := dwarvenName[Random(109)];
+  playerName := dwarvenName[Random(Length(dwarvenName))];
   generateTitle;
 end;
 
@@ -386,7 +386,7 @@ end;
 
 procedure generateTitle;
 begin
-  playerTitle := titles[Random(108)];
+  playerTitle := titles[Random(109)];
 end;
 
 procedure getTrollDate;

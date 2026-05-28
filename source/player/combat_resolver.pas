@@ -108,9 +108,11 @@ begin
          logAction('----');
       end
       else
+      begin
       (* If the target was an NPC *)
          ui.displayMessage('You kill ' + opponent);
-      entities.killEntity(npcID);
+         entities.killEntity(npcID);
+      end;
       exit;
     end
     else
