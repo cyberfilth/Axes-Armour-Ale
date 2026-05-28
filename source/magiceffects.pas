@@ -190,7 +190,7 @@ begin
   (*  Set array to 0 *)
   SetLength(targetList, 0);
   (* Cost of casting magick *)
-  cost := (5 - player_stats.playerLevel);
+  cost := Max(1, 5 - player_stats.playerLevel);
   if (cost > player_stats.currentMagick) then
   begin
     ui.displayMessage('You don''t have enough magickal energy to cast!');
