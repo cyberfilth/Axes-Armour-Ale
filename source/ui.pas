@@ -323,43 +323,11 @@ begin
   TextOut(scrGame.minX + 2, 8, 'black', Chr(223) + Chr(223) + Chr(223) +
     Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) +
     Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223));
-  (* Length of health bar *)
-  bars := 0;
   (* Calculate percentage of total health *)
   healthPercentage := (entities.entityList[0].currentHP * 100) div entities.entityList[0].maxHP;
   (* Calculate the length of the health bar *)
-  if (healthPercentage <= 6) then
-    bars := 1
-  else if (healthPercentage > 6) and (healthPercentage <= 12) then
-    bars := 2
-  else if (healthPercentage > 12) and (healthPercentage <= 18) then
-    bars := 3
-  else if (healthPercentage > 18) and (healthPercentage < 25) then
-    bars := 4
-  else if (healthPercentage >= 25) and (healthPercentage <= 31) then
-    bars := 5
-  else if (healthPercentage > 31) and (healthPercentage <= 37) then
-    bars := 6
-  else if (healthPercentage > 37) and (healthPercentage <= 43) then
-    bars := 7
-  else if (healthPercentage > 43) and (healthPercentage < 50) then
-    bars := 8
-  else if (healthPercentage >= 50) and (healthPercentage <= 56) then
-    bars := 9
-  else if (healthPercentage > 56) and (healthPercentage <= 62) then
-    bars := 10
-  else if (healthPercentage > 62) and (healthPercentage <= 68) then
-    bars := 11
-  else if (healthPercentage > 68) and (healthPercentage < 75) then
-    bars := 12
-  else if (healthPercentage >= 75) and (healthPercentage <= 81) then
-    bars := 13
-  else if (healthPercentage > 81) and (healthPercentage <= 87) then
-    bars := 14
-  else if (healthPercentage > 87) and (healthPercentage <= 94) then
-    bars := 15
-  else if (healthPercentage > 94) then
-    bars := 16;
+  bars := (healthPercentage * 16) div 100;
+  if bars = 0 then bars := 1;  // minimum visible bar
   (* Draw health bar *)
   for i := 1 to bars do
     TextOut((scrGame.minX + 1) + i, 8, 'green', Chr(223));
@@ -379,43 +347,11 @@ begin
   TextOut(scrGame.minX + 2, 10, 'black', Chr(223) + Chr(223) + Chr(223) +
     Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) +
     Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223) + Chr(223));
-  (* Length of magick bar *)
-  bars := 0;
   (* Calculate percentage of total magick *)
   magickPercentage := (player_stats.currentMagick * 100) div player_stats.maxMagick;
   (* Calculate the length of the magick bar *)
-  if (magickPercentage >= 1) and (magickPercentage <= 6) then
-    bars := 1
-  else if (magickPercentage > 6) and (magickPercentage <= 12) then
-    bars := 2
-  else if (magickPercentage > 12) and (magickPercentage <= 18) then
-    bars := 3
-  else if (magickPercentage > 18) and (magickPercentage < 25) then
-    bars := 4
-  else if (magickPercentage >= 25) and (magickPercentage <= 31) then
-    bars := 5
-  else if (magickPercentage > 31) and (magickPercentage <= 37) then
-    bars := 6
-  else if (magickPercentage > 37) and (magickPercentage <= 43) then
-    bars := 7
-  else if (magickPercentage > 43) and (magickPercentage < 50) then
-    bars := 8
-  else if (magickPercentage >= 50) and (magickPercentage <= 56) then
-    bars := 9
-  else if (magickPercentage > 56) and (magickPercentage <= 62) then
-    bars := 10
-  else if (magickPercentage > 62) and (magickPercentage <= 68) then
-    bars := 11
-  else if (magickPercentage > 68) and (magickPercentage < 75) then
-    bars := 12
-  else if (magickPercentage >= 75) and (magickPercentage <= 81) then
-    bars := 13
-  else if (magickPercentage > 81) and (magickPercentage <= 87) then
-    bars := 14
-  else if (magickPercentage > 87) and (magickPercentage <= 94) then
-    bars := 15
-  else if (magickPercentage > 94) then
-    bars := 16;
+  bars := (magickPercentage * 16) div 100;
+  if bars = 0 then bars := 1;  // minimum visible bar
   (* Draw magick bar *)
   for i := 1 to bars do
     TextOut((scrGame.minX + 1) + i, 10, 'blue', Chr(223));
