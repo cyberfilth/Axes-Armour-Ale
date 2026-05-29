@@ -148,8 +148,15 @@ end;
 
 procedure decisionHostile(id: smallint);
 begin
+  {------------------------------- If health is below 25%, escape }
+  if (entityList[id].currentHP < (entityList[id].maxHP div 4)) then
+  begin
+    entityList[id].state := stateEscape;
+    escapePlayer(id, entityList[id].posX, entityList[id].posY);
+  end
+  
   {------------------------------- If NPC can see the player }
-  if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
+  else if (los.inView(entityList[id].posX, entityList[id].posY, entityList[0].posX,
     entityList[0].posY, entityList[id].visionRange) = True) then
   begin
     entityList[id].moveCount := 5;
@@ -169,14 +176,7 @@ begin
     if (randomRange(1, 5) = 3) then
       ui.displayMessage('You hear sounds of scratching');
     followScent(id);
-  end
-
-  {------------------------------- If health is below 25%, escape }
-  else if (entityList[id].currentHP < (entityList[id].maxHP div 4)) then
-  begin
-    entityList[id].state := stateEscape;
-    escapePlayer(id, entityList[id].posX, entityList[id].posY);
-  end
+  end  
 
   else
     {------------------------------- Wander }
