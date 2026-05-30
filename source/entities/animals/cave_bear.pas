@@ -25,8 +25,6 @@ procedure wander(id, spx, spy: smallint);
 procedure chasePlayer(id, spx, spy: smallint);
 (* Check if player is next to NPC *)
 function isNextToPlayer(spx, spy: smallint): boolean;
-(* Run from player *)
-procedure escapePlayer(id, spx, spy: smallint);
 (* NPC attacks another entity *)
 procedure combat(npcID, enemyID: smallint);
 
@@ -255,52 +253,6 @@ begin
 end;
 
 {$I nextto}
-
-procedure escapePlayer(id, spx, spy: smallint);
-var
-  newX, newY, dx, dy: smallint;
-  distance: single;
-begin
-  newX := 0;
-  newY := 0;
-  (* Get new coordinates to escape the player *)
-  dx := entityList[0].posX - spx;
-  dy := entityList[0].posY - spy;
-  if (dx = 0) and (dy = 0) then
-  begin
-    newX := spx;
-    newy := spy;
-  end
-  else
-  begin
-    distance := sqrt(dx ** 2 + dy ** 2);
-    dx := round(dx / distance);
-    dy := round(dy / distance);
-    if (dx > 0) then
-      dx := -1;
-    if (dx < 0) then
-      dx := 1;
-    dy := round(dy / distance);
-    if (dy > 0) then
-      dy := -1;
-    if (dy < 0) then
-      dy := 1;
-    newX := spx + dx;
-    newY := spy + dy;
-  end;
-  if (map.canMove(newX, newY) = True) then
-  begin
-    if (map.hasPlayer(newX, newY) = True) then
-    begin
-      entities.moveNPC(id, spx, spy);
-      combat(id, 0);
-    end
-    else if (map.isOccupied(newX, newY) = False) then
-      entities.moveNPC(id, newX, newY);
-  end
-  else
-    wander(id, spx, spy);
-end;
 
 procedure combat(npcID, enemyID: smallint);
 var
