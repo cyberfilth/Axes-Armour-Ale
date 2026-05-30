@@ -389,37 +389,53 @@ begin
 end;
 
 procedure calcDistances(x, y: smallint);
-(* Check within boundaries of map *)
-  function rangeok(x, y: smallint): boolean;
-  begin
-    Result := (x in [2..MAXCOLUMNS - 1]) and (y in [2..MAXROWS - 1]);
+type
+  TQueueEntry = record
+    x, y, dist: smallint;
   end;
-
-  (* Set distance around current tile *)
-  procedure setaround(x, y: smallint; d: smallint);
-  const
-    r: array[1..4] of tpoint =  (* the four directions of movement *)
-      ((x: 0; y: -1), (x: 1; y: 0), (x: 0; y: 1), (x: -1; y: 0));
-  var
-    a: smallint;
-    dx, dy: smallint;
+var
+  queue: array[0..(MAXROWS * MAXCOLUMNS)] of TQueueEntry;
+  head, tail: smallint;
+  current: TQueueEntry;
+  dx, dy, d: smallint;
+  { Four cardinal directions }
+  dirX: array[1..4] of smallint = (0, 1, 0, -1);
+  dirY: array[1..4] of smallint = (-1, 0, 1, 0);
+  a: smallint;
+begin
+  head := 0;
+  tail := 0;
+  { Seed the queue with the starting tile }
+  distances[y, x] := 0;
+  queue[tail].x := x;
+  queue[tail].y := y;
+  queue[tail].dist := 0;
+  Inc(tail);
+  { Process queue until empty }
+  while head <> tail do
   begin
+    current := queue[head];
+    Inc(head);
+    { Check all four neighbours }
     for a := 1 to 4 do
     begin
-      dx := x + r[a].x;
-      dy := y + r[a].y;
-      if rangeok(dx, dy) and (blockORnot(dx, dy) = bClear) and
-        (d < distances[dy, dx]) then
+      dx := current.x + dirX[a];
+      dy := current.y + dirY[a];
+      d := current.dist + 1;
+      { Within bounds, passable, and not yet visited }
+      if (dx >= 2) and (dx <= MAXCOLUMNS - 1) and
+         (dy >= 2) and (dy <= MAXROWS - 1) and
+         (blockORnot(dx, dy) = bClear) and
+         (d < distances[dy, dx]) then
       begin
         distances[dy, dx] := d;
-        setaround(dx, dy, d + 1);
+        queue[tail].x := dx;
+        queue[tail].y := dy;
+        queue[tail].dist := d;
+        Inc(tail);
       end;
     end;
   end;
-
-begin
-  distances[x, y] := 0;
-  setaround(x, y, 1);
 end;
 
 function leftHasFloor(): boolean;
